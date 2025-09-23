@@ -224,22 +224,6 @@ TEST_BULK_DOWNLOAD=true go test -tags=integration -v -run DownloadBulkFile
 - Integration tests require `USPTO_API_KEY` environment variable and will fail with a clear error message if not set.
 - Bulk file download test is skipped by default to avoid downloading large files (can be several GB). Set `TEST_BULK_DOWNLOAD=true` to run it.
 
-## Project Structure
-
-```
-.
-├── README.md           # This file
-├── swagger_fixed.yaml  # Fixed OpenAPI spec (corrected from original)
-├── swagger_original.yaml # Original USPTO swagger (for reference)
-├── types_gen.go        # Generated types (DO NOT EDIT)
-├── client_gen.go       # Generated HTTP client (DO NOT EDIT)
-├── client.go           # Clean wrapper with retry logic
-├── client_test.go      # Unit tests with mock
-├── integration_test.go # Real API tests
-├── go.mod              # Module definition
-└── go.sum              # Module dependencies
-```
-
 ## Endpoint Coverage Status
 
 **100% Coverage**: All 19 functional USPTO ODP API endpoints are implemented and tested:
