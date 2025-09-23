@@ -1,4 +1,4 @@
-package usptoapi
+package odp
 
 import (
 	"bytes"
@@ -8,6 +8,8 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/patent-dev/uspto-odp/generated"
 )
 
 // TestDefaultConfig tests the DefaultConfig function
@@ -826,6 +828,13 @@ func TestClientWithActualResponses(t *testing.T) {
 			w.Header().Set("Location", "https://data.uspto.gov/files/PTGRXML/2025/ipg250916.zip?Expires=1758628085&Signature=test&Key-Pair-Id=TEST123")
 			w.WriteHeader(http.StatusFound)
 
+		case "/api/v1/datasets/products/files/TEST/test.zip":
+			// Mock download for FileDownloadURI validation tests
+			zipData := []byte("PK\x03\x04test zip content for validation")
+			w.Header().Set("Content-Type", "application/zip")
+			w.Header().Set("Content-Length", "35")
+			w.Write(zipData)
+
 		case "/api/v1/patent/applications/16123456/assignment":
 			// Mock response for GetPatentAssignment
 			response := map[string]interface{}{
@@ -1015,7 +1024,7 @@ func TestClientWithActualResponses(t *testing.T) {
 		Timeout:    10,
 	}
 
-	client, err := NewODPClient(config)
+	client, err := NewClient(config)
 	if err != nil {
 		t.Fatalf("Failed to create client: %v", err)
 	}
@@ -1157,22 +1166,6 @@ func TestClientWithActualResponses(t *testing.T) {
 		}
 	})
 
-	t.Run("GetBulkFileURL", func(t *testing.T) {
-		// GetBulkFileURL expects a 302 redirect with Location header
-		// We need to add this case to the mock server
-		redirectURL, err := client.GetBulkFileURL(ctx, "PTGRXML", "2025/ipg250916.zip")
-		if err != nil {
-			t.Fatalf("GetBulkFileURL failed: %v", err)
-		}
-		if redirectURL == "" {
-			t.Fatal("Expected redirect URL, got empty string")
-		}
-		// Check that it's a valid URL
-		if !strings.HasPrefix(redirectURL, "https://") {
-			t.Errorf("Expected https URL, got: %s", redirectURL)
-		}
-	})
-
 	t.Run("GetPatentAssignment", func(t *testing.T) {
 		result, err := client.GetPatentAssignment(ctx, "16123456")
 		if err != nil {
@@ -1234,9 +1227,9 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("SearchPatentsDownload", func(t *testing.T) {
-		req := PatentDownloadRequest{
+		req := generated.PatentDownloadRequest{
 			Q: StringPtr("machine learning"),
-			Pagination: &Pagination{
+			Pagination: &generated.Pagination{
 				Offset: Int32Ptr(0),
 				Limit:  Int32Ptr(10),
 			},
@@ -1261,9 +1254,9 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("SearchPetitionsDownload", func(t *testing.T) {
-		req := PetitionDecisionDownloadRequest{
+		req := generated.PetitionDecisionDownloadRequest{
 			Q: StringPtr("revival"),
-			Pagination: &Pagination{
+			Pagination: &generated.Pagination{
 				Offset: Int32Ptr(0),
 				Limit:  Int32Ptr(10),
 			},
@@ -1277,39 +1270,30 @@ func TestClientWithActualResponses(t *testing.T) {
 		}
 	})
 
-	// For DownloadBulkFile tests, we need a separate mock server that can handle the actual download
-	t.Run("DownloadBulkFile", func(t *testing.T) {
-		// Create a mock server that serves the actual file after redirect
-		downloadServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Set("Content-Type", "application/zip")
-			// Mock ZIP file with PK header
-			zipData := []byte("PK\x03\x04MockZipFileContent...")
-			w.Write(zipData)
-		}))
-		defer downloadServer.Close()
-
-		// Update the main mock server to redirect to our download server
-		// This is already handled by the existing redirect case
+	t.Run("DownloadBulkFile_Validation", func(t *testing.T) {
+		// Test validation - should reject invalid URLs
 		var buf bytes.Buffer
-		err := client.DownloadBulkFile(ctx, "PTGRXML", "2025/ipg250916.zip", &buf)
-		// The test will fail because the redirect URL doesn't match our download server
-		// but we're testing that the method is called correctly
-		if err == nil || !strings.Contains(err.Error(), "download failed") {
-			// We expect an error because the redirect URL won't be our mock server
-			// In real usage, it would redirect to the actual S3 URL
-			t.Log("DownloadBulkFile handled redirect as expected")
+		err := client.DownloadBulkFile(ctx, "https://data.uspto.gov/files/redirect/test.zip", &buf)
+		if err == nil {
+			t.Fatal("Expected validation error for invalid FileDownloadURI")
 		}
+		if !strings.Contains(err.Error(), "invalid FileDownloadURI") {
+			t.Errorf("Expected validation error, got: %v", err)
+		}
+		t.Log("FileDownloadURI validation working correctly")
 	})
 
-	t.Run("DownloadBulkFileWithProgress", func(t *testing.T) {
+	t.Run("DownloadBulkFileWithProgress_Validation", func(t *testing.T) {
+		// Test validation - should reject invalid URLs
 		var buf bytes.Buffer
-		err := client.DownloadBulkFileWithProgress(ctx, "PTGRXML", "2025/ipg250916.zip", &buf,
-			func(bytesComplete, bytesTotal int64) {
-				// Progress callback
-			})
-		// Similar to above - we're testing the method is called correctly
-		if err == nil || !strings.Contains(err.Error(), "download failed") {
-			t.Log("DownloadBulkFileWithProgress handled redirect as expected")
+		err := client.DownloadBulkFileWithProgress(ctx, "https://data.uspto.gov/files/redirect/test.zip", &buf, nil)
+		if err == nil {
+			t.Fatal("Expected validation error for invalid FileDownloadURI")
 		}
+		if !strings.Contains(err.Error(), "invalid FileDownloadURI") {
+			t.Errorf("Expected validation error, got: %v", err)
+		}
+		t.Log("FileDownloadURI validation working correctly for DownloadBulkFileWithProgress")
 	})
+
 }

@@ -1,17 +1,20 @@
-package usptoapi
+package odp
 
 import (
 	"context"
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
+
+	"github.com/patent-dev/uspto-odp/generated"
 )
 
-// ODPClient is the main USPTO ODP API client
-type ODPClient struct {
+// Client is the main USPTO ODP API client
+type Client struct {
 	config    *Config
-	generated *ClientWithResponses
+	generated *generated.ClientWithResponses
 }
 
 // Config holds client configuration
@@ -35,44 +38,41 @@ func DefaultConfig() *Config {
 	}
 }
 
-// NewODPClient creates a new USPTO ODP API client
-func NewODPClient(config *Config) (*ODPClient, error) {
+// NewClient creates a new USPTO ODP API client
+func NewClient(config *Config) (*Client, error) {
 	if config == nil {
 		config = DefaultConfig()
 	}
 
-	// Create HTTP client with timeout
 	httpClient := &http.Client{
 		Timeout: time.Duration(config.Timeout) * time.Second,
 	}
 
-	// Add authentication headers
-	requestEditor := func(ctx context.Context, req *http.Request) error {
+	requestEditor := generated.RequestEditorFn(func(ctx context.Context, req *http.Request) error {
 		req.Header.Set("User-Agent", config.UserAgent)
 		if config.APIKey != "" {
 			req.Header.Set("X-API-Key", config.APIKey)
 		}
 		return nil
-	}
+	})
 
-	// Create generated client
-	genClient, err := NewClientWithResponses(
+	genClient, err := generated.NewClientWithResponses(
 		config.BaseURL,
-		WithHTTPClient(httpClient),
-		WithRequestEditorFn(requestEditor),
+		generated.WithHTTPClient(httpClient),
+		generated.WithRequestEditorFn(requestEditor),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create client: %w", err)
 	}
 
-	return &ODPClient{
+	return &Client{
 		config:    config,
 		generated: genClient,
 	}, nil
 }
 
 // retryableRequest wraps requests with retry logic
-func (c *ODPClient) retryableRequest(fn func() error) error {
+func (c *Client) retryableRequest(fn func() error) error {
 	var lastErr error
 	for attempt := 0; attempt <= c.config.MaxRetries; attempt++ {
 		err := fn()
@@ -88,19 +88,17 @@ func (c *ODPClient) retryableRequest(fn func() error) error {
 	return fmt.Errorf("failed after %d retries: %w", c.config.MaxRetries, lastErr)
 }
 
-// Patent Application API Methods
-
 // SearchPatents searches for patent applications
-func (c *ODPClient) SearchPatents(ctx context.Context, query string, offset, limit int32) (*PatentDataResponse, error) {
-	req := PatentSearchRequest{
+func (c *Client) SearchPatents(ctx context.Context, query string, offset, limit int32) (*generated.PatentDataResponse, error) {
+	req := generated.PatentSearchRequest{
 		Q: StringPtr(query),
-		Pagination: &Pagination{
+		Pagination: &generated.Pagination{
 			Offset: Int32Ptr(offset),
 			Limit:  Int32Ptr(limit),
 		},
 	}
 
-	var resp *PostApiV1PatentApplicationsSearchResponse
+	var resp *generated.PostApiV1PatentApplicationsSearchResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentApplicationsSearchWithResponse(ctx, req)
@@ -120,8 +118,8 @@ func (c *ODPClient) SearchPatents(ctx context.Context, query string, offset, lim
 }
 
 // GetPatent retrieves a specific patent application
-func (c *ODPClient) GetPatent(ctx context.Context, applicationNumber string) (*PatentDataResponse, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextResponse
+func (c *Client) GetPatent(ctx context.Context, applicationNumber string) (*generated.PatentDataResponse, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextWithResponse(ctx, applicationNumber)
@@ -141,8 +139,8 @@ func (c *ODPClient) GetPatent(ctx context.Context, applicationNumber string) (*P
 }
 
 // GetPatentAdjustment retrieves patent term adjustment data
-func (c *ODPClient) GetPatentAdjustment(ctx context.Context, applicationNumber string) (interface{}, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse
+func (c *Client) GetPatentAdjustment(ctx context.Context, applicationNumber string) (any, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextAdjustmentWithResponse(ctx, applicationNumber)
@@ -162,8 +160,8 @@ func (c *ODPClient) GetPatentAdjustment(ctx context.Context, applicationNumber s
 }
 
 // GetPatentContinuity retrieves patent continuity data
-func (c *ODPClient) GetPatentContinuity(ctx context.Context, applicationNumber string) (interface{}, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse
+func (c *Client) GetPatentContinuity(ctx context.Context, applicationNumber string) (any, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextContinuityWithResponse(ctx, applicationNumber)
@@ -183,9 +181,9 @@ func (c *ODPClient) GetPatentContinuity(ctx context.Context, applicationNumber s
 }
 
 // GetPatentDocuments retrieves patent documents list
-func (c *ODPClient) GetPatentDocuments(ctx context.Context, applicationNumber string) (*DocumentBag, error) {
-	params := &GetApiV1PatentApplicationsApplicationNumberTextDocumentsParams{}
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse
+func (c *Client) GetPatentDocuments(ctx context.Context, applicationNumber string) (*generated.DocumentBag, error) {
+	params := &generated.GetApiV1PatentApplicationsApplicationNumberTextDocumentsParams{}
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextDocumentsWithResponse(ctx, applicationNumber, params)
@@ -205,9 +203,9 @@ func (c *ODPClient) GetPatentDocuments(ctx context.Context, applicationNumber st
 }
 
 // GetStatusCodes retrieves all patent status codes
-func (c *ODPClient) GetStatusCodes(ctx context.Context) (*StatusCodeSearchResponse, error) {
-	params := &GetApiV1PatentStatusCodesParams{}
-	var resp *GetApiV1PatentStatusCodesResponse
+func (c *Client) GetStatusCodes(ctx context.Context) (*generated.StatusCodeSearchResponse, error) {
+	params := &generated.GetApiV1PatentStatusCodesParams{}
+	var resp *generated.GetApiV1PatentStatusCodesResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentStatusCodesWithResponse(ctx, params)
@@ -226,17 +224,15 @@ func (c *ODPClient) GetStatusCodes(ctx context.Context) (*StatusCodeSearchRespon
 	return resp.JSON200, nil
 }
 
-// Bulk Data API Methods
-
 // SearchBulkProducts searches for bulk data products
-func (c *ODPClient) SearchBulkProducts(ctx context.Context, query string, offset, limit int) (*BdssResponseBag, error) {
-	params := &GetApiV1DatasetsProductsSearchParams{
+func (c *Client) SearchBulkProducts(ctx context.Context, query string, offset, limit int) (*generated.BdssResponseBag, error) {
+	params := &generated.GetApiV1DatasetsProductsSearchParams{
 		Q:      StringPtr(query),
 		Offset: IntPtr(offset),
 		Limit:  IntPtr(limit),
 	}
 
-	var resp *GetApiV1DatasetsProductsSearchResponse
+	var resp *generated.GetApiV1DatasetsProductsSearchResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1DatasetsProductsSearchWithResponse(ctx, params)
@@ -256,9 +252,9 @@ func (c *ODPClient) SearchBulkProducts(ctx context.Context, query string, offset
 }
 
 // GetBulkProduct retrieves a specific bulk data product
-func (c *ODPClient) GetBulkProduct(ctx context.Context, productID string) (*BdssResponseProductBag, error) {
-	params := &GetApiV1DatasetsProductsProductIdentifierParams{}
-	var resp *GetApiV1DatasetsProductsProductIdentifierResponse
+func (c *Client) GetBulkProduct(ctx context.Context, productID string) (*generated.BdssResponseProductBag, error) {
+	params := &generated.GetApiV1DatasetsProductsProductIdentifierParams{}
+	var resp *generated.GetApiV1DatasetsProductsProductIdentifierResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1DatasetsProductsProductIdentifierWithResponse(ctx, productID, params)
@@ -277,102 +273,42 @@ func (c *ODPClient) GetBulkProduct(ctx context.Context, productID string) (*Bdss
 	return resp.JSON200, nil
 }
 
-// DownloadBulkFile downloads a specific bulk data file and writes it to the provided writer
-// This is memory-efficient for large files as it streams directly to the writer
-func (c *ODPClient) DownloadBulkFile(ctx context.Context, productID string, fileName string, w io.Writer) error {
-	// First, get the redirect URL
-	httpClient := &http.Client{
-		Timeout: time.Duration(c.config.Timeout) * time.Second,
-		CheckRedirect: func(req *http.Request, via []*http.Request) error {
-			// Stop following redirects on first request
-			return http.ErrUseLastResponse
-		},
+// validateFileDownloadURI validates that the URL is a proper FileDownloadURI from the USPTO API
+func (c *Client) validateFileDownloadURI(fileDownloadURI string) error {
+	if fileDownloadURI == "" {
+		return fmt.Errorf("fileDownloadURI cannot be empty")
 	}
 
-	// Create request to get redirect URL
-	url := fmt.Sprintf("%s/api/v1/datasets/products/files/%s/%s", c.config.BaseURL, productID, fileName)
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return fmt.Errorf("creating request: %w", err)
-	}
-
-	// Add headers
-	req.Header.Set("User-Agent", c.config.UserAgent)
-	if c.config.APIKey != "" {
-		req.Header.Set("X-API-Key", c.config.APIKey)
-	}
-
-	// Execute request to get redirect
-	resp, err := httpClient.Do(req)
-	if err != nil {
-		return fmt.Errorf("getting redirect URL: %w", err)
-	}
-	defer func() { _ = resp.Body.Close() }()
-
-	// Handle 302 redirect
-	if resp.StatusCode != http.StatusFound {
-		return fmt.Errorf("expected 302 redirect, got status %d", resp.StatusCode)
-	}
-
-	downloadURL := resp.Header.Get("Location")
-	if downloadURL == "" {
-		return fmt.Errorf("302 redirect without Location header")
-	}
-
-	// Now download the actual file (allow redirects for the actual download)
-	downloadClient := &http.Client{
-		Timeout: 0, // No timeout for large file downloads
-	}
-
-	downloadReq, err := http.NewRequestWithContext(ctx, "GET", downloadURL, nil)
-	if err != nil {
-		return fmt.Errorf("creating download request: %w", err)
-	}
-
-	downloadResp, err := downloadClient.Do(downloadReq)
-	if err != nil {
-		return fmt.Errorf("downloading file: %w", err)
-	}
-	defer func() { _ = downloadResp.Body.Close() }()
-
-	if downloadResp.StatusCode != http.StatusOK {
-		return fmt.Errorf("download failed with status %d", downloadResp.StatusCode)
-	}
-
-	// Get expected size if available
-	expectedSize := downloadResp.ContentLength
-
-	// Stream the file content to the writer
-	bytesWritten, err := io.Copy(w, downloadResp.Body)
-	if err != nil {
-		return fmt.Errorf("writing file data: %w", err)
-	}
-
-	// Validate we got the expected amount of data
-	if expectedSize > 0 && bytesWritten != expectedSize {
-		return fmt.Errorf("incomplete download: got %d bytes, expected %d", bytesWritten, expectedSize)
+	expectedPrefix := "https://api.uspto.gov/api/v1/datasets/products/files/"
+	if !strings.HasPrefix(fileDownloadURI, expectedPrefix) {
+		return fmt.Errorf("invalid FileDownloadURI: must start with %s (got: %s)", expectedPrefix, fileDownloadURI)
 	}
 
 	return nil
 }
 
-// DownloadBulkFileWithProgress downloads a file with optional progress callback
-// The progress callback receives bytes written and total bytes (if known, -1 otherwise)
-func (c *ODPClient) DownloadBulkFileWithProgress(ctx context.Context, productID string, fileName string, w io.Writer, progress func(bytesComplete int64, bytesTotal int64)) error {
-	// First, get the redirect URL
-	httpClient := &http.Client{
-		Timeout: time.Duration(c.config.Timeout) * time.Second,
-		CheckRedirect: func(req *http.Request, via []*http.Request) error {
-			return http.ErrUseLastResponse
-		},
+// DownloadBulkFile downloads a file directly using the FileDownloadURI from the API response
+func (c *Client) DownloadBulkFile(ctx context.Context, fileDownloadURI string, w io.Writer) error {
+	return c.DownloadBulkFileWithProgress(ctx, fileDownloadURI, w, nil)
+}
+
+// DownloadBulkFileWithProgress downloads a file directly using FileDownloadURI with progress tracking
+func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadURI string, w io.Writer, progress func(bytesComplete int64, bytesTotal int64)) error {
+	if err := c.validateFileDownloadURI(fileDownloadURI); err != nil {
+		return err
 	}
 
-	url := fmt.Sprintf("%s/api/v1/datasets/products/files/%s/%s", c.config.BaseURL, productID, fileName)
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	// Create HTTP client that follows redirects (since we're using the direct URL)
+	httpClient := &http.Client{
+		Timeout: time.Duration(c.config.Timeout) * time.Second,
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", fileDownloadURI, nil)
 	if err != nil {
 		return fmt.Errorf("creating request: %w", err)
 	}
 
+	// Add authentication headers
 	req.Header.Set("User-Agent", c.config.UserAgent)
 	if c.config.APIKey != "" {
 		req.Header.Set("X-API-Key", c.config.APIKey)
@@ -380,49 +316,47 @@ func (c *ODPClient) DownloadBulkFileWithProgress(ctx context.Context, productID 
 
 	resp, err := httpClient.Do(req)
 	if err != nil {
-		return fmt.Errorf("getting redirect URL: %w", err)
+		return fmt.Errorf("downloading file: %w", err)
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	if resp.StatusCode != http.StatusFound {
-		return fmt.Errorf("expected 302 redirect, got status %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("download failed with status %d", resp.StatusCode)
 	}
 
-	downloadURL := resp.Header.Get("Location")
-	if downloadURL == "" {
-		return fmt.Errorf("302 redirect without Location header")
-	}
+	expectedSize := resp.ContentLength
 
-	// Download with progress
-	downloadClient := &http.Client{Timeout: 0}
-	downloadReq, err := http.NewRequestWithContext(ctx, "GET", downloadURL, nil)
-	if err != nil {
-		return fmt.Errorf("creating download request: %w", err)
-	}
-
-	downloadResp, err := downloadClient.Do(downloadReq)
-	if err != nil {
-		return fmt.Errorf("downloading file: %w", err)
-	}
-	defer func() { _ = downloadResp.Body.Close() }()
-
-	if downloadResp.StatusCode != http.StatusOK {
-		return fmt.Errorf("download failed with status %d", downloadResp.StatusCode)
-	}
-
-	expectedSize := downloadResp.ContentLength
-
-	// Create progress reader if callback provided
-	var reader io.Reader = downloadResp.Body
+	// Stream with progress tracking if callback provided
+	var bytesWritten int64
 	if progress != nil {
-		reader = &progressReader{
-			reader:   downloadResp.Body,
-			total:    expectedSize,
-			callback: progress,
-		}
-	}
+		// Create a pipe to track progress
+		pr, pw := io.Pipe()
 
-	bytesWritten, err := io.Copy(w, reader)
+		// Track bytes in a goroutine
+		go func() {
+			defer pw.Close()
+			var written int64
+			buf := make([]byte, 32*1024) // 32KB buffer
+
+			for {
+				n, err := resp.Body.Read(buf)
+				if n > 0 {
+					written += int64(n)
+					progress(written, expectedSize)
+					if _, writeErr := pw.Write(buf[:n]); writeErr != nil {
+						return
+					}
+				}
+				if err != nil {
+					return
+				}
+			}
+		}()
+
+		bytesWritten, err = io.Copy(w, pr)
+	} else {
+		bytesWritten, err = io.Copy(w, resp.Body)
+	}
 	if err != nil {
 		return fmt.Errorf("writing file data: %w", err)
 	}
@@ -433,81 +367,18 @@ func (c *ODPClient) DownloadBulkFileWithProgress(ctx context.Context, productID 
 
 	return nil
 }
-
-// progressReader wraps an io.Reader to report progress
-type progressReader struct {
-	reader   io.Reader
-	total    int64
-	written  int64
-	callback func(bytesComplete int64, bytesTotal int64)
-}
-
-func (pr *progressReader) Read(p []byte) (int, error) {
-	n, err := pr.reader.Read(p)
-	if n > 0 {
-		pr.written += int64(n)
-		pr.callback(pr.written, pr.total)
-	}
-	return n, err
-}
-
-// GetBulkFileURL gets the download URL for a bulk data file
-// Note: The URL is temporary and will expire
-func (c *ODPClient) GetBulkFileURL(ctx context.Context, productID string, fileName string) (string, error) {
-	// Create a custom HTTP client that doesn't follow redirects
-	httpClient := &http.Client{
-		Timeout: time.Duration(c.config.Timeout) * time.Second,
-		CheckRedirect: func(req *http.Request, via []*http.Request) error {
-			// Stop following redirects
-			return http.ErrUseLastResponse
-		},
-	}
-
-	// Create request
-	url := fmt.Sprintf("%s/api/v1/datasets/products/files/%s/%s", c.config.BaseURL, productID, fileName)
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return "", err
-	}
-
-	// Add headers
-	req.Header.Set("User-Agent", c.config.UserAgent)
-	if c.config.APIKey != "" {
-		req.Header.Set("X-API-Key", c.config.APIKey)
-	}
-
-	// Execute request
-	resp, err := httpClient.Do(req)
-	if err != nil {
-		return "", err
-	}
-	defer func() { _ = resp.Body.Close() }()
-
-	// Handle 302 redirect
-	if resp.StatusCode == http.StatusFound {
-		location := resp.Header.Get("Location")
-		if location == "" {
-			return "", fmt.Errorf("302 redirect without Location header")
-		}
-		return location, nil
-	}
-
-	return "", fmt.Errorf("API returned status %d", resp.StatusCode)
-}
-
-// Petition API Methods
 
 // SearchPetitions searches for petition decisions
-func (c *ODPClient) SearchPetitions(ctx context.Context, query string, offset, limit int32) (*PetitionDecisionResponseBag, error) {
-	req := PetitionDecisionSearchRequest{
+func (c *Client) SearchPetitions(ctx context.Context, query string, offset, limit int32) (*generated.PetitionDecisionResponseBag, error) {
+	req := generated.PetitionDecisionSearchRequest{
 		Q: StringPtr(query),
-		Pagination: &Pagination{
+		Pagination: &generated.Pagination{
 			Offset: Int32Ptr(offset),
 			Limit:  Int32Ptr(limit),
 		},
 	}
 
-	var resp *PostApiV1PetitionDecisionsSearchResponse
+	var resp *generated.PostApiV1PetitionDecisionsSearchResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PetitionDecisionsSearchWithResponse(ctx, req)
@@ -526,11 +397,9 @@ func (c *ODPClient) SearchPetitions(ctx context.Context, query string, offset, l
 	return resp.JSON200, nil
 }
 
-// Additional Patent Application API Methods
-
 // GetPatentAssignment retrieves patent assignment data
-func (c *ODPClient) GetPatentAssignment(ctx context.Context, applicationNumber string) (interface{}, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse
+func (c *Client) GetPatentAssignment(ctx context.Context, applicationNumber string) (any, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextAssignmentWithResponse(ctx, applicationNumber)
@@ -550,8 +419,8 @@ func (c *ODPClient) GetPatentAssignment(ctx context.Context, applicationNumber s
 }
 
 // GetPatentAssociatedDocuments retrieves associated documents
-func (c *ODPClient) GetPatentAssociatedDocuments(ctx context.Context, applicationNumber string) (interface{}, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse
+func (c *Client) GetPatentAssociatedDocuments(ctx context.Context, applicationNumber string) (any, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsWithResponse(ctx, applicationNumber)
@@ -571,8 +440,8 @@ func (c *ODPClient) GetPatentAssociatedDocuments(ctx context.Context, applicatio
 }
 
 // GetPatentAttorney retrieves patent attorney information
-func (c *ODPClient) GetPatentAttorney(ctx context.Context, applicationNumber string) (interface{}, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse
+func (c *Client) GetPatentAttorney(ctx context.Context, applicationNumber string) (any, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextAttorneyWithResponse(ctx, applicationNumber)
@@ -592,8 +461,8 @@ func (c *ODPClient) GetPatentAttorney(ctx context.Context, applicationNumber str
 }
 
 // GetPatentForeignPriority retrieves foreign priority data
-func (c *ODPClient) GetPatentForeignPriority(ctx context.Context, applicationNumber string) (interface{}, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
+func (c *Client) GetPatentForeignPriority(ctx context.Context, applicationNumber string) (any, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityWithResponse(ctx, applicationNumber)
@@ -613,8 +482,8 @@ func (c *ODPClient) GetPatentForeignPriority(ctx context.Context, applicationNum
 }
 
 // GetPatentMetaData retrieves patent metadata
-func (c *ODPClient) GetPatentMetaData(ctx context.Context, applicationNumber string) (interface{}, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse
+func (c *Client) GetPatentMetaData(ctx context.Context, applicationNumber string) (any, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextMetaDataWithResponse(ctx, applicationNumber)
@@ -634,8 +503,8 @@ func (c *ODPClient) GetPatentMetaData(ctx context.Context, applicationNumber str
 }
 
 // GetPatentTransactions retrieves patent transaction history
-func (c *ODPClient) GetPatentTransactions(ctx context.Context, applicationNumber string) (interface{}, error) {
-	var resp *GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse
+func (c *Client) GetPatentTransactions(ctx context.Context, applicationNumber string) (any, error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextTransactionsWithResponse(ctx, applicationNumber)
@@ -655,8 +524,8 @@ func (c *ODPClient) GetPatentTransactions(ctx context.Context, applicationNumber
 }
 
 // SearchPatentsDownload downloads patent search results
-func (c *ODPClient) SearchPatentsDownload(ctx context.Context, req PatentDownloadRequest) ([]byte, error) {
-	var resp *PostApiV1PatentApplicationsSearchDownloadResponse
+func (c *Client) SearchPatentsDownload(ctx context.Context, req generated.PatentDownloadRequest) ([]byte, error) {
+	var resp *generated.PostApiV1PatentApplicationsSearchDownloadResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentApplicationsSearchDownloadWithResponse(ctx, req)
@@ -676,11 +545,11 @@ func (c *ODPClient) SearchPatentsDownload(ctx context.Context, req PatentDownloa
 }
 
 // GetPetitionDecision retrieves a specific petition decision
-func (c *ODPClient) GetPetitionDecision(ctx context.Context, recordID string, includeDocuments bool) (*PetitionDecisionIdentifierResponseBag, error) {
-	params := &GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams{
+func (c *Client) GetPetitionDecision(ctx context.Context, recordID string, includeDocuments bool) (*generated.PetitionDecisionIdentifierResponseBag, error) {
+	params := &generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams{
 		IncludeDocuments: &includeDocuments,
 	}
-	var resp *GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse
+	var resp *generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierWithResponse(ctx, recordID, params)
@@ -700,8 +569,8 @@ func (c *ODPClient) GetPetitionDecision(ctx context.Context, recordID string, in
 }
 
 // SearchPetitionsDownload downloads petition search results
-func (c *ODPClient) SearchPetitionsDownload(ctx context.Context, req PetitionDecisionDownloadRequest) ([]byte, error) {
-	var resp *PostApiV1PetitionDecisionsSearchDownloadResponse
+func (c *Client) SearchPetitionsDownload(ctx context.Context, req generated.PetitionDecisionDownloadRequest) ([]byte, error) {
+	var resp *generated.PostApiV1PetitionDecisionsSearchDownloadResponse
 	err := c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PetitionDecisionsSearchDownloadWithResponse(ctx, req)
@@ -719,8 +588,6 @@ func (c *ODPClient) SearchPetitionsDownload(ctx context.Context, req PetitionDec
 	}
 	return resp.Body, nil
 }
-
-// Helper functions
 
 // StringPtr returns a pointer to a string
 func StringPtr(s string) *string {

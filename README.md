@@ -30,12 +30,12 @@ import (
     "fmt"
     "log"
 
-    uspto "github.com/patent-dev/uspto-odp"
+    "github.com/patent-dev/uspto-odp"
 )
 
 func main() {
     // Create client
-    client, err := uspto.NewODPClient(&uspto.Config{
+    client, err := odp.NewClient(&odp.Config{
         APIKey: "your-api-key",
     })
     if err != nil {
@@ -95,11 +95,10 @@ GetStatusCodes(ctx) (*StatusCodeSearchResponse, error)
 SearchBulkProducts(ctx, query string, offset, limit int) (*BdssResponseBag, error)
 GetBulkProduct(ctx, productID string) (*BdssResponseProductBag, error)
 
-// File download options:
-GetBulkFileURL(ctx, productID, fileName string) (string, error) // Returns temporary download URL
-DownloadBulkFile(ctx, productID, fileName string, w io.Writer) error // Streams to writer
-DownloadBulkFileWithProgress(ctx, productID, fileName string, w io.Writer,
-    progress func(bytesComplete, bytesTotal int64)) error // With progress callback
+// File download methods (use FileDownloadURI directly):
+DownloadBulkFile(ctx, fileDownloadURI string, w io.Writer) error
+DownloadBulkFileWithProgress(ctx, fileDownloadURI string, w io.Writer,
+    progress func(bytesComplete, bytesTotal int64)) error
 ```
 
 ### Petition API (3 endpoints)
@@ -110,10 +109,43 @@ GetPetitionDecision(ctx, recordID string, includeDocuments bool) (*PetitionDecis
 SearchPetitionsDownload(ctx, req PetitionDecisionDownloadRequest) ([]byte, error)
 ```
 
+## Bulk File Downloads
+
+Download bulk data files using the FileDownloadURI provided by the API:
+
+```go
+// 1. Get the bulk product to access file metadata
+product, err := client.GetBulkProduct(ctx, "PTGRXML")
+if err != nil {
+    log.Fatal(err)
+}
+
+// 2. Find your desired file and use its FileDownloadURI directly
+files := *product.BulkDataProductBag[0].ProductFileBag.FileDataBag
+for _, file := range files {
+    if file.FileName != nil && strings.Contains(*file.FileName, "ipg250923.zip") {
+        if file.FileDownloadURI != nil {
+            // 3. Download using the FileDownloadURI directly
+            err := client.DownloadBulkFileWithProgress(ctx, *file.FileDownloadURI, outputFile,
+                func(bytesComplete, bytesTotal int64) {
+                    percent := float64(bytesComplete) * 100 / float64(bytesTotal)
+                    fmt.Printf("\rProgress: %.1f%%", percent)
+                })
+            if err != nil {
+                log.Fatal(err)
+            }
+        }
+        break
+    }
+}
+```
+
+**URL Validation**: The download methods validate that the provided URL is a valid FileDownloadURI from the USPTO API (must start with `https://api.uspto.gov/api/v1/datasets/products/files/`).
+
 ## Configuration
 
 ```go
-config := &uspto.Config{
+config := &odp.Config{
     BaseURL:    "https://api.uspto.gov", // Default
     APIKey:     "your-api-key",
     UserAgent:  "YourApp/1.0",
@@ -122,7 +154,19 @@ config := &uspto.Config{
     Timeout:    30,                      // Request timeout in seconds
 }
 
-client, err := uspto.NewODPClient(config)
+client, err := odp.NewClient(config)
+```
+
+## Package Structure
+
+```
+├── client.go           # Main client implementation (package odp)
+├── client_test.go      # Unit tests with mock server
+├── integration_test.go # Integration tests (real API)
+├── generated/          # Auto-generated OpenAPI code
+│   ├── client_gen.go   # Generated client (package generated)
+│   └── types_gen.go    # Generated types (package generated)
+└── swagger_fixed.yaml  # Fixed OpenAPI specification
 ```
 
 ## Implementation
@@ -131,8 +175,8 @@ This library provides a Go client for the USPTO ODP API through a multi-step pro
 
 1. **API Specification**: Started with the official [USPTO ODP Swagger specification](https://data.uspto.gov/swagger/index.html#/)
 2. **Fix Mismatches**: Fixed type mismatches between swagger and actual API responses (see [Swagger Fixes](#swagger-fixes-applied))
-3. **Code Generation**: Generate types and client code using [oapi-codegen](https://github.com/oapi-codegen/oapi-codegen)
-4. **Idiomatic Wrapper**: Wrap generated code in a clean, idiomatic Go client with retry logic
+3. **Code Generation**: Generate types and client code using [oapi-codegen](https://github.com/oapi-codegen/oapi-codegen) into `generated/` package
+4. **Idiomatic Wrapper**: Wrap generated code in a clean, idiomatic Go client with retry logic (main `odp` package)
 
 ## Testing
 
@@ -258,11 +302,11 @@ If the swagger spec is updated:
 # Install generator
 go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
 
-# Generate types (DO NOT EDIT types_gen.go directly)
-oapi-codegen -package usptoapi -generate types swagger_fixed.yaml > types_gen.go
+# Generate types (DO NOT EDIT generated/types_gen.go directly)
+oapi-codegen -package generated -generate types swagger_fixed.yaml > generated/types_gen.go
 
-# Generate client (DO NOT EDIT client_gen.go directly)
-oapi-codegen -package usptoapi -generate client swagger_fixed.yaml > client_gen.go
+# Generate client (DO NOT EDIT generated/client_gen.go directly)
+oapi-codegen -package generated -generate client swagger_fixed.yaml > generated/client_gen.go
 ```
 
 ## Contributing

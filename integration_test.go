@@ -1,13 +1,16 @@
 //go:build integration
 // +build integration
 
-package usptoapi
+package odp
 
 import (
 	"bytes"
 	"context"
 	"os"
+	"strings"
 	"testing"
+
+	"github.com/patent-dev/uspto-odp/generated"
 )
 
 // TestIntegrationWithRealAPI tests against the actual USPTO API
@@ -26,7 +29,7 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		Timeout:    30,
 	}
 
-	client, err := NewODPClient(config)
+	client, err := NewClient(config)
 	if err != nil {
 		t.Fatalf("Failed to create client: %v", err)
 	}
@@ -160,41 +163,6 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		}
 	})
 
-	t.Run("GetBulkFileURL", func(t *testing.T) {
-		// Test getting the redirect URL (doesn't download the actual file)
-		redirectURL, err := client.GetBulkFileURL(ctx, "PTGRXML", "2025/ipg250923.zip")
-		if err != nil {
-			t.Fatalf("GetBulkFileURL failed: %v", err)
-		}
-
-		if redirectURL == "" {
-			t.Error("Expected redirect URL, got empty string")
-		} else {
-			t.Logf("Success: Got bulk file redirect URL: %s...", redirectURL[:50])
-		}
-	})
-
-	t.Run("DownloadBulkFile", func(t *testing.T) {
-		// Skip actual download test by default (files are very large)
-		if os.Getenv("TEST_BULK_DOWNLOAD") != "true" {
-			t.Skip("Skipping bulk file download test (set TEST_BULK_DOWNLOAD=true to run)")
-		}
-
-		// Only run if explicitly requested
-		var buf bytes.Buffer
-		err := client.DownloadBulkFile(ctx, "PTGRXML", "2025/ipg250923.zip", &buf)
-		if err != nil {
-			t.Fatalf("DownloadBulkFile failed: %v", err)
-		}
-
-		// Check we got some data
-		if buf.Len() == 0 {
-			t.Error("Downloaded file is empty")
-		} else {
-			t.Logf("Success: Downloaded bulk file: %d bytes", buf.Len())
-		}
-	})
-
 	t.Run("SearchPetitions", func(t *testing.T) {
 		result, err := client.SearchPetitions(ctx, "revival", 0, 2)
 		if err != nil {
@@ -287,11 +255,11 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 	})
 
 	t.Run("SearchPatentsDownload", func(t *testing.T) {
-		format := PatentDownloadRequestFormat("json")
-		req := PatentDownloadRequest{
+		format := generated.PatentDownloadRequestFormat("json")
+		req := generated.PatentDownloadRequest{
 			Q:      StringPtr("test"),
 			Format: &format,
-			Pagination: &Pagination{
+			Pagination: &generated.Pagination{
 				Offset: Int32Ptr(0),
 				Limit:  Int32Ptr(1),
 			},
@@ -322,11 +290,11 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 	})
 
 	t.Run("SearchPetitionsDownload", func(t *testing.T) {
-		format := PetitionDecisionDownloadRequestFormat("json")
-		req := PetitionDecisionDownloadRequest{
+		format := generated.PetitionDecisionDownloadRequestFormat("json")
+		req := generated.PetitionDecisionDownloadRequest{
 			Q:      StringPtr("revival"),
 			Format: &format,
-			Pagination: &Pagination{
+			Pagination: &generated.Pagination{
 				Offset: Int32Ptr(0),
 				Limit:  Int32Ptr(1),
 			},
@@ -344,38 +312,61 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		t.Logf("Success: Downloaded petition search results (%d bytes)", len(result))
 	})
 
-	t.Run("DownloadBulkFileWithProgress", func(t *testing.T) {
+	t.Run("DownloadBulkFile", func(t *testing.T) {
 		// Skip actual download test by default (files are very large)
 		if os.Getenv("TEST_BULK_DOWNLOAD") != "true" {
-			t.Skip("Skipping bulk file download with progress test (set TEST_BULK_DOWNLOAD=true to run)")
+			t.Skip("Skipping bulk file download test (set TEST_BULK_DOWNLOAD=true to run)")
 		}
 
-		// Only run if explicitly requested
-		var buf bytes.Buffer
-		var progressCalled bool
-		err := client.DownloadBulkFileWithProgress(ctx, "PTGRXML", "2025/ipg250923.zip", &buf,
-			func(bytesComplete, bytesTotal int64) {
-				progressCalled = true
-				if bytesTotal > 0 {
-					percent := float64(bytesComplete) * 100 / float64(bytesTotal)
-					t.Logf("Progress: %.1f%% (%d/%d bytes)", percent, bytesComplete, bytesTotal)
-				}
-			})
+		// Get a real FileDownloadURI from the API
+		result, err := client.GetBulkProduct(ctx, "PTGRXML")
 		if err != nil {
-			t.Fatalf("DownloadBulkFileWithProgress failed: %v", err)
+			t.Fatalf("GetBulkProduct failed: %v", err)
 		}
 
-		// Check we got some data
+		if result.BulkDataProductBag == nil || len(*result.BulkDataProductBag) == 0 {
+			t.Fatal("No product data found")
+		}
+
+		product := (*result.BulkDataProductBag)[0]
+		if product.ProductFileBag == nil || product.ProductFileBag.FileDataBag == nil || len(*product.ProductFileBag.FileDataBag) == 0 {
+			t.Fatal("No files found")
+		}
+
+		// Look for specific file ipg250916.zip
+		var fileIndex int = -1
+		for i, f := range *product.ProductFileBag.FileDataBag {
+			if f.FileName != nil && strings.Contains(*f.FileName, "ipg250916.zip") {
+				fileIndex = i
+				break
+			}
+		}
+
+		if fileIndex == -1 {
+			// Fallback to first file if specific file not found
+			fileIndex = 0
+			t.Logf("Warning: ipg250916.zip not found, using first file")
+		}
+
+		file := (*product.ProductFileBag.FileDataBag)[fileIndex]
+		if file.FileDownloadURI == nil {
+			t.Fatal("No FileDownloadURI found")
+		}
+
+		// Use the new recommended API
+		var buf bytes.Buffer
+		err = client.DownloadBulkFile(ctx, *file.FileDownloadURI, &buf)
+		if err != nil {
+			t.Fatalf("DownloadBulkFile failed: %v", err)
+		}
+
 		if buf.Len() == 0 {
 			t.Error("Downloaded file is empty")
 		} else {
-			t.Logf("Success: Downloaded bulk file with progress: %d bytes", buf.Len())
-		}
-
-		if !progressCalled {
-			t.Error("Progress callback was never called")
+			t.Logf("Success: Downloaded bulk file using FileDownloadURI: %d bytes", buf.Len())
 		}
 	})
+
 }
 
 // TestEndpointCoverage documents which endpoints are implemented
@@ -404,7 +395,7 @@ func TestEndpointCoverage(t *testing.T) {
 		// Bulk Data API (3 endpoints)
 		{"Bulk", "GET", "/api/v1/datasets/products/search", "SearchBulkProducts"},
 		{"Bulk", "GET", "/api/v1/datasets/products/{productId}", "GetBulkProduct"},
-		{"Bulk", "GET", "/api/v1/datasets/products/files/{productId}/{fileName}", "GetBulkFileURL/DownloadBulkFile"},
+		{"Bulk", "GET", "/api/v1/datasets/products/files/{productId}/{fileName}", "DownloadBulkFile/DownloadBulkFileWithProgress"},
 
 		// Petition API (3 endpoints)
 		{"Petition", "POST", "/api/v1/petition/decisions/search", "SearchPetitions"},
