@@ -23,43 +23,11 @@ go get github.com/patent-dev/uspto-odp
 ## Quick Start
 
 ```go
-package main
+client, err := odp.NewClient(&odp.Config{APIKey: "your-api-key"})
+ctx := context.Background()
 
-import (
-    "context"
-    "fmt"
-    "log"
-
-    "github.com/patent-dev/uspto-odp"
-)
-
-func main() {
-    // Create client
-    client, err := odp.NewClient(&odp.Config{
-        APIKey: "your-api-key",
-    })
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    ctx := context.Background()
-
-    // Search patents
-    results, err := client.SearchPatents(ctx, "artificial intelligence", 0, 10)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    fmt.Printf("Found %d patents\n", *results.Count)
-
-    // Get status codes (most reliable endpoint)
-    statuses, err := client.GetStatusCodes(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    fmt.Printf("Retrieved %d status codes\n", *statuses.Count)
-}
+results, err := client.SearchPatents(ctx, "artificial intelligence", 0, 10)
+fmt.Printf("Found %d patents\n", *results.Count)
 ```
 
 ## API Methods - Complete Coverage (19 endpoints)
@@ -71,7 +39,7 @@ All 19 functional USPTO ODP API endpoints are fully implemented and tested.
 ```go
 // Core Patent Data
 SearchPatents(ctx, query string, offset, limit int32) (*PatentDataResponse, error)
-GetPatent(ctx, applicationNumber string) (*PatentDataResponse, error)
+GetPatent(ctx, patentNumber string) (*PatentDataResponse, error)  // Accepts any patent number format
 GetPatentMetaData(ctx, applicationNumber string) (interface{}, error)
 
 // Patent Details
@@ -109,38 +77,84 @@ GetPetitionDecision(ctx, recordID string, includeDocuments bool) (*PetitionDecis
 SearchPetitionsDownload(ctx, req PetitionDecisionDownloadRequest) ([]byte, error)
 ```
 
-## Bulk File Downloads
+## Patent Full Text & Advanced Features
 
-Download bulk data files using the FileDownloadURI provided by the API:
+### Patent Number Normalization
+
+The library handles various patent number formats and automatically resolves them to application numbers:
 
 ```go
-// 1. Get the bulk product to access file metadata
-product, err := client.GetBulkProduct(ctx, "PTGRXML")
-if err != nil {
-    log.Fatal(err)
-}
+// GetPatent accepts any patent number format
+doc, err := client.GetPatent(ctx, "US 11,646,472 B2")  // Grant number
+doc, err := client.GetPatent(ctx, "17/248,024")        // Application number
+doc, err := client.GetPatent(ctx, "US20250087686A1")   // Publication number
 
-// 2. Find your desired file and use its FileDownloadURI directly
+// For other methods, resolve to application number first
+appNumber, err := client.ResolvePatentNumber(ctx, "US 11,646,472 B2")
+// appNumber = "17248024" (the actual application number)
+
+// Low-level normalization (formatting only, doesn't resolve)
+pn, err := odp.NormalizePatentNumber("US 11,646,472 B2")
+fmt.Println(pn.Type)                  // PatentNumberTypeGrant
+fmt.Println(pn.Normalized)            // "11646472" (normalized, not application number!)
+fmt.Println(pn.FormatAsGrant())       // "11,646,472"
+```
+
+**Note:** Grant and publication numbers are **not** the same as application numbers. The library uses the search API to resolve grant/publication numbers to their corresponding application numbers.
+
+Supported formats:
+- Applications: `17248024`, `17/248,024`, `US 17/248,024`
+- Grants: `11646472`, `11,646,472`, `US 11,646,472 B2`
+- Publications: `20250087686`, `US20250087686A1`
+
+**Note:** 8-digit numbers (like `11646472`) are ambiguous - they could be either grant or application numbers. Use formatting (commas, kind codes) to disambiguate.
+
+### XML Full Text Retrieval
+
+Parse full patent text (ICE DTD 4.6/4.7):
+
+```go
+doc, err := client.GetPatentXML(ctx, "US 11,646,472 B2")
+
+title := doc.GetTitle()
+abstract := doc.GetAbstract().ExtractAbstractText()
+claims := doc.GetClaims().ExtractAllClaimsTextFormatted()
+description := doc.GetDescription().ExtractDescriptionText()
+```
+
+Advanced usage:
+
+```go
+// Get XML URL and type
+xmlURL, docType, err := client.GetXMLURLForApplication(ctx, "17248024")
+
+// Download with type hint
+doc, err := client.DownloadXMLWithType(ctx, xmlURL, docType)
+
+// Parse raw XML
+data := []byte(/* XML content */)
+doc, err = odp.ParseGrantXML(data)  // or ParseApplicationXML
+```
+
+## Bulk File Downloads
+
+```go
+product, err := client.GetBulkProduct(ctx, "PTGRXML")
 files := *product.BulkDataProductBag[0].ProductFileBag.FileDataBag
+
 for _, file := range files {
     if file.FileName != nil && strings.Contains(*file.FileName, "ipg250923.zip") {
         if file.FileDownloadURI != nil {
-            // 3. Download using the FileDownloadURI directly
             err := client.DownloadBulkFileWithProgress(ctx, *file.FileDownloadURI, outputFile,
                 func(bytesComplete, bytesTotal int64) {
                     percent := float64(bytesComplete) * 100 / float64(bytesTotal)
                     fmt.Printf("\rProgress: %.1f%%", percent)
                 })
-            if err != nil {
-                log.Fatal(err)
-            }
         }
         break
     }
 }
 ```
-
-**URL Validation**: The download methods validate that the provided URL is a valid FileDownloadURI from the USPTO API (must start with `https://api.uspto.gov/api/v1/datasets/products/files/`).
 
 ## Configuration
 
@@ -160,13 +174,19 @@ client, err := odp.NewClient(config)
 ## Package Structure
 
 ```
-├── client.go           # Main client implementation (package odp)
-├── client_test.go      # Unit tests with mock server
-├── integration_test.go # Integration tests (real API)
-├── generated/          # Auto-generated OpenAPI code
-│   ├── client_gen.go   # Generated client (package generated)
-│   └── types_gen.go    # Generated types (package generated)
-└── swagger_fixed.yaml  # Fixed OpenAPI specification
+├── client.go            # Main client implementation (package odp)
+├── patent_number.go     # Patent number normalization
+├── xml.go               # XML full text parsing (ICE DTD 4.6/4.7)
+├── client_test.go       # Unit tests with mock server
+├── patent_number_test.go# Patent number normalization tests
+├── xml_test.go          # XML parsing tests
+├── integration_test.go  # Integration tests (real API)
+├── generated/           # Auto-generated OpenAPI code
+│   ├── client_gen.go    # Generated client (package generated)
+│   └── types_gen.go     # Generated types (package generated)
+├── dtd/                 # ICE DTD documentation
+│   └── README.md        # DTD structure and information
+└── swagger_fixed.yaml   # Fixed OpenAPI specification
 ```
 
 ## Implementation
@@ -180,29 +200,16 @@ This library provides a Go client for the USPTO ODP API through a multi-step pro
 
 ## Testing
 
-This library includes two types of tests serving different purposes:
+### Unit Tests
 
-### Unit Tests (Mock Server)
-
-Offline tests using a mock HTTP server with hardcoded responses based on swagger & real API. These tests verify the client's parsing logic without making actual API calls.
-
-**Run unit tests:**
 ```bash
-# Run all unit tests
 go test -v
-
-# Run specific test
-go test -v -run TestClientWithActualResponses/SearchPatents
-
-# Run with coverage
 go test -v -cover
 ```
 
-### Integration Tests (Real API)
+### Integration Tests
 
-Tests that make actual HTTP requests to `https://api.uspto.gov` to validate our swagger fixes and ensure compatibility with the real USPTO API.
-
-**Run integration tests:**
+Requires `USPTO_API_KEY` environment variable:
 ```bash
 # Set your API key (add to ~/.zshrc for persistence)
 export USPTO_API_KEY=your-api-key
@@ -216,65 +223,41 @@ go test -tags=integration -v -run TestIntegrationWithRealAPI/GetStatusCodes
 # Test endpoint coverage documentation
 go test -tags=integration -v -run TestEndpointCoverage
 
+# Test XML parsing with real API data
+go test -tags=integration -v -run TestXMLParsing
+
 # Test bulk file download (skipped by default due to large file size)
 TEST_BULK_DOWNLOAD=true go test -tags=integration -v -run DownloadBulkFile
 ```
 
-**Note**:
-- Integration tests require `USPTO_API_KEY` environment variable and will fail with a clear error message if not set.
-- Bulk file download test is skipped by default to avoid downloading large files (can be several GB). Set `TEST_BULK_DOWNLOAD=true` to run it.
+Integration tests require `USPTO_API_KEY` environment variable. Bulk file download test skipped by default (set `TEST_BULK_DOWNLOAD=true` to run).
 
-## Endpoint Coverage Status
+## Endpoint Coverage
 
-**100% Coverage**: All 19 functional USPTO ODP API endpoints are implemented and tested:
+All 19 functional USPTO ODP API endpoints are implemented and tested:
 - 13 Patent Application API endpoints
 - 3 Bulk Data API endpoints
 - 3 Petition API endpoints
 
 ## Swagger Fixes Applied
 
-The original USPTO swagger specification had several type mismatches with the actual API responses. We maintain a fixed version (`swagger_fixed.yaml`) with the following corrections:
+Fixed type mismatches in USPTO swagger specification (`swagger_fixed.yaml`):
 
-### 1. Type Corrections
-- **`applicationConfirmationNumber`**: Changed from `string` to `number`
-  - API returns numeric value (e.g., 1061) not string
-  - Fixed in PatentData schema
+### Type Corrections
+- `applicationConfirmationNumber`, `prosecutionStatusCode`: string → number
+- `frameNumber`, `reelNumber`: string → integer (API returns numeric values)
 
-- **`prosecutionStatusCode`**: Changed from `string` to `number`
-  - API returns numeric status codes
-  - Fixed in PatentData schema
+### Structure Fixes
+- `BulkDataProductBag`: array alias → object with array field
+- `assignmentBag`: single object → array of Assignment objects
+- `petitionIssueConsideredTextBag`: array of objects → array of strings
 
-- **`customerNumberCorrespondenceData`**: Changed from array to object
-  - API returns a single object, not an array
-  - Fixed in PatentData schema
+### Format Fixes
+- Removed `format: date` from non-ISO date fields (e.g., `createDateTime`, `mailDateTime`)
 
-### 2. Structure Fixes
-- **`BulkDataProductBag`**: Changed from array type alias to proper object
-  - Was causing unmarshaling errors with array type alias
-  - Fixed to be an object containing the array
-
-- **`petitionIssueConsideredTextBag`**: Changed from array of objects to array of strings
-  - API returns simple string array
-  - Fixed in PetitionDecision schema
-
-### 3. Format Removals
-- **Date fields**: Removed `format: date` from non-ISO date fields
-  - Fields like `createDateTime`, `mailDateTime` return custom format "YYYY-MM-DD HH:MM:SS"
-  - Removed format constraint to allow proper parsing
-
-### 4. Endpoint Removals
-- **`/api/v1/patent/applications/text-to-search`**: Removed entirely
-  - Endpoint defined but has no operations (no GET/POST/etc methods)
-  - Cannot be implemented or used
-
-### 5. Endpoint Additions
-- **`/api/v1/datasets/products/files/{productIdentifier}/{fileName}`**: Added missing endpoint
-  - Not present in original swagger but exists in the actual API
-  - Returns 302 redirect to download bulk data files
-  - Essential for downloading files referenced in bulk product responses
-
-These fixes ensure the generated Go client correctly unmarshals all API responses without type errors and provides access to all functional endpoints.
-
+### Endpoint Changes
+- Removed: `/api/v1/patent/applications/text-to-search` (defined but has no operations)
+- Added: `/api/v1/datasets/products/files/{productIdentifier}/{fileName}` (missing from original swagger)
 
 ## Development
 

@@ -191,12 +191,12 @@ type Assignment struct {
 	} `json:"correspondenceAddressBag,omitempty"`
 
 	// FrameNumber 1-4 digit number that identifies the frame number to be used to locate the first image(page) of the assignment on microfilm.
-	FrameNumber        *string `json:"frameNumber,omitempty"`
+	FrameNumber        *int    `json:"frameNumber,omitempty"`
 	PageTotalQuantity  *int    `json:"pageTotalQuantity,omitempty"`
 	ReelAndFrameNumber *string `json:"reelAndFrameNumber,omitempty"`
 
 	// ReelNumber 1-6 digit number identifies the reel number to be used to locate the assignment on microfilm.
-	ReelNumber *string `json:"reelNumber,omitempty"`
+	ReelNumber *int `json:"reelNumber,omitempty"`
 }
 
 // BdssResponseBag defines model for BdssResponseBag.

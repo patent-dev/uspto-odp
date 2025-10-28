@@ -2758,9 +2758,6 @@ type GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse struct {
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationNumberText Free format of application number
 			ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
-
-			// AssignmentBag The collection of national assignments related to a patent
-			AssignmentBag *Assignment `json:"assignmentBag,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
 	}
 	JSON400 *struct {
@@ -4275,9 +4272,6 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse(rsp 
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationNumberText Free format of application number
 				ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
-
-				// AssignmentBag The collection of national assignments related to a patent
-				AssignmentBag *Assignment `json:"assignmentBag,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {

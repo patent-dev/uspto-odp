@@ -869,8 +869,10 @@ paths:
                           type: string
                           example: 14104993
                           description: Free format of application number
-                        assignmentBag:
-                          $ref: '#/components/schemas/Assignment'
+                          assignmentBag:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/Assignment'
         '400':
           description: Bad Request
           content:
@@ -3191,11 +3193,11 @@ components:
       description: The collection of national assignments related to a patent
       properties:
         reelNumber:
-          type: string
+          type: integer
           example: 60620
           description: 1-6 digit number identifies the reel number to be used to locate the assignment on microfilm.
         frameNumber:
-          type: string
+          type: integer
           example: 769
           description: 1-4 digit number that identifies the frame number to be used to locate the first image(page) of the assignment on microfilm.
         reelAndFrameNumber:

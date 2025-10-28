@@ -117,10 +117,85 @@ func (c *Client) SearchPatents(ctx context.Context, query string, offset, limit 
 	return resp.JSON200, nil
 }
 
-// GetPatent retrieves a specific patent application
-func (c *Client) GetPatent(ctx context.Context, applicationNumber string) (*generated.PatentDataResponse, error) {
+// resolveGrantToApplicationNumber searches for a grant number and returns its application number
+func (c *Client) resolveGrantToApplicationNumber(ctx context.Context, grantNumber string) (string, error) {
+	query := fmt.Sprintf("applicationMetaData.patentNumber:%s", grantNumber)
+
+	result, err := c.SearchPatents(ctx, query, 0, 1)
+	if err != nil {
+		return "", fmt.Errorf("failed to search for grant number %s: %w", grantNumber, err)
+	}
+
+	if result.PatentFileWrapperDataBag == nil || len(*result.PatentFileWrapperDataBag) == 0 {
+		return "", fmt.Errorf("no application found for grant number %s", grantNumber)
+	}
+
+	patent := (*result.PatentFileWrapperDataBag)[0]
+	if patent.ApplicationNumberText == nil {
+		return "", fmt.Errorf("application number not found in response for grant number %s", grantNumber)
+	}
+
+	return *patent.ApplicationNumberText, nil
+}
+
+// resolvePublicationToApplicationNumber searches for a publication number and returns its application number
+func (c *Client) resolvePublicationToApplicationNumber(ctx context.Context, publicationNumber string) (string, error) {
+	// Format publication number for search (e.g., 20250087686 -> US20250087686A1)
+	formattedPub := publicationNumber
+	if len(publicationNumber) == 11 && !strings.HasPrefix(publicationNumber, "US") {
+		formattedPub = "US" + publicationNumber + "A1"
+	}
+
+	query := fmt.Sprintf("applicationMetaData.earliestPublicationNumber:%s", formattedPub)
+
+	result, err := c.SearchPatents(ctx, query, 0, 1)
+	if err != nil {
+		return "", fmt.Errorf("failed to search for publication number %s: %w", publicationNumber, err)
+	}
+
+	if result.PatentFileWrapperDataBag == nil || len(*result.PatentFileWrapperDataBag) == 0 {
+		return "", fmt.Errorf("no application found for publication number %s", publicationNumber)
+	}
+
+	patent := (*result.PatentFileWrapperDataBag)[0]
+	if patent.ApplicationNumberText == nil {
+		return "", fmt.Errorf("application number not found in response for publication number %s", publicationNumber)
+	}
+
+	return *patent.ApplicationNumberText, nil
+}
+
+// ResolvePatentNumber resolves any patent number format (application, grant, or publication)
+// to its application number by searching the USPTO API when necessary.
+// For application numbers, returns the normalized number directly.
+// For grant and publication numbers, performs an API search to find the corresponding application number.
+func (c *Client) ResolvePatentNumber(ctx context.Context, patentNumber string) (string, error) {
+	pn, err := NormalizePatentNumber(patentNumber)
+	if err != nil {
+		return "", fmt.Errorf("invalid patent number: %w", err)
+	}
+
+	switch pn.Type {
+	case PatentNumberTypeGrant:
+		return c.resolveGrantToApplicationNumber(ctx, pn.Normalized)
+	case PatentNumberTypePublication:
+		return c.resolvePublicationToApplicationNumber(ctx, pn.Normalized)
+	case PatentNumberTypeApplication:
+		return pn.ToApplicationNumber(), nil
+	default:
+		return "", fmt.Errorf("unknown patent number type")
+	}
+}
+
+// GetPatent retrieves patent data by application, grant, or publication number
+func (c *Client) GetPatent(ctx context.Context, patentNumber string) (*generated.PatentDataResponse, error) {
+	applicationNumber, err := c.ResolvePatentNumber(ctx, patentNumber)
+	if err != nil {
+		return nil, err
+	}
+
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextResponse
-	err := c.retryableRequest(func() error {
+	err = c.retryableRequest(func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextWithResponse(ctx, applicationNumber)
 		if err != nil {

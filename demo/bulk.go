@@ -13,22 +13,17 @@ import (
 	odp "github.com/patent-dev/uspto-odp"
 )
 
-// extractFilePathFromURI extracts the downloadable file path from a FileDownloadURI
-// Example: "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg250923.zip"
-// returns "2025/ipg250923.zip" for productID "PTGRXML"
 func extractFilePathFromURI(downloadURI, productID string) string {
 	if downloadURI == "" || productID == "" {
 		return ""
 	}
 
-	// Find the position after "products/files/productID/"
 	pattern := "/products/files/" + productID + "/"
 	index := strings.Index(downloadURI, pattern)
 	if index == -1 {
 		return ""
 	}
 
-	// Extract everything after the pattern
 	start := index + len(pattern)
 	if start >= len(downloadURI) {
 		return ""
@@ -37,44 +32,19 @@ func extractFilePathFromURI(downloadURI, productID string) string {
 	return downloadURI[start:]
 }
 
-func main() {
-	fmt.Println("USPTO Bulk Data Download Tool")
-	fmt.Println("==============================")
+func demoBulk(ctx context.Context, client *odp.Client, reader *bufio.Reader) {
+	printHeader("Bulk Data Download")
 
-	apiKey := os.Getenv("USPTO_API_KEY")
-	if apiKey == "" {
-		reader := bufio.NewReader(os.Stdin)
-		fmt.Print("\nEnter your USPTO API key: ")
-		apiKey, _ = reader.ReadString('\n')
-		apiKey = strings.TrimSpace(apiKey)
-	} else {
-		fmt.Printf("\nUsing API key from environment (USPTO_API_KEY)\n")
-	}
-
-	config := odp.DefaultConfig()
-	config.APIKey = apiKey
-	client, err := odp.NewClient(config)
-	if err != nil {
-		fmt.Printf("Error creating client: %v\n", err)
-		os.Exit(1)
-	}
-
-	reader := bufio.NewReader(os.Stdin)
-	ctx := context.Background()
-
-	fmt.Println("\n=== STEP 1: Select a Bulk Data Product ===")
 	productID := selectProduct(ctx, client, reader)
 	if productID == "" {
 		return
 	}
 
-	fmt.Printf("\n=== STEP 2: Browse Files for %s ===\n", productID)
 	fileName := selectFile(ctx, client, reader, productID)
 	if fileName == "" {
 		return
 	}
 
-	fmt.Printf("\n=== STEP 3: Download %s ===\n", fileName)
 	downloadSelectedFile(ctx, client, productID, fileName)
 }
 
@@ -156,7 +126,6 @@ func selectFile(ctx context.Context, client *odp.Client, reader *bufio.Reader, p
 
 	fmt.Printf("\nTotal files available: %d\n", totalFiles)
 
-	// Pagination
 	pageSize := 20
 	currentPage := 0
 
@@ -178,15 +147,13 @@ func selectFile(ctx context.Context, client *odp.Client, reader *bufio.Reader, p
 					fmt.Printf(" (%.2f MB)", sizeMB)
 				}
 				if file.FileReleaseDate != nil {
-					// Parse and format date
 					if len(*file.FileReleaseDate) >= 10 {
 						fmt.Printf(" - %s", (*file.FileReleaseDate)[:10])
 					}
 				}
 				fmt.Println()
 
-				// Extract the correct file path from FileDownloadURI
-				filePath := *file.FileName // fallback to FileName
+				filePath := *file.FileName
 				if file.FileDownloadURI != nil {
 					if extracted := extractFilePathFromURI(*file.FileDownloadURI, productID); extracted != "" {
 						filePath = extracted
@@ -255,8 +222,7 @@ func selectFile(ctx context.Context, client *odp.Client, reader *bufio.Reader, p
 					if err == nil && num > 0 && num <= len(files) {
 						file := files[num-1]
 						if file.FileName != nil {
-							// Extract the correct file path from FileDownloadURI
-							filePath := *file.FileName // fallback to FileName
+							filePath := *file.FileName
 							if file.FileDownloadURI != nil {
 								if extracted := extractFilePathFromURI(*file.FileDownloadURI, productID); extracted != "" {
 									filePath = extracted
@@ -268,7 +234,6 @@ func selectFile(ctx context.Context, client *odp.Client, reader *bufio.Reader, p
 				}
 			}
 		default:
-			// Try to parse as number
 			num, err := strconv.Atoi(choice)
 			if err == nil && fileMap[num] != "" {
 				return fileMap[num]
@@ -279,21 +244,18 @@ func selectFile(ctx context.Context, client *odp.Client, reader *bufio.Reader, p
 }
 
 func downloadSelectedFile(ctx context.Context, client *odp.Client, productID, fileName string) {
-	// Get the file details to obtain the FileDownloadURI (recommended approach)
 	result, err := client.GetBulkProduct(ctx, productID)
 	if err != nil {
 		fmt.Printf("Error getting product details: %v\n", err)
 		return
 	}
 
-	// Find the specific file's FileDownloadURI
 	var fileDownloadURI string
 	if result.BulkDataProductBag != nil && len(*result.BulkDataProductBag) > 0 {
 		product := (*result.BulkDataProductBag)[0]
 		if product.ProductFileBag != nil && product.ProductFileBag.FileDataBag != nil {
 			for _, file := range *product.ProductFileBag.FileDataBag {
 				if file.FileDownloadURI != nil {
-					// Check if this is our file (match the extracted path)
 					if extracted := extractFilePathFromURI(*file.FileDownloadURI, productID); extracted == fileName {
 						fileDownloadURI = *file.FileDownloadURI
 						break
@@ -308,7 +270,6 @@ func downloadSelectedFile(ctx context.Context, client *odp.Client, productID, fi
 		return
 	}
 
-	// Create output file (use just the filename, not the full path)
 	outputPath := filepath.Base(fileName)
 	fmt.Printf("Saving to: %s\n", outputPath)
 	fmt.Printf("Download URL: %s\n", fileDownloadURI)
@@ -320,21 +281,18 @@ func downloadSelectedFile(ctx context.Context, client *odp.Client, productID, fi
 	}
 	defer file.Close()
 
-	// Download with progress using the new recommended method
 	startTime := time.Now()
 	var lastProgress int64
 	var lastUpdate time.Time
 
-	// Use DownloadBulkFileWithProgress - the new, better API
 	err = client.DownloadBulkFileWithProgress(ctx, fileDownloadURI, file,
 		func(bytesComplete, bytesTotal int64) {
 			now := time.Now()
-			// Update every 0.5 seconds or every 5MB
 			if now.Sub(lastUpdate) > 500*time.Millisecond || bytesComplete-lastProgress > 5*1024*1024 {
 				if bytesTotal > 0 {
 					percent := float64(bytesComplete) * 100 / float64(bytesTotal)
 					elapsed := now.Sub(startTime).Seconds()
-					speed := float64(bytesComplete) / elapsed / 1024 / 1024 // MB/s
+					speed := float64(bytesComplete) / elapsed / 1024 / 1024
 					remaining := float64(bytesTotal-bytesComplete) / (float64(bytesComplete) / elapsed)
 
 					fmt.Printf("\rProgress: %.1f%% | %.2f/%.2f MB | Speed: %.2f MB/s | ETA: %.0fs     ",
@@ -351,7 +309,7 @@ func downloadSelectedFile(ctx context.Context, client *odp.Client, productID, fi
 			}
 		})
 
-	fmt.Println() // New line after progress
+	fmt.Println()
 
 	if err != nil {
 		fmt.Printf("Error downloading file: %v\n", err)
@@ -359,7 +317,6 @@ func downloadSelectedFile(ctx context.Context, client *odp.Client, productID, fi
 		return
 	}
 
-	// Get file info for size
 	info, _ := file.Stat()
 	elapsed := time.Since(startTime)
 	avgSpeed := float64(info.Size()) / elapsed.Seconds() / 1024 / 1024
