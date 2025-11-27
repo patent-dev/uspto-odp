@@ -1,0 +1,4 @@
+Method: get_trial_decision
+
+Parameters:
+  documentIdentifier: 171246356

@@ -1,0 +1,4 @@
+Method: get_interference_decision
+
+Parameters:
+  documentIdentifier: 229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b

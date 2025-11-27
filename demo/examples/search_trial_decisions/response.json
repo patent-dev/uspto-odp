@@ -1,0 +1,264 @@
+{
+  "count": 19523,
+  "patentTrialDocumentDataBag": [
+    {
+      "decisionData": {
+        "decisionIssueDate": "2025-11-26",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "102",
+          "103"
+        ],
+        "statuteAndRuleBag": [
+          "37 CFR 42.100",
+          "37 CFR 42.73",
+          "35 USC 318"
+        ],
+        "trialOutcomeCategory": "Final Written Decision"
+      },
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246356",
+        "documentName": "IPR2024-00984 FWD FINAL.pdf",
+        "documentNumber": 59,
+        "documentOCRText": "Trials@uspto.gov Paper 59 \n571-272-7822 Date: November 26, 2025 \n\n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\n \nARASHI VISION (U.S.) LLC (D/B/A INSTA360), \n\nPetitioner, \n\nv. \n\nGOPRO, INC., \nPatent Owner. \n\n \n\nIPR2024-00984 \nPatent 10,015,413 B1 \n\n \n \n\nBefore WILLIAM V. SAINDON, NABEEL U. KHAN, and \nBRIAN D. RANGE, Administrative Patent Judges. \n\nKHAN, Administrative Patent Judge.  \n \n \n \n\nJUDGMENT \nFinal Written Decision \n\nDetermining Some Ch ...",
+        "documentSizeQuantity": 626123,
+        "documentTitleText": "JUDGMENT Final Written Decision Determining Some Challenged Claims Unpatentable 35 U.S.C. § 318(a)",
+        "documentTypeDescriptionText": "FINAL",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2025-11-26T23:58:00",
+      "patentOwnerData": {
+        "applicationNumberText": "15492738",
+        "counselName": "Glass, Jameset al",
+        "grantDate": "2018-07-03",
+        "groupArtUnitNumber": "2663",
+        "inventorName": "Nicholas D. Woodman et al",
+        "patentNumber": "10015413",
+        "realPartyInInterestName": "GoPro, Inc.",
+        "technologyCenterNumber": "2600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Yap, Alexet al",
+        "realPartyInInterestName": "Arashi Vision Inc. (d/b/a Insta360)"
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2024-06-20",
+        "institutionDecisionDate": "2025-01-07",
+        "latestDecisionDate": "2025-11-26",
+        "petitionFilingDate": "2024-06-20",
+        "terminationDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T08:12:03",
+        "trialStatusCategory": "Final Written Decision",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2024-00984"
+    },
+    {
+      "decisionData": {
+        "decisionIssueDate": "2025-11-26",
+        "decisionTypeCategory": "Decision",
+        "statuteAndRuleBag": [
+          "35 USC 317",
+          "37 CFR 42.74",
+          "37 CFR 42.72"
+        ],
+        "trialOutcomeCategory": "Settled After Institution"
+      },
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246430",
+        "documentName": "IPR2025-00261 to -00264 Termination due to Settlement After Insitution FINAL.pdf",
+        "documentNumber": 17,
+        "documentOCRText": "upload to S3 failed",
+        "documentSizeQuantity": 96971,
+        "documentTitleText": "Termination Decision:  Post-DI Settlement",
+        "documentTypeDescriptionText": "TERMINATE",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2025-11-27T05:54:57",
+      "patentOwnerData": {
+        "applicationNumberText": "17090018",
+        "counselName": "Rigg, Robertet al",
+        "grantDate": "2021-06-15",
+        "groupArtUnitNumber": "3731",
+        "inventorName": "Richard L. Leimbach et al",
+        "patentNumber": "11034007",
+        "realPartyInInterestName": "Kyocera Senco Industrial Tools, Inc.",
+        "technologyCenterNumber": "3700"
+      },
+      "regularPetitionerData": {
+        "counselName": "Parikh, Amolet al",
+        "realPartyInInterestName": "Koki Holdings America Ltd. et al."
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2024-12-13",
+        "institutionDecisionDate": "2025-06-11",
+        "latestDecisionDate": "2025-11-26",
+        "petitionFilingDate": "2024-12-13",
+        "terminationDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T10:33:35",
+        "trialStatusCategory": "Terminated-Settled",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2025-00261"
+    },
+    {
+      "decisionData": {
+        "decisionIssueDate": "2025-11-26",
+        "decisionTypeCategory": "Decision",
+        "statuteAndRuleBag": [
+          "35 USC 317",
+          "37 CFR 42.74",
+          "37 CFR 42.72"
+        ],
+        "trialOutcomeCategory": "Settled After Institution"
+      },
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246434",
+        "documentName": "IPR2025-00261 to -00264 Termination due to Settlement After Insitution FINAL.pdf",
+        "documentNumber": 17,
+        "documentOCRText": "Trials@uspto.gov Paper 17 \nTel: 571-272-7822 Date: November 26, 2025 \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\nKOKI HOLDINGS AMERICA LTD., \nPetitioner, \n\nv. \n\nKYOCERA SENCO INDUSTRIAL TOOLS, INC., \nPatent Owner. \n\n \n\nIPR2025-00261, IPR2025-00262, IPR2025-00263, IPR2025-00264 \nPatents 11,034,007 B2; 10,478,954 B2; 11,241,776 B2; 11,845,167 B2 \n\n \n\nBefore BARRY L. GROSSMAN, MITCHELL G. WEATHERLY, and \nSCOTT C. MOORE, Administrative Patent Judg ...",
+        "documentSizeQuantity": 96971,
+        "documentTitleText": "Termination Decision:  Post-DI Settlement",
+        "documentTypeDescriptionText": "TERMINATE",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2025-11-27T05:54:57",
+      "patentOwnerData": {
+        "applicationNumberText": "16398944",
+        "counselName": "Rigg, Robertet al",
+        "grantDate": "2022-02-08",
+        "groupArtUnitNumber": "3731",
+        "inventorName": "Richard L. Leimbach et al",
+        "patentNumber": "11241776",
+        "realPartyInInterestName": "Kyocera Senco Industrial Tools, Inc.",
+        "technologyCenterNumber": "3700"
+      },
+      "regularPetitionerData": {
+        "counselName": "Parikh, Amolet al",
+        "realPartyInInterestName": "Koki Holdings America Ltd. et al."
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2024-12-13",
+        "institutionDecisionDate": "2025-06-11",
+        "latestDecisionDate": "2025-11-26",
+        "petitionFilingDate": "2024-12-13",
+        "terminationDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T10:34:10",
+        "trialStatusCategory": "Terminated-Settled",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2025-00263"
+    },
+    {
+      "decisionData": {
+        "decisionIssueDate": "2025-11-26",
+        "decisionTypeCategory": "Decision",
+        "statuteAndRuleBag": [
+          "35 USC 317",
+          "37 CFR 42.74",
+          "37 CFR 42.72"
+        ],
+        "trialOutcomeCategory": "Settled After Institution"
+      },
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246432",
+        "documentName": "IPR2025-00261 to -00264 Termination due to Settlement After Insitution FINAL.pdf",
+        "documentNumber": 17,
+        "documentOCRText": "Trials@uspto.gov Paper 17 \nTel: 571-272-7822 Date: November 26, 2025 \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\nKOKI HOLDINGS AMERICA LTD., \nPetitioner, \n\nv. \n\nKYOCERA SENCO INDUSTRIAL TOOLS, INC., \nPatent Owner. \n\n \n\nIPR2025-00261, IPR2025-00262, IPR2025-00263, IPR2025-00264 \nPatents 11,034,007 B2; 10,478,954 B2; 11,241,776 B2; 11,845,167 B2 \n\n \n\nBefore BARRY L. GROSSMAN, MITCHELL G. WEATHERLY, and \nSCOTT C. MOORE, Administrative Patent Judg ...",
+        "documentSizeQuantity": 96971,
+        "documentTitleText": "Termination Decision:  Post-DI Settlement",
+        "documentTypeDescriptionText": "TERMINATE",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2025-11-27T05:54:57",
+      "patentOwnerData": {
+        "applicationNumberText": "15583202",
+        "counselName": "Rigg, Robertet al",
+        "grantDate": "2019-11-19",
+        "groupArtUnitNumber": "3731",
+        "inventorName": "Richard L. Leimbach et al",
+        "patentNumber": "10478954",
+        "realPartyInInterestName": "Kyocera Senco Industrial Tools, Inc.",
+        "technologyCenterNumber": "3700"
+      },
+      "regularPetitionerData": {
+        "counselName": "Parikh, Amolet al",
+        "realPartyInInterestName": "Koki Holdings America Ltd. et al."
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2024-12-13",
+        "institutionDecisionDate": "2025-06-11",
+        "latestDecisionDate": "2025-11-26",
+        "petitionFilingDate": "2024-12-13",
+        "terminationDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T10:33:52",
+        "trialStatusCategory": "Terminated-Settled",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2025-00262"
+    },
+    {
+      "decisionData": {
+        "decisionIssueDate": "2025-11-26",
+        "decisionTypeCategory": "Decision",
+        "statuteAndRuleBag": [
+          "35 USC 317",
+          "37 CFR 42.74",
+          "37 CFR 42.72"
+        ],
+        "trialOutcomeCategory": "Settled After Institution"
+      },
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246436",
+        "documentName": "IPR2025-00261 to -00264 Termination due to Settlement After Insitution FINAL.pdf",
+        "documentNumber": 17,
+        "documentOCRText": "Trials@uspto.gov Paper 17 \nTel: 571-272-7822 Date: November 26, 2025 \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\nKOKI HOLDINGS AMERICA LTD., \nPetitioner, \n\nv. \n\nKYOCERA SENCO INDUSTRIAL TOOLS, INC., \nPatent Owner. \n\n \n\nIPR2025-00261, IPR2025-00262, IPR2025-00263, IPR2025-00264 \nPatents 11,034,007 B2; 10,478,954 B2; 11,241,776 B2; 11,845,167 B2 \n\n \n\nBefore BARRY L. GROSSMAN, MITCHELL G. WEATHERLY, and \nSCOTT C. MOORE, Administrative Patent Judg ...",
+        "documentSizeQuantity": 96971,
+        "documentTitleText": "Termination Decision:  Post-DI Settlement",
+        "documentTypeDescriptionText": "TERMINATE",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2025-11-27T05:54:57",
+      "patentOwnerData": {
+        "applicationNumberText": "17571811",
+        "counselName": "Rigg, Robertet al",
+        "grantDate": "2023-12-19",
+        "groupArtUnitNumber": "3731",
+        "inventorName": "Richard L. Leimbach et al",
+        "patentNumber": "11845167",
+        "realPartyInInterestName": "Kyocera Senco Industrial Tools, Inc.",
+        "technologyCenterNumber": "3700"
+      },
+      "regularPetitionerData": {
+        "counselName": "Parikh, Amolet al",
+        "realPartyInInterestName": "Koki Holdings America Ltd. et al."
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2024-12-13",
+        "institutionDecisionDate": "2025-06-11",
+        "latestDecisionDate": "2025-11-26",
+        "petitionFilingDate": "2024-12-13",
+        "terminationDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T10:34:28",
+        "trialStatusCategory": "Terminated-Settled",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2025-00264"
+    }
+  ]
+}

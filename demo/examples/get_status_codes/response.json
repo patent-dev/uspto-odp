@@ -1,0 +1,106 @@
+{
+  "count": 241,
+  "requestIdentifier": "c9dad448-fdf1-480d-9615-c5682f110583",
+  "statusCodeBag": [
+    {
+      "applicationStatusCode": 1,
+      "applicationStatusDescriptionText": "Missassigned Application Number"
+    },
+    {
+      "applicationStatusCode": 3,
+      "applicationStatusDescriptionText": "Proceedings Terminated"
+    },
+    {
+      "applicationStatusCode": 11,
+      "applicationStatusDescriptionText": "Hague Application under International Review"
+    },
+    {
+      "applicationStatusCode": 12,
+      "applicationStatusDescriptionText": "Pre-Exam Transmittal Review Complete (Hague)"
+    },
+    {
+      "applicationStatusCode": 16,
+      "applicationStatusDescriptionText": "Waiting for LR clearance"
+    },
+    {
+      "applicationStatusCode": 17,
+      "applicationStatusDescriptionText": "Sent to Classification contractor"
+    },
+    {
+      "applicationStatusCode": 18,
+      "applicationStatusDescriptionText": "Application Returned back to Preexam"
+    },
+    {
+      "applicationStatusCode": 19,
+      "applicationStatusDescriptionText": "Application Undergoing Preexam Processing"
+    },
+    {
+      "applicationStatusCode": 20,
+      "applicationStatusDescriptionText": "Application Dispatched from Preexam, Not Yet Docketed"
+    },
+    {
+      "applicationStatusCode": 21,
+      "applicationStatusDescriptionText": "Lost Image Document Mailed"
+    },
+    {
+      "applicationStatusCode": 25,
+      "applicationStatusDescriptionText": "TSS review complete"
+    },
+    {
+      "applicationStatusCode": 27,
+      "applicationStatusDescriptionText": "UNDOCKETED TRACK 1"
+    },
+    {
+      "applicationStatusCode": 28,
+      "applicationStatusDescriptionText": "Rocket Docket PREX"
+    },
+    {
+      "applicationStatusCode": 29,
+      "applicationStatusDescriptionText": "Queue Mass Docket"
+    },
+    {
+      "applicationStatusCode": 30,
+      "applicationStatusDescriptionText": "Docketed New Case - Ready for Examination"
+    },
+    {
+      "applicationStatusCode": 31,
+      "applicationStatusDescriptionText": "AWAITING RESPONSE FOR INFORMALITY, FEE DEFICIENCY OR CRF ACTION"
+    },
+    {
+      "applicationStatusCode": 37,
+      "applicationStatusDescriptionText": "Special New"
+    },
+    {
+      "applicationStatusCode": 38,
+      "applicationStatusDescriptionText": "Rocket Docket"
+    },
+    {
+      "applicationStatusCode": 39,
+      "applicationStatusDescriptionText": "Special New (Pilot)"
+    },
+    {
+      "applicationStatusCode": 40,
+      "applicationStatusDescriptionText": "Non Final Action Counted, Not Yet Mailed"
+    },
+    {
+      "applicationStatusCode": 41,
+      "applicationStatusDescriptionText": "Non Final Action Mailed"
+    },
+    {
+      "applicationStatusCode": 50,
+      "applicationStatusDescriptionText": "Ex parte Quayle Action Counted, Not Yet Mailed"
+    },
+    {
+      "applicationStatusCode": 51,
+      "applicationStatusDescriptionText": "Ex parte Quayle Action Mailed"
+    },
+    {
+      "applicationStatusCode": 60,
+      "applicationStatusDescriptionText": "Final Rejection Counted, Not Yet Mailed"
+    },
+    {
+      "applicationStatusCode": 61,
+      "applicationStatusDescriptionText": "Final Rejection Mailed"
+    }
+  ]
+}

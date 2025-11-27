@@ -1,0 +1,4 @@
+Method: get_appeal_decisions_by_appeal_number
+
+Parameters:
+  appealNumber: 2026000193

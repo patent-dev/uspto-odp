@@ -1,0 +1,29 @@
+{
+  "count": 1,
+  "patentTrialProceedingDataBag": [
+    {
+      "lastModifiedDateTime": "2025-11-27T11:53:36",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    }
+  ],
+  "requestIdentifier": "83d8dad0-36c3-4ef6-bc62-03b173068044"
+}

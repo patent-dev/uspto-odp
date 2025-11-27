@@ -678,3 +678,446 @@ func IntPtr(i int) *int {
 func Int32Ptr(i int32) *int32 {
 	return &i
 }
+
+// ==============================================================================
+// PTAB (Patent Trial and Appeal Board) Methods
+// ==============================================================================
+
+// SearchTrialProceedings searches PTAB trial proceedings
+func (c *Client) SearchTrialProceedings(ctx context.Context, query string, offset, limit int32) (*generated.ProceedingDataResponse, error) {
+	req := generated.PostApiV1PatentTrialsProceedingsSearchJSONRequestBody{
+		Q: StringPtr(query),
+		Pagination: &generated.Pagination{
+			Offset: Int32Ptr(offset),
+			Limit:  Int32Ptr(limit),
+		},
+	}
+
+	var resp *generated.PostApiV1PatentTrialsProceedingsSearchResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentTrialsProceedingsSearchWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetTrialProceeding retrieves a specific PTAB trial proceeding by trial number
+func (c *Client) GetTrialProceeding(ctx context.Context, trialNumber string) (*generated.ProceedingDataResponse, error) {
+	var resp *generated.GetApiV1PatentTrialsProceedingsTrialNumberResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentTrialsProceedingsTrialNumberWithResponse(ctx, trialNumber)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// SearchTrialDecisions searches PTAB trial decisions
+func (c *Client) SearchTrialDecisions(ctx context.Context, query string, offset, limit int32) (*generated.DecisionDataResponse, error) {
+	req := generated.PostApiV1PatentTrialsDecisionsSearchJSONRequestBody{
+		Q: StringPtr(query),
+		Pagination: &generated.Pagination{
+			Offset: Int32Ptr(offset),
+			Limit:  Int32Ptr(limit),
+		},
+	}
+
+	var resp *generated.PostApiV1PatentTrialsDecisionsSearchResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentTrialsDecisionsSearchWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetTrialDecision retrieves a specific PTAB trial decision by document identifier
+func (c *Client) GetTrialDecision(ctx context.Context, documentIdentifier string) (*generated.DecisionDataResponse, error) {
+	var resp *generated.GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentTrialsDecisionsDocumentIdentifierWithResponse(ctx, documentIdentifier)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// SearchTrialDocuments searches PTAB trial documents
+func (c *Client) SearchTrialDocuments(ctx context.Context, query string, offset, limit int32) (*generated.DocumentDataResponse, error) {
+	req := generated.PostApiV1PatentTrialsDocumentsSearchJSONRequestBody{
+		Q: StringPtr(query),
+		Pagination: &generated.Pagination{
+			Offset: Int32Ptr(offset),
+			Limit:  Int32Ptr(limit),
+		},
+	}
+
+	var resp *generated.PostApiV1PatentTrialsDocumentsSearchResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentTrialsDocumentsSearchWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetTrialDocument retrieves a specific PTAB trial document by document identifier
+func (c *Client) GetTrialDocument(ctx context.Context, documentIdentifier string) (*generated.DocumentDataResponse, error) {
+	var resp *generated.GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentTrialsDocumentsDocumentIdentifierWithResponse(ctx, documentIdentifier)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// SearchAppealDecisions searches PTAB appeal decisions
+func (c *Client) SearchAppealDecisions(ctx context.Context, query string, offset, limit int32) (*generated.AppealDecisionDataResponse, error) {
+	req := generated.PostApiV1PatentAppealsDecisionsSearchJSONRequestBody{
+		Q: StringPtr(query),
+		Pagination: &generated.Pagination{
+			Offset: Int32Ptr(offset),
+			Limit:  Int32Ptr(limit),
+		},
+	}
+
+	var resp *generated.PostApiV1PatentAppealsDecisionsSearchResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentAppealsDecisionsSearchWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetAppealDecision retrieves a specific PTAB appeal decision by document identifier
+func (c *Client) GetAppealDecision(ctx context.Context, documentIdentifier string) (*generated.AppealDecisionDataResponse, error) {
+	var resp *generated.GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentAppealsDecisionsDocumentIdentifierWithResponse(ctx, documentIdentifier)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetAppealDecisionsByAppealNumber retrieves all decisions for a specific appeal number
+func (c *Client) GetAppealDecisionsByAppealNumber(ctx context.Context, appealNumber string) (*generated.AppealDecisionDataResponse, error) {
+	var resp *generated.GetApiV1PatentAppealsAppealNumberDecisionsResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentAppealsAppealNumberDecisionsWithResponse(ctx, appealNumber)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// SearchInterferenceDecisions searches PTAB interference decisions
+func (c *Client) SearchInterferenceDecisions(ctx context.Context, query string, offset, limit int32) (*generated.InterferenceDecisionDataResponse, error) {
+	req := generated.PostApiV1PatentInterferencesDecisionsSearchJSONRequestBody{
+		Q: StringPtr(query),
+		Pagination: &generated.Pagination{
+			Offset: Int32Ptr(offset),
+			Limit:  Int32Ptr(limit),
+		},
+	}
+
+	var resp *generated.PostApiV1PatentInterferencesDecisionsSearchResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentInterferencesDecisionsSearchWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetInterferenceDecision retrieves a specific PTAB interference decision by document identifier
+func (c *Client) GetInterferenceDecision(ctx context.Context, documentIdentifier string) (*generated.InterferenceDecisionDataResponse, error) {
+	var resp *generated.GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentInterferencesDecisionsDocumentIdentifierWithResponse(ctx, documentIdentifier)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetInterferenceDecisionsByNumber retrieves all decisions for a specific interference number
+func (c *Client) GetInterferenceDecisionsByNumber(ctx context.Context, interferenceNumber string) (*generated.InterferenceDecisionDataResponse, error) {
+	var resp *generated.GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentInterferencesInterferenceNumberDecisionsWithResponse(ctx, interferenceNumber)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetTrialDecisionsByTrialNumber retrieves all decisions for a specific trial number
+func (c *Client) GetTrialDecisionsByTrialNumber(ctx context.Context, trialNumber string) (*generated.DecisionDataResponse, error) {
+	var resp *generated.GetApiV1PatentTrialsTrialNumberDecisionsResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentTrialsTrialNumberDecisionsWithResponse(ctx, trialNumber)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// GetTrialDocumentsByTrialNumber retrieves all documents for a specific trial number
+func (c *Client) GetTrialDocumentsByTrialNumber(ctx context.Context, trialNumber string) (*generated.DocumentDataResponse, error) {
+	var resp *generated.GetApiV1PatentTrialsTrialNumberDocumentsResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.GetApiV1PatentTrialsTrialNumberDocumentsWithResponse(ctx, trialNumber)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.JSON200, nil
+}
+
+// SearchTrialProceedingsDownload downloads trial proceedings search results
+func (c *Client) SearchTrialProceedingsDownload(ctx context.Context, req generated.DownloadRequest) ([]byte, error) {
+	var resp *generated.PostApiV1PatentTrialsProceedingsSearchDownloadResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentTrialsProceedingsSearchDownloadWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.Body, nil
+}
+
+// SearchTrialDecisionsDownload downloads trial decisions search results
+func (c *Client) SearchTrialDecisionsDownload(ctx context.Context, req generated.DownloadRequest) ([]byte, error) {
+	var resp *generated.PostApiV1PatentTrialsDecisionsSearchDownloadResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentTrialsDecisionsSearchDownloadWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.Body, nil
+}
+
+// SearchTrialDocumentsDownload downloads trial documents search results
+func (c *Client) SearchTrialDocumentsDownload(ctx context.Context, req generated.DownloadRequest) ([]byte, error) {
+	var resp *generated.PostApiV1PatentTrialsDocumentsSearchDownloadResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentTrialsDocumentsSearchDownloadWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.Body, nil
+}
+
+// SearchAppealDecisionsDownload downloads appeal decisions search results
+func (c *Client) SearchAppealDecisionsDownload(ctx context.Context, req generated.DownloadRequest) ([]byte, error) {
+	var resp *generated.PostApiV1PatentAppealsDecisionsSearchDownloadResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentAppealsDecisionsSearchDownloadWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.Body, nil
+}
+
+// SearchInterferenceDecisionsDownload downloads interference decisions search results
+func (c *Client) SearchInterferenceDecisionsDownload(ctx context.Context, req generated.PatentDownloadRequest) ([]byte, error) {
+	var resp *generated.PostApiV1PatentInterferencesDecisionsSearchDownloadResponse
+	err := c.retryableRequest(func() error {
+		var err error
+		resp, err = c.generated.PostApiV1PatentInterferencesDecisionsSearchDownloadWithResponse(ctx, req)
+		if err != nil {
+			return err
+		}
+		if resp.StatusCode() != http.StatusOK {
+			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+	return resp.Body, nil
+}

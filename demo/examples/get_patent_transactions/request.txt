@@ -1,0 +1,4 @@
+Method: get_patent_transactions
+
+Parameters:
+  applicationNumber: 17248024

@@ -4,12 +4,15 @@ Demonstration program for the USPTO Open Data Portal (ODP) API client library.
 
 ## Features
 
-The demo covers all major API endpoints:
+The demo covers all 38 API endpoints with example saving:
 
 - **Patent API** (13 endpoints) - Search patents, retrieve metadata, documents, assignments, etc.
 - **Petition API** (3 endpoints) - Search and retrieve petition decisions
-- **Bulk Data** - Browse and download bulk data products with progress tracking
+- **PTAB API** (19 endpoints) - Trial proceedings, decisions, documents, appeals, interferences
+- **Bulk Data** (3 endpoints) - Browse and download bulk data products with progress tracking
 - **XML Full Text** - Retrieve and parse full patent text (grants and applications)
+
+All request/response pairs are saved to `examples/` directory for documentation.
 
 ## Prerequisites
 
@@ -33,8 +36,12 @@ go run .
 # Run specific service
 go run . -service=patent
 go run . -service=petition
+go run . -service=ptab
 go run . -service=xml
 go run . -service=bulk
+
+# Skip saving examples
+go run . -service=ptab -no-save
 
 # Interactive mode
 go run . -interactive
@@ -137,10 +144,13 @@ demo/
 ├── main.go          # Entry point, CLI flags, routing
 ├── patent.go        # 13 Patent API endpoint demonstrations
 ├── petition.go      # 3 Petition API endpoint demonstrations
+├── ptab.go          # 19 PTAB API endpoint demonstrations
 ├── bulk.go          # Bulk data browser and downloader
 ├── xmldemo.go       # XML full text retrieval and parsing
+├── saver.go         # Example saver utility
 ├── utils.go         # Helper functions for display
 ├── testdata.go      # Test patent numbers
+├── examples/        # Saved request/response examples
 ├── go.mod           # Module definition
 └── README.md        # This file
 ```

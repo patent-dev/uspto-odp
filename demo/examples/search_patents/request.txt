@@ -1,0 +1,6 @@
+Method: search_patents
+
+Parameters:
+  offset: 0
+  limit: 5
+  query: artificialIntelligence

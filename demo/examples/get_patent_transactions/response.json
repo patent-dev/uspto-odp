@@ -1,0 +1,315 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationNumberText": "17248024",
+      "eventDataBag": [
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2023-10-03",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MOPPT",
+          "eventDate": "2023-10-03",
+          "eventDescriptionText": "Mail O.P. Petition Decision"
+        },
+        {
+          "eventCode": "MP014",
+          "eventDate": "2023-09-29",
+          "eventDescriptionText": "Mail-Record Petition Decision of Granted to Make Entity Status large"
+        },
+        {
+          "eventCode": "P014",
+          "eventDate": "2023-09-28",
+          "eventDescriptionText": "Record Petition Decision of Granted to Make Entity Status large"
+        },
+        {
+          "eventCode": "OPPT",
+          "eventDate": "2023-09-28",
+          "eventDescriptionText": "O.P. Petition Decision"
+        },
+        {
+          "eventCode": "BIG.",
+          "eventDate": "2023-07-07",
+          "eventDescriptionText": "Entity Status Set To Undiscounted (Initial Default Setting or Status Change)"
+        },
+        {
+          "eventCode": "PET.",
+          "eventDate": "2023-07-07",
+          "eventDescriptionText": "Petition Entered"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-06-28",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2023-06-28",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MOPPT",
+          "eventDate": "2023-06-28",
+          "eventDescriptionText": "Mail O.P. Petition Decision"
+        },
+        {
+          "eventCode": "MPTDI",
+          "eventDate": "2023-06-26",
+          "eventDescriptionText": "Mail-Petition Decision - Dismissed"
+        },
+        {
+          "eventCode": "PTDI",
+          "eventDate": "2023-06-23",
+          "eventDescriptionText": "Petition Decision - Dismissed"
+        },
+        {
+          "eventCode": "OPPT",
+          "eventDate": "2023-06-16",
+          "eventDescriptionText": "O.P. Petition Decision"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "PET.",
+          "eventDate": "2023-03-28",
+          "eventDescriptionText": "Petition Entered"
+        },
+        {
+          "eventCode": "PGM/",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Recordation of Patent Grant Mailed"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MEPG_NTF",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Mail Patent eGrant Notification"
+        },
+        {
+          "eventCode": "EPG_NTF",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Patent eGrant Notification"
+        },
+        {
+          "eventCode": "EPG/",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Recordation of Patent eGrant"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-04-20",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2023-04-20",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "WPIR",
+          "eventDate": "2023-04-19",
+          "eventDescriptionText": "Issue Notification Mailed"
+        },
+        {
+          "eventCode": "PTAC",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Patent Issue Date Used in PTA Calculation"
+        },
+        {
+          "eventCode": "D1935",
+          "eventDate": "2023-03-31",
+          "eventDescriptionText": "Dispatch to FDC"
+        },
+        {
+          "eventCode": "PILS",
+          "eventDate": "2023-03-31",
+          "eventDescriptionText": "Application Is Considered Ready for Issue"
+        },
+        {
+          "eventCode": "N084",
+          "eventDate": "2023-03-30",
+          "eventDescriptionText": "Issue Fee Payment Verified"
+        },
+        {
+          "eventCode": "IFEE",
+          "eventDate": "2023-03-30",
+          "eventDescriptionText": "Issue Fee Payment Received"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-01-13",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTF",
+          "eventDate": "2023-01-13",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MC/N=",
+          "eventDate": "2023-01-13",
+          "eventDescriptionText": "Mail Corrected Notice of Allowance"
+        },
+        {
+          "eventCode": "C/N=",
+          "eventDate": "2023-01-11",
+          "eventDescriptionText": "Corrected Notice of Allowance"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-01-03",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTF",
+          "eventDate": "2023-01-03",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MN/=.",
+          "eventDate": "2023-01-03",
+          "eventDescriptionText": "Mail Notice of Allowance"
+        },
+        {
+          "eventCode": "N/=.",
+          "eventDate": "2022-12-29",
+          "eventDescriptionText": "Notice of Allowance Data Verification Completed"
+        },
+        {
+          "eventCode": "IDSC",
+          "eventDate": "2022-12-15",
+          "eventDescriptionText": "Information Disclosure Statement considered"
+        },
+        {
+          "eventCode": "DOCK",
+          "eventDate": "2022-12-10",
+          "eventDescriptionText": "Case Docketed to Examiner in GAU"
+        },
+        {
+          "eventCode": "DOCK",
+          "eventDate": "2021-08-23",
+          "eventDescriptionText": "Case Docketed to Examiner in GAU"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2021-07-09",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "PG-ISSUE",
+          "eventDate": "2021-07-08",
+          "eventDescriptionText": "PG-Pub Issue Notification"
+        },
+        {
+          "eventCode": "M844",
+          "eventDate": "2021-03-26",
+          "eventDescriptionText": "Information Disclosure Statement (IDS) Filed"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2021-03-30",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "OIPE",
+          "eventDate": "2021-03-29",
+          "eventDescriptionText": "Application Dispatched from OIPE"
+        },
+        {
+          "eventCode": "FTFI",
+          "eventDate": "2021-03-29",
+          "eventDescriptionText": "FITF set to NO - revise initial setting"
+        },
+        {
+          "eventCode": "PTA.RFE",
+          "eventDate": "2021-03-26",
+          "eventDescriptionText": "Patent Term Adjustment - Ready for Examination"
+        },
+        {
+          "eventCode": "COMP",
+          "eventDate": "2021-03-30",
+          "eventDescriptionText": "Application Is Now Complete"
+        },
+        {
+          "eventCode": "FLRCPT.U",
+          "eventDate": "2021-03-30",
+          "eventDescriptionText": "Filing Receipt - Updated"
+        },
+        {
+          "eventCode": "FLFEE",
+          "eventDate": "2021-03-26",
+          "eventDescriptionText": "Payment of additional filing fee/Preexam"
+        },
+        {
+          "eventCode": "WIDS",
+          "eventDate": "2021-03-26",
+          "eventDescriptionText": "Information Disclosure Statement (IDS) Filed"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "EML_NTF",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "CCRDY",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Application ready for PDX access by participating foreign offices"
+        },
+        {
+          "eventCode": "FLRCPT.O",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Filing Receipt"
+        },
+        {
+          "eventCode": "INCD",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Notice Mailed--Application Incomplete--Filing Date Assigned"
+        },
+        {
+          "eventCode": "SMAL",
+          "eventDate": "2021-01-28",
+          "eventDescriptionText": "Applicant Has Filed a Verified Statement of Small Entity Status in Compliance with 37 CFR 1.27"
+        },
+        {
+          "eventCode": "SREXR141",
+          "eventDate": "2021-01-05",
+          "eventDescriptionText": "PTO/SB/69-Authorize EPO Access to Search Results"
+        },
+        {
+          "eventCode": "APPERMS",
+          "eventDate": "2021-01-05",
+          "eventDescriptionText": "Applicants have given acceptable permission for participating foreign"
+        },
+        {
+          "eventCode": "BIG.",
+          "eventDate": "2021-01-05",
+          "eventDescriptionText": "Entity Status Set To Undiscounted (Initial Default Setting or Status Change)"
+        },
+        {
+          "eventCode": "IEXX",
+          "eventDate": "2021-01-05",
+          "eventDescriptionText": "Initial Exam Team nn"
+        }
+      ]
+    }
+  ]
+}

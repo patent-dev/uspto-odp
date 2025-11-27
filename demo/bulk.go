@@ -243,6 +243,94 @@ func selectFile(ctx context.Context, client *odp.Client, reader *bufio.Reader, p
 	}
 }
 
+// demoBulkWithContext runs non-interactive bulk demos with example saving
+func demoBulkWithContext(dctx *DemoContext) {
+	printHeader("Bulk Data API Demonstrations")
+
+	demoSearchBulkProductsCtx(dctx)
+	demoGetBulkProductCtx(dctx)
+	// Note: DownloadBulkFile is not included as it requires actual file download
+	// which is not suitable for example saving (files are very large)
+}
+
+func demoSearchBulkProductsCtx(dctx *DemoContext) {
+	printSubHeader("SearchBulkProducts")
+
+	result, err := dctx.Client.SearchBulkProducts(dctx.Ctx, "", 0, 10)
+	if err != nil {
+		printError(err)
+		return
+	}
+
+	dctx.savePatentExample("search_bulk_products", map[string]string{"query": "", "offset": "0", "limit": "10"}, result)
+
+	if result.Count != nil {
+		fmt.Printf("Total products: %d\n", *result.Count)
+	}
+
+	if result.BulkDataProductBag != nil {
+		fmt.Printf("Returned: %d products\n", len(*result.BulkDataProductBag))
+		for i, product := range *result.BulkDataProductBag {
+			if i >= 5 {
+				fmt.Printf("... and %d more products\n", len(*result.BulkDataProductBag)-5)
+				break
+			}
+			fmt.Printf("\n%d. ", i+1)
+			if product.ProductIdentifier != nil {
+				fmt.Printf("ID: %s", *product.ProductIdentifier)
+			}
+			if product.ProductTitleText != nil {
+				fmt.Printf("\n   Title: %s", *product.ProductTitleText)
+			}
+			if product.ProductFrequencyText != nil {
+				fmt.Printf(" (%s)", *product.ProductFrequencyText)
+			}
+			fmt.Println()
+		}
+	}
+}
+
+func demoGetBulkProductCtx(dctx *DemoContext) {
+	printSubHeader("GetBulkProduct")
+
+	// Use a known product ID (Patent Grant Full Text)
+	productID := "PTGRXML"
+
+	result, err := dctx.Client.GetBulkProduct(dctx.Ctx, productID)
+	if err != nil {
+		printError(err)
+		return
+	}
+
+	dctx.savePatentExample("get_bulk_product", map[string]string{"productID": productID}, result)
+
+	if result.BulkDataProductBag != nil && len(*result.BulkDataProductBag) > 0 {
+		product := (*result.BulkDataProductBag)[0]
+		if product.ProductIdentifier != nil {
+			printResult("Product ID", *product.ProductIdentifier)
+		}
+		if product.ProductTitleText != nil {
+			printResult("Title", *product.ProductTitleText)
+		}
+		if product.ProductFileBag != nil && product.ProductFileBag.FileDataBag != nil {
+			fmt.Printf("Available files: %d\n", len(*product.ProductFileBag.FileDataBag))
+			for i, file := range *product.ProductFileBag.FileDataBag {
+				if i >= 3 {
+					fmt.Printf("... and %d more files\n", len(*product.ProductFileBag.FileDataBag)-3)
+					break
+				}
+				if file.FileName != nil {
+					fmt.Printf("  - %s", *file.FileName)
+					if file.FileSize != nil {
+						fmt.Printf(" (%.2f MB)", float64(*file.FileSize)/1024/1024)
+					}
+					fmt.Println()
+				}
+			}
+		}
+	}
+}
+
 func downloadSelectedFile(ctx context.Context, client *odp.Client, productID, fileName string) {
 	result, err := client.GetBulkProduct(ctx, productID)
 	if err != nil {

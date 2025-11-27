@@ -734,7 +734,7 @@ func TestClientWithActualResponses(t *testing.T) {
 						"productToDate":                   "2001-12-25",
 						"productTotalFileSize":            25938442242,
 						"productFileTotalQuantity":        1382,
-						"lastModifiedDateTime":            "2025-09-23 10:02:00",
+						"lastModifiedDateTime":            "2025-09-23T10:02:00Z",
 						"mimeTypeIdentifierArrayText":     []string{"ASCII", "XML"},
 					},
 				},
@@ -759,7 +759,7 @@ func TestClientWithActualResponses(t *testing.T) {
 						"productToDate":                   "2025-09-23",
 						"productTotalFileSize":            120319343938,
 						"productFileTotalQuantity":        1267,
-						"lastModifiedDateTime":            "2025-09-23 00:57:53",
+						"lastModifiedDateTime":            "2025-09-23T00:57:53Z",
 						"mimeTypeIdentifierArrayText":     []string{"ASCII", "XML"},
 						"productFileBag": map[string]interface{}{
 							"count": 11,
@@ -771,8 +771,8 @@ func TestClientWithActualResponses(t *testing.T) {
 									"fileDataToDate":           "2025-09-23",
 									"fileTypeText":             "Data",
 									"fileDownloadURI":          "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg250923.zip",
-									"fileReleaseDate":          "2025-09-23 00:57:53",
-									"fileLastModifiedDateTime": "2025-09-23 00:57:53",
+									"fileReleaseDate":          "2025-09-23T00:57:53Z",
+									"fileLastModifiedDateTime": "2025-09-23T00:57:53Z",
 								},
 								map[string]interface{}{
 									"fileName":                 "ipg250916.zip",
@@ -835,136 +835,222 @@ func TestClientWithActualResponses(t *testing.T) {
 			w.Header().Set("Content-Length", "35")
 			w.Write(zipData)
 
-		case "/api/v1/patent/applications/16123456/assignment":
-			// Mock response for GetPatentAssignment
+		case "/api/v1/patent/applications/15000001/assignment":
+			// Actual response structure from demo/examples/get_patent_assignment/response.json
 			response := map[string]interface{}{
-				"assignmentBag": []interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
 					map[string]interface{}{
-						"reelNumber":     "048123",
-						"frameNumber":    "0456",
-						"assignorName":   "SMITH, JOHN A.",
-						"assigneeName":   "ACME CORPORATION",
-						"recordedDate":   "2020-01-15",
-						"conveyanceText": "ASSIGNMENT OF ASSIGNORS INTEREST",
-					},
-					map[string]interface{}{
-						"reelNumber":     "049234",
-						"frameNumber":    "0789",
-						"assignorName":   "ACME CORPORATION",
-						"assigneeName":   "TECH INNOVATIONS LLC",
-						"recordedDate":   "2021-03-20",
-						"conveyanceText": "MERGER",
-					},
-				},
-			}
-			json.NewEncoder(w).Encode(response)
-
-		case "/api/v1/patent/applications/16123456/associated-documents":
-			// Mock response for GetPatentAssociatedDocuments
-			response := map[string]interface{}{
-				"associatedDocumentBag": []interface{}{
-					map[string]interface{}{
-						"documentIdentifier":  "RCEX.2020-01-15",
-						"documentCode":        "RCEX",
-						"documentDescription": "Request for Continued Examination",
-						"mailDate":            "2020-01-15",
-						"pageCount":           3,
-					},
-					map[string]interface{}{
-						"documentIdentifier":  "IDS.2020-03-20",
-						"documentCode":        "IDS",
-						"documentDescription": "Information Disclosure Statement",
-						"mailDate":            "2020-03-20",
-						"pageCount":           10,
-					},
-				},
-			}
-			json.NewEncoder(w).Encode(response)
-
-		case "/api/v1/patent/applications/16123456/foreign-priority":
-			// Mock response for GetPatentForeignPriority
-			response := map[string]interface{}{
-				"foreignPriorityBag": []interface{}{
-					map[string]interface{}{
-						"applicationNumber":      "JP2019-123456",
-						"countryCode":            "JP",
-						"filingDate":             "2019-06-15",
-						"priorityClaimIndicator": true,
-					},
-					map[string]interface{}{
-						"applicationNumber":      "EP19123456.7",
-						"countryCode":            "EP",
-						"filingDate":             "2019-07-20",
-						"priorityClaimIndicator": true,
-					},
-				},
-			}
-			json.NewEncoder(w).Encode(response)
-
-		case "/api/v1/patent/applications/16123456/meta-data":
-			// Mock response for GetPatentMetaData
-			response := map[string]interface{}{
-				"applicationNumber": "16123456",
-				"filingDate":        "2020-01-15",
-				"publicationNumber": "US20210123456A1",
-				"publicationDate":   "2021-04-29",
-				"patentNumber":      "US11123456B2",
-				"issueDate":         "2023-07-11",
-				"examinerName":      "SMITH, JOHN",
-				"groupArtUnit":      "2156",
-				"technologyCenter":  "2100",
-			}
-			json.NewEncoder(w).Encode(response)
-
-		case "/api/v1/patent/applications/16123456/transactions":
-			// Mock response for GetPatentTransactions
-			response := map[string]interface{}{
-				"transactionBag": []interface{}{
-					map[string]interface{}{
-						"transactionCode":        "RCEX",
-						"transactionDescription": "Request for Continued Examination",
-						"transactionDate":        "2020-01-15",
-					},
-					map[string]interface{}{
-						"transactionCode":        "N417",
-						"transactionDescription": "Non-Final Rejection",
-						"transactionDate":        "2020-06-20",
-					},
-					map[string]interface{}{
-						"transactionCode":        "NOA",
-						"transactionDescription": "Notice of Allowance",
-						"transactionDate":        "2023-03-15",
-					},
-				},
-			}
-			json.NewEncoder(w).Encode(response)
-
-		case "/api/v1/patent/applications/16123456/attorney":
-			// Mock response for GetPatentAttorney - using existing attorney structure
-			response := map[string]interface{}{
-				"recordAttorney": map[string]interface{}{
-					"customerNumberCorrespondenceData": map[string]interface{}{
-						"powerOfAttorneyAddressBag": []interface{}{
+						"applicationNumberText": "15000001",
+						"assignmentBag": []interface{}{
 							map[string]interface{}{
-								"cityName":             "MIAMI",
-								"geographicRegionName": "FLORIDA",
-								"geographicRegionCode": "FL",
-								"countryCode":          "US",
-								"postalCode":           "33134",
-								"nameLineOneText":      "SANCHELIMA & ASSOCIATES, P.A.",
-								"nameLineTwoText":      "CHRIS SANCHELIMA, ESQ.",
-								"countryName":          "UNITED STATES",
-								"addressLineOneText":   "235 S.W. LE JEUNE ROAD",
+								"assigneeBag": []interface{}{
+									map[string]interface{}{
+										"assigneeAddress": map[string]interface{}{
+											"addressLineOneText":   "129, SAMSUNG-RO, YEONGTONG-GU",
+											"cityName":             "SUWON-SI, GYEONGGI-DO",
+											"geographicRegionName": "KRX",
+											"postalCode":           "16677",
+										},
+										"assigneeNameText": "SAMSUNG ELECTRONICS CO., LTD",
+									},
+								},
+								"assignmentMailedDate":     "2016-04-20",
+								"assignmentReceivedDate":   "2016-04-19",
+								"assignmentRecordedDate":   "2016-04-19",
+								"conveyanceText":           "ASSIGNMENT OF ASSIGNORS INTEREST (SEE DOCUMENT FOR DETAILS).",
+								"frameNumber":              190,
+								"reelNumber":               38323,
+								"reelAndFrameNumber":       "038323/0190",
+								"pageTotalQuantity":        8,
+								"imageAvailableStatusCode": false,
+								"assignorBag": []interface{}{
+									map[string]interface{}{
+										"assignorName":  "HEO, JIN-PIL",
+										"executionDate": "2016-01-05",
+									},
+									map[string]interface{}{
+										"assignorName":  "JUNG, MIN-HWA",
+										"executionDate": "2016-01-05",
+									},
+								},
+								"correspondenceAddress": map[string]interface{}{
+									"addressLineOneText":    "P.O. BOX 1213",
+									"correspondentNameText": "MUIR PATENT LAW, PLLC",
+								},
 							},
 						},
-						"patronIdentifier": 1818,
 					},
-					"powerOfAttorneyBag": []interface{}{
-						map[string]interface{}{
-							"activeIndicator":    "ACTIVE",
-							"firstName":          "CHRISTIAN",
-							"lastName":           "SANCHELIMA",
-							"registrationNumber": "58501",
+				},
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/17248024/associated-documents":
+			// Actual response structure from demo/examples/get_patent_associated_documents/response.json
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"applicationNumberText": "17248024",
+						"grantDocumentMetaData": map[string]interface{}{
+							"fileCreateDateTime": "2024-09-30T17:04:44",
+							"fileLocationURI":    "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML-SPLT/2023/ipg230509/17248024_11646472.xml",
+							"productIdentifier":  "PTGRXML",
+							"xmlFileName":        "17248024_11646472.xml",
+							"zipFileName":        "ipg230509.zip",
+						},
+						"pgpubDocumentMetaData": map[string]interface{}{
+							"fileCreateDateTime": "2024-09-27T23:02:09",
+							"fileLocationURI":    "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2021/ipa210708/17248024_20210210819.xml",
+							"productIdentifier":  "APPXML",
+							"xmlFileName":        "17248024_20210210819.xml",
+							"zipFileName":        "ipa210708.zip",
+						},
+					},
+				},
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/15000001/foreign-priority":
+			// Actual response structure from demo/examples/get_patent_foreign_priority/response.json
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"applicationNumberText": "15000001",
+						"foreignPriorityBag": []interface{}{
+							map[string]interface{}{
+								"applicationNumberText": "10-2014-0009131",
+								"filingDate":            "2015-01-20",
+								"ipOfficeName":          "REPUBLIC OF KOREA",
+							},
+						},
+					},
+				},
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/17248024/meta-data":
+			// Actual response structure from demo/examples/get_patent_meta_data/response.json
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"applicationMetaData": map[string]interface{}{
+							"applicationConfirmationNumber":    4114,
+							"applicationStatusCode":            150,
+							"applicationStatusDate":            "2023-04-19",
+							"applicationStatusDescriptionText": "Patented Case",
+							"applicationTypeCategory":          "REGULAR",
+							"applicationTypeCode":              "UTL",
+							"applicationTypeLabelName":         "Utility",
+							"class":                            "429",
+							"customerNumber":                   22434,
+							"docketNumber":                     "PLUSP040X1C4US",
+							"earliestPublicationDate":          "2021-07-08",
+							"earliestPublicationNumber":        "US20210210819A1",
+							"effectiveFilingDate":              "2021-01-05",
+							"examinerNameText":                 "DOVE, TRACY MAE",
+							"filingDate":                       "2021-01-05",
+							"firstApplicantName":               "PolyPlus Battery Company",
+							"firstInventorName":                "Steven J. Visco",
+							"grantDate":                        "2023-05-09",
+							"groupArtUnitNumber":               "1723",
+							"inventionTitle":                   "Electrode protection using a composite comprising an ionic conducting protective layer",
+							"patentNumber":                     "11646472",
+							"subclass":                         "303",
+							"applicantBag": []interface{}{
+								map[string]interface{}{
+									"applicantNameText": "PolyPlus Battery Company",
+								},
+							},
+							"cpcClassificationBag": []string{"H01M 50/46", "H01G 11/06"},
+						},
+						"applicationNumberText": "17248024",
+					},
+				},
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/17248024/transactions":
+			// Actual response structure from demo/examples/get_patent_transactions/response.json
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"applicationNumberText": "17248024",
+						"eventDataBag": []interface{}{
+							map[string]interface{}{
+								"eventCode":            "EML_NTR",
+								"eventDate":            "2023-10-03",
+								"eventDescriptionText": "Email Notification",
+							},
+							map[string]interface{}{
+								"eventCode":            "MOPPT",
+								"eventDate":            "2023-10-03",
+								"eventDescriptionText": "Mail O.P. Petition Decision",
+							},
+							map[string]interface{}{
+								"eventCode":            "ELC_RVW",
+								"eventDate":            "2023-05-09",
+								"eventDescriptionText": "Electronic Review",
+							},
+						},
+					},
+				},
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/17248024/attorney":
+			// Actual response structure from demo/examples/get_patent_attorney/response.json
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"applicationNumberText": "17248024",
+						"recordAttorney": map[string]interface{}{
+							"attorneyBag": []interface{}{
+								map[string]interface{}{
+									"activeIndicator": "ACTIVE",
+									"attorneyAddressBag": []interface{}{
+										map[string]interface{}{
+											"addressLineOneText":   "PO BOX 70250",
+											"cityName":             "OAKLAND",
+											"countryCode":          "US",
+											"countryName":          "UNITED STATES",
+											"geographicRegionCode": "CA",
+											"geographicRegionName": "CALIFORNIA",
+											"nameLineOneText":      "WEAVER AUSTIN VILLENEUVE & SAMPSON LLP",
+											"postalCode":           "94612-025",
+										},
+									},
+									"firstName":                      "JEFFREY",
+									"lastName":                       "WEAVER",
+									"registeredPractitionerCategory": "ATTNY",
+									"registrationNumber":             "31314",
+									"telecommunicationAddressBag": []interface{}{
+										map[string]interface{}{
+											"telecomTypeCode":         "TEL",
+											"telecommunicationNumber": "510-663-1100",
+										},
+									},
+								},
+							},
+							"customerNumberCorrespondenceData": map[string]interface{}{
+								"patronIdentifier": 22434,
+								"powerOfAttorneyAddressBag": []interface{}{
+									map[string]interface{}{
+										"addressLineOneText":   "PO BOX 70250",
+										"cityName":             "OAKLAND",
+										"countryCode":          "US",
+										"countryName":          "UNITED STATES",
+										"geographicRegionCode": "CA",
+										"geographicRegionName": "CALIFORNIA",
+										"nameLineOneText":      "WEAVER AUSTIN VILLENEUVE & SAMPSON LLP",
+										"postalCode":           "94612-0250",
+									},
+								},
+							},
 						},
 					},
 				},
@@ -998,6 +1084,318 @@ func TestClientWithActualResponses(t *testing.T) {
 			// Mock response for SearchPetitionsDownload - returns CSV data
 			w.Header().Set("Content-Type", "text/csv")
 			csvData := []byte("Record ID,Application Number,Decision Date,Decision Type\ntest-id-1,13986179,2020-11-30,DENIED\ntest-id-2,14123456,2021-01-15,GRANTED")
+			w.Write(csvData)
+
+		// PTAB API endpoints - Trial Proceedings
+		case "/api/v1/patent/trials/proceedings/search":
+			response := map[string]interface{}{
+				"count": 500,
+				"patentTrialProceedingDataBag": []interface{}{
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"trialMetaData": map[string]interface{}{
+							"trialTypeCode":        "IPR",
+							"trialStatusCategory":  "Terminated",
+							"petitionFilingDate":   "2020-01-15",
+							"trialInstitutionDate": "2020-07-15",
+							"fileDownloadURI":      "https://api.uspto.gov/ptab/files/IPR2020-00001",
+						},
+						"patentOwnerData": map[string]interface{}{
+							"patentNumber":         "10123456",
+							"patentOwnerPartyName": "ACME Corp",
+						},
+						"petitionerPartyName": "Tech Company LLC",
+					},
+				},
+				"requestIdentifier": "ptab-proc-search-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/trials/proceedings/IPR2020-00001":
+			response := map[string]interface{}{
+				"count": 1,
+				"patentTrialProceedingDataBag": []interface{}{
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"trialMetaData": map[string]interface{}{
+							"trialTypeCode":       "IPR",
+							"trialStatusCategory": "Terminated",
+							"petitionFilingDate":  "2020-01-15",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-proc-get-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		// PTAB API endpoints - Trial Decisions
+		case "/api/v1/patent/trials/decisions/search":
+			response := map[string]interface{}{
+				"count": 100,
+				"patentTrialDocumentDataBag": []interface{}{
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"documentData": map[string]interface{}{
+							"documentTitleText":  "Final Written Decision",
+							"documentFilingDate": "2021-01-15",
+							"documentIdentifier": "doc-123",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-decisions-search-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/trials/decisions/doc-123":
+			response := map[string]interface{}{
+				"count": 1,
+				"patentTrialDocumentDataBag": []interface{}{
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"documentData": map[string]interface{}{
+							"documentTitleText":  "Final Written Decision",
+							"documentFilingDate": "2021-01-15",
+							"documentIdentifier": "doc-123",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-decision-get-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		// PTAB API endpoints - Trial Documents
+		case "/api/v1/patent/trials/documents/search":
+			response := map[string]interface{}{
+				"count": 200,
+				"patentTrialDocumentDataBag": []interface{}{
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"documentData": map[string]interface{}{
+							"documentName":       "Petition.pdf",
+							"documentCategory":   "PETITION",
+							"documentIdentifier": "tdoc-456",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-docs-search-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/trials/documents/tdoc-456":
+			response := map[string]interface{}{
+				"count": 1,
+				"patentTrialDocumentDataBag": []interface{}{
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"documentData": map[string]interface{}{
+							"documentName":       "Petition.pdf",
+							"documentCategory":   "PETITION",
+							"documentIdentifier": "tdoc-456",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-doc-get-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		// PTAB API endpoints - Appeal Decisions
+		case "/api/v1/patent/appeals/decisions/search":
+			response := map[string]interface{}{
+				"count": 50,
+				"patentAppealDataBag": []interface{}{
+					map[string]interface{}{
+						"appealNumber": "2020-000001",
+						"documentData": map[string]interface{}{
+							"documentName":       "Decision on Appeal",
+							"documentFilingDate": "2020-06-15",
+							"documentIdentifier": "appeal-doc-789",
+						},
+						"appelantData": map[string]interface{}{
+							"applicationNumberText": "15123456",
+							"inventorName":          "John Smith",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-appeal-search-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/appeals/decisions/appeal-doc-789":
+			response := map[string]interface{}{
+				"count": 1,
+				"patentAppealDataBag": []interface{}{
+					map[string]interface{}{
+						"appealNumber": "2020-000001",
+						"documentData": map[string]interface{}{
+							"documentName":       "Decision on Appeal",
+							"documentFilingDate": "2020-06-15",
+							"documentIdentifier": "appeal-doc-789",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-appeal-get-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/appeals/2020-000001/decisions":
+			response := map[string]interface{}{
+				"count": 2,
+				"patentAppealDataBag": []interface{}{
+					map[string]interface{}{
+						"appealNumber": "2020-000001",
+						"documentData": map[string]interface{}{
+							"documentName":       "Decision on Appeal",
+							"documentFilingDate": "2020-06-15",
+						},
+					},
+					map[string]interface{}{
+						"appealNumber": "2020-000001",
+						"documentData": map[string]interface{}{
+							"documentName":       "Rehearing Decision",
+							"documentFilingDate": "2020-09-15",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-appeal-by-number-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		// PTAB API endpoints - Interference Decisions
+		case "/api/v1/patent/interferences/decisions/search":
+			response := map[string]interface{}{
+				"count":             1811,
+				"requestIdentifier": "ptab-interference-search-123",
+				"patentInterferenceDataBag": []interface{}{
+					map[string]interface{}{
+						"interferenceNumber": "106130",
+						"documentData": map[string]interface{}{
+							"documentTitleText":    "Judgment 37 C.F.R. § 41.127(a)",
+							"decisionIssueDate":    "2025-01-28",
+							"documentIdentifier":   "229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b",
+							"decisionTypeCategory": "Decision",
+						},
+						"interferenceMetaData": map[string]interface{}{
+							"interferenceStyleName":        "LEE M. KAPLAN v. PATRICE CANI",
+							"interferenceLastModifiedDate": "2025-11-13",
+						},
+						"lastModifiedDateTime": "2025-11-20T03:12:32",
+					},
+				},
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/interferences/decisions/229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b":
+			response := map[string]interface{}{
+				"count":             1,
+				"requestIdentifier": "ptab-interference-get-123",
+				"patentInterferenceDataBag": []interface{}{
+					map[string]interface{}{
+						"interferenceNumber": "106130",
+						"documentData": map[string]interface{}{
+							"documentTitleText":    "Judgment 37 C.F.R. § 41.127(a)",
+							"decisionIssueDate":    "2025-01-28",
+							"documentIdentifier":   "229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b",
+							"decisionTypeCategory": "Decision",
+						},
+					},
+				},
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/interferences/106130/decisions":
+			response := map[string]interface{}{
+				"count":             2,
+				"requestIdentifier": "ptab-interference-by-number-123",
+				"patentInterferenceDataBag": []interface{}{
+					map[string]interface{}{
+						"interferenceNumber": "106130",
+						"documentData": map[string]interface{}{
+							"documentTitleText": "Judgment 37 C.F.R. § 41.127(a)",
+							"decisionIssueDate": "2025-01-28",
+						},
+					},
+					map[string]interface{}{
+						"interferenceNumber": "106130",
+						"documentData": map[string]interface{}{
+							"documentTitleText": "Decision on Priority",
+							"decisionIssueDate": "2025-01-28",
+						},
+					},
+				},
+			}
+			json.NewEncoder(w).Encode(response)
+
+		// PTAB API - Trial decisions/documents by trial number
+		case "/api/v1/patent/trials/IPR2020-00001/decisions":
+			response := map[string]interface{}{
+				"count": 2,
+				"patentTrialDocumentDataBag": []interface{}{
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"documentData": map[string]interface{}{
+							"documentTitleText":  "Institution Decision",
+							"documentFilingDate": "2020-07-15",
+						},
+					},
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"documentData": map[string]interface{}{
+							"documentTitleText":  "Final Written Decision",
+							"documentFilingDate": "2021-07-15",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-trial-decisions-by-number-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/trials/IPR2020-00001/documents":
+			response := map[string]interface{}{
+				"count": 3,
+				"patentTrialDocumentDataBag": []interface{}{
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"documentData": map[string]interface{}{
+							"documentName":     "Petition.pdf",
+							"documentCategory": "PETITION",
+						},
+					},
+					map[string]interface{}{
+						"trialNumber": "IPR2020-00001",
+						"documentData": map[string]interface{}{
+							"documentName":     "Patent Owner Response.pdf",
+							"documentCategory": "RESPONSE",
+						},
+					},
+				},
+				"requestIdentifier": "ptab-trial-documents-by-number-123",
+			}
+			json.NewEncoder(w).Encode(response)
+
+		// PTAB API - Download endpoints
+		case "/api/v1/patent/trials/proceedings/search/download":
+			w.Header().Set("Content-Type", "text/csv")
+			csvData := []byte("Trial Number,Status,Filing Date\nIPR2020-00001,Terminated,2020-01-15\nIPR2021-00002,Instituted,2021-03-20")
+			w.Write(csvData)
+
+		case "/api/v1/patent/trials/decisions/search/download":
+			w.Header().Set("Content-Type", "text/csv")
+			csvData := []byte("Trial Number,Decision Type,Decision Date\nIPR2020-00001,Final Written Decision,2021-01-15")
+			w.Write(csvData)
+
+		case "/api/v1/patent/trials/documents/search/download":
+			w.Header().Set("Content-Type", "text/csv")
+			csvData := []byte("Trial Number,Document Name,Category\nIPR2020-00001,Petition.pdf,PETITION")
+			w.Write(csvData)
+
+		case "/api/v1/patent/appeals/decisions/search/download":
+			w.Header().Set("Content-Type", "text/csv")
+			csvData := []byte("Appeal Number,Decision Date,Outcome\n2020-000001,2020-06-15,Affirmed")
+			w.Write(csvData)
+
+		case "/api/v1/patent/interferences/decisions/search/download":
+			w.Header().Set("Content-Type", "text/csv")
+			csvData := []byte("Interference Number,Decision Date,Outcome\n106130,2025-01-28,Judgment")
 			w.Write(csvData)
 
 		default:
@@ -1167,7 +1565,8 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("GetPatentAssignment", func(t *testing.T) {
-		result, err := client.GetPatentAssignment(ctx, "16123456")
+		// Uses 15000001 (Samsung patent with assignment data)
+		result, err := client.GetPatentAssignment(ctx, "15000001")
 		if err != nil {
 			t.Fatalf("GetPatentAssignment failed: %v", err)
 		}
@@ -1177,7 +1576,8 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("GetPatentAssociatedDocuments", func(t *testing.T) {
-		result, err := client.GetPatentAssociatedDocuments(ctx, "16123456")
+		// Uses 17248024 (PolyPlus patent)
+		result, err := client.GetPatentAssociatedDocuments(ctx, "17248024")
 		if err != nil {
 			t.Fatalf("GetPatentAssociatedDocuments failed: %v", err)
 		}
@@ -1187,7 +1587,8 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("GetPatentAttorney", func(t *testing.T) {
-		result, err := client.GetPatentAttorney(ctx, "16123456")
+		// Uses 17248024 (PolyPlus patent)
+		result, err := client.GetPatentAttorney(ctx, "17248024")
 		if err != nil {
 			t.Fatalf("GetPatentAttorney failed: %v", err)
 		}
@@ -1197,7 +1598,8 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("GetPatentForeignPriority", func(t *testing.T) {
-		result, err := client.GetPatentForeignPriority(ctx, "16123456")
+		// Uses 15000001 (Samsung patent with Korean priority)
+		result, err := client.GetPatentForeignPriority(ctx, "15000001")
 		if err != nil {
 			t.Fatalf("GetPatentForeignPriority failed: %v", err)
 		}
@@ -1207,7 +1609,8 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("GetPatentMetaData", func(t *testing.T) {
-		result, err := client.GetPatentMetaData(ctx, "16123456")
+		// Uses 17248024 (PolyPlus patent)
+		result, err := client.GetPatentMetaData(ctx, "17248024")
 		if err != nil {
 			t.Fatalf("GetPatentMetaData failed: %v", err)
 		}
@@ -1217,7 +1620,8 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("GetPatentTransactions", func(t *testing.T) {
-		result, err := client.GetPatentTransactions(ctx, "16123456")
+		// Uses 17248024 (PolyPlus patent)
+		result, err := client.GetPatentTransactions(ctx, "17248024")
 		if err != nil {
 			t.Fatalf("GetPatentTransactions failed: %v", err)
 		}
@@ -1294,6 +1698,216 @@ func TestClientWithActualResponses(t *testing.T) {
 			t.Errorf("Expected validation error, got: %v", err)
 		}
 		t.Log("FileDownloadURI validation working correctly for DownloadBulkFileWithProgress")
+	})
+
+	// PTAB API Tests
+	t.Run("SearchTrialProceedings", func(t *testing.T) {
+		result, err := client.SearchTrialProceedings(ctx, "trialMetaData.trialTypeCode:IPR", 0, 10)
+		if err != nil {
+			t.Fatalf("SearchTrialProceedings failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+		jsonData, _ := json.Marshal(result)
+		if len(jsonData) < 10 {
+			t.Error("Response seems empty")
+		}
+	})
+
+	t.Run("GetTrialProceeding", func(t *testing.T) {
+		result, err := client.GetTrialProceeding(ctx, "IPR2020-00001")
+		if err != nil {
+			t.Fatalf("GetTrialProceeding failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("SearchTrialDecisions", func(t *testing.T) {
+		result, err := client.SearchTrialDecisions(ctx, "", 0, 10)
+		if err != nil {
+			t.Fatalf("SearchTrialDecisions failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("GetTrialDecision", func(t *testing.T) {
+		result, err := client.GetTrialDecision(ctx, "doc-123")
+		if err != nil {
+			t.Fatalf("GetTrialDecision failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("SearchTrialDocuments", func(t *testing.T) {
+		result, err := client.SearchTrialDocuments(ctx, "", 0, 10)
+		if err != nil {
+			t.Fatalf("SearchTrialDocuments failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("GetTrialDocument", func(t *testing.T) {
+		result, err := client.GetTrialDocument(ctx, "tdoc-456")
+		if err != nil {
+			t.Fatalf("GetTrialDocument failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("SearchAppealDecisions", func(t *testing.T) {
+		result, err := client.SearchAppealDecisions(ctx, "", 0, 10)
+		if err != nil {
+			t.Fatalf("SearchAppealDecisions failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("GetAppealDecision", func(t *testing.T) {
+		result, err := client.GetAppealDecision(ctx, "appeal-doc-789")
+		if err != nil {
+			t.Fatalf("GetAppealDecision failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("GetAppealDecisionsByAppealNumber", func(t *testing.T) {
+		result, err := client.GetAppealDecisionsByAppealNumber(ctx, "2020-000001")
+		if err != nil {
+			t.Fatalf("GetAppealDecisionsByAppealNumber failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("SearchInterferenceDecisions", func(t *testing.T) {
+		result, err := client.SearchInterferenceDecisions(ctx, "", 0, 10)
+		if err != nil {
+			t.Fatalf("SearchInterferenceDecisions failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("GetInterferenceDecision", func(t *testing.T) {
+		result, err := client.GetInterferenceDecision(ctx, "229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b")
+		if err != nil {
+			t.Fatalf("GetInterferenceDecision failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("GetInterferenceDecisionsByNumber", func(t *testing.T) {
+		result, err := client.GetInterferenceDecisionsByNumber(ctx, "106130")
+		if err != nil {
+			t.Fatalf("GetInterferenceDecisionsByNumber failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("GetTrialDecisionsByTrialNumber", func(t *testing.T) {
+		result, err := client.GetTrialDecisionsByTrialNumber(ctx, "IPR2020-00001")
+		if err != nil {
+			t.Fatalf("GetTrialDecisionsByTrialNumber failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("GetTrialDocumentsByTrialNumber", func(t *testing.T) {
+		result, err := client.GetTrialDocumentsByTrialNumber(ctx, "IPR2020-00001")
+		if err != nil {
+			t.Fatalf("GetTrialDocumentsByTrialNumber failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+	})
+
+	t.Run("SearchTrialProceedingsDownload", func(t *testing.T) {
+		req := generated.DownloadRequest{
+			Q: StringPtr(""),
+		}
+		result, err := client.SearchTrialProceedingsDownload(ctx, req)
+		if err != nil {
+			t.Fatalf("SearchTrialProceedingsDownload failed: %v", err)
+		}
+		if len(result) == 0 {
+			t.Fatal("Expected data, got empty")
+		}
+	})
+
+	t.Run("SearchTrialDecisionsDownload", func(t *testing.T) {
+		req := generated.DownloadRequest{
+			Q: StringPtr(""),
+		}
+		result, err := client.SearchTrialDecisionsDownload(ctx, req)
+		if err != nil {
+			t.Fatalf("SearchTrialDecisionsDownload failed: %v", err)
+		}
+		if len(result) == 0 {
+			t.Fatal("Expected data, got empty")
+		}
+	})
+
+	t.Run("SearchTrialDocumentsDownload", func(t *testing.T) {
+		req := generated.DownloadRequest{
+			Q: StringPtr(""),
+		}
+		result, err := client.SearchTrialDocumentsDownload(ctx, req)
+		if err != nil {
+			t.Fatalf("SearchTrialDocumentsDownload failed: %v", err)
+		}
+		if len(result) == 0 {
+			t.Fatal("Expected data, got empty")
+		}
+	})
+
+	t.Run("SearchAppealDecisionsDownload", func(t *testing.T) {
+		req := generated.DownloadRequest{
+			Q: StringPtr(""),
+		}
+		result, err := client.SearchAppealDecisionsDownload(ctx, req)
+		if err != nil {
+			t.Fatalf("SearchAppealDecisionsDownload failed: %v", err)
+		}
+		if len(result) == 0 {
+			t.Fatal("Expected data, got empty")
+		}
+	})
+
+	t.Run("SearchInterferenceDecisionsDownload", func(t *testing.T) {
+		req := generated.PatentDownloadRequest{
+			Q: StringPtr(""),
+		}
+		result, err := client.SearchInterferenceDecisionsDownload(ctx, req)
+		if err != nil {
+			t.Fatalf("SearchInterferenceDecisionsDownload failed: %v", err)
+		}
+		if len(result) == 0 {
+			t.Fatal("Expected data, got empty")
+		}
 	})
 
 }

@@ -1,0 +1,4 @@
+Method: get_trial_document
+
+Parameters:
+  documentIdentifier: 171247256

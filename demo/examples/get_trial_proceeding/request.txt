@@ -1,0 +1,4 @@
+Method: get_trial_proceeding
+
+Parameters:
+  trialNumber: IPR2026-00114

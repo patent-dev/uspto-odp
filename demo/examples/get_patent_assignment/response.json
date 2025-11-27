@@ -1,0 +1,76 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationNumberText": "15000001",
+      "assignmentBag": [
+        {
+          "assigneeBag": [
+            {
+              "assigneeAddress": {
+                "addressLineOneText": "129, SAMSUNG-RO, YEONGTONG-GU",
+                "cityName": "SUWON-SI, GYEONGGI-DO",
+                "geographicRegionName": "KRX",
+                "postalCode": "16677"
+              },
+              "assigneeNameText": "SAMSUNG ELECTRONICS CO., LTD"
+            }
+          ],
+          "assignmentMailedDate": "2016-04-20",
+          "assignmentReceivedDate": "2016-04-19",
+          "assignmentRecordedDate": "2016-04-19",
+          "assignorBag": [
+            {
+              "assignorName": "HEO, JIN-PIL",
+              "executionDate": "2016-01-05"
+            },
+            {
+              "assignorName": "JUNG, MIN-HWA",
+              "executionDate": "2016-01-05"
+            },
+            {
+              "assignorName": "KIM, KI-CHUL",
+              "executionDate": "2016-01-05"
+            },
+            {
+              "assignorName": "LEE, JONG-CHEOL",
+              "executionDate": "2016-01-05"
+            },
+            {
+              "assignorName": "LEE, SEUNG-HAN",
+              "executionDate": "2016-01-05"
+            },
+            {
+              "assignorName": "SHIN, JAE-CHUL",
+              "executionDate": "2016-01-05"
+            },
+            {
+              "assignorName": "WON, YU-HO",
+              "executionDate": "2016-01-05"
+            },
+            {
+              "assignorName": "HAN, KYU-HEE",
+              "executionDate": "2016-01-06"
+            },
+            {
+              "assignorName": "YI, IN-SUN",
+              "executionDate": "2016-01-21"
+            }
+          ],
+          "conveyanceText": "ASSIGNMENT OF ASSIGNORS INTEREST (SEE DOCUMENT FOR DETAILS).",
+          "correspondenceAddress": {
+            "addressLineOneText": "P.O. BOX 1213",
+            "addressLineThreeText": "GREAT FALLS, VA 22066",
+            "addressLineTwoText": "9913 GEORGETOWN PIKE, SUITE 200",
+            "correspondentNameText": "MUIR PATENT LAW, PLLC"
+          },
+          "frameNumber": 190,
+          "imageAvailableStatusCode": false,
+          "pageTotalQuantity": 8,
+          "reelAndFrameNumber": "038323/0190",
+          "reelNumber": 38323
+        }
+      ]
+    }
+  ]
+}

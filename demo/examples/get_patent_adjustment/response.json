@@ -1,0 +1,486 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationNumberText": "17248024",
+      "patentTermAdjustmentData": {
+        "aDelayQuantity": 304,
+        "adjustmentTotalQuantity": 304,
+        "applicantDayDelayQuantity": 0,
+        "bDelayQuantity": 0,
+        "cDelayQuantity": 0,
+        "overlappingDayQuantity": 0,
+        "patentTermAdjustmentHistoryDataBag": [
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-05-09",
+            "eventDescriptionText": "PTA 36 Months",
+            "eventSequenceNumber": 51.5,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0.5,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-05-09",
+            "eventDescriptionText": "Patent Issue Date Used in PTA Calculation",
+            "eventSequenceNumber": 51,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-04-01",
+            "eventDescriptionText": "Export to Final Data Capture",
+            "eventSequenceNumber": 50,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-03-31",
+            "eventDescriptionText": "Dispatch to FDC",
+            "eventSequenceNumber": 49,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-03-31",
+            "eventDescriptionText": "Application Is Considered Ready for Issue",
+            "eventSequenceNumber": 48,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-03-30",
+            "eventDescriptionText": "Issue Fee Payment Verified",
+            "eventSequenceNumber": 47,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-03-30",
+            "eventDescriptionText": "Issue Fee Payment Received",
+            "eventSequenceNumber": 46,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-21",
+            "eventDescriptionText": "Finished Initial Data Capture",
+            "eventSequenceNumber": 45,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-13",
+            "eventDescriptionText": "Electronic Review",
+            "eventSequenceNumber": 44,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-13",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 43,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-13",
+            "eventDescriptionText": "Mail Corrected Notice of Allowance",
+            "eventSequenceNumber": 42,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-11",
+            "eventDescriptionText": "Corrected Notice of Allowance",
+            "eventSequenceNumber": 41,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-03",
+            "eventDescriptionText": "Electronic Review",
+            "eventSequenceNumber": 40,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-30",
+            "eventDescriptionText": "Export to Initial Data Capture",
+            "eventSequenceNumber": 39,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-03",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 38,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-03",
+            "eventDescriptionText": "Mail Notice of Allowance",
+            "eventSequenceNumber": 37,
+            "ipOfficeDayDelayQuantity": 304,
+            "originatingEventSequenceNumber": 0.5,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Office Action Review",
+            "eventSequenceNumber": 36,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Office Action Review",
+            "eventSequenceNumber": 35,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Issue Revision Completed",
+            "eventSequenceNumber": 34,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Document Verification",
+            "eventSequenceNumber": 33,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Notice of Allowance Data Verification Completed",
+            "eventSequenceNumber": 32,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-15",
+            "eventDescriptionText": "Reasons for Allowance",
+            "eventSequenceNumber": 31,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-15",
+            "eventDescriptionText": "Allowability Notice",
+            "eventSequenceNumber": 30,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-15",
+            "eventDescriptionText": "Information Disclosure Statement considered",
+            "eventSequenceNumber": 29,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-10",
+            "eventDescriptionText": "Case Docketed to Examiner in GAU",
+            "eventSequenceNumber": 28,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-08-23",
+            "eventDescriptionText": "Case Docketed to Examiner in GAU",
+            "eventSequenceNumber": 27,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-07-09",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 26,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-07-08",
+            "eventDescriptionText": "PG-Pub Issue Notification",
+            "eventSequenceNumber": 25,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-26",
+            "eventDescriptionText": "Information Disclosure Statement (IDS) Filed",
+            "eventSequenceNumber": 24,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-30",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 23,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-29",
+            "eventDescriptionText": "Application Dispatched from OIPE",
+            "eventSequenceNumber": 22,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-29",
+            "eventDescriptionText": "FITF set to NO - revise initial setting",
+            "eventSequenceNumber": 21,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-26",
+            "eventDescriptionText": "Patent Term Adjustment - Ready for Examination",
+            "eventSequenceNumber": 20,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-30",
+            "eventDescriptionText": "Application Is Now Complete",
+            "eventSequenceNumber": 19,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-30",
+            "eventDescriptionText": "Filing Receipt - Updated",
+            "eventSequenceNumber": 18,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-26",
+            "eventDescriptionText": "Payment of additional filing fee/Preexam",
+            "eventSequenceNumber": 17,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-26",
+            "eventDescriptionText": "Information Disclosure Statement (IDS) Filed",
+            "eventSequenceNumber": 15,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Electronic Review",
+            "eventSequenceNumber": 14,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 13,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 12,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Application ready for PDX access by participating foreign offices",
+            "eventSequenceNumber": 11,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Filing Receipt",
+            "eventSequenceNumber": 10,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Notice Mailed--Application Incomplete--Filing Date Assigned",
+            "eventSequenceNumber": 9,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-28",
+            "eventDescriptionText": "Applicant Has Filed a Verified Statement of Small Entity Status in Compliance with 37 CFR 1.27",
+            "eventSequenceNumber": 8,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "PTO/SB/69-Authorize EPO Access to Search Results",
+            "eventSequenceNumber": 7,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "Applicants have given acceptable permission for participating foreign",
+            "eventSequenceNumber": 6,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-19",
+            "eventDescriptionText": "Cleared by L\u0026R (LARS)",
+            "eventSequenceNumber": 5,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-09",
+            "eventDescriptionText": "Referred to Level 2 (LARS) by OIPE CSR",
+            "eventSequenceNumber": 4,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "IFW Scan \u0026 PACR Auto Security Review",
+            "eventSequenceNumber": 3,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "Entity Status Set To Undiscounted (Initial Default Setting or Status Change)",
+            "eventSequenceNumber": 2,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "Initial Exam Team nn",
+            "eventSequenceNumber": 1,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "Filing date",
+            "eventSequenceNumber": 0.5,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          }
+        ]
+      }
+    }
+  ]
+}

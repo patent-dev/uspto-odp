@@ -59,7 +59,6 @@ type Bibliography struct {
 	PublicationReference *DocumentID `xml:"publication-reference>document-id"`
 	ApplicationReference *DocumentID `xml:"application-reference>document-id"`
 	InventionTitle       []Text      `xml:"invention-title"`
-	// Add more fields as needed
 }
 
 // DocumentID represents document identification

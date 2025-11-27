@@ -1,0 +1,174 @@
+{
+  "count": 7275,
+  "petitionDecisionDataBag": [
+    {
+      "applicationNumberText": "10290800",
+      "businessEntityStatusCategory": "Regular Undiscounted",
+      "courtActionIndicator": false,
+      "customerNumber": 29159,
+      "decisionDate": "2003-10-17",
+      "decisionPetitionTypeCode": 411,
+      "decisionTypeCode": "C",
+      "finalDecidingOfficeName": "OFFICE OF PETITIONS",
+      "firstInventorToFileIndicator": false,
+      "groupArtUnitNumber": "3713",
+      "inventionTitle": "GAMING DEVICE HAVING IMPROVED AWARD OFFER BONUS SCHEME",
+      "inventorBag": [
+        "Anthony J. Baerlocher",
+        "Joseph E. Kaminkow",
+        "Gregg J. Palmer"
+      ],
+      "lastIngestionDateTime": "2025-09-29T17:35:02",
+      "patentNumber": "6796905",
+      "petitionDecisionRecordIdentifier": "0b71b685-adb9-539d-8257-127dc9e58247",
+      "petitionIssueConsideredTextBag": [
+        "Filing date"
+      ],
+      "petitionMailDate": "2003-08-04",
+      "prosecutionStatusCodeDescriptionText": "Prior to examination",
+      "ruleBag": [
+        "37 CFR 1.10"
+      ],
+      "statuteBag": [
+        "35 USC 21(a)"
+      ],
+      "technologyCenter": "3700"
+    },
+    {
+      "applicationNumberText": "10347018",
+      "businessEntityStatusCategory": "Small",
+      "courtActionIndicator": false,
+      "decisionDate": "2012-03-26",
+      "decisionPetitionTypeCode": 525,
+      "decisionTypeCode": "C",
+      "finalDecidingOfficeName": "OFFICE OF PETITIONS",
+      "firstInventorToFileIndicator": false,
+      "groupArtUnitNumber": "1791",
+      "inventionTitle": "Edible Homogenous Supports for Comestibles with Optional Mess Guards and Drip Guards",
+      "inventorBag": [
+        "Alice Mary Kiely"
+      ],
+      "lastIngestionDateTime": "2025-09-29T17:35:02",
+      "petitionDecisionRecordIdentifier": "eafa727a-354d-534f-b6aa-a4b366afbb28",
+      "petitionIssueConsideredTextBag": [
+        "Withdrawal of abandonment"
+      ],
+      "petitionMailDate": "2011-09-30",
+      "prosecutionStatusCodeDescriptionText": "Abandoned",
+      "ruleBag": [
+        "37 CFR 1.181",
+        "37 CFR 1.113",
+        "37 CFR 1.137"
+      ],
+      "statuteBag": [
+        "35 USC 132",
+        "35 USC 133"
+      ],
+      "technologyCenter": "1700"
+    },
+    {
+      "applicationNumberText": "10424135",
+      "businessEntityStatusCategory": "Regular Undiscounted",
+      "courtActionIndicator": false,
+      "decisionDate": "2006-10-17",
+      "decisionPetitionTypeCode": 515,
+      "decisionTypeCode": "C",
+      "finalDecidingOfficeName": "OFFICE OF PETITIONS",
+      "firstInventorToFileIndicator": false,
+      "groupArtUnitNumber": "2875",
+      "inventionTitle": "PLASMA DISPLAY DEVICE",
+      "inventorBag": [
+        "Tae-Kyoung Kang",
+        "Ki-Jung Kim",
+        "Myung-Gon Kim"
+      ],
+      "lastIngestionDateTime": "2025-09-29T17:35:02",
+      "patentNumber": "7061177",
+      "petitionDecisionRecordIdentifier": "db571d2a-0f41-5f20-8ab4-9cc16f96a2b6",
+      "petitionIssueConsideredTextBag": [
+        "Supervisory review of non-examining matter",
+        "Refund"
+      ],
+      "petitionMailDate": "2006-04-17",
+      "prosecutionStatusCodeDescriptionText": "After allowance",
+      "ruleBag": [
+        "37 CFR 1.26"
+      ],
+      "statuteBag": [
+        "35 USC 42(d)",
+        "35 USC 41"
+      ],
+      "technologyCenter": "2800"
+    },
+    {
+      "applicationNumberText": "10704056",
+      "businessEntityStatusCategory": "Regular Undiscounted",
+      "courtActionIndicator": false,
+      "customerNumber": 26161,
+      "decisionDate": "2010-07-02",
+      "decisionPetitionTypeCode": 503,
+      "decisionTypeCode": "C",
+      "finalDecidingOfficeName": "OFFICE OF PETITIONS",
+      "firstInventorToFileIndicator": false,
+      "groupArtUnitNumber": "1644",
+      "inventionTitle": "CELL SURFACE MOLECULE MEDIATING CELL ADHESION AND SIGNAL TRANSMISSION",
+      "inventorBag": [
+        "Takuya Tamatani",
+        "Katsunari Tezuka"
+      ],
+      "lastIngestionDateTime": "2025-09-29T17:35:02",
+      "patentNumber": "7226909",
+      "petitionDecisionRecordIdentifier": "a57ebc6f-db97-54b5-b9f7-20eb1a2913dc",
+      "petitionIssueConsideredTextBag": [
+        "Waiver or suspension of a rule",
+        "Patent term adjustment: Untimely"
+      ],
+      "petitionMailDate": "2009-10-02",
+      "prosecutionStatusCodeDescriptionText": "Patented",
+      "ruleBag": [
+        "37 CFR 1.183",
+        "37 CFR 1.705(b)"
+      ],
+      "statuteBag": [
+        "35 USC 154(b)(4)"
+      ],
+      "technologyCenter": "1600"
+    },
+    {
+      "applicationNumberText": "10905330",
+      "businessEntityStatusCategory": "Regular Undiscounted",
+      "courtActionIndicator": false,
+      "customerNumber": 20915,
+      "decisionDate": "2007-08-15",
+      "decisionPetitionTypeCode": 515,
+      "decisionTypeCode": "C",
+      "finalDecidingOfficeName": "OFFICE OF PETITIONS",
+      "firstInventorToFileIndicator": false,
+      "groupArtUnitNumber": "2872",
+      "inventionTitle": "MIRROR SYSTEM WITH VARYING CHARACTERISTICS BASED ON VEHICLE POSITIONING",
+      "inventorBag": [
+        "Rob Schnell"
+      ],
+      "lastIngestionDateTime": "2025-09-29T17:35:02",
+      "patentNumber": "7168818",
+      "petitionDecisionRecordIdentifier": "86272230-a5ad-5f6d-b710-268a4c5f6c59",
+      "petitionIssueConsideredTextBag": [
+        "Certificate of Correction",
+        "Supervisory review of non-examining matter"
+      ],
+      "petitionMailDate": "2007-05-24",
+      "prosecutionStatusCodeDescriptionText": "Patented",
+      "ruleBag": [
+        "37 CFR 1.181",
+        "37 CFR 1.323",
+        "37 CFR 1.182",
+        "37 CFR 1.322"
+      ],
+      "statuteBag": [
+        "35 USC 254",
+        "35 USC 255"
+      ],
+      "technologyCenter": "2800"
+    }
+  ]
+}

@@ -1,0 +1,1453 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationNumberText": "17248024",
+      "recordAttorney": {
+        "attorneyBag": [
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JEFFREY",
+            "lastName": "WEAVER",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "31314",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET, SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON, LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "JOSEPH",
+            "lastName": "VILLENEUVE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "37460",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "2  EMBARCADERO CENTER, 8TH FLOOR",
+                "cityName": "SAN FRANCISCO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "KILPATRICK TOWNSEND \u0026 STOCKTON, LLP",
+                "postalCode": "94111"
+              }
+            ],
+            "firstName": "BABAK",
+            "lastName": "SANI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "37495",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "415-576-0200"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET, SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "EMILY",
+            "lastName": "HALIDAY",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "38903",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "P.O. BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JAMES",
+            "lastName": "AUSTIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "39489",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JOHN",
+            "lastName": "GRIFFITH",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "44137",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ROGER",
+            "lastName": "SAMPSON",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "44314",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1080 MARSH ROAD",
+                "cityName": "MENLO PARK",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "KILPATRICK TOWNSEND \u0026 STOCKTON, LLP",
+                "postalCode": "94025"
+              }
+            ],
+            "firstName": "BARMAK",
+            "lastName": "SANI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "45068",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "650-326-2400"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "950 PAGE MILL ROAD",
+                "cityName": "PALO ALTO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "ALSTON \u0026 BIRD",
+                "postalCode": "94304"
+              }
+            ],
+            "firstName": "ARDESHIR",
+            "lastName": "TABIBI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "48750",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "650-838-2000"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 STREET SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "DENISE",
+            "lastName": "BERGIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "50581",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "KO-FANG",
+            "lastName": "CHANG",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "50829",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "P.O. BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "SHEILA",
+            "lastName": "MARTINEZ-LEMKE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "52004",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "DAY",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "55101",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY, SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "CHRISTIAN",
+            "lastName": "SCHOLZ",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "58024",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ANNA",
+            "lastName": "GAVRILOVA",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "58181",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "FAX",
+                "telecommunicationNumber": "202-778-2201"
+              },
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "HO",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "59305",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "SCOTT",
+            "lastName": "MCMILLAN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "62079",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "REENA",
+            "lastName": "MALHOTRA",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "63942",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ZHENHAI",
+            "lastName": "FU",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "67175",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-267-4112"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "23755 LORAIN ROAD, SUITE 200",
+                "cityName": "NORTH OLMSTED",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "OH",
+                "geographicRegionName": "OHIO",
+                "nameLineOneText": "RANKIN HILL AND CLARK LLP",
+                "postalCode": "44070"
+              }
+            ],
+            "firstName": "TAEYUN",
+            "lastName": "KIM",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "68858",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "216-566-9700"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON, LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "BRIAN",
+            "lastName": "HAHN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69069",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1 PARK PLACE",
+                "addressLineTwoText": "SUITE 200",
+                "cityName": "DUBLIN",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "AEYE, INC.",
+                "postalCode": "94568"
+              }
+            ],
+            "firstName": "SIRAJ",
+            "lastName": "HUSAIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69111",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "925-400-4366"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "TSE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69392",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON",
+                "nameLineTwoText": "INTELLECTUAL PROPERTY LAW",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "AMANDA",
+            "lastName": "KESICH",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "70667",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "PATRICIA",
+            "lastName": "TSAI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "72642",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "195 S MILPITAS BLVD",
+                "cityName": "MILPITAS",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "VIEW, INC.",
+                "postalCode": "95035"
+              }
+            ],
+            "firstName": "RYAN",
+            "lastName": "OTIS",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "73075",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "408-263-9200"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "ARTHI",
+            "lastName": "SRINIVASAN",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "73675",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET",
+                "addressLineTwoText": "SUITE 1450",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "ASHLEY",
+            "lastName": "SPERBECK",
+            "middleName": "E",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "74144",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY ST",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "PRICE",
+            "lastName": "MURRY",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "77445",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET",
+                "addressLineTwoText": "SUITE 1450",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "TIA",
+            "lastName": "LEE",
+            "middleName": "S.",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "83376",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          }
+        ],
+        "customerNumberCorrespondenceData": {
+          "patronIdentifier": 22434,
+          "powerOfAttorneyAddressBag": [
+            {
+              "addressLineOneText": "P.O. BOX 70250",
+              "cityName": "OAKLAND",
+              "countryCode": "US",
+              "countryName": "UNITED STATES",
+              "geographicRegionCode": "CA",
+              "geographicRegionName": "CALIFORNIA",
+              "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+              "postalCode": "94612-0250"
+            }
+          ]
+        },
+        "powerOfAttorneyBag": [
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JOHN",
+            "lastName": "GRIFFITH",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "44137",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ANNA",
+            "lastName": "GAVRILOVA",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "58181",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "FAX",
+                "telecommunicationNumber": "202-778-2201"
+              },
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "REENA",
+            "lastName": "MALHOTRA",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "63942",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY, SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "CHRISTIAN",
+            "lastName": "SCHOLZ",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "58024",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "7271 GLENDORA LN",
+                "cityName": "KALAMAZOO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "MI",
+                "geographicRegionName": "MICHIGAN",
+                "postalCode": "49009"
+              }
+            ],
+            "firstName": "ERIK",
+            "lastName": "LARSEN",
+            "middleName": "M",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "80679",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "989-948-7447"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "195 S MILPITAS BLVD",
+                "cityName": "MILPITAS",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "VIEW, INC.",
+                "postalCode": "95035"
+              }
+            ],
+            "firstName": "RYAN",
+            "lastName": "OTIS",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "73075",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "408-263-9200"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY ST",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "PRICE",
+            "lastName": "MURRY",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "77445",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "2  EMBARCADERO CENTER, 8TH FLOOR",
+                "cityName": "SAN FRANCISCO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "KILPATRICK TOWNSEND \u0026 STOCKTON, LLP",
+                "postalCode": "94111"
+              }
+            ],
+            "firstName": "BABAK",
+            "lastName": "SANI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "37495",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "415-576-0200"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1080 MARSH ROAD",
+                "cityName": "MENLO PARK",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "KILPATRICK TOWNSEND \u0026 STOCKTON, LLP",
+                "postalCode": "94025"
+              }
+            ],
+            "firstName": "BARMAK",
+            "lastName": "SANI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "45068",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "650-326-2400"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET",
+                "addressLineTwoText": "SUITE 1450",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "ASHLEY",
+            "lastName": "SPERBECK",
+            "middleName": "E",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "74144",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 STREET SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "DENISE",
+            "lastName": "BERGIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "50581",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "HO",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "59305",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "ARTHI",
+            "lastName": "SRINIVASAN",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "73675",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "3725 ALBERT LANE",
+                "cityName": "LONG GROVE",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "IL",
+                "geographicRegionName": "ILLINOIS",
+                "postalCode": "60047"
+              }
+            ],
+            "firstName": "LAUREN",
+            "lastName": "STEVENS",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "36691",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "224-500-9023"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1 PARK PLACE",
+                "addressLineTwoText": "SUITE 200",
+                "cityName": "DUBLIN",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "AEYE, INC.",
+                "postalCode": "94568"
+              }
+            ],
+            "firstName": "SIRAJ",
+            "lastName": "HUSAIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69111",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "925-400-4366"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET, SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON, LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "JOSEPH",
+            "lastName": "VILLENEUVE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "37460",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "P.O. BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JAMES",
+            "lastName": "AUSTIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "39489",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "KO-FANG",
+            "lastName": "CHANG",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "50829",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "PATRICIA",
+            "lastName": "TSAI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "72642",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "SCOTT",
+            "lastName": "MCMILLAN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "62079",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "TSE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69392",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "950 PAGE MILL ROAD",
+                "cityName": "PALO ALTO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "ALSTON \u0026 BIRD",
+                "postalCode": "94304"
+              }
+            ],
+            "firstName": "ARDESHIR",
+            "lastName": "TABIBI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "48750",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "650-838-2000"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JEFFREY",
+            "lastName": "WEAVER",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "31314",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ROGER",
+            "lastName": "SAMPSON",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "44314",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON",
+                "nameLineTwoText": "INTELLECTUAL PROPERTY LAW",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "AMANDA",
+            "lastName": "KESICH",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "70667",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET",
+                "addressLineTwoText": "SUITE 1450",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "TIA",
+            "lastName": "LEE",
+            "middleName": "S.",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "83376",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

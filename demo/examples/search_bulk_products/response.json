@@ -1,0 +1,246 @@
+{
+  "bulkDataProductBag": [
+    {
+      "daysOfWeekText": "SUNDAY",
+      "lastModifiedDateTime": "2025-11-27 01:54:23",
+      "mimeTypeIdentifierArrayText": [
+        "JSON"
+      ],
+      "productDataSetArrayText": [
+        "Research"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Patent file wrapper"
+      ],
+      "productDescriptionText": "Bibliographic and assignments static patent data compiled into file sets. The Weekly Datasets (10-year increments) can be downloaded in bulk.",
+      "productFileTotalQuantity": 3,
+      "productFrequencyText": "WEEKLY",
+      "productFromDate": "2001-01-01",
+      "productIdentifier": "PTFWPRE",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent File Wrapper (Bulk Datasets) - Weekly",
+      "productToDate": "2025-12-31",
+      "productTotalFileSize": 60280430000
+    },
+    {
+      "lastModifiedDateTime": "2025-11-27 00:30:41",
+      "mimeTypeIdentifierArrayText": [
+        "JSON"
+      ],
+      "productDataSetArrayText": [
+        "Research"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Patent file wrapper"
+      ],
+      "productDescriptionText": "Bibliographic and assignments static patent data compiled into file sets. The Delta Datasets (daily increments) can be downloaded in bulk.",
+      "productFileTotalQuantity": 7,
+      "productFrequencyText": "DAILY",
+      "productFromDate": "2025-11-20",
+      "productIdentifier": "PTFWPRD",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent File Wrapper (Bulk Datasets) - Daily",
+      "productToDate": "2025-11-26",
+      "productTotalFileSize": 19679912000
+    },
+    {
+      "lastModifiedDateTime": "2025-11-10 18:03:00",
+      "mimeTypeIdentifierArrayText": [
+        "ASCII",
+        "XML"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)"
+      ],
+      "productDescriptionText": "Contains the concatenated full-text of each patent grant document issued weekly (Tuesdays) from January 1, 1976 to present (excludes images/drawings). This is the subset of the Patent Grant Full Text Data with Embedded TIFF Images.",
+      "productFileTotalQuantity": 1382,
+      "productFrequencyText": "YEARLY",
+      "productFromDate": "1976-01-06",
+      "productIdentifier": "PTGRAPS",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent Grant Full-Text Data (No Images) - APS",
+      "productToDate": "2001-12-25",
+      "productTotalFileSize": 25938442000
+    },
+    {
+      "daysOfWeekText": "TUESDAY",
+      "lastModifiedDateTime": "2025-11-10 18:02:57",
+      "mimeTypeIdentifierArrayText": [
+        "ASCII",
+        "XML"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)"
+      ],
+      "productDescriptionText": "Provides the bulk zip files that contains the concatenated full-text of each patent grant document issued weekly. This page provides an additional feature called “View Patent Records” which allows user to find or discover the patent grants that are bundled in the zip file. Even though the zip file may contain grants that belong to the applications which were filed before 2001, ODP will only show the grants that belong to the applications that were filed from 2001.",
+      "productFileTotalQuantity": 1277,
+      "productFrequencyText": "WEEKLY",
+      "productFromDate": "2002-01-01",
+      "productIdentifier": "PTGRXML",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent Grant Full-Text Data (No Images) - XML",
+      "productToDate": "2025-11-25",
+      "productTotalFileSize": 121808010000
+    },
+    {
+      "daysOfWeekText": "THURSDAY",
+      "lastModifiedDateTime": "2025-11-10 18:02:30",
+      "mimeTypeIdentifierArrayText": [
+        "XML"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Patent Application",
+        "Published patent applications (pre-grant publicati"
+      ],
+      "productDescriptionText": "Contains the full text, images/drawings, and complex work units (tables, mathematical expressions, chemical structures, and genetic sequence data) of each patent application (non-provisional utility and plant) published weekly (Thursdays) from March 15, 2001 to present.",
+      "productFileTotalQuantity": 1922,
+      "productFrequencyText": "WEEKLY",
+      "productFromDate": "2001-03-15",
+      "productIdentifier": "APPDT",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent Application Full Text Data with Embedded TIFF Images (Application Red Book based on WIPO ST.36)",
+      "productToDate": "2025-11-27",
+      "productTotalFileSize": 4010114500000
+    },
+    {
+      "daysOfWeekText": "TUESDAY",
+      "lastModifiedDateTime": "2025-11-10 18:02:30",
+      "mimeTypeIdentifierArrayText": [
+        "PDF"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)"
+      ],
+      "productDescriptionText": "Contains the images of each patent grant issued weekly (Tuesdays) from July 31, 1790 to present in Portable Document Format (PDF) created from the Patent Grant Single-Page TIFF Images. Also included are older grants that have new Certificates-of-Correction (C-of-C) and rescanned images of older patent grants.",
+      "productFileTotalQuantity": 1824,
+      "productFrequencyText": "WEEKLY",
+      "productFromDate": "1790-07-31",
+      "productIdentifier": "PTGRMP2",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent Grant Multi-page PDF Images",
+      "productToDate": "2025-11-25",
+      "productTotalFileSize": 14173793000000
+    },
+    {
+      "daysOfWeekText": "TUESDAY",
+      "lastModifiedDateTime": "2025-11-10 18:02:23",
+      "mimeTypeIdentifierArrayText": [
+        "XML"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)"
+      ],
+      "productDescriptionText": "Contains the full text, images/drawings, and complex work units (tables, mathematical expressions, chemical structures, and genetic sequence data) of each patent grant issued weekly (Tuesdays) from January 1, 2001 to present.",
+      "productFileTotalQuantity": 1595,
+      "productFrequencyText": "WEEKLY",
+      "productFromDate": "2002-01-01",
+      "productIdentifier": "PTGRDT",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent Grant Full Text Data with Embedded TIFF Images (Grant Red Book based on WIPO ST.36) - XML",
+      "productToDate": "2025-11-25",
+      "productTotalFileSize": 2747187300000
+    },
+    {
+      "daysOfWeekText": "TUESDAY",
+      "lastModifiedDateTime": "2025-11-10 18:02:19",
+      "mimeTypeIdentifierArrayText": [
+        "ASCII",
+        "XML"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)"
+      ],
+      "productDescriptionText": "Contains the concatenated bibliographic text (front page) of each patent grant document issued weekly (Tuesdays) from January 1, 1976 to present (excludes images/drawings). Subset of the Patent Grant Full Text Data. Note: The concatenated file in its entirety is not a valid XML document; it must be un-concatenated back to individual XML documents for XML data processing.",
+      "productFileTotalQuantity": 1307,
+      "productFrequencyText": "WEEKLY",
+      "productFromDate": "2002-01-01",
+      "productIdentifier": "PTBLXML",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent Grant Bibliographic (Front Page) Text Data - XML",
+      "productToDate": "2025-11-25",
+      "productTotalFileSize": 19025486000
+    },
+    {
+      "lastModifiedDateTime": "2025-11-10 18:02:18",
+      "mimeTypeIdentifierArrayText": [
+        "XML"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)"
+      ],
+      "productDescriptionText": "Contains the full text, images/drawings, and complex work units (tables, mathematical expressions, chemical structures, and genetic sequence data) of each patent grant issued weekly (Tuesdays) from January 1, 2001 to present.",
+      "productFileTotalQuantity": 53,
+      "productFrequencyText": "YEARLY",
+      "productFromDate": "2001-01-02",
+      "productIdentifier": "PTGRDSGM",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent Grant Full Text Data with Embedded TIFF Images (Grant Red Book based on WIPO ST.36) - SGML",
+      "productToDate": "2001-12-25",
+      "productTotalFileSize": 39804510000
+    },
+    {
+      "lastModifiedDateTime": "2025-11-10 18:02:17",
+      "mimeTypeIdentifierArrayText": [
+        "ASCII",
+        "XML"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)"
+      ],
+      "productDescriptionText": "Contains the concatenated bibliographic text (front page) of each patent grant document issued weekly (Tuesdays) from January 1, 1976 to present (excludes images/drawings). Subset of the Patent Grant Full Text Data.",
+      "productFileTotalQuantity": 253,
+      "productFrequencyText": "YEARLY",
+      "productFromDate": "1976-01-01",
+      "productIdentifier": "PTBLAPS",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Patent Grant Bibliographic (Front Page) Text Data - APS",
+      "productToDate": "2017-04-03",
+      "productTotalFileSize": 2625304600
+    }
+  ],
+  "count": 10
+}

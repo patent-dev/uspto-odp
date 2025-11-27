@@ -1,0 +1,4 @@
+Method: get_patent
+
+Parameters:
+  patentNumber: 17248024

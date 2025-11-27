@@ -1,0 +1,115 @@
+{
+  "count": 2,
+  "patentTrialDocumentDataBag": [
+    {
+      "decisionData": {
+        "decisionIssueDate": "2025-11-26",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "102",
+          "103"
+        ],
+        "statuteAndRuleBag": [
+          "37 CFR 42.100",
+          "37 CFR 42.73",
+          "35 USC 318"
+        ],
+        "trialOutcomeCategory": "Final Written Decision"
+      },
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246356",
+        "documentName": "IPR2024-00984 FWD FINAL.pdf",
+        "documentNumber": 59,
+        "documentOCRText": "Trials@uspto.gov Paper 59 \n571-272-7822 Date: November 26, 2025 \n\n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\n \nARASHI VISION (U.S.) LLC (D/B/A INSTA360), \n\nPetitioner, \n\nv. \n\nGOPRO, INC., \nPatent Owner. \n\n \n\nIPR2024-00984 \nPatent 10,015,413 B1 \n\n \n \n\nBefore WILLIAM V. SAINDON, NABEEL U. KHAN, and \nBRIAN D. RANGE, Administrative Patent Judges. \n\nKHAN, Administrative Patent Judge.  \n \n \n \n\nJUDGMENT \nFinal Written Decision \n\nDetermining Some Ch ...",
+        "documentSizeQuantity": 626123,
+        "documentTitleText": "JUDGMENT Final Written Decision Determining Some Challenged Claims Unpatentable 35 U.S.C. § 318(a)",
+        "documentTypeDescriptionText": "FINAL",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2025-11-26T23:58:00",
+      "patentOwnerData": {
+        "applicationNumberText": "15492738",
+        "counselName": "Glass, Jameset al",
+        "grantDate": "2018-07-03",
+        "groupArtUnitNumber": "2663",
+        "inventorName": "Nicholas D. Woodman et al",
+        "patentNumber": "10015413",
+        "realPartyInInterestName": "GoPro, Inc.",
+        "technologyCenterNumber": "2600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Yap, Alexet al",
+        "realPartyInInterestName": "Arashi Vision Inc. (d/b/a Insta360)"
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2024-06-20",
+        "institutionDecisionDate": "2025-01-07",
+        "latestDecisionDate": "2025-11-26",
+        "petitionFilingDate": "2024-06-20",
+        "terminationDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T08:12:03",
+        "trialStatusCategory": "Final Written Decision",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2024-00984"
+    },
+    {
+      "decisionData": {
+        "decisionIssueDate": "2025-01-07",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "102",
+          "103"
+        ],
+        "statuteAndRuleBag": [
+          "37 CFR 42.100",
+          "37 CFR 42.107",
+          "37 CFR 42.108",
+          "35 USC 314"
+        ],
+        "trialOutcomeCategory": "Institution Granted"
+      },
+      "documentData": {
+        "documentFilingDate": "2025-01-07",
+        "documentIdentifier": "170961214",
+        "documentName": "IPR2024-00984 DI FINAL.pdf",
+        "documentNumber": 13,
+        "documentOCRText": "Trials@uspto.gov Paper 13 \n571-272-7822 Date: January 7, 2025 \n\n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\n \nARASHI VISION (U.S.) LLC (D/B/A INSTA360), \n\nPetitioner, \n\nv. \n\nGOPRO, INC., \nPatent Owner. \n\n \n\nIPR2024-00984 \nPatent 10,015,413 B1 \n\n \n \n\nBefore WILLIAM V. SAINDON, NABEEL U. KHAN, and \nBRIAN D. RANGE, Administrative Patent Judges. \n\nKHAN, Administrative Patent Judge.  \n\nDECISION \nGranting Institution of Inter Partes Review \n\n35 U.S ...",
+        "documentSizeQuantity": 531813,
+        "documentTitleText": "Institution Decision: DECISION Granting Institution of Inter Partes Review 35 U.S.C. § 314",
+        "documentTypeDescriptionText": "DECISION",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2025-11-20T01:22:56",
+      "patentOwnerData": {
+        "applicationNumberText": "15492738",
+        "counselName": "Glass, Jameset al",
+        "grantDate": "2018-07-03",
+        "groupArtUnitNumber": "2663",
+        "inventorName": "Nicholas D. Woodman et al",
+        "patentNumber": "10015413",
+        "realPartyInInterestName": "GoPro, Inc.",
+        "technologyCenterNumber": "2600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Yap, Alexet al",
+        "realPartyInInterestName": "Arashi Vision Inc. (d/b/a Insta360)"
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2024-06-20",
+        "institutionDecisionDate": "2025-01-07",
+        "latestDecisionDate": "2025-01-07",
+        "petitionFilingDate": "2024-06-20",
+        "trialLastModifiedDate": "2025-10-07",
+        "trialLastModifiedDateTime": "2025-10-07T09:52:34",
+        "trialStatusCategory": "Trial Instituted",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2024-00984"
+    }
+  ]
+}

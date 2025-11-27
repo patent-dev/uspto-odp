@@ -16,6 +16,15 @@ func demoPetition(ctx context.Context, client *odp.Client) {
 	demoSearchPetitionsDownload(ctx, client)
 }
 
+// demoPetitionWithContext runs all Petition demos with optional example saving
+func demoPetitionWithContext(dctx *DemoContext) {
+	printHeader("Petition API Demonstrations")
+
+	demoSearchPetitionsCtx(dctx)
+	demoGetPetitionDecisionCtx(dctx)
+	demoSearchPetitionsDownloadCtx(dctx)
+}
+
 func demoSearchPetitions(ctx context.Context, client *odp.Client) {
 	printSubHeader("SearchPetitions")
 
@@ -25,6 +34,23 @@ func demoSearchPetitions(ctx context.Context, client *odp.Client) {
 		return
 	}
 
+	printPetitionSearchResult(result)
+}
+
+func demoSearchPetitionsCtx(dctx *DemoContext) {
+	printSubHeader("SearchPetitions")
+
+	result, err := dctx.Client.SearchPetitions(dctx.Ctx, "", 0, 5)
+	if err != nil {
+		printError(err)
+		return
+	}
+
+	dctx.savePatentExample("search_petitions", map[string]string{"query": "", "offset": "0", "limit": "5"}, result)
+	printPetitionSearchResult(result)
+}
+
+func printPetitionSearchResult(result *generated.PetitionDecisionResponseBag) {
 	if result.Count != nil {
 		fmt.Printf("Total results: %d\n", *result.Count)
 	}
@@ -78,6 +104,43 @@ func demoGetPetitionDecision(ctx context.Context, client *odp.Client) {
 		return
 	}
 
+	printPetitionDecisionResult(result)
+}
+
+func demoGetPetitionDecisionCtx(dctx *DemoContext) {
+	printSubHeader("GetPetitionDecision")
+
+	// First search to get a valid record ID
+	searchResult, err := dctx.Client.SearchPetitions(dctx.Ctx, "", 0, 1)
+	if err != nil {
+		printError(err)
+		return
+	}
+
+	var recordID string
+	if searchResult.PetitionDecisionDataBag != nil && len(*searchResult.PetitionDecisionDataBag) > 0 {
+		petition := (*searchResult.PetitionDecisionDataBag)[0]
+		if petition.PetitionDecisionRecordIdentifier != nil {
+			recordID = *petition.PetitionDecisionRecordIdentifier
+		}
+	}
+
+	if recordID == "" {
+		fmt.Println("No petition record ID found to demonstrate")
+		return
+	}
+
+	result, err := dctx.Client.GetPetitionDecision(dctx.Ctx, recordID, true)
+	if err != nil {
+		printError(err)
+		return
+	}
+
+	dctx.savePatentExample("get_petition_decision", map[string]string{"recordID": recordID, "includeDocuments": "true"}, result)
+	printPetitionDecisionResult(result)
+}
+
+func printPetitionDecisionResult(result *generated.PetitionDecisionIdentifierResponseBag) {
 	if result.PetitionDecisionDataBag != nil && len(*result.PetitionDecisionDataBag) > 0 {
 		petition := (*result.PetitionDecisionDataBag)[0]
 		if petition.PetitionDecisionRecordIdentifier != nil {
@@ -112,10 +175,32 @@ func demoSearchPetitionsDownload(ctx context.Context, client *odp.Client) {
 		return
 	}
 
-	fmt.Printf("Downloaded data size: %d bytes\n", len(data))
-	if len(data) > 500 {
-		fmt.Printf("Preview:\n%s\n...\n", string(data[:500]))
-	} else {
-		fmt.Printf("Data:\n%s\n", string(data))
+	printDownloadResult(data)
+}
+
+func demoSearchPetitionsDownloadCtx(dctx *DemoContext) {
+	printSubHeader("SearchPetitionsDownload")
+
+	req := generated.PetitionDecisionDownloadRequest{
+		Q: odp.StringPtr(""),
+		Pagination: &generated.Pagination{
+			Offset: odp.Int32Ptr(0),
+			Limit:  odp.Int32Ptr(5),
+		},
 	}
+
+	data, err := dctx.Client.SearchPetitionsDownload(dctx.Ctx, req)
+	if err != nil {
+		printError(err)
+		return
+	}
+
+	if dctx.Saver != nil {
+		requestDesc := FormatRequestDescription("search_petitions_download", map[string]string{"query": "", "offset": "0", "limit": "5"})
+		format := DetectFormat(data)
+		if err := dctx.Saver.SaveExample("search_petitions_download", requestDesc, data, format); err != nil {
+			fmt.Printf("Warning: failed to save example: %v\n", err)
+		}
+	}
+	printDownloadResult(data)
 }

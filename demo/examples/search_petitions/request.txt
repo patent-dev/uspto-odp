@@ -1,0 +1,6 @@
+Method: search_petitions
+
+Parameters:
+  query: 
+  offset: 0
+  limit: 5

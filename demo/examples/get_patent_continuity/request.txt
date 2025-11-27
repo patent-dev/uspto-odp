@@ -1,0 +1,4 @@
+Method: get_patent_continuity
+
+Parameters:
+  applicationNumber: 17248024

@@ -1,0 +1,99 @@
+{
+  "count": 161137,
+  "patentAppealDataBag": [
+    {
+      "appealDocumentCategory": "Decision",
+      "appealMetaData": {
+        "appealFilingDate": "2025-10-22",
+        "appealLastModifiedDate": "2025-11-20",
+        "appealLastModifiedDateTime": "2025-11-20T18:21:10",
+        "applicationTypeCategory": "Appeal",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000193/2026000193.zip"
+      },
+      "appealNumber": "2026000193",
+      "documentData": {
+        "documentFilingDate": "2025-11-20",
+        "documentIdentifier": "6f897fb0-e318-4f51-a216-19430e93332c",
+        "documentName": "Decision_2026000193_11-20-2025.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/409,019 08/23/2021 Judith Baumeister A0848.70142US12 4367\n\n159933 7590 11/21/2025\n\nSanofi (Bioverativ/Ablynx/Pasteur)/Wolf\nc/o Wolf, Greenfield \u0026 Sacks, P.C.\n600 Atlantic Avenue\nBoston, MA ...",
+        "documentSizeQuantity": 235526
+      },
+      "lastModifiedDateTime": "2025-11-21T07:18:43"
+    },
+    {
+      "appealDocumentCategory": "Decision",
+      "appealMetaData": {
+        "appealFilingDate": "2025-09-15",
+        "appealLastModifiedDate": "2025-10-22",
+        "appealLastModifiedDateTime": "2025-10-22T15:11:03",
+        "applicationTypeCategory": "Appeal",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2025/003801/2025003801.zip"
+      },
+      "appealNumber": "2025003801",
+      "documentData": {
+        "documentFilingDate": "2025-10-22",
+        "documentIdentifier": "79162ee6-df24-4935-8050-9f4a0889c2f4",
+        "documentName": "Decision_2025003801_10-22-2025.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/289,145 11/01/2023 Thomas GUSTAVSSON 14003-000377/US/NPA 7422\n\n112467 7590 10/23/2025\n\nRMCK Law Group, PLC\nPO Box 210280\nAuburn Hills, MI 48321\n\nEXAMINER\n\nFELTON, AILEEN BAKER\n\nART UNIT PA ...",
+        "documentSizeQuantity": 190641
+      },
+      "lastModifiedDateTime": "2025-11-20T01:11:33"
+    },
+    {
+      "appealDocumentCategory": "Decision",
+      "appealMetaData": {
+        "appealFilingDate": "2025-09-11",
+        "appealLastModifiedDate": "2025-11-25",
+        "appealLastModifiedDateTime": "2025-11-25T15:48:46",
+        "applicationTypeCategory": "Appeal",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2025/003786/2025003786.zip"
+      },
+      "appealNumber": "2025003786",
+      "documentData": {
+        "documentFilingDate": "2025-11-19",
+        "documentIdentifier": "5772a54a-d425-4115-97db-d65d7c6c3f80",
+        "documentName": "Decision_2025003786_11-19-2025.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/241,488 09/01/2023 Aditya Bansal OMMC 12346 6166\n\n61650 7590 11/20/2025\n\nMYERS WOLIN, LLC\n100 SOUTH JEFFERSON ROAD\nSUITE 202\nWHIPPANY, NJ 07981-1009\n\nEXAMINER\n\nSTEWART, CRYSTOL\n\nART UNIT P ..."
+      },
+      "lastModifiedDateTime": "2025-11-26T05:18:06"
+    },
+    {
+      "appealDocumentCategory": "Decision",
+      "appealMetaData": {
+        "appealFilingDate": "2025-09-10",
+        "appealLastModifiedDate": "2025-10-22",
+        "appealLastModifiedDateTime": "2025-10-22T18:09:08",
+        "applicationTypeCategory": "Appeal",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2025/003751/2025003751.zip"
+      },
+      "appealNumber": "2025003751",
+      "documentData": {
+        "documentFilingDate": "2025-10-22",
+        "documentIdentifier": "3bfd495c-6bf0-48e4-9330-c768f6bce7c3",
+        "documentName": "Decision_2025003751_10-22-2025.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/423,231 01/25/2024 GEORGE EDWARD PARRIS DEM_PAT_Div1 1837\n\n82854 7590 10/23/2025\n\nPeter R. Kramer\nIngenium Patents LLC\n30 N Gould Street\nSte R\nSheridan, WY 82801\n\nEXAMINER\n\nWIECZOREK, MICH ...",
+        "documentSizeQuantity": 98540
+      },
+      "lastModifiedDateTime": "2025-11-20T01:11:33"
+    },
+    {
+      "appealDocumentCategory": "Decision",
+      "appealMetaData": {
+        "appealFilingDate": "2025-08-22",
+        "appealLastModifiedDate": "2025-09-25",
+        "appealLastModifiedDateTime": "2025-09-25T16:13:18",
+        "applicationTypeCategory": "Appeal",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2025/003616/2025003616.zip"
+      },
+      "appealNumber": "2025003616",
+      "documentData": {
+        "documentFilingDate": "2025-09-25",
+        "documentIdentifier": "a6c0a615-3afa-4f74-ab8d-bd43a6354a7d",
+        "documentName": "Decision_2025003616_09-25-2025.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/120,952 03/13/2023 Carl Hampson 20121-416419 2485\n\n202156 7590 09/26/2025\n\nBarnes \u0026 Thornburg LLP (Knauf)\n11 S. Meridian Street\nIndianapolis, IN 46204\n\nEXAMINER\n\nSASTRI, SATYA B\n\nART UNIT  ...",
+        "documentSizeQuantity": 178059
+      },
+      "lastModifiedDateTime": "2025-11-20T01:11:33"
+    }
+  ]
+}

@@ -42,6 +42,10 @@ func formatJSON(v interface{}) string {
 	return string(b)
 }
 
+func marshalJSON(v interface{}) ([]byte, error) {
+	return json.MarshalIndent(v, "", "  ")
+}
+
 func min(a, b int) int {
 	if a < b {
 		return a

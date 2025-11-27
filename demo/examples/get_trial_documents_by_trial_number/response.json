@@ -1,0 +1,855 @@
+{
+  "count": 36,
+  "patentTrialDocumentDataBag": [
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246426",
+        "documentName": "Ex-1029 - Ex. A - 780 Claim Chart.pdf",
+        "documentNumber": 1029,
+        "documentSizeQuantity": 2858035,
+        "documentTitleText": "Exhibit A to Network-1’s Infringement Contentions for the ’780 Patent",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246394",
+        "documentName": "Ex-1007 - AbiChar.pdf",
+        "documentNumber": 1007,
+        "documentSizeQuantity": 868743,
+        "documentTitleText": "A Fast and Secure Elliptic Curve Based Authenticated Key Agreement Protocol",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246410",
+        "documentName": "Ex-1021 - Boyd \u0026 Mathuria.pdf",
+        "documentNumber": 1021,
+        "documentSizeQuantity": 13200327,
+        "documentTitleText": "Protocols for Authentication and Key Establishment",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246372",
+        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part3.pdf",
+        "documentNumber": 1004,
+        "documentSizeQuantity": 35256571,
+        "documentTitleText": "Prosecution History of the ’780 Patent (Part 3 of 7)",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246422",
+        "documentName": "Ex-1027 - Reprogrammable SIMs.pdf",
+        "documentNumber": 1027,
+        "documentSizeQuantity": 3829280,
+        "documentTitleText": "Reprogrammable SIMs: Technology, Evolution and Implications",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246382",
+        "documentName": "Ex-1005 - Secure Profile Provisioning Architecture for Embedded UICC.pdf",
+        "documentNumber": 1005,
+        "documentSizeQuantity": 1361729,
+        "documentTitleText": "Secure Profile Provisioning Architecture for Embedded UICC",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171247300",
+        "documentName": "2025-11-26 SEC POA (780) (Signed).pdf",
+        "documentNumber": 1,
+        "documentSizeQuantity": 292473,
+        "documentTitleText": "Samsung Electronics Co., Ltd.’s Power of Attorney",
+        "documentTypeDescriptionText": "NOTICE",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246378",
+        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part6.pdf",
+        "documentNumber": 1004,
+        "documentSizeQuantity": 37002606,
+        "documentTitleText": "Prosecution History of the ’780 Patent (Part 6 of 7)",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246420",
+        "documentName": "Ex-1026 - GlobalPlatform Card Technology.pdf",
+        "documentNumber": 1026,
+        "documentSizeQuantity": 1760814,
+        "documentTitleText": "GlobalPlatform Card Technology, Secure Channel Protocol 03",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246412",
+        "documentName": "Ex-1022 - New Directions in Cryptography.pdf",
+        "documentNumber": 1022,
+        "documentSizeQuantity": 2593947,
+        "documentTitleText": "New Directions in Cryptography",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246402",
+        "documentName": "Ex-1015 - Declaration of Simon Blake-Wilson.pdf",
+        "documentNumber": 1015,
+        "documentSizeQuantity": 1265488,
+        "documentTitleText": "Declaration of Simon Blake-Wilson",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246416",
+        "documentName": "Ex-1024 - NIST Special Publication 800-38F.pdf",
+        "documentNumber": 1024,
+        "documentSizeQuantity": 911600,
+        "documentTitleText": "NIST Special Publication 800-38F",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246368",
+        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part1.pdf",
+        "documentNumber": 1004,
+        "documentSizeQuantity": 29477707,
+        "documentTitleText": "Prosecution History of the ’780 Patent (Part 1 of 7)",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171247284",
+        "documentName": "Ex-1030 - US11916893.pdf",
+        "documentNumber": 1030,
+        "documentSizeQuantity": 7188329,
+        "documentTitleText": "U.S. Patent No. 11,916,893",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246408",
+        "documentName": "Ex-1019 - Declaration of Gordan MacPherson .pdf",
+        "documentNumber": 1019,
+        "documentSizeQuantity": 14145875,
+        "documentTitleText": "Declaration of Gordan MacPherson",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171247296",
+        "documentName": "Ex-1003 - Curriculum Vitae of Dr. Paul S. Min.pdf",
+        "documentNumber": 1003,
+        "documentSizeQuantity": 1139388,
+        "documentTitleText": "Curriculum Vitae of Dr. Paul S. Min",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246376",
+        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part5.pdf",
+        "documentNumber": 1004,
+        "documentSizeQuantity": 26304605,
+        "documentTitleText": "Prosecution History of the ’780 Patent (Part 5 of 7)",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246374",
+        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part4.pdf",
+        "documentNumber": 1004,
+        "documentSizeQuantity": 30966296,
+        "documentTitleText": "Prosecution History of the ’780 Patent (Part 4 of 7)",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246400",
+        "documentName": "Ex-1011 - SCP11.pdf",
+        "documentNumber": 1011,
+        "documentSizeQuantity": 8285744,
+        "documentTitleText": "GlobalPlatform Card Secure Channel Protocol ’11’",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246366",
+        "documentName": "Ex-1001 - US11233780.pdf",
+        "documentNumber": 1001,
+        "documentSizeQuantity": 4259210,
+        "documentTitleText": "U.S. Patent No. 11,233,780 (“the ’780 Patent”)",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246380",
+        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part7.pdf",
+        "documentNumber": 1004,
+        "documentSizeQuantity": 22008946,
+        "documentTitleText": "Prosecution History of the ’780 Patent (Part 7 of 7)",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171247304",
+        "documentName": "2025-11-26 Samsung (Network-1) 780 Patent IPR Petition.pdf",
+        "documentNumber": 3,
+        "documentSizeQuantity": 9496703,
+        "documentTitleText": "Petition: as filed",
+        "documentTypeDescriptionText": "PETITION",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T09:54:49",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246414",
+        "documentName": "Ex-1023 - NIST Special Publication 800-57.pdf",
+        "documentNumber": 1023,
+        "documentSizeQuantity": 1745408,
+        "documentTitleText": "NIST Special Publication 800-57",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T09:54:49",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171247302",
+        "documentName": "2025-11-26 SEA POA (780) (Signed).pdf",
+        "documentNumber": 2,
+        "documentSizeQuantity": 302503,
+        "documentTitleText": "Samsung Electronics America, Inc.’s Power of Attorney",
+        "documentTypeDescriptionText": "NOTICE",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T09:54:49",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    },
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171246390",
+        "documentName": "Ex-1006 - GlobalPlatform_Part 2.pdf",
+        "documentNumber": 1006,
+        "documentSizeQuantity": 33509118,
+        "documentTitleText": "GlobalPlatform Card Specification (Part 2 of 3)",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "patentOwnerData": {
+        "applicationNumberText": "16453682",
+        "grantDate": "2022-01-25",
+        "groupArtUnitNumber": "2432",
+        "inventorName": "John A. Nix",
+        "patentNumber": "11233780",
+        "technologyCenterNumber": "2400"
+      },
+      "regularPetitionerData": {
+        "counselName": "Fink, Williamet al",
+        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00114"
+    }
+  ]
+}

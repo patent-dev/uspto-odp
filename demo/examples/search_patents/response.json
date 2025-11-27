@@ -1,0 +1,588 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationMetaData": {
+        "applicantBag": [
+          {
+            "applicantNameText": "Shanghai ArtificialIntelligence Innovation Center",
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "Shanghai ArtificialIntelligence Innovation Center",
+                "postalAddressCategory": "postal"
+              }
+            ]
+          }
+        ],
+        "applicationConfirmationNumber": 6793,
+        "applicationStatusCode": 30,
+        "applicationStatusDate": "2024-03-28",
+        "applicationStatusDescriptionText": "Docketed New Case - Ready for Examination",
+        "applicationTypeCategory": "REGULAR",
+        "applicationTypeCode": "UTL",
+        "applicationTypeLabelName": "Utility",
+        "class": "706",
+        "cpcClassificationBag": [
+          "G06N   3/08"
+        ],
+        "customerNumber": 185322,
+        "docketNumber": "CP123010099E-US",
+        "earliestPublicationDate": "2024-10-31",
+        "earliestPublicationNumber": "US20240362478A1",
+        "effectiveFilingDate": "2024-03-06",
+        "entityStatusData": {
+          "businessEntityStatusCategory": "Small",
+          "smallEntityStatusIndicator": false
+        },
+        "examinerNameText": "CENTRAL, DOCKET",
+        "filingDate": "2024-03-06",
+        "firstApplicantName": "Shanghai ArtificialIntelligence Innovation Center",
+        "firstInventorName": "Nanyang YE",
+        "firstInventorToFileIndicator": "Y",
+        "groupArtUnitNumber": "OPAP",
+        "inventionTitle": "CERTIFIABLE OUT-OF-DISTRIBUTION GENERALIZATION METHOD, MEDIUM, AND ELECTRONIC DEVICE",
+        "inventorBag": [
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "YE,Nanyang",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "YE,Nanyang",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Nanyang",
+            "inventorNameText": "Nanyang YE",
+            "lastName": "YE"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "GU,Qinying",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "GU,Qinying",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Qinying",
+            "inventorNameText": "Qinying GU",
+            "lastName": "GU"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "ZHU,Lin",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "ZHU,Lin",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Lin",
+            "inventorNameText": "Lin ZHU",
+            "lastName": "ZHU"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "ZENG,Zhaoyu",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "ZENG,Zhaoyu",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Zhaoyu",
+            "inventorNameText": "Zhaoyu ZENG",
+            "lastName": "ZENG"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "SHAO,Jiayao",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "SHAO,Jiayao",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Jiayao",
+            "inventorNameText": "Jiayao SHAO",
+            "lastName": "SHAO"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "PENG,Chensheng",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "PENG,Chensheng",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Chensheng",
+            "inventorNameText": "Chensheng PENG",
+            "lastName": "PENG"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "PAN,Bikang",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "PAN,Bikang",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Bikang",
+            "inventorNameText": "Bikang PAN",
+            "lastName": "PAN"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "LI,Kaican",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "LI,Kaican",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Kaican",
+            "inventorNameText": "Kaican LI",
+            "lastName": "LI"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "ZHU,Jun",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "ZHU,Jun",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Jun",
+            "inventorNameText": "Jun ZHU",
+            "lastName": "ZHU"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "WANG,Xinbing",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "WANG,Xinbing",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Xinbing",
+            "inventorNameText": "Xinbing WANG",
+            "lastName": "WANG"
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "ZHOU,Chenghu",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Shanghai",
+                "countryCode": "CN",
+                "countryName": "CHINA",
+                "nameLineOneText": "ZHOU,Chenghu",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "firstName": "Chenghu",
+            "inventorNameText": "Chenghu ZHOU",
+            "lastName": "ZHOU"
+          }
+        ],
+        "nationalStageIndicator": false,
+        "publicationCategoryBag": [
+          "Pre-Grant Publications - PGPub"
+        ],
+        "publicationDateBag": [
+          "2024-10-31"
+        ],
+        "publicationSequenceNumberBag": [
+          "0362478"
+        ],
+        "subclass": "25",
+        "uspcSymbolText": "706/25"
+      },
+      "applicationNumberText": "18597857",
+      "assignmentBag": [
+        {
+          "assigneeBag": [
+            {
+              "assigneeAddress": {
+                "addressLineOneText": "37TH AND 38THFLOOR, NO. 701",
+                "addressLineTwoText": "YUNJIN ROAD, XUHUI DISTRICT",
+                "cityName": "SHANGHAI",
+                "geographicRegionCode": "CNX"
+              },
+              "assigneeNameText": "SHANGHAI ARTIFICIALINTELLIGENCE INNOVATION CENTER"
+            }
+          ],
+          "assignmentMailedDate": "2024-03-19",
+          "assignmentReceivedDate": "2024-03-18",
+          "assignmentRecordedDate": "2024-03-18",
+          "assignorBag": [
+            {
+              "assignorName": "GU, QINYING",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "LI, KAICAN",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "PAN, BIKANG",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "PENG, CHENSHENG",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "SHAO, JIAYAO",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "WANG, XINBING",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "YE, NANYANG",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "ZENG, ZHAOYU",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "ZHOU, CHENGHU",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "ZHU, JUN",
+              "executionDate": "2024-03-01"
+            },
+            {
+              "assignorName": "ZHU, LIN",
+              "executionDate": "2024-03-01"
+            }
+          ],
+          "conveyanceText": "ASSIGNMENT OF ASSIGNORS INTEREST (SEE DOCUMENT FOR DETAILS).",
+          "correspondenceAddress": {
+            "addressLineOneText": "50 LERER LANE",
+            "addressLineTwoText": "STATEN ISLAND, NY 10307",
+            "correspondentNameText": "NITIN KAUSHIK"
+          },
+          "frameNumber": 720,
+          "pageTotalQuantity": 6,
+          "reelAndFrameNumber": "066803/0720",
+          "reelNumber": 66803
+        }
+      ],
+      "correspondenceAddressBag": [
+        {
+          "addressLineOneText": "50 Lerer Lane",
+          "cityName": "Staten Island",
+          "countryCode": "US",
+          "countryName": "UNITED STATES",
+          "geographicRegionCode": "NY",
+          "geographicRegionName": "NEW YORK",
+          "nameLineOneText": "Nitin Kaushik",
+          "postalCode": "10307"
+        }
+      ],
+      "eventDataBag": [
+        {
+          "eventCode": "CCRDY",
+          "eventDate": "2024-05-09",
+          "eventDescriptionText": "Application ready for PDX access by participating foreign offices"
+        },
+        {
+          "eventCode": "CCRDY",
+          "eventDate": "2024-05-09",
+          "eventDescriptionText": "Application ready for PDX access by participating foreign offices"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2024-10-31",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "PG-ISSUE",
+          "eventDate": "2024-10-31",
+          "eventDescriptionText": "PG-Pub Issue Notification"
+        },
+        {
+          "eventCode": "MM327",
+          "eventDate": "2024-04-28",
+          "eventDescriptionText": "Mail Miscellaneous Communication to Applicant"
+        },
+        {
+          "eventCode": "M327",
+          "eventDate": "2024-04-27",
+          "eventDescriptionText": "Miscellaneous Communication to Applicant - No Action Count"
+        },
+        {
+          "eventCode": "PD.RECVD",
+          "eventDate": "2024-04-01",
+          "eventDescriptionText": "Priority document has successfully retrieved via PDX/DAS"
+        },
+        {
+          "eventCode": "M844",
+          "eventDate": "2024-03-06",
+          "eventDescriptionText": "Information Disclosure Statement (IDS) Filed"
+        },
+        {
+          "eventCode": "DOCK",
+          "eventDate": "2024-03-28",
+          "eventDescriptionText": "Case Docketed to Examiner in GAU"
+        },
+        {
+          "eventCode": "OIPE",
+          "eventDate": "2024-03-28",
+          "eventDescriptionText": "Application Dispatched from OIPE"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2024-03-20",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "PGPC",
+          "eventDate": "2024-03-19",
+          "eventDescriptionText": "Sent to Classification Contractor"
+        },
+        {
+          "eventCode": "FTFS",
+          "eventDate": "2024-03-19",
+          "eventDescriptionText": "FITF set to YES - revise initial setting"
+        },
+        {
+          "eventCode": "PTA.RFE",
+          "eventDate": "2024-03-19",
+          "eventDescriptionText": "Patent Term Adjustment - Ready for Examination"
+        },
+        {
+          "eventCode": "MPEN",
+          "eventDate": "2024-03-20",
+          "eventDescriptionText": "Mail Pre-Exam Notice"
+        },
+        {
+          "eventCode": "COMP",
+          "eventDate": "2024-03-20",
+          "eventDescriptionText": "Application Is Now Complete"
+        },
+        {
+          "eventCode": "FLRCPT.O",
+          "eventDate": "2024-03-20",
+          "eventDescriptionText": "Filing Receipt"
+        },
+        {
+          "eventCode": "PDREQUST",
+          "eventDate": "2024-03-06",
+          "eventDescriptionText": "Request from applicant for the USPTO to retrieve the Priority Document"
+        },
+        {
+          "eventCode": "PDREQUST",
+          "eventDate": "2024-03-06",
+          "eventDescriptionText": "Request from applicant for the USPTO to retrieve the Priority Document"
+        },
+        {
+          "eventCode": "SREXR141",
+          "eventDate": "2024-03-06",
+          "eventDescriptionText": "PTO/SB/69-Authorize EPO Access to Search Results"
+        },
+        {
+          "eventCode": "APPERMS",
+          "eventDate": "2024-03-06",
+          "eventDescriptionText": "Applicants have given acceptable permission for participating foreign"
+        },
+        {
+          "eventCode": "SMAL",
+          "eventDate": "2024-03-18",
+          "eventDescriptionText": "Applicant Has Filed a Verified Statement of Small Entity Status in Compliance with 37 CFR 1.27"
+        },
+        {
+          "eventCode": "BIG.",
+          "eventDate": "2024-03-06",
+          "eventDescriptionText": "Entity Status Set To Undiscounted (Initial Default Setting or Status Change)"
+        },
+        {
+          "eventCode": "IEXX",
+          "eventDate": "2024-03-06",
+          "eventDescriptionText": "Initial Exam Team nn"
+        }
+      ],
+      "foreignPriorityBag": [
+        {
+          "applicationNumberText": "2023104556449",
+          "filingDate": "2023-04-25",
+          "ipOfficeName": "CHINA"
+        }
+      ],
+      "lastIngestionDateTime": "2025-06-12T16:11:13",
+      "pgpubDocumentMetaData": {
+        "fileCreateDateTime": "2024-10-31T08:39:35",
+        "fileLocationURI": "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2024/ipa241031/18597857_20240362478.xml",
+        "productIdentifier": "APPXML",
+        "xmlFileName": "18597857_20240362478.xml",
+        "zipFileName": "ipa241031.zip"
+      },
+      "recordAttorney": {
+        "attorneyBag": [
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "50 LERER LANE",
+                "cityName": "STATEN ISLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "NY",
+                "geographicRegionName": "NEW YORK",
+                "postalCode": "10307"
+              }
+            ],
+            "firstName": "NITIN",
+            "lastName": "KAUSHIK",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "80417",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "908-560-7265"
+              }
+            ]
+          }
+        ],
+        "customerNumberCorrespondenceData": {
+          "patronIdentifier": 185322,
+          "powerOfAttorneyAddressBag": [
+            {
+              "addressLineOneText": "50 Lerer Lane",
+              "cityName": "Staten Island",
+              "countryCode": "US",
+              "countryName": "UNITED STATES",
+              "geographicRegionCode": "NY",
+              "geographicRegionName": "NEW YORK",
+              "nameLineOneText": "Nitin Kaushik",
+              "postalCode": "10307"
+            }
+          ]
+        },
+        "powerOfAttorneyBag": [
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "50 LERER LANE",
+                "cityName": "STATEN ISLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "NY",
+                "geographicRegionName": "NEW YORK",
+                "postalCode": "10307"
+              }
+            ],
+            "firstName": "NITIN",
+            "lastName": "KAUSHIK",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "80417",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "908-560-7265"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Method: search_trial_decisions
+
+Parameters:
+  query: 

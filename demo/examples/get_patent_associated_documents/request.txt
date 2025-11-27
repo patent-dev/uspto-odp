@@ -1,0 +1,4 @@
+Method: get_patent_associated_documents
+
+Parameters:
+  applicationNumber: 17248024

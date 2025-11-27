@@ -1,0 +1,5 @@
+Method: get_petition_decision
+
+Parameters:
+  includeDocuments: true
+  recordID: 0b71b685-adb9-539d-8257-127dc9e58247

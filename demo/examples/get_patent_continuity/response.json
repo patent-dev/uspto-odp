@@ -1,0 +1,136 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationNumberText": "17248024",
+      "parentContinuityBag": [
+        {
+          "childApplicationNumberText": "17248024",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2019-11-25",
+          "parentApplicationNumberText": "16695054",
+          "parentApplicationStatusCode": 250,
+          "parentApplicationStatusDescriptionText": "Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362",
+          "parentPatentNumber": "10916753"
+        },
+        {
+          "childApplicationNumberText": "16695054",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2017-04-13",
+          "parentApplicationNumberText": "15487364",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "10529971"
+        },
+        {
+          "childApplicationNumberText": "15487364",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2016-05-09",
+          "parentApplicationNumberText": "15150231",
+          "parentApplicationStatusCode": 250,
+          "parentApplicationStatusDescriptionText": "Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362",
+          "parentPatentNumber": "9666850"
+        },
+        {
+          "childApplicationNumberText": "15150231",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2014-01-15",
+          "parentApplicationNumberText": "14156267",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "9368775"
+        },
+        {
+          "childApplicationNumberText": "14156267",
+          "claimParentageTypeCode": "CIP",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation in-part of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2013-06-27",
+          "parentApplicationNumberText": "13929653",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "8828580"
+        },
+        {
+          "childApplicationNumberText": "13929653",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2012-09-13",
+          "parentApplicationNumberText": "13615351",
+          "parentApplicationStatusCode": 250,
+          "parentApplicationStatusDescriptionText": "Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362",
+          "parentPatentNumber": "8501339"
+        },
+        {
+          "childApplicationNumberText": "13615351",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2010-09-22",
+          "parentApplicationNumberText": "12888154",
+          "parentApplicationStatusCode": 250,
+          "parentApplicationStatusDescriptionText": "Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362",
+          "parentPatentNumber": "8293398"
+        },
+        {
+          "childApplicationNumberText": "12888154",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2007-06-28",
+          "parentApplicationNumberText": "11824597",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "7829212"
+        },
+        {
+          "childApplicationNumberText": "11824597",
+          "claimParentageTypeCode": "DIV",
+          "claimParentageTypeCodeDescriptionText": "is a Division of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2004-04-14",
+          "parentApplicationNumberText": "10824944",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "7282295"
+        },
+        {
+          "childApplicationNumberText": "10824944",
+          "claimParentageTypeCode": "PRO",
+          "claimParentageTypeCodeDescriptionText": "Claims priority from a provisional application",
+          "parentApplicationFilingDate": "2004-02-27",
+          "parentApplicationNumberText": "60548231",
+          "parentApplicationStatusCode": 159,
+          "parentApplicationStatusDescriptionText": "Provisional Application Expired"
+        },
+        {
+          "childApplicationNumberText": "10824944",
+          "claimParentageTypeCode": "PRO",
+          "claimParentageTypeCodeDescriptionText": "Claims priority from a provisional application",
+          "parentApplicationFilingDate": "2004-02-06",
+          "parentApplicationNumberText": "60542532",
+          "parentApplicationStatusCode": 159,
+          "parentApplicationStatusDescriptionText": "Provisional Application Expired"
+        },
+        {
+          "childApplicationNumberText": "14156267",
+          "claimParentageTypeCode": "PRO",
+          "claimParentageTypeCodeDescriptionText": "Claims priority from a provisional application",
+          "parentApplicationFilingDate": "2013-02-11",
+          "parentApplicationNumberText": "61763412",
+          "parentApplicationStatusCode": 159,
+          "parentApplicationStatusDescriptionText": "Provisional Application Expired"
+        }
+      ]
+    }
+  ]
+}

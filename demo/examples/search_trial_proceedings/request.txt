@@ -1,0 +1,4 @@
+Method: search_trial_proceedings
+
+Parameters:
+  query: trialMetaData.trialTypeCode:IPR

@@ -1,0 +1,197 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationMetaData": {
+        "applicantBag": [
+          {
+            "applicantNameText": "PolyPlus Battery Company",
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "postalAddressCategory": "postal"
+              }
+            ]
+          }
+        ],
+        "applicationConfirmationNumber": 4114,
+        "applicationStatusCode": 150,
+        "applicationStatusDate": "2023-04-19",
+        "applicationStatusDescriptionText": "Patented Case",
+        "applicationTypeCategory": "REGULAR",
+        "applicationTypeCode": "UTL",
+        "applicationTypeLabelName": "Utility",
+        "class": "429",
+        "cpcClassificationBag": [
+          "H01M  50/46",
+          "H01G  11/06",
+          "H01M  50/449",
+          "H01G  11/52",
+          "H01G  11/58",
+          "H01M   4/13",
+          "H01M   4/366",
+          "H01M   4/587",
+          "H01M   4/628",
+          "H01M   6/34",
+          "H01M   8/065",
+          "H01M  10/052",
+          "H01M  10/0562",
+          "H01M  10/36",
+          "H01M  12/08",
+          "H01M2004/027",
+          "H01M2300/0085",
+          "Y02E  60/10",
+          "Y02E  60/13",
+          "Y02E  60/50"
+        ],
+        "customerNumber": 22434,
+        "docketNumber": "PLUSP040X1C4US",
+        "earliestPublicationDate": "2021-07-08",
+        "earliestPublicationNumber": "US20210210819A1",
+        "effectiveFilingDate": "2021-01-05",
+        "entityStatusData": {
+          "businessEntityStatusCategory": "Regular Undiscounted",
+          "smallEntityStatusIndicator": false
+        },
+        "examinerNameText": "DOVE, TRACY MAE",
+        "filingDate": "2021-01-05",
+        "firstApplicantName": "PolyPlus Battery Company",
+        "firstInventorName": "Steven J. Visco",
+        "firstInventorToFileIndicator": "N",
+        "grantDate": "2023-05-09",
+        "groupArtUnitNumber": "1727",
+        "inventionTitle": "MAKING LITHIUM METAL - SEAWATER BATTERY CELLS HAVING PROTECTED LITHIUM ELECTRODES",
+        "inventorBag": [
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Visco, Steven J.",
+                "postalAddressCategory": "residence"
+              },
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Steven J. Visco",
+                "postalAddressCategory": "postal"
+              }
+            ],
+            "countryCode": "US",
+            "firstName": "Steven",
+            "inventorNameText": "Steven J. Visco",
+            "lastName": "Visco",
+            "middleName": "J."
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Bruce D. Katz",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Moraga",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Katz, Bruce D.",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "countryCode": "US",
+            "firstName": "Bruce",
+            "inventorNameText": "Bruce D. Katz",
+            "lastName": "Katz",
+            "middleName": "D."
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Danville",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Nimon, Yevgeniy S.",
+                "postalAddressCategory": "residence"
+              },
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Yevgeniy S. Nimon",
+                "postalAddressCategory": "postal"
+              }
+            ],
+            "countryCode": "US",
+            "firstName": "Yevgeniy",
+            "inventorNameText": "Yevgeniy S. Nimon",
+            "lastName": "Nimon",
+            "middleName": "S."
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Lafayette",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "De Jonghe, Lutgard C.",
+                "postalAddressCategory": "residence"
+              },
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Lutgard C. De Jonghe",
+                "postalAddressCategory": "postal"
+              }
+            ],
+            "countryCode": "US",
+            "firstName": "Lutgard",
+            "inventorNameText": "Lutgard C. De Jonghe",
+            "lastName": "De Jonghe",
+            "middleName": "C."
+          }
+        ],
+        "nationalStageIndicator": false,
+        "patentNumber": "11646472",
+        "publicationCategoryBag": [
+          "Granted/Issued",
+          "Pre-Grant Publications - PGPub"
+        ],
+        "publicationDateBag": [
+          "2021-07-08"
+        ],
+        "publicationSequenceNumberBag": [
+          "0210819"
+        ],
+        "subclass": "144",
+        "uspcSymbolText": "429/144"
+      },
+      "applicationNumberText": "17248024"
+    }
+  ],
+  "requestIdentifier": "6b582471-0f6d-4e49-af26-d03cf4cd8ae0"
+}

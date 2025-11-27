@@ -1,0 +1,4 @@
+Method: get_patent_meta_data
+
+Parameters:
+  applicationNumber: 17248024

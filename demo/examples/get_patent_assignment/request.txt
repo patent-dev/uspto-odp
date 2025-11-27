@@ -1,0 +1,4 @@
+Method: get_patent_assignment
+
+Parameters:
+  applicationNumber: 15000001

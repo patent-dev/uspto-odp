@@ -23,16 +23,18 @@ go get github.com/patent-dev/uspto-odp
 ## Quick Start
 
 ```go
-client, err := odp.NewClient(&odp.Config{APIKey: "your-api-key"})
+config := odp.DefaultConfig()
+config.APIKey = "your-api-key"
+client, err := odp.NewClient(config)
 ctx := context.Background()
 
 results, err := client.SearchPatents(ctx, "artificial intelligence", 0, 10)
 fmt.Printf("Found %d patents\n", *results.Count)
 ```
 
-## API Methods - Complete Coverage (19 endpoints)
+## API Methods - Complete Coverage (38 endpoints)
 
-All 19 functional USPTO ODP API endpoints are fully implemented and tested.
+All 38 USPTO ODP API endpoints are fully implemented and tested.
 
 ### Patent Application API (13 endpoints)
 
@@ -75,6 +77,39 @@ DownloadBulkFileWithProgress(ctx, fileDownloadURI string, w io.Writer,
 SearchPetitions(ctx, query string, offset, limit int32) (*PetitionDecisionResponseBag, error)
 GetPetitionDecision(ctx, recordID string, includeDocuments bool) (*PetitionDecisionIdentifierResponseBag, error)
 SearchPetitionsDownload(ctx, req PetitionDecisionDownloadRequest) ([]byte, error)
+```
+
+### PTAB (Patent Trial and Appeal Board) API (19 endpoints)
+
+```go
+// Trial Proceedings (IPR, PGR, CBM)
+SearchTrialProceedings(ctx, query string, offset, limit int32) (*ProceedingDataResponse, error)
+GetTrialProceeding(ctx, trialNumber string) (*ProceedingDataResponse, error)
+SearchTrialProceedingsDownload(ctx, req DownloadRequest) ([]byte, error)
+
+// Trial Decisions
+SearchTrialDecisions(ctx, query string, offset, limit int32) (*DecisionDataResponse, error)
+GetTrialDecision(ctx, documentIdentifier string) (*DecisionDataResponse, error)
+GetTrialDecisionsByTrialNumber(ctx, trialNumber string) (*DecisionDataResponse, error)
+SearchTrialDecisionsDownload(ctx, req DownloadRequest) ([]byte, error)
+
+// Trial Documents
+SearchTrialDocuments(ctx, query string, offset, limit int32) (*DocumentDataResponse, error)
+GetTrialDocument(ctx, documentIdentifier string) (*DocumentDataResponse, error)
+GetTrialDocumentsByTrialNumber(ctx, trialNumber string) (*DocumentDataResponse, error)
+SearchTrialDocumentsDownload(ctx, req DownloadRequest) ([]byte, error)
+
+// Appeal Decisions
+SearchAppealDecisions(ctx, query string, offset, limit int32) (*AppealDecisionDataResponse, error)
+GetAppealDecision(ctx, documentIdentifier string) (*AppealDecisionDataResponse, error)
+GetAppealDecisionsByAppealNumber(ctx, appealNumber string) (*AppealDecisionDataResponse, error)
+SearchAppealDecisionsDownload(ctx, req DownloadRequest) ([]byte, error)
+
+// Interference Decisions
+SearchInterferenceDecisions(ctx, query string, offset, limit int32) (*InterferenceDecisionDataResponse, error)
+GetInterferenceDecision(ctx, documentIdentifier string) (*InterferenceDecisionDataResponse, error)
+GetInterferenceDecisionsByNumber(ctx, interferenceNumber string) (*InterferenceDecisionDataResponse, error)
+SearchInterferenceDecisionsDownload(ctx, req PatentDownloadRequest) ([]byte, error)
 ```
 
 ## Patent Full Text & Advanced Features
@@ -184,9 +219,17 @@ client, err := odp.NewClient(config)
 ├── generated/           # Auto-generated OpenAPI code
 │   ├── client_gen.go    # Generated client (package generated)
 │   └── types_gen.go     # Generated types (package generated)
-├── dtd/                 # ICE DTD documentation
-│   └── README.md        # DTD structure and information
-└── swagger_fixed.yaml   # Fixed OpenAPI specification
+├── cmd/gen/             # Code generation tool (pure Go)
+│   └── main.go          # Bundles swagger files and applies fixes
+├── demo/                # Usage examples with saved responses
+│   └── main.go          # Demo runner for all API services
+├── swagger/             # Official USPTO OpenAPI specs (DO NOT EDIT)
+│   ├── swagger.yaml     # Main API specification
+│   ├── odp-common-base.yaml  # Shared type definitions
+│   └── trial-*.yaml     # PTAB API specifications
+├── swagger_fixed.yaml   # Processed spec with fixes (auto-generated)
+└── dtd/                 # ICE DTD documentation
+    └── README.md        # DTD structure and information
 ```
 
 ## Implementation
@@ -234,47 +277,95 @@ Integration tests require `USPTO_API_KEY` environment variable. Bulk file downlo
 
 ## Endpoint Coverage
 
-All 19 functional USPTO ODP API endpoints are implemented and tested:
+All 38 USPTO ODP API endpoints are implemented and tested:
 - 13 Patent Application API endpoints
 - 3 Bulk Data API endpoints
 - 3 Petition API endpoints
+- 19 PTAB (Patent Trial and Appeal Board) API endpoints
 
-## Swagger Fixes Applied
+## Swagger Processing
 
-Fixed type mismatches in USPTO swagger specification (`swagger_fixed.yaml`):
+### Source Files
 
-### Type Corrections
-- `applicationConfirmationNumber`, `prosecutionStatusCode`: string → number
-- `frameNumber`, `reelNumber`: string → integer (API returns numeric values)
+The USPTO ODP API specification is distributed as multiple YAML files with `$ref` references between them. The original files are downloaded from [USPTO ODP Swagger](https://data.uspto.gov/swagger/index.html#/) and stored in `swagger/`:
 
-### Structure Fixes
-- `BulkDataProductBag`: array alias → object with array field
-- `assignmentBag`: single object → array of Assignment objects
-- `petitionIssueConsideredTextBag`: array of objects → array of strings
+```
+swagger/
+├── swagger.yaml           # Main API spec (Patent, Bulk, Petition endpoints)
+├── odp-common-base.yaml   # Shared type definitions
+├── trial-proceedings.yaml # PTAB trial proceedings
+├── trial-decisions.yaml   # PTAB trial decisions
+├── trial-documents.yaml   # PTAB trial documents
+├── trial-appeal-decisions.yaml  # PTAB appeal decisions
+├── trial-interferences.yaml     # PTAB interference decisions
+└── trial-common.yaml      # Shared PTAB types
+```
 
-### Format Fixes
-- Removed `format: date` from non-ISO date fields (e.g., `createDateTime`, `mailDateTime`)
+**Important:** Do not edit files in `swagger/` - these are the original USPTO specifications.
 
-### Endpoint Changes
-- Removed: `/api/v1/patent/applications/text-to-search` (defined but has no operations)
-- Added: `/api/v1/datasets/products/files/{productIdentifier}/{fileName}` (missing from original swagger)
+### Code Generation
 
-## Development
-
-### Regenerating from Swagger
-
-If the swagger spec is updated:
+The `cmd/gen` tool (pure Go, no external dependencies) processes these files:
 
 ```bash
-# Install generator
-go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
-
-# Generate types (DO NOT EDIT generated/types_gen.go directly)
-oapi-codegen -package generated -generate types swagger_fixed.yaml > generated/types_gen.go
-
-# Generate client (DO NOT EDIT generated/client_gen.go directly)
-oapi-codegen -package generated -generate client swagger_fixed.yaml > generated/client_gen.go
+go run ./cmd/gen
 ```
+
+This tool:
+1. **Bundles** all YAML files, resolving `$ref` references between files
+2. **Applies fixes** for mismatches between swagger spec and actual API responses
+3. **Generates** `swagger_fixed.yaml` (processed OpenAPI spec)
+4. **Generates** Go code in `generated/` using oapi-codegen
+
+### Fixes Applied
+
+The USPTO swagger specification has several mismatches with actual API responses:
+
+**Type Corrections:**
+- `frameNumber`, `reelNumber`: string → integer (API returns numeric values)
+- `documentNumber`: string → integer (PTAB API returns numbers)
+- Error response `code`: integer → string (API returns `"404"` not `404`)
+
+**Structure Fixes:**
+- `petitionIssueConsideredTextBag`: array of objects → array of strings
+- `correspondenceAddress`: array → object (Assignment API returns object)
+- `DecisionData.statuteAndRuleBag`, `issueTypeBag`: string → array (PTAB API returns arrays)
+- `GetPatentAssignment.assignmentBag`: single object → array (API returns array of assignments)
+
+**Field Name Fixes:**
+- `InterferenceDecisionRecord.decisionDocumentData` → `documentData` (API uses different field name)
+
+**Format Fixes:**
+- Removed `format: date-time` from datetime fields that return non-RFC3339 formats (e.g., `lastModifiedDateTime` returns `"2025-11-26T23:58:00"` without timezone)
+- Removed `format: date` from datetime fields (e.g., `appealLastModifiedDateTime` returns datetime, not date)
+- Removed `format: date` from fields returning non-ISO dates (e.g., `fileReleaseDate` returns `"2025-09-23 00:57:53"`)
+
+**Endpoint Fixes:**
+- Removed `/api/v1/patent/applications/text-to-search` (defined in spec but has no operations)
+
+## Version History
+
+### v1.2.0 - PTAB API Complete (2025-11-27)
+- Support for USPTO ODP 3.0 (released 2025-11-21) which added PTAB datasets
+- Added 19 PTAB (Patent Trial and Appeal Board) API endpoints
+- Trial Proceedings, Decisions, Documents, Appeal Decisions, Interference Decisions
+- Pure Go code generation tool (`cmd/gen`) with no external dependencies
+- Multi-file swagger processing (USPTO distributes spec as multiple YAML files)
+- Demo with example saving (request/response pairs for documentation)
+- Fixed API/swagger mismatches for PTAB endpoints
+
+### v1.1.0 - Patent Number Normalization & XML Parsing
+- Patent number normalization (accepts any format: grant, application, publication)
+- `ResolvePatentNumber()` to convert grant/publication numbers to application numbers
+- XML full text parsing (ICE DTD 4.6/4.7)
+- Refactored demo suite
+
+### v1.0.0 - Initial Release
+- Complete USPTO ODP API client with 19 endpoints
+- Patent Application API (13 endpoints)
+- Bulk Data API (3 endpoints)
+- Petition API (3 endpoints)
+- Retry logic and configurable timeouts
 
 ## Contributing
 

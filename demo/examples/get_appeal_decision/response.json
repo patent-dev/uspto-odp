@@ -1,0 +1,24 @@
+{
+  "count": 1,
+  "patentAppealDataBag": [
+    {
+      "appealDocumentCategory": "Decision",
+      "appealMetaData": {
+        "appealFilingDate": "2025-10-22",
+        "appealLastModifiedDate": "2025-11-20",
+        "appealLastModifiedDateTime": "2025-11-20T18:21:10",
+        "applicationTypeCategory": "Appeal",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000193/2026000193.zip"
+      },
+      "appealNumber": "2026000193",
+      "documentData": {
+        "documentFilingDate": "2025-11-20",
+        "documentIdentifier": "6f897fb0-e318-4f51-a216-19430e93332c",
+        "documentName": "Decision_2026000193_11-20-2025.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/409,019 08/23/2021 Judith Baumeister A0848.70142US12 4367\n\n159933 7590 11/21/2025\n\nSanofi (Bioverativ/Ablynx/Pasteur)/Wolf\nc/o Wolf, Greenfield \u0026 Sacks, P.C.\n600 Atlantic Avenue\nBoston, MA ...",
+        "documentSizeQuantity": 235526
+      },
+      "lastModifiedDateTime": "2025-11-21T07:18:43"
+    }
+  ]
+}

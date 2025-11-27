@@ -1,0 +1,6 @@
+Method: search_bulk_products
+
+Parameters:
+  query: 
+  offset: 0
+  limit: 10

@@ -1,0 +1,38 @@
+{
+  "count": 1,
+  "petitionDecisionDataBag": [
+    {
+      "applicationNumberText": "10290800",
+      "businessEntityStatusCategory": "Regular Undiscounted",
+      "courtActionIndicator": false,
+      "customerNumber": 29159,
+      "decisionDate": "2003-10-17",
+      "decisionPetitionTypeCode": 411,
+      "decisionTypeCode": "C",
+      "finalDecidingOfficeName": "OFFICE OF PETITIONS",
+      "firstInventorToFileIndicator": false,
+      "groupArtUnitNumber": "3713",
+      "inventionTitle": "GAMING DEVICE HAVING IMPROVED AWARD OFFER BONUS SCHEME",
+      "inventorBag": [
+        "Anthony J. Baerlocher",
+        "Joseph E. Kaminkow",
+        "Gregg J. Palmer"
+      ],
+      "lastIngestionDateTime": "2025-09-29T17:35:02",
+      "patentNumber": "6796905",
+      "petitionDecisionRecordIdentifier": "0b71b685-adb9-539d-8257-127dc9e58247",
+      "petitionIssueConsideredTextBag": [
+        "Filing date"
+      ],
+      "petitionMailDate": "2003-08-04",
+      "prosecutionStatusCodeDescriptionText": "Prior to examination",
+      "ruleBag": [
+        "37 CFR 1.10"
+      ],
+      "statuteBag": [
+        "35 USC 21(a)"
+      ],
+      "technologyCenter": "3700"
+    }
+  ]
+}

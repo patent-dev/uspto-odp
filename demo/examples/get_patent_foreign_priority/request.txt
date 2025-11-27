@@ -1,0 +1,4 @@
+Method: get_patent_foreign_priority
+
+Parameters:
+  applicationNumber: 15000001

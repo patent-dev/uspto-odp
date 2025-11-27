@@ -1,0 +1,22 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationNumberText": "17248024",
+      "grantDocumentMetaData": {
+        "fileCreateDateTime": "2024-09-30T17:04:44",
+        "fileLocationURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML-SPLT/2023/ipg230509/17248024_11646472.xml",
+        "productIdentifier": "PTGRXML",
+        "xmlFileName": "17248024_11646472.xml",
+        "zipFileName": "ipg230509.zip"
+      },
+      "pgpubDocumentMetaData": {
+        "fileCreateDateTime": "2024-09-27T23:02:09",
+        "fileLocationURI": "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2021/ipa210708/17248024_20210210819.xml",
+        "productIdentifier": "APPXML",
+        "xmlFileName": "17248024_20210210819.xml",
+        "zipFileName": "ipa210708.zip"
+      }
+    }
+  ]
+}

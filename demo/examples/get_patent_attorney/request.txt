@@ -1,0 +1,4 @@
+Method: get_patent_attorney
+
+Parameters:
+  applicationNumber: 17248024

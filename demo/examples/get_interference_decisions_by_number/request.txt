@@ -1,0 +1,4 @@
+Method: get_interference_decisions_by_number
+
+Parameters:
+  interferenceNumber: 106130

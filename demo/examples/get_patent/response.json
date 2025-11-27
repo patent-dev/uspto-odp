@@ -1,0 +1,2581 @@
+{
+  "count": 1,
+  "patentFileWrapperDataBag": [
+    {
+      "applicationMetaData": {
+        "applicantBag": [
+          {
+            "applicantNameText": "PolyPlus Battery Company",
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "postalAddressCategory": "postal"
+              }
+            ]
+          }
+        ],
+        "applicationConfirmationNumber": 4114,
+        "applicationStatusCode": 150,
+        "applicationStatusDate": "2023-04-19",
+        "applicationStatusDescriptionText": "Patented Case",
+        "applicationTypeCategory": "REGULAR",
+        "applicationTypeCode": "UTL",
+        "applicationTypeLabelName": "Utility",
+        "class": "429",
+        "cpcClassificationBag": [
+          "H01M  50/46",
+          "H01G  11/06",
+          "H01M  50/449",
+          "H01G  11/52",
+          "H01G  11/58",
+          "H01M   4/13",
+          "H01M   4/366",
+          "H01M   4/587",
+          "H01M   4/628",
+          "H01M   6/34",
+          "H01M   8/065",
+          "H01M  10/052",
+          "H01M  10/0562",
+          "H01M  10/36",
+          "H01M  12/08",
+          "H01M2004/027",
+          "H01M2300/0085",
+          "Y02E  60/10",
+          "Y02E  60/13",
+          "Y02E  60/50"
+        ],
+        "customerNumber": 22434,
+        "docketNumber": "PLUSP040X1C4US",
+        "earliestPublicationDate": "2021-07-08",
+        "earliestPublicationNumber": "US20210210819A1",
+        "effectiveFilingDate": "2021-01-05",
+        "entityStatusData": {
+          "businessEntityStatusCategory": "Regular Undiscounted",
+          "smallEntityStatusIndicator": false
+        },
+        "examinerNameText": "DOVE, TRACY MAE",
+        "filingDate": "2021-01-05",
+        "firstApplicantName": "PolyPlus Battery Company",
+        "firstInventorName": "Steven J. Visco",
+        "firstInventorToFileIndicator": "N",
+        "grantDate": "2023-05-09",
+        "groupArtUnitNumber": "1727",
+        "inventionTitle": "MAKING LITHIUM METAL - SEAWATER BATTERY CELLS HAVING PROTECTED LITHIUM ELECTRODES",
+        "inventorBag": [
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Visco, Steven J.",
+                "postalAddressCategory": "residence"
+              },
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Steven J. Visco",
+                "postalAddressCategory": "postal"
+              }
+            ],
+            "countryCode": "US",
+            "firstName": "Steven",
+            "inventorNameText": "Steven J. Visco",
+            "lastName": "Visco",
+            "middleName": "J."
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Bruce D. Katz",
+                "postalAddressCategory": "postal"
+              },
+              {
+                "cityName": "Moraga",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Katz, Bruce D.",
+                "postalAddressCategory": "residence"
+              }
+            ],
+            "countryCode": "US",
+            "firstName": "Bruce",
+            "inventorNameText": "Bruce D. Katz",
+            "lastName": "Katz",
+            "middleName": "D."
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Danville",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Nimon, Yevgeniy S.",
+                "postalAddressCategory": "residence"
+              },
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Yevgeniy S. Nimon",
+                "postalAddressCategory": "postal"
+              }
+            ],
+            "countryCode": "US",
+            "firstName": "Yevgeniy",
+            "inventorNameText": "Yevgeniy S. Nimon",
+            "lastName": "Nimon",
+            "middleName": "S."
+          },
+          {
+            "correspondenceAddressBag": [
+              {
+                "cityName": "Lafayette",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "De Jonghe, Lutgard C.",
+                "postalAddressCategory": "residence"
+              },
+              {
+                "cityName": "Berkeley",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "Lutgard C. De Jonghe",
+                "postalAddressCategory": "postal"
+              }
+            ],
+            "countryCode": "US",
+            "firstName": "Lutgard",
+            "inventorNameText": "Lutgard C. De Jonghe",
+            "lastName": "De Jonghe",
+            "middleName": "C."
+          }
+        ],
+        "nationalStageIndicator": false,
+        "patentNumber": "11646472",
+        "publicationCategoryBag": [
+          "Granted/Issued",
+          "Pre-Grant Publications - PGPub"
+        ],
+        "publicationDateBag": [
+          "2021-07-08"
+        ],
+        "publicationSequenceNumberBag": [
+          "0210819"
+        ],
+        "subclass": "144",
+        "uspcSymbolText": "429/144"
+      },
+      "applicationNumberText": "17248024",
+      "correspondenceAddressBag": [
+        {
+          "addressLineOneText": "P.O. BOX 70250",
+          "cityName": "OAKLAND",
+          "countryCode": "US",
+          "countryName": "UNITED STATES",
+          "geographicRegionCode": "CA",
+          "geographicRegionName": "CALIFORNIA",
+          "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+          "postalCode": "94612-0250"
+        }
+      ],
+      "eventDataBag": [
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2023-10-03",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MOPPT",
+          "eventDate": "2023-10-03",
+          "eventDescriptionText": "Mail O.P. Petition Decision"
+        },
+        {
+          "eventCode": "MP014",
+          "eventDate": "2023-09-29",
+          "eventDescriptionText": "Mail-Record Petition Decision of Granted to Make Entity Status large"
+        },
+        {
+          "eventCode": "P014",
+          "eventDate": "2023-09-28",
+          "eventDescriptionText": "Record Petition Decision of Granted to Make Entity Status large"
+        },
+        {
+          "eventCode": "OPPT",
+          "eventDate": "2023-09-28",
+          "eventDescriptionText": "O.P. Petition Decision"
+        },
+        {
+          "eventCode": "BIG.",
+          "eventDate": "2023-07-07",
+          "eventDescriptionText": "Entity Status Set To Undiscounted (Initial Default Setting or Status Change)"
+        },
+        {
+          "eventCode": "PET.",
+          "eventDate": "2023-07-07",
+          "eventDescriptionText": "Petition Entered"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-06-28",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2023-06-28",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MOPPT",
+          "eventDate": "2023-06-28",
+          "eventDescriptionText": "Mail O.P. Petition Decision"
+        },
+        {
+          "eventCode": "MPTDI",
+          "eventDate": "2023-06-26",
+          "eventDescriptionText": "Mail-Petition Decision - Dismissed"
+        },
+        {
+          "eventCode": "PTDI",
+          "eventDate": "2023-06-23",
+          "eventDescriptionText": "Petition Decision - Dismissed"
+        },
+        {
+          "eventCode": "OPPT",
+          "eventDate": "2023-06-16",
+          "eventDescriptionText": "O.P. Petition Decision"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "PET.",
+          "eventDate": "2023-03-28",
+          "eventDescriptionText": "Petition Entered"
+        },
+        {
+          "eventCode": "PGM/",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Recordation of Patent Grant Mailed"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MEPG_NTF",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Mail Patent eGrant Notification"
+        },
+        {
+          "eventCode": "EPG_NTF",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Patent eGrant Notification"
+        },
+        {
+          "eventCode": "EPG/",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Recordation of Patent eGrant"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-04-20",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2023-04-20",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "WPIR",
+          "eventDate": "2023-04-19",
+          "eventDescriptionText": "Issue Notification Mailed"
+        },
+        {
+          "eventCode": "PTAC",
+          "eventDate": "2023-05-09",
+          "eventDescriptionText": "Patent Issue Date Used in PTA Calculation"
+        },
+        {
+          "eventCode": "D1935",
+          "eventDate": "2023-03-31",
+          "eventDescriptionText": "Dispatch to FDC"
+        },
+        {
+          "eventCode": "PILS",
+          "eventDate": "2023-03-31",
+          "eventDescriptionText": "Application Is Considered Ready for Issue"
+        },
+        {
+          "eventCode": "N084",
+          "eventDate": "2023-03-30",
+          "eventDescriptionText": "Issue Fee Payment Verified"
+        },
+        {
+          "eventCode": "IFEE",
+          "eventDate": "2023-03-30",
+          "eventDescriptionText": "Issue Fee Payment Received"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-01-13",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTF",
+          "eventDate": "2023-01-13",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MC/N=",
+          "eventDate": "2023-01-13",
+          "eventDescriptionText": "Mail Corrected Notice of Allowance"
+        },
+        {
+          "eventCode": "C/N=",
+          "eventDate": "2023-01-11",
+          "eventDescriptionText": "Corrected Notice of Allowance"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2023-01-03",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTF",
+          "eventDate": "2023-01-03",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "MN/=.",
+          "eventDate": "2023-01-03",
+          "eventDescriptionText": "Mail Notice of Allowance"
+        },
+        {
+          "eventCode": "N/=.",
+          "eventDate": "2022-12-29",
+          "eventDescriptionText": "Notice of Allowance Data Verification Completed"
+        },
+        {
+          "eventCode": "IDSC",
+          "eventDate": "2022-12-15",
+          "eventDescriptionText": "Information Disclosure Statement considered"
+        },
+        {
+          "eventCode": "DOCK",
+          "eventDate": "2022-12-10",
+          "eventDescriptionText": "Case Docketed to Examiner in GAU"
+        },
+        {
+          "eventCode": "DOCK",
+          "eventDate": "2021-08-23",
+          "eventDescriptionText": "Case Docketed to Examiner in GAU"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2021-07-09",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "PG-ISSUE",
+          "eventDate": "2021-07-08",
+          "eventDescriptionText": "PG-Pub Issue Notification"
+        },
+        {
+          "eventCode": "M844",
+          "eventDate": "2021-03-26",
+          "eventDescriptionText": "Information Disclosure Statement (IDS) Filed"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2021-03-30",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "OIPE",
+          "eventDate": "2021-03-29",
+          "eventDescriptionText": "Application Dispatched from OIPE"
+        },
+        {
+          "eventCode": "FTFI",
+          "eventDate": "2021-03-29",
+          "eventDescriptionText": "FITF set to NO - revise initial setting"
+        },
+        {
+          "eventCode": "PTA.RFE",
+          "eventDate": "2021-03-26",
+          "eventDescriptionText": "Patent Term Adjustment - Ready for Examination"
+        },
+        {
+          "eventCode": "COMP",
+          "eventDate": "2021-03-30",
+          "eventDescriptionText": "Application Is Now Complete"
+        },
+        {
+          "eventCode": "FLRCPT.U",
+          "eventDate": "2021-03-30",
+          "eventDescriptionText": "Filing Receipt - Updated"
+        },
+        {
+          "eventCode": "FLFEE",
+          "eventDate": "2021-03-26",
+          "eventDescriptionText": "Payment of additional filing fee/Preexam"
+        },
+        {
+          "eventCode": "WIDS",
+          "eventDate": "2021-03-26",
+          "eventDescriptionText": "Information Disclosure Statement (IDS) Filed"
+        },
+        {
+          "eventCode": "ELC_RVW",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Electronic Review"
+        },
+        {
+          "eventCode": "EML_NTR",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "EML_NTF",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Email Notification"
+        },
+        {
+          "eventCode": "CCRDY",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Application ready for PDX access by participating foreign offices"
+        },
+        {
+          "eventCode": "FLRCPT.O",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Filing Receipt"
+        },
+        {
+          "eventCode": "INCD",
+          "eventDate": "2021-01-29",
+          "eventDescriptionText": "Notice Mailed--Application Incomplete--Filing Date Assigned"
+        },
+        {
+          "eventCode": "SMAL",
+          "eventDate": "2021-01-28",
+          "eventDescriptionText": "Applicant Has Filed a Verified Statement of Small Entity Status in Compliance with 37 CFR 1.27"
+        },
+        {
+          "eventCode": "SREXR141",
+          "eventDate": "2021-01-05",
+          "eventDescriptionText": "PTO/SB/69-Authorize EPO Access to Search Results"
+        },
+        {
+          "eventCode": "APPERMS",
+          "eventDate": "2021-01-05",
+          "eventDescriptionText": "Applicants have given acceptable permission for participating foreign"
+        },
+        {
+          "eventCode": "BIG.",
+          "eventDate": "2021-01-05",
+          "eventDescriptionText": "Entity Status Set To Undiscounted (Initial Default Setting or Status Change)"
+        },
+        {
+          "eventCode": "IEXX",
+          "eventDate": "2021-01-05",
+          "eventDescriptionText": "Initial Exam Team nn"
+        }
+      ],
+      "grantDocumentMetaData": {
+        "fileCreateDateTime": "2024-09-30T17:04:44",
+        "fileLocationURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML-SPLT/2023/ipg230509/17248024_11646472.xml",
+        "productIdentifier": "PTGRXML",
+        "xmlFileName": "17248024_11646472.xml",
+        "zipFileName": "ipg230509.zip"
+      },
+      "lastIngestionDateTime": "2025-11-09T14:10:21",
+      "parentContinuityBag": [
+        {
+          "childApplicationNumberText": "17248024",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2019-11-25",
+          "parentApplicationNumberText": "16695054",
+          "parentApplicationStatusCode": 250,
+          "parentApplicationStatusDescriptionText": "Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362",
+          "parentPatentNumber": "10916753"
+        },
+        {
+          "childApplicationNumberText": "16695054",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2017-04-13",
+          "parentApplicationNumberText": "15487364",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "10529971"
+        },
+        {
+          "childApplicationNumberText": "15487364",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2016-05-09",
+          "parentApplicationNumberText": "15150231",
+          "parentApplicationStatusCode": 250,
+          "parentApplicationStatusDescriptionText": "Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362",
+          "parentPatentNumber": "9666850"
+        },
+        {
+          "childApplicationNumberText": "15150231",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2014-01-15",
+          "parentApplicationNumberText": "14156267",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "9368775"
+        },
+        {
+          "childApplicationNumberText": "14156267",
+          "claimParentageTypeCode": "CIP",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation in-part of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2013-06-27",
+          "parentApplicationNumberText": "13929653",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "8828580"
+        },
+        {
+          "childApplicationNumberText": "13929653",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2012-09-13",
+          "parentApplicationNumberText": "13615351",
+          "parentApplicationStatusCode": 250,
+          "parentApplicationStatusDescriptionText": "Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362",
+          "parentPatentNumber": "8501339"
+        },
+        {
+          "childApplicationNumberText": "13615351",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2010-09-22",
+          "parentApplicationNumberText": "12888154",
+          "parentApplicationStatusCode": 250,
+          "parentApplicationStatusDescriptionText": "Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362",
+          "parentPatentNumber": "8293398"
+        },
+        {
+          "childApplicationNumberText": "12888154",
+          "claimParentageTypeCode": "CON",
+          "claimParentageTypeCodeDescriptionText": "is a Continuation of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2007-06-28",
+          "parentApplicationNumberText": "11824597",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "7829212"
+        },
+        {
+          "childApplicationNumberText": "11824597",
+          "claimParentageTypeCode": "DIV",
+          "claimParentageTypeCodeDescriptionText": "is a Division of",
+          "firstInventorToFileIndicator": false,
+          "parentApplicationFilingDate": "2004-04-14",
+          "parentApplicationNumberText": "10824944",
+          "parentApplicationStatusCode": 150,
+          "parentApplicationStatusDescriptionText": "Patented Case",
+          "parentPatentNumber": "7282295"
+        },
+        {
+          "childApplicationNumberText": "10824944",
+          "claimParentageTypeCode": "PRO",
+          "claimParentageTypeCodeDescriptionText": "Claims priority from a provisional application",
+          "parentApplicationFilingDate": "2004-02-27",
+          "parentApplicationNumberText": "60548231",
+          "parentApplicationStatusCode": 159,
+          "parentApplicationStatusDescriptionText": "Provisional Application Expired"
+        },
+        {
+          "childApplicationNumberText": "10824944",
+          "claimParentageTypeCode": "PRO",
+          "claimParentageTypeCodeDescriptionText": "Claims priority from a provisional application",
+          "parentApplicationFilingDate": "2004-02-06",
+          "parentApplicationNumberText": "60542532",
+          "parentApplicationStatusCode": 159,
+          "parentApplicationStatusDescriptionText": "Provisional Application Expired"
+        },
+        {
+          "childApplicationNumberText": "14156267",
+          "claimParentageTypeCode": "PRO",
+          "claimParentageTypeCodeDescriptionText": "Claims priority from a provisional application",
+          "parentApplicationFilingDate": "2013-02-11",
+          "parentApplicationNumberText": "61763412",
+          "parentApplicationStatusCode": 159,
+          "parentApplicationStatusDescriptionText": "Provisional Application Expired"
+        }
+      ],
+      "patentTermAdjustmentData": {
+        "aDelayQuantity": 304,
+        "adjustmentTotalQuantity": 304,
+        "applicantDayDelayQuantity": 0,
+        "bDelayQuantity": 0,
+        "cDelayQuantity": 0,
+        "overlappingDayQuantity": 0,
+        "patentTermAdjustmentHistoryDataBag": [
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-05-09",
+            "eventDescriptionText": "PTA 36 Months",
+            "eventSequenceNumber": 51.5,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0.5,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-05-09",
+            "eventDescriptionText": "Patent Issue Date Used in PTA Calculation",
+            "eventSequenceNumber": 51,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-04-01",
+            "eventDescriptionText": "Export to Final Data Capture",
+            "eventSequenceNumber": 50,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-03-31",
+            "eventDescriptionText": "Dispatch to FDC",
+            "eventSequenceNumber": 49,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-03-31",
+            "eventDescriptionText": "Application Is Considered Ready for Issue",
+            "eventSequenceNumber": 48,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-03-30",
+            "eventDescriptionText": "Issue Fee Payment Verified",
+            "eventSequenceNumber": 47,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-03-30",
+            "eventDescriptionText": "Issue Fee Payment Received",
+            "eventSequenceNumber": 46,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-21",
+            "eventDescriptionText": "Finished Initial Data Capture",
+            "eventSequenceNumber": 45,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-13",
+            "eventDescriptionText": "Electronic Review",
+            "eventSequenceNumber": 44,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-13",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 43,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-13",
+            "eventDescriptionText": "Mail Corrected Notice of Allowance",
+            "eventSequenceNumber": 42,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-11",
+            "eventDescriptionText": "Corrected Notice of Allowance",
+            "eventSequenceNumber": 41,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-03",
+            "eventDescriptionText": "Electronic Review",
+            "eventSequenceNumber": 40,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-30",
+            "eventDescriptionText": "Export to Initial Data Capture",
+            "eventSequenceNumber": 39,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-03",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 38,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2023-01-03",
+            "eventDescriptionText": "Mail Notice of Allowance",
+            "eventSequenceNumber": 37,
+            "ipOfficeDayDelayQuantity": 304,
+            "originatingEventSequenceNumber": 0.5,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Office Action Review",
+            "eventSequenceNumber": 36,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Office Action Review",
+            "eventSequenceNumber": 35,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Issue Revision Completed",
+            "eventSequenceNumber": 34,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Document Verification",
+            "eventSequenceNumber": 33,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-29",
+            "eventDescriptionText": "Notice of Allowance Data Verification Completed",
+            "eventSequenceNumber": 32,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-15",
+            "eventDescriptionText": "Reasons for Allowance",
+            "eventSequenceNumber": 31,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-15",
+            "eventDescriptionText": "Allowability Notice",
+            "eventSequenceNumber": 30,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-15",
+            "eventDescriptionText": "Information Disclosure Statement considered",
+            "eventSequenceNumber": 29,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2022-12-10",
+            "eventDescriptionText": "Case Docketed to Examiner in GAU",
+            "eventSequenceNumber": 28,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-08-23",
+            "eventDescriptionText": "Case Docketed to Examiner in GAU",
+            "eventSequenceNumber": 27,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-07-09",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 26,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-07-08",
+            "eventDescriptionText": "PG-Pub Issue Notification",
+            "eventSequenceNumber": 25,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-26",
+            "eventDescriptionText": "Information Disclosure Statement (IDS) Filed",
+            "eventSequenceNumber": 24,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-30",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 23,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-29",
+            "eventDescriptionText": "Application Dispatched from OIPE",
+            "eventSequenceNumber": 22,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-29",
+            "eventDescriptionText": "FITF set to NO - revise initial setting",
+            "eventSequenceNumber": 21,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-26",
+            "eventDescriptionText": "Patent Term Adjustment - Ready for Examination",
+            "eventSequenceNumber": 20,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-30",
+            "eventDescriptionText": "Application Is Now Complete",
+            "eventSequenceNumber": 19,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-30",
+            "eventDescriptionText": "Filing Receipt - Updated",
+            "eventSequenceNumber": 18,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-26",
+            "eventDescriptionText": "Payment of additional filing fee/Preexam",
+            "eventSequenceNumber": 17,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-03-26",
+            "eventDescriptionText": "Information Disclosure Statement (IDS) Filed",
+            "eventSequenceNumber": 15,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Electronic Review",
+            "eventSequenceNumber": 14,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 13,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Email Notification",
+            "eventSequenceNumber": 12,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Application ready for PDX access by participating foreign offices",
+            "eventSequenceNumber": 11,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Filing Receipt",
+            "eventSequenceNumber": 10,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-29",
+            "eventDescriptionText": "Notice Mailed--Application Incomplete--Filing Date Assigned",
+            "eventSequenceNumber": 9,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-28",
+            "eventDescriptionText": "Applicant Has Filed a Verified Statement of Small Entity Status in Compliance with 37 CFR 1.27",
+            "eventSequenceNumber": 8,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "PTO/SB/69-Authorize EPO Access to Search Results",
+            "eventSequenceNumber": 7,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "Applicants have given acceptable permission for participating foreign",
+            "eventSequenceNumber": 6,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-19",
+            "eventDescriptionText": "Cleared by L\u0026R (LARS)",
+            "eventSequenceNumber": 5,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-09",
+            "eventDescriptionText": "Referred to Level 2 (LARS) by OIPE CSR",
+            "eventSequenceNumber": 4,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "IFW Scan \u0026 PACR Auto Security Review",
+            "eventSequenceNumber": 3,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "Entity Status Set To Undiscounted (Initial Default Setting or Status Change)",
+            "eventSequenceNumber": 2,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "Initial Exam Team nn",
+            "eventSequenceNumber": 1,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          },
+          {
+            "applicantDayDelayQuantity": 0,
+            "eventDate": "2021-01-05",
+            "eventDescriptionText": "Filing date",
+            "eventSequenceNumber": 0.5,
+            "ipOfficeDayDelayQuantity": 0,
+            "originatingEventSequenceNumber": 0,
+            "ptaPTECode": "PTA"
+          }
+        ]
+      },
+      "pgpubDocumentMetaData": {
+        "fileCreateDateTime": "2024-09-27T23:02:09",
+        "fileLocationURI": "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2021/ipa210708/17248024_20210210819.xml",
+        "productIdentifier": "APPXML",
+        "xmlFileName": "17248024_20210210819.xml",
+        "zipFileName": "ipa210708.zip"
+      },
+      "recordAttorney": {
+        "attorneyBag": [
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JEFFREY",
+            "lastName": "WEAVER",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "31314",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET, SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON, LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "JOSEPH",
+            "lastName": "VILLENEUVE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "37460",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "2  EMBARCADERO CENTER, 8TH FLOOR",
+                "cityName": "SAN FRANCISCO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "KILPATRICK TOWNSEND \u0026 STOCKTON, LLP",
+                "postalCode": "94111"
+              }
+            ],
+            "firstName": "BABAK",
+            "lastName": "SANI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "37495",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "415-576-0200"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET, SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "EMILY",
+            "lastName": "HALIDAY",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "38903",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "P.O. BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JAMES",
+            "lastName": "AUSTIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "39489",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JOHN",
+            "lastName": "GRIFFITH",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "44137",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ROGER",
+            "lastName": "SAMPSON",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "44314",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1080 MARSH ROAD",
+                "cityName": "MENLO PARK",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "KILPATRICK TOWNSEND \u0026 STOCKTON, LLP",
+                "postalCode": "94025"
+              }
+            ],
+            "firstName": "BARMAK",
+            "lastName": "SANI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "45068",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "650-326-2400"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "950 PAGE MILL ROAD",
+                "cityName": "PALO ALTO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "ALSTON \u0026 BIRD",
+                "postalCode": "94304"
+              }
+            ],
+            "firstName": "ARDESHIR",
+            "lastName": "TABIBI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "48750",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "650-838-2000"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 STREET SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "DENISE",
+            "lastName": "BERGIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "50581",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "KO-FANG",
+            "lastName": "CHANG",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "50829",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "P.O. BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "SHEILA",
+            "lastName": "MARTINEZ-LEMKE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "52004",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "DAY",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "55101",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY, SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "CHRISTIAN",
+            "lastName": "SCHOLZ",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "58024",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ANNA",
+            "lastName": "GAVRILOVA",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "58181",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "FAX",
+                "telecommunicationNumber": "202-778-2201"
+              },
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "HO",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "59305",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "SCOTT",
+            "lastName": "MCMILLAN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "62079",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "REENA",
+            "lastName": "MALHOTRA",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "63942",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ZHENHAI",
+            "lastName": "FU",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "67175",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-267-4112"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "23755 LORAIN ROAD, SUITE 200",
+                "cityName": "NORTH OLMSTED",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "OH",
+                "geographicRegionName": "OHIO",
+                "nameLineOneText": "RANKIN HILL AND CLARK LLP",
+                "postalCode": "44070"
+              }
+            ],
+            "firstName": "TAEYUN",
+            "lastName": "KIM",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "68858",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "216-566-9700"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON, LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "BRIAN",
+            "lastName": "HAHN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69069",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1 PARK PLACE",
+                "addressLineTwoText": "SUITE 200",
+                "cityName": "DUBLIN",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "AEYE, INC.",
+                "postalCode": "94568"
+              }
+            ],
+            "firstName": "SIRAJ",
+            "lastName": "HUSAIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69111",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "925-400-4366"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "TSE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69392",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON",
+                "nameLineTwoText": "INTELLECTUAL PROPERTY LAW",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "AMANDA",
+            "lastName": "KESICH",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "70667",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "PATRICIA",
+            "lastName": "TSAI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "72642",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "195 S MILPITAS BLVD",
+                "cityName": "MILPITAS",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "VIEW, INC.",
+                "postalCode": "95035"
+              }
+            ],
+            "firstName": "RYAN",
+            "lastName": "OTIS",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "73075",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "408-263-9200"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "ARTHI",
+            "lastName": "SRINIVASAN",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "73675",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET",
+                "addressLineTwoText": "SUITE 1450",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "ASHLEY",
+            "lastName": "SPERBECK",
+            "middleName": "E",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "74144",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY ST",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "PRICE",
+            "lastName": "MURRY",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "77445",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET",
+                "addressLineTwoText": "SUITE 1450",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "TIA",
+            "lastName": "LEE",
+            "middleName": "S.",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "83376",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          }
+        ],
+        "customerNumberCorrespondenceData": {
+          "patronIdentifier": 22434,
+          "powerOfAttorneyAddressBag": [
+            {
+              "addressLineOneText": "P.O. BOX 70250",
+              "cityName": "OAKLAND",
+              "countryCode": "US",
+              "countryName": "UNITED STATES",
+              "geographicRegionCode": "CA",
+              "geographicRegionName": "CALIFORNIA",
+              "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+              "postalCode": "94612-0250"
+            }
+          ]
+        },
+        "powerOfAttorneyBag": [
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JOHN",
+            "lastName": "GRIFFITH",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "44137",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ANNA",
+            "lastName": "GAVRILOVA",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "58181",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "FAX",
+                "telecommunicationNumber": "202-778-2201"
+              },
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "REENA",
+            "lastName": "MALHOTRA",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "63942",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY, SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "CHRISTIAN",
+            "lastName": "SCHOLZ",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "58024",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "7271 GLENDORA LN",
+                "cityName": "KALAMAZOO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "MI",
+                "geographicRegionName": "MICHIGAN",
+                "postalCode": "49009"
+              }
+            ],
+            "firstName": "ERIK",
+            "lastName": "LARSEN",
+            "middleName": "M",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "80679",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "989-948-7447"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "195 S MILPITAS BLVD",
+                "cityName": "MILPITAS",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "VIEW, INC.",
+                "postalCode": "95035"
+              }
+            ],
+            "firstName": "RYAN",
+            "lastName": "OTIS",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "73075",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "408-263-9200"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY ST",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "PRICE",
+            "lastName": "MURRY",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "77445",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "2  EMBARCADERO CENTER, 8TH FLOOR",
+                "cityName": "SAN FRANCISCO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "KILPATRICK TOWNSEND \u0026 STOCKTON, LLP",
+                "postalCode": "94111"
+              }
+            ],
+            "firstName": "BABAK",
+            "lastName": "SANI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "37495",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "415-576-0200"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1080 MARSH ROAD",
+                "cityName": "MENLO PARK",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "KILPATRICK TOWNSEND \u0026 STOCKTON, LLP",
+                "postalCode": "94025"
+              }
+            ],
+            "firstName": "BARMAK",
+            "lastName": "SANI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "45068",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "650-326-2400"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET",
+                "addressLineTwoText": "SUITE 1450",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "ASHLEY",
+            "lastName": "SPERBECK",
+            "middleName": "E",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "74144",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 STREET SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "DENISE",
+            "lastName": "BERGIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "50581",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "HO",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "59305",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "ARTHI",
+            "lastName": "SRINIVASAN",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "73675",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "3725 ALBERT LANE",
+                "cityName": "LONG GROVE",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "IL",
+                "geographicRegionName": "ILLINOIS",
+                "postalCode": "60047"
+              }
+            ],
+            "firstName": "LAUREN",
+            "lastName": "STEVENS",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "36691",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "224-500-9023"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1 PARK PLACE",
+                "addressLineTwoText": "SUITE 200",
+                "cityName": "DUBLIN",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "AEYE, INC.",
+                "postalCode": "94568"
+              }
+            ],
+            "firstName": "SIRAJ",
+            "lastName": "HUSAIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69111",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "925-400-4366"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET, SUITE 1700",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON, LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "JOSEPH",
+            "lastName": "VILLENEUVE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "37460",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "P.O. BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON  LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JAMES",
+            "lastName": "AUSTIN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "39489",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "KO-FANG",
+            "lastName": "CHANG",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "50829",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612"
+              }
+            ],
+            "firstName": "PATRICIA",
+            "lastName": "TSAI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "72642",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "1111 BROADWAY",
+                "addressLineTwoText": "SUITE 2300",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "SCOTT",
+            "lastName": "MCMILLAN",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "62079",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "MICHAEL",
+            "lastName": "TSE",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "69392",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "950 PAGE MILL ROAD",
+                "cityName": "PALO ALTO",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "ALSTON \u0026 BIRD",
+                "postalCode": "94304"
+              }
+            ],
+            "firstName": "ARDESHIR",
+            "lastName": "TABIBI",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "48750",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "650-838-2000"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "JEFFREY",
+            "lastName": "WEAVER",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "31314",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "ROGER",
+            "lastName": "SAMPSON",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "44314",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "PO BOX 70250",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON",
+                "nameLineTwoText": "INTELLECTUAL PROPERTY LAW",
+                "postalCode": "94612-025"
+              }
+            ],
+            "firstName": "AMANDA",
+            "lastName": "KESICH",
+            "registeredPractitionerCategory": "ATTNY",
+            "registrationNumber": "70667",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "555 12TH STREET",
+                "addressLineTwoText": "SUITE 1450",
+                "cityName": "OAKLAND",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "WEAVER AUSTIN VILLENEUVE \u0026 SAMPSON LLP",
+                "postalCode": "94607"
+              }
+            ],
+            "firstName": "TIA",
+            "lastName": "LEE",
+            "middleName": "S.",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "83376",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

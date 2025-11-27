@@ -1,0 +1,39 @@
+{
+  "count": 1,
+  "patentTrialDocumentDataBag": [
+    {
+      "documentData": {
+        "documentFilingDate": "2025-11-26",
+        "documentIdentifier": "171247256",
+        "documentName": "NJOY-1025 Part 4 of 4 14925968_file_history_2729-3639.pdf",
+        "documentNumber": 1025,
+        "documentSizeQuantity": 38851201,
+        "documentTitleText": "U.S. Patent Application No. 14925968 File History_ Part 4 of 4",
+        "documentTypeDescriptionText": "Exhibit",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2025-11-27T05:54:59",
+      "patentOwnerData": {
+        "applicationNumberText": "17171976",
+        "grantDate": "2024-12-03",
+        "groupArtUnitNumber": "1747",
+        "inventorName": "Adam Bowen et al",
+        "patentNumber": "12156533",
+        "technologyCenterNumber": "1700"
+      },
+      "regularPetitionerData": {
+        "counselName": "Renner, W. Karlet al",
+        "realPartyInInterestName": "NJOY, LLC et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2025-11-26",
+        "trialLastModifiedDate": "2025-11-26",
+        "trialLastModifiedDateTime": "2025-11-26T18:37:22",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00161"
+    }
+  ]
+}

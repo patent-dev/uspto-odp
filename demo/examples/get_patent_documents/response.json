@@ -1,0 +1,700 @@
+{
+  "documentBag": [
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "PETDEC",
+      "documentCodeDescriptionText": "Petition Decision",
+      "documentIdentifier": "LN4VBTHCXBLUEX2",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LN4VBTHCXBLUEX2.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LN4VBTHCXBLUEX2/files/O.P.%20Petition%20Decision.docx",
+          "mimeTypeIdentifier": "MS_WORD"
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LN4VBTHCXBLUEX2/files/media_image1.png",
+          "mimeTypeIdentifier": "PNG"
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LN4VBTHCXBLUEX2/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2023-10-03T09:18:25.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "WFEE",
+      "documentCodeDescriptionText": "Fee Worksheet (SB06)",
+      "documentIdentifier": "LN1W922SXBLUEX2",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LN1W922SXBLUEX2.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2023-09-27T00:00:00.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "PET.OP",
+      "documentCodeDescriptionText": "Petition for review by the Office of Petitions",
+      "documentIdentifier": "LJSTQZCEGREENX2",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LJSTQZCEGREENX2.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LJSTQZCEGREENX2/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2023-07-07T13:01:58.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "N417",
+      "documentCodeDescriptionText": "Electronic Filing System Acknowledgment Receipt",
+      "documentIdentifier": "LJSTQZCFGREENX2",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LJSTQZCFGREENX2.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2023-07-07T13:01:58.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "PETDEC",
+      "documentCodeDescriptionText": "Petition Decision",
+      "documentIdentifier": "LJD7AV6UGREENX3",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LJD7AV6UGREENX3.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 3
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LJD7AV6UGREENX3/files/O.P.%20Petition%20Decision.docx",
+          "mimeTypeIdentifier": "MS_WORD"
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LJD7AV6UGREENX3/files/media_image1.png",
+          "mimeTypeIdentifier": "PNG"
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LJD7AV6UGREENX3/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2023-06-28T10:36:55.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "EGRANT.PDF",
+      "documentCodeDescriptionText": "Digitally signed official patent eGrant document",
+      "documentIdentifier": "15e1ed5d-0625-4e2e-9b47-f96ba7398088",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/15e1ed5d-0625-4e2e-9b47-f96ba7398088/files/11646472_merged.pdf",
+          "mimeTypeIdentifier": "PDF"
+        }
+      ],
+      "officialDate": "2023-05-09T00:00:00.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "EGRANT.NTF",
+      "documentCodeDescriptionText": "eGrant day-of Notification",
+      "documentIdentifier": "LHFRQGZNGREENX4",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LHFRQGZNGREENX4.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2023-05-09T00:00:00.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "ISSUE.NTF",
+      "documentCodeDescriptionText": "Issue Notification",
+      "documentIdentifier": "LGOGLD15XBLUEX2",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LGOGLD15XBLUEX2.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2023-04-19T00:00:00.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "IFEE",
+      "documentCodeDescriptionText": "Issue Fee Payment (PTO-85B)",
+      "documentIdentifier": "LFVDDSRLGREENX3",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LFVDDSRLGREENX3.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2023-03-30T13:07:25.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "N417.PYMT",
+      "documentCodeDescriptionText": "Electronic Fee Payment",
+      "documentIdentifier": "LFVDDSRMGREENX3",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LFVDDSRMGREENX3.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2023-03-30T13:07:25.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "N417",
+      "documentCodeDescriptionText": "Electronic Filing System Acknowledgment Receipt",
+      "documentIdentifier": "LFVDDSRNGREENX3",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LFVDDSRNGREENX3.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2023-03-30T13:07:25.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "PET.OP",
+      "documentCodeDescriptionText": "Petition for review by the Office of Petitions",
+      "documentIdentifier": "LFT2GN4MXBLUEX1",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LFT2GN4MXBLUEX1.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LFT2GN4MXBLUEX1/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2023-03-28T18:07:57.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "N417",
+      "documentCodeDescriptionText": "Electronic Filing System Acknowledgment Receipt",
+      "documentIdentifier": "LFT2GN4NXBLUEX1",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LFT2GN4NXBLUEX1.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2023-03-28T18:07:57.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "NOA",
+      "documentCodeDescriptionText": "Notice of Allowance and Fees Due (PTOL-85)",
+      "documentIdentifier": "LCRVD37ZXBLUEX1",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LCRVD37ZXBLUEX1.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 4
+        }
+      ],
+      "officialDate": "2023-01-13T00:00:00.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "NOA",
+      "documentCodeDescriptionText": "Notice of Allowance and Fees Due (PTOL-85)",
+      "documentIdentifier": "LC92E2KNXBLUEX1",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LC92E2KNXBLUEX1.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 7
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LC92E2KNXBLUEX1/files/Allowability%20Notice.docx",
+          "mimeTypeIdentifier": "MS_WORD"
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LC92E2KNXBLUEX1/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2023-01-03T00:00:00.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "IIFW",
+      "documentCodeDescriptionText": "Issue Information including classification, examiner, name, claim, renumbering, etc.",
+      "documentIdentifier": "LC92E2KOXBLUEX1",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LC92E2KOXBLUEX1.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 3
+        }
+      ],
+      "officialDate": "2023-01-03T00:00:00.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "SRFW",
+      "documentCodeDescriptionText": "Search information including classification, databases and other search related notes",
+      "documentIdentifier": "LC92E2KPXBLUEX1",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LC92E2KPXBLUEX1.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2023-01-03T00:00:00.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "1449",
+      "documentCodeDescriptionText": "List of References cited by applicant and considered by examiner",
+      "documentIdentifier": "LC92E2KRXBLUEX1",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LC92E2KRXBLUEX1.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 19
+        }
+      ],
+      "officialDate": "2023-01-03T00:00:00.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "BIB",
+      "documentCodeDescriptionText": "Bibliographic Data Sheet",
+      "documentIdentifier": "LC92E2KSXBLUEX1",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/LC92E2KSXBLUEX1.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2023-01-03T00:00:00.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "NTC.PUB",
+      "documentCodeDescriptionText": "Notice of Publication",
+      "documentIdentifier": "KQUYT52KLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KQUYT52KLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2021-07-08T09:47:53.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "APP.FILE.REC",
+      "documentCodeDescriptionText": "Filing Receipt",
+      "documentIdentifier": "KMUQQ8OXDFLYX10",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMUQQ8OXDFLYX10.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 4
+        }
+      ],
+      "officialDate": "2021-03-30T11:22:52.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "WFEE",
+      "documentCodeDescriptionText": "Fee Worksheet (SB06)",
+      "documentIdentifier": "KMUQQ7XTLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMUQQ7XTLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2021-03-30T11:22:51.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "IDS",
+      "documentCodeDescriptionText": "Information Disclosure Statement (IDS) Form (SB08)",
+      "documentIdentifier": "KMRD8TSVLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8TSVLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 19
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8TSVLDFLYX9/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:03.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "WFEE",
+      "documentCodeDescriptionText": "Fee Worksheet (SB06)",
+      "documentIdentifier": "KMRD8TSXLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8TSXLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:03.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "N417",
+      "documentCodeDescriptionText": "Electronic Filing System Acknowledgment Receipt",
+      "documentIdentifier": "KMRD8TSYLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8TSYLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 3
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:03.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "A.PE",
+      "documentCodeDescriptionText": "Preliminary Amendment",
+      "documentIdentifier": "KMRD8QKGLDFLYX5",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8QKGLDFLYX5.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:02.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "SPEC",
+      "documentCodeDescriptionText": "Specification",
+      "documentIdentifier": "KMRD8QKHLDFLYX5",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8QKHLDFLYX5.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8QKHLDFLYX5/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:02.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "CLM",
+      "documentCodeDescriptionText": "Claims",
+      "documentIdentifier": "KMRD8QKILDFLYX5",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8QKILDFLYX5.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8QKILDFLYX5/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:02.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "REM",
+      "documentCodeDescriptionText": "Applicant Arguments/Remarks Made in an Amendment",
+      "documentIdentifier": "KMRD8QKJLDFLYX5",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8QKJLDFLYX5.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8QKJLDFLYX5/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:02.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "PEFR",
+      "documentCodeDescriptionText": "Applicant Response to Pre-Exam Formalities Notice",
+      "documentIdentifier": "KMRD8RGSLDFLYX5",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8RGSLDFLYX5.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:02.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "ADS",
+      "documentCodeDescriptionText": "Application Data Sheet",
+      "documentIdentifier": "KMRD8RGTLDFLYX5",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8RGTLDFLYX5.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 10
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:02.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "TRAN.LET",
+      "documentCodeDescriptionText": "Transmittal Letter",
+      "documentIdentifier": "KMRD8RGULDFLYX5",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KMRD8RGULDFLYX5.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2021-03-26T02:42:02.000-0400"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "WCLM",
+      "documentCodeDescriptionText": "Claims Worksheet (PTO-2022)",
+      "documentIdentifier": "KKH7MDVLLDFLYX4",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KKH7MDVLLDFLYX4.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2021-01-29T13:47:35.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "APP.FILE.REC",
+      "documentCodeDescriptionText": "Filing Receipt",
+      "documentIdentifier": "KKH7MCCNLDFLYX7",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KKH7MCCNLDFLYX7.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 4
+        }
+      ],
+      "officialDate": "2021-01-29T13:47:33.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "WFEE",
+      "documentCodeDescriptionText": "Fee Worksheet (SB06)",
+      "documentIdentifier": "KKH7MBOCDFLYX11",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KKH7MBOCDFLYX11.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        }
+      ],
+      "officialDate": "2021-01-29T13:47:32.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "NTC.MISS.PRT",
+      "documentCodeDescriptionText": "Notice to File Missing Parts",
+      "documentIdentifier": "KKH7MARRLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KKH7MARRLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        }
+      ],
+      "officialDate": "2021-01-29T13:47:31.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "PA..",
+      "documentCodeDescriptionText": "Power of Attorney",
+      "documentIdentifier": "KJKMKMRQLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRQLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 4
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:41.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "N417",
+      "documentCodeDescriptionText": "Electronic Filing System Acknowledgment Receipt",
+      "documentIdentifier": "KJKMKMRRLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRRLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 3
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:41.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "OATH",
+      "documentCodeDescriptionText": "Oath or Declaration filed",
+      "documentIdentifier": "KJKMKMRSLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRSLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 4
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:41.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "DRW",
+      "documentCodeDescriptionText": "Drawings-only black and white line drawings",
+      "documentIdentifier": "KJKMKMRTLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRTLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 6
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:41.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "ADS",
+      "documentCodeDescriptionText": "Application Data Sheet",
+      "documentIdentifier": "KJKMKMRULDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRULDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 10
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:41.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "SPEC",
+      "documentCodeDescriptionText": "Specification",
+      "documentIdentifier": "KJKMKMRVLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRVLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 42
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRVLDFLYX9/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:41.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "CLM",
+      "documentCodeDescriptionText": "Claims",
+      "documentIdentifier": "KJKMKMRWLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRWLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 2
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRWLDFLYX9/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:41.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "ABST",
+      "documentCodeDescriptionText": "Abstract",
+      "documentIdentifier": "KJKMKMRXLDFLYX9",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRXLDFLYX9.pdf",
+          "mimeTypeIdentifier": "PDF",
+          "pageTotalQuantity": 1
+        },
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/KJKMKMRXLDFLYX9/xmlarchive",
+          "mimeTypeIdentifier": "XML"
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:41.000-0500"
+    },
+    {
+      "applicationNumberText": "17248024",
+      "documentCode": "SPEC",
+      "documentCodeDescriptionText": "Specification",
+      "documentIdentifier": "196a9ca4-7574-4fed-888e-86d28f10fd95",
+      "downloadOptionBag": [
+        {
+          "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/17248024/196a9ca4-7574-4fed-888e-86d28f10fd95/files/8cca3b92-c488-46ed-8f58-379486ceb0ea.pdf",
+          "mimeTypeIdentifier": "PDF"
+        }
+      ],
+      "officialDate": "2021-01-05T18:29:30.000-0500"
+    }
+  ]
+}

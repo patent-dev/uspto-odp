@@ -1,0 +1,4 @@
+Method: get_trial_documents_by_trial_number
+
+Parameters:
+  trialNumber: IPR2026-00114
