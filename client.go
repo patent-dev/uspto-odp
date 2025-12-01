@@ -2,6 +2,7 @@ package odp
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -71,6 +72,39 @@ func NewClient(config *Config) (*Client, error) {
 	}, nil
 }
 
+// APIError represents an error returned by the USPTO API with status code
+type APIError struct {
+	StatusCode int
+	Message    string
+}
+
+func (e *APIError) Error() string {
+	return e.Message
+}
+
+// IsRetryable returns true for transient errors (429, 5xx) that should be retried
+func (e *APIError) IsRetryable() bool {
+	return e.StatusCode == http.StatusTooManyRequests || e.StatusCode >= 500
+}
+
+func isRetryableError(err error) bool {
+	if err == nil {
+		return false
+	}
+	var apiErr *APIError
+	if errors.As(err, &apiErr) {
+		return apiErr.IsRetryable()
+	}
+	return true // network errors, timeouts are retryable
+}
+
+func checkStatus(statusCode int) error {
+	if statusCode == http.StatusOK {
+		return nil
+	}
+	return &APIError{StatusCode: statusCode, Message: fmt.Sprintf("API returned status %d", statusCode)}
+}
+
 // retryableRequest wraps requests with retry logic
 func (c *Client) retryableRequest(fn func() error) error {
 	var lastErr error
@@ -80,6 +114,11 @@ func (c *Client) retryableRequest(fn func() error) error {
 			return nil
 		}
 		lastErr = err
+
+		// Don't retry if error is not retryable (e.g., 404 Not Found)
+		if !isRetryableError(err) {
+			return err
+		}
 
 		if attempt < c.config.MaxRetries {
 			time.Sleep(time.Duration(c.config.RetryDelay*(attempt+1)) * time.Second)
@@ -105,8 +144,8 @@ func (c *Client) SearchPatents(ctx context.Context, query string, offset, limit 
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -201,8 +240,8 @@ func (c *Client) GetPatent(ctx context.Context, patentNumber string) (*generated
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -222,8 +261,8 @@ func (c *Client) GetPatentAdjustment(ctx context.Context, applicationNumber stri
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -243,8 +282,8 @@ func (c *Client) GetPatentContinuity(ctx context.Context, applicationNumber stri
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -265,8 +304,8 @@ func (c *Client) GetPatentDocuments(ctx context.Context, applicationNumber strin
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -287,8 +326,8 @@ func (c *Client) GetStatusCodes(ctx context.Context) (*generated.StatusCodeSearc
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -314,8 +353,8 @@ func (c *Client) SearchBulkProducts(ctx context.Context, query string, offset, l
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -336,8 +375,8 @@ func (c *Client) GetBulkProduct(ctx context.Context, productID string) (*generat
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -395,8 +434,8 @@ func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadU
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("download failed with status %d", resp.StatusCode)
+	if err := checkStatus(resp.StatusCode); err != nil {
+		return err
 	}
 
 	expectedSize := resp.ContentLength
@@ -460,8 +499,8 @@ func (c *Client) SearchPetitions(ctx context.Context, query string, offset, limi
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -481,8 +520,8 @@ func (c *Client) GetPatentAssignment(ctx context.Context, applicationNumber stri
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -502,8 +541,8 @@ func (c *Client) GetPatentAssociatedDocuments(ctx context.Context, applicationNu
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -523,8 +562,8 @@ func (c *Client) GetPatentAttorney(ctx context.Context, applicationNumber string
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -544,8 +583,8 @@ func (c *Client) GetPatentForeignPriority(ctx context.Context, applicationNumber
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -565,8 +604,8 @@ func (c *Client) GetPatentMetaData(ctx context.Context, applicationNumber string
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -586,8 +625,8 @@ func (c *Client) GetPatentTransactions(ctx context.Context, applicationNumber st
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -607,8 +646,8 @@ func (c *Client) SearchPatentsDownload(ctx context.Context, req generated.Patent
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -631,8 +670,8 @@ func (c *Client) GetPetitionDecision(ctx context.Context, recordID string, inclu
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -652,8 +691,8 @@ func (c *Client) SearchPetitionsDownload(ctx context.Context, req generated.Peti
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -700,8 +739,8 @@ func (c *Client) SearchTrialProceedings(ctx context.Context, query string, offse
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -721,8 +760,8 @@ func (c *Client) GetTrialProceeding(ctx context.Context, trialNumber string) (*g
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -750,8 +789,8 @@ func (c *Client) SearchTrialDecisions(ctx context.Context, query string, offset,
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -771,8 +810,8 @@ func (c *Client) GetTrialDecision(ctx context.Context, documentIdentifier string
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -800,8 +839,8 @@ func (c *Client) SearchTrialDocuments(ctx context.Context, query string, offset,
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -821,8 +860,8 @@ func (c *Client) GetTrialDocument(ctx context.Context, documentIdentifier string
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -850,8 +889,8 @@ func (c *Client) SearchAppealDecisions(ctx context.Context, query string, offset
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -871,8 +910,8 @@ func (c *Client) GetAppealDecision(ctx context.Context, documentIdentifier strin
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -892,8 +931,8 @@ func (c *Client) GetAppealDecisionsByAppealNumber(ctx context.Context, appealNum
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -921,8 +960,8 @@ func (c *Client) SearchInterferenceDecisions(ctx context.Context, query string, 
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -942,8 +981,8 @@ func (c *Client) GetInterferenceDecision(ctx context.Context, documentIdentifier
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -963,8 +1002,8 @@ func (c *Client) GetInterferenceDecisionsByNumber(ctx context.Context, interfere
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -984,8 +1023,8 @@ func (c *Client) GetTrialDecisionsByTrialNumber(ctx context.Context, trialNumber
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -1005,8 +1044,8 @@ func (c *Client) GetTrialDocumentsByTrialNumber(ctx context.Context, trialNumber
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -1026,8 +1065,8 @@ func (c *Client) SearchTrialProceedingsDownload(ctx context.Context, req generat
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -1047,8 +1086,8 @@ func (c *Client) SearchTrialDecisionsDownload(ctx context.Context, req generated
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -1068,8 +1107,8 @@ func (c *Client) SearchTrialDocumentsDownload(ctx context.Context, req generated
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -1089,8 +1128,8 @@ func (c *Client) SearchAppealDecisionsDownload(ctx context.Context, req generate
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
@@ -1110,8 +1149,8 @@ func (c *Client) SearchInterferenceDecisionsDownload(ctx context.Context, req ge
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode() != http.StatusOK {
-			return fmt.Errorf("API returned status %d", resp.StatusCode())
+		if err := checkStatus(resp.StatusCode()); err != nil {
+			return err
 		}
 		return nil
 	})
