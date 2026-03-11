@@ -45,14 +45,14 @@ GetPatent(ctx, patentNumber string) (*PatentDataResponse, error)  // Accepts any
 GetPatentMetaData(ctx, applicationNumber string) (interface{}, error)
 
 // Patent Details
-GetPatentAdjustment(ctx, applicationNumber string) (interface{}, error)
-GetPatentContinuity(ctx, applicationNumber string) (interface{}, error)
+GetPatentAdjustment(ctx, applicationNumber string) (*AdjustmentResponse, error)
+GetPatentContinuity(ctx, applicationNumber string) (*ContinuityResponse, error)
 GetPatentDocuments(ctx, applicationNumber string) (*DocumentBag, error)
-GetPatentAssignment(ctx, applicationNumber string) (interface{}, error)
-GetPatentAssociatedDocuments(ctx, applicationNumber string) (interface{}, error)
-GetPatentAttorney(ctx, applicationNumber string) (interface{}, error)
-GetPatentForeignPriority(ctx, applicationNumber string) (interface{}, error)
-GetPatentTransactions(ctx, applicationNumber string) (interface{}, error)
+GetPatentAssignment(ctx, applicationNumber string) (*AssignmentResponse, error)
+GetPatentAssociatedDocuments(ctx, applicationNumber string) (any, error)
+GetPatentAttorney(ctx, applicationNumber string) (any, error)
+GetPatentForeignPriority(ctx, applicationNumber string) (any, error)
+GetPatentTransactions(ctx, applicationNumber string) (*TransactionsResponse, error)
 
 // Downloads & Utilities
 SearchPatentsDownload(ctx, req PatentDownloadRequest) ([]byte, error)
@@ -210,9 +210,11 @@ client, err := odp.NewClient(config)
 
 ```
 ├── client.go            # Main client implementation (package odp)
+├── types.go             # Typed response structs (continuity, assignment, adjustment, transactions)
 ├── patent_number.go     # Patent number normalization
 ├── xml.go               # XML full text parsing (ICE DTD 4.6/4.7)
 ├── client_test.go       # Unit tests with mock server
+├── types_test.go        # Typed response tests with real fixtures
 ├── patent_number_test.go# Patent number normalization tests
 ├── xml_test.go          # XML parsing tests
 ├── integration_test.go  # Integration tests (real API)
@@ -345,6 +347,14 @@ The USPTO swagger specification has several mismatches with actual API responses
 
 ## Version History
 
+### v1.3.0 - Strongly-Typed Response Parsing
+- `GetPatentContinuity` returns `*ContinuityResponse` with Parents/Children and relationship types
+- `GetPatentAssignment` returns `*AssignmentResponse` with assignors, assignees, reel/frame
+- `GetPatentAdjustment` returns `*AdjustmentResponse` with PTA delay breakdown
+- `GetPatentTransactions` returns `*TransactionsResponse` with event date/code/description
+- Comprehensive unit tests with real JSON fixtures and edge cases
+- Enhanced integration tests with typed assertions and fixture update mechanism
+
 ### v1.2.0 - PTAB API Complete (2025-11-27)
 - Support for USPTO ODP 3.0 (released 2025-11-21) which added PTAB datasets
 - Added 19 PTAB (Patent Trial and Appeal Board) API endpoints
@@ -367,9 +377,14 @@ The USPTO swagger specification has several mismatches with actual API responses
 - Petition API (3 endpoints)
 - Retry logic and configurable timeouts
 
-## Contributing
+## Related Projects
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Part of the [patent.dev](https://patent.dev) open-source patent data ecosystem:
+
+- [epo-ops](https://github.com/patent-dev/epo-ops) — EPO Open Patent Services client (search, biblio, legal status, family, images)
+- [dpma-connect-plus](https://github.com/patent-dev/dpma-connect-plus) — DPMA Connect Plus client (patents, designs, trademarks)
+- [epo-bdds](https://github.com/patent-dev/epo-bdds) — EPO Bulk Data Distribution Service client
+- [bulk-file-loader](https://github.com/patent-dev/bulk-file-loader) — Automated bulk patent data download manager
 
 ## License
 
