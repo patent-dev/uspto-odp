@@ -381,10 +381,11 @@ The USPTO swagger specification has several mismatches with actual API responses
 
 Part of the [patent.dev](https://patent.dev) open-source patent data ecosystem:
 
-- [epo-ops](https://github.com/patent-dev/epo-ops) — EPO Open Patent Services client (search, biblio, legal status, family, images)
-- [dpma-connect-plus](https://github.com/patent-dev/dpma-connect-plus) — DPMA Connect Plus client (patents, designs, trademarks)
-- [epo-bdds](https://github.com/patent-dev/epo-bdds) — EPO Bulk Data Distribution Service client
-- [bulk-file-loader](https://github.com/patent-dev/bulk-file-loader) — Automated bulk patent data download manager
+- [epo-ops](https://github.com/patent-dev/epo-ops) - EPO Open Patent Services client (search, biblio, legal status, family, images)
+- [epo-bdds](https://github.com/patent-dev/epo-bdds) - EPO Bulk Data Distribution Service client
+- [dpma-connect-plus](https://github.com/patent-dev/dpma-connect-plus) - DPMA Connect Plus client (patents, designs, trademarks)
+
+The [bulk-file-loader](https://github.com/patent-dev/bulk-file-loader) uses these libraries for automated patent data downloads.
 
 ## License
 
