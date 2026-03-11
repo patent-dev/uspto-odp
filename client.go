@@ -252,8 +252,8 @@ func (c *Client) GetPatent(ctx context.Context, patentNumber string) (*generated
 	return resp.JSON200, nil
 }
 
-// GetPatentAdjustment retrieves patent term adjustment data
-func (c *Client) GetPatentAdjustment(ctx context.Context, applicationNumber string) (any, error) {
+// GetPatentAdjustment retrieves patent term adjustment data.
+func (c *Client) GetPatentAdjustment(ctx context.Context, applicationNumber string) (*AdjustmentResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse
 	err := c.retryableRequest(func() error {
 		var err error
@@ -270,11 +270,23 @@ func (c *Client) GetPatentAdjustment(ctx context.Context, applicationNumber stri
 	if err != nil {
 		return nil, err
 	}
-	return resp.JSON200, nil
+
+	result := &AdjustmentResponse{ApplicationNumber: applicationNumber}
+	if resp.JSON200 != nil && resp.JSON200.PatentFileWrapperDataBag != nil && len(*resp.JSON200.PatentFileWrapperDataBag) > 0 {
+		bag := (*resp.JSON200.PatentFileWrapperDataBag)[0]
+		if bag.PatentTermAdjustmentData != nil {
+			pta := bag.PatentTermAdjustmentData
+			result.TotalAdjustmentDays = derefInt(pta.AdjustmentTotalQuantity)
+			result.ADelays = derefInt(pta.ADelayQuantity)
+			result.BDelays = derefInt(pta.BDelayQuantity)
+			result.CDelays = derefInt(pta.CDelayQuantity)
+		}
+	}
+	return result, nil
 }
 
-// GetPatentContinuity retrieves patent continuity data
-func (c *Client) GetPatentContinuity(ctx context.Context, applicationNumber string) (any, error) {
+// GetPatentContinuity retrieves patent continuity data.
+func (c *Client) GetPatentContinuity(ctx context.Context, applicationNumber string) (*ContinuityResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse
 	err := c.retryableRequest(func() error {
 		var err error
@@ -291,7 +303,38 @@ func (c *Client) GetPatentContinuity(ctx context.Context, applicationNumber stri
 	if err != nil {
 		return nil, err
 	}
-	return resp.JSON200, nil
+
+	result := &ContinuityResponse{
+		ApplicationNumber: applicationNumber,
+		Parents:           []ContinuityParent{},
+		Children:          []ContinuityChild{},
+	}
+	if resp.JSON200 != nil && resp.JSON200.PatentFileWrapperDataBag != nil && len(*resp.JSON200.PatentFileWrapperDataBag) > 0 {
+		bag := (*resp.JSON200.PatentFileWrapperDataBag)[0]
+		if bag.ParentContinuityBag != nil {
+			for _, p := range *bag.ParentContinuityBag {
+				result.Parents = append(result.Parents, ContinuityParent{
+					ApplicationNumber: derefStr(p.ParentApplicationNumberText),
+					PatentNumber:      derefStr(p.ParentPatentNumber),
+					FilingDate:        derefStr(p.ParentApplicationFilingDate),
+					Status:            derefStr(p.ParentApplicationStatusDescriptionText),
+					RelationshipType:  mapRelationshipType(derefStr(p.ClaimParentageTypeCode), derefStr(p.ClaimParentageTypeCodeDescriptionText)),
+				})
+			}
+		}
+		if bag.ChildContinuityBag != nil {
+			for _, ch := range *bag.ChildContinuityBag {
+				result.Children = append(result.Children, ContinuityChild{
+					ApplicationNumber: derefStr(ch.ChildApplicationNumberText),
+					PatentNumber:      derefStr(ch.ChildPatentNumber),
+					FilingDate:        derefStr(ch.ChildApplicationFilingDate),
+					Status:            derefStr(ch.ChildApplicationStatusDescriptionText),
+					RelationshipType:  mapRelationshipType(derefStr(ch.ClaimParentageTypeCode), derefStr(ch.ClaimParentageTypeCodeDescriptionText)),
+				})
+			}
+		}
+	}
+	return result, nil
 }
 
 // GetPatentDocuments retrieves patent documents list
@@ -511,8 +554,8 @@ func (c *Client) SearchPetitions(ctx context.Context, query string, offset, limi
 	return resp.JSON200, nil
 }
 
-// GetPatentAssignment retrieves patent assignment data
-func (c *Client) GetPatentAssignment(ctx context.Context, applicationNumber string) (any, error) {
+// GetPatentAssignment retrieves patent assignment data.
+func (c *Client) GetPatentAssignment(ctx context.Context, applicationNumber string) (*AssignmentResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse
 	err := c.retryableRequest(func() error {
 		var err error
@@ -529,7 +572,48 @@ func (c *Client) GetPatentAssignment(ctx context.Context, applicationNumber stri
 	if err != nil {
 		return nil, err
 	}
-	return resp.JSON200, nil
+
+	result := &AssignmentResponse{
+		ApplicationNumber: applicationNumber,
+		Assignments:       []AssignmentEntry{},
+	}
+	if resp.JSON200 != nil && resp.JSON200.PatentFileWrapperDataBag != nil && len(*resp.JSON200.PatentFileWrapperDataBag) > 0 {
+		bag := (*resp.JSON200.PatentFileWrapperDataBag)[0]
+		if bag.AssignmentBag != nil {
+			for _, a := range *bag.AssignmentBag {
+				entry := AssignmentEntry{
+					RecordedDate: derefStr(a.AssignmentRecordedDate),
+					Conveyance:   derefStr(a.ConveyanceText),
+					ReelFrame:    derefStr(a.ReelAndFrameNumber),
+				}
+				// Join multiple assignors
+				if a.AssignorBag != nil {
+					var names []string
+					for _, assignor := range *a.AssignorBag {
+						if name := derefStr(assignor.AssignorName); name != "" {
+							names = append(names, name)
+						}
+						if entry.ExecutionDate == "" {
+							entry.ExecutionDate = derefStr(assignor.ExecutionDate)
+						}
+					}
+					entry.Assignor = strings.Join(names, ", ")
+				}
+				// Join multiple assignees
+				if a.AssigneeBag != nil {
+					var names []string
+					for _, assignee := range *a.AssigneeBag {
+						if name := derefStr(assignee.AssigneeNameText); name != "" {
+							names = append(names, name)
+						}
+					}
+					entry.Assignee = strings.Join(names, ", ")
+				}
+				result.Assignments = append(result.Assignments, entry)
+			}
+		}
+	}
+	return result, nil
 }
 
 // GetPatentAssociatedDocuments retrieves associated documents
@@ -616,8 +700,8 @@ func (c *Client) GetPatentMetaData(ctx context.Context, applicationNumber string
 	return resp.JSON200, nil
 }
 
-// GetPatentTransactions retrieves patent transaction history
-func (c *Client) GetPatentTransactions(ctx context.Context, applicationNumber string) (any, error) {
+// GetPatentTransactions retrieves patent transaction history.
+func (c *Client) GetPatentTransactions(ctx context.Context, applicationNumber string) (*TransactionsResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse
 	err := c.retryableRequest(func() error {
 		var err error
@@ -634,7 +718,24 @@ func (c *Client) GetPatentTransactions(ctx context.Context, applicationNumber st
 	if err != nil {
 		return nil, err
 	}
-	return resp.JSON200, nil
+
+	result := &TransactionsResponse{
+		ApplicationNumber: applicationNumber,
+		Events:            []TransactionEvent{},
+	}
+	if resp.JSON200 != nil && resp.JSON200.PatentFileWrapperDataBag != nil && len(*resp.JSON200.PatentFileWrapperDataBag) > 0 {
+		bag := (*resp.JSON200.PatentFileWrapperDataBag)[0]
+		if bag.EventDataBag != nil {
+			for _, e := range *bag.EventDataBag {
+				result.Events = append(result.Events, TransactionEvent{
+					Date:        derefStr(e.EventDate),
+					Code:        derefStr(e.EventCode),
+					Description: derefStr(e.EventDescriptionText),
+				})
+			}
+		}
+	}
+	return result, nil
 }
 
 // SearchPatentsDownload downloads patent search results

@@ -1467,10 +1467,17 @@ func TestClientWithActualResponses(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
-		// Basic validation - check that we got data
-		jsonData, _ := json.Marshal(result)
-		if len(jsonData) < 10 {
-			t.Error("Response seems empty")
+		if result.ApplicationNumber != "17123456" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17123456")
+		}
+		if result.TotalAdjustmentDays != 238 {
+			t.Errorf("TotalAdjustmentDays = %d, want 238", result.TotalAdjustmentDays)
+		}
+		if result.ADelays != 238 {
+			t.Errorf("ADelays = %d, want 238", result.ADelays)
+		}
+		if result.BDelays != 0 {
+			t.Errorf("BDelays = %d, want 0", result.BDelays)
 		}
 	})
 
@@ -1482,10 +1489,21 @@ func TestClientWithActualResponses(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
-		// Basic validation - check that we got data
-		jsonData, _ := json.Marshal(result)
-		if len(jsonData) < 10 {
-			t.Error("Response seems empty")
+		if result.ApplicationNumber != "17123456" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17123456")
+		}
+		if len(result.Children) != 1 {
+			t.Fatalf("Expected 1 child, got %d", len(result.Children))
+		}
+		ch := result.Children[0]
+		if ch.ApplicationNumber != "PCTUS2297200" {
+			t.Errorf("Child.ApplicationNumber = %q, want %q", ch.ApplicationNumber, "PCTUS2297200")
+		}
+		if ch.Status != "Application Undergoing Preexam Processing" {
+			t.Errorf("Child.Status = %q", ch.Status)
+		}
+		if result.Parents == nil {
+			t.Error("Parents should be non-nil")
 		}
 	})
 
@@ -1573,6 +1591,22 @@ func TestClientWithActualResponses(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
+		if result.ApplicationNumber != "15000001" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "15000001")
+		}
+		if len(result.Assignments) != 1 {
+			t.Fatalf("Expected 1 assignment, got %d", len(result.Assignments))
+		}
+		a := result.Assignments[0]
+		if a.Assignee != "SAMSUNG ELECTRONICS CO., LTD" {
+			t.Errorf("Assignee = %q, want %q", a.Assignee, "SAMSUNG ELECTRONICS CO., LTD")
+		}
+		if a.ReelFrame != "038323/0190" {
+			t.Errorf("ReelFrame = %q, want %q", a.ReelFrame, "038323/0190")
+		}
+		if a.Assignor == "" {
+			t.Error("Assignor should not be empty")
+		}
 	})
 
 	t.Run("GetPatentAssociatedDocuments", func(t *testing.T) {
@@ -1627,6 +1661,19 @@ func TestClientWithActualResponses(t *testing.T) {
 		}
 		if result == nil {
 			t.Fatal("Expected result, got nil")
+		}
+		if result.ApplicationNumber != "17248024" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17248024")
+		}
+		if len(result.Events) != 3 {
+			t.Fatalf("Expected 3 events, got %d", len(result.Events))
+		}
+		e0 := result.Events[0]
+		if e0.Code != "EML_NTR" {
+			t.Errorf("Events[0].Code = %q, want %q", e0.Code, "EML_NTR")
+		}
+		if e0.Date != "2023-10-03" {
+			t.Errorf("Events[0].Date = %q, want %q", e0.Date, "2023-10-03")
 		}
 	})
 

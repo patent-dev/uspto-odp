@@ -6,12 +6,17 @@ package odp
 import (
 	"bytes"
 	"context"
+	"encoding/json"
+	"flag"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/patent-dev/uspto-odp/generated"
 )
+
+var updateFixtures = flag.Bool("update-fixtures", false, "update fixture files from live API responses")
 
 // TestIntegrationWithRealAPI tests against the actual USPTO API
 // Run with: go test -tags=integration -v
@@ -100,8 +105,11 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
-
-		t.Logf("Success: Retrieved patent adjustment data")
+		if result.ApplicationNumber != "17123456" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17123456")
+		}
+		t.Logf("Adjustment: total=%d, A=%d, B=%d, C=%d",
+			result.TotalAdjustmentDays, result.ADelays, result.BDelays, result.CDelays)
 	})
 
 	t.Run("GetPatentContinuity", func(t *testing.T) {
@@ -113,8 +121,16 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
-
-		t.Logf("Success: Retrieved patent continuity data")
+		if result.ApplicationNumber != "17123456" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17123456")
+		}
+		if result.Parents == nil {
+			t.Error("Parents should be non-nil")
+		}
+		if result.Children == nil {
+			t.Error("Children should be non-nil")
+		}
+		t.Logf("Continuity: %d parents, %d children", len(result.Parents), len(result.Children))
 	})
 
 	t.Run("GetPatentDocuments", func(t *testing.T) {
@@ -198,8 +214,13 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
-
-		t.Logf("Success: Retrieved patent assignment data")
+		if result.ApplicationNumber != "17123456" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17123456")
+		}
+		if result.Assignments == nil {
+			t.Error("Assignments should be non-nil")
+		}
+		t.Logf("Assignment: %d entries", len(result.Assignments))
 	})
 
 	t.Run("GetPatentAssociatedDocuments", func(t *testing.T) {
@@ -250,8 +271,13 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
-
-		t.Logf("Success: Retrieved patent transactions")
+		if result.ApplicationNumber != "17123456" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17123456")
+		}
+		if result.Events == nil {
+			t.Error("Events should be non-nil")
+		}
+		t.Logf("Transactions: %d events", len(result.Events))
 	})
 
 	t.Run("SearchPatentsDownload", func(t *testing.T) {
@@ -726,4 +752,207 @@ func TestXMLParsing(t *testing.T) {
 
 		t.Log("Success: All patent number formats resolved to the same application")
 	})
+}
+
+// TestEdgeCasesIntegration tests edge cases with patents that have limited data.
+func TestEdgeCasesIntegration(t *testing.T) {
+	apiKey := os.Getenv("USPTO_API_KEY")
+	if apiKey == "" {
+		t.Skip("USPTO_API_KEY environment variable is required")
+	}
+
+	config := &Config{
+		BaseURL:    "https://api.uspto.gov",
+		APIKey:     apiKey,
+		MaxRetries: 2,
+		RetryDelay: 1,
+		Timeout:    30,
+	}
+
+	client, err := NewClient(config)
+	if err != nil {
+		t.Fatalf("Failed to create client: %v", err)
+	}
+
+	ctx := context.Background()
+
+	// 17248024 is a continuation with 12 parents — test a standalone app with no continuity
+	t.Run("GetPatentContinuity_NoContinuity", func(t *testing.T) {
+		// 16000001 — a standalone application (not a continuation)
+		result, err := client.GetPatentContinuity(ctx, "16000001")
+		if err != nil {
+			t.Fatalf("GetPatentContinuity failed: %v", err)
+		}
+
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+		if result.Parents == nil {
+			t.Error("Parents should be non-nil (empty slice)")
+		}
+		if result.Children == nil {
+			t.Error("Children should be non-nil (empty slice)")
+		}
+
+		t.Logf("Continuity for 16000001: %d parents, %d children (edge case: standalone app)",
+			len(result.Parents), len(result.Children))
+	})
+
+	// Test assignment with detailed field assertions
+	t.Run("GetPatentAssignment_DetailedAssertions", func(t *testing.T) {
+		result, err := client.GetPatentAssignment(ctx, "17248024")
+		if err != nil {
+			t.Fatalf("GetPatentAssignment failed: %v", err)
+		}
+
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+		if result.Assignments == nil {
+			t.Error("Assignments should be non-nil (empty slice)")
+		}
+
+		t.Logf("Assignment for 17248024: %d entries", len(result.Assignments))
+
+		// Verify all assignment entries have basic fields
+		for i, a := range result.Assignments {
+			if a.Assignee == "" {
+				t.Errorf("Assignment[%d] has empty Assignee", i)
+			}
+			if i < 3 {
+				t.Logf("  Assignment[%d]: Assignee=%q Assignor=%q Date=%s",
+					i, a.Assignee, a.Assignor, a.RecordedDate)
+			}
+		}
+	})
+
+	// Test typed assertions with primary test patent (17248024)
+	t.Run("GetPatentAdjustment_DetailedAssertions", func(t *testing.T) {
+		result, err := client.GetPatentAdjustment(ctx, "17248024")
+		if err != nil {
+			t.Fatalf("GetPatentAdjustment failed: %v", err)
+		}
+
+		if result.ApplicationNumber != "17248024" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17248024")
+		}
+		// Known values for 17248024
+		if result.TotalAdjustmentDays <= 0 {
+			t.Errorf("Expected positive TotalAdjustmentDays, got %d", result.TotalAdjustmentDays)
+		}
+
+		t.Logf("Adjustment for 17248024: total=%d, A=%d, B=%d, C=%d",
+			result.TotalAdjustmentDays, result.ADelays, result.BDelays, result.CDelays)
+	})
+
+	// Test transactions with detailed assertions
+	t.Run("GetPatentTransactions_DetailedAssertions", func(t *testing.T) {
+		result, err := client.GetPatentTransactions(ctx, "17248024")
+		if err != nil {
+			t.Fatalf("GetPatentTransactions failed: %v", err)
+		}
+
+		if result.ApplicationNumber != "17248024" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17248024")
+		}
+		if len(result.Events) < 10 {
+			t.Errorf("Expected 10+ events for 17248024, got %d", len(result.Events))
+		}
+
+		// Verify event fields
+		for i, e := range result.Events {
+			if e.Date == "" || e.Code == "" {
+				t.Errorf("Event[%d] missing Date or Code", i)
+				break
+			}
+			if i < 3 {
+				t.Logf("  Event[%d]: %s %s %s", i, e.Date, e.Code, e.Description)
+			}
+		}
+
+		t.Logf("Transactions for 17248024: %d events", len(result.Events))
+	})
+}
+
+// TestFixtureSaving tests the fixture saving mechanism when -update-fixtures is set.
+func TestFixtureSaving(t *testing.T) {
+	if !*updateFixtures {
+		t.Skip("Skipping fixture saving test (use -update-fixtures to enable)")
+	}
+
+	apiKey := os.Getenv("USPTO_API_KEY")
+	if apiKey == "" {
+		t.Skip("USPTO_API_KEY environment variable is required")
+	}
+
+	config := &Config{
+		BaseURL:    "https://api.uspto.gov",
+		APIKey:     apiKey,
+		MaxRetries: 2,
+		RetryDelay: 1,
+		Timeout:    30,
+	}
+
+	client, err := NewClient(config)
+	if err != nil {
+		t.Fatalf("Failed to create client: %v", err)
+	}
+
+	ctx := context.Background()
+	appNumber := "17248024"
+
+	t.Run("SaveContinuityFixture", func(t *testing.T) {
+		result, err := client.GetPatentContinuity(ctx, appNumber)
+		if err != nil {
+			t.Fatalf("GetPatentContinuity failed: %v", err)
+		}
+		data, _ := json.MarshalIndent(result, "", "  ")
+		saveFixture(t, "continuity_17248024", data)
+	})
+
+	t.Run("SaveAssignmentFixture", func(t *testing.T) {
+		result, err := client.GetPatentAssignment(ctx, "15000001")
+		if err != nil {
+			t.Fatalf("GetPatentAssignment failed: %v", err)
+		}
+		data, _ := json.MarshalIndent(result, "", "  ")
+		saveFixture(t, "assignment_15000001", data)
+	})
+
+	t.Run("SaveAdjustmentFixture", func(t *testing.T) {
+		result, err := client.GetPatentAdjustment(ctx, appNumber)
+		if err != nil {
+			t.Fatalf("GetPatentAdjustment failed: %v", err)
+		}
+		data, _ := json.MarshalIndent(result, "", "  ")
+		saveFixture(t, "adjustment_17248024", data)
+	})
+
+	t.Run("SaveTransactionsFixture", func(t *testing.T) {
+		result, err := client.GetPatentTransactions(ctx, appNumber)
+		if err != nil {
+			t.Fatalf("GetPatentTransactions failed: %v", err)
+		}
+		data, _ := json.MarshalIndent(result, "", "  ")
+		saveFixture(t, "transactions_17248024", data)
+	})
+}
+
+// saveFixture saves API response data as a fixture file when -update-fixtures is set.
+func saveFixture(t *testing.T, name string, data []byte) {
+	t.Helper()
+	if !*updateFixtures {
+		return
+	}
+	dir := filepath.Join("testdata", "fixtures")
+	if err := os.MkdirAll(dir, 0755); err != nil {
+		t.Logf("Warning: failed to create fixture dir: %v", err)
+		return
+	}
+	path := filepath.Join(dir, name+".json")
+	if err := os.WriteFile(path, data, 0644); err != nil {
+		t.Logf("Warning: failed to write fixture %s: %v", path, err)
+		return
+	}
+	t.Logf("Updated fixture: %s", path)
 }
