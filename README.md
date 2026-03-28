@@ -3,16 +3,21 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/patent-dev/uspto-odp.svg)](https://pkg.go.dev/github.com/patent-dev/uspto-odp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A complete Go client library for the USPTO Open Data Portal API.
+A complete Go client library for the USPTO Open Data Portal API, Office Action APIs, and TSDR (Trademark Status & Document Retrieval).
 
 ## Getting Started
 
-### API Key Required
+### API Keys
 
-You need an API key to use the USPTO ODP API:
-- **Details**: https://data.uspto.gov/apis/getting-started
-- **Note**: Video verification is required during registration
-- **Rate limits**: Check the documentation for current rate limits and usage guidelines
+**ODP API Key** (Patent, PTAB, Petition, Bulk Data, Office Action):
+- Register at https://data.uspto.gov/apis/getting-started
+- Video verification required during registration
+- Used via `X-API-KEY` header
+
+**TSDR API Key** (Trademark Status & Document Retrieval):
+- Register at https://account.uspto.gov/profile/api-manager
+- Separate key from ODP
+- Used via `USPTO-API-KEY` header
 
 ## Installation
 
@@ -32,9 +37,9 @@ results, err := client.SearchPatents(ctx, "artificial intelligence", 0, 10)
 fmt.Printf("Found %d patents\n", *results.Count)
 ```
 
-## API Methods - Complete Coverage (38 endpoints)
+## API Methods - Complete Coverage (53 wrapper methods)
 
-All 38 USPTO ODP API endpoints are fully implemented and tested.
+All USPTO ODP API endpoints are fully implemented and tested, plus Office Action and TSDR APIs.
 
 ### Patent Application API (13 endpoints)
 
@@ -110,6 +115,75 @@ SearchInterferenceDecisions(ctx, query string, offset, limit int32) (*Interferen
 GetInterferenceDecision(ctx, documentIdentifier string) (*InterferenceDecisionDataResponse, error)
 GetInterferenceDecisionsByNumber(ctx, interferenceNumber string) (*InterferenceDecisionDataResponse, error)
 SearchInterferenceDecisionsDownload(ctx, req PatentDownloadRequest) ([]byte, error)
+```
+
+### Office Action APIs (8 endpoints)
+
+These use the DSAPI pattern (form-encoded POST with Lucene/Solr queries). Same API key as the main ODP API.
+
+```go
+// Office Action Text Retrieval
+SearchOfficeActions(ctx, criteria string, start, rows int32) (*DSAPIResponse, error)
+GetOfficeActionFields(ctx) (*DSAPIFieldsResponse, error)
+
+// Office Action Citations (Forms PTO-892 & PTO-1449)
+SearchOfficeActionCitations(ctx, criteria string, start, rows int32) (*DSAPIResponse, error)
+GetOfficeActionCitationFields(ctx) (*DSAPIFieldsResponse, error)
+
+// Office Action Rejections (101, 102, 103, 112, DP)
+SearchOfficeActionRejections(ctx, criteria string, start, rows int32) (*DSAPIResponse, error)
+GetOfficeActionRejectionFields(ctx) (*DSAPIFieldsResponse, error)
+
+// Enriched Citations (AI/ML extracted from office actions)
+SearchEnrichedCitations(ctx, criteria string, start, rows int32) (*DSAPIResponse, error)
+GetEnrichedCitationFields(ctx) (*DSAPIFieldsResponse, error)
+```
+
+Office Action APIs use Lucene query syntax:
+```go
+// Search by patent application number
+result, err := client.SearchOfficeActionRejections(ctx, "patentApplicationNumber:12190351", 0, 10)
+
+// Search with boolean operators
+result, err := client.SearchOfficeActions(ctx, "hasRej103:1 AND groupArtUnitNumber:1713", 0, 10)
+
+// Get available fields
+fields, err := client.GetOfficeActionRejectionFields(ctx)
+fmt.Printf("Searchable fields: %v\n", fields.Fields)
+```
+
+### TSDR (Trademark Status & Document Retrieval) API
+
+Separate server (`tsdrapi.uspto.gov`) and API key. Requires `TSDRAPIKey` in config.
+
+```go
+config := odp.DefaultConfig()
+config.APIKey = "your-odp-key"
+config.TSDRAPIKey = "your-tsdr-key"  // from https://account.uspto.gov/profile/api-manager
+client, err := odp.NewClient(config)
+
+// Get trademark case status (raw XML response)
+xmlResp, err := client.GetTrademarkStatus(ctx, "97123456")
+
+// Get trademark case status (JSON via content negotiation)
+status, err := client.GetTrademarkStatusJSON(ctx, "97123456")
+fmt.Printf("Trademarks: %d\n", len(status.Trademarks))
+
+// Get document list (XML)
+docs, err := client.GetTrademarkDocumentsXML(ctx, "97123456")
+
+// Get info about a specific document (XML) - docID format: {TypeCode}{YYYYMMDD}
+info, err := client.GetTrademarkDocumentInfo(ctx, "97123456", "NOA20230322")
+
+// Download a document as PDF
+var buf bytes.Buffer
+client.DownloadTrademarkDocument(ctx, "97123456", "NOA20230322", &buf)
+
+// Get last update time
+update, err := client.GetTrademarkLastUpdate(ctx, "97123456")
+
+// Multi-status lookup
+result, err := client.GetTrademarkMultiStatus(ctx, "sn", []string{"97123456", "97654321"})
 ```
 
 ## Patent Full Text & Advanced Features
@@ -201,6 +275,10 @@ config := &odp.Config{
     MaxRetries: 3,                       // Retry failed requests
     RetryDelay: 1,                       // Seconds between retries
     Timeout:    30,                      // Request timeout in seconds
+
+    // TSDR (optional - separate server and API key)
+    TSDRAPIKey: "your-tsdr-key",         // From https://account.uspto.gov/profile/api-manager
+    TSDRBaseURL: "https://tsdrapi.uspto.gov", // Default
 }
 
 client, err := odp.NewClient(config)
@@ -209,29 +287,35 @@ client, err := odp.NewClient(config)
 ## Package Structure
 
 ```
-├── client.go            # Main client implementation (package odp)
-├── types.go             # Typed response structs (continuity, assignment, adjustment, transactions)
-├── patent_number.go     # Patent number normalization
-├── xml.go               # XML full text parsing (ICE DTD 4.6/4.7)
-├── client_test.go       # Unit tests with mock server
-├── types_test.go        # Typed response tests with real fixtures
-├── patent_number_test.go# Patent number normalization tests
-├── xml_test.go          # XML parsing tests
-├── integration_test.go  # Integration tests (real API)
-├── generated/           # Auto-generated OpenAPI code
-│   ├── client_gen.go    # Generated client (package generated)
-│   └── types_gen.go     # Generated types (package generated)
-├── cmd/gen/             # Code generation tool (pure Go)
-│   └── main.go          # Bundles swagger files and applies fixes
-├── demo/                # Usage examples with saved responses
-│   └── main.go          # Demo runner for all API services
-├── swagger/             # Official USPTO OpenAPI specs (DO NOT EDIT)
-│   ├── swagger.yaml     # Main API specification
-│   ├── odp-common-base.yaml  # Shared type definitions
-│   └── trial-*.yaml     # PTAB API specifications
-├── swagger_fixed.yaml   # Processed spec with fixes (auto-generated)
-└── dtd/                 # ICE DTD documentation
-    └── README.md        # DTD structure and information
+├── client.go              # Main client implementation (package odp)
+├── office_action.go       # Office Action API wrappers (DSAPI pattern)
+├── tsdr.go                # TSDR (Trademark) API wrappers
+├── types.go               # Typed response structs (continuity, assignment, adjustment, transactions)
+├── patent_number.go       # Patent number normalization
+├── xml.go                 # XML full text parsing (ICE DTD 4.6/4.7)
+├── *_test.go              # Unit tests, integration tests
+├── generated/             # Auto-generated OpenAPI code
+│   ├── client_gen.go      # ODP client (package generated)
+│   ├── types_gen.go       # ODP types (package generated)
+│   ├── oa/                # Office Action DSAPI (package oa)
+│   │   ├── client_gen.go
+│   │   └── types_gen.go
+│   └── tsdr/              # TSDR Trademark (package tsdr)
+│       ├── client_gen.go
+│       └── types_gen.go
+├── cmd/gen/               # Code generation tool (pure Go)
+│   └── main.go            # Bundles swagger files and applies fixes
+├── demo/                  # Usage examples with saved responses
+├── swagger/               # Official USPTO OpenAPI specs (DO NOT EDIT)
+│   ├── swagger.yaml       # Main ODP API specification
+│   ├── odp-common-base.yaml # Shared type definitions
+│   ├── trial-*.yaml       # PTAB API specifications
+│   ├── oa-*.yaml          # Office Action DSAPI specifications
+│   └── tsdr-swagger.json  # TSDR API specification
+├── swagger_fixed.yaml     # Processed ODP spec (auto-generated)
+├── swagger_oa_fixed.yaml  # Processed OA spec (auto-generated)
+├── swagger_tsdr_fixed.json# Processed TSDR spec (auto-generated)
+└── dtd/                   # ICE DTD documentation
 ```
 
 ## Implementation
@@ -254,36 +338,37 @@ go test -v -cover
 
 ### Integration Tests
 
-Requires `USPTO_API_KEY` environment variable:
+Requires `USPTO_API_KEY` and optionally `USPTO_TSDR_API_KEY`:
 ```bash
-# Set your API key (add to ~/.zshrc for persistence)
-export USPTO_API_KEY=your-api-key
+# Set your API keys (add to ~/.zshrc for persistence)
+export USPTO_API_KEY=your-odp-key
+export USPTO_TSDR_API_KEY=your-tsdr-key  # from https://account.uspto.gov/profile/api-manager
 
 # Run all integration tests
 go test -tags=integration -v
 
+# Office Action APIs
+go test -tags=integration -v -run TestOfficeActionAPIs
+
+# TSDR API
+go test -tags=integration -v -run TestTSDRAPIs
+
 # Run specific endpoint test
 go test -tags=integration -v -run TestIntegrationWithRealAPI/GetStatusCodes
-
-# Test endpoint coverage documentation
-go test -tags=integration -v -run TestEndpointCoverage
-
-# Test XML parsing with real API data
-go test -tags=integration -v -run TestXMLParsing
 
 # Test bulk file download (skipped by default due to large file size)
 TEST_BULK_DOWNLOAD=true go test -tags=integration -v -run DownloadBulkFile
 ```
 
-Integration tests require `USPTO_API_KEY` environment variable. Bulk file download test skipped by default (set `TEST_BULK_DOWNLOAD=true` to run).
-
 ## Endpoint Coverage
 
-All 38 USPTO ODP API endpoints are implemented and tested:
+All USPTO ODP API endpoints are implemented and tested:
 - 13 Patent Application API endpoints
 - 3 Bulk Data API endpoints
 - 3 Petition API endpoints
 - 19 PTAB (Patent Trial and Appeal Board) API endpoints
+- 8 Office Action DSAPI endpoints (Text Retrieval, Citations, Rejections, Enriched Citations)
+- 7 TSDR (Trademark Status & Document Retrieval) wrapper methods
 
 ## Swagger Processing
 
@@ -293,14 +378,19 @@ The USPTO ODP API specification is distributed as multiple YAML files with `$ref
 
 ```
 swagger/
-├── swagger.yaml           # Main API spec (Patent, Bulk, Petition endpoints)
-├── odp-common-base.yaml   # Shared type definitions
-├── trial-proceedings.yaml # PTAB trial proceedings
-├── trial-decisions.yaml   # PTAB trial decisions
-├── trial-documents.yaml   # PTAB trial documents
+├── swagger.yaml                 # Main ODP API spec (Patent, Bulk, Petition)
+├── odp-common-base.yaml         # Shared type definitions
+├── trial-proceedings.yaml       # PTAB trial proceedings
+├── trial-decisions.yaml         # PTAB trial decisions
+├── trial-documents.yaml         # PTAB trial documents
 ├── trial-appeal-decisions.yaml  # PTAB appeal decisions
 ├── trial-interferences.yaml     # PTAB interference decisions
-└── trial-common.yaml      # Shared PTAB types
+├── trial-common.yaml            # Shared PTAB types
+├── oa-text-retrieval.yaml       # Office Action Text Retrieval
+├── oa-citations.yaml            # Office Action Citations
+├── oa-rejections.yaml           # Office Action Rejections
+├── oa-enriched-citations.yaml   # Enriched Citations
+└── tsdr-swagger.json            # TSDR (Trademark) API
 ```
 
 **Important:** Do not edit files in `swagger/` - these are the original USPTO specifications.
@@ -314,28 +404,28 @@ go run ./cmd/gen
 ```
 
 This tool:
-1. **Bundles** all YAML files, resolving `$ref` references between files
-2. **Applies fixes** for mismatches between swagger spec and actual API responses
-3. **Generates** `swagger_fixed.yaml` (processed OpenAPI spec)
-4. **Generates** Go code in `generated/` using oapi-codegen
+1. **Bundles** ODP + PTAB YAML files, resolving `$ref` references -> `swagger_fixed.yaml` -> `generated/`
+2. **Bundles** 4 Office Action specs -> `swagger_oa_fixed.yaml` -> `generated/oa/`
+3. **Copies** TSDR spec -> `swagger_tsdr_fixed.json` -> `generated/tsdr/`
+4. **Applies fixes** for mismatches between swagger specs and actual API responses
 
 ### Fixes Applied
 
 The USPTO swagger specification has several mismatches with actual API responses:
 
 **Type Corrections:**
-- `frameNumber`, `reelNumber`: string → integer (API returns numeric values)
-- `documentNumber`: string → integer (PTAB API returns numbers)
-- Error response `code`: integer → string (API returns `"404"` not `404`)
+- `frameNumber`, `reelNumber`: string -> integer (API returns numeric values)
+- `documentNumber`: string -> integer (PTAB API returns numbers)
+- Error response `code`: integer -> string (API returns `"404"` not `404`)
 
 **Structure Fixes:**
-- `petitionIssueConsideredTextBag`: array of objects → array of strings
-- `correspondenceAddress`: array → object (Assignment API returns object)
-- `DecisionData.statuteAndRuleBag`, `issueTypeBag`: string → array (PTAB API returns arrays)
-- `GetPatentAssignment.assignmentBag`: single object → array (API returns array of assignments)
+- `petitionIssueConsideredTextBag`: array of objects -> array of strings
+- `correspondenceAddress`: array -> object (Assignment API returns object)
+- `DecisionData.statuteAndRuleBag`, `issueTypeBag`: string -> array (PTAB API returns arrays)
+- `GetPatentAssignment.assignmentBag`: single object -> array (API returns array of assignments)
 
 **Field Name Fixes:**
-- `InterferenceDecisionRecord.decisionDocumentData` → `documentData` (API uses different field name)
+- `InterferenceDecisionRecord.decisionDocumentData` -> `documentData` (API uses different field name)
 
 **Format Fixes:**
 - Removed `format: date-time` from datetime fields that return non-RFC3339 formats (e.g., `lastModifiedDateTime` returns `"2025-11-26T23:58:00"` without timezone)
@@ -345,14 +435,37 @@ The USPTO swagger specification has several mismatches with actual API responses
 **Endpoint Fixes:**
 - Removed `/api/v1/patent/applications/text-to-search` (defined in spec but has no operations)
 
+**Office Action DSAPI Fixes:**
+- Removed phantom path parameters (`dataset`, `version` declared as `in: path` but paths are static)
+- Made `operationId` values unique across bundled specs (all 4 specs used identical IDs)
+
+**TSDR Fixes:**
+- Fixed protocol-relative server URL (`//tsdrapi.uspto.gov/` -> `https://tsdrapi.uspto.gov`)
+- `GetDocumentInfoXml` and `GetCaseDocsInfoXml` endpoints return 406 with `Accept: application/json` - content negotiation is not supported despite XML/JSON server paths in spec
+- Removed `format: date-time` and `format: date` from 64 fields - API returns inconsistent date formats (date-only `"2021-11-19"` in fields declared as `date-time`, non-ISO formats elsewhere), causing `time.Time` parsing failures in generated code
+
+**Bugs Fixed by USPTO:**
+- `trial-appeal-decisions.yaml`: `appelantData` -> `appellantData` (spelling), `realPartyName` -> `realPartyInInterestName`, `techCenterNumber` -> `technologyCenterNumber`, `requestorData` -> `thirdPartyRequesterData`, `documentTypeCategory` -> `documentTypeDescriptionText`, `downloadURI` -> `fileDownloadURI`, added `decisionData` block, added `requestIdentifier`
+- `trial-common.yaml`: `downloadURI` -> `fileDownloadURI`, `statuteAndRuleBag`/`issueTypeBag` string -> array, `documentNumber` string -> integer, added `RegularPetitionerData` fields, added `appealOutcomeCategory`
+- `trial-decisions.yaml`: now uses full inline schemas instead of `allOf` refs
+
 ## Version History
+
+### v1.4.0 - Full ODP Coverage (Office Action + TSDR)
+- Office Action APIs: Text Retrieval, Citations, Rejections, Enriched Citations (8 endpoints)
+- TSDR (Trademark Status & Document Retrieval) API (24 endpoints, separate server + key)
+- Updated PTAB swagger specs with USPTO's field name fixes
+- Separate generated packages: `generated/oa/`, `generated/tsdr/`
+- DSAPI pattern support (form-encoded POST, Lucene/Solr queries)
+- TSDR content negotiation (JSON via Accept header, XML default)
+- Integration tests for all new APIs
 
 ### v1.3.0 - Strongly-Typed Response Parsing
 - `GetPatentContinuity` returns `*ContinuityResponse` with Parents/Children and relationship types
 - `GetPatentAssignment` returns `*AssignmentResponse` with assignors, assignees, reel/frame
 - `GetPatentAdjustment` returns `*AdjustmentResponse` with PTA delay breakdown
 - `GetPatentTransactions` returns `*TransactionsResponse` with event date/code/description
-- Comprehensive unit tests with real JSON fixtures and edge cases
+- Unit tests with real JSON fixtures and edge cases
 - Enhanced integration tests with typed assertions and fixture update mechanism
 
 ### v1.2.0 - PTAB API Complete (2025-11-27)

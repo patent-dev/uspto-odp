@@ -1,0 +1,5 @@
+Method: get_trademark_document_info
+
+Parameters:
+  serialNumber: 97123456
+  docID: NOA20230322

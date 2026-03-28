@@ -418,7 +418,7 @@ func (c *Client) DownloadXMLWithType(ctx context.Context, url string, expectedTy
 	if err != nil {
 		return nil, fmt.Errorf("downloading XML: %w", err)
 	}
-	defer resp.Body.Close()
+	defer drainClose(resp.Body)
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("download failed with status %d", resp.StatusCode)

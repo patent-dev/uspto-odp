@@ -1,0 +1,32 @@
+{
+  "apiKey": "enriched_cited_reference_metadata",
+  "apiVersionNumber": "v3",
+  "apiUrl": "https://api.uspto.gov/api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields",
+  "apiDocumentationUrl": "https://data.uspto.gov/swagger/index.html?urls.primaryName=USPTO%20Enriched%20Citation%20API%20v3",
+  "apiStatus": "PUBLISHED",
+  "fieldCount": 22,
+  "fields": [
+    "officeActionDate",
+    "relatedClaimNumberText",
+    "applicantCitedExaminerReferenceIndicator",
+    "createUserIdentifier",
+    "kindCode",
+    "nplIndicator",
+    "workGroupNumber",
+    "officeActionCategory",
+    "patentApplicationNumber",
+    "inventorNameText",
+    "groupArtUnitNumber",
+    "qualitySummaryText",
+    "createDateTime",
+    "techCenter",
+    "citedDocumentIdentifier",
+    "countryCode",
+    "passageLocationText",
+    "obsoleteDocumentIdentifier",
+    "citationCategoryCode",
+    "id",
+    "examinerCitedReferenceIndicator",
+    "publicationNumber"
+  ]
+}

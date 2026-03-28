@@ -43,6 +43,7 @@ const (
 type AppealDecisionDataResponse struct {
 	Count               *int                   `json:"count,omitempty"`
 	PatentAppealDataBag *[]PatentAppealDataBag `json:"patentAppealDataBag,omitempty"`
+	RequestIdentifier   *string                `json:"requestIdentifier,omitempty"`
 }
 
 // ApplicationMetaData Represents patent application meta data properties
@@ -269,15 +270,20 @@ type ChildContinuityData struct {
 
 // DecisionData defines model for DecisionData.
 type DecisionData struct {
-	DecisionIssueDate    *openapi_types.Date `json:"decisionIssueDate,omitempty"`
-	DecisionTypeCategory *string             `json:"decisionTypeCategory,omitempty"`
-	IssueTypeBag         *[]string           `json:"issueTypeBag,omitempty"`
-	StatuteAndRuleBag    *[]string           `json:"statuteAndRuleBag,omitempty"`
-	TrialOutcomeCategory *string             `json:"trialOutcomeCategory,omitempty"`
+	AppealOutcomeCategory *string             `json:"appealOutcomeCategory,omitempty"`
+	DecisionIssueDate     *openapi_types.Date `json:"decisionIssueDate,omitempty"`
+	DecisionTypeCategory  *string             `json:"decisionTypeCategory,omitempty"`
+	IssueTypeBag          *[]string           `json:"issueTypeBag,omitempty"`
+	StatuteAndRuleBag     *[]string           `json:"statuteAndRuleBag,omitempty"`
+	TrialOutcomeCategory  *string             `json:"trialOutcomeCategory,omitempty"`
 }
 
 // DecisionDataResponse defines model for DecisionDataResponse.
-type DecisionDataResponse = DocumentDataResponse
+type DecisionDataResponse struct {
+	Count                      *int                          `json:"count,omitempty"`
+	Facets                     *[]Facet                      `json:"facets,omitempty"`
+	PatentTrialDecisionDataBag *[]PatentTrialDecisionDataBag `json:"patentTrialDecisionDataBag,omitempty"`
+}
 
 // DerivationPetitionerData defines model for DerivationPetitionerData.
 type DerivationPetitionerData struct {
@@ -318,10 +324,9 @@ type DocumentData struct {
 	DocumentNumber              *int                `json:"documentNumber,omitempty"`
 	DocumentOCRText             *string             `json:"documentOCRText,omitempty"`
 	DocumentSizeQuantity        *int                `json:"documentSizeQuantity,omitempty"`
-	DocumentStatus              *string             `json:"documentStatus,omitempty"`
 	DocumentTitleText           *string             `json:"documentTitleText,omitempty"`
 	DocumentTypeDescriptionText *string             `json:"documentTypeDescriptionText,omitempty"`
-	DownloadURI                 *string             `json:"downloadURI,omitempty"`
+	FileDownloadURI             *string             `json:"fileDownloadURI,omitempty"`
 	FilingPartyCategory         *string             `json:"filingPartyCategory,omitempty"`
 	MimeTypeIdentifier          *string             `json:"mimeTypeIdentifier,omitempty"`
 }
@@ -414,7 +419,7 @@ type InterferenceDecisionDocumentData struct {
 	DocumentOCRText             *string             `json:"documentOCRText,omitempty"`
 	DocumentSizeQuantity        *int64              `json:"documentSizeQuantity,omitempty"`
 	DocumentTitleText           *string             `json:"documentTitleText,omitempty"`
-	DownloadURI                 *string             `json:"downloadURI,omitempty"`
+	FileDownloadURI             *string             `json:"fileDownloadURI,omitempty"`
 	InterferenceOutcomeCategory *string             `json:"interferenceOutcomeCategory,omitempty"`
 	IssueTypeBag                *[]string           `json:"issueTypeBag,omitempty"`
 	StatuteAndRuleBag           *[]string           `json:"statuteAndRuleBag,omitempty"`
@@ -878,8 +883,15 @@ type RecordAttorney struct {
 
 // RegularPetitionerData defines model for RegularPetitionerData.
 type RegularPetitionerData struct {
-	CounselName             *string `json:"counselName,omitempty"`
-	RealPartyInInterestName *string `json:"realPartyInInterestName,omitempty"`
+	ApplicationNumberText   *string             `json:"applicationNumberText,omitempty"`
+	CounselName             *string             `json:"counselName,omitempty"`
+	GrantDate               *openapi_types.Date `json:"grantDate,omitempty"`
+	GroupArtUnitNumber      *string             `json:"groupArtUnitNumber,omitempty"`
+	InventorName            *string             `json:"inventorName,omitempty"`
+	PatentNumber            *string             `json:"patentNumber,omitempty"`
+	PatentOwnerName         *string             `json:"patentOwnerName,omitempty"`
+	RealPartyInInterestName *string             `json:"realPartyInInterestName,omitempty"`
+	TechnologyCenterNumber  *string             `json:"technologyCenterNumber,omitempty"`
 }
 
 // RespondentData defines model for RespondentData.
@@ -993,32 +1005,55 @@ type PatentAppealDataBag struct {
 		DocketNoticeMailedDate     *openapi_types.Date `json:"docketNoticeMailedDate,omitempty"`
 		FileDownloadURI            *string             `json:"fileDownloadURI,omitempty"`
 	} `json:"appealMetaData,omitempty"`
-	AppealNumber *string `json:"appealNumber,omitempty"`
-	AppelantData *struct {
-		ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
-		CounselName           *string `json:"counselName,omitempty"`
-		GroupArtUnitNumber    *string `json:"groupArtUnitNumber,omitempty"`
-		InventorName          *string `json:"inventorName,omitempty"`
-		PatentNumber          *string `json:"patentNumber,omitempty"`
-		PatentOwnerName       *string `json:"patentOwnerName,omitempty"`
-		PublicationDate       *string `json:"publicationDate,omitempty"`
-		PublicationNumber     *string `json:"publicationNumber,omitempty"`
-		RealPartyName         *string `json:"realPartyName,omitempty"`
-		TechCenterNumber      *string `json:"techCenterNumber,omitempty"`
-	} `json:"appelantData,omitempty"`
+	AppealNumber  *string `json:"appealNumber,omitempty"`
+	AppellantData *struct {
+		ApplicationNumberText   *string             `json:"applicationNumberText,omitempty"`
+		CounselName             *string             `json:"counselName,omitempty"`
+		GrantDate               *openapi_types.Date `json:"grantDate,omitempty"`
+		GroupArtUnitNumber      *string             `json:"groupArtUnitNumber,omitempty"`
+		InventorName            *string             `json:"inventorName,omitempty"`
+		PatentNumber            *string             `json:"patentNumber,omitempty"`
+		PatentOwnerName         *string             `json:"patentOwnerName,omitempty"`
+		PublicationDate         *string             `json:"publicationDate,omitempty"`
+		PublicationNumber       *string             `json:"publicationNumber,omitempty"`
+		RealPartyInInterestName *string             `json:"realPartyInInterestName,omitempty"`
+		TechnologyCenterNumber  *string             `json:"technologyCenterNumber,omitempty"`
+	} `json:"appellantData,omitempty"`
+	DecisionData *struct {
+		AppealOutcomeCategory *string             `json:"appealOutcomeCategory,omitempty"`
+		DecisionIssueDate     *openapi_types.Date `json:"decisionIssueDate,omitempty"`
+		DecisionTypeCategory  *string             `json:"decisionTypeCategory,omitempty"`
+		IssueTypeBag          *[]string           `json:"issueTypeBag,omitempty"`
+		StatuteAndRuleBag     *[]string           `json:"statuteAndRuleBag,omitempty"`
+	} `json:"decisionData,omitempty"`
 	DocumentData *struct {
-		DocumentFilingDate   *string `json:"documentFilingDate,omitempty"`
-		DocumentIdentifier   *string `json:"documentIdentifier,omitempty"`
-		DocumentName         *string `json:"documentName,omitempty"`
-		DocumentOCRText      *string `json:"documentOCRText,omitempty"`
-		DocumentSizeQuantity *int    `json:"documentSizeQuantity,omitempty"`
-		DocumentTypeCategory *string `json:"documentTypeCategory,omitempty"`
-		DownloadURI          *string `json:"downloadURI,omitempty"`
+		DocumentFilingDate          *string `json:"documentFilingDate,omitempty"`
+		DocumentIdentifier          *string `json:"documentIdentifier,omitempty"`
+		DocumentName                *string `json:"documentName,omitempty"`
+		DocumentOCRText             *string `json:"documentOCRText,omitempty"`
+		DocumentSizeQuantity        *int    `json:"documentSizeQuantity,omitempty"`
+		DocumentTypeDescriptionText *string `json:"documentTypeDescriptionText,omitempty"`
+		FileDownloadURI             *string `json:"fileDownloadURI,omitempty"`
 	} `json:"documentData,omitempty"`
-	LastModifiedDateTime *string `json:"lastModifiedDateTime,omitempty"`
-	RequestorData        *struct {
+	LastModifiedDateTime    *string `json:"lastModifiedDateTime,omitempty"`
+	ThirdPartyRequesterData *struct {
 		ThirdPartyName *string `json:"thirdPartyName,omitempty"`
-	} `json:"requestorData,omitempty"`
+	} `json:"thirdPartyRequesterData,omitempty"`
+}
+
+// PatentTrialDecisionDataBag A single PTAB document record.
+type PatentTrialDecisionDataBag struct {
+	DecisionData             *DecisionData             `json:"decisionData,omitempty"`
+	DerivationPetitionerData *DerivationPetitionerData `json:"derivationPetitionerData,omitempty"`
+	DocumentData             *DocumentData             `json:"documentData,omitempty"`
+	LastModifiedDateTime     *string                   `json:"lastModifiedDateTime,omitempty"`
+	PatentOwnerData          *PatentOwnerData          `json:"patentOwnerData,omitempty"`
+	RegularPetitionerData    *RegularPetitionerData    `json:"regularPetitionerData,omitempty"`
+	RespondentData           *RespondentData           `json:"respondentData,omitempty"`
+	TrialDocumentCategory    *string                   `json:"trialDocumentCategory,omitempty"`
+	TrialMetaData            *TrialMetaData            `json:"trialMetaData,omitempty"`
+	TrialNumber              *string                   `json:"trialNumber,omitempty"`
+	TrialTypeCode            *string                   `json:"trialTypeCode,omitempty"`
 }
 
 // PatentTrialDocumentDataBag A single PTAB document record.
@@ -1055,7 +1090,7 @@ type BadRequest struct {
 	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 }
 
-// Decision200 Identical structure, just decisions-only data.
+// Decision200 defines model for Decision200.
 type Decision200 = DecisionDataResponse
 
 // Document200 defines model for Document200.

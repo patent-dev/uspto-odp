@@ -1,0 +1,26 @@
+{
+  "apiKey": "oa_citations",
+  "apiVersionNumber": "v2",
+  "apiUrl": "https://api.uspto.gov/api/v1/patent/oa/oa_citations/v2/fields",
+  "apiDocumentationUrl": "arn:aws:iam::831714700926:role/uspto-dev/uspto-dh-p-prod-service-role-1",
+  "apiStatus": "PUBLISHED",
+  "fieldCount": 16,
+  "fields": [
+    "applicantCitedExaminerReferenceIndicator",
+    "createUserIdentifier",
+    "workGroup",
+    "officeActionCitationReferenceIndicator",
+    "referenceIdentifier",
+    "actionTypeCategory",
+    "patentApplicationNumber",
+    "legalSectionCode",
+    "groupArtUnitNumber",
+    "createDateTime",
+    "techCenter",
+    "paragraphNumber",
+    "obsoleteDocumentIdentifier",
+    "parsedReferenceIdentifier",
+    "id",
+    "examinerCitedReferenceIndicator"
+  ]
+}

@@ -558,7 +558,7 @@ func TestExtractAllClaimsTextFormatted_Nil(t *testing.T) {
 	}
 }
 
-// Test comprehensive text extraction
+// Test full text extraction
 func TestComprehensiveTextExtraction(t *testing.T) {
 	doc, err := ParseXML([]byte(sampleGrantXML))
 	if err != nil {

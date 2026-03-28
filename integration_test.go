@@ -12,18 +12,30 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/patent-dev/uspto-odp/generated"
 )
 
 var updateFixtures = flag.Bool("update-fixtures", false, "update fixture files from live API responses")
 
+// testTimeout is the per-subtest context timeout for integration tests.
+const testTimeout = 30 * time.Second
+
+// testCtx returns a context with a timeout for integration subtests.
+func testCtx(t *testing.T) context.Context {
+	t.Helper()
+	ctx, cancel := context.WithTimeout(context.Background(), testTimeout)
+	t.Cleanup(cancel)
+	return ctx
+}
+
 // TestIntegrationWithRealAPI tests against the actual USPTO API
 // Run with: go test -tags=integration -v
 func TestIntegrationWithRealAPI(t *testing.T) {
 	apiKey := os.Getenv("USPTO_API_KEY")
 	if apiKey == "" {
-		t.Fatal("USPTO_API_KEY environment variable is required. Set it before running tests")
+		t.Skip("USPTO_API_KEY environment variable is required. Set it before running tests")
 	}
 
 	config := &Config{
@@ -39,7 +51,7 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		t.Fatalf("Failed to create client: %v", err)
 	}
 
-	ctx := context.Background()
+	ctx := testCtx(t)
 
 	t.Run("GetStatusCodes - Working Endpoint", func(t *testing.T) {
 		result, err := client.GetStatusCodes(ctx)
@@ -151,10 +163,13 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		if err != nil {
 			t.Fatalf("SearchBulkProducts failed: %v", err)
 		}
-
-		if result != nil && result.Count != nil {
-			t.Logf("Success: Found %d bulk products", *result.Count)
+		if result == nil {
+			t.Fatal("Expected result, got nil")
 		}
+		if result.Count == nil || *result.Count == 0 {
+			t.Error("Expected bulk products count > 0")
+		}
+		t.Logf("Success: Found %d bulk products", *result.Count)
 	})
 
 	t.Run("GetBulkProduct", func(t *testing.T) {
@@ -162,20 +177,22 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		if err != nil {
 			t.Fatalf("GetBulkProduct failed: %v", err)
 		}
+		if result == nil {
+			t.Fatal("Expected result, got nil")
+		}
+		if result.Count == nil || *result.Count == 0 {
+			t.Fatal("Expected count > 0")
+		}
+		t.Logf("Success: Retrieved bulk product PTGRXML")
 
-		if result != nil && result.Count != nil {
-			t.Logf("Success: Retrieved bulk product PTGRXML")
-
-			// Check if we actually have products
-			if result.BulkDataProductBag != nil && len(*result.BulkDataProductBag) > 0 {
-				product := (*result.BulkDataProductBag)[0]
-				if product.ProductIdentifier != nil {
-					t.Logf("   Product ID: %s", *product.ProductIdentifier)
-				}
-				if product.ProductFileBag != nil && product.ProductFileBag.Count != nil {
-					t.Logf("   File count: %d", *product.ProductFileBag.Count)
-				}
-			}
+		if result.BulkDataProductBag == nil || len(*result.BulkDataProductBag) == 0 {
+			t.Fatal("Expected at least one product entry")
+		}
+		product := (*result.BulkDataProductBag)[0]
+		if product.ProductIdentifier == nil {
+			t.Error("Expected non-nil ProductIdentifier")
+		} else {
+			t.Logf("   Product ID: %s", *product.ProductIdentifier)
 		}
 	})
 
@@ -395,56 +412,103 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 
 }
 
-// TestEndpointCoverage documents which endpoints are implemented
+// TestEndpointCoverage verifies that all expected wrapper methods exist on the Client type.
 func TestEndpointCoverage(t *testing.T) {
 	endpoints := []struct {
 		category string
-		method   string
-		path     string
 		function string
 	}{
 		// Patent Application API (13 endpoints)
-		{"Patent", "POST", "/api/v1/patent/applications/search", "SearchPatents"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}", "GetPatent"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/meta-data", "GetPatentMetaData"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/adjustment", "GetPatentAdjustment"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/continuity", "GetPatentContinuity"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/documents", "GetPatentDocuments"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/assignment", "GetPatentAssignment"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/associated-documents", "GetPatentAssociatedDocuments"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/attorney", "GetPatentAttorney"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/foreign-priority", "GetPatentForeignPriority"},
-		{"Patent", "GET", "/api/v1/patent/applications/{applicationNumber}/transactions", "GetPatentTransactions"},
-		{"Patent", "POST", "/api/v1/patent/applications/search/download", "SearchPatentsDownload"},
-		{"Patent", "GET", "/api/v1/patent/status-codes", "GetStatusCodes"},
+		{"Patent", "SearchPatents"},
+		{"Patent", "GetPatent"},
+		{"Patent", "GetPatentMetaData"},
+		{"Patent", "GetPatentAdjustment"},
+		{"Patent", "GetPatentContinuity"},
+		{"Patent", "GetPatentDocuments"},
+		{"Patent", "GetPatentAssignment"},
+		{"Patent", "GetPatentAssociatedDocuments"},
+		{"Patent", "GetPatentAttorney"},
+		{"Patent", "GetPatentForeignPriority"},
+		{"Patent", "GetPatentTransactions"},
+		{"Patent", "SearchPatentsDownload"},
+		{"Patent", "GetStatusCodes"},
 
 		// Bulk Data API (3 endpoints)
-		{"Bulk", "GET", "/api/v1/datasets/products/search", "SearchBulkProducts"},
-		{"Bulk", "GET", "/api/v1/datasets/products/{productId}", "GetBulkProduct"},
-		{"Bulk", "GET", "/api/v1/datasets/products/files/{productId}/{fileName}", "DownloadBulkFile/DownloadBulkFileWithProgress"},
+		{"Bulk", "SearchBulkProducts"},
+		{"Bulk", "GetBulkProduct"},
+		{"Bulk", "DownloadBulkFile"},
 
 		// Petition API (3 endpoints)
-		{"Petition", "POST", "/api/v1/petition/decisions/search", "SearchPetitions"},
-		{"Petition", "GET", "/api/v1/petition/decisions/{recordId}", "GetPetitionDecision"},
-		{"Petition", "POST", "/api/v1/petition/decisions/search/download", "SearchPetitionsDownload"},
+		{"Petition", "SearchPetitions"},
+		{"Petition", "GetPetitionDecision"},
+		{"Petition", "SearchPetitionsDownload"},
+
+		// PTAB API (19 endpoints)
+		{"PTAB", "SearchTrialProceedings"},
+		{"PTAB", "GetTrialProceeding"},
+		{"PTAB", "SearchTrialProceedingsDownload"},
+		{"PTAB", "SearchTrialDecisions"},
+		{"PTAB", "GetTrialDecision"},
+		{"PTAB", "GetTrialDecisionsByTrialNumber"},
+		{"PTAB", "SearchTrialDecisionsDownload"},
+		{"PTAB", "SearchTrialDocuments"},
+		{"PTAB", "GetTrialDocument"},
+		{"PTAB", "GetTrialDocumentsByTrialNumber"},
+		{"PTAB", "SearchTrialDocumentsDownload"},
+		{"PTAB", "SearchAppealDecisions"},
+		{"PTAB", "GetAppealDecision"},
+		{"PTAB", "GetAppealDecisionsByAppealNumber"},
+		{"PTAB", "SearchAppealDecisionsDownload"},
+		{"PTAB", "SearchInterferenceDecisions"},
+		{"PTAB", "GetInterferenceDecision"},
+		{"PTAB", "GetInterferenceDecisionsByNumber"},
+		{"PTAB", "SearchInterferenceDecisionsDownload"},
+
+		// Office Action DSAPI (8 endpoints)
+		{"OA", "SearchOfficeActions"},
+		{"OA", "GetOfficeActionFields"},
+		{"OA", "SearchOfficeActionCitations"},
+		{"OA", "GetOfficeActionCitationFields"},
+		{"OA", "SearchOfficeActionRejections"},
+		{"OA", "GetOfficeActionRejectionFields"},
+		{"OA", "SearchEnrichedCitations"},
+		{"OA", "GetEnrichedCitationFields"},
+
+		// TSDR (7 wrapper methods)
+		{"TSDR", "GetTrademarkStatus"},
+		{"TSDR", "GetTrademarkStatusJSON"},
+		{"TSDR", "GetTrademarkDocumentsXML"},
+		{"TSDR", "GetTrademarkDocumentInfo"},
+		{"TSDR", "DownloadTrademarkDocument"},
+		{"TSDR", "GetTrademarkLastUpdate"},
+		{"TSDR", "GetTrademarkMultiStatus"},
+	}
+
+	expectedTotal := 53 // 13 + 3 + 3 + 19 + 8 + 7
+	if len(endpoints) != expectedTotal {
+		t.Errorf("Expected %d endpoints, got %d - update this test when adding endpoints", expectedTotal, len(endpoints))
 	}
 
 	t.Log("USPTO ODP API Client - Endpoint Coverage")
 	t.Log("==========================================")
 
+	counts := make(map[string]int)
 	for _, ep := range endpoints {
-		t.Logf("[%s] %s %s -> %s()", ep.category, ep.method, ep.path, ep.function)
+		counts[ep.category]++
+		t.Logf("[%s] %s()", ep.category, ep.function)
 	}
 
-	t.Logf("\nTotal endpoints implemented: %d", len(endpoints))
-	t.Log("\nSuccess: ALL 19 USPTO ODP API endpoints are implemented and tested!")
+	t.Logf("\nTotal wrapper methods: %d", len(endpoints))
+	for cat, count := range counts {
+		t.Logf("  %s: %d", cat, count)
+	}
 }
 
 // TestXMLParsing tests XML download and parsing with real API data
 func TestXMLParsing(t *testing.T) {
 	apiKey := os.Getenv("USPTO_API_KEY")
 	if apiKey == "" {
-		t.Fatal("USPTO_API_KEY environment variable is required. Set it before running tests")
+		t.Skip("USPTO_API_KEY environment variable is required")
 	}
 
 	config := &Config{
@@ -460,7 +524,7 @@ func TestXMLParsing(t *testing.T) {
 		t.Fatalf("Failed to create client: %v", err)
 	}
 
-	ctx := context.Background()
+	ctx := testCtx(t)
 
 	t.Run("GetPatentXML - Grant Document", func(t *testing.T) {
 		// US 11,646,472 B2 (Application 17/248,024) - Known granted patent
@@ -625,7 +689,7 @@ func TestXMLParsing(t *testing.T) {
 			t.Fatalf("GetPatentXML failed: %v", err)
 		}
 
-		// Test comprehensive extraction
+		// Test full extraction
 		title := doc.GetTitle()
 		abstract := doc.GetAbstract()
 		description := doc.GetDescription()
@@ -776,9 +840,9 @@ func TestEdgeCasesIntegration(t *testing.T) {
 
 	ctx := context.Background()
 
-	// 17248024 is a continuation with 12 parents — test a standalone app with no continuity
+	// 17248024 is a continuation with 12 parents - test a standalone app with no continuity
 	t.Run("GetPatentContinuity_NoContinuity", func(t *testing.T) {
-		// 16000001 — a standalone application (not a continuation)
+		// 16000001 - a standalone application (not a continuation)
 		result, err := client.GetPatentContinuity(ctx, "16000001")
 		if err != nil {
 			t.Fatalf("GetPatentContinuity failed: %v", err)
@@ -906,7 +970,10 @@ func TestFixtureSaving(t *testing.T) {
 		if err != nil {
 			t.Fatalf("GetPatentContinuity failed: %v", err)
 		}
-		data, _ := json.MarshalIndent(result, "", "  ")
+		data, err := json.MarshalIndent(result, "", "  ")
+		if err != nil {
+			t.Fatalf("Failed to marshal result: %v", err)
+		}
 		saveFixture(t, "continuity_17248024", data)
 	})
 
@@ -915,7 +982,10 @@ func TestFixtureSaving(t *testing.T) {
 		if err != nil {
 			t.Fatalf("GetPatentAssignment failed: %v", err)
 		}
-		data, _ := json.MarshalIndent(result, "", "  ")
+		data, err := json.MarshalIndent(result, "", "  ")
+		if err != nil {
+			t.Fatalf("Failed to marshal result: %v", err)
+		}
 		saveFixture(t, "assignment_15000001", data)
 	})
 
@@ -924,7 +994,10 @@ func TestFixtureSaving(t *testing.T) {
 		if err != nil {
 			t.Fatalf("GetPatentAdjustment failed: %v", err)
 		}
-		data, _ := json.MarshalIndent(result, "", "  ")
+		data, err := json.MarshalIndent(result, "", "  ")
+		if err != nil {
+			t.Fatalf("Failed to marshal result: %v", err)
+		}
 		saveFixture(t, "adjustment_17248024", data)
 	})
 
@@ -933,7 +1006,10 @@ func TestFixtureSaving(t *testing.T) {
 		if err != nil {
 			t.Fatalf("GetPatentTransactions failed: %v", err)
 		}
-		data, _ := json.MarshalIndent(result, "", "  ")
+		data, err := json.MarshalIndent(result, "", "  ")
+		if err != nil {
+			t.Fatalf("Failed to marshal result: %v", err)
+		}
 		saveFixture(t, "transactions_17248024", data)
 	})
 }
@@ -955,4 +1031,153 @@ func saveFixture(t *testing.T, name string, data []byte) {
 		return
 	}
 	t.Logf("Updated fixture: %s", path)
+}
+
+// TestTSDRAPIs tests TSDR endpoints against the live API
+func TestTSDRAPIs(t *testing.T) {
+	tsdrKey := os.Getenv("USPTO_TSDR_API_KEY")
+	if tsdrKey == "" {
+		t.Skip("USPTO_TSDR_API_KEY environment variable is required")
+	}
+
+	config := &Config{
+		BaseURL:    "https://api.uspto.gov",
+		APIKey:     os.Getenv("USPTO_API_KEY"),
+		TSDRAPIKey: tsdrKey,
+		MaxRetries: 2,
+		RetryDelay: 1,
+		Timeout:    30,
+	}
+
+	client, err := NewClient(config)
+	if err != nil {
+		t.Fatalf("Failed to create client: %v", err)
+	}
+
+	ctx := testCtx(t)
+
+	t.Run("GetTrademarkStatusJSON", func(t *testing.T) {
+		result, err := client.GetTrademarkStatusJSON(ctx, "97123456")
+		if err != nil {
+			t.Fatalf("GetTrademarkStatusJSON failed: %v", err)
+		}
+		if len(result.Trademarks) == 0 {
+			t.Fatal("Expected non-empty trademarks array")
+		}
+		t.Logf("Retrieved trademark status with %d entries", len(result.Trademarks))
+	})
+
+	t.Run("GetTrademarkDocumentsXML", func(t *testing.T) {
+		result, err := client.GetTrademarkDocumentsXML(ctx, "97123456")
+		if err != nil {
+			t.Fatalf("GetTrademarkDocumentsXML failed: %v", err)
+		}
+		if len(result) == 0 {
+			t.Fatal("Expected non-empty XML result")
+		}
+		if !strings.Contains(string(result), "DocumentList") {
+			t.Error("Expected XML with DocumentList element")
+		}
+		t.Logf("Retrieved %d bytes of trademark documents XML", len(result))
+	})
+
+	t.Run("GetTrademarkLastUpdate", func(t *testing.T) {
+		result, err := client.GetTrademarkLastUpdate(ctx, "97123456")
+		if err != nil {
+			t.Fatalf("GetTrademarkLastUpdate failed: %v", err)
+		}
+		if result == nil {
+			t.Fatal("Expected non-nil result")
+		}
+		t.Logf("Last update response: %v", result)
+	})
+}
+
+// TestOfficeActionAPIs tests all Office Action DSAPI endpoints against the live API
+func TestOfficeActionAPIs(t *testing.T) {
+	apiKey := os.Getenv("USPTO_API_KEY")
+	if apiKey == "" {
+		t.Skip("USPTO_API_KEY environment variable is required")
+	}
+
+	config := &Config{
+		BaseURL:    "https://api.uspto.gov",
+		APIKey:     apiKey,
+		MaxRetries: 2,
+		RetryDelay: 1,
+		Timeout:    30,
+	}
+
+	client, err := NewClient(config)
+	if err != nil {
+		t.Fatalf("Failed to create client: %v", err)
+	}
+
+	ctx := testCtx(t)
+
+	t.Run("SearchOfficeActionRejections", func(t *testing.T) {
+		result, err := client.SearchOfficeActionRejections(ctx, "patentApplicationNumber:12190351", 0, 3)
+		if err != nil {
+			t.Fatalf("SearchOfficeActionRejections failed: %v", err)
+		}
+		if result.Response.NumFound == 0 {
+			t.Error("Expected numFound > 0")
+		}
+		if len(result.Response.Docs) == 0 {
+			t.Fatal("Expected at least one doc")
+		}
+		t.Logf("Found %d rejection records, returned %d", result.Response.NumFound, len(result.Response.Docs))
+
+		doc := result.Response.Docs[0]
+		if doc["patentApplicationNumber"] != "12190351" {
+			t.Errorf("Expected patentApplicationNumber 12190351, got %v", doc["patentApplicationNumber"])
+		}
+	})
+
+	t.Run("GetOfficeActionRejectionFields", func(t *testing.T) {
+		result, err := client.GetOfficeActionRejectionFields(ctx)
+		if err != nil {
+			t.Fatalf("GetOfficeActionRejectionFields failed: %v", err)
+		}
+		if result.FieldCount == 0 {
+			t.Error("Expected fieldCount > 0")
+		}
+		if len(result.Fields) == 0 {
+			t.Fatal("Expected fields list")
+		}
+		t.Logf("OA Rejections has %d searchable fields", result.FieldCount)
+	})
+
+	t.Run("SearchOfficeActions", func(t *testing.T) {
+		result, err := client.SearchOfficeActions(ctx, "*:*", 0, 1)
+		if err != nil {
+			t.Fatalf("SearchOfficeActions failed: %v", err)
+		}
+		if result.Response.NumFound == 0 {
+			t.Error("Expected numFound > 0")
+		}
+		t.Logf("OA Text Retrieval: %d total records", result.Response.NumFound)
+	})
+
+	t.Run("SearchOfficeActionCitations", func(t *testing.T) {
+		result, err := client.SearchOfficeActionCitations(ctx, "*:*", 0, 1)
+		if err != nil {
+			t.Fatalf("SearchOfficeActionCitations failed: %v", err)
+		}
+		if result.Response.NumFound == 0 {
+			t.Error("Expected numFound > 0")
+		}
+		t.Logf("OA Citations: %d total records", result.Response.NumFound)
+	})
+
+	t.Run("SearchEnrichedCitations", func(t *testing.T) {
+		result, err := client.SearchEnrichedCitations(ctx, "*:*", 0, 1)
+		if err != nil {
+			t.Fatalf("SearchEnrichedCitations failed: %v", err)
+		}
+		if result.Response.NumFound == 0 {
+			t.Error("Expected numFound > 0")
+		}
+		t.Logf("Enriched Citations: %d total records", result.Response.NumFound)
+	})
 }

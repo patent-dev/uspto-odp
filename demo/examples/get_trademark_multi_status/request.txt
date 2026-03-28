@@ -1,0 +1,5 @@
+Method: get_trademark_multi_status
+
+Parameters:
+  type: sn
+  numbers: 97123456,90001000

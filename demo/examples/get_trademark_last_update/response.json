@@ -1,0 +1,16 @@
+{
+  "caseUpdateInfo": [
+    {
+      "caseData": {
+        "caseProsecutionData": {
+          "lastModifiedDate": "2023-03-22"
+        },
+        "caseStatusData": {
+          "lastModifiedDate": "2023-03-22"
+        }
+      },
+      "name": "Serial Number",
+      "value": "97123456"
+    }
+  ]
+}

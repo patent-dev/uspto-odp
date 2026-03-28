@@ -2555,25 +2555,25 @@ components:
     PetitionDecisionIdentifierResponseBag:
       $ref: ./odp-common-base.yaml#/components/schemas/PetitionDecisionIdentifierResponseBag
    
-    # Trial – Proceedings
+    # Trial -Proceedings
     ProceedingDataResponse:
       $ref: ./trial-proceedings.yaml#/components/schemas/ProceedingDataResponse
     PatentTrialProceedingDataBag:
       $ref: ./trial-proceedings.yaml#/components/schemas/patentTrialProceedingDataBag
 
-    # Trial – Documents
+    # Trial -Documents
     DocumentDataResponse:
       $ref: ./trial-documents.yaml#/components/schemas/DocumentDataResponse
     PatentTrialDocumentDataBag:
       $ref: ./trial-documents.yaml#/components/schemas/patentTrialDocumentDataBag
 
-    # Trial – Decisions
+    # Trial -Decisions
     DecisionDataResponse:
       $ref: ./trial-decisions.yaml#/components/schemas/DecisionDataResponse
     PatentTrialDecisionDataBag:
       $ref: ./trial-decisions.yaml#/components/schemas/patentTrialDecisionDataBag
 
-    # Trial – Interferences (decisions)
+    # Trial -Interferences (decisions)
     InterferenceDecisionDataResponse:
       $ref: ./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse
 

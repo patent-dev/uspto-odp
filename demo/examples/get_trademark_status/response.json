@@ -1,0 +1,468 @@
+{
+  "trademarks": [
+    {
+      "divisional": {
+        "childOf": null,
+        "parentOfList": [],
+        "serialNumber": 97123456
+      },
+      "foreignInfoList": [],
+      "gsList": [
+        {
+          "classBasis": null,
+          "description": "Downloadable game software; downloadable computer programs and computer software for electronic transfer of digital tokens; downloadable computer software for use as a digital token wallet; downloadable software for enabling users to electronically create, store, send, receive, accept, and transmit digital tokens based on the blockchain technology; downloadable software for enabling users to exchange digital tokens for data; downloadable software for creating digital tokens using blockchain technology to facilitate the transfer of data between users, to allow users to post and view photos, videos, and audio files; downloadable electronic data files featuring non-fungible tokens used with blockchain technology; downloadable electronic data files featuring non-fungible tokens used with blockchain technology to represent a collectible item; downloadable electronic data files featuring non-fungible tokens used with blockchain technology for data storage and content access limitation; computer keyboards; mousepads",
+          "firstUseDate": null,
+          "firstUseDateDescription": null,
+          "firstUseInCommerceDate": null,
+          "firstUseInCommerceDateDescription": null,
+          "internationalClassPrime": true,
+          "internationalClasses": [
+            {
+              "code": "009",
+              "description": "Electrical and scientific apparatus"
+            }
+          ],
+          "primeClassCode": "009",
+          "pseudoClasses": [],
+          "serialNumber": 97123456,
+          "statusCode": "6",
+          "statusDate": "2021-11-19",
+          "statusDescription": "ACTIVE",
+          "usClasses": [
+            {
+              "code": "021",
+              "description": "Electrical Appratus, Machines, and Supplies"
+            },
+            {
+              "code": "023",
+              "description": "Cutlery, Machinery, and Tools, and Parts Thereof"
+            },
+            {
+              "code": "026",
+              "description": "Measuring and Scientific Appliances"
+            },
+            {
+              "code": "036",
+              "description": "Musical Instruments and Supplies"
+            },
+            {
+              "code": "038",
+              "description": "Prints and Publications"
+            }
+          ]
+        }
+      ],
+      "internationalData": false,
+      "parties": {
+        "ownerGroups": {
+          "10": [
+            {
+              "address1": "LegalInc Corporate Services Inc.",
+              "address2": "651 N Broad St., Ste 206",
+              "addressStateCountry": {
+                "iso": {
+                  "code": "US",
+                  "name": "UNITED STATES"
+                },
+                "isoRegion": {
+                  "code": "DE",
+                  "name": "DELAWARE"
+                },
+                "stateCountry": {
+                  "code": "DE",
+                  "name": "DELAWARE"
+                },
+                "wipo": null
+              },
+              "assignment": null,
+              "citizenship": {
+                "iso": {
+                  "code": "US",
+                  "name": "UNITED STATES"
+                },
+                "isoRegion": {
+                  "code": "DE",
+                  "name": "DELAWARE"
+                },
+                "stateCountry": {
+                  "code": "DE",
+                  "name": "DELAWARE"
+                },
+                "wipo": null
+              },
+              "city": "Middletown",
+              "composedOf": null,
+              "dbaAkaFormerly": null,
+              "emailList": {
+                "addresses": [
+                  "XXXX"
+                ],
+                "authIndicator": "Y"
+              },
+              "entityNum": 1,
+              "entityType": {
+                "code": 16,
+                "description": "LIMITED LIABILITY COMPANY"
+              },
+              "name": "Combo Labs, LLC",
+              "partyType": 10,
+              "partyTypeDescription": "ORIGINAL APPLICANT",
+              "reelFrame": null,
+              "serialNumber": 97123456,
+              "zip": "19709"
+            }
+          ],
+          "11": [
+            {
+              "address1": "COGENCY GLOBAL INC.",
+              "address2": "850 NEW BURTON RD SUITE 201",
+              "addressStateCountry": {
+                "iso": {
+                  "code": "US",
+                  "name": "UNITED STATES"
+                },
+                "isoRegion": {
+                  "code": "DE",
+                  "name": "DELAWARE"
+                },
+                "stateCountry": {
+                  "code": "DE",
+                  "name": "DELAWARE"
+                },
+                "wipo": null
+              },
+              "assignment": null,
+              "citizenship": {
+                "iso": {
+                  "code": "US",
+                  "name": "UNITED STATES"
+                },
+                "isoRegion": {
+                  "code": "DE",
+                  "name": "DELAWARE"
+                },
+                "stateCountry": {
+                  "code": "DE",
+                  "name": "DELAWARE"
+                },
+                "wipo": null
+              },
+              "city": "DOVER",
+              "composedOf": null,
+              "dbaAkaFormerly": null,
+              "emailList": {
+                "addresses": [
+                  "XXXX"
+                ],
+                "authIndicator": "Y"
+              },
+              "entityNum": 1,
+              "entityType": {
+                "code": 3,
+                "description": "CORPORATION"
+              },
+              "name": "CHIRU LABS, INC.",
+              "partyType": 11,
+              "partyTypeDescription": "SUBSEQUENT OWNER BEFORE PUBLICATION",
+              "reelFrame": null,
+              "serialNumber": 97123456,
+              "zip": "19904"
+            }
+          ]
+        }
+      },
+      "prosecutionHistory": [
+        {
+          "entryCode": "MAB2",
+          "entryDate": "2023-03-22T04:00:00.000+0000",
+          "entryDesc": "ABANDONMENT NOTICE E-MAILED - FAILURE TO RESPOND",
+          "entryNumber": 18,
+          "entryType": "E",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "MAB2",
+          "entryDate": "2023-03-22T04:00:00.000+0000",
+          "entryDesc": "ABANDONMENT NOTICE MAILED - FAILURE TO RESPOND",
+          "entryNumber": 17,
+          "entryType": "O",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "ABN2",
+          "entryDate": "2023-03-22T04:00:00.000+0000",
+          "entryDesc": "ABANDONMENT - FAILURE TO RESPOND OR LATE RESPONSE",
+          "entryNumber": 16,
+          "entryType": "O",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "CHAN",
+          "entryDate": "2022-09-30T04:00:00.000+0000",
+          "entryDesc": "APPLICANT/CORRESPONDENCE CHANGES (NON-RESPONSIVE) ENTERED",
+          "entryNumber": 15,
+          "entryType": "I",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "TCCA",
+          "entryDate": "2022-09-30T04:00:00.000+0000",
+          "entryDesc": "TEAS CHANGE OF CORRESPONDENCE RECEIVED",
+          "entryNumber": 14,
+          "entryType": "I",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "ARAA",
+          "entryDate": "2022-09-30T04:00:00.000+0000",
+          "entryDesc": "ATTORNEY/DOM.REP.REVOKED AND/OR APPOINTED",
+          "entryNumber": 13,
+          "entryType": "I",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "REAP",
+          "entryDate": "2022-09-30T04:00:00.000+0000",
+          "entryDesc": "TEAS REVOKE/APP/CHANGE ADDR OF ATTY/DOM REP RECEIVED",
+          "entryNumber": 12,
+          "entryType": "I",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "COAR",
+          "entryDate": "2022-09-30T04:00:00.000+0000",
+          "entryDesc": "TEAS CHANGE OF OWNER ADDRESS RECEIVED",
+          "entryNumber": 11,
+          "entryType": "I",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "GNRN",
+          "entryDate": "2022-09-07T04:00:00.000+0000",
+          "entryDesc": "NOTIFICATION OF NON-FINAL ACTION E-MAILED",
+          "entryNumber": 10,
+          "entryType": "O",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "GNRT",
+          "entryDate": "2022-09-07T04:00:00.000+0000",
+          "entryDesc": "NON-FINAL ACTION E-MAILED",
+          "entryNumber": 9,
+          "entryType": "O",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "CNRT",
+          "entryDate": "2022-09-07T04:00:00.000+0000",
+          "entryDesc": "NON-FINAL ACTION  WRITTEN",
+          "entryNumber": 8,
+          "entryType": "R",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "GNRN",
+          "entryDate": "2022-08-30T04:00:00.000+0000",
+          "entryDesc": "NOTIFICATION OF NON-FINAL ACTION E-MAILED",
+          "entryNumber": 7,
+          "entryType": "O",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "GNRT",
+          "entryDate": "2022-08-30T04:00:00.000+0000",
+          "entryDesc": "NON-FINAL ACTION E-MAILED",
+          "entryNumber": 6,
+          "entryType": "F",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "CNRT",
+          "entryDate": "2022-08-30T04:00:00.000+0000",
+          "entryDesc": "NON-FINAL ACTION  WRITTEN",
+          "entryNumber": 5,
+          "entryType": "R",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "DOCK",
+          "entryDate": "2022-08-23T04:00:00.000+0000",
+          "entryDesc": "ASSIGNED TO EXAMINER",
+          "entryNumber": 4,
+          "entryType": "D",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "ASGN",
+          "entryDate": "2022-03-09T05:00:00.000+0000",
+          "entryDesc": "AUTOMATIC UPDATE OF ASSIGNMENT OF OWNERSHIP",
+          "entryNumber": 3,
+          "entryType": "I",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "NWOS",
+          "entryDate": "2021-11-19T05:00:00.000+0000",
+          "entryDesc": "NEW APPLICATION OFFICE SUPPLIED DATA ENTERED",
+          "entryNumber": 2,
+          "entryType": "I",
+          "proceedingNum": 0
+        },
+        {
+          "entryCode": "NWAP",
+          "entryDate": "2021-11-17T05:00:00.000+0000",
+          "entryDesc": "NEW APPLICATION ENTERED",
+          "entryNumber": 1,
+          "entryType": "I",
+          "proceedingNum": 0
+        }
+      ],
+      "publication": {
+        "officialGazettes": [],
+        "serialNumber": 97123456
+      },
+      "relationshipBundleList": [],
+      "status": {
+        "amendPrincipal": false,
+        "amendSupplemental": false,
+        "attrnyDktNumber": "032854.7028",
+        "certificationMark": false,
+        "changeInReg": false,
+        "chargeToLocation": null,
+        "clsTotal": 5,
+        "collectiveMembershipMark": false,
+        "collectiveServiceMark": false,
+        "collectiveTradeMark": false,
+        "colorDrawingCurr": false,
+        "correction": "",
+        "correspondence": {
+          "address": {
+            "city": "Chicago",
+            "countryCode": "US",
+            "countryName": "UNITED STATES",
+            "line1": "2 North LaSalle Street, Suite 1700",
+            "postalCode": "60602",
+            "region": {
+              "iso": {
+                "code": "US",
+                "name": "UNITED STATES"
+              },
+              "isoRegion": {
+                "code": "IL",
+                "name": "ILLINOIS"
+              },
+              "stateCountry": {
+                "code": "IL",
+                "name": "ILLINOIS"
+              },
+              "wipo": null
+            }
+          },
+          "attorneyEmail": {
+            "addresses": [
+              "trademarks@nge.com"
+            ],
+            "authIndicator": "Y"
+          },
+          "attorneyName": "Michael G. Kelber",
+          "correspondantEmail": {
+            "addresses": [
+              "lhegarty@nge.com",
+              "marden@nge.com",
+              "trademarks@nge.com"
+            ],
+            "authIndicator": "Y"
+          },
+          "correspondantFax": "3122691747",
+          "correspondantPhone": "3122698000",
+          "firmName": "Neal, Gerber \u0026 Eisenberg LLP",
+          "freeFormAddress": [],
+          "individualFullName": "Michael G. Kelber"
+        },
+        "currLocationCd": "M3X",
+        "currLocationDt": "2023-03-22",
+        "currentLoc": "TMO LAW OFFICE 112 - EXAMINING ATTORNEY ASSIGNED",
+        "currentlyAsBaseApp": false,
+        "currentlyAsTeasPlusApp": false,
+        "currentlyAsTeasRfApp": false,
+        "dateAbandoned": "2023-03-08",
+        "designSearchList": [],
+        "extStatusDesc": "Abandoned because the applicant failed to respond or filed a late response to an Office action.  To view all documents in this file, click on the Trademark Document Retrieval link at the top of this page.",
+        "filed44d": false,
+        "filed44e": false,
+        "filed66a": false,
+        "filedAsBaseApp": false,
+        "filedAsTeasPlusApp": false,
+        "filedAsTeasRfApp": false,
+        "filedItu": true,
+        "filedNoBasis": false,
+        "filedUse": false,
+        "filingDate": "2021-11-13",
+        "intStatusDesc": null,
+        "ituAmended": false,
+        "ituCurr": true,
+        "lawOffAsgnCd": "M30",
+        "lawOffAssigned": "LAW OFFICE 112",
+        "markDrawDesc": "STANDARD CHARACTER MARK",
+        "markDrawingCd": "4",
+        "markElement": "AZUKI ZEN",
+        "newLawOffAsgnCd": "112",
+        "noBasisCurr": false,
+        "others": false,
+        "parentOf": [],
+        "phyLocation": null,
+        "phyLocationDt": null,
+        "physicalLocationHistory": [
+          {
+            "eventDate": "2021-11-17",
+            "physicalLocation": "OUT",
+            "physicalLocationDescription": "NO PHYSICAL FILE"
+          }
+        ],
+        "prevRegNumList": [],
+        "pseudoMark": null,
+        "publishedPrevRegMark": false,
+        "renewalFiled": false,
+        "sect15Ack": false,
+        "sect15Filed": false,
+        "sect44dAmended": false,
+        "sect44dCurr": false,
+        "sect44eAmended": false,
+        "sect44eCurr": false,
+        "sect66aCurr": false,
+        "sect71Acpt": false,
+        "sect71Filed": false,
+        "sect71PartialAcpt": false,
+        "sect8Acpt": false,
+        "sect8Filed": false,
+        "sect8PartialAcpt": false,
+        "section2f": false,
+        "section2fPartial": false,
+        "serialNumber": 97123456,
+        "serviceMark": false,
+        "staff": {
+          "chargeTo": null,
+          "examiner": {
+            "name": "BELL, JUSTIN T",
+            "number": null
+          },
+          "ituParalegal": null,
+          "lie": null,
+          "paralegal": null
+        },
+        "standardChar": true,
+        "status": 602,
+        "statusDate": "2023-03-22",
+        "supplementalRegister": false,
+        "tm5Status": 10,
+        "tm5StatusDef": "This trademark application was refused, dismissed, or invalidated by  the Office and this application is no longer active.",
+        "tm5StatusDesc": "DEAD/APPLICATION/Refused/Dismissed or Invalidated",
+        "trademark": true,
+        "translation": "The wording Azuki has no meaning in a foreign language.",
+        "usRegistrationNumber": "",
+        "useAmended": false,
+        "useCurr": false
+      }
+    }
+  ]
+}

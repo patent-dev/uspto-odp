@@ -1,20 +1,11 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	odp "github.com/patent-dev/uspto-odp"
 	"github.com/patent-dev/uspto-odp/generated"
 )
-
-func demoPetition(ctx context.Context, client *odp.Client) {
-	printHeader("Petition API Demonstrations")
-
-	demoSearchPetitions(ctx, client)
-	demoGetPetitionDecision(ctx, client)
-	demoSearchPetitionsDownload(ctx, client)
-}
 
 // demoPetitionWithContext runs all Petition demos with optional example saving
 func demoPetitionWithContext(dctx *DemoContext) {
@@ -23,18 +14,6 @@ func demoPetitionWithContext(dctx *DemoContext) {
 	demoSearchPetitionsCtx(dctx)
 	demoGetPetitionDecisionCtx(dctx)
 	demoSearchPetitionsDownloadCtx(dctx)
-}
-
-func demoSearchPetitions(ctx context.Context, client *odp.Client) {
-	printSubHeader("SearchPetitions")
-
-	result, err := client.SearchPetitions(ctx, "", 0, 5)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	printPetitionSearchResult(result)
 }
 
 func demoSearchPetitionsCtx(dctx *DemoContext) {
@@ -74,37 +53,6 @@ func printPetitionSearchResult(result *generated.PetitionDecisionResponseBag) {
 			fmt.Println()
 		}
 	}
-}
-
-func demoGetPetitionDecision(ctx context.Context, client *odp.Client) {
-	printSubHeader("GetPetitionDecision")
-
-	searchResult, err := client.SearchPetitions(ctx, "", 0, 1)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	var recordID string
-	if searchResult.PetitionDecisionDataBag != nil && len(*searchResult.PetitionDecisionDataBag) > 0 {
-		petition := (*searchResult.PetitionDecisionDataBag)[0]
-		if petition.PetitionDecisionRecordIdentifier != nil {
-			recordID = *petition.PetitionDecisionRecordIdentifier
-		}
-	}
-
-	if recordID == "" {
-		fmt.Println("No petition record ID found to demonstrate")
-		return
-	}
-
-	result, err := client.GetPetitionDecision(ctx, recordID, true)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	printPetitionDecisionResult(result)
 }
 
 func demoGetPetitionDecisionCtx(dctx *DemoContext) {
@@ -158,34 +106,14 @@ func printPetitionDecisionResult(result *generated.PetitionDecisionIdentifierRes
 	}
 }
 
-func demoSearchPetitionsDownload(ctx context.Context, client *odp.Client) {
-	printSubHeader("SearchPetitionsDownload")
-
-	req := generated.PetitionDecisionDownloadRequest{
-		Q: odp.StringPtr(""),
-		Pagination: &generated.Pagination{
-			Offset: odp.Int32Ptr(0),
-			Limit:  odp.Int32Ptr(5),
-		},
-	}
-
-	data, err := client.SearchPetitionsDownload(ctx, req)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	printDownloadResult(data)
-}
-
 func demoSearchPetitionsDownloadCtx(dctx *DemoContext) {
 	printSubHeader("SearchPetitionsDownload")
 
 	req := generated.PetitionDecisionDownloadRequest{
 		Q: odp.StringPtr(""),
 		Pagination: &generated.Pagination{
-			Offset: odp.Int32Ptr(0),
-			Limit:  odp.Int32Ptr(5),
+			Offset: ptrInt32(0),
+			Limit:  ptrInt32(5),
 		},
 	}
 

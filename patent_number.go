@@ -107,18 +107,18 @@ func NormalizePatentNumber(input string) (*PatentNumber, error) {
 
 		// Heuristics based on length
 		length := len(cleaned)
-		switch {
-		case length == 7:
+		switch length {
+		case 7:
 			// 7-digit grant number (e.g., 9123456)
 			result.Type = PatentNumberTypeGrant
-		case length == 8 || length == 9:
+		case 8, 9:
 			// 8-9 digit application number (e.g., 17248024)
 			// Note: 8 digits is ambiguous (could be recent grant or application).
 			// Without formatting clues (commas, slashes, kind codes), we default to
 			// application as both work with the API and applications are more common.
 			result.Type = PatentNumberTypeApplication
 			result.ApplicationNo = cleaned
-		case length == 11:
+		case 11:
 			// 11-digit publication number (e.g., 20250087686)
 			result.Type = PatentNumberTypePublication
 		default:

@@ -452,7 +452,7 @@ components:
             fileDownloadURI: 
               type: string
               example: '/download'
-        appelantData:
+        appellantData:
           type: object
           properties:
             applicationNumberText:
@@ -467,7 +467,7 @@ components:
             inventorName:
               type: string
               example: Sultan, Tarik et al
-            realPartyName:
+            realPartyInInterestName:
               type: string
               example: Unicorn Pharmaceuticals
             patentNumber:
@@ -482,10 +482,14 @@ components:
             publicationNumber:
               type: string
               example: 20210628467A1
-            techCenterNumber:
+            technologyCenterNumber:
               type: string
               example: RD00
-        requestorData:
+            grantDate:
+              type: string
+              format: date
+              example: '2022-05-27'
+        thirdPartyRequesterData:
           type: object
           properties:
             thirdPartyName:
@@ -509,15 +513,35 @@ components:
             documentOCRText:
               type: string
               example: Some OCR content
-            documentTypeCategory:
+            documentTypeDescriptionText:
               type: string
               example: Rehearing
-            downloadURI:
+            fileDownloadURI:
               type: string
               example: https://ptab.uspto.gov/appeal/document/download
+        decisionData:
+          type: object
+          properties:
+            appealOutcomeCategory:
+              type: string
+              example: 'sample'
+            statuteAndRuleBag:
+              type: array
+              items: { type: string }
+              example: ["37 CFR 42.100","37 CFR 43.100"]
+            decisionIssueDate:       { type: string, format: date, example: "2002-02-25" }
+            decisionTypeCategory:    { type: string, example: "Decision" }
+            issueTypeBag:
+              type: array
+              items: { type: string }
+              example: ["Substantive","Procedural"]
+
     AppealDecisionDataResponse:
       type: object
       properties:
+        requestIdentifier: 
+          type: string
+          example: 501eacc7-c785-4d85-96ac-a39f3f5533aa
         count:
           type: integer
           example: 1

@@ -5,20 +5,30 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math"
+	"math/rand"
+	"net"
 	"net/http"
 	"strings"
 	"time"
 
 	"github.com/patent-dev/uspto-odp/generated"
+	oa "github.com/patent-dev/uspto-odp/generated/oa"
+	tsdrgen "github.com/patent-dev/uspto-odp/generated/tsdr"
 )
 
 // Client is the main USPTO ODP API client
 type Client struct {
-	config    *Config
-	generated *generated.ClientWithResponses
+	config     *Config
+	httpClient *http.Client
+	generated  *generated.ClientWithResponses
+	oa         *oa.ClientWithResponses
+	tsdr       *tsdrgen.ClientWithResponses
 }
 
-// Config holds client configuration
+// Config holds client configuration.
+// Note: Timeout applies to all APIs (ODP, OA, TSDR) uniformly. If TSDR document
+// downloads need a longer timeout, create a separate Client with a higher Timeout.
 type Config struct {
 	BaseURL    string
 	APIKey     string
@@ -26,13 +36,17 @@ type Config struct {
 	MaxRetries int
 	RetryDelay int // seconds
 	Timeout    int // seconds
+
+	// TSDR (Trademark Status & Document Retrieval) - separate server + API key
+	TSDRBaseURL string // defaults to "https://tsdrapi.uspto.gov"
+	TSDRAPIKey  string // from https://account.uspto.gov/profile/api-manager
 }
 
 // DefaultConfig returns default configuration
 func DefaultConfig() *Config {
 	return &Config{
 		BaseURL:    "https://api.uspto.gov",
-		UserAgent:  "PatentDev/1.0",
+		UserAgent:  "PatentDev/1.4",
 		MaxRetries: 3,
 		RetryDelay: 1,
 		Timeout:    30,
@@ -45,40 +59,91 @@ func NewClient(config *Config) (*Client, error) {
 		config = DefaultConfig()
 	}
 
+	// Defensive copy to prevent mutation after construction
+	cfg := *config
+	config = &cfg
+
 	httpClient := &http.Client{
 		Timeout: time.Duration(config.Timeout) * time.Second,
 	}
 
-	requestEditor := generated.RequestEditorFn(func(ctx context.Context, req *http.Request) error {
+	// Shared request editor for ODP + OA (same auth header)
+	odpEditor := func(_ context.Context, req *http.Request) error {
 		req.Header.Set("User-Agent", config.UserAgent)
 		if config.APIKey != "" {
 			req.Header.Set("X-API-Key", config.APIKey)
 		}
 		return nil
-	})
+	}
 
 	genClient, err := generated.NewClientWithResponses(
 		config.BaseURL,
 		generated.WithHTTPClient(httpClient),
-		generated.WithRequestEditorFn(requestEditor),
+		generated.WithRequestEditorFn(generated.RequestEditorFn(odpEditor)),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create client: %w", err)
 	}
 
-	return &Client{
-		config:    config,
-		generated: genClient,
-	}, nil
+	oaClient, err := oa.NewClientWithResponses(
+		config.BaseURL,
+		oa.WithHTTPClient(httpClient),
+		oa.WithRequestEditorFn(oa.RequestEditorFn(odpEditor)),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create OA client: %w", err)
+	}
+
+	client := &Client{
+		config:     config,
+		httpClient: httpClient,
+		generated:  genClient,
+		oa:         oaClient,
+	}
+
+	// TSDR client (optional, only initialized if TSDRAPIKey is set)
+	if config.TSDRAPIKey != "" {
+		tsdrBaseURL := config.TSDRBaseURL
+		if tsdrBaseURL == "" {
+			tsdrBaseURL = "https://tsdrapi.uspto.gov"
+		}
+
+		tsdrEditor := tsdrgen.RequestEditorFn(func(_ context.Context, req *http.Request) error {
+			req.Header.Set("User-Agent", config.UserAgent)
+			req.Header.Set("USPTO-API-KEY", config.TSDRAPIKey)
+			return nil
+		})
+
+		tsdrClient, err := tsdrgen.NewClientWithResponses(
+			tsdrBaseURL,
+			tsdrgen.WithHTTPClient(httpClient),
+			tsdrgen.WithRequestEditorFn(tsdrEditor),
+		)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create TSDR client: %w", err)
+		}
+		client.tsdr = tsdrClient
+	}
+
+	return client, nil
 }
 
 // APIError represents an error returned by the USPTO API with status code
 type APIError struct {
 	StatusCode int
 	Message    string
+	Body       string // server response body for debugging
 }
 
 func (e *APIError) Error() string {
+	return e.Message
+}
+
+// Detail returns the error message with the server response body, if available.
+func (e *APIError) Detail() string {
+	if e.Body != "" {
+		return fmt.Sprintf("%s: %s", e.Message, e.Body)
+	}
 	return e.Message
 }
 
@@ -95,18 +160,48 @@ func isRetryableError(err error) bool {
 	if errors.As(err, &apiErr) {
 		return apiErr.IsRetryable()
 	}
-	return true // network errors, timeouts are retryable
+	// Only retry on network-level transient errors (timeouts, connection resets)
+	var netErr net.Error
+	if errors.As(err, &netErr) {
+		return netErr.Timeout()
+	}
+	// Connection refused, reset, etc.
+	var opErr *net.OpError
+	return errors.As(err, &opErr)
+}
+
+// checkStatusWithBody returns an APIError for non-2xx responses, including the response body for debugging.
+func checkStatusWithBody(statusCode int, body []byte) error {
+	if statusCode >= 200 && statusCode < 300 {
+		return nil
+	}
+	apiErr := &APIError{
+		StatusCode: statusCode,
+		Message:    fmt.Sprintf("API returned status %d", statusCode),
+	}
+	if len(body) > 0 {
+		apiErr.Body = truncatePreview(string(body), 512)
+	}
+	return apiErr
+}
+
+// truncatePreview returns s truncated to maxLen with "..." appended if truncated.
+func truncatePreview(s string, maxLen int) string {
+	if len(s) <= maxLen {
+		return s
+	}
+	return s[:maxLen] + "..."
 }
 
 func checkStatus(statusCode int) error {
-	if statusCode == http.StatusOK {
+	if statusCode >= 200 && statusCode < 300 {
 		return nil
 	}
 	return &APIError{StatusCode: statusCode, Message: fmt.Sprintf("API returned status %d", statusCode)}
 }
 
-// retryableRequest wraps requests with retry logic
-func (c *Client) retryableRequest(fn func() error) error {
+// retryableRequest wraps requests with retry logic, respecting context cancellation.
+func (c *Client) retryableRequest(ctx context.Context, fn func() error) error {
 	var lastErr error
 	for attempt := 0; attempt <= c.config.MaxRetries; attempt++ {
 		err := fn()
@@ -115,16 +210,48 @@ func (c *Client) retryableRequest(fn func() error) error {
 		}
 		lastErr = err
 
-		// Don't retry if error is not retryable (e.g., 404 Not Found)
 		if !isRetryableError(err) {
 			return err
 		}
 
 		if attempt < c.config.MaxRetries {
-			time.Sleep(time.Duration(c.config.RetryDelay*(attempt+1)) * time.Second)
+			// Exponential backoff: base * 2^attempt, with jitter
+			base := float64(c.config.RetryDelay)
+			delay := base * math.Pow(2, float64(attempt))
+			jitter := delay * 0.25 * rand.Float64()
+			wait := time.Duration(delay+jitter) * time.Second
+
+			select {
+			case <-time.After(wait):
+			case <-ctx.Done():
+				return fmt.Errorf("request cancelled during retry: %w", ctx.Err())
+			}
 		}
 	}
 	return fmt.Errorf("failed after %d retries: %w", c.config.MaxRetries, lastErr)
+}
+
+// drainClose reads remaining body bytes (for HTTP connection reuse) and closes.
+func drainClose(body io.ReadCloser) {
+	_, _ = io.Copy(io.Discard, body)
+	_ = body.Close()
+}
+
+// progressReader wraps an io.Reader with a progress callback.
+type progressReader struct {
+	r       io.Reader
+	written int64
+	total   int64
+	fn      func(bytesComplete, bytesTotal int64)
+}
+
+func (pr *progressReader) Read(p []byte) (int, error) {
+	n, err := pr.r.Read(p)
+	if n > 0 {
+		pr.written += int64(n)
+		pr.fn(pr.written, pr.total)
+	}
+	return n, err
 }
 
 // SearchPatents searches for patent applications
@@ -138,13 +265,13 @@ func (c *Client) SearchPatents(ctx context.Context, query string, offset, limit 
 	}
 
 	var resp *generated.PostApiV1PatentApplicationsSearchResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentApplicationsSearchWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -234,13 +361,13 @@ func (c *Client) GetPatent(ctx context.Context, patentNumber string) (*generated
 	}
 
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextResponse
-	err = c.retryableRequest(func() error {
+	err = c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -255,13 +382,13 @@ func (c *Client) GetPatent(ctx context.Context, patentNumber string) (*generated
 // GetPatentAdjustment retrieves patent term adjustment data.
 func (c *Client) GetPatentAdjustment(ctx context.Context, applicationNumber string) (*AdjustmentResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextAdjustmentWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -288,13 +415,13 @@ func (c *Client) GetPatentAdjustment(ctx context.Context, applicationNumber stri
 // GetPatentContinuity retrieves patent continuity data.
 func (c *Client) GetPatentContinuity(ctx context.Context, applicationNumber string) (*ContinuityResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextContinuityWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -341,13 +468,13 @@ func (c *Client) GetPatentContinuity(ctx context.Context, applicationNumber stri
 func (c *Client) GetPatentDocuments(ctx context.Context, applicationNumber string) (*generated.DocumentBag, error) {
 	params := &generated.GetApiV1PatentApplicationsApplicationNumberTextDocumentsParams{}
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextDocumentsWithResponse(ctx, applicationNumber, params)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -363,13 +490,13 @@ func (c *Client) GetPatentDocuments(ctx context.Context, applicationNumber strin
 func (c *Client) GetStatusCodes(ctx context.Context) (*generated.StatusCodeSearchResponse, error) {
 	params := &generated.GetApiV1PatentStatusCodesParams{}
 	var resp *generated.GetApiV1PatentStatusCodesResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentStatusCodesWithResponse(ctx, params)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -390,13 +517,13 @@ func (c *Client) SearchBulkProducts(ctx context.Context, query string, offset, l
 	}
 
 	var resp *generated.GetApiV1DatasetsProductsSearchResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1DatasetsProductsSearchWithResponse(ctx, params)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -412,13 +539,13 @@ func (c *Client) SearchBulkProducts(ctx context.Context, query string, offset, l
 func (c *Client) GetBulkProduct(ctx context.Context, productID string) (*generated.BdssResponseProductBag, error) {
 	params := &generated.GetApiV1DatasetsProductsProductIdentifierParams{}
 	var resp *generated.GetApiV1DatasetsProductsProductIdentifierResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1DatasetsProductsProductIdentifierWithResponse(ctx, productID, params)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -436,7 +563,7 @@ func (c *Client) validateFileDownloadURI(fileDownloadURI string) error {
 		return fmt.Errorf("fileDownloadURI cannot be empty")
 	}
 
-	expectedPrefix := "https://api.uspto.gov/api/v1/datasets/products/files/"
+	expectedPrefix := c.config.BaseURL + "/api/v1/datasets/products/files/"
 	if !strings.HasPrefix(fileDownloadURI, expectedPrefix) {
 		return fmt.Errorf("invalid FileDownloadURI: must start with %s (got: %s)", expectedPrefix, fileDownloadURI)
 	}
@@ -455,11 +582,6 @@ func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadU
 		return err
 	}
 
-	// Create HTTP client that follows redirects (since we're using the direct URL)
-	httpClient := &http.Client{
-		Timeout: time.Duration(c.config.Timeout) * time.Second,
-	}
-
 	req, err := http.NewRequestWithContext(ctx, "GET", fileDownloadURI, nil)
 	if err != nil {
 		return fmt.Errorf("creating request: %w", err)
@@ -471,11 +593,11 @@ func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadU
 		req.Header.Set("X-API-Key", c.config.APIKey)
 	}
 
-	resp, err := httpClient.Do(req)
+	resp, err := c.httpClient.Do(req)
 	if err != nil {
 		return fmt.Errorf("downloading file: %w", err)
 	}
-	defer func() { _ = resp.Body.Close() }()
+	defer drainClose(resp.Body)
 
 	if err := checkStatus(resp.StatusCode); err != nil {
 		return err
@@ -483,37 +605,13 @@ func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadU
 
 	expectedSize := resp.ContentLength
 
-	// Stream with progress tracking if callback provided
-	var bytesWritten int64
+	// Wrap with progress tracking if callback provided
+	var src io.Reader = resp.Body
 	if progress != nil {
-		// Create a pipe to track progress
-		pr, pw := io.Pipe()
-
-		// Track bytes in a goroutine
-		go func() {
-			defer pw.Close()
-			var written int64
-			buf := make([]byte, 32*1024) // 32KB buffer
-
-			for {
-				n, err := resp.Body.Read(buf)
-				if n > 0 {
-					written += int64(n)
-					progress(written, expectedSize)
-					if _, writeErr := pw.Write(buf[:n]); writeErr != nil {
-						return
-					}
-				}
-				if err != nil {
-					return
-				}
-			}
-		}()
-
-		bytesWritten, err = io.Copy(w, pr)
-	} else {
-		bytesWritten, err = io.Copy(w, resp.Body)
+		src = &progressReader{r: resp.Body, total: expectedSize, fn: progress}
 	}
+
+	bytesWritten, err := io.Copy(w, src)
 	if err != nil {
 		return fmt.Errorf("writing file data: %w", err)
 	}
@@ -536,13 +634,13 @@ func (c *Client) SearchPetitions(ctx context.Context, query string, offset, limi
 	}
 
 	var resp *generated.PostApiV1PetitionDecisionsSearchResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PetitionDecisionsSearchWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -557,13 +655,13 @@ func (c *Client) SearchPetitions(ctx context.Context, query string, offset, limi
 // GetPatentAssignment retrieves patent assignment data.
 func (c *Client) GetPatentAssignment(ctx context.Context, applicationNumber string) (*AssignmentResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextAssignmentWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -616,16 +714,16 @@ func (c *Client) GetPatentAssignment(ctx context.Context, applicationNumber stri
 	return result, nil
 }
 
-// GetPatentAssociatedDocuments retrieves associated documents
-func (c *Client) GetPatentAssociatedDocuments(ctx context.Context, applicationNumber string) (any, error) {
+// GetPatentAssociatedDocuments retrieves patent grant and publication XML file metadata.
+func (c *Client) GetPatentAssociatedDocuments(ctx context.Context, applicationNumber string) (*AssociatedDocumentsResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -634,19 +732,26 @@ func (c *Client) GetPatentAssociatedDocuments(ctx context.Context, applicationNu
 	if err != nil {
 		return nil, err
 	}
-	return resp.JSON200, nil
+
+	result := &AssociatedDocumentsResponse{ApplicationNumber: applicationNumber}
+	if resp.JSON200 != nil && resp.JSON200.PatentFileWrapperDataBag != nil && len(*resp.JSON200.PatentFileWrapperDataBag) > 0 {
+		bag := (*resp.JSON200.PatentFileWrapperDataBag)[0]
+		result.GrantDocumentMetaData = bag.GrantDocumentMetaData
+		result.PgpubDocumentMetaData = bag.PgpubDocumentMetaData
+	}
+	return result, nil
 }
 
-// GetPatentAttorney retrieves patent attorney information
-func (c *Client) GetPatentAttorney(ctx context.Context, applicationNumber string) (any, error) {
+// GetPatentAttorney retrieves patent attorney information.
+func (c *Client) GetPatentAttorney(ctx context.Context, applicationNumber string) (*generated.RecordAttorney, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextAttorneyWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -655,19 +760,22 @@ func (c *Client) GetPatentAttorney(ctx context.Context, applicationNumber string
 	if err != nil {
 		return nil, err
 	}
-	return resp.JSON200, nil
+	if resp.JSON200 != nil && resp.JSON200.PatentFileWrapperDataBag != nil && len(*resp.JSON200.PatentFileWrapperDataBag) > 0 {
+		return (*resp.JSON200.PatentFileWrapperDataBag)[0].RecordAttorney, nil
+	}
+	return nil, nil
 }
 
-// GetPatentForeignPriority retrieves foreign priority data
-func (c *Client) GetPatentForeignPriority(ctx context.Context, applicationNumber string) (any, error) {
+// GetPatentForeignPriority retrieves foreign priority data.
+func (c *Client) GetPatentForeignPriority(ctx context.Context, applicationNumber string) ([]generated.ForeignPriority, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -676,19 +784,25 @@ func (c *Client) GetPatentForeignPriority(ctx context.Context, applicationNumber
 	if err != nil {
 		return nil, err
 	}
-	return resp.JSON200, nil
+	if resp.JSON200 != nil && resp.JSON200.PatentFileWrapperDataBag != nil && len(*resp.JSON200.PatentFileWrapperDataBag) > 0 {
+		bag := (*resp.JSON200.PatentFileWrapperDataBag)[0]
+		if bag.ForeignPriorityBag != nil {
+			return *bag.ForeignPriorityBag, nil
+		}
+	}
+	return nil, nil
 }
 
-// GetPatentMetaData retrieves patent metadata
-func (c *Client) GetPatentMetaData(ctx context.Context, applicationNumber string) (any, error) {
+// GetPatentMetaData retrieves patent metadata (status, filing date, examiner, classification, etc.).
+func (c *Client) GetPatentMetaData(ctx context.Context, applicationNumber string) (*generated.ApplicationMetaData, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextMetaDataWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -697,19 +811,22 @@ func (c *Client) GetPatentMetaData(ctx context.Context, applicationNumber string
 	if err != nil {
 		return nil, err
 	}
-	return resp.JSON200, nil
+	if resp.JSON200 != nil && resp.JSON200.PatentFileWrapperDataBag != nil && len(*resp.JSON200.PatentFileWrapperDataBag) > 0 {
+		return (*resp.JSON200.PatentFileWrapperDataBag)[0].ApplicationMetaData, nil
+	}
+	return nil, nil
 }
 
 // GetPatentTransactions retrieves patent transaction history.
 func (c *Client) GetPatentTransactions(ctx context.Context, applicationNumber string) (*TransactionsResponse, error) {
 	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentApplicationsApplicationNumberTextTransactionsWithResponse(ctx, applicationNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -741,13 +858,13 @@ func (c *Client) GetPatentTransactions(ctx context.Context, applicationNumber st
 // SearchPatentsDownload downloads patent search results
 func (c *Client) SearchPatentsDownload(ctx context.Context, req generated.PatentDownloadRequest) ([]byte, error) {
 	var resp *generated.PostApiV1PatentApplicationsSearchDownloadResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentApplicationsSearchDownloadWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -765,13 +882,13 @@ func (c *Client) GetPetitionDecision(ctx context.Context, recordID string, inclu
 		IncludeDocuments: &includeDocuments,
 	}
 	var resp *generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierWithResponse(ctx, recordID, params)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -786,13 +903,13 @@ func (c *Client) GetPetitionDecision(ctx context.Context, recordID string, inclu
 // SearchPetitionsDownload downloads petition search results
 func (c *Client) SearchPetitionsDownload(ctx context.Context, req generated.PetitionDecisionDownloadRequest) ([]byte, error) {
 	var resp *generated.PostApiV1PetitionDecisionsSearchDownloadResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PetitionDecisionsSearchDownloadWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -834,13 +951,13 @@ func (c *Client) SearchTrialProceedings(ctx context.Context, query string, offse
 	}
 
 	var resp *generated.PostApiV1PatentTrialsProceedingsSearchResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentTrialsProceedingsSearchWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -855,13 +972,13 @@ func (c *Client) SearchTrialProceedings(ctx context.Context, query string, offse
 // GetTrialProceeding retrieves a specific PTAB trial proceeding by trial number
 func (c *Client) GetTrialProceeding(ctx context.Context, trialNumber string) (*generated.ProceedingDataResponse, error) {
 	var resp *generated.GetApiV1PatentTrialsProceedingsTrialNumberResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentTrialsProceedingsTrialNumberWithResponse(ctx, trialNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -884,13 +1001,13 @@ func (c *Client) SearchTrialDecisions(ctx context.Context, query string, offset,
 	}
 
 	var resp *generated.PostApiV1PatentTrialsDecisionsSearchResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentTrialsDecisionsSearchWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -905,13 +1022,13 @@ func (c *Client) SearchTrialDecisions(ctx context.Context, query string, offset,
 // GetTrialDecision retrieves a specific PTAB trial decision by document identifier
 func (c *Client) GetTrialDecision(ctx context.Context, documentIdentifier string) (*generated.DecisionDataResponse, error) {
 	var resp *generated.GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentTrialsDecisionsDocumentIdentifierWithResponse(ctx, documentIdentifier)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -934,13 +1051,13 @@ func (c *Client) SearchTrialDocuments(ctx context.Context, query string, offset,
 	}
 
 	var resp *generated.PostApiV1PatentTrialsDocumentsSearchResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentTrialsDocumentsSearchWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -955,13 +1072,13 @@ func (c *Client) SearchTrialDocuments(ctx context.Context, query string, offset,
 // GetTrialDocument retrieves a specific PTAB trial document by document identifier
 func (c *Client) GetTrialDocument(ctx context.Context, documentIdentifier string) (*generated.DocumentDataResponse, error) {
 	var resp *generated.GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentTrialsDocumentsDocumentIdentifierWithResponse(ctx, documentIdentifier)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -984,13 +1101,13 @@ func (c *Client) SearchAppealDecisions(ctx context.Context, query string, offset
 	}
 
 	var resp *generated.PostApiV1PatentAppealsDecisionsSearchResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentAppealsDecisionsSearchWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1005,13 +1122,13 @@ func (c *Client) SearchAppealDecisions(ctx context.Context, query string, offset
 // GetAppealDecision retrieves a specific PTAB appeal decision by document identifier
 func (c *Client) GetAppealDecision(ctx context.Context, documentIdentifier string) (*generated.AppealDecisionDataResponse, error) {
 	var resp *generated.GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentAppealsDecisionsDocumentIdentifierWithResponse(ctx, documentIdentifier)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1026,13 +1143,13 @@ func (c *Client) GetAppealDecision(ctx context.Context, documentIdentifier strin
 // GetAppealDecisionsByAppealNumber retrieves all decisions for a specific appeal number
 func (c *Client) GetAppealDecisionsByAppealNumber(ctx context.Context, appealNumber string) (*generated.AppealDecisionDataResponse, error) {
 	var resp *generated.GetApiV1PatentAppealsAppealNumberDecisionsResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentAppealsAppealNumberDecisionsWithResponse(ctx, appealNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1055,13 +1172,13 @@ func (c *Client) SearchInterferenceDecisions(ctx context.Context, query string, 
 	}
 
 	var resp *generated.PostApiV1PatentInterferencesDecisionsSearchResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentInterferencesDecisionsSearchWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1076,13 +1193,13 @@ func (c *Client) SearchInterferenceDecisions(ctx context.Context, query string, 
 // GetInterferenceDecision retrieves a specific PTAB interference decision by document identifier
 func (c *Client) GetInterferenceDecision(ctx context.Context, documentIdentifier string) (*generated.InterferenceDecisionDataResponse, error) {
 	var resp *generated.GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentInterferencesDecisionsDocumentIdentifierWithResponse(ctx, documentIdentifier)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1097,13 +1214,13 @@ func (c *Client) GetInterferenceDecision(ctx context.Context, documentIdentifier
 // GetInterferenceDecisionsByNumber retrieves all decisions for a specific interference number
 func (c *Client) GetInterferenceDecisionsByNumber(ctx context.Context, interferenceNumber string) (*generated.InterferenceDecisionDataResponse, error) {
 	var resp *generated.GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentInterferencesInterferenceNumberDecisionsWithResponse(ctx, interferenceNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1118,13 +1235,13 @@ func (c *Client) GetInterferenceDecisionsByNumber(ctx context.Context, interfere
 // GetTrialDecisionsByTrialNumber retrieves all decisions for a specific trial number
 func (c *Client) GetTrialDecisionsByTrialNumber(ctx context.Context, trialNumber string) (*generated.DecisionDataResponse, error) {
 	var resp *generated.GetApiV1PatentTrialsTrialNumberDecisionsResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentTrialsTrialNumberDecisionsWithResponse(ctx, trialNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1139,13 +1256,13 @@ func (c *Client) GetTrialDecisionsByTrialNumber(ctx context.Context, trialNumber
 // GetTrialDocumentsByTrialNumber retrieves all documents for a specific trial number
 func (c *Client) GetTrialDocumentsByTrialNumber(ctx context.Context, trialNumber string) (*generated.DocumentDataResponse, error) {
 	var resp *generated.GetApiV1PatentTrialsTrialNumberDocumentsResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.GetApiV1PatentTrialsTrialNumberDocumentsWithResponse(ctx, trialNumber)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1160,13 +1277,13 @@ func (c *Client) GetTrialDocumentsByTrialNumber(ctx context.Context, trialNumber
 // SearchTrialProceedingsDownload downloads trial proceedings search results
 func (c *Client) SearchTrialProceedingsDownload(ctx context.Context, req generated.DownloadRequest) ([]byte, error) {
 	var resp *generated.PostApiV1PatentTrialsProceedingsSearchDownloadResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentTrialsProceedingsSearchDownloadWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1181,13 +1298,13 @@ func (c *Client) SearchTrialProceedingsDownload(ctx context.Context, req generat
 // SearchTrialDecisionsDownload downloads trial decisions search results
 func (c *Client) SearchTrialDecisionsDownload(ctx context.Context, req generated.DownloadRequest) ([]byte, error) {
 	var resp *generated.PostApiV1PatentTrialsDecisionsSearchDownloadResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentTrialsDecisionsSearchDownloadWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1202,13 +1319,13 @@ func (c *Client) SearchTrialDecisionsDownload(ctx context.Context, req generated
 // SearchTrialDocumentsDownload downloads trial documents search results
 func (c *Client) SearchTrialDocumentsDownload(ctx context.Context, req generated.DownloadRequest) ([]byte, error) {
 	var resp *generated.PostApiV1PatentTrialsDocumentsSearchDownloadResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentTrialsDocumentsSearchDownloadWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1223,13 +1340,13 @@ func (c *Client) SearchTrialDocumentsDownload(ctx context.Context, req generated
 // SearchAppealDecisionsDownload downloads appeal decisions search results
 func (c *Client) SearchAppealDecisionsDownload(ctx context.Context, req generated.DownloadRequest) ([]byte, error) {
 	var resp *generated.PostApiV1PatentAppealsDecisionsSearchDownloadResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentAppealsDecisionsSearchDownloadWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
@@ -1244,13 +1361,13 @@ func (c *Client) SearchAppealDecisionsDownload(ctx context.Context, req generate
 // SearchInterferenceDecisionsDownload downloads interference decisions search results
 func (c *Client) SearchInterferenceDecisionsDownload(ctx context.Context, req generated.PatentDownloadRequest) ([]byte, error) {
 	var resp *generated.PostApiV1PatentInterferencesDecisionsSearchDownloadResponse
-	err := c.retryableRequest(func() error {
+	err := c.retryableRequest(ctx, func() error {
 		var err error
 		resp, err = c.generated.PostApiV1PatentInterferencesDecisionsSearchDownloadWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
-		if err := checkStatus(resp.StatusCode()); err != nil {
+		if err := checkStatusWithBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil

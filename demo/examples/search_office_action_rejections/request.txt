@@ -1,0 +1,4 @@
+Method: search_office_action_rejections
+
+Parameters:
+  criteria: patentApplicationNumber:12190351

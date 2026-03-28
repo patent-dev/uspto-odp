@@ -1,0 +1,4 @@
+Method: search_enriched_citations
+
+Parameters:
+  criteria: *:*

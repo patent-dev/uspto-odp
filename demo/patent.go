@@ -1,31 +1,11 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	odp "github.com/patent-dev/uspto-odp"
 	"github.com/patent-dev/uspto-odp/generated"
 )
-
-func demoPatent(ctx context.Context, client *odp.Client, patentNumber string) {
-	printHeader("Patent API Demonstrations")
-	fmt.Printf("Using patent: %s\n", patentNumber)
-
-	demoSearchPatents(ctx, client)
-	demoGetPatent(ctx, client, patentNumber)
-	demoGetPatentMetaData(ctx, client, patentNumber)
-	demoGetPatentAdjustment(ctx, client, patentNumber)
-	demoGetPatentContinuity(ctx, client, patentNumber)
-	demoGetPatentDocuments(ctx, client, patentNumber)
-	demoGetPatentAssignment(ctx, client, patentNumber)
-	demoGetPatentAssociatedDocuments(ctx, client, patentNumber)
-	demoGetPatentAttorney(ctx, client, patentNumber)
-	demoGetPatentForeignPriority(ctx, client, patentNumber)
-	demoGetPatentTransactions(ctx, client, patentNumber)
-	demoSearchPatentsDownload(ctx, client)
-	demoGetStatusCodes(ctx, client)
-}
 
 // demoPatentWithContext runs all Patent demos with optional example saving
 func demoPatentWithContext(dctx *DemoContext, patentNumber string) {
@@ -62,7 +42,7 @@ func demoPatentWithContext(dctx *DemoContext, patentNumber string) {
 
 // savePatentExample saves an example if saver is configured
 func (dctx *DemoContext) savePatentExample(name string, params map[string]string, response interface{}) {
-	if dctx.Saver == nil {
+	if dctx.SkipSave || dctx.Saver == nil {
 		return
 	}
 	requestDesc := FormatRequestDescription(name, params)
@@ -75,18 +55,6 @@ func (dctx *DemoContext) savePatentExample(name string, params map[string]string
 	if err := dctx.Saver.SaveExample(name, requestDesc, data, format); err != nil {
 		fmt.Printf("Warning: failed to save example for %s: %v\n", name, err)
 	}
-}
-
-func demoSearchPatents(ctx context.Context, client *odp.Client) {
-	printSubHeader("SearchPatents")
-
-	result, err := client.SearchPatents(ctx, "artificialIntelligence", 0, 5)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	printPatentSearchResult(result)
 }
 
 func demoSearchPatentsCtx(dctx *DemoContext) {
@@ -126,18 +94,6 @@ func printPatentSearchResult(result *generated.PatentDataResponse) {
 	}
 }
 
-func demoGetPatent(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatent")
-
-	result, err := client.GetPatent(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	printPatentResult(result)
-}
-
 func demoGetPatentCtx(dctx *DemoContext, patentNumber string) {
 	printSubHeader("GetPatent")
 
@@ -174,24 +130,6 @@ func printPatentResult(result *generated.PatentDataResponse) {
 	}
 }
 
-func demoGetPatentMetaData(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentMetaData")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentMetaData(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	fmt.Printf("Metadata: %s\n", formatJSON(result))
-}
-
 func demoGetPatentMetaDataCtx(dctx *DemoContext, appNumber string) {
 	printSubHeader("GetPatentMetaData")
 
@@ -203,24 +141,6 @@ func demoGetPatentMetaDataCtx(dctx *DemoContext, appNumber string) {
 
 	dctx.savePatentExample("get_patent_meta_data", map[string]string{"applicationNumber": appNumber}, result)
 	fmt.Printf("Metadata: %s\n", formatJSON(result))
-}
-
-func demoGetPatentAdjustment(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentAdjustment")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentAdjustment(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	fmt.Printf("Adjustment data: %s\n", formatJSON(result))
 }
 
 func demoGetPatentAdjustmentCtx(dctx *DemoContext, appNumber string) {
@@ -236,24 +156,6 @@ func demoGetPatentAdjustmentCtx(dctx *DemoContext, appNumber string) {
 	fmt.Printf("Adjustment data: %s\n", formatJSON(result))
 }
 
-func demoGetPatentContinuity(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentContinuity")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentContinuity(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	fmt.Printf("Continuity data: %s\n", formatJSON(result))
-}
-
 func demoGetPatentContinuityCtx(dctx *DemoContext, appNumber string) {
 	printSubHeader("GetPatentContinuity")
 
@@ -265,24 +167,6 @@ func demoGetPatentContinuityCtx(dctx *DemoContext, appNumber string) {
 
 	dctx.savePatentExample("get_patent_continuity", map[string]string{"applicationNumber": appNumber}, result)
 	fmt.Printf("Continuity data: %s\n", formatJSON(result))
-}
-
-func demoGetPatentDocuments(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentDocuments")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentDocuments(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	printPatentDocumentsResult(result)
 }
 
 func demoGetPatentDocumentsCtx(dctx *DemoContext, appNumber string) {
@@ -321,24 +205,6 @@ func printPatentDocumentsResult(result *generated.DocumentBag) {
 	}
 }
 
-func demoGetPatentAssignment(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentAssignment")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentAssignment(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	fmt.Printf("Assignment data: %s\n", formatJSON(result))
-}
-
 func demoGetPatentAssignmentCtx(dctx *DemoContext, appNumber string) {
 	printSubHeader("GetPatentAssignment")
 
@@ -350,24 +216,6 @@ func demoGetPatentAssignmentCtx(dctx *DemoContext, appNumber string) {
 
 	dctx.savePatentExample("get_patent_assignment", map[string]string{"applicationNumber": appNumber}, result)
 	fmt.Printf("Assignment data: %s\n", formatJSON(result))
-}
-
-func demoGetPatentAssociatedDocuments(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentAssociatedDocuments")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentAssociatedDocuments(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	fmt.Printf("Associated documents: %s\n", formatJSON(result))
 }
 
 func demoGetPatentAssociatedDocumentsCtx(dctx *DemoContext, appNumber string) {
@@ -383,24 +231,6 @@ func demoGetPatentAssociatedDocumentsCtx(dctx *DemoContext, appNumber string) {
 	fmt.Printf("Associated documents: %s\n", formatJSON(result))
 }
 
-func demoGetPatentAttorney(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentAttorney")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentAttorney(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	fmt.Printf("Attorney data: %s\n", formatJSON(result))
-}
-
 func demoGetPatentAttorneyCtx(dctx *DemoContext, appNumber string) {
 	printSubHeader("GetPatentAttorney")
 
@@ -412,24 +242,6 @@ func demoGetPatentAttorneyCtx(dctx *DemoContext, appNumber string) {
 
 	dctx.savePatentExample("get_patent_attorney", map[string]string{"applicationNumber": appNumber}, result)
 	fmt.Printf("Attorney data: %s\n", formatJSON(result))
-}
-
-func demoGetPatentForeignPriority(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentForeignPriority")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentForeignPriority(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	fmt.Printf("Foreign priority data: %s\n", formatJSON(result))
 }
 
 func demoGetPatentForeignPriorityCtx(dctx *DemoContext, appNumber string) {
@@ -445,24 +257,6 @@ func demoGetPatentForeignPriorityCtx(dctx *DemoContext, appNumber string) {
 	fmt.Printf("Foreign priority data: %s\n", formatJSON(result))
 }
 
-func demoGetPatentTransactions(ctx context.Context, client *odp.Client, patentNumber string) {
-	printSubHeader("GetPatentTransactions")
-
-	appNumber, err := client.ResolvePatentNumber(ctx, patentNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	result, err := client.GetPatentTransactions(ctx, appNumber)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	fmt.Printf("Transaction history: %s\n", formatJSON(result))
-}
-
 func demoGetPatentTransactionsCtx(dctx *DemoContext, appNumber string) {
 	printSubHeader("GetPatentTransactions")
 
@@ -476,34 +270,14 @@ func demoGetPatentTransactionsCtx(dctx *DemoContext, appNumber string) {
 	fmt.Printf("Transaction history: %s\n", formatJSON(result))
 }
 
-func demoSearchPatentsDownload(ctx context.Context, client *odp.Client) {
-	printSubHeader("SearchPatentsDownload")
-
-	req := generated.PatentDownloadRequest{
-		Q: odp.StringPtr("artificialIntelligence"),
-		Pagination: &generated.Pagination{
-			Offset: odp.Int32Ptr(0),
-			Limit:  odp.Int32Ptr(5),
-		},
-	}
-
-	data, err := client.SearchPatentsDownload(ctx, req)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	printDownloadResult(data)
-}
-
 func demoSearchPatentsDownloadCtx(dctx *DemoContext) {
 	printSubHeader("SearchPatentsDownload")
 
 	req := generated.PatentDownloadRequest{
 		Q: odp.StringPtr("artificialIntelligence"),
 		Pagination: &generated.Pagination{
-			Offset: odp.Int32Ptr(0),
-			Limit:  odp.Int32Ptr(5),
+			Offset: ptrInt32(0),
+			Limit:  ptrInt32(5),
 		},
 	}
 
@@ -530,18 +304,6 @@ func printDownloadResult(data []byte) {
 	} else {
 		fmt.Printf("Data:\n%s\n", string(data))
 	}
-}
-
-func demoGetStatusCodes(ctx context.Context, client *odp.Client) {
-	printSubHeader("GetStatusCodes")
-
-	result, err := client.GetStatusCodes(ctx)
-	if err != nil {
-		printError(err)
-		return
-	}
-
-	printStatusCodesResult(result)
 }
 
 func demoGetStatusCodesCtx(dctx *DemoContext) {

@@ -89,12 +89,34 @@ components:
     RegularPetitionerData:
       type: object
       properties:
+        applicationNumberText:
+          type: string
+          example: '16123456'
         counselName:
           type: string
           example: John D. Counsel
         realPartyInInterestName:
           type: string
           example: DEF Inc.
+        grantDate:
+          type: string
+          format: date
+          example: '2020-03-22'
+        groupArtUnitNumber:
+          type: string
+          example: '1790'
+        inventorName:
+          type: string
+          example: Emma Smith
+        patentNumber:
+          type: string
+          example: US10203040B2
+        patentOwnerName:
+          type: string
+          example: JKL Holdings
+        technologyCenterNumber:
+          type: string
+          example: '1700'
     RespondentData:
       type: object
       properties:
@@ -174,8 +196,8 @@ components:
           type: string
           example: petition.pdf
         documentNumber:
-          type: string
-          example: '1'
+          type: integer
+          example: 1
         documentSizeQuantity:
           type: integer
           example: 123456
@@ -188,7 +210,7 @@ components:
         documentTypeDescriptionText:
           type: string
           example: Petition Type
-        downloadURI:
+        fileDownloadURI:
           type: string
           format: uri
           example: https://ptab.uspto.gov/doc/100012345
@@ -198,15 +220,13 @@ components:
         mimeTypeIdentifier:
           type: string
           example: application/pdf
-        documentStatus:
-          type: string
-          example: public
     DecisionData:
       type: object
       properties:
         statuteAndRuleBag:
-          type: string
-          example: 37 CFR 42.100
+          type: array
+          items: { type: string }
+          example: ["37 CFR 42.100","37 CFR 43.100"]
         decisionIssueDate:
           type: string
           format: date
@@ -215,11 +235,15 @@ components:
           type: string
           example: Final Written Decision
         issueTypeBag:
-          type: string
-          example: Substantive
+          type: array
+          items: { type: string }
+          example: ["112","103"]
         trialOutcomeCategory:
           type: string
           example: Denied
+        appealOutcomeCategory:
+          type: string
+          example: Denied        
     FacetItem:
       type: object
       properties:
@@ -404,17 +428,17 @@ components:
         documentSizeQuantity:    { type: integer, format: int64, example: 45224 }
         documentOCRText:         { type: string, example: "The opinion in support of the decision..." }
         documentTitleText:       { type: string, example: "DECISION-103751" }
-        downloadURI:             { type: string, example: "https://example.org/path/to/document.pdf" }
+        fileDownloadURI:             { type: string, example: "https://example.org/path/to/document.pdf" }
         statuteAndRuleBag:
           type: array
           items: { type: string }
-          example: [""]
+          example: ["37 CFR 42.100","37 CFR 43.100"]
         decisionIssueDate:       { type: string, format: date, example: "2002-02-25" }
         decisionTypeCategory:    { type: string, example: "Decision" }
         issueTypeBag:
           type: array
           items: { type: string }
-          example: [""]
+          example: ["Substantive","Procedural"]
         interferenceOutcomeCategory:
           type: string
           example: "Interference"

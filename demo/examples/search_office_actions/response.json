@@ -1,0 +1,203 @@
+{
+  "response": {
+    "numFound": 3,
+    "start": 0,
+    "docs": [
+      {
+        "accessLevelCategory": [
+          "PUBLIC"
+        ],
+        "applicationDeemedWithdrawnDate": "0001-01-01T00:00:00",
+        "applicationStatusNumber": 150,
+        "applicationTypeCategory": [
+          "REGULAR"
+        ],
+        "bodyText": [
+          "\n\n    \n    PNG\n    media_image1.png\n    172\n    172\n    media_image1.png\n    Greyscale\nUnited States Patent and Trademark Office    \n        \n            \n                                \n            \n        \n    \n\nCommissioner for Patents\nUnited States Patent and Trademark Office\nP.O. Box 1450\nAlexandria, VA 22313-1450\nwww.uspto.gov\n\n\n\n\n\nIn re Application of\nVISCO, STEVEN J., et al.\nApplication No.:  17/248,024\nFiled:  January 05, 2021\nAttorney Docket No.: PLUSP040X1C4US \n:\n:\n:                        NOTICE     \n:\n:\n\n\n\n\nThis is a notice regarding the renewed request for acceptance of a fee deficiency submission under 37 CFR 1.28(c) filed July 07, 2023.  \n\nThe Office no longer investigates or rejects original or reissue applications under 37 CFR 1.56.  1098 Off. Gaz. Pat. Office 502 (January 3, 1989).  Therefore, nothing in this Notice is intended to imply that an investigation was done.  \n\nThe fee deficiency submission under 37 CFR 1.28(c) is hereby ACCEPTED.\n\nThis application is no longer entitled to small entity status.  Accordingly, all future fees paid in this application must be paid at the undiscounted rate. \n\nInquiries related to this communication should be directed to Dale Hall, Paralegal Specialist at (571) 272-3586. \n\n\n\n/Dale A. Hall/Paralegal Specialist, OPET                                                                                                                                                                                                        \n\n\n    \n        \n            \n    \n"
+        ],
+        "createDateTime": "2025-01-04T23:00:34",
+        "customerNumber": 22434,
+        "documentActiveIndicator": [
+          "0"
+        ],
+        "effectiveFilingDate": "0001-01-01T00:00:00",
+        "examinerEmployeeNumber": [
+          "76667 "
+        ],
+        "filingDate": "2021-01-05T00:00:00",
+        "grantDate": "2023-05-09T00:00:00",
+        "groupArtUnitNumber": 1727,
+        "id": "23773da14300892846fef406cdeb4cb1b364f41cc76b17f2effb1029",
+        "inventionSubjectMatterCategory": [
+          "UTL"
+        ],
+        "inventionTitle": [
+          "MAKING LITHIUM METAL - SEAWATER BATTERY CELLS HAVING PROTECTED LITHIUM ELECTRODES"
+        ],
+        "lastModifiedTimestamp": "2023-10-01T04:20:06",
+        "legacyCMSIdentifier": [
+          "000002ef"
+        ],
+        "legacyDocumentCodeIdentifier": [
+          "PETDEC"
+        ],
+        "nationalClass": [
+          "429"
+        ],
+        "nationalSubclass": [
+          "144000"
+        ],
+        "obsoleteDocumentIdentifier": [
+          "LN4VBTHCXBLUEX2"
+        ],
+        "patentApplicationConfirmationNumber": 4114,
+        "patentApplicationNumber": [
+          "17248024"
+        ],
+        "patentNumber": [
+          "11646472"
+        ],
+        "sourceSystemName": [
+          "OC"
+        ],
+        "submissionDate": "2023-10-03T00:00:00",
+        "techCenter": [
+          "1700"
+        ],
+        "workGroup": [
+          "1720"
+        ]
+      },
+      {
+        "accessLevelCategory": [
+          "PUBLIC"
+        ],
+        "applicationDeemedWithdrawnDate": "0001-01-01T00:00:00",
+        "applicationStatusNumber": 93,
+        "applicationTypeCategory": [
+          "REGULAR"
+        ],
+        "bodyText": [
+          "\n\n    Notice of Pre-AIA  or AIA  Status\nThe present application is being examined under the pre-AIA  first to invent provisions. \nInformation Disclosure Statement\nThe information disclosure statement (IDS) submitted on 3/26/21 has been considered by the examiner.\nAllowable Subject Matter\nClaims 21-37 are allowed.\n\tThis application is a continuation of allowed application 16/695,054, which is a continuation of allowed application 15/487,364.  See the parent applications for the reasons for allowance with respect to the protected lithium metal electrode recited by at least claim 21.\nAny inquiry concerning this communication or earlier communications from the examiner should be directed to TRACY DOVE whose telephone number is (571)272-1285. The examiner can normally be reached M-F 9:00-3:00.\nExaminer interviews are available via telephone, in-person, and video conferencing using a USPTO supplied web-based collaboration tool. To schedule an interview, applicant is encouraged to use the USPTO Automated Interview Request (AIR) at http://www.uspto.gov/interviewpractice.\nIf attempts to reach the examiner by telephone are unsuccessful, the examiner’s supervisor, Barbara Gilliam can be reached on 571-272-1330. The fax phone number for the organization where this application or proceeding is assigned is 571-273-8300.\nInformation regarding the status of published or unpublished applications may be obtained from Patent Center. Unpublished application information in Patent Center is available to registered users. To file and manage patent submissions in Patent Center, visit: https://patentcenter.uspto.gov. Visit https://www.uspto.gov/patents/apply/patent-center for more information about Patent Center and https://www.uspto.gov/patents/docx for information about filing in DOCX format. For additional questions, contact the Electronic Business Center (EBC) at 866-217-9197 (toll-free). If you would like assistance from a USPTO Customer Service Representative, call 800-786-9199 (IN USA OR CANADA) or 571-272-1000.\n\n\n/TRACY M DOVE/Primary Examiner, Art Unit 1727                                                                                                                                                                                                        \n\n\n    \n        \n            \n    \n"
+        ],
+        "createDateTime": "2025-01-04T23:00:34",
+        "customerNumber": 22434,
+        "documentActiveIndicator": [
+          "0"
+        ],
+        "effectiveFilingDate": "0001-01-01T00:00:00",
+        "examinerEmployeeNumber": [
+          "76667 "
+        ],
+        "filingDate": "2021-01-05T00:00:00",
+        "grantDate": "0001-01-01T00:00:00",
+        "groupArtUnitNumber": 1727,
+        "id": "e5843f1f20afecd59e160ae68e29eb8296b6a01e9ab3d1991795e3d1",
+        "inventionSubjectMatterCategory": [
+          "UTL"
+        ],
+        "inventionTitle": [
+          "MAKING LITHIUM METAL - SEAWATER BATTERY CELLS HAVING PROTECTED LITHIUM ELECTRODES"
+        ],
+        "lastModifiedTimestamp": "2022-12-30T23:55:47",
+        "legacyCMSIdentifier": [
+          "000002ef"
+        ],
+        "legacyDocumentCodeIdentifier": [
+          "NOA"
+        ],
+        "nationalClass": [
+          "429"
+        ],
+        "nationalSubclass": [
+          "144000"
+        ],
+        "obsoleteDocumentIdentifier": [
+          "LC92E2KNXBLUEX1"
+        ],
+        "patentApplicationConfirmationNumber": 4114,
+        "patentApplicationNumber": [
+          "17248024"
+        ],
+        "patentNumber": [
+          " "
+        ],
+        "sourceSystemName": [
+          "OC"
+        ],
+        "submissionDate": "2023-01-03T00:00:00",
+        "techCenter": [
+          "1700"
+        ],
+        "workGroup": [
+          "1720"
+        ]
+      },
+      {
+        "accessLevelCategory": [
+          "PUBLIC"
+        ],
+        "applicationDeemedWithdrawnDate": "0001-01-01T00:00:00",
+        "applicationStatusNumber": 150,
+        "applicationTypeCategory": [
+          "REGULAR"
+        ],
+        "bodyText": [
+          "\n\n    \n    PNG\n    media_image1.png\n    172\n    172\n    media_image1.png\n    Greyscale\nUnited States Patent and Trademark Office    \n        \n            \n                                \n            \n        \n    \n\nCommissioner for Patents\nUnited States Patent and Trademark Office\nP.O. Box 1450\nAlexandria, VA 22313-1450\nwww.uspto.gov\n\n\n\n\nIn re Patent No. 11,646,472\nIssue Date: 9 May 2023\nApplication No. 17/248,024\nFiling or 371(c) Date: 5 Jan 2021\nAttorney Docket No. PLUSP040X1C4US \n\n\n:\n:\tDECISION ON PETITION\n:\n:\n:\n\n\n\nThis is a Notice regarding the request for acceptance of a fee deficiency submission under 37 CFR 1.28(c) filed March 28, 2023. \n\nThe Office no longer investigates or rejects original or reissue applications under 37 CFR 1.56.  1098 Off. Gaz. Pat. Office 502 (January 3, 1989).  Therefore, nothing in this Notice is intended to imply that an investigation was done. \n\nThe fee deficiency submission under 37 CFR 1.28(c) is NOT ACCEPTED.\n\nApplicant should note that 37 CFR 1.28(c) states in part: If status as a small entity is established in good faith, and fees as a small entity are paid in good faith, in any application or patent, and it is later discovered that such status as a small entity was established in error, or that through error the Office was not notified of a loss of entitlement to small entity status as required by § 1.27(g)(2), the error will be excused upon compliance with the separate submission and itemization.  See 37 CFR 1.28(c)(2)(ii).\n\nThe itemization must include the following information:\n\n\t(A)    Each particular type of fee that was erroneously paid as a small entity, \n(e.g., basic statutory filing fee, two-month extension of time fee) along with the                                                                                                                                                        current fee amount for a non-small entity;\n\n(B)     The small entity fee actually paid, and when. This will permit the Office to differentiate, for example, between two one-month extension of time fees erroneously paid as a small entity but on different dates;\n\n\t(C)     The deficiency owed amount (for each fee erroneously paid); and\n\n(D)     The total deficiency payment owed, which is the sum or total of the individual deficiency owed amounts set forth in paragraph (c)(2)(ii) of this section.\n\nApplicant has not met the requirement of item (A), which includes stating the current fee amount for a non-small entity, and additionally has not met the requirement of item (B), which includes stating the small entity fee actually paid, and the date on which it was paid.\n\nApplicant has stated the wrong fee types for the fees previously paid. Furthermore, the fee amounts stated do not match the paid fees (see in itemization: previous fee paid for 2311, utility examination fee and previous fee paid for 2111, utility search fee).\n\nApplicant should submit the itemization within ONE (1) MONTH from the mail date of this Notice.  This time limit is non-extendable.  Failure to timely respond may result in the return of the fee deficiency paper, at the option of the Office.\n\nFurther correspondence with respect to this matter should be addressed as follows:\n\nBy mail:\t\tMail Stop PETITION\n\t\t\tCommissioner for Patents\n\t\t\tP. O. Box 1450\n\t\t\tAlexandria, VA  22313-1450\n\nBy FAX:\t\t(571) 273-8300\n\t\t\tATTN: Office of Petitions\n\nBy hand:\t\tU. S. Patent and Trademark Office\n\tCustomer Service Window, Mail Stop Petitions \nRandolph Building\n401 Dulany Street\nAlexandria, VA  22314\n\nBy internet:\t\tPatent Electronic Filing System1 \n\nTelephone inquiries regarding this decision should be directed to Sarvajna Kalva at 571-270-0899. All other inquiries concerning the examination or status of the application are accessible in the Patent Electronic Filing System.[1] \n\n\n/JONYA SMALLS/\nJonya SmallsLead Paralegal Specialist, OPET                                                                                                                                                                                                        \n\n\n    \n        \n            \n        \n            \n    \n\n    \n        \n        [1][1] https://www.uspto.gov/patents/apply (for help using Patent Electronic Filing System call the Patent Electronic Business Center at (866) 217-9197).\n        \n    \n"
+        ],
+        "createDateTime": "2025-01-04T23:00:34",
+        "customerNumber": 22434,
+        "documentActiveIndicator": [
+          "0"
+        ],
+        "effectiveFilingDate": "0001-01-01T00:00:00",
+        "examinerEmployeeNumber": [
+          "76667 "
+        ],
+        "filingDate": "2021-01-05T00:00:00",
+        "grantDate": "2023-05-09T00:00:00",
+        "groupArtUnitNumber": 1727,
+        "id": "acdcbcdf4b084a43a4fae80b67a5960edbab9bf92bbec5faff1af9a4",
+        "inventionSubjectMatterCategory": [
+          "UTL"
+        ],
+        "inventionTitle": [
+          "MAKING LITHIUM METAL - SEAWATER BATTERY CELLS HAVING PROTECTED LITHIUM ELECTRODES"
+        ],
+        "lastModifiedTimestamp": "2023-09-09T04:19:51",
+        "legacyCMSIdentifier": [
+          "000002ef"
+        ],
+        "legacyDocumentCodeIdentifier": [
+          "PETDEC"
+        ],
+        "nationalClass": [
+          "429"
+        ],
+        "nationalSubclass": [
+          "144000"
+        ],
+        "obsoleteDocumentIdentifier": [
+          "LJD7AV6UGREENX3"
+        ],
+        "patentApplicationConfirmationNumber": 4114,
+        "patentApplicationNumber": [
+          "17248024"
+        ],
+        "patentNumber": [
+          "11646472"
+        ],
+        "sourceSystemName": [
+          "OC"
+        ],
+        "submissionDate": "2023-06-28T00:00:00",
+        "techCenter": [
+          "1700"
+        ],
+        "workGroup": [
+          "1720"
+        ]
+      }
+    ]
+  }
+}

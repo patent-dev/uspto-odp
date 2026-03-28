@@ -1,0 +1,290 @@
+openapi: 3.0.1
+info:
+    title: USPTO Office Action APIs (DSAPI)
+    description: "Combined Office Action APIs: Text Retrieval, Citations, Rejections, and Enriched Citations. These use the DSAPI pattern (form-encoded POST with Lucene/Solr queries)."
+    contact:
+        name: Open Data Portal
+        email: data@uspto.gov
+        url: https://data.uspto.gov/apis/getting-started
+    version: 1.0.0
+servers:
+    - url: https://api.uspto.gov
+security:
+    - ApiKeyAuth: []
+tags: []
+paths:
+    /api/v1/patent/oa/oa_actions/v1/fields:
+        get:
+            tags:
+                - oa_actions
+            summary: Provides the general information about the API and the list of fields that can be used to query the dataset.
+            description: This GET API returns the list of all the searchable field names that are in the oa_actions. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+            operationId: oa-actions-list-fields
+            parameters: []
+            responses:
+                "200":
+                    description: The dataset api for the given version is found and it is accessible to consume.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                "404":
+                    description: The combination of dataset name and version is not found in the system or it is not published yet to be consumed by public.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+    /api/v1/patent/oa/oa_actions/v1/records:
+        post:
+            tags:
+                - oa_actions
+            summary: Provides search capability for the data set with the given search criteria.
+            description: This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+            operationId: oa-actions-search
+            parameters: []
+            requestBody:
+                content:
+                    application/x-www-form-urlencoded:
+                        schema:
+                            required:
+                                - criteria
+                            type: object
+                            properties:
+                                criteria:
+                                    type: string
+                                    description: "Uses Lucene Query Syntax in the format of propertyName:value or propertyName:[num1 TO num2]. Please refer 'docs' element in the API response for the property names and use a query syntax based on appropriate data type of the property."
+                                    default: '*:*'
+                                start:
+                                    type: integer
+                                    description: Starting record number. Default value is 0.
+                                    format: int32
+                                    default: 0
+                                rows:
+                                    type: integer
+                                    description: "Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset."
+                                    format: int32
+                                    default: 100
+                required: true
+            responses:
+                "200":
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    additionalProperties:
+                                        type: object
+                                        properties: {}
+                "404":
+                    description: No matching record found for the given criteria.
+                    content: {}
+    /api/v1/patent/oa/oa_citations/v2/fields:
+        get:
+            tags:
+                - oa_citations
+            summary: Provides the general information about the API and the list of fields that can be used to query the dataset.
+            description: This GET API returns the list of all the searchable field names that are in the oa_citations. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+            operationId: oa-citations-list-fields
+            parameters: []
+            responses:
+                "200":
+                    description: The dataset api for the given version is found and it is accessible to consume.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                "404":
+                    description: The combination of dataset name and version is not found in the system or it is not published yet to be consumed by public.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+    /api/v1/patent/oa/oa_citations/v2/records:
+        post:
+            tags:
+                - oa_citations
+            summary: Provides search capability for the data set with the given search criteria.
+            description: This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+            operationId: oa-citations-search
+            parameters: []
+            requestBody:
+                content:
+                    application/x-www-form-urlencoded:
+                        schema:
+                            required:
+                                - criteria
+                            type: object
+                            properties:
+                                criteria:
+                                    type: string
+                                    description: "Uses Lucene Query Syntax in the format of propertyName:value or propertyName:[num1 TO num2]. Please refer 'docs' element in the API response for the property names and use a query syntax based on appropriate data type of the property."
+                                    default: '*:*'
+                                start:
+                                    type: integer
+                                    description: Starting record number. Default value is 0.
+                                    format: int32
+                                    default: 0
+                                rows:
+                                    type: integer
+                                    description: "Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset."
+                                    format: int32
+                                    default: 100
+                required: true
+            responses:
+                "200":
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    additionalProperties:
+                                        type: object
+                                        properties: {}
+                "404":
+                    description: No matching record found for the given criteria.
+                    content: {}
+    "/api/v1/patent/oa/oa_rejections/v2/fields":
+        get:
+            tags:
+                - oa_rejections
+            summary: Provides the general information about the API and the list of fields that can be used to query the dataset.
+            description: This GET API returns the list of all the searchable field names that are in the oa_rejections. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+            operationId: oa-rejections-list-fields
+            parameters: []
+            responses:
+                '200':
+                    description: The dataset api for the given version is found and it is accessible to consume.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                '404':
+                    description: The combination of dataset name and version is not found in the system or it is not published yet to be consumed by public.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+    /api/v1/patent/oa/oa_rejections/v2/records:
+        post:
+            tags:
+                - oa_rejections
+            summary: Provides search capability for the data set with the given search criteria.
+            description: This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+            operationId: oa-rejections-search
+            parameters: []
+            requestBody:
+                content:
+                    application/x-www-form-urlencoded:
+                        schema:
+                            required:
+                                - criteria
+                            type: object
+                            properties:
+                                criteria:
+                                    type: string
+                                    description: Uses Lucene Query Syntax in the format of propertyName:value or propertyName:[num1 TO num2]. Please refer 'docs' element in the API response for the property names and use a query syntax based on appropriate data type of the property.
+                                    default: "*:*"
+                                start:
+                                    type: integer
+                                    description: Starting record number. Default value is 0.
+                                    format: int32
+                                    default: 0
+                                rows:
+                                    type: integer
+                                    description: Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset.
+                                    format: int32
+                                    default: 100
+                required: true
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    additionalProperties:
+                                        type: object
+                                        properties: {}
+                '404':
+                    description: No matching record found for the given criteria.
+                    content: {}
+    /api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields:
+        get:
+            tags:
+                - enriched_cited_reference_metadata
+            summary: Provides the general information about the API and the list of fields that can be used to query the dataset.
+            description: This GET API returns the list of all the searchable field names that are in the enriched_cited_reference_metadata. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+            operationId: enriched-citations-list-fields
+            parameters: []
+            responses:
+                "200":
+                    description: The dataset api for the given version is found and it is accessible to consume.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                "404":
+                    description: The combination of dataset name and version is not found in the system or it is not published yet to be consumed by public.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+    /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records:
+        post:
+            tags:
+                - enriched_cited_reference_metadata
+            summary: Provides search capability for the data set with the given search criteria.
+            description: This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+            operationId: enriched-citations-search
+            parameters: []
+            requestBody:
+                content:
+                    application/x-www-form-urlencoded:
+                        schema:
+                            required:
+                                - criteria
+                            type: object
+                            properties:
+                                criteria:
+                                    type: string
+                                    description: "Uses Lucene Query Syntax in the format of propertyName:value or propertyName:[num1 TO num2]. Please refer 'docs' element in the API response for the property names and use a query syntax based on appropriate data type of the property."
+                                    default: '*:*'
+                                start:
+                                    type: integer
+                                    description: Starting record number. Default value is 0.
+                                    format: int32
+                                    default: 0
+                                rows:
+                                    type: integer
+                                    description: "Specify number of rows to be returned. If you run the search with default values, in the response you will see 'numFound' attribute which will tell the number of records available in the dataset."
+                                    format: int32
+                                    default: 100
+                required: true
+            responses:
+                "200":
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    additionalProperties:
+                                        type: object
+                                        properties: {}
+                "404":
+                    description: No matching record found for the given criteria.
+                    content: {}
+components:
+    securitySchemes:
+        ApiKeyAuth:
+            type: apiKey
+            in: header
+            name: X-API-KEY
+x-original-swagger-version: "2.0"

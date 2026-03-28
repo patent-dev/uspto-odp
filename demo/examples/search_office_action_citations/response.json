@@ -1,0 +1,93 @@
+{
+  "response": {
+    "numFound": 7,
+    "start": 0,
+    "docs": [
+      {
+        "actionTypeCategory": "rejected",
+        "applicantCitedExaminerReferenceIndicator": true,
+        "createDateTime": "2025-07-07T01:12:35",
+        "createUserIdentifier": "ETL_SYS",
+        "examinerCitedReferenceIndicator": true,
+        "groupArtUnitNumber": "2641",
+        "id": "d50488aca95d581f9af0d888130835c0",
+        "legalSectionCode": "102",
+        "obsoleteDocumentIdentifier": "K87AK41FRXEAPX5",
+        "officeActionCitationReferenceIndicator": true,
+        "parsedReferenceIdentifier": "20070217688",
+        "patentApplicationNumber": "16123456",
+        "referenceIdentifier": "Sabe; Kohtaro US 20070217688 A1",
+        "techCenter": "2600",
+        "workGroup": "2640"
+      },
+      {
+        "actionTypeCategory": "",
+        "applicantCitedExaminerReferenceIndicator": false,
+        "createDateTime": "2025-07-07T01:12:35",
+        "createUserIdentifier": "ETL_SYS",
+        "examinerCitedReferenceIndicator": false,
+        "groupArtUnitNumber": "2641",
+        "id": "583e1eb625286ba023119d0b85b88bae",
+        "legalSectionCode": "",
+        "obsoleteDocumentIdentifier": "K87AK41FRXEAPX5",
+        "officeActionCitationReferenceIndicator": false,
+        "parsedReferenceIdentifier": "",
+        "patentApplicationNumber": "16123456",
+        "referenceIdentifier": "",
+        "techCenter": "2600",
+        "workGroup": "2640"
+      },
+      {
+        "actionTypeCategory": "",
+        "applicantCitedExaminerReferenceIndicator": false,
+        "createDateTime": "2025-07-07T01:12:35",
+        "createUserIdentifier": "ETL_SYS",
+        "examinerCitedReferenceIndicator": false,
+        "groupArtUnitNumber": "2641",
+        "id": "caa002998dfbf344ed537bb9a834b285",
+        "legalSectionCode": "nonstatutory double patenting",
+        "obsoleteDocumentIdentifier": "K87AK41FRXEAPX5",
+        "officeActionCitationReferenceIndicator": true,
+        "parsedReferenceIdentifier": "",
+        "patentApplicationNumber": "16123456",
+        "referenceIdentifier": "",
+        "techCenter": "2600",
+        "workGroup": "2640"
+      },
+      {
+        "actionTypeCategory": "rejected",
+        "applicantCitedExaminerReferenceIndicator": false,
+        "createDateTime": "2025-07-07T01:12:35",
+        "createUserIdentifier": "ETL_SYS",
+        "examinerCitedReferenceIndicator": false,
+        "groupArtUnitNumber": "2641",
+        "id": "d45abc8a6db5673221f5b147df081519",
+        "legalSectionCode": "nonstatutory double patenting",
+        "obsoleteDocumentIdentifier": "K87AK41FRXEAPX5",
+        "officeActionCitationReferenceIndicator": true,
+        "parsedReferenceIdentifier": "",
+        "patentApplicationNumber": "16123456",
+        "referenceIdentifier": "",
+        "techCenter": "2600",
+        "workGroup": "2640"
+      },
+      {
+        "actionTypeCategory": "rejected",
+        "applicantCitedExaminerReferenceIndicator": false,
+        "createDateTime": "2025-07-07T01:12:35",
+        "createUserIdentifier": "ETL_SYS",
+        "examinerCitedReferenceIndicator": false,
+        "groupArtUnitNumber": "2641",
+        "id": "36a50853d1437865f7fcfc1f7b14b6e0",
+        "legalSectionCode": "",
+        "obsoleteDocumentIdentifier": "K87AK41FRXEAPX5",
+        "officeActionCitationReferenceIndicator": false,
+        "parsedReferenceIdentifier": "",
+        "patentApplicationNumber": "16123456",
+        "referenceIdentifier": "",
+        "techCenter": "2600",
+        "workGroup": "2640"
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+Method: search_office_actions
+
+Parameters:
+  criteria: patentApplicationNumber:17248024

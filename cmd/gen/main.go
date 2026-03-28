@@ -31,11 +31,37 @@ const (
 	typesOutput  = "generated/types_gen.go"
 	clientOutput = "generated/client_gen.go"
 	packageName  = "generated"
+
+	// Office Action DSAPI - separate package
+	oaFixedFile    = "swagger_oa_fixed.yaml"
+	oaTypesOutput  = "generated/oa/types_gen.go"
+	oaClientOutput = "generated/oa/client_gen.go"
+	oaPackageName  = "oa"
+
+	// TSDR - separate package (different server + auth)
+	tsdrSourceFile   = "swagger/tsdr-swagger.json"
+	tsdrFixedFile    = "swagger_tsdr_fixed.json"
+	tsdrTypesOutput  = "generated/tsdr/types_gen.go"
+	tsdrClientOutput = "generated/tsdr/client_gen.go"
+	tsdrPackageName  = "tsdr"
 )
+
+// Office Action spec files and their unique operationId prefixes
+var oaSpecs = []struct {
+	file   string
+	prefix string // unique prefix for operationIds
+}{
+	{"oa-text-retrieval.yaml", "oa-actions"},
+	{"oa-citations.yaml", "oa-citations"},
+	{"oa-rejections.yaml", "oa-rejections"},
+	{"oa-enriched-citations.yaml", "enriched-citations"},
+}
 
 func main() {
 	log.Println("USPTO ODP Swagger Generator")
 	log.Println("============================")
+
+	// === ODP + PTAB APIs ===
 
 	// Step 1: Bundle swagger files
 	log.Println("Step 1: Bundling swagger files...")
@@ -53,6 +79,48 @@ func main() {
 	log.Println("Step 3: Generating code...")
 	if err := generateCode(); err != nil {
 		log.Fatalf("Failed to generate code: %v", err)
+	}
+
+	// === Office Action DSAPI ===
+
+	log.Println("")
+	log.Println("Office Action DSAPI")
+	log.Println("============================")
+
+	// Step 4: Bundle OA specs
+	log.Println("Step 4: Bundling Office Action specs...")
+	if err := bundleOASwagger(); err != nil {
+		log.Fatalf("Failed to bundle OA swagger: %v", err)
+	}
+
+	// Step 5: Apply OA fixes
+	log.Println("Step 5: Applying OA fixes...")
+	if err := applyOAFixes(); err != nil {
+		log.Fatalf("Failed to apply OA fixes: %v", err)
+	}
+
+	// Step 6: Generate OA code
+	log.Println("Step 6: Generating OA code...")
+	if err := generateOACode(); err != nil {
+		log.Fatalf("Failed to generate OA code: %v", err)
+	}
+
+	// === TSDR API ===
+
+	log.Println("")
+	log.Println("TSDR API")
+	log.Println("============================")
+
+	// Step 7: Apply TSDR fixes
+	log.Println("Step 7: Applying TSDR fixes...")
+	if err := applyTSDRFixes(); err != nil {
+		log.Fatalf("Failed to apply TSDR fixes: %v", err)
+	}
+
+	// Step 8: Generate TSDR code
+	log.Println("Step 8: Generating TSDR code...")
+	if err := generateTSDRCode(); err != nil {
+		log.Fatalf("Failed to generate TSDR code: %v", err)
 	}
 
 	log.Println("Done!")
@@ -221,8 +289,7 @@ func mergeComponents(mainDoc *yaml.Node, sourceFile *yaml.Node, _ string) error 
 		}
 	}
 
-	// Merge paths - but don't add paths that are already aliased in swagger.yaml
-	// Instead, we'll resolve path refs later in resolveExternalRefs
+	// Merge paths from source files into main document
 	mainPaths := findChildNode(mainRoot, "paths")
 	sourcePaths := findChildNode(sourceRoot, "paths")
 
@@ -239,7 +306,6 @@ func mergeComponents(mainDoc *yaml.Node, sourceFile *yaml.Node, _ string) error 
 					parts := strings.SplitN(refNode.Value, "#", 2)
 					if len(parts) == 2 {
 						jsonPath := parts[1]
-						// Find target in source paths
 						// Path refs look like: /paths/~1api~1v1~1patent~1proceedings~1search
 						if strings.HasPrefix(jsonPath, "/paths/") {
 							encodedPath := strings.TrimPrefix(jsonPath, "/paths/")
@@ -258,6 +324,7 @@ func mergeComponents(mainDoc *yaml.Node, sourceFile *yaml.Node, _ string) error 
 				}
 			}
 		}
+
 	}
 
 	return nil
@@ -543,7 +610,9 @@ func fixResponseSchemas() error {
 	fixSchemaRefs(&doc, splitNames)
 
 	// For response context, update both split and wrapped names
-	allResponseNames := append(splitNames, wrappedNames...)
+	allResponseNames := make([]string, 0, len(splitNames)+len(wrappedNames))
+	allResponseNames = append(allResponseNames, splitNames...)
+	allResponseNames = append(allResponseNames, wrappedNames...)
 	fixResponseRefs(&doc, allResponseNames)
 
 	if fixCount > 0 {
@@ -566,7 +635,8 @@ func fixSchemaRefs(node *yaml.Node, names []string) {
 		return
 	}
 
-	if node.Kind == yaml.MappingNode {
+	switch node.Kind {
+	case yaml.MappingNode:
 		for i := 0; i < len(node.Content); i += 2 {
 			keyNode := node.Content[i]
 			valueNode := node.Content[i+1]
@@ -578,11 +648,7 @@ func fixSchemaRefs(node *yaml.Node, names []string) {
 				fixSchemaRefs(valueNode, names)
 			}
 		}
-	} else if node.Kind == yaml.SequenceNode {
-		for _, child := range node.Content {
-			fixSchemaRefs(child, names)
-		}
-	} else if node.Kind == yaml.DocumentNode {
+	case yaml.SequenceNode, yaml.DocumentNode:
 		for _, child := range node.Content {
 			fixSchemaRefs(child, names)
 		}
@@ -595,7 +661,8 @@ func updateSchemaContextRefs(node *yaml.Node, names []string) {
 		return
 	}
 
-	if node.Kind == yaml.MappingNode {
+	switch node.Kind {
+	case yaml.MappingNode:
 		for i := 0; i < len(node.Content); i += 2 {
 			keyNode := node.Content[i]
 			valueNode := node.Content[i+1]
@@ -612,7 +679,7 @@ func updateSchemaContextRefs(node *yaml.Node, names []string) {
 				updateSchemaContextRefs(valueNode, names)
 			}
 		}
-	} else if node.Kind == yaml.SequenceNode {
+	case yaml.SequenceNode:
 		for _, child := range node.Content {
 			updateSchemaContextRefs(child, names)
 		}
@@ -625,7 +692,8 @@ func fixResponseRefs(node *yaml.Node, names []string) {
 		return
 	}
 
-	if node.Kind == yaml.MappingNode {
+	switch node.Kind {
+	case yaml.MappingNode:
 		for i := 0; i < len(node.Content); i += 2 {
 			keyNode := node.Content[i]
 			valueNode := node.Content[i+1]
@@ -637,11 +705,7 @@ func fixResponseRefs(node *yaml.Node, names []string) {
 				fixResponseRefs(valueNode, names)
 			}
 		}
-	} else if node.Kind == yaml.SequenceNode {
-		for _, child := range node.Content {
-			fixResponseRefs(child, names)
-		}
-	} else if node.Kind == yaml.DocumentNode {
+	case yaml.SequenceNode, yaml.DocumentNode:
 		for _, child := range node.Content {
 			fixResponseRefs(child, names)
 		}
@@ -726,10 +790,10 @@ func findNode(root *yaml.Node, keys ...string) *yaml.Node {
 }
 
 func findChildNode(node *yaml.Node, key string) *yaml.Node {
-	if node.Kind != yaml.MappingNode {
+	if node == nil || node.Kind != yaml.MappingNode {
 		return nil
 	}
-	for i := 0; i < len(node.Content); i += 2 {
+	for i := 0; i+1 < len(node.Content); i += 2 {
 		if node.Content[i].Value == key {
 			return node.Content[i+1]
 		}
@@ -738,10 +802,10 @@ func findChildNode(node *yaml.Node, key string) *yaml.Node {
 }
 
 func findChildNodeIndex(node *yaml.Node, key string) int {
-	if node.Kind != yaml.MappingNode {
+	if node == nil || node.Kind != yaml.MappingNode {
 		return -1
 	}
-	for i := 0; i < len(node.Content); i += 2 {
+	for i := 0; i+1 < len(node.Content); i += 2 {
 		if node.Content[i].Value == key {
 			return i
 		}
@@ -813,6 +877,377 @@ func generateCode() error {
 		return fmt.Errorf("writing client: %w", err)
 	}
 	log.Printf("  - Written %s (%d bytes)", clientOutput, len(clientCode))
+
+	return nil
+}
+
+// bundleOASwagger merges the 4 Office Action DSAPI specs into one OpenAPI file.
+// The original specs are kept untouched in swagger/. This only combines their paths.
+func bundleOASwagger() error {
+	// Start with the first spec as the base
+	baseData, err := os.ReadFile(filepath.Join(swaggerDir, oaSpecs[0].file))
+	if err != nil {
+		return fmt.Errorf("reading %s: %w", oaSpecs[0].file, err)
+	}
+
+	var baseDoc yaml.Node
+	if err := yaml.Unmarshal(baseData, &baseDoc); err != nil {
+		return fmt.Errorf("parsing %s: %w", oaSpecs[0].file, err)
+	}
+	log.Printf("  - Loaded %s (base)", oaSpecs[0].file)
+
+	baseRoot := getDocRoot(&baseDoc)
+	basePaths := findChildNode(baseRoot, "paths")
+
+	// Update the title to reflect the combined spec
+	info := findChildNode(baseRoot, "info")
+	if info != nil {
+		title := findChildNode(info, "title")
+		if title != nil {
+			title.Value = "USPTO Office Action APIs (DSAPI)"
+		}
+		desc := findChildNode(info, "description")
+		if desc != nil {
+			desc.Value = "Combined Office Action APIs: Text Retrieval, Citations, Rejections, and Enriched Citations. " +
+				"These use the DSAPI pattern (form-encoded POST with Lucene/Solr queries)."
+		}
+	}
+
+	// Update tags to include all APIs
+	tags := findChildNode(baseRoot, "tags")
+	if tags != nil {
+		tags.Content = nil // clear
+	}
+
+	// Track existing paths to detect collisions
+	existingPaths := make(map[string]string) // path -> source spec
+	if basePaths != nil {
+		for j := 0; j+1 < len(basePaths.Content); j += 2 {
+			existingPaths[basePaths.Content[j].Value] = oaSpecs[0].file
+		}
+	}
+
+	// Merge paths and components from remaining specs
+	baseComponents := findChildNode(baseRoot, "components")
+	baseSchemas := findChildNode(baseComponents, "schemas")
+
+	for i := 1; i < len(oaSpecs); i++ {
+		specData, err := os.ReadFile(filepath.Join(swaggerDir, oaSpecs[i].file))
+		if err != nil {
+			return fmt.Errorf("reading %s: %w", oaSpecs[i].file, err)
+		}
+
+		var specDoc yaml.Node
+		if err := yaml.Unmarshal(specData, &specDoc); err != nil {
+			return fmt.Errorf("parsing %s: %w", oaSpecs[i].file, err)
+		}
+
+		specRoot := getDocRoot(&specDoc)
+		specPaths := findChildNode(specRoot, "paths")
+
+		if specPaths != nil && basePaths != nil {
+			for j := 0; j+1 < len(specPaths.Content); j += 2 {
+				pathKey := specPaths.Content[j].Value
+				if existingSpec, exists := existingPaths[pathKey]; exists {
+					return fmt.Errorf("duplicate path %q: defined in both %s and %s", pathKey, existingSpec, oaSpecs[i].file)
+				}
+				existingPaths[pathKey] = oaSpecs[i].file
+				basePaths.Content = append(basePaths.Content,
+					specPaths.Content[j],
+					specPaths.Content[j+1],
+				)
+			}
+		}
+
+		// Merge components/schemas if present
+		specComponents := findChildNode(specRoot, "components")
+		specSchemas := findChildNode(specComponents, "schemas")
+		if specSchemas != nil && baseSchemas != nil {
+			for j := 0; j+1 < len(specSchemas.Content); j += 2 {
+				schemaName := specSchemas.Content[j].Value
+				if findChildNode(baseSchemas, schemaName) == nil {
+					baseSchemas.Content = append(baseSchemas.Content,
+						specSchemas.Content[j],
+						specSchemas.Content[j+1],
+					)
+				}
+			}
+		}
+
+		log.Printf("  - Merged paths from %s", oaSpecs[i].file)
+	}
+
+	out, err := yaml.Marshal(&baseDoc)
+	if err != nil {
+		return fmt.Errorf("marshaling bundled OA spec: %w", err)
+	}
+
+	if err := os.WriteFile(oaFixedFile, out, 0644); err != nil {
+		return fmt.Errorf("writing %s: %w", oaFixedFile, err)
+	}
+
+	log.Printf("  - Written %s", oaFixedFile)
+	return nil
+}
+
+// applyOAFixes applies bug fixes to the bundled Office Action spec via YAML tree manipulation.
+// Each fix corrects a documented issue in the original USPTO swagger specs.
+func applyOAFixes() error {
+	data, err := os.ReadFile(oaFixedFile)
+	if err != nil {
+		return fmt.Errorf("reading %s: %w", oaFixedFile, err)
+	}
+
+	var doc yaml.Node
+	if err := yaml.Unmarshal(data, &doc); err != nil {
+		return fmt.Errorf("parsing YAML: %w", err)
+	}
+
+	root := getDocRoot(&doc)
+	paths := findChildNode(root, "paths")
+	if paths == nil {
+		return fmt.Errorf("no paths found in OA spec")
+	}
+
+	// Build a map from path string to operationId prefix
+	pathPrefixMap := make(map[string]string)
+	for _, spec := range oaSpecs {
+		specData, err := os.ReadFile(filepath.Join(swaggerDir, spec.file))
+		if err != nil {
+			return fmt.Errorf("reading %s for prefix map: %w", spec.file, err)
+		}
+		var specDoc yaml.Node
+		if err := yaml.Unmarshal(specData, &specDoc); err != nil {
+			return fmt.Errorf("parsing %s for prefix map: %w", spec.file, err)
+		}
+		specPaths := findChildNode(getDocRoot(&specDoc), "paths")
+		if specPaths == nil {
+			log.Printf("  Warning: no paths found in %s", spec.file)
+			continue
+		}
+		for j := 0; j+1 < len(specPaths.Content); j += 2 {
+			pathPrefixMap[specPaths.Content[j].Value] = spec.prefix
+		}
+	}
+
+	fixCount := 0
+
+	// Walk all paths and apply fixes
+	for i := 0; i+1 < len(paths.Content); i += 2 {
+		pathStr := paths.Content[i].Value
+		pathNode := paths.Content[i+1]
+		prefix := pathPrefixMap[pathStr]
+
+		if pathNode.Kind != yaml.MappingNode {
+			continue
+		}
+
+		// Walk each method (get, post, etc.) under this path
+		for j := 0; j+1 < len(pathNode.Content); j += 2 {
+			methodNode := pathNode.Content[j+1]
+			if methodNode.Kind != yaml.MappingNode {
+				continue
+			}
+
+			// Bug 1: Remove phantom path parameters (dataset, version declared as "in: path")
+			params := findChildNode(methodNode, "parameters")
+			if params != nil && params.Kind == yaml.SequenceNode {
+				filtered := make([]*yaml.Node, 0)
+				for _, param := range params.Content {
+					nameNode := findChildNode(param, "name")
+					inNode := findChildNode(param, "in")
+					if nameNode != nil && inNode != nil && inNode.Value == "path" &&
+						(nameNode.Value == "dataset" || nameNode.Value == "version") {
+						fixCount++
+						continue // skip phantom param
+					}
+					filtered = append(filtered, param)
+				}
+				params.Content = filtered
+			}
+
+			// Bug 2: Make operationIds unique (all specs use list-searchable-fields / perform-search)
+			if prefix != "" {
+				opIdIdx := findChildNodeIndex(methodNode, "operationId")
+				if opIdIdx >= 0 {
+					opIdNode := methodNode.Content[opIdIdx+1]
+					switch opIdNode.Value {
+					case "list-searchable-fields":
+						opIdNode.Value = prefix + "-list-fields"
+						fixCount++
+					case "perform-search":
+						opIdNode.Value = prefix + "-search"
+						fixCount++
+					}
+				}
+			}
+		}
+	}
+
+	log.Printf("  - Bug fix: removed phantom path parameters + made operationIds unique")
+	log.Printf("  Applied %d OA fixes", fixCount)
+
+	out, err := yaml.Marshal(&doc)
+	if err != nil {
+		return fmt.Errorf("marshaling YAML: %w", err)
+	}
+
+	if err := os.WriteFile(oaFixedFile, out, 0644); err != nil {
+		return fmt.Errorf("writing %s: %w", oaFixedFile, err)
+	}
+
+	return nil
+}
+
+// generateOACode generates Go types and client from the bundled OA spec.
+func generateOACode() error {
+	// Ensure output directory exists
+	if err := os.MkdirAll("generated/oa", 0755); err != nil {
+		return fmt.Errorf("creating generated/oa: %w", err)
+	}
+
+	loader := openapi3.NewLoader()
+	loader.IsExternalRefsAllowed = true
+
+	spec, err := loader.LoadFromFile(oaFixedFile)
+	if err != nil {
+		return fmt.Errorf("loading spec: %w", err)
+	}
+
+	// Generate types
+	log.Println("  Generating OA types...")
+	typesConfig := codegen.Configuration{
+		PackageName: oaPackageName,
+		Generate: codegen.GenerateOptions{
+			Models: true,
+		},
+	}
+
+	typesCode, err := codegen.Generate(spec, typesConfig)
+	if err != nil {
+		return fmt.Errorf("generating OA types: %w", err)
+	}
+
+	if err := os.WriteFile(oaTypesOutput, []byte(typesCode), 0644); err != nil {
+		return fmt.Errorf("writing OA types: %w", err)
+	}
+	log.Printf("  - Written %s (%d bytes)", oaTypesOutput, len(typesCode))
+
+	// Generate client
+	log.Println("  Generating OA client...")
+	clientConfig := codegen.Configuration{
+		PackageName: oaPackageName,
+		Generate: codegen.GenerateOptions{
+			Client: true,
+		},
+	}
+
+	clientCode, err := codegen.Generate(spec, clientConfig)
+	if err != nil {
+		return fmt.Errorf("generating OA client: %w", err)
+	}
+
+	if err := os.WriteFile(oaClientOutput, []byte(clientCode), 0644); err != nil {
+		return fmt.Errorf("writing OA client: %w", err)
+	}
+	log.Printf("  - Written %s (%d bytes)", oaClientOutput, len(clientCode))
+
+	return nil
+}
+
+// applyTSDRFixes copies the TSDR spec and applies bug fixes.
+func applyTSDRFixes() error {
+	data, err := os.ReadFile(tsdrSourceFile)
+	if err != nil {
+		return fmt.Errorf("reading %s: %w", tsdrSourceFile, err)
+	}
+
+	content := string(data)
+	fixCount := 0
+
+	// Bug 1: Server URL is protocol-relative "//tsdrapi.uspto.gov/"
+	// oapi-codegen needs a full URL
+	if strings.Contains(content, `"//tsdrapi.uspto.gov/"`) {
+		content = strings.ReplaceAll(content, `"//tsdrapi.uspto.gov/"`, `"https://tsdrapi.uspto.gov"`)
+		fixCount++
+		log.Println("  - Bug fix: server URL protocol-relative -> https")
+	}
+
+	// Bug 2: date and date-time format fields cause time.Time parsing failures.
+	// The API returns inconsistent formats: date-only ("2021-11-19") in fields
+	// declared as date-time, and non-ISO formats elsewhere. Strip all date/date-time
+	// formats so they generate as plain strings.
+	for _, dateFmt := range []string{`"date-time"`, `"date"`} {
+		old := `"format": ` + dateFmt
+		if strings.Contains(content, old) {
+			count := strings.Count(content, old)
+			content = strings.ReplaceAll(content, old, `"x-original-format": `+dateFmt)
+			fixCount++
+			log.Printf("  - Bug fix: removed %d date format declarations (%s)", count, dateFmt)
+		}
+	}
+
+	log.Printf("  Applied %d TSDR fixes", fixCount)
+
+	if err := os.WriteFile(tsdrFixedFile, []byte(content), 0644); err != nil {
+		return fmt.Errorf("writing %s: %w", tsdrFixedFile, err)
+	}
+	log.Printf("  - Written %s", tsdrFixedFile)
+
+	return nil
+}
+
+// generateTSDRCode generates Go types and client from the TSDR spec.
+func generateTSDRCode() error {
+	if err := os.MkdirAll("generated/tsdr", 0755); err != nil {
+		return fmt.Errorf("creating generated/tsdr: %w", err)
+	}
+
+	loader := openapi3.NewLoader()
+	loader.IsExternalRefsAllowed = true
+
+	spec, err := loader.LoadFromFile(tsdrFixedFile)
+	if err != nil {
+		return fmt.Errorf("loading TSDR spec: %w", err)
+	}
+
+	// Generate types
+	log.Println("  Generating TSDR types...")
+	typesConfig := codegen.Configuration{
+		PackageName: tsdrPackageName,
+		Generate: codegen.GenerateOptions{
+			Models: true,
+		},
+	}
+
+	typesCode, err := codegen.Generate(spec, typesConfig)
+	if err != nil {
+		return fmt.Errorf("generating TSDR types: %w", err)
+	}
+
+	if err := os.WriteFile(tsdrTypesOutput, []byte(typesCode), 0644); err != nil {
+		return fmt.Errorf("writing TSDR types: %w", err)
+	}
+	log.Printf("  - Written %s (%d bytes)", tsdrTypesOutput, len(typesCode))
+
+	// Generate client
+	log.Println("  Generating TSDR client...")
+	clientConfig := codegen.Configuration{
+		PackageName: tsdrPackageName,
+		Generate: codegen.GenerateOptions{
+			Client: true,
+		},
+	}
+
+	clientCode, err := codegen.Generate(spec, clientConfig)
+	if err != nil {
+		return fmt.Errorf("generating TSDR client: %w", err)
+	}
+
+	if err := os.WriteFile(tsdrClientOutput, []byte(clientCode), 0644); err != nil {
+		return fmt.Errorf("writing TSDR client: %w", err)
+	}
+	log.Printf("  - Written %s (%d bytes)", tsdrClientOutput, len(clientCode))
 
 	return nil
 }

@@ -1,0 +1,4 @@
+Method: get_trademark_documents
+
+Parameters:
+  serialNumber: 97123456

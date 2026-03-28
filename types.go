@@ -1,6 +1,17 @@
 package odp
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/patent-dev/uspto-odp/generated"
+)
+
+// AssociatedDocumentsResponse contains patent grant and publication XML file metadata.
+type AssociatedDocumentsResponse struct {
+	ApplicationNumber     string
+	GrantDocumentMetaData *generated.GrantFileMetaData
+	PgpubDocumentMetaData *generated.PGPubFileMetaData
+}
 
 // ContinuityParent represents a parent application in a continuity chain.
 type ContinuityParent struct {

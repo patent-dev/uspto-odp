@@ -5494,7 +5494,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/PetitionDecisionAndDocuments'
-        # Trial – Proceedings
+        # Trial -Proceedings
         ProceedingDataResponse:
             type: object
             properties:
@@ -5509,7 +5509,7 @@ components:
                         $ref: '#/components/schemas/patentTrialProceedingDataBag'
         PatentTrialProceedingDataBag:
             $ref: '#/components/schemas/patentTrialProceedingDataBag'
-        # Trial – Documents
+        # Trial -Documents
         DocumentDataResponse:
             type: object
             properties:
@@ -5526,14 +5526,24 @@ components:
                         $ref: '#/components/schemas/Facet'
         PatentTrialDocumentDataBag:
             $ref: '#/components/schemas/patentTrialDocumentDataBag'
-        # Trial – Decisions
+        # Trial -Decisions
         DecisionDataResponse:
-            allOf:
-                - $ref: '#/components/schemas/DocumentDataResponse'
-            description: Identical structure, just decisions-only data.
+            type: object
+            properties:
+                count:
+                    type: integer
+                    example: 100
+                patentTrialDecisionDataBag:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/patentTrialDecisionDataBag'
+                facets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Facet'
         PatentTrialDecisionDataBag:
             $ref: '#/components/schemas/patentTrialDecisionDataBag'
-        # Trial – Interferences (decisions)
+        # Trial -Interferences (decisions)
         InterferenceDecisionDataResponse:
             type: object
             required: [count, requestIdentifier, patentInterferenceDataBag]
@@ -5553,6 +5563,9 @@ components:
         AppealDecisionDataResponse:
             type: object
             properties:
+                requestIdentifier:
+                    type: string
+                    example: 501eacc7-c785-4d85-96ac-a39f3f5533aa
                 count:
                     type: integer
                     example: 1
@@ -5647,16 +5660,22 @@ components:
                 requestIdentifier:
                     type: string
                     example: 07c5c24d-bf8e-458c-9427-a038500d6e98
-        patentTrialProceedingDataBag:
+        patentTrialDecisionDataBag:
             type: object
-            description: A single PTAB trial proceeding record.
+            description: A single PTAB document record.
             properties:
+                trialDocumentCategory:
+                    type: string
+                    example: document
+                lastModifiedDateTime:
+                    type: string
+                    example: '2025-07-01T15:20:30Z'
                 trialNumber:
                     type: string
                     example: IPR2024-00001
-                lastModifiedDateTime:
+                trialTypeCode:
                     type: string
-                    example: "2025-07-17T20:24:01"
+                    example: IPR
                 trialMetaData:
                     $ref: '#/components/schemas/TrialMetaData'
                 patentOwnerData:
@@ -5667,6 +5686,10 @@ components:
                     $ref: '#/components/schemas/RespondentData'
                 derivationPetitionerData:
                     $ref: '#/components/schemas/DerivationPetitionerData'
+                documentData:
+                    $ref: '#/components/schemas/DocumentData'
+                decisionData:
+                    $ref: '#/components/schemas/DecisionData'
         StatusCodeSearchRequest:
             type: object
             properties:
@@ -6319,7 +6342,7 @@ components:
                         fileDownloadURI:
                             type: string
                             example: '/download'
-                appelantData:
+                appellantData:
                     type: object
                     properties:
                         applicationNumberText:
@@ -6334,7 +6357,7 @@ components:
                         inventorName:
                             type: string
                             example: Sultan, Tarik et al
-                        realPartyName:
+                        realPartyInInterestName:
                             type: string
                             example: Unicorn Pharmaceuticals
                         patentNumber:
@@ -6349,10 +6372,14 @@ components:
                         publicationNumber:
                             type: string
                             example: 20210628467A1
-                        techCenterNumber:
+                        technologyCenterNumber:
                             type: string
                             example: RD00
-                requestorData:
+                        grantDate:
+                            type: string
+                            format: date
+                            example: '2022-05-27'
+                thirdPartyRequesterData:
                     type: object
                     properties:
                         thirdPartyName:
@@ -6376,12 +6403,28 @@ components:
                         documentOCRText:
                             type: string
                             example: Some OCR content
-                        documentTypeCategory:
+                        documentTypeDescriptionText:
                             type: string
                             example: Rehearing
-                        downloadURI:
+                        fileDownloadURI:
                             type: string
                             example: https://ptab.uspto.gov/appeal/document/download
+                decisionData:
+                    type: object
+                    properties:
+                        appealOutcomeCategory:
+                            type: string
+                            example: 'sample'
+                        statuteAndRuleBag:
+                            type: array
+                            items: {type: string}
+                            example: ["37 CFR 42.100", "37 CFR 43.100"]
+                        decisionIssueDate: {type: string, format: date, example: "2002-02-25"}
+                        decisionTypeCategory: {type: string, example: "Decision"}
+                        issueTypeBag:
+                            type: array
+                            items: {type: string}
+                            example: ["Substantive", "Procedural"]
         SearchRequest:
             allOf:
                 - $ref: '#/components/schemas/PatentSearchRequest'
@@ -6466,12 +6509,34 @@ components:
         RegularPetitionerData:
             type: object
             properties:
+                applicationNumberText:
+                    type: string
+                    example: '16123456'
                 counselName:
                     type: string
                     example: John D. Counsel
                 realPartyInInterestName:
                     type: string
                     example: DEF Inc.
+                grantDate:
+                    type: string
+                    format: date
+                    example: '2020-03-22'
+                groupArtUnitNumber:
+                    type: string
+                    example: '1790'
+                inventorName:
+                    type: string
+                    example: Emma Smith
+                patentNumber:
+                    type: string
+                    example: US10203040B2
+                patentOwnerName:
+                    type: string
+                    example: JKL Holdings
+                technologyCenterNumber:
+                    type: string
+                    example: '1700'
         RespondentData:
             type: object
             properties:
@@ -6552,7 +6617,7 @@ components:
                     example: petition.pdf
                 documentNumber:
                     type: integer
-                    example: '1'
+                    example: 1
                 documentSizeQuantity:
                     type: integer
                     example: 123456
@@ -6565,7 +6630,7 @@ components:
                 documentTypeDescriptionText:
                     type: string
                     example: Petition Type
-                downloadURI:
+                fileDownloadURI:
                     type: string
                     format: uri
                     example: https://ptab.uspto.gov/doc/100012345
@@ -6575,17 +6640,13 @@ components:
                 mimeTypeIdentifier:
                     type: string
                     example: application/pdf
-                documentStatus:
-                    type: string
-                    example: public
         DecisionData:
             type: object
             properties:
                 statuteAndRuleBag:
                     type: array
-                    items:
-                        type: string
-                    example: 37 CFR 42.100
+                    items: {type: string}
+                    example: ["37 CFR 42.100", "37 CFR 43.100"]
                 decisionIssueDate:
                     type: string
                     format: date
@@ -6595,10 +6656,12 @@ components:
                     example: Final Written Decision
                 issueTypeBag:
                     type: array
-                    items:
-                        type: string
-                    example: Substantive
+                    items: {type: string}
+                    example: ["112", "103"]
                 trialOutcomeCategory:
+                    type: string
+                    example: Denied
+                appealOutcomeCategory:
                     type: string
                     example: Denied
         FacetItem:
@@ -6671,24 +6734,20 @@ components:
                 documentSizeQuantity: {type: integer, format: int64, example: 45224}
                 documentOCRText: {type: string, example: "The opinion in support of the decision..."}
                 documentTitleText: {type: string, example: "DECISION-103751"}
-                downloadURI: {type: string, example: "https://example.org/path/to/document.pdf"}
+                fileDownloadURI: {type: string, example: "https://example.org/path/to/document.pdf"}
                 statuteAndRuleBag:
                     type: array
                     items: {type: string}
-                    example: [""]
+                    example: ["37 CFR 42.100", "37 CFR 43.100"]
                 decisionIssueDate: {type: string, format: date, example: "2002-02-25"}
                 decisionTypeCategory: {type: string, example: "Decision"}
                 issueTypeBag:
                     type: array
                     items: {type: string}
-                    example: [""]
+                    example: ["Substantive", "Procedural"]
                 interferenceOutcomeCategory:
                     type: string
                     example: "Interference"
-        patentTrialDecisionDataBag:
-            allOf:
-                - $ref: '#/components/schemas/patentTrialDocumentDataBag'
-            description: Decision records only (trialDocumentCategory = decision).
         patentTrialDocumentDataBag:
             type: object
             description: A single PTAB document record.
@@ -6719,13 +6778,27 @@ components:
                     $ref: '#/components/schemas/DocumentData'
                 decisionData:
                     $ref: '#/components/schemas/DecisionData'
+        patentTrialProceedingDataBag:
+            type: object
+            description: A single PTAB trial proceeding record.
+            properties:
+                trialNumber:
+                    type: string
+                    example: IPR2024-00001
+                lastModifiedDateTime:
+                    type: string
+                    example: "2025-07-17T20:24:01"
+                trialMetaData:
+                    $ref: '#/components/schemas/TrialMetaData'
+                patentOwnerData:
+                    $ref: '#/components/schemas/PatentOwnerData'
+                regularPetitionerData:
+                    $ref: '#/components/schemas/RegularPetitionerData'
+                respondentData:
+                    $ref: '#/components/schemas/RespondentData'
+                derivationPetitionerData:
+                    $ref: '#/components/schemas/DerivationPetitionerData'
     responses:
-        Proceeding200:
-            description: OK
-            content:
-                application/json:
-                    schema:
-                        $ref: '#/components/schemas/ProceedingDataResponse'
         Decision200:
             description: OK
             content:
@@ -6738,6 +6811,12 @@ components:
                 application/json:
                     schema:
                         $ref: '#/components/schemas/DocumentDataResponse'
+        Proceeding200:
+            description: OK
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/ProceedingDataResponse'
         BadRequest:
             description: Bad Request
             content:

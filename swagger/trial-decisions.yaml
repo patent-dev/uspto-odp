@@ -399,13 +399,50 @@ paths:
 components:
   schemas:
     patentTrialDecisionDataBag:
-      allOf:
-      - $ref: ./trial-documents.yaml#/components/schemas/patentTrialDocumentDataBag
-      description: Decision records only (trialDocumentCategory = decision).
+      type: object
+      description: A single PTAB document record.
+      properties:
+        trialDocumentCategory:
+          type: string
+          example: document
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          example: '2025-07-01T15:20:30Z'
+        trialNumber:
+          type: string
+          example: IPR2024-00001
+        trialTypeCode:
+          type: string
+          example: IPR
+        trialMetaData:
+          $ref: ./trial-common.yaml#/components/schemas/TrialMetaData
+        patentOwnerData:
+          $ref: ./trial-common.yaml#/components/schemas/PatentOwnerData
+        regularPetitionerData:
+          $ref: ./trial-common.yaml#/components/schemas/RegularPetitionerData
+        respondentData:
+          $ref: ./trial-common.yaml#/components/schemas/RespondentData
+        derivationPetitionerData:
+          $ref: ./trial-common.yaml#/components/schemas/DerivationPetitionerData
+        documentData:
+          $ref: ./trial-common.yaml#/components/schemas/DocumentData
+        decisionData:
+          $ref: ./trial-common.yaml#/components/schemas/DecisionData
     DecisionDataResponse:
-      allOf:
-      - $ref: ./trial-documents.yaml#/components/schemas/DocumentDataResponse
-      description: Identical structure, just decisions-only data.
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 100
+        patentTrialDecisionDataBag:
+          type: array
+          items:
+            $ref: '#/components/schemas/patentTrialDecisionDataBag'
+        facets:
+          type: array
+          items:
+            $ref: ./trial-common.yaml#/components/schemas/Facet
   responses:
     Decision200:
       description: OK

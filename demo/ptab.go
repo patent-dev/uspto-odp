@@ -1,22 +1,11 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	odp "github.com/patent-dev/uspto-odp"
 	"github.com/patent-dev/uspto-odp/generated"
 )
-
-// demoPTAB runs basic PTAB demos (without example saving)
-func demoPTAB(ctx context.Context, client *odp.Client) {
-	dctx := &DemoContext{
-		Client:   client,
-		Ctx:      ctx,
-		SkipSave: true,
-	}
-	demoPTABWithContext(dctx)
-}
 
 // demoPTABWithContext runs all PTAB demos with optional example saving
 func demoPTABWithContext(dctx *DemoContext) {
@@ -196,9 +185,9 @@ func demoSearchTrialDecisions(dctx *DemoContext) {
 		fmt.Printf("Total trial decisions: %d\n", *result.Count)
 	}
 
-	if result.PatentTrialDocumentDataBag != nil {
-		fmt.Printf("Returned: %d decisions\n", len(*result.PatentTrialDocumentDataBag))
-		for i, doc := range *result.PatentTrialDocumentDataBag {
+	if result.PatentTrialDecisionDataBag != nil {
+		fmt.Printf("Returned: %d decisions\n", len(*result.PatentTrialDecisionDataBag))
+		for i, doc := range *result.PatentTrialDecisionDataBag {
 			if i >= 3 {
 				break
 			}
@@ -226,15 +215,15 @@ func demoGetTrialDecision(dctx *DemoContext) {
 
 	// First search to get a valid document identifier
 	result, err := dctx.Client.SearchTrialDecisions(dctx.Ctx, "", 0, 1)
-	if err != nil || result.PatentTrialDocumentDataBag == nil || len(*result.PatentTrialDocumentDataBag) == 0 {
+	if err != nil || result.PatentTrialDecisionDataBag == nil || len(*result.PatentTrialDecisionDataBag) == 0 {
 		fmt.Println("No trial decisions found to demo")
 		return
 	}
 
 	docID := ""
-	if (*result.PatentTrialDocumentDataBag)[0].DocumentData != nil &&
-		(*result.PatentTrialDocumentDataBag)[0].DocumentData.DocumentIdentifier != nil {
-		docID = *(*result.PatentTrialDocumentDataBag)[0].DocumentData.DocumentIdentifier
+	if (*result.PatentTrialDecisionDataBag)[0].DocumentData != nil &&
+		(*result.PatentTrialDecisionDataBag)[0].DocumentData.DocumentIdentifier != nil {
+		docID = *(*result.PatentTrialDecisionDataBag)[0].DocumentData.DocumentIdentifier
 	}
 	if docID == "" {
 		fmt.Println("No document identifier found")
@@ -254,16 +243,16 @@ func demoGetTrialDecision(dctx *DemoContext) {
 func demoGetTrialDecisionsByTrialNumber(dctx *DemoContext) {
 	printSubHeader("GetTrialDecisionsByTrialNumber")
 
-	// Get trial number from SearchTrialDecisions (not Proceedings) to ensure it has decisions
+	// Get trial number from SearchTrialDecisions (not Proceedings) so it has decisions
 	result, err := dctx.Client.SearchTrialDecisions(dctx.Ctx, "", 0, 1)
-	if err != nil || result.PatentTrialDocumentDataBag == nil || len(*result.PatentTrialDocumentDataBag) == 0 {
+	if err != nil || result.PatentTrialDecisionDataBag == nil || len(*result.PatentTrialDecisionDataBag) == 0 {
 		fmt.Println("No trial decisions found to get trial number")
 		return
 	}
 
 	trialNumber := ""
-	if (*result.PatentTrialDocumentDataBag)[0].TrialNumber != nil {
-		trialNumber = *(*result.PatentTrialDocumentDataBag)[0].TrialNumber
+	if (*result.PatentTrialDecisionDataBag)[0].TrialNumber != nil {
+		trialNumber = *(*result.PatentTrialDecisionDataBag)[0].TrialNumber
 	}
 	if trialNumber == "" {
 		fmt.Println("No trial number found in decisions")

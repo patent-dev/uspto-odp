@@ -1,0 +1,4 @@
+Method: get_trademark_last_update
+
+Parameters:
+  serialNumber: 97123456

@@ -2,4 +2,8 @@
 Thumbs.db
 coverage.out
 demo/demo
+gen
+cmd_dump_search/
 *.zip
+swagger_oa_fixed.yaml
+swagger_tsdr_fixed.json

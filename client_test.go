@@ -21,8 +21,8 @@ func TestDefaultConfig(t *testing.T) {
 	if config.BaseURL != "https://api.uspto.gov" {
 		t.Errorf("Expected BaseURL to be https://api.uspto.gov, got %s", config.BaseURL)
 	}
-	if config.UserAgent != "PatentDev/1.0" {
-		t.Errorf("Expected UserAgent to be PatentDev/1.0, got %s", config.UserAgent)
+	if config.UserAgent != "PatentDev/1.4" {
+		t.Errorf("Expected UserAgent to be PatentDev/1.4, got %s", config.UserAgent)
 	}
 	if config.MaxRetries != 3 {
 		t.Errorf("Expected MaxRetries to be 3, got %d", config.MaxRetries)
@@ -304,7 +304,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "3e733c0b-db90-4b4f-827d-4c405a928ecc",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/17123456":
 			// Actual response from GetPatent
@@ -593,7 +593,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "937c3c3f-e76e-47c1-96a1-97551935d441",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/17123456/adjustment":
 			// Actual response from GetPatentAdjustment
@@ -636,7 +636,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "c30d8ea6-60b4-4e83-99f1-607d9c4d4e83",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/17123456/continuity":
 			// Actual response from GetPatentContinuity
@@ -659,7 +659,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "a1477612-509d-4bb1-9184-729fd0286854",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/17123456/documents":
 			// Actual response from GetPatentDocuments
@@ -697,7 +697,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/status-codes":
 			// Actual response from GetStatusCodes
@@ -715,7 +715,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "5c35a272-dcbc-4229-952c-24afdf9ebfca",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/datasets/products/search":
 			// Actual response from SearchBulkProducts
@@ -739,7 +739,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/datasets/products/PTGRXML":
 			// Actual response from GetBulkProduct
@@ -789,7 +789,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/petition/decisions/search":
 			// Actual response from SearchPetitions
@@ -821,7 +821,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/datasets/products/files/PTGRXML/2025/ipg250916.zip":
 			// GetBulkFileURL endpoint - returns 302 redirect
@@ -833,7 +833,7 @@ func TestClientWithActualResponses(t *testing.T) {
 			zipData := []byte("PK\x03\x04test zip content for validation")
 			w.Header().Set("Content-Type", "application/zip")
 			w.Header().Set("Content-Length", "35")
-			w.Write(zipData)
+			_, _ = w.Write(zipData)
 
 		case "/api/v1/patent/applications/15000001/assignment":
 			// Actual response structure from demo/examples/get_patent_assignment/response.json
@@ -883,7 +883,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/17248024/associated-documents":
 			// Actual response structure from demo/examples/get_patent_associated_documents/response.json
@@ -909,7 +909,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/15000001/foreign-priority":
 			// Actual response structure from demo/examples/get_patent_foreign_priority/response.json
@@ -928,7 +928,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/17248024/meta-data":
 			// Actual response structure from demo/examples/get_patent_meta_data/response.json
@@ -970,7 +970,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/17248024/transactions":
 			// Actual response structure from demo/examples/get_patent_transactions/response.json
@@ -999,7 +999,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/17248024/attorney":
 			// Actual response structure from demo/examples/get_patent_attorney/response.json
@@ -1055,13 +1055,13 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/applications/search/download":
 			// Mock response for SearchPatentsDownload - returns CSV data
 			w.Header().Set("Content-Type", "text/csv")
 			csvData := []byte("Application Number,Filing Date,Title\n16123456,2020-01-15,Machine Learning System\n17234567,2021-02-20,AI Processing Method")
-			w.Write(csvData)
+			_, _ = w.Write(csvData)
 
 		case "/api/v1/petition/decisions/test-petition-id":
 			// Mock response for GetPetitionDecision
@@ -1078,13 +1078,13 @@ func TestClientWithActualResponses(t *testing.T) {
 					"ruleBag":                          []string{"37 CFR 1.137(a)", "37 CFR 1.137(b)(1)"},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/petition/decisions/search/download":
 			// Mock response for SearchPetitionsDownload - returns CSV data
 			w.Header().Set("Content-Type", "text/csv")
 			csvData := []byte("Record ID,Application Number,Decision Date,Decision Type\ntest-id-1,13986179,2020-11-30,DENIED\ntest-id-2,14123456,2021-01-15,GRANTED")
-			w.Write(csvData)
+			_, _ = w.Write(csvData)
 
 		// PTAB API endpoints - Trial Proceedings
 		case "/api/v1/patent/trials/proceedings/search":
@@ -1109,7 +1109,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-proc-search-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/trials/proceedings/IPR2020-00001":
 			response := map[string]interface{}{
@@ -1126,7 +1126,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-proc-get-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		// PTAB API endpoints - Trial Decisions
 		case "/api/v1/patent/trials/decisions/search":
@@ -1144,7 +1144,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-decisions-search-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/trials/decisions/doc-123":
 			response := map[string]interface{}{
@@ -1161,7 +1161,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-decision-get-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		// PTAB API endpoints - Trial Documents
 		case "/api/v1/patent/trials/documents/search":
@@ -1179,7 +1179,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-docs-search-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/trials/documents/tdoc-456":
 			response := map[string]interface{}{
@@ -1196,7 +1196,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-doc-get-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		// PTAB API endpoints - Appeal Decisions
 		case "/api/v1/patent/appeals/decisions/search":
@@ -1218,7 +1218,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-appeal-search-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/appeals/decisions/appeal-doc-789":
 			response := map[string]interface{}{
@@ -1235,7 +1235,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-appeal-get-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/appeals/2020-000001/decisions":
 			response := map[string]interface{}{
@@ -1258,7 +1258,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-appeal-by-number-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		// PTAB API endpoints - Interference Decisions
 		case "/api/v1/patent/interferences/decisions/search":
@@ -1282,7 +1282,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/interferences/decisions/229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b":
 			response := map[string]interface{}{
@@ -1300,7 +1300,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/interferences/106130/decisions":
 			response := map[string]interface{}{
@@ -1323,7 +1323,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		// PTAB API - Trial decisions/documents by trial number
 		case "/api/v1/patent/trials/IPR2020-00001/decisions":
@@ -1347,7 +1347,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-trial-decisions-by-number-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/patent/trials/IPR2020-00001/documents":
 			response := map[string]interface{}{
@@ -1370,33 +1370,33 @@ func TestClientWithActualResponses(t *testing.T) {
 				},
 				"requestIdentifier": "ptab-trial-documents-by-number-123",
 			}
-			json.NewEncoder(w).Encode(response)
+			_ = json.NewEncoder(w).Encode(response)
 
 		// PTAB API - Download endpoints
 		case "/api/v1/patent/trials/proceedings/search/download":
 			w.Header().Set("Content-Type", "text/csv")
 			csvData := []byte("Trial Number,Status,Filing Date\nIPR2020-00001,Terminated,2020-01-15\nIPR2021-00002,Instituted,2021-03-20")
-			w.Write(csvData)
+			_, _ = w.Write(csvData)
 
 		case "/api/v1/patent/trials/decisions/search/download":
 			w.Header().Set("Content-Type", "text/csv")
 			csvData := []byte("Trial Number,Decision Type,Decision Date\nIPR2020-00001,Final Written Decision,2021-01-15")
-			w.Write(csvData)
+			_, _ = w.Write(csvData)
 
 		case "/api/v1/patent/trials/documents/search/download":
 			w.Header().Set("Content-Type", "text/csv")
 			csvData := []byte("Trial Number,Document Name,Category\nIPR2020-00001,Petition.pdf,PETITION")
-			w.Write(csvData)
+			_, _ = w.Write(csvData)
 
 		case "/api/v1/patent/appeals/decisions/search/download":
 			w.Header().Set("Content-Type", "text/csv")
 			csvData := []byte("Appeal Number,Decision Date,Outcome\n2020-000001,2020-06-15,Affirmed")
-			w.Write(csvData)
+			_, _ = w.Write(csvData)
 
 		case "/api/v1/patent/interferences/decisions/search/download":
 			w.Header().Set("Content-Type", "text/csv")
 			csvData := []byte("Interference Number,Decision Date,Outcome\n106130,2025-01-28,Judgment")
-			w.Write(csvData)
+			_, _ = w.Write(csvData)
 
 		default:
 			// Special handling for bulk file download URLs that include redirect
@@ -1405,11 +1405,11 @@ func TestClientWithActualResponses(t *testing.T) {
 				w.Header().Set("Content-Type", "application/zip")
 				// Mock ZIP file header (PK signature)
 				zipData := []byte("PK\x03\x04MockZipFileContent...")
-				w.Write(zipData)
+				_, _ = w.Write(zipData)
 				return
 			}
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(map[string]string{"error": "not found"})
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "not found"})
 		}
 	}))
 	defer server.Close()
@@ -1618,6 +1618,15 @@ func TestClientWithActualResponses(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
+		if result.ApplicationNumber != "17248024" {
+			t.Errorf("ApplicationNumber = %q, want %q", result.ApplicationNumber, "17248024")
+		}
+		if result.GrantDocumentMetaData == nil {
+			t.Error("Expected GrantDocumentMetaData, got nil")
+		}
+		if result.PgpubDocumentMetaData == nil {
+			t.Error("Expected PgpubDocumentMetaData, got nil")
+		}
 	})
 
 	t.Run("GetPatentAttorney", func(t *testing.T) {
@@ -1629,6 +1638,9 @@ func TestClientWithActualResponses(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
+		if result.AttorneyBag == nil {
+			t.Error("Expected AttorneyBag, got nil")
+		}
 	})
 
 	t.Run("GetPatentForeignPriority", func(t *testing.T) {
@@ -1637,8 +1649,11 @@ func TestClientWithActualResponses(t *testing.T) {
 		if err != nil {
 			t.Fatalf("GetPatentForeignPriority failed: %v", err)
 		}
-		if result == nil {
-			t.Fatal("Expected result, got nil")
+		if len(result) == 0 {
+			t.Fatal("Expected at least one ForeignPriority entry")
+		}
+		if result[0].IpOfficeName == nil || *result[0].IpOfficeName != "REPUBLIC OF KOREA" {
+			t.Errorf("Expected IpOfficeName 'REPUBLIC OF KOREA', got %v", result[0].IpOfficeName)
 		}
 	})
 
@@ -1650,6 +1665,12 @@ func TestClientWithActualResponses(t *testing.T) {
 		}
 		if result == nil {
 			t.Fatal("Expected result, got nil")
+		}
+		if result.InventionTitle == nil || *result.InventionTitle == "" {
+			t.Error("Expected non-empty InventionTitle")
+		}
+		if result.PatentNumber == nil || *result.PatentNumber != "11646472" {
+			t.Errorf("Expected PatentNumber '11646472', got %v", result.PatentNumber)
 		}
 	})
 

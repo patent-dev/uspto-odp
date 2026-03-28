@@ -1,16 +1,19 @@
-// Package main provides a comprehensive demo of the USPTO ODP Go client.
+// Package main provides a demo of the USPTO ODP Go client.
 //
-// This demo showcases ALL 38 endpoints of the USPTO ODP API:
+// This demo showcases all 53 wrapper methods across 6 API groups:
 // - 13 Patent Application API endpoints
 // - 3 Bulk Data API endpoints
 // - 3 Petition API endpoints
 // - 19 PTAB (Patent Trial and Appeal Board) API endpoints
+// - 8 Office Action DSAPI endpoints
+// - 7 TSDR (Trademark Status & Document Retrieval) endpoints
 //
 // All request/response pairs are saved to demo/examples/ for reference.
 //
 // Usage:
 //
 //	export USPTO_API_KEY="your-api-key"
+//	export USPTO_TSDR_API_KEY="your-tsdr-key"  # optional, for TSDR demos
 //
 //	# Run all demos
 //	./demo
@@ -18,6 +21,8 @@
 //	# Run specific service demos
 //	./demo -service=patent
 //	./demo -service=ptab
+//	./demo -service=officeaction
+//	./demo -service=tsdr
 //
 //	# Skip saving examples
 //	./demo -no-save
@@ -38,7 +43,7 @@ import (
 var (
 	apiKey      = flag.String("key", os.Getenv("USPTO_API_KEY"), "USPTO API key")
 	patent      = flag.String("patent", TestPatentApp, "Patent number")
-	service     = flag.String("service", "", "Service filter (patent|bulk|petition|ptab|xml)")
+	service     = flag.String("service", "", "Service filter (patent|bulk|petition|ptab|xml|officeaction|tsdr)")
 	endpoint    = flag.String("endpoint", "", "Specific endpoint to run")
 	interactive = flag.Bool("interactive", false, "Run in interactive mode")
 	examplesDir = flag.String("examples", "examples", "Directory to save examples")
@@ -63,6 +68,8 @@ func main() {
 
 	config := odp.DefaultConfig()
 	config.APIKey = *apiKey
+	// TSDR uses a separate API key (from https://account.uspto.gov/profile/api-manager)
+	config.TSDRAPIKey = os.Getenv("USPTO_TSDR_API_KEY")
 	client, err := odp.NewClient(config)
 	if err != nil {
 		log.Fatal(err)
@@ -90,12 +97,7 @@ func main() {
 	case "patent":
 		demoPatentWithContext(dctx, *patent)
 	case "bulk":
-		if *interactive {
-			reader := bufio.NewReader(os.Stdin)
-			demoBulk(ctx, client, reader)
-		} else {
-			demoBulkWithContext(dctx)
-		}
+		demoBulkWithContext(dctx)
 	case "petition":
 		demoPetitionWithContext(dctx)
 	case "ptab":
@@ -103,6 +105,10 @@ func main() {
 	case "xml":
 		reader := bufio.NewReader(os.Stdin)
 		demoXML(ctx, client, reader)
+	case "officeaction", "oa":
+		demoOfficeAction(dctx)
+	case "tsdr":
+		demoTSDR(dctx)
 	case "":
 		runAllWithContext(dctx)
 	default:
@@ -110,21 +116,27 @@ func main() {
 	}
 }
 
-func runAll(ctx context.Context, client *odp.Client, patent string) {
-	demoPatent(ctx, client, patent)
-	demoPetition(ctx, client)
-	demoPTAB(ctx, client)
-}
-
 func runAllWithContext(dctx *DemoContext) {
 	demoPatentWithContext(dctx, dctx.Patent)
 	demoPetitionWithContext(dctx)
 	demoBulkWithContext(dctx)
 	demoPTABWithContext(dctx)
+	demoOfficeAction(dctx)
+	// TSDR requires a separate API key; skip if not configured
+	if os.Getenv("USPTO_TSDR_API_KEY") != "" {
+		demoTSDR(dctx)
+	}
 }
 
 func runInteractive(ctx context.Context, client *odp.Client) {
 	reader := bufio.NewReader(os.Stdin)
+
+	dctx := &DemoContext{
+		Client:   client,
+		Ctx:      ctx,
+		Patent:   TestPatentApp,
+		SkipSave: true,
+	}
 
 	for {
 		printHeader("USPTO ODP API Demo")
@@ -133,6 +145,8 @@ func runInteractive(ctx context.Context, client *odp.Client) {
 		fmt.Println("3. PTAB API (19 endpoints)")
 		fmt.Println("4. Bulk Data Download")
 		fmt.Println("5. Patent XML Full Text")
+		fmt.Println("6. Office Action API (8 endpoints)")
+		fmt.Println("7. TSDR API (7 endpoints)")
 		fmt.Println("q. Quit")
 		fmt.Print("\nSelect option: ")
 
@@ -147,15 +161,19 @@ func runInteractive(ctx context.Context, client *odp.Client) {
 			if patentInput == "" {
 				patentInput = TestPatentApp
 			}
-			demoPatent(ctx, client, patentInput)
+			demoPatentWithContext(dctx, patentInput)
 		case "2":
-			demoPetition(ctx, client)
+			demoPetitionWithContext(dctx)
 		case "3":
-			demoPTAB(ctx, client)
+			demoPTABWithContext(dctx)
 		case "4":
 			demoBulk(ctx, client, reader)
 		case "5":
 			demoXML(ctx, client, reader)
+		case "6":
+			demoOfficeAction(dctx)
+		case "7":
+			demoTSDR(dctx)
 		case "q", "Q":
 			fmt.Println("Goodbye!")
 			return
