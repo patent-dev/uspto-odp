@@ -2,7 +2,6 @@ package odp
 
 import (
 	"context"
-	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io"
@@ -497,7 +496,8 @@ func ParseXMLWithType(data []byte, expectedType DocumentType) (*XMLDocument, err
 	return nil, fmt.Errorf("invalid document type: %v", expectedType)
 }
 
-// GetXMLURLForApplication retrieves the XML URL and document type for a patent
+// GetXMLURLForApplication retrieves the XML URL and document type for a patent.
+// Checks grant metadata first, then pre-grant publication (pgpub) metadata.
 func (c *Client) GetXMLURLForApplication(ctx context.Context, patentNumber string) (string, DocumentType, error) {
 	resp, err := c.GetPatent(ctx, patentNumber)
 	if err != nil {
@@ -508,38 +508,19 @@ func (c *Client) GetXMLURLForApplication(ctx context.Context, patentNumber strin
 		return "", DocumentTypeUnknown, fmt.Errorf("no patent data found")
 	}
 
-	// Get the first patent record
 	patentData := (*resp.PatentFileWrapperDataBag)[0]
 
-	// Try to get grant XML first (if patent has been granted)
-	if patentData.GrantDocumentMetaData != nil {
-		// Convert to JSON and back to extract the fileLocationURI
-		// The generated type uses interface{} for this field, so we use JSON
-		// marshaling as a type-safe way to access nested string fields
-		jsonData, err := json.Marshal(patentData.GrantDocumentMetaData)
-		if err == nil {
-			var meta map[string]interface{}
-			if err := json.Unmarshal(jsonData, &meta); err == nil {
-				if uri, ok := meta["fileLocationURI"].(string); ok && uri != "" {
-					return uri, DocumentTypeGrant, nil
-				}
-			}
+	// Try grant XML first (granted patents)
+	if patentData.GrantDocumentMetaData != nil && patentData.GrantDocumentMetaData.FileLocationURI != nil {
+		if uri := *patentData.GrantDocumentMetaData.FileLocationURI; uri != "" {
+			return uri, DocumentTypeGrant, nil
 		}
 	}
 
-	// Try to get application XML
-	if patentData.ApplicationMetaData != nil {
-		// Convert to JSON and back to extract the fileLocationURI
-		// The generated type uses interface{} for this field, so we use JSON
-		// marshaling as a type-safe way to access nested string fields
-		jsonData, err := json.Marshal(patentData.ApplicationMetaData)
-		if err == nil {
-			var meta map[string]interface{}
-			if err := json.Unmarshal(jsonData, &meta); err == nil {
-				if uri, ok := meta["fileLocationURI"].(string); ok && uri != "" {
-					return uri, DocumentTypeApplication, nil
-				}
-			}
+	// Try pre-grant publication XML (published applications)
+	if patentData.PgpubDocumentMetaData != nil && patentData.PgpubDocumentMetaData.FileLocationURI != nil {
+		if uri := *patentData.PgpubDocumentMetaData.FileLocationURI; uri != "" {
+			return uri, DocumentTypeApplication, nil
 		}
 	}
 

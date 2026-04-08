@@ -267,7 +267,8 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 	})
 
 	t.Run("GetPatentForeignPriority", func(t *testing.T) {
-		result, err := client.GetPatentForeignPriority(ctx, "17123456")
+		// 15000001 has foreign priority data (KR 10-2014-0009131)
+		result, err := client.GetPatentForeignPriority(ctx, "15000001")
 		if err != nil {
 			t.Fatalf("GetPatentForeignPriority failed: %v", err)
 		}
@@ -276,7 +277,7 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 			t.Fatal("Expected result, got nil")
 		}
 
-		t.Logf("Success: Retrieved patent foreign priority data")
+		t.Logf("Foreign priority: %d entries", len(result))
 	})
 
 	t.Run("GetPatentTransactions", func(t *testing.T) {

@@ -1398,6 +1398,112 @@ func TestClientWithActualResponses(t *testing.T) {
 			csvData := []byte("Interference Number,Decision Date,Outcome\n106130,2025-01-28,Judgment")
 			_, _ = w.Write(csvData)
 
+		// GetPatent responses for GetXMLURLForApplication tests
+		case "/api/v1/patent/applications/18500001":
+			// Pending application: pgpub metadata only, no grant
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"applicationMetaData": map[string]interface{}{
+							"inventionTitle": "COMPOSITION AND METHOD FOR TREATING SYMPTOMS",
+							"filingDate":     "2023-10-05",
+						},
+						"pgpubDocumentMetaData": map[string]interface{}{
+							"productIdentifier":  "APPXML",
+							"zipFileName":        "ipa250410.zip",
+							"fileCreateDateTime": "2025-04-10T08:38:17",
+							"xmlFileName":        "18500001_20250100001.xml",
+							"fileLocationURI":    "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2025/ipa250410/18500001_20250100001.xml",
+						},
+					},
+				},
+			}
+			_ = json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/17999999":
+			// Granted application: both grant and pgpub metadata
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"applicationMetaData": map[string]interface{}{
+							"inventionTitle": "SOME GRANTED PATENT",
+						},
+						"grantDocumentMetaData": map[string]interface{}{
+							"productIdentifier":  "PTGRXML",
+							"fileLocationURI":    "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML-SPLT/2024/ipg240101/17999999_12345678.xml",
+							"xmlFileName":        "17999999_12345678.xml",
+							"zipFileName":        "ipg240101.zip",
+							"fileCreateDateTime": "2024-01-01T10:00:00",
+						},
+						"pgpubDocumentMetaData": map[string]interface{}{
+							"productIdentifier":  "APPXML",
+							"fileLocationURI":    "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2023/ipa230101/17999999_20230001234.xml",
+							"xmlFileName":        "17999999_20230001234.xml",
+							"zipFileName":        "ipa230101.zip",
+							"fileCreateDateTime": "2023-01-01T10:00:00",
+						},
+					},
+				},
+			}
+			_ = json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/18000001":
+			// Application with no XML metadata at all
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"applicationMetaData": map[string]interface{}{
+							"inventionTitle": "UNPUBLISHED APPLICATION",
+							"filingDate":     "2024-11-01",
+						},
+					},
+				},
+			}
+			_ = json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/18000002":
+			// Grant metadata present but fileLocationURI empty, pgpub has URL
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"grantDocumentMetaData": map[string]interface{}{
+							"productIdentifier": "PTGRXML",
+							"fileLocationURI":   "",
+						},
+						"pgpubDocumentMetaData": map[string]interface{}{
+							"productIdentifier":  "APPXML",
+							"fileLocationURI":    "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2025/ipa250101/18000002_20250200001.xml",
+							"xmlFileName":        "18000002_20250200001.xml",
+							"fileCreateDateTime": "2025-01-01T10:00:00",
+						},
+					},
+				},
+			}
+			_ = json.NewEncoder(w).Encode(response)
+
+		case "/api/v1/patent/applications/18000003":
+			// Both grant and pgpub present but both fileLocationURI empty
+			response := map[string]interface{}{
+				"count": 1,
+				"patentFileWrapperDataBag": []interface{}{
+					map[string]interface{}{
+						"grantDocumentMetaData": map[string]interface{}{
+							"productIdentifier": "PTGRXML",
+							"fileLocationURI":   "",
+						},
+						"pgpubDocumentMetaData": map[string]interface{}{
+							"productIdentifier": "APPXML",
+							"fileLocationURI":   "",
+						},
+					},
+				},
+			}
+			_ = json.NewEncoder(w).Encode(response)
+
 		default:
 			// Special handling for bulk file download URLs that include redirect
 			if strings.HasPrefix(r.URL.Path, "https://data.uspto.gov/files/") {
@@ -1975,6 +2081,75 @@ func TestClientWithActualResponses(t *testing.T) {
 		}
 		if len(result) == 0 {
 			t.Fatal("Expected data, got empty")
+		}
+	})
+
+	t.Run("GetXMLURLForApplication", func(t *testing.T) {
+		tests := []struct {
+			name       string
+			appNumber  string
+			wantURL    string
+			wantType   DocumentType
+			wantErrMsg string
+		}{
+			{
+				name:      "grant metadata present",
+				appNumber: "17123456",
+				wantURL:   "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML-SPLT/2023/ipg230711/17123456_11696966.xml",
+				wantType:  DocumentTypeGrant,
+			},
+			{
+				name:      "pgpub only, no grant",
+				appNumber: "18500001",
+				wantURL:   "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2025/ipa250410/18500001_20250100001.xml",
+				wantType:  DocumentTypeApplication,
+			},
+			{
+				name:      "both grant and pgpub, grant wins",
+				appNumber: "17999999",
+				wantURL:   "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML-SPLT/2024/ipg240101/17999999_12345678.xml",
+				wantType:  DocumentTypeGrant,
+			},
+			{
+				name:       "no XML metadata at all",
+				appNumber:  "18000001",
+				wantErrMsg: "no XML URL found in patent data",
+			},
+			{
+				name:      "grant URI empty, falls through to pgpub",
+				appNumber: "18000002",
+				wantURL:   "https://api.uspto.gov/api/v1/datasets/products/files/APPXML-SPLT/2025/ipa250101/18000002_20250200001.xml",
+				wantType:  DocumentTypeApplication,
+			},
+			{
+				name:       "both URIs empty",
+				appNumber:  "18000003",
+				wantErrMsg: "no XML URL found in patent data",
+			},
+		}
+
+		for _, tt := range tests {
+			t.Run(tt.name, func(t *testing.T) {
+				url, docType, err := client.GetXMLURLForApplication(ctx, tt.appNumber)
+				if tt.wantErrMsg != "" {
+					if err == nil {
+						t.Fatalf("expected error containing %q, got nil", tt.wantErrMsg)
+					}
+					if !strings.Contains(err.Error(), tt.wantErrMsg) {
+						t.Fatalf("error = %q, want containing %q", err.Error(), tt.wantErrMsg)
+					}
+					return
+				}
+				if err != nil {
+					t.Fatalf("unexpected error: %v", err)
+				}
+				if url != tt.wantURL {
+					t.Errorf("url = %q, want %q", url, tt.wantURL)
+				}
+				if docType != tt.wantType {
+					t.Errorf("docType = %v, want %v", docType, tt.wantType)
+				}
+			})
 		}
 	})
 
