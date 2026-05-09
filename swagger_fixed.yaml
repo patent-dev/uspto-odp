@@ -5533,7 +5533,7 @@ components:
                 count:
                     type: integer
                     example: 100
-                patentTrialDecisionDataBag:
+                patentTrialDocumentDataBag:
                     type: array
                     items:
                         $ref: '#/components/schemas/patentTrialDecisionDataBag'
@@ -5659,125 +5659,86 @@ components:
                 requestIdentifier:
                     type: string
                     example: 07c5c24d-bf8e-458c-9427-a038500d6e98
-        patentAppealDataBag:
+        patentTrialProceedingDataBag:
             type: object
+            description: A single PTAB trial proceeding record.
             properties:
-                appealNumber:
+                trialNumber:
                     type: string
-                    example: '2024518758'
+                    example: IPR2024-00001
                 lastModifiedDateTime:
                     type: string
-                    example: '2024-05-05T00:00:00Z'
-                appealDocumentCategory:
+                    example: "2025-07-17T20:24:01"
+                trialMetaData:
+                    $ref: '#/components/schemas/TrialMetaData'
+                patentOwnerData:
+                    $ref: '#/components/schemas/PatentOwnerData'
+                regularPetitionerData:
+                    $ref: '#/components/schemas/RegularPetitionerData'
+                respondentData:
+                    $ref: '#/components/schemas/RespondentData'
+                derivationPetitionerData:
+                    $ref: '#/components/schemas/DerivationPetitionerData'
+        patentTrialDocumentDataBag:
+            type: object
+            description: A single PTAB document record.
+            properties:
+                trialDocumentCategory:
                     type: string
-                    example: decision document
-                appealMetaData:
-                    type: object
-                    properties:
-                        docketNoticeMailedDate:
-                            type: string
-                            format: date
-                            example: '2024-05-05'
-                        appealFilingDate:
-                            type: string
-                            format: date
-                            example: '2024-05-05'
-                        appealLastModifiedDate:
-                            type: string
-                            format: date
-                            example: '2024-05-05'
-                        appealLastModifiedDateTime:
-                            type: string
-                            example: '2024-05-05T00:00:00Z'
-                        applicationTypeCategory:
-                            type: string
-                            example: 'Affirmed-in-Part'
-                        fileDownloadURI:
-                            type: string
-                            example: '/download'
-                appellantData:
-                    type: object
-                    properties:
-                        applicationNumberText:
-                            type: string
-                            example: '8357487'
-                        counselName:
-                            type: string
-                            example: TARROLL, SUMDHEIM
-                        groupArtUnitNumber:
-                            type: string
-                            example: STIC
-                        inventorName:
-                            type: string
-                            example: Sultan, Tarik et al
-                        realPartyInInterestName:
-                            type: string
-                            example: Unicorn Pharmaceuticals
-                        patentNumber:
-                            type: string
-                            example: '4678439'
-                        patentOwnerName:
-                            type: string
-                            example: Unicorn Pharmaceuticals
-                        publicationDate:
-                            type: string
-                            example: '2022-05-27'
-                        publicationNumber:
-                            type: string
-                            example: 20210628467A1
-                        technologyCenterNumber:
-                            type: string
-                            example: RD00
-                        grantDate:
-                            type: string
-                            format: date
-                            example: '2022-05-27'
-                thirdPartyRequesterData:
-                    type: object
-                    properties:
-                        thirdPartyName:
-                            type: string
-                            example: null
+                    example: document
+                lastModifiedDateTime:
+                    type: string
+                    example: '2025-07-01T15:20:30Z'
+                trialNumber:
+                    type: string
+                    example: IPR2024-00001
+                trialTypeCode:
+                    type: string
+                    example: IPR
+                trialMetaData:
+                    $ref: '#/components/schemas/TrialMetaData'
+                patentOwnerData:
+                    $ref: '#/components/schemas/PatentOwnerData'
+                regularPetitionerData:
+                    $ref: '#/components/schemas/RegularPetitionerData'
+                respondentData:
+                    $ref: '#/components/schemas/RespondentData'
+                derivationPetitionerData:
+                    $ref: '#/components/schemas/DerivationPetitionerData'
                 documentData:
-                    type: object
-                    properties:
-                        documentFilingDate:
-                            type: string
-                            example: '2022-02-26'
-                        documentIdentifier:
-                            type: string
-                            example: PTAB/e010a6e7-b2df-4f72-b800-e232b89585ab
-                        documentName:
-                            type: string
-                            example: Final Decision Document
-                        documentSizeQuantity:
-                            type: integer
-                            example: 102113
-                        documentOCRText:
-                            type: string
-                            example: Some OCR content
-                        documentTypeDescriptionText:
-                            type: string
-                            example: Rehearing
-                        fileDownloadURI:
-                            type: string
-                            example: https://ptab.uspto.gov/appeal/document/download
+                    $ref: '#/components/schemas/DocumentData'
                 decisionData:
-                    type: object
-                    properties:
-                        appealOutcomeCategory:
-                            type: string
-                            example: 'sample'
-                        statuteAndRuleBag:
-                            type: array
-                            items: {type: string}
-                            example: ["37 CFR 42.100", "37 CFR 43.100"]
-                        decisionIssueDate: {type: string, format: date, example: "2002-02-25"}
-                        decisionTypeCategory: {type: string, example: "Decision"}
-                        issueTypeBag:
-                            type: array
-                            items: {type: string}
-                            example: ["Substantive", "Procedural"]
+                    $ref: '#/components/schemas/DecisionData'
+        patentTrialDecisionDataBag:
+            type: object
+            description: A single PTAB document record.
+            properties:
+                trialDocumentCategory:
+                    type: string
+                    example: document
+                lastModifiedDateTime:
+                    type: string
+                    example: '2025-07-01T15:20:30Z'
+                trialNumber:
+                    type: string
+                    example: IPR2024-00001
+                trialTypeCode:
+                    type: string
+                    example: IPR
+                trialMetaData:
+                    $ref: '#/components/schemas/TrialMetaData'
+                patentOwnerData:
+                    $ref: '#/components/schemas/PatentOwnerData'
+                regularPetitionerData:
+                    $ref: '#/components/schemas/RegularPetitionerData'
+                respondentData:
+                    $ref: '#/components/schemas/RespondentData'
+                derivationPetitionerData:
+                    $ref: '#/components/schemas/DerivationPetitionerData'
+                documentData:
+                    $ref: '#/components/schemas/DocumentData'
+                decisionData:
+                    $ref: '#/components/schemas/DecisionData'
         SearchRequest:
             allOf:
                 - $ref: '#/components/schemas/PatentSearchRequest'
@@ -6116,56 +6077,125 @@ components:
                 interferenceOutcomeCategory:
                     type: string
                     example: "Interference"
-        patentTrialDocumentDataBag:
+        patentAppealDataBag:
             type: object
-            description: A single PTAB document record.
             properties:
-                trialDocumentCategory:
+                appealNumber:
                     type: string
-                    example: document
+                    example: '2024518758'
                 lastModifiedDateTime:
                     type: string
-                    example: '2025-07-01T15:20:30Z'
-                trialNumber:
+                    example: '2024-05-05T00:00:00Z'
+                appealDocumentCategory:
                     type: string
-                    example: IPR2024-00001
-                trialTypeCode:
-                    type: string
-                    example: IPR
-                trialMetaData:
-                    $ref: '#/components/schemas/TrialMetaData'
-                patentOwnerData:
-                    $ref: '#/components/schemas/PatentOwnerData'
-                regularPetitionerData:
-                    $ref: '#/components/schemas/RegularPetitionerData'
-                respondentData:
-                    $ref: '#/components/schemas/RespondentData'
-                derivationPetitionerData:
-                    $ref: '#/components/schemas/DerivationPetitionerData'
+                    example: decision document
+                appealMetaData:
+                    type: object
+                    properties:
+                        docketNoticeMailedDate:
+                            type: string
+                            format: date
+                            example: '2024-05-05'
+                        appealFilingDate:
+                            type: string
+                            format: date
+                            example: '2024-05-05'
+                        appealLastModifiedDate:
+                            type: string
+                            format: date
+                            example: '2024-05-05'
+                        appealLastModifiedDateTime:
+                            type: string
+                            example: '2024-05-05T00:00:00Z'
+                        applicationTypeCategory:
+                            type: string
+                            example: 'Affirmed-in-Part'
+                        fileDownloadURI:
+                            type: string
+                            example: '/download'
+                appellantData:
+                    type: object
+                    properties:
+                        applicationNumberText:
+                            type: string
+                            example: '8357487'
+                        counselName:
+                            type: string
+                            example: TARROLL, SUMDHEIM
+                        groupArtUnitNumber:
+                            type: string
+                            example: STIC
+                        inventorName:
+                            type: string
+                            example: Sultan, Tarik et al
+                        realPartyInInterestName:
+                            type: string
+                            example: Unicorn Pharmaceuticals
+                        patentNumber:
+                            type: string
+                            example: '4678439'
+                        patentOwnerName:
+                            type: string
+                            example: Unicorn Pharmaceuticals
+                        publicationDate:
+                            type: string
+                            example: '2022-05-27'
+                        publicationNumber:
+                            type: string
+                            example: 20210628467A1
+                        technologyCenterNumber:
+                            type: string
+                            example: RD00
+                        grantDate:
+                            type: string
+                            format: date
+                            example: '2022-05-27'
+                thirdPartyRequesterData:
+                    type: object
+                    properties:
+                        thirdPartyName:
+                            type: string
+                            example: null
                 documentData:
-                    $ref: '#/components/schemas/DocumentData'
+                    type: object
+                    properties:
+                        documentFilingDate:
+                            type: string
+                            example: '2022-02-26'
+                        documentIdentifier:
+                            type: string
+                            example: PTAB/e010a6e7-b2df-4f72-b800-e232b89585ab
+                        documentName:
+                            type: string
+                            example: Final Decision Document
+                        documentSizeQuantity:
+                            type: integer
+                            example: 102113
+                        documentOCRText:
+                            type: string
+                            example: Some OCR content
+                        documentTypeDescriptionText:
+                            type: string
+                            example: Rehearing
+                        fileDownloadURI:
+                            type: string
+                            example: https://ptab.uspto.gov/appeal/document/download
                 decisionData:
-                    $ref: '#/components/schemas/DecisionData'
-        patentTrialProceedingDataBag:
-            type: object
-            description: A single PTAB trial proceeding record.
-            properties:
-                trialNumber:
-                    type: string
-                    example: IPR2024-00001
-                lastModifiedDateTime:
-                    type: string
-                    example: "2025-07-17T20:24:01"
-                trialMetaData:
-                    $ref: '#/components/schemas/TrialMetaData'
-                patentOwnerData:
-                    $ref: '#/components/schemas/PatentOwnerData'
-                regularPetitionerData:
-                    $ref: '#/components/schemas/RegularPetitionerData'
-                respondentData:
-                    $ref: '#/components/schemas/RespondentData'
-                derivationPetitionerData:
-                    $ref: '#/components/schemas/DerivationPetitionerData'
+                    type: object
+                    properties:
+                        appealOutcomeCategory:
+                            type: string
+                            example: 'sample'
+                        statuteAndRuleBag:
+                            type: array
+                            items: {type: string}
+                            example: ["37 CFR 42.100", "37 CFR 43.100"]
+                        decisionIssueDate: {type: string, format: date, example: "2002-02-25"}
+                        decisionTypeCategory: {type: string, example: "Decision"}
+                        issueTypeBag:
+                            type: array
+                            items: {type: string}
+                            example: ["Substantive", "Procedural"]
         StatusCodeSearchRequest:
             type: object
             properties:
@@ -6774,49 +6804,19 @@ components:
                 - json
                 - csv
             default: json
-        patentTrialDecisionDataBag:
-            type: object
-            description: A single PTAB document record.
-            properties:
-                trialDocumentCategory:
-                    type: string
-                    example: document
-                lastModifiedDateTime:
-                    type: string
-                    example: '2025-07-01T15:20:30Z'
-                trialNumber:
-                    type: string
-                    example: IPR2024-00001
-                trialTypeCode:
-                    type: string
-                    example: IPR
-                trialMetaData:
-                    $ref: '#/components/schemas/TrialMetaData'
-                patentOwnerData:
-                    $ref: '#/components/schemas/PatentOwnerData'
-                regularPetitionerData:
-                    $ref: '#/components/schemas/RegularPetitionerData'
-                respondentData:
-                    $ref: '#/components/schemas/RespondentData'
-                derivationPetitionerData:
-                    $ref: '#/components/schemas/DerivationPetitionerData'
-                documentData:
-                    $ref: '#/components/schemas/DocumentData'
-                decisionData:
-                    $ref: '#/components/schemas/DecisionData'
     responses:
-        Document200:
-            description: OK
-            content:
-                application/json:
-                    schema:
-                        $ref: '#/components/schemas/DocumentDataResponse'
         Proceeding200:
             description: OK
             content:
                 application/json:
                     schema:
                         $ref: '#/components/schemas/ProceedingDataResponse'
+        Document200:
+            description: OK
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/DocumentDataResponse'
         Decision200:
             description: OK
             content:

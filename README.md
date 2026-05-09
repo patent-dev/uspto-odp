@@ -468,6 +468,7 @@ The USPTO swagger specification has several mismatches with actual API responses
 
 **Field Name Fixes:**
 - `InterferenceDecisionRecord.decisionDocumentData` -> `documentData` (API uses different field name)
+- `DecisionDataResponse.patentTrialDecisionDataBag` -> `patentTrialDocumentDataBag` (PTAB trial-decisions search returns the array under `patentTrialDocumentDataBag`, same as trial-documents; without this fix the slice silently unmarshals to nil while `count` parses fine)
 
 **Format Fixes:**
 - Removed `format: date-time` from datetime fields that return non-RFC3339 formats (e.g., `lastModifiedDateTime` returns `"2025-11-26T23:58:00"` without timezone)
@@ -493,6 +494,11 @@ The USPTO swagger specification has several mismatches with actual API responses
 - `trial-decisions.yaml`: now uses full inline schemas instead of `allOf` refs
 
 ## Version History
+
+### v1.5.1 - PTAB decisions field name fix
+
+- `DecisionDataResponse.PatentTrialDecisionDataBag` renamed to `PatentTrialDocumentDataBag` to match the actual API response. Previously the slice always unmarshaled to nil while `count` parsed fine. Mechanically breaking for consumers, but the old field never had data.
+- `cmd/gen` now sorts source files deterministically; previously the bundled spec depended on Go map iteration order.
 
 ### v1.5.0 - PCT support, typed responses, ergonomics
 

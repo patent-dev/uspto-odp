@@ -17,6 +17,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
 
 	"github.com/getkin/kin-openapi/openapi3"
@@ -160,12 +161,20 @@ func bundleSwagger() error {
 		return fmt.Errorf("swagger.yaml not found")
 	}
 
-	// Merge components from all other files into main doc
-	for filename, doc := range files {
+	// Iterate files in a stable order. mergeComponents keeps the first
+	// content for each name, so reverse-alpha makes trial-*.yaml win over
+	// odp-common-base.yaml for shared names (Facet, FacetItem, Status413).
+	filenames := make([]string, 0, len(files))
+	for filename := range files {
+		filenames = append(filenames, filename)
+	}
+	sort.Sort(sort.Reverse(sort.StringSlice(filenames)))
+
+	for _, filename := range filenames {
 		if filename == "swagger.yaml" {
 			continue
 		}
-		if err := mergeComponents(mainDoc, doc, filename); err != nil {
+		if err := mergeComponents(mainDoc, files[filename], filename); err != nil {
 			return fmt.Errorf("merging %s: %w", filename, err)
 		}
 		log.Printf("  - Merged components from %s", filename)
@@ -478,6 +487,16 @@ func applyFixes() error {
 		content = re12.ReplaceAllString(content, "${1}type: array\n                                                    items:\n                                                        ${2}")
 		fixCount++
 		log.Println("  - Fixed GetPatentAssignment: assignmentBag single object -> array (API returns array)")
+	}
+
+	// Fix 13: PTAB trials/decisions search returns results under
+	// patentTrialDocumentDataBag, not patentTrialDecisionDataBag. Without this
+	// the slice unmarshals to nil while count parses fine.
+	re13 := regexp.MustCompile(`(count:\s*\n\s+type:\s*integer\s*\n\s+example:\s*100\s*\n\s+)patentTrialDecisionDataBag:`)
+	if re13.MatchString(content) {
+		content = re13.ReplaceAllString(content, "${1}patentTrialDocumentDataBag:")
+		fixCount++
+		log.Println("  - Fixed DecisionDataResponse: patentTrialDecisionDataBag -> patentTrialDocumentDataBag (API field name)")
 	}
 
 	log.Printf("  Applied %d regex fixes", fixCount)

@@ -282,7 +282,7 @@ type DecisionData struct {
 type DecisionDataResponse struct {
 	Count                      *int                          `json:"count,omitempty"`
 	Facets                     *[]Facet                      `json:"facets,omitempty"`
-	PatentTrialDecisionDataBag *[]PatentTrialDecisionDataBag `json:"patentTrialDecisionDataBag,omitempty"`
+	PatentTrialDocumentDataBag *[]PatentTrialDecisionDataBag `json:"patentTrialDocumentDataBag,omitempty"`
 }
 
 // DerivationPetitionerData defines model for DerivationPetitionerData.

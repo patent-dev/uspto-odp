@@ -185,9 +185,9 @@ func demoSearchTrialDecisions(dctx *DemoContext) {
 		fmt.Printf("Total trial decisions: %d\n", *result.Count)
 	}
 
-	if result.PatentTrialDecisionDataBag != nil {
-		fmt.Printf("Returned: %d decisions\n", len(*result.PatentTrialDecisionDataBag))
-		for i, doc := range *result.PatentTrialDecisionDataBag {
+	if result.PatentTrialDocumentDataBag != nil {
+		fmt.Printf("Returned: %d decisions\n", len(*result.PatentTrialDocumentDataBag))
+		for i, doc := range *result.PatentTrialDocumentDataBag {
 			if i >= 3 {
 				break
 			}
@@ -215,15 +215,15 @@ func demoGetTrialDecision(dctx *DemoContext) {
 
 	// First search to get a valid document identifier
 	result, err := dctx.Client.SearchTrialDecisions(dctx.Ctx, "", 0, 1)
-	if err != nil || result.PatentTrialDecisionDataBag == nil || len(*result.PatentTrialDecisionDataBag) == 0 {
+	if err != nil || result.PatentTrialDocumentDataBag == nil || len(*result.PatentTrialDocumentDataBag) == 0 {
 		fmt.Println("No trial decisions found to demo")
 		return
 	}
 
 	docID := ""
-	if (*result.PatentTrialDecisionDataBag)[0].DocumentData != nil &&
-		(*result.PatentTrialDecisionDataBag)[0].DocumentData.DocumentIdentifier != nil {
-		docID = *(*result.PatentTrialDecisionDataBag)[0].DocumentData.DocumentIdentifier
+	if (*result.PatentTrialDocumentDataBag)[0].DocumentData != nil &&
+		(*result.PatentTrialDocumentDataBag)[0].DocumentData.DocumentIdentifier != nil {
+		docID = *(*result.PatentTrialDocumentDataBag)[0].DocumentData.DocumentIdentifier
 	}
 	if docID == "" {
 		fmt.Println("No document identifier found")
@@ -245,14 +245,14 @@ func demoGetTrialDecisionsByTrialNumber(dctx *DemoContext) {
 
 	// Get trial number from SearchTrialDecisions (not Proceedings) so it has decisions
 	result, err := dctx.Client.SearchTrialDecisions(dctx.Ctx, "", 0, 1)
-	if err != nil || result.PatentTrialDecisionDataBag == nil || len(*result.PatentTrialDecisionDataBag) == 0 {
+	if err != nil || result.PatentTrialDocumentDataBag == nil || len(*result.PatentTrialDocumentDataBag) == 0 {
 		fmt.Println("No trial decisions found to get trial number")
 		return
 	}
 
 	trialNumber := ""
-	if (*result.PatentTrialDecisionDataBag)[0].TrialNumber != nil {
-		trialNumber = *(*result.PatentTrialDecisionDataBag)[0].TrialNumber
+	if (*result.PatentTrialDocumentDataBag)[0].TrialNumber != nil {
+		trialNumber = *(*result.PatentTrialDocumentDataBag)[0].TrialNumber
 	}
 	if trialNumber == "" {
 		fmt.Println("No trial number found in decisions")
