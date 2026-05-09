@@ -5,6 +5,41 @@
 
 A complete Go client library for the USPTO Open Data Portal API, Office Action APIs, and TSDR (Trademark Status & Document Retrieval).
 
+## ODP releases & spec versions
+
+USPTO bumps the **portal version** (currently 4.0) for any change to the
+ODP -- UI updates, new bulk datasets, ecosystem additions -- even when the
+underlying **API specs** don't change. Each swagger file carries its own
+`info.version`, and that's the contract this client binds to.
+
+| Spec file | Version | Surface |
+|---|---|---|
+| `swagger.yaml` | 1.0.0 | Patent Application, Bulk Data, Petition, PTAB |
+| `odp-common-base.yaml` | 1.0.0 | Shared schemas |
+| `trial-proceedings.yaml` | 1.0.0 | PTAB trial proceedings |
+| `trial-decisions.yaml` | 1.0.0 | PTAB trial decisions |
+| `trial-documents.yaml` | 1.0.0 | PTAB trial documents |
+| `trial-appeal-decisions.yaml` | 1.0.0 | PTAB appeal decisions |
+| `trial-interferences.yaml` | 1.0.0 | PTAB interference decisions |
+| `trial-common.yaml` | 1.1.0 | Shared PTAB types |
+| `oa-text-retrieval.yaml` | 1.0.0 | Office Action text |
+| `oa-citations.yaml` | 1.0.0 | Office Action citations |
+| `oa-rejections.yaml` | 1.0.0 | Office Action rejections |
+| `oa-enriched-citations.yaml` | 1.0.0 | Office Action enriched citations |
+| `tsdr-swagger.json` | version 1 | TSDR (separate server + key) |
+
+What this client implements from each ODP portal release:
+
+| Portal release | Date | Changes affecting this client |
+|---|---|---|
+| 3.0 | 2025-11-21 | Initial PTAB datasets via ODP -- wrapped (19 endpoints). |
+| 3.2 | 2026-01-16 | Office Action Weekly Archives surfaced as bulk product `OACT` -- accessible via the existing `SearchBulkProducts` / `GetBulkProduct` wrappers. PTAB RSS feed not wrapped (separate host, no API key). |
+| 3.3 | 2026-03-04 | Trademark (TM) Decisions & Proceedings reachable only through the portal SPA at `data.uspto.gov/ui/trademark/tm-decisions-api/`, using cookie + WAF-token auth. No public API spec. Not wrapped; will revisit if USPTO publishes one. |
+| 3.4 | 2026-03-13 | PatentsView bulk products surfaced via the existing bulk-data wrappers. |
+| 3.5 | 2026-03-24 | Office Action APIs migrated to ODP -- wrapped (8 endpoints). The migration is incomplete on USPTO's side: the OA routes don't yet exist at `api.uspto.gov`; the legacy Developer Hub at `developer.uspto.gov/ds-api/...` still serves them with no API key. The client points the OA wrappers at the legacy host via `Config.OABaseURL` (default `https://developer.uspto.gov`); override when USPTO completes the migration. |
+| 3.6 | 2026-04-10 | US PCT numbers standardized to 15-char (`PCTUS...`); display form is 17-char with slashes -- fully supported. Patent Assignments API: `countryOrStateCode` deprecated, location consolidated under `geographicRegionCode` -- handled with fallback. Daily/yearly bulk file resumption is dataset coverage, no client change. |
+| 4.0 | (latest) | Portal-level changes; the API specs in this repo are still 1.0.x. If 4.0 ever introduces a path or schema change, drop the new swagger files into `swagger/` and run `go run ./cmd/gen`; the coverage test catches anything that goes silently unwrapped. |
+
 ## Getting Started
 
 ### API Keys
@@ -45,18 +80,18 @@ All USPTO ODP API endpoints are fully implemented and tested, plus Office Action
 
 ```go
 // Core Patent Data
-SearchPatents(ctx, query string, offset, limit int32) (*PatentDataResponse, error)
+SearchPatents(ctx, query string, offset, limit int) (*PatentDataResponse, error)
 GetPatent(ctx, patentNumber string) (*PatentDataResponse, error)  // Accepts any patent number format
-GetPatentMetaData(ctx, applicationNumber string) (interface{}, error)
+GetPatentMetaData(ctx, applicationNumber string) (*MetaDataResponse, error)
 
 // Patent Details
 GetPatentAdjustment(ctx, applicationNumber string) (*AdjustmentResponse, error)
 GetPatentContinuity(ctx, applicationNumber string) (*ContinuityResponse, error)
 GetPatentDocuments(ctx, applicationNumber string) (*DocumentBag, error)
 GetPatentAssignment(ctx, applicationNumber string) (*AssignmentResponse, error)
-GetPatentAssociatedDocuments(ctx, applicationNumber string) (any, error)
-GetPatentAttorney(ctx, applicationNumber string) (any, error)
-GetPatentForeignPriority(ctx, applicationNumber string) (any, error)
+GetPatentAssociatedDocuments(ctx, applicationNumber string) (*AssociatedDocumentsResponse, error)
+GetPatentAttorney(ctx, applicationNumber string) (*RecordAttorney, error)
+GetPatentForeignPriority(ctx, applicationNumber string) (*ForeignPriorityResponse, error)
 GetPatentTransactions(ctx, applicationNumber string) (*TransactionsResponse, error)
 
 // Downloads & Utilities
@@ -79,7 +114,7 @@ DownloadBulkFileWithProgress(ctx, fileDownloadURI string, w io.Writer,
 ### Petition API (3 endpoints)
 
 ```go
-SearchPetitions(ctx, query string, offset, limit int32) (*PetitionDecisionResponseBag, error)
+SearchPetitions(ctx, query string, offset, limit int) (*PetitionDecisionResponseBag, error)
 GetPetitionDecision(ctx, recordID string, includeDocuments bool) (*PetitionDecisionIdentifierResponseBag, error)
 SearchPetitionsDownload(ctx, req PetitionDecisionDownloadRequest) ([]byte, error)
 ```
@@ -88,30 +123,30 @@ SearchPetitionsDownload(ctx, req PetitionDecisionDownloadRequest) ([]byte, error
 
 ```go
 // Trial Proceedings (IPR, PGR, CBM)
-SearchTrialProceedings(ctx, query string, offset, limit int32) (*ProceedingDataResponse, error)
+SearchTrialProceedings(ctx, query string, offset, limit int) (*ProceedingDataResponse, error)
 GetTrialProceeding(ctx, trialNumber string) (*ProceedingDataResponse, error)
 SearchTrialProceedingsDownload(ctx, req DownloadRequest) ([]byte, error)
 
 // Trial Decisions
-SearchTrialDecisions(ctx, query string, offset, limit int32) (*DecisionDataResponse, error)
+SearchTrialDecisions(ctx, query string, offset, limit int) (*DecisionDataResponse, error)
 GetTrialDecision(ctx, documentIdentifier string) (*DecisionDataResponse, error)
 GetTrialDecisionsByTrialNumber(ctx, trialNumber string) (*DecisionDataResponse, error)
 SearchTrialDecisionsDownload(ctx, req DownloadRequest) ([]byte, error)
 
 // Trial Documents
-SearchTrialDocuments(ctx, query string, offset, limit int32) (*DocumentDataResponse, error)
+SearchTrialDocuments(ctx, query string, offset, limit int) (*DocumentDataResponse, error)
 GetTrialDocument(ctx, documentIdentifier string) (*DocumentDataResponse, error)
 GetTrialDocumentsByTrialNumber(ctx, trialNumber string) (*DocumentDataResponse, error)
 SearchTrialDocumentsDownload(ctx, req DownloadRequest) ([]byte, error)
 
 // Appeal Decisions
-SearchAppealDecisions(ctx, query string, offset, limit int32) (*AppealDecisionDataResponse, error)
+SearchAppealDecisions(ctx, query string, offset, limit int) (*AppealDecisionDataResponse, error)
 GetAppealDecision(ctx, documentIdentifier string) (*AppealDecisionDataResponse, error)
 GetAppealDecisionsByAppealNumber(ctx, appealNumber string) (*AppealDecisionDataResponse, error)
 SearchAppealDecisionsDownload(ctx, req DownloadRequest) ([]byte, error)
 
 // Interference Decisions
-SearchInterferenceDecisions(ctx, query string, offset, limit int32) (*InterferenceDecisionDataResponse, error)
+SearchInterferenceDecisions(ctx, query string, offset, limit int) (*InterferenceDecisionDataResponse, error)
 GetInterferenceDecision(ctx, documentIdentifier string) (*InterferenceDecisionDataResponse, error)
 GetInterferenceDecisionsByNumber(ctx, interferenceNumber string) (*InterferenceDecisionDataResponse, error)
 SearchInterferenceDecisionsDownload(ctx, req PatentDownloadRequest) ([]byte, error)
@@ -123,19 +158,19 @@ These use the DSAPI pattern (form-encoded POST with Lucene/Solr queries). Same A
 
 ```go
 // Office Action Text Retrieval
-SearchOfficeActions(ctx, criteria string, start, rows int32) (*DSAPIResponse, error)
+SearchOfficeActions(ctx, criteria string, start, rows int) (*DSAPIResponse, error)
 GetOfficeActionFields(ctx) (*DSAPIFieldsResponse, error)
 
 // Office Action Citations (Forms PTO-892 & PTO-1449)
-SearchOfficeActionCitations(ctx, criteria string, start, rows int32) (*DSAPIResponse, error)
+SearchOfficeActionCitations(ctx, criteria string, start, rows int) (*DSAPIResponse, error)
 GetOfficeActionCitationFields(ctx) (*DSAPIFieldsResponse, error)
 
 // Office Action Rejections (101, 102, 103, 112, DP)
-SearchOfficeActionRejections(ctx, criteria string, start, rows int32) (*DSAPIResponse, error)
+SearchOfficeActionRejections(ctx, criteria string, start, rows int) (*DSAPIResponse, error)
 GetOfficeActionRejectionFields(ctx) (*DSAPIFieldsResponse, error)
 
 // Enriched Citations (AI/ML extracted from office actions)
-SearchEnrichedCitations(ctx, criteria string, start, rows int32) (*DSAPIResponse, error)
+SearchEnrichedCitations(ctx, criteria string, start, rows int) (*DSAPIResponse, error)
 GetEnrichedCitationFields(ctx) (*DSAPIFieldsResponse, error)
 ```
 
@@ -214,7 +249,8 @@ fmt.Println(pn.FormatAsGrant())       // "11,646,472"
 Supported formats:
 - Applications: `17248024`, `17/248,024`, `US 17/248,024`
 - Grants: `11646472`, `11,646,472`, `US 11,646,472 B2`
-- Publications: `20250087686`, `US20250087686A1`
+- Publications: `20250087686`, `US20250087686A1` (kind code preserved when supplied: `A2`, `A9`, ...)
+- PCT: `PCTUS2025058371` (15-char API form), `PCT/US2025/058371` (17-char display), `PCTUS0719317` (12-char legacy). Use `pn.FormatAsPCT()` for the display form.
 
 **Note:** 8-digit numbers (like `11646472`) are ambiguous - they could be either grant or application numbers. Use formatting (commas, kind codes) to disambiguate.
 
@@ -273,8 +309,11 @@ config := &odp.Config{
     APIKey:     "your-api-key",
     UserAgent:  "YourApp/1.0",
     MaxRetries: 3,                       // Retry failed requests
-    RetryDelay: 1,                       // Seconds between retries
-    Timeout:    30,                      // Request timeout in seconds
+    RetryDelay: 1 * time.Second,         // Base backoff between retries
+    Timeout:    30 * time.Second,        // Request timeout
+
+    // Office Action DSAPI - separate host while USPTO completes its migration
+    OABaseURL:  "https://developer.uspto.gov", // Default; no API key required at this host
 
     // TSDR (optional - separate server and API key)
     TSDRAPIKey: "your-tsdr-key",         // From https://account.uspto.gov/profile/api-manager
@@ -283,6 +322,9 @@ config := &odp.Config{
 
 client, err := odp.NewClient(config)
 ```
+
+When the server returns 429 with a `Retry-After` header, the client honors the
+header value (capped at 60s) instead of the exponential backoff.
 
 ## Package Structure
 
@@ -438,6 +480,7 @@ The USPTO swagger specification has several mismatches with actual API responses
 **Office Action DSAPI Fixes:**
 - Removed phantom path parameters (`dataset`, `version` declared as `in: path` but paths are static)
 - Made `operationId` values unique across bundled specs (all 4 specs used identical IDs)
+- Rewrote OA paths from `/api/v1/patent/oa/<api>/<v>/<x>` to `/ds-api/<api>/<v>/<x>` and replaced the spec server URL from `https://api.uspto.gov` to `https://developer.uspto.gov`. The ODP 3.5 (2026-03-24) migration is incomplete on USPTO's side; the documented endpoints 404 today, while the legacy Developer Hub at `developer.uspto.gov/ds-api/...` still serves the same payloads. The fix lives in `applyOAFixes` and runs at bundle time. Override at runtime via `Config.OABaseURL` when USPTO completes the migration.
 
 **TSDR Fixes:**
 - Fixed protocol-relative server URL (`//tsdrapi.uspto.gov/` -> `https://tsdrapi.uspto.gov`)
@@ -450,6 +493,65 @@ The USPTO swagger specification has several mismatches with actual API responses
 - `trial-decisions.yaml`: now uses full inline schemas instead of `allOf` refs
 
 ## Version History
+
+### v1.5.0 - PCT support, typed responses, ergonomics
+
+Breaking changes (consumers must update in lockstep):
+- `Config.Timeout` and `Config.RetryDelay` are `time.Duration` instead of `int` seconds.
+- Search wrappers (`SearchPatents`, `SearchPetitions`, all PTAB `Search*`,
+  all Office Action `Search*`) take `int` instead of `int32` for
+  offsets/limits.
+- `GetPatentMetaData` returns `*MetaDataResponse`, covering every field on
+  `ApplicationMetaData` including applicants, inventors, entity status,
+  classification bags, and PCT data. Numeric and boolean fields are
+  pointer-typed where the API distinguishes absent from zero.
+- `GetPatentForeignPriority` returns `*ForeignPriorityResponse`.
+- `AssignmentEntry.Assignors []Assignor` and `Assignees []Assignee` are
+  separate types: assignors carry name + execution date; assignees carry
+  name + address. New fields: `MailedDate`, `ReceivedDate`,
+  `DocumentLocationURI`.
+- `AdjustmentResponse` drops `FilingDate` / `GrantDate` (the adjustment
+  endpoint does not return them). Use `GetPatentMetaData` instead.
+
+New:
+- PCT number support in `NormalizePatentNumber`, `ResolvePatentNumber`, and
+  `GetPatent`: 15-char API form (`PCTUS2025058371`), 17-char display form
+  (`PCT/US2025/058371`), and 12-char legacy form. `FormatAsPCT()` returns
+  the display form.
+- Publication kind codes (`A1`, `A2`, `A9`, ...) flow through
+  `ResolvePatentNumber` when supplied (previously forced to `A1`).
+- `APIError.RetryAfter` (`time.Duration`) populated from the `Retry-After`
+  response header. `retryableRequest` honors it. When the requested wait
+  exceeds `retryAfterCap` (60s), `IsRetryable()` returns false so the
+  caller can decide rather than the client truncating. `Retry-After: 0`
+  triggers an immediate retry.
+- Assignment address parsing reads `geographicRegionCode` (current 3.6
+  field) and falls back to `countryOrStateCode` for older records.
+- `Config.OABaseURL` (default `https://developer.uspto.gov`) routes the
+  Office Action DSAPI wrappers to the legacy host that still serves them
+  while ODP 3.5's migration to `api.uspto.gov` is in progress.
+- `cmd/gen` rewrites the OA spec's paths from `/api/v1/patent/oa/...` to
+  `/ds-api/...` and sets the spec server URL to `developer.uspto.gov` so
+  the generated client targets the working endpoints.
+- `Config.MaxRetryAfter` (default 60s) caps how long the client will wait
+  for a server-requested retry; longer waits surface as non-retryable
+  `*APIError` so the caller can decide.
+- `Config.UserAgent` defaults to `uspto-odp/<version> (patent.dev; +<repo>)`
+  exposed via `DefaultUserAgent` and `Version` constants.
+- Search wrappers validate `offset`/`limit` against `int32` bounds at the
+  call boundary instead of silently truncating.
+- `DownloadBulkFile`/`DownloadBulkFileWithProgress` retry the
+  connection-setup phase (request, status check) through `retryableRequest`;
+  mid-stream errors propagate without retry to avoid overwriting partial
+  writes on non-seekable writers.
+- `xml.go`'s `DownloadXMLWithType` uses the configured `c.httpClient` so
+  `Config.Timeout` actually applies.
+- `MetaDataResponse.ApplicationConfirmationNumber` is `*int` (the swagger
+  types it as `number`/`float32`; we coerce to a sane Go type in the
+  wrapper).
+- `TestGeneratedClientCoverage` matches generated client methods used as
+  function calls in the wrapper sources, asserting every endpoint is
+  either wrapped or pattern-allow-listed.
 
 ### v1.4.0 - Full ODP Coverage (Office Action + TSDR)
 - Office Action APIs: Text Retrieval, Citations, Rejections, Enriched Citations (8 endpoints)

@@ -5712,7 +5712,7 @@ type GetApiV1PatentApplicationsSearchResponse struct {
 		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
-	JSON413 *Status413
+	JSON413 *Status413Schema
 	JSON500 *struct {
 		Code              interface{} `json:"code,omitempty"`
 		Error             interface{} `json:"error,omitempty"`
@@ -5757,7 +5757,7 @@ type PostApiV1PatentApplicationsSearchResponse struct {
 		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
-	JSON413 *Status413
+	JSON413 *Status413Schema
 	JSON500 *struct {
 		Code              interface{} `json:"code,omitempty"`
 		Error             interface{} `json:"error,omitempty"`
@@ -8376,7 +8376,7 @@ func ParseGetApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*GetApiV
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 413:
-		var dest Status413
+		var dest Status413Schema
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8455,7 +8455,7 @@ func ParsePostApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*PostAp
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 413:
-		var dest Status413
+		var dest Status413Schema
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

@@ -14,15 +14,22 @@ const (
 	PatentNumberTypeApplication
 	PatentNumberTypeGrant
 	PatentNumberTypePublication
+	PatentNumberTypePCT
 )
 
 // PatentNumber represents a normalized patent number
 type PatentNumber struct {
 	Original      string           // Original input
-	Normalized    string           // Normalized format (digits only)
+	Normalized    string           // Normalized format (digits only, or PCT API form)
 	ApplicationNo string           // Application number if derivable
 	Type          PatentNumberType // Type of number
 	Country       string           // Country code (usually "US")
+	// KindCode is the suffix when supplied by the caller (e.g., "A1", "A2",
+	// "B2"). For publication numbers it is threaded through resolution to
+	// preserve republished kinds. For grant numbers it is captured for
+	// display only -- USPTO's search API ignores grant kind codes when
+	// resolving to an application number.
+	KindCode string
 }
 
 // Patent number patterns
@@ -31,13 +38,22 @@ var (
 	applicationWithSlashPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{2})/(\d{3})[,\s]*(\d{3})$`)
 
 	// Grant with kind code: US 11,646,472 B2, 9,123,456 B1
-	grantWithKindPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{1,2})[,\s]*(\d{3})[,\s]*(\d{3})[\s]+[A-Z]\d$`)
+	grantWithKindPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{1,2})[,\s]*(\d{3})[,\s]*(\d{3})[\s]+([A-Z]\d)$`)
 
 	// Grant with comma formatting: 11,646,472, US 11,646,472
 	grantWithCommaPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{1,2}),(\d{3}),(\d{3})$`)
 
 	// Publication: 20250087686, US20250087686A1, US 2025/0087686 A1
-	publicationPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{4})[/,\s]*(\d{7})(?:\s*[A-Z]\d)?$`)
+	publicationPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{4})[/,\s]*(\d{7})(?:\s*([A-Z]\d))?$`)
+
+	// PCT 15-char API form: PCTUS2025058371 (no slashes anywhere)
+	pct15Pattern = regexp.MustCompile(`^(?i)PCTUS(\d{4})(\d{6})$`)
+
+	// PCT 17-char display form: PCT/US2025/058371 (slashes after PCT and after year)
+	pct17Pattern = regexp.MustCompile(`^(?i)PCT/US(\d{4})/(\d{6})$`)
+
+	// PCT legacy 12-char form: PCTUS0719317 (preserve as-is, API accepts it)
+	pct12Pattern = regexp.MustCompile(`^(?i)PCTUS(\d{7})$`)
 
 	// Simple patterns for fallback
 	digitsOnlyPattern = regexp.MustCompile(`^\d+$`)
@@ -48,6 +64,8 @@ var (
 //   - Application: "17248024", "17/248,024", "17/248024"
 //   - Grant: "11646472", "11,646,472", "US 11,646,472 B2"
 //   - Publication: "20250087686", "US20250087686A1", "US 2025/0087686 A1"
+//   - PCT: "PCTUS2025058371" (15-char API form), "PCT/US2025/058371" (17-char display),
+//     "PCTUS0719317" (12-char legacy)
 func NormalizePatentNumber(input string) (*PatentNumber, error) {
 	if input == "" {
 		return nil, fmt.Errorf("patent number cannot be empty")
@@ -61,12 +79,37 @@ func NormalizePatentNumber(input string) (*PatentNumber, error) {
 		Country:  "US",
 	}
 
+	// Try PCT 15-char API form (no slashes)
+	if matches := pct15Pattern.FindStringSubmatch(cleaned); matches != nil {
+		result.Normalized = "PCTUS" + matches[1] + matches[2]
+		result.Type = PatentNumberTypePCT
+		result.ApplicationNo = result.Normalized
+		return result, nil
+	}
+
+	// Try PCT 17-char display form (PCT/US####/######)
+	if matches := pct17Pattern.FindStringSubmatch(cleaned); matches != nil {
+		result.Normalized = "PCTUS" + matches[1] + matches[2]
+		result.Type = PatentNumberTypePCT
+		result.ApplicationNo = result.Normalized
+		return result, nil
+	}
+
+	// Try PCT 12-char legacy form
+	if matches := pct12Pattern.FindStringSubmatch(cleaned); matches != nil {
+		result.Normalized = "PCTUS" + matches[1]
+		result.Type = PatentNumberTypePCT
+		result.ApplicationNo = result.Normalized
+		return result, nil
+	}
+
 	// Try grant with kind code first (most specific, e.g., US 11,646,472 B2)
 	if matches := grantWithKindPattern.FindStringSubmatch(cleaned); matches != nil {
 		series := matches[1]
 		number := matches[2] + matches[3]
 		result.Normalized = series + number
 		result.Type = PatentNumberTypeGrant
+		result.KindCode = matches[4]
 		result.ApplicationNo = "" // Will need to be looked up
 		return result, nil
 	}
@@ -97,6 +140,9 @@ func NormalizePatentNumber(input string) (*PatentNumber, error) {
 		number := matches[2]
 		result.Normalized = year + number
 		result.Type = PatentNumberTypePublication
+		if len(matches) > 3 {
+			result.KindCode = matches[3]
+		}
 		result.ApplicationNo = "" // Will need to be looked up
 		return result, nil
 	}
@@ -133,8 +179,8 @@ func NormalizePatentNumber(input string) (*PatentNumber, error) {
 }
 
 // ToApplicationNumber converts a patent number to application number format
-// For application numbers, returns as-is
-// For grant/publication numbers, returns the normalized number which can be used with the API
+// For application and PCT numbers, returns as-is.
+// For grant/publication numbers, returns the normalized number which can be used with the API.
 func (pn *PatentNumber) ToApplicationNumber() string {
 	if pn.ApplicationNo != "" {
 		return pn.ApplicationNo
@@ -153,6 +199,8 @@ func (pn *PatentNumber) String() string {
 		typeStr = "grant"
 	case PatentNumberTypePublication:
 		typeStr = "publication"
+	case PatentNumberTypePCT:
+		typeStr = "pct"
 	}
 
 	return fmt.Sprintf("%s (%s: %s)", pn.Original, typeStr, pn.Normalized)
@@ -210,5 +258,21 @@ func (pn *PatentNumber) FormatAsPublication() string {
 		return fmt.Sprintf("%s/%s", year, number)
 	}
 
+	return pn.Normalized
+}
+
+// FormatAsPCT formats a PCT number for display (e.g., PCT/US2025/058371).
+// 15-char API form -> 17-char display form.
+// 12-char legacy form is returned unchanged (no canonical display form).
+func (pn *PatentNumber) FormatAsPCT() string {
+	if pn.Type != PatentNumberTypePCT {
+		return pn.Normalized
+	}
+	// PCTUS + 4 year + 6 sequence = 15 chars
+	if len(pn.Normalized) == 15 && strings.HasPrefix(pn.Normalized, "PCTUS") {
+		year := pn.Normalized[5:9]
+		seq := pn.Normalized[9:]
+		return fmt.Sprintf("PCT/US%s/%s", year, seq)
+	}
 	return pn.Normalized
 }

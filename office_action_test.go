@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 )
 
 func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
@@ -18,7 +19,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 		switch r.URL.Path {
 
 		// Office Action Text Retrieval
-		case "/api/v1/patent/oa/oa_actions/v1/records":
+		case "/ds-api/oa_actions/v1/records":
 			if r.Method != "POST" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -38,7 +39,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 				},
 			})
 
-		case "/api/v1/patent/oa/oa_actions/v1/fields":
+		case "/ds-api/oa_actions/v1/fields":
 			if r.Method != "GET" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -46,7 +47,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 			_ = json.NewEncoder(w).Encode(map[string]any{
 				"apiKey":              "oa_actions",
 				"apiVersionNumber":    "v1",
-				"apiUrl":              "https://api.uspto.gov/api/v1/patent/oa/oa_actions/v1/fields",
+				"apiUrl":              "https://api.uspto.gov/ds-api/oa_actions/v1/fields",
 				"apiDocumentationUrl": "https://data.uspto.gov/swagger",
 				"apiStatus":           "PUBLISHED",
 				"fieldCount":          5,
@@ -54,7 +55,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 			})
 
 		// Office Action Citations
-		case "/api/v1/patent/oa/oa_citations/v2/records":
+		case "/ds-api/oa_citations/v2/records":
 			if r.Method != "POST" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -73,7 +74,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 				},
 			})
 
-		case "/api/v1/patent/oa/oa_citations/v2/fields":
+		case "/ds-api/oa_citations/v2/fields":
 			if r.Method != "GET" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -85,7 +86,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 			})
 
 		// Office Action Rejections
-		case "/api/v1/patent/oa/oa_rejections/v2/records":
+		case "/ds-api/oa_rejections/v2/records":
 			if r.Method != "POST" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -111,7 +112,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 				},
 			})
 
-		case "/api/v1/patent/oa/oa_rejections/v2/fields":
+		case "/ds-api/oa_rejections/v2/fields":
 			if r.Method != "GET" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -127,7 +128,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 			})
 
 		// Enriched Citations
-		case "/api/v1/patent/oa/enriched_cited_reference_metadata/v3/records":
+		case "/ds-api/enriched_cited_reference_metadata/v3/records":
 			if r.Method != "POST" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -146,7 +147,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 				},
 			})
 
-		case "/api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields":
+		case "/ds-api/enriched_cited_reference_metadata/v3/fields":
 			if r.Method != "GET" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -167,9 +168,10 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 
 	config := &Config{
 		BaseURL:    server.URL,
+		OABaseURL:  server.URL,
 		APIKey:     "test-key",
 		MaxRetries: 0,
-		Timeout:    10,
+		Timeout:    10 * time.Second,
 		UserAgent:  "test",
 	}
 
@@ -326,7 +328,7 @@ func TestSearchOfficeActions_ServerError(t *testing.T) {
 	}))
 	defer server.Close()
 
-	client, err := NewClient(&Config{BaseURL: server.URL, APIKey: "test", MaxRetries: 0, Timeout: 10})
+	client, err := NewClient(&Config{BaseURL: server.URL, OABaseURL: server.URL, APIKey: "test", MaxRetries: 0, Timeout: 10 * time.Second})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +356,7 @@ func TestSearchOfficeActions_NotFound(t *testing.T) {
 	}))
 	defer server.Close()
 
-	client, _ := NewClient(&Config{BaseURL: server.URL, APIKey: "test", MaxRetries: 0, Timeout: 10})
+	client, _ := NewClient(&Config{BaseURL: server.URL, OABaseURL: server.URL, APIKey: "test", MaxRetries: 0, Timeout: 10 * time.Second})
 
 	_, err := client.SearchOfficeActions(context.Background(), "*:*", 0, 10)
 	if err == nil {
@@ -376,7 +378,7 @@ func TestSearchOfficeActions_MalformedJSON(t *testing.T) {
 	}))
 	defer server.Close()
 
-	client, _ := NewClient(&Config{BaseURL: server.URL, APIKey: "test", MaxRetries: 0, Timeout: 10})
+	client, _ := NewClient(&Config{BaseURL: server.URL, OABaseURL: server.URL, APIKey: "test", MaxRetries: 0, Timeout: 10 * time.Second})
 
 	_, err := client.SearchOfficeActions(context.Background(), "*:*", 0, 10)
 	if err == nil {
@@ -397,7 +399,7 @@ func TestSearchOfficeActions_EmptyDocs(t *testing.T) {
 	}))
 	defer server.Close()
 
-	client, _ := NewClient(&Config{BaseURL: server.URL, APIKey: "test", MaxRetries: 0, Timeout: 10})
+	client, _ := NewClient(&Config{BaseURL: server.URL, OABaseURL: server.URL, APIKey: "test", MaxRetries: 0, Timeout: 10 * time.Second})
 
 	result, err := client.SearchOfficeActions(context.Background(), "nonexistent:query", 0, 10)
 	if err != nil {
@@ -431,7 +433,7 @@ func TestGetOfficeActionFields_ServerError(t *testing.T) {
 	}))
 	defer server.Close()
 
-	client, _ := NewClient(&Config{BaseURL: server.URL, APIKey: "bad-key", MaxRetries: 0, Timeout: 10})
+	client, _ := NewClient(&Config{BaseURL: server.URL, OABaseURL: server.URL, APIKey: "bad-key", MaxRetries: 0, Timeout: 10 * time.Second})
 
 	_, err := client.GetOfficeActionFields(context.Background())
 	if err == nil {

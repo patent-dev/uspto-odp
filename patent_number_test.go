@@ -258,6 +258,82 @@ func TestNormalizePatentNumber_RealExamples(t *testing.T) {
 	}
 }
 
+func TestNormalizePatentNumber_PCT(t *testing.T) {
+	tests := []struct {
+		input      string
+		normalized string
+		display    string
+	}{
+		// 15-char API form
+		{"PCTUS2025058371", "PCTUS2025058371", "PCT/US2025/058371"},
+		{"pctus2025058371", "PCTUS2025058371", "PCT/US2025/058371"},
+		// 17-char display form
+		{"PCT/US2025/058371", "PCTUS2025058371", "PCT/US2025/058371"},
+		{"pct/us2025/058371", "PCTUS2025058371", "PCT/US2025/058371"},
+		// 12-char legacy form (swagger example)
+		{"PCTUS0719317", "PCTUS0719317", "PCTUS0719317"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.input, func(t *testing.T) {
+			pn, err := NormalizePatentNumber(tt.input)
+			if err != nil {
+				t.Fatalf("Failed to normalize: %v", err)
+			}
+			if pn.Type != PatentNumberTypePCT {
+				t.Errorf("Expected type PCT, got %v", pn.Type)
+			}
+			if pn.Normalized != tt.normalized {
+				t.Errorf("Expected normalized %s, got %s", tt.normalized, pn.Normalized)
+			}
+			if pn.ApplicationNo != tt.normalized {
+				t.Errorf("Expected ApplicationNo %s, got %s", tt.normalized, pn.ApplicationNo)
+			}
+			if pn.ToApplicationNumber() != tt.normalized {
+				t.Errorf("Expected ToApplicationNumber %s, got %s", tt.normalized, pn.ToApplicationNumber())
+			}
+			if pn.FormatAsPCT() != tt.display {
+				t.Errorf("Expected FormatAsPCT %s, got %s", tt.display, pn.FormatAsPCT())
+			}
+		})
+	}
+}
+
+func TestNormalizePatentNumber_PublicationKindCode(t *testing.T) {
+	tests := []struct {
+		input    string
+		kindCode string
+	}{
+		{"US20250087686A1", "A1"},
+		{"US20250087686A2", "A2"},
+		{"US20250087686A9", "A9"},
+		{"US 2025/0087686 A2", "A2"},
+		{"20250087686", ""}, // no kind code -> empty
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.input, func(t *testing.T) {
+			pn, err := NormalizePatentNumber(tt.input)
+			if err != nil {
+				t.Fatalf("Failed to normalize: %v", err)
+			}
+			if pn.KindCode != tt.kindCode {
+				t.Errorf("Expected KindCode %q, got %q", tt.kindCode, pn.KindCode)
+			}
+		})
+	}
+}
+
+func TestNormalizePatentNumber_GrantKindCode(t *testing.T) {
+	pn, err := NormalizePatentNumber("US 11,646,472 B2")
+	if err != nil {
+		t.Fatalf("Failed to normalize: %v", err)
+	}
+	if pn.KindCode != "B2" {
+		t.Errorf("Expected KindCode B2, got %q", pn.KindCode)
+	}
+}
+
 func BenchmarkNormalizePatentNumber(b *testing.B) {
 	inputs := []string{
 		"17248024",

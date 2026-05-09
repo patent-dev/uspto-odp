@@ -45,7 +45,7 @@ func readJSONResponse(resp *http.Response, result any) error {
 	if err != nil {
 		return fmt.Errorf("reading response: %w", err)
 	}
-	if err := checkStatusWithBody(resp.StatusCode, body); err != nil {
+	if err := checkResponseStatus(resp.StatusCode, body, resp.Header); err != nil {
 		return err
 	}
 	return json.Unmarshal(body, result)
@@ -124,15 +124,18 @@ func DSAPIApplicationCriteria(appNum string) string {
 // SearchOfficeActions searches office action full-text records using Lucene query syntax.
 // Criteria uses Lucene syntax (e.g., "patentApplicationNumber:16123456").
 // Use "*:*" or empty string to match all records.
-func (c *Client) SearchOfficeActions(ctx context.Context, criteria string, start, rows int32) (*DSAPIResponse, error) {
+func (c *Client) SearchOfficeActions(ctx context.Context, criteria string, start, rows int) (*DSAPIResponse, error) {
+	if err := validatePagination(start, rows); err != nil {
+		return nil, err
+	}
 	if criteria == "" {
 		criteria = "*:*"
 	}
 	return c.dsapiSearch(ctx, func(ctx context.Context) (*http.Response, error) {
 		req := oa.OaActionsSearchFormdataRequestBody{
 			Criteria: criteria,
-			Start:    Int32Ptr(start),
-			Rows:     Int32Ptr(rows),
+			Start:    Int32Ptr(int32(start)),
+			Rows:     Int32Ptr(int32(rows)),
 		}
 		return c.oa.OaActionsSearchWithFormdataBody(ctx, req)
 	})
@@ -149,15 +152,18 @@ func (c *Client) GetOfficeActionFields(ctx context.Context) (*DSAPIFieldsRespons
 
 // SearchOfficeActionCitations searches office action citation records.
 // Data covers Office Actions mailed from June 1, 2018 to 180 days prior to current date.
-func (c *Client) SearchOfficeActionCitations(ctx context.Context, criteria string, start, rows int32) (*DSAPIResponse, error) {
+func (c *Client) SearchOfficeActionCitations(ctx context.Context, criteria string, start, rows int) (*DSAPIResponse, error) {
+	if err := validatePagination(start, rows); err != nil {
+		return nil, err
+	}
 	if criteria == "" {
 		criteria = "*:*"
 	}
 	return c.dsapiSearch(ctx, func(ctx context.Context) (*http.Response, error) {
 		req := oa.OaCitationsSearchFormdataRequestBody{
 			Criteria: criteria,
-			Start:    Int32Ptr(start),
-			Rows:     Int32Ptr(rows),
+			Start:    Int32Ptr(int32(start)),
+			Rows:     Int32Ptr(int32(rows)),
 		}
 		return c.oa.OaCitationsSearchWithFormdataBody(ctx, req)
 	})
@@ -174,15 +180,18 @@ func (c *Client) GetOfficeActionCitationFields(ctx context.Context) (*DSAPIField
 
 // SearchOfficeActionRejections searches office action rejection records.
 // Includes rejection types (101, 102, 103, 112, double patenting) and patent eligibility indicators.
-func (c *Client) SearchOfficeActionRejections(ctx context.Context, criteria string, start, rows int32) (*DSAPIResponse, error) {
+func (c *Client) SearchOfficeActionRejections(ctx context.Context, criteria string, start, rows int) (*DSAPIResponse, error) {
+	if err := validatePagination(start, rows); err != nil {
+		return nil, err
+	}
 	if criteria == "" {
 		criteria = "*:*"
 	}
 	return c.dsapiSearch(ctx, func(ctx context.Context) (*http.Response, error) {
 		req := oa.OaRejectionsSearchFormdataRequestBody{
 			Criteria: criteria,
-			Start:    Int32Ptr(start),
-			Rows:     Int32Ptr(rows),
+			Start:    Int32Ptr(int32(start)),
+			Rows:     Int32Ptr(int32(rows)),
 		}
 		return c.oa.OaRejectionsSearchWithFormdataBody(ctx, req)
 	})
@@ -199,15 +208,18 @@ func (c *Client) GetOfficeActionRejectionFields(ctx context.Context) (*DSAPIFiel
 
 // SearchEnrichedCitations searches enriched citation metadata records.
 // Uses AI/ML to extract statutes, rejected claims, prior art references from office actions.
-func (c *Client) SearchEnrichedCitations(ctx context.Context, criteria string, start, rows int32) (*DSAPIResponse, error) {
+func (c *Client) SearchEnrichedCitations(ctx context.Context, criteria string, start, rows int) (*DSAPIResponse, error) {
+	if err := validatePagination(start, rows); err != nil {
+		return nil, err
+	}
 	if criteria == "" {
 		criteria = "*:*"
 	}
 	return c.dsapiSearch(ctx, func(ctx context.Context) (*http.Response, error) {
 		req := oa.EnrichedCitationsSearchFormdataRequestBody{
 			Criteria: criteria,
-			Start:    Int32Ptr(start),
-			Rows:     Int32Ptr(rows),
+			Start:    Int32Ptr(int32(start)),
+			Rows:     Int32Ptr(int32(rows)),
 		}
 		return c.oa.EnrichedCitationsSearchWithFormdataBody(ctx, req)
 	})

@@ -20,7 +20,9 @@ import (
 var updateFixtures = flag.Bool("update-fixtures", false, "update fixture files from live API responses")
 
 // testTimeout is the per-subtest context timeout for integration tests.
-const testTimeout = 30 * time.Second
+// Sized for slow USPTO endpoints (multi-MB grant-XML downloads can take
+// 30+ seconds under load).
+const testTimeout = 90 * time.Second
 
 // testCtx returns a context with a timeout for integration subtests.
 func testCtx(t *testing.T) context.Context {
@@ -42,8 +44,8 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		BaseURL:    "https://api.uspto.gov",
 		APIKey:     apiKey,
 		MaxRetries: 2,
-		RetryDelay: 1,
-		Timeout:    30,
+		RetryDelay: 1 * time.Second,
+		Timeout:    30 * time.Second,
 	}
 
 	client, err := NewClient(config)
@@ -277,7 +279,7 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 			t.Fatal("Expected result, got nil")
 		}
 
-		t.Logf("Foreign priority: %d entries", len(result))
+		t.Logf("Foreign priority: %d entries", len(result.Claims))
 	})
 
 	t.Run("GetPatentTransactions", func(t *testing.T) {
@@ -516,8 +518,8 @@ func TestXMLParsing(t *testing.T) {
 		BaseURL:    "https://api.uspto.gov",
 		APIKey:     apiKey,
 		MaxRetries: 2,
-		RetryDelay: 1,
-		Timeout:    60, // Longer timeout for XML downloads
+		RetryDelay: 1 * time.Second,
+		Timeout:    60 * time.Second, // Longer timeout for XML downloads
 	}
 
 	client, err := NewClient(config)
@@ -830,8 +832,8 @@ func TestEdgeCasesIntegration(t *testing.T) {
 		BaseURL:    "https://api.uspto.gov",
 		APIKey:     apiKey,
 		MaxRetries: 2,
-		RetryDelay: 1,
-		Timeout:    30,
+		RetryDelay: 1 * time.Second,
+		Timeout:    30 * time.Second,
 	}
 
 	client, err := NewClient(config)
@@ -881,12 +883,20 @@ func TestEdgeCasesIntegration(t *testing.T) {
 
 		// Verify all assignment entries have basic fields
 		for i, a := range result.Assignments {
-			if a.Assignee == "" {
-				t.Errorf("Assignment[%d] has empty Assignee", i)
+			if len(a.Assignees) == 0 {
+				t.Errorf("Assignment[%d] has no Assignees", i)
 			}
 			if i < 3 {
-				t.Logf("  Assignment[%d]: Assignee=%q Assignor=%q Date=%s",
-					i, a.Assignee, a.Assignor, a.RecordedDate)
+				assigneeNames := make([]string, len(a.Assignees))
+				for j, p := range a.Assignees {
+					assigneeNames[j] = p.Name
+				}
+				assignorNames := make([]string, len(a.Assignors))
+				for j, p := range a.Assignors {
+					assignorNames[j] = p.Name
+				}
+				t.Logf("  Assignment[%d]: Assignees=%v Assignors=%v Date=%s",
+					i, assigneeNames, assignorNames, a.RecordedDate)
 			}
 		}
 	})
@@ -954,8 +964,8 @@ func TestFixtureSaving(t *testing.T) {
 		BaseURL:    "https://api.uspto.gov",
 		APIKey:     apiKey,
 		MaxRetries: 2,
-		RetryDelay: 1,
-		Timeout:    30,
+		RetryDelay: 1 * time.Second,
+		Timeout:    30 * time.Second,
 	}
 
 	client, err := NewClient(config)
@@ -1046,8 +1056,8 @@ func TestTSDRAPIs(t *testing.T) {
 		APIKey:     os.Getenv("USPTO_API_KEY"),
 		TSDRAPIKey: tsdrKey,
 		MaxRetries: 2,
-		RetryDelay: 1,
-		Timeout:    30,
+		RetryDelay: 1 * time.Second,
+		Timeout:    30 * time.Second,
 	}
 
 	client, err := NewClient(config)
@@ -1105,8 +1115,8 @@ func TestOfficeActionAPIs(t *testing.T) {
 		BaseURL:    "https://api.uspto.gov",
 		APIKey:     apiKey,
 		MaxRetries: 2,
-		RetryDelay: 1,
-		Timeout:    30,
+		RetryDelay: 1 * time.Second,
+		Timeout:    30 * time.Second,
 	}
 
 	client, err := NewClient(config)

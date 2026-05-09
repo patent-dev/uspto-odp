@@ -274,7 +274,7 @@ func NewEnrichedCitationsListFieldsRequest(server string) (*http.Request, error)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields")
+	operationPath := fmt.Sprintf("/ds-api/enriched_cited_reference_metadata/v3/fields")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -312,7 +312,7 @@ func NewEnrichedCitationsSearchRequestWithBody(server string, contentType string
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/patent/oa/enriched_cited_reference_metadata/v3/records")
+	operationPath := fmt.Sprintf("/ds-api/enriched_cited_reference_metadata/v3/records")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -341,7 +341,7 @@ func NewOaActionsListFieldsRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/patent/oa/oa_actions/v1/fields")
+	operationPath := fmt.Sprintf("/ds-api/oa_actions/v1/fields")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -379,7 +379,7 @@ func NewOaActionsSearchRequestWithBody(server string, contentType string, body i
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/patent/oa/oa_actions/v1/records")
+	operationPath := fmt.Sprintf("/ds-api/oa_actions/v1/records")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -408,7 +408,7 @@ func NewOaCitationsListFieldsRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/patent/oa/oa_citations/v2/fields")
+	operationPath := fmt.Sprintf("/ds-api/oa_citations/v2/fields")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -446,7 +446,7 @@ func NewOaCitationsSearchRequestWithBody(server string, contentType string, body
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/patent/oa/oa_citations/v2/records")
+	operationPath := fmt.Sprintf("/ds-api/oa_citations/v2/records")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -475,7 +475,7 @@ func NewOaRejectionsListFieldsRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/patent/oa/oa_rejections/v2/fields")
+	operationPath := fmt.Sprintf("/ds-api/oa_rejections/v2/fields")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -513,7 +513,7 @@ func NewOaRejectionsSearchRequestWithBody(server string, contentType string, bod
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/patent/oa/oa_rejections/v2/records")
+	operationPath := fmt.Sprintf("/ds-api/oa_rejections/v2/records")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}

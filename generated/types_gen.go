@@ -350,10 +350,17 @@ type EventData struct {
 	EventDescriptionText *string `json:"eventDescriptionText,omitempty"`
 }
 
-// Facet Facet Description
+// Facet defines model for Facet.
 type Facet struct {
-	Count *int    `json:"count,omitempty"`
-	Value *string `json:"value,omitempty"`
+	StatuteAndRuleBag   *[]FacetItem `json:"statuteAndRuleBag,omitempty"`
+	TrialStatusCategory *[]FacetItem `json:"trialStatusCategory,omitempty"`
+	TrialTypeCategory   *[]FacetItem `json:"trialTypeCategory,omitempty"`
+}
+
+// FacetItem defines model for FacetItem.
+type FacetItem struct {
+	Name     *string `json:"name,omitempty"`
+	Quantity *int    `json:"quantity,omitempty"`
 }
 
 // Facets defines model for Facets.
@@ -951,8 +958,8 @@ type Sort struct {
 // SortOrder Sort order. e.g. Asc, ASC, Desc, desc, DESC
 type SortOrder string
 
-// Status413 defines model for Status413.
-type Status413 struct {
+// Status413Schema defines model for Status413Schema.
+type Status413Schema struct {
 	Code              *string `json:"code,omitempty"`
 	DetailedMessage   *string `json:"detailedMessage,omitempty"`
 	Message           *string `json:"message,omitempty"`
@@ -1120,6 +1127,14 @@ type NotFound struct {
 
 // Proceeding200 defines model for Proceeding200.
 type Proceeding200 = ProceedingDataResponse
+
+// Status413 defines model for Status413.
+type Status413 struct {
+	Code              *string `json:"code,omitempty"`
+	DetailedMessage   *string `json:"detailedMessage,omitempty"`
+	Message           *string `json:"message,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+}
 
 // GetApiV1DatasetsProductsSearchParams defines parameters for GetApiV1DatasetsProductsSearch.
 type GetApiV1DatasetsProductsSearchParams struct {

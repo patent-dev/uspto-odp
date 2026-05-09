@@ -412,8 +412,7 @@ func (c *Client) DownloadXMLWithType(ctx context.Context, url string, expectedTy
 		req.Header.Set("X-API-Key", c.config.APIKey)
 	}
 
-	httpClient := &http.Client{}
-	resp, err := httpClient.Do(req)
+	resp, err := c.httpClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("downloading XML: %w", err)
 	}

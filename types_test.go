@@ -181,14 +181,20 @@ func TestGetPatentAssignment_Fixture(t *testing.T) {
 		t.Fatalf("Expected 1 assignment, got %d", len(result.Assignments))
 	}
 	a := result.Assignments[0]
-	if a.Assignee != "SAMSUNG ELECTRONICS CO., LTD" {
-		t.Errorf("Assignee = %q, want %q", a.Assignee, "SAMSUNG ELECTRONICS CO., LTD")
+	if len(a.Assignees) != 1 {
+		t.Fatalf("Expected 1 assignee, got %d", len(a.Assignees))
+	}
+	if a.Assignees[0].Name != "SAMSUNG ELECTRONICS CO., LTD" {
+		t.Errorf("Assignees[0].Name = %q, want %q", a.Assignees[0].Name, "SAMSUNG ELECTRONICS CO., LTD")
 	}
 	if a.RecordedDate != "2016-04-19" {
 		t.Errorf("RecordedDate = %q, want %q", a.RecordedDate, "2016-04-19")
 	}
-	if a.ExecutionDate != "2016-01-05" {
-		t.Errorf("ExecutionDate = %q, want %q", a.ExecutionDate, "2016-01-05")
+	if len(a.Assignors) == 0 {
+		t.Fatal("Expected assignors, got 0")
+	}
+	if a.Assignors[0].ExecutionDate != "2016-01-05" {
+		t.Errorf("Assignors[0].ExecutionDate = %q, want %q", a.Assignors[0].ExecutionDate, "2016-01-05")
 	}
 	if a.Conveyance != "ASSIGNMENT OF ASSIGNORS INTEREST (SEE DOCUMENT FOR DETAILS)." {
 		t.Errorf("Conveyance = %q", a.Conveyance)
@@ -196,16 +202,16 @@ func TestGetPatentAssignment_Fixture(t *testing.T) {
 	if a.ReelFrame != "038323/0190" {
 		t.Errorf("ReelFrame = %q, want %q", a.ReelFrame, "038323/0190")
 	}
-	// 9 assignors comma-joined
-	if a.Assignor == "" {
-		t.Error("Assignor should not be empty")
+	names := make([]string, len(a.Assignors))
+	for i, p := range a.Assignors {
+		names[i] = p.Name
 	}
-	// Check first and last assignor names appear
-	if !strings.Contains(a.Assignor, "HEO, JIN-PIL") {
-		t.Errorf("Assignor should contain 'HEO, JIN-PIL', got %q", a.Assignor)
+	joined := strings.Join(names, "|")
+	if !strings.Contains(joined, "HEO, JIN-PIL") {
+		t.Errorf("Assignor names should contain 'HEO, JIN-PIL', got %q", joined)
 	}
-	if !strings.Contains(a.Assignor, "YI, IN-SUN") {
-		t.Errorf("Assignor should contain 'YI, IN-SUN', got %q", a.Assignor)
+	if !strings.Contains(joined, "YI, IN-SUN") {
+		t.Errorf("Assignor names should contain 'YI, IN-SUN', got %q", joined)
 	}
 }
 

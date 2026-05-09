@@ -9,6 +9,7 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 )
 
 func setupTSDRMockServer(t *testing.T) (*httptest.Server, *Client) {
@@ -103,7 +104,7 @@ func setupTSDRMockServer(t *testing.T) (*httptest.Server, *Client) {
 		TSDRBaseURL: server.URL,
 		TSDRAPIKey:  "test-tsdr-key",
 		MaxRetries:  0,
-		Timeout:     10,
+		Timeout:     10 * time.Second,
 		UserAgent:   "test",
 	}
 
@@ -213,8 +214,8 @@ func TestDownloadTrademarkDocument_WithRetries(t *testing.T) {
 		TSDRBaseURL: server.URL,
 		TSDRAPIKey:  "test-tsdr-key",
 		MaxRetries:  1,
-		RetryDelay:  0,
-		Timeout:     10,
+		RetryDelay:  0 * time.Second,
+		Timeout:     10 * time.Second,
 		UserAgent:   "test",
 	}
 	client, err := NewClient(config)
@@ -290,7 +291,7 @@ func TestTSDR_NotConfigured(t *testing.T) {
 		BaseURL:    "http://localhost",
 		APIKey:     "test-key",
 		MaxRetries: 0,
-		Timeout:    10,
+		Timeout:    10 * time.Second,
 	}
 	client, err := NewClient(config)
 	if err != nil {
@@ -319,7 +320,7 @@ func TestTSDR_ServerError(t *testing.T) {
 		TSDRBaseURL: server.URL,
 		TSDRAPIKey:  "test",
 		MaxRetries:  0,
-		Timeout:     10,
+		Timeout:     10 * time.Second,
 	}
 	client, _ := NewClient(config)
 

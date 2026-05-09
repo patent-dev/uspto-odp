@@ -4,13 +4,199 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/patent-dev/uspto-odp/generated"
 )
+
+func TestParseRetryAfter(t *testing.T) {
+	tests := []struct {
+		name string
+		hdr  string
+		min  time.Duration // accept anything >= min if computed from HTTP-date
+		max  time.Duration
+	}{
+		{"missing", "", 0, 0},
+		{"seconds-5", "5", 5 * time.Second, 5 * time.Second},
+		{"seconds-zero", "0", 0, 0},
+		{"seconds-negative", "-3", 0, 0},
+		// Above-cap values are returned verbatim; retryableRequest decides
+		// whether to honor or surface based on Config.MaxRetryAfter.
+		{"seconds-above-cap", "9999", 9999 * time.Second, 9999 * time.Second},
+		{"http-date-past", "Mon, 02 Jan 2006 15:04:05 GMT", 0, 0},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			h := http.Header{}
+			if tt.hdr != "" {
+				h.Set("Retry-After", tt.hdr)
+			}
+			got := parseRetryAfter(h)
+			if got < tt.min || got > tt.max {
+				t.Errorf("parseRetryAfter(%q) = %v, want in [%v,%v]", tt.hdr, got, tt.min, tt.max)
+			}
+		})
+	}
+}
+
+func TestValidatePagination(t *testing.T) {
+	tests := []struct {
+		name           string
+		offset, limit  int
+		wantErr        bool
+	}{
+		{"ok", 0, 10, false},
+		{"ok-large", 1_000_000, 100, false},
+		{"negative-offset", -1, 10, true},
+		{"negative-limit", 0, -1, true},
+		{"offset-overflow", int(math.MaxInt32) + 1, 10, true},
+		{"limit-overflow", 0, int(math.MaxInt32) + 1, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			err := validatePagination(tt.offset, tt.limit)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("validatePagination(%d,%d) err=%v, wantErr=%v", tt.offset, tt.limit, err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestSearchPatents_RejectsBadPagination(t *testing.T) {
+	cfg := DefaultConfig()
+	cfg.BaseURL = "http://invalid.local"
+	cfg.APIKey = "test"
+	client, err := NewClient(cfg)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+	if _, err := client.SearchPatents(context.Background(), "x", -1, 10); err == nil {
+		t.Error("expected error for negative offset")
+	}
+	if _, err := client.SearchPatents(context.Background(), "x", 0, int(math.MaxInt32)+1); err == nil {
+		t.Error("expected error for limit overflow")
+	}
+}
+
+func TestParseRetryAfter_FutureHTTPDate(t *testing.T) {
+	h := http.Header{}
+	h.Set("Retry-After", time.Now().Add(5*time.Second).UTC().Format(http.TimeFormat))
+	got := parseRetryAfter(h)
+	if got < 1*time.Second || got > 6*time.Second {
+		t.Errorf("parseRetryAfter(future-date) = %v, want in [1s, 6s]", got)
+	}
+}
+
+func TestAPIError_RetryAfter(t *testing.T) {
+	h := http.Header{}
+	h.Set("Retry-After", "7")
+	err := checkResponseStatus(429, []byte(`{"error":"rate limited"}`), h)
+	var apiErr *APIError
+	if !errors.As(err, &apiErr) {
+		t.Fatalf("expected *APIError, got %T", err)
+	}
+	if apiErr.RetryAfter != 7*time.Second {
+		t.Errorf("RetryAfter = %v, want 7s", apiErr.RetryAfter)
+	}
+	if apiErr.StatusCode != 429 {
+		t.Errorf("StatusCode = %d, want 429", apiErr.StatusCode)
+	}
+	if !apiErr.IsRetryable() {
+		t.Error("expected 429 to be retryable")
+	}
+}
+
+func TestRetryableRequest_AboveCapSurfaces(t *testing.T) {
+	hits := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		hits++
+		w.Header().Set("Retry-After", "600")
+		w.WriteHeader(http.StatusTooManyRequests)
+		_, _ = w.Write([]byte(`{"error":"rate limited"}`))
+	}))
+	defer server.Close()
+
+	cfg := DefaultConfig()
+	cfg.BaseURL = server.URL
+	cfg.APIKey = "test"
+	cfg.MaxRetries = 3
+	cfg.MaxRetryAfter = 60 * time.Second // explicit; verifies the cap is honored
+	cfg.Timeout = 10 * time.Second
+	client, err := NewClient(cfg)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+
+	_, err = client.SearchPatents(context.Background(), "x", 0, 1)
+	if err == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var apiErr *APIError
+	if !errors.As(err, &apiErr) {
+		t.Fatalf("expected *APIError, got %T: %v", err, err)
+	}
+	if apiErr.RetryAfter != 600*time.Second {
+		t.Errorf("RetryAfter = %v, want 600s", apiErr.RetryAfter)
+	}
+	if hits != 1 {
+		t.Errorf("expected 1 server hit (no retry above cap), got %d", hits)
+	}
+}
+
+// TestRetryableRequest_HonorsRetryAfter exercises the full retry path: a
+// server returns 429 with Retry-After: 1 once, then 200, and the client
+// succeeds on the second attempt with a wait derived from the header.
+func TestRetryableRequest_HonorsRetryAfter(t *testing.T) {
+	hits := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		hits++
+		if hits == 1 {
+			w.Header().Set("Retry-After", "1")
+			w.WriteHeader(http.StatusTooManyRequests)
+			_, _ = w.Write([]byte(`{"error":"rate limited"}`))
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"count":0,"patentFileWrapperDataBag":[]}`))
+	}))
+	defer server.Close()
+
+	cfg := DefaultConfig()
+	cfg.BaseURL = server.URL
+	cfg.APIKey = "test"
+	cfg.MaxRetries = 2
+	// 30s exponential floor vs. Retry-After: 1; if Retry-After isn't honored
+	// the test would wait ~30s (and exceed the test timeout). The big gap
+	// keeps the upper-bound check robust on contended CI.
+	cfg.RetryDelay = 30 * time.Second
+	cfg.Timeout = 10 * time.Second
+	client, err := NewClient(cfg)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+
+	start := time.Now()
+	_, err = client.SearchPatents(context.Background(), "x", 0, 1)
+	elapsed := time.Since(start)
+	if err != nil {
+		t.Fatalf("SearchPatents: %v", err)
+	}
+	if hits != 2 {
+		t.Errorf("expected 2 server hits, got %d", hits)
+	}
+	if elapsed > 5*time.Second {
+		t.Errorf("retry waited %v; Retry-After: 1 should beat the 30s exponential floor", elapsed)
+	}
+	if elapsed < 900*time.Millisecond {
+		t.Errorf("retry waited only %v; expected ~1s from Retry-After: 1", elapsed)
+	}
+}
 
 // TestDefaultConfig tests the DefaultConfig function
 func TestDefaultConfig(t *testing.T) {
@@ -21,17 +207,20 @@ func TestDefaultConfig(t *testing.T) {
 	if config.BaseURL != "https://api.uspto.gov" {
 		t.Errorf("Expected BaseURL to be https://api.uspto.gov, got %s", config.BaseURL)
 	}
-	if config.UserAgent != "PatentDev/1.4" {
-		t.Errorf("Expected UserAgent to be PatentDev/1.4, got %s", config.UserAgent)
+	if config.UserAgent != DefaultUserAgent {
+		t.Errorf("Expected UserAgent to be %q, got %q", DefaultUserAgent, config.UserAgent)
+	}
+	if !strings.Contains(config.UserAgent, "uspto-odp/"+Version) {
+		t.Errorf("Default UA should advertise library and version: %q", config.UserAgent)
 	}
 	if config.MaxRetries != 3 {
 		t.Errorf("Expected MaxRetries to be 3, got %d", config.MaxRetries)
 	}
-	if config.RetryDelay != 1 {
-		t.Errorf("Expected RetryDelay to be 1, got %d", config.RetryDelay)
+	if config.RetryDelay != 1*time.Second {
+		t.Errorf("Expected RetryDelay to be 1s, got %v", config.RetryDelay)
 	}
-	if config.Timeout != 30 {
-		t.Errorf("Expected Timeout to be 30, got %d", config.Timeout)
+	if config.Timeout != 30*time.Second {
+		t.Errorf("Expected Timeout to be 30s, got %v", config.Timeout)
 	}
 }
 
@@ -1525,7 +1714,7 @@ func TestClientWithActualResponses(t *testing.T) {
 		BaseURL:    server.URL,
 		APIKey:     "test-key",
 		MaxRetries: 1,
-		Timeout:    10,
+		Timeout:    10 * time.Second,
 	}
 
 	client, err := NewClient(config)
@@ -1704,14 +1893,14 @@ func TestClientWithActualResponses(t *testing.T) {
 			t.Fatalf("Expected 1 assignment, got %d", len(result.Assignments))
 		}
 		a := result.Assignments[0]
-		if a.Assignee != "SAMSUNG ELECTRONICS CO., LTD" {
-			t.Errorf("Assignee = %q, want %q", a.Assignee, "SAMSUNG ELECTRONICS CO., LTD")
+		if len(a.Assignees) == 0 || a.Assignees[0].Name != "SAMSUNG ELECTRONICS CO., LTD" {
+			t.Errorf("Assignees[0].Name = %v, want %q", a.Assignees, "SAMSUNG ELECTRONICS CO., LTD")
 		}
 		if a.ReelFrame != "038323/0190" {
 			t.Errorf("ReelFrame = %q, want %q", a.ReelFrame, "038323/0190")
 		}
-		if a.Assignor == "" {
-			t.Error("Assignor should not be empty")
+		if len(a.Assignors) == 0 {
+			t.Error("Assignors should not be empty")
 		}
 	})
 
@@ -1755,11 +1944,11 @@ func TestClientWithActualResponses(t *testing.T) {
 		if err != nil {
 			t.Fatalf("GetPatentForeignPriority failed: %v", err)
 		}
-		if len(result) == 0 {
+		if result == nil || len(result.Claims) == 0 {
 			t.Fatal("Expected at least one ForeignPriority entry")
 		}
-		if result[0].IpOfficeName == nil || *result[0].IpOfficeName != "REPUBLIC OF KOREA" {
-			t.Errorf("Expected IpOfficeName 'REPUBLIC OF KOREA', got %v", result[0].IpOfficeName)
+		if result.Claims[0].IPOfficeName != "REPUBLIC OF KOREA" {
+			t.Errorf("Expected IPOfficeName 'REPUBLIC OF KOREA', got %q", result.Claims[0].IPOfficeName)
 		}
 	})
 
@@ -1772,11 +1961,11 @@ func TestClientWithActualResponses(t *testing.T) {
 		if result == nil {
 			t.Fatal("Expected result, got nil")
 		}
-		if result.InventionTitle == nil || *result.InventionTitle == "" {
+		if result.InventionTitle == "" {
 			t.Error("Expected non-empty InventionTitle")
 		}
-		if result.PatentNumber == nil || *result.PatentNumber != "11646472" {
-			t.Errorf("Expected PatentNumber '11646472', got %v", result.PatentNumber)
+		if result.PatentNumber != "11646472" {
+			t.Errorf("Expected PatentNumber '11646472', got %q", result.PatentNumber)
 		}
 	})
 

@@ -498,6 +498,13 @@ func applyFixes() error {
 // The USPTO swagger incorrectly defines error responses as schemas with response structure.
 // These are used both as responses (in response context) and as schemas (inline).
 // We split them: move to responses for response usage, create schema for schema usage.
+//
+// Side-effect to be aware of: oapi-codegen will emit two Go types for the
+// split -- one named after the response (e.g. `Status413`, derived from the
+// response's inline schema) and one named after the renamed schema
+// (`Status413Schema`). They have identical fields. Both are part of the
+// generated package by design; the wrappers reference `Status413Schema` via
+// the response field's `JSON413` slot.
 func fixResponseSchemas() error {
 	data, err := os.ReadFile(fixedFile)
 	if err != nil {
@@ -1085,6 +1092,34 @@ func applyOAFixes() error {
 	}
 
 	log.Printf("  - Bug fix: removed phantom path parameters + made operationIds unique")
+
+	// Bug: USPTO's OA specs claim the routes live on api.uspto.gov at
+	// /api/v1/patent/oa/<api>/<v>/<x>, but the migration announced in ODP
+	// 3.5 (2026-03-24) is incomplete -- as of 2026-05 the legacy Developer
+	// Hub at developer.uspto.gov/ds-api/<api>/<v>/<x> still serves these
+	// endpoints, with no API key required. Rewrite the paths (drop the
+	// /api/v1/patent/oa prefix in favor of /ds-api) and replace the
+	// server URL. Revisit when USPTO completes the migration.
+	const oaSpecPathPrefix = "/api/v1/patent/oa"
+	const oaLegacyPathPrefix = "/ds-api"
+	for i := 0; i+1 < len(paths.Content); i += 2 {
+		keyNode := paths.Content[i]
+		if strings.HasPrefix(keyNode.Value, oaSpecPathPrefix+"/") {
+			keyNode.Value = oaLegacyPathPrefix + strings.TrimPrefix(keyNode.Value, oaSpecPathPrefix)
+			fixCount++
+		}
+	}
+	if servers := findChildNode(root, "servers"); servers != nil && servers.Kind == yaml.SequenceNode {
+		for _, server := range servers.Content {
+			if urlNode := findChildNode(server, "url"); urlNode != nil &&
+				strings.Contains(urlNode.Value, "api.uspto.gov") {
+				urlNode.Value = "https://developer.uspto.gov"
+				fixCount++
+			}
+		}
+	}
+	log.Println("  - Bug fix: routed OA paths to legacy DSAPI host (developer.uspto.gov/ds-api/...)")
+
 	log.Printf("  Applied %d OA fixes", fixCount)
 
 	out, err := yaml.Marshal(&doc)
