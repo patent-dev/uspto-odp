@@ -19,7 +19,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 		switch r.URL.Path {
 
 		// Office Action Text Retrieval
-		case "/ds-api/oa_actions/v1/records":
+		case "/api/v1/patent/oa/oa_actions/v1/records":
 			if r.Method != "POST" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -39,7 +39,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 				},
 			})
 
-		case "/ds-api/oa_actions/v1/fields":
+		case "/api/v1/patent/oa/oa_actions/v1/fields":
 			if r.Method != "GET" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -47,7 +47,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 			_ = json.NewEncoder(w).Encode(map[string]any{
 				"apiKey":              "oa_actions",
 				"apiVersionNumber":    "v1",
-				"apiUrl":              "https://api.uspto.gov/ds-api/oa_actions/v1/fields",
+				"apiUrl":              "https://api.uspto.gov/api/v1/patent/oa/oa_actions/v1/fields",
 				"apiDocumentationUrl": "https://data.uspto.gov/swagger",
 				"apiStatus":           "PUBLISHED",
 				"fieldCount":          5,
@@ -55,7 +55,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 			})
 
 		// Office Action Citations
-		case "/ds-api/oa_citations/v2/records":
+		case "/api/v1/patent/oa/oa_citations/v2/records":
 			if r.Method != "POST" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -74,7 +74,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 				},
 			})
 
-		case "/ds-api/oa_citations/v2/fields":
+		case "/api/v1/patent/oa/oa_citations/v2/fields":
 			if r.Method != "GET" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -86,7 +86,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 			})
 
 		// Office Action Rejections
-		case "/ds-api/oa_rejections/v2/records":
+		case "/api/v1/patent/oa/oa_rejections/v2/records":
 			if r.Method != "POST" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -112,7 +112,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 				},
 			})
 
-		case "/ds-api/oa_rejections/v2/fields":
+		case "/api/v1/patent/oa/oa_rejections/v2/fields":
 			if r.Method != "GET" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -128,7 +128,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 			})
 
 		// Enriched Citations
-		case "/ds-api/enriched_cited_reference_metadata/v3/records":
+		case "/api/v1/patent/oa/enriched_cited_reference_metadata/v3/records":
 			if r.Method != "POST" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return
@@ -147,7 +147,7 @@ func setupOAMockServer(t *testing.T) (*httptest.Server, *Client) {
 				},
 			})
 
-		case "/ds-api/enriched_cited_reference_metadata/v3/fields":
+		case "/api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields":
 			if r.Method != "GET" {
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				return

@@ -55,11 +55,8 @@ type Config struct {
 	// DefaultMaxRetryAfter constant".
 	MaxRetryAfter time.Duration
 
-	// OABaseURL is the host serving the Office Action DSAPI. USPTO's
-	// stated migration to api.uspto.gov is incomplete; the legacy
-	// Developer Hub still serves these endpoints. Defaults to
-	// "https://developer.uspto.gov" and requires no API key. When USPTO
-	// completes the migration, override to the new host.
+	// OABaseURL is the host serving the Office Action APIs. Defaults to
+	// the ODP host (https://api.uspto.gov); override to point elsewhere.
 	OABaseURL string
 
 	// TSDR (Trademark Status & Document Retrieval) - separate server + API key
@@ -67,8 +64,8 @@ type Config struct {
 	TSDRAPIKey  string // from https://account.uspto.gov/profile/api-manager
 }
 
-// DefaultOABaseURL is where Office Action DSAPI is actually served today.
-const DefaultOABaseURL = "https://developer.uspto.gov"
+// DefaultOABaseURL is the ODP host serving the Office Action APIs.
+const DefaultOABaseURL = "https://api.uspto.gov"
 
 // DefaultMaxRetryAfter is the cap applied when Config.MaxRetryAfter is zero.
 const DefaultMaxRetryAfter = 60 * time.Second
@@ -100,9 +97,7 @@ func NewClient(config *Config) (*Client, error) {
 		Timeout: config.Timeout,
 	}
 
-	// ODP requires X-API-Key. The legacy Office Action DSAPI (default OA
-	// host) does not -- and sending it there is harmless but we keep the
-	// editors separate so the pattern is explicit.
+	// ODP and the OA APIs both authenticate with X-API-Key on api.uspto.gov.
 	odpEditor := func(_ context.Context, req *http.Request) error {
 		req.Header.Set("User-Agent", config.UserAgent)
 		if config.APIKey != "" {
@@ -112,9 +107,6 @@ func NewClient(config *Config) (*Client, error) {
 	}
 	oaEditor := func(_ context.Context, req *http.Request) error {
 		req.Header.Set("User-Agent", config.UserAgent)
-		// Legacy DSAPI ignores the header but accepts it; pass it through
-		// so a future migration to api.uspto.gov keeps working when the
-		// caller overrides OABaseURL.
 		if config.APIKey != "" {
 			req.Header.Set("X-API-Key", config.APIKey)
 		}
