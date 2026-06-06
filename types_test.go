@@ -103,7 +103,7 @@ func TestGetPatentContinuity_Fixture(t *testing.T) {
 
 func TestGetPatentContinuity_WithChildren(t *testing.T) {
 	childJSON := `{"count":1,"patentFileWrapperDataBag":[{"applicationNumberText":"17000000","childContinuityBag":[{"childApplicationNumberText":"18111111","childPatentNumber":"11222333","childApplicationFilingDate":"2024-01-15","childApplicationStatusDescriptionText":"Patented Case","claimParentageTypeCode":"CON","claimParentageTypeCodeDescriptionText":"is a Continuation of"},{"childApplicationNumberText":"18222222","childApplicationFilingDate":"2024-06-01","childApplicationStatusDescriptionText":"Docketed New Case","claimParentageTypeCode":"DIV","claimParentageTypeCodeDescriptionText":"is a Division of"}]}]}`
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_, _ = w.Write([]byte(childJSON))
 	}))

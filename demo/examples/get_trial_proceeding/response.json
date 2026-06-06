@@ -2,28 +2,28 @@
   "count": 1,
   "patentTrialProceedingDataBag": [
     {
-      "lastModifiedDateTime": "2025-11-27T11:53:36",
+      "lastModifiedDateTime": "2026-06-05T19:10:56",
       "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
       },
       "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
       },
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
         "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
+        "trialTypeCode": "PGR"
       },
-      "trialNumber": "IPR2026-00114"
+      "trialNumber": "PGR2026-00055"
     }
   ],
-  "requestIdentifier": "83d8dad0-36c3-4ef6-bc62-03b173068044"
+  "requestIdentifier": "e9ac8d45-ec97-45b3-b333-d7ff4f57ce1b"
 }

@@ -9,6 +9,7 @@ import (
 // PatentNumberType indicates the type of patent number
 type PatentNumberType int
 
+// Patent number type values.
 const (
 	PatentNumberTypeUnknown PatentNumberType = iota
 	PatentNumberTypeApplication
@@ -140,9 +141,8 @@ func NormalizePatentNumber(input string) (*PatentNumber, error) {
 		number := matches[2]
 		result.Normalized = year + number
 		result.Type = PatentNumberTypePublication
-		if len(matches) > 3 {
-			result.KindCode = matches[3]
-		}
+		// matches[3] is the optional kind-code group; empty when absent.
+		result.KindCode = matches[3]
 		result.ApplicationNo = "" // Will need to be looked up
 		return result, nil
 	}

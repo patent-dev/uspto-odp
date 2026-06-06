@@ -233,6 +233,53 @@ func TestDownloadTrademarkDocument_WithRetries(t *testing.T) {
 	}
 }
 
+// TestDownloadTrademarkDocument_ErrorBody verifies the PDF download error path
+// uses checkResponseStatus: a non-2xx response must surface an *APIError that
+// preserves the server body and the Retry-After header, rather than the
+// body-less checkStatus.
+func TestDownloadTrademarkDocument_ErrorBody(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Retry-After", "12")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusTooManyRequests)
+		_, _ = w.Write([]byte(`{"error":"rate limited"}`))
+	}))
+	defer server.Close()
+
+	config := &Config{
+		BaseURL:     server.URL,
+		APIKey:      "test",
+		TSDRBaseURL: server.URL,
+		TSDRAPIKey:  "test",
+		MaxRetries:  0, // exercise the streaming (non-buffered) path
+		Timeout:     10 * time.Second,
+		UserAgent:   "test",
+	}
+	client, err := NewClient(config)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+
+	var buf bytes.Buffer
+	err = client.DownloadTrademarkDocument(context.Background(), "97123456", "NOA20230322", &buf)
+	if err == nil {
+		t.Fatal("expected error for 429 response, got nil")
+	}
+	var apiErr *APIError
+	if !errors.As(err, &apiErr) {
+		t.Fatalf("expected *APIError, got %T: %v", err, err)
+	}
+	if apiErr.StatusCode != http.StatusTooManyRequests {
+		t.Errorf("StatusCode = %d, want 429", apiErr.StatusCode)
+	}
+	if !strings.Contains(apiErr.Body, "rate limited") {
+		t.Errorf("expected body to be preserved, got %q", apiErr.Body)
+	}
+	if apiErr.RetryAfter != 12*time.Second {
+		t.Errorf("RetryAfter = %v, want 12s", apiErr.RetryAfter)
+	}
+}
+
 func TestGetTrademarkLastUpdate(t *testing.T) {
 	server, client := setupTSDRMockServer(t)
 	defer server.Close()
@@ -308,7 +355,7 @@ func TestTSDR_NotConfigured(t *testing.T) {
 }
 
 func TestTSDR_ServerError(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(`{"error":"internal error"}`))
 	}))

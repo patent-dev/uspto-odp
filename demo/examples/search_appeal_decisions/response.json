@@ -1,99 +1,218 @@
 {
-  "count": 161137,
+  "count": 163764,
   "patentAppealDataBag": [
     {
       "appealDocumentCategory": "Decision",
       "appealMetaData": {
-        "appealFilingDate": "2025-10-22",
-        "appealLastModifiedDate": "2025-11-20",
-        "appealLastModifiedDateTime": "2025-11-20T18:21:10",
-        "applicationTypeCategory": "Appeal",
-        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000193/2026000193.zip"
+        "appealFilingDate": "2026-04-20",
+        "appealLastModifiedDate": "2026-05-22",
+        "appealLastModifiedDateTime": "2026-05-22T11:12:28",
+        "applicationTypeCategory": "REISSUE",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001845/2026001845.zip"
       },
-      "appealNumber": "2026000193",
+      "appealNumber": "2026001845",
+      "appellantData": {
+        "applicationNumberText": "18798196",
+        "counselName": "SCHWEGMAN LUNDBERG \u0026 WOESSNER, P.A.",
+        "groupArtUnitNumber": "3993",
+        "inventorName": "Charlie Pigonska Haagendrup",
+        "patentOwnerName": "Zipplify AB",
+        "realPartyInInterestName": "Zipplify AB",
+        "technologyCenterNumber": "3900"
+      },
+      "decisionData": {
+        "appealOutcomeCategory": "Affirmed",
+        "decisionIssueDate": "2026-05-22",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "112"
+        ],
+        "statuteAndRuleBag": [
+          "35 USC 251",
+          "35 USC 134"
+        ]
+      },
       "documentData": {
-        "documentFilingDate": "2025-11-20",
-        "documentIdentifier": "6f897fb0-e318-4f51-a216-19430e93332c",
-        "documentName": "Decision_2026000193_11-20-2025.pdf",
-        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/409,019 08/23/2021 Judith Baumeister A0848.70142US12 4367\n\n159933 7590 11/21/2025\n\nSanofi (Bioverativ/Ablynx/Pasteur)/Wolf\nc/o Wolf, Greenfield \u0026 Sacks, P.C.\n600 Atlantic Avenue\nBoston, MA ...",
-        "documentSizeQuantity": 235526
+        "documentFilingDate": "2026-05-22",
+        "documentIdentifier": "52a45c0a-8bfd-4a3c-a5ae-45ecef055d27",
+        "documentName": "Decision_2026001845_05-22-2026.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/798,196 08/08/2024 Charlie Pigonska Haagendrup 6273.043USR 6478\n\n21186 7590 05/26/2026\n\nSCHWEGMAN LUNDBERG \u0026 WOESSNER, P.A.\nP.O. BOX 2938\nMINNEAPOLIS, MN 55402\n\nEXAMINER\n\nDAVISON, LAURA L\n ...",
+        "documentSizeQuantity": 119815,
+        "documentTypeDescriptionText": "Paper",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001845/52a45c0a-8bfd-4a3c-a5ae-45ecef055d27.pdf"
       },
-      "lastModifiedDateTime": "2025-11-21T07:18:43"
+      "lastModifiedDateTime": "2026-05-22T17:32:24"
     },
     {
       "appealDocumentCategory": "Decision",
       "appealMetaData": {
-        "appealFilingDate": "2025-09-15",
-        "appealLastModifiedDate": "2025-10-22",
-        "appealLastModifiedDateTime": "2025-10-22T15:11:03",
-        "applicationTypeCategory": "Appeal",
-        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2025/003801/2025003801.zip"
+        "appealFilingDate": "2026-04-08",
+        "appealLastModifiedDate": "2026-06-05",
+        "appealLastModifiedDateTime": "2026-06-05T19:08:34",
+        "applicationTypeCategory": "REISSUE",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001764/2026001764.zip"
       },
-      "appealNumber": "2025003801",
+      "appealNumber": "2026001764",
+      "appellantData": {
+        "applicationNumberText": "16894242",
+        "counselName": "SCHWEGMAN LUNDBERG \u0026 WOESSNER, P.A.",
+        "groupArtUnitNumber": "3993",
+        "inventorName": "Cheng-Chung Wang",
+        "patentOwnerName": "Team Worldwide Corp.",
+        "realPartyInInterestName": "Team Worldwide Corp.",
+        "technologyCenterNumber": "3900"
+      },
+      "decisionData": {
+        "appealOutcomeCategory": "Reversed",
+        "decisionIssueDate": "2026-06-05",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "112"
+        ],
+        "statuteAndRuleBag": [
+          "35 USC 134"
+        ]
+      },
       "documentData": {
-        "documentFilingDate": "2025-10-22",
-        "documentIdentifier": "79162ee6-df24-4935-8050-9f4a0889c2f4",
-        "documentName": "Decision_2025003801_10-22-2025.pdf",
-        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/289,145 11/01/2023 Thomas GUSTAVSSON 14003-000377/US/NPA 7422\n\n112467 7590 10/23/2025\n\nRMCK Law Group, PLC\nPO Box 210280\nAuburn Hills, MI 48321\n\nEXAMINER\n\nFELTON, AILEEN BAKER\n\nART UNIT PA ...",
-        "documentSizeQuantity": 190641
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "58f106f5-a6ef-4736-9e45-7b4f62fe6397",
+        "documentName": "Decision_2026001764_06-05-2026.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n16/894,242 06/05/2020 Cheng-Chung Wang 5076.021USR 1608\n\n21186 7590 06/08/2026\n\nSCHWEGMAN LUNDBERG \u0026 WOESSNER, P.A.\nP.O. BOX 2938\nMINNEAPOLIS, MN 55402\n\nEXAMINER\n\nDOERRLER, WILLIAM CHARLES\n\nA ...",
+        "documentSizeQuantity": 92409,
+        "documentTypeDescriptionText": "Paper",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001764/58f106f5-a6ef-4736-9e45-7b4f62fe6397.pdf"
       },
-      "lastModifiedDateTime": "2025-11-20T01:11:33"
+      "lastModifiedDateTime": "2026-06-06T02:11:30"
     },
     {
       "appealDocumentCategory": "Decision",
       "appealMetaData": {
-        "appealFilingDate": "2025-09-11",
-        "appealLastModifiedDate": "2025-11-25",
-        "appealLastModifiedDateTime": "2025-11-25T15:48:46",
-        "applicationTypeCategory": "Appeal",
-        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2025/003786/2025003786.zip"
+        "appealFilingDate": "2026-04-06",
+        "appealLastModifiedDate": "2026-05-14",
+        "appealLastModifiedDateTime": "2026-05-14T20:09:24",
+        "applicationTypeCategory": "REEXAM",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001737/2026001737.zip"
       },
-      "appealNumber": "2025003786",
+      "appealNumber": "2026001737",
+      "appellantData": {
+        "applicationNumberText": "90019597",
+        "counselName": "Jacqueline Bardini, Esq.",
+        "groupArtUnitNumber": "3993",
+        "inventorName": "11756703",
+        "patentOwnerName": "11756703 et al",
+        "realPartyInInterestName": "Wenyong Yue (PO) et al.",
+        "technologyCenterNumber": "3900"
+      },
+      "decisionData": {
+        "appealOutcomeCategory": "Affirmed",
+        "decisionIssueDate": "2026-05-14",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "103"
+        ],
+        "statuteAndRuleBag": [
+          "37 CFR 41.50(f)",
+          "37 CFR 41.50",
+          "35 USC 134"
+        ]
+      },
       "documentData": {
-        "documentFilingDate": "2025-11-19",
-        "documentIdentifier": "5772a54a-d425-4115-97db-d65d7c6c3f80",
-        "documentName": "Decision_2025003786_11-19-2025.pdf",
-        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/241,488 09/01/2023 Aditya Bansal OMMC 12346 6166\n\n61650 7590 11/20/2025\n\nMYERS WOLIN, LLC\n100 SOUTH JEFFERSON ROAD\nSUITE 202\nWHIPPANY, NJ 07981-1009\n\nEXAMINER\n\nSTEWART, CRYSTOL\n\nART UNIT P ..."
+        "documentFilingDate": "2026-05-14",
+        "documentIdentifier": "d4b72c94-f625-4aaa-8bbc-3d992f2e9e0b",
+        "documentName": "Decision_2026001737_05-14-2026.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n90/019,597 07/24/2024 11756703 0135-0001 4077\n\n112105 7590 05/15/2026\n\nJacqueline Bardini, Esq.\n18 Fairways Lane\nBeacon, NY 12508\n\nEXAMINER\n\nKADING, JOSHUA A\n\nART UNIT PAPER NUMBER\n\n3993\n\nMAI ...",
+        "documentSizeQuantity": 213434,
+        "documentTypeDescriptionText": "Paper",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001737/d4b72c94-f625-4aaa-8bbc-3d992f2e9e0b.pdf"
       },
-      "lastModifiedDateTime": "2025-11-26T05:18:06"
+      "lastModifiedDateTime": "2026-05-15T03:12:27"
     },
     {
       "appealDocumentCategory": "Decision",
       "appealMetaData": {
-        "appealFilingDate": "2025-09-10",
-        "appealLastModifiedDate": "2025-10-22",
-        "appealLastModifiedDateTime": "2025-10-22T18:09:08",
-        "applicationTypeCategory": "Appeal",
-        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2025/003751/2025003751.zip"
+        "appealFilingDate": "2026-03-30",
+        "appealLastModifiedDate": "2026-04-23",
+        "appealLastModifiedDateTime": "2026-04-23T16:09:30",
+        "applicationTypeCategory": "REGULAR",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001626/2026001626.zip"
       },
-      "appealNumber": "2025003751",
+      "appealNumber": "2026001626",
+      "appellantData": {
+        "applicationNumberText": "18544787",
+        "counselName": "Ajay A. Jagtiani",
+        "groupArtUnitNumber": "2872",
+        "inventorName": "Christopher Brian RAUB",
+        "patentOwnerName": "The Catholic University of America",
+        "publicationDate": "2024-06-27",
+        "publicationNumber": "US20240207101A1",
+        "realPartyInInterestName": "The Catholic University of America",
+        "technologyCenterNumber": "2800"
+      },
+      "decisionData": {
+        "appealOutcomeCategory": "Affirmed",
+        "decisionIssueDate": "2026-04-23",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [],
+        "statuteAndRuleBag": [
+          "37 CFR 1.192",
+          "35 USC 134"
+        ]
+      },
       "documentData": {
-        "documentFilingDate": "2025-10-22",
-        "documentIdentifier": "3bfd495c-6bf0-48e4-9330-c768f6bce7c3",
-        "documentName": "Decision_2025003751_10-22-2025.pdf",
-        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/423,231 01/25/2024 GEORGE EDWARD PARRIS DEM_PAT_Div1 1837\n\n82854 7590 10/23/2025\n\nPeter R. Kramer\nIngenium Patents LLC\n30 N Gould Street\nSte R\nSheridan, WY 82801\n\nEXAMINER\n\nWIECZOREK, MICH ...",
-        "documentSizeQuantity": 98540
+        "documentFilingDate": "2026-04-23",
+        "documentIdentifier": "e70647a5-aace-43d4-bfd3-35d09871944a",
+        "documentName": "Decision_2026001626_04-23-2026.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/544,787 12/19/2023 Christopher Brian RAUB 109007-24574US01 2392\n\n110669 7590 04/24/2026\n\nAjay A. Jagtiani\nMiles \u0026 Stockbridge\n1751 Pinnacle Drive\nSuite 1500\nTysons Corner, VA 22102\n\nEXAMIN ...",
+        "documentSizeQuantity": 435772,
+        "documentTypeDescriptionText": "Paper",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001626/e70647a5-aace-43d4-bfd3-35d09871944a.pdf"
       },
-      "lastModifiedDateTime": "2025-11-20T01:11:33"
+      "lastModifiedDateTime": "2026-04-23T23:12:43"
     },
     {
       "appealDocumentCategory": "Decision",
       "appealMetaData": {
-        "appealFilingDate": "2025-08-22",
-        "appealLastModifiedDate": "2025-09-25",
-        "appealLastModifiedDateTime": "2025-09-25T16:13:18",
-        "applicationTypeCategory": "Appeal",
-        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2025/003616/2025003616.zip"
+        "appealFilingDate": "2026-03-24",
+        "appealLastModifiedDate": "2026-04-28",
+        "appealLastModifiedDateTime": "2026-04-28T11:10:16",
+        "applicationTypeCategory": "REGULAR",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001570/2026001570.zip"
       },
-      "appealNumber": "2025003616",
+      "appealNumber": "2026001570",
+      "appellantData": {
+        "applicationNumberText": "17916055",
+        "counselName": "Xsensus",
+        "groupArtUnitNumber": "2855",
+        "inventorName": "Yusuke KOIKE",
+        "patentNumber": "",
+        "patentOwnerName": "Sumitomo Electric Industries, Ltd.",
+        "publicationDate": "2023-06-01",
+        "publicationNumber": "US20230166376A1",
+        "realPartyInInterestName": "Sumitomo Electric Industries, Ltd.",
+        "technologyCenterNumber": "2800"
+      },
+      "decisionData": {
+        "appealOutcomeCategory": "Reversed",
+        "decisionIssueDate": "2026-04-28",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "101"
+        ],
+        "statuteAndRuleBag": [
+          "35 USC 134"
+        ]
+      },
       "documentData": {
-        "documentFilingDate": "2025-09-25",
-        "documentIdentifier": "a6c0a615-3afa-4f74-ab8d-bd43a6354a7d",
-        "documentName": "Decision_2025003616_09-25-2025.pdf",
-        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/120,952 03/13/2023 Carl Hampson 20121-416419 2485\n\n202156 7590 09/26/2025\n\nBarnes \u0026 Thornburg LLP (Knauf)\n11 S. Meridian Street\nIndianapolis, IN 46204\n\nEXAMINER\n\nSASTRI, SATYA B\n\nART UNIT  ...",
-        "documentSizeQuantity": 178059
+        "documentFilingDate": "2026-04-28",
+        "documentIdentifier": "03873ddc-5bc7-41a9-a6fe-d82c78ac379c",
+        "documentName": "Decision_2026001570_04-28-2026.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/916,055 09/30/2022 Yusuke KOIKE 20226US01 2647\n\n154930 7590 04/29/2026\n\nXsensus\n8521 Leesburg Pike\nSuite 310\nVienna, VA 22182\n\nEXAMINER\n\nDUNLAP, JONATHAN M\n\nART UNIT PAPER NUMBER\n\n2855\n\nNO ...",
+        "documentSizeQuantity": 155171,
+        "documentTypeDescriptionText": "Paper",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001570/03873ddc-5bc7-41a9-a6fe-d82c78ac379c.pdf"
       },
-      "lastModifiedDateTime": "2025-11-20T01:11:33"
+      "lastModifiedDateTime": "2026-04-28T17:31:51"
     }
-  ]
+  ],
+  "requestIdentifier": "b44b40bf-a21b-44d6-bda9-c5a9ca2c2226"
 }

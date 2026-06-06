@@ -1,0 +1,37 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - misspell
+    - revive
+  exclusions:
+    generated: strict
+    rules:
+      # Generated code is exempt from style linters.
+      - path: generated/
+        linters:
+          - revive
+          - staticcheck
+      # Deliberate, established public package name (epo_ops); renaming would
+      # break the API for no readability gain. Only matches that legacy name.
+      - linters:
+          - revive
+        text: "don't use an underscore in package name"
+      # The cql subpackage keeps its CQL-prefixed exported type names on purpose
+      # (stable public API). Scoped to that package only.
+      - path: cql/
+        linters:
+          - revive
+        text: stutters
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0

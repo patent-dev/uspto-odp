@@ -141,18 +141,18 @@ Provides a menu to select and run any service interactively.
 
 ```
 demo/
-├── main.go          # Entry point, CLI flags, routing
-├── patent.go        # 13 Patent API endpoint demonstrations
-├── petition.go      # 3 Petition API endpoint demonstrations
-├── ptab.go          # 19 PTAB API endpoint demonstrations
-├── bulk.go          # Bulk data browser and downloader
-├── xmldemo.go       # XML full text retrieval and parsing
-├── saver.go         # Example saver utility
-├── utils.go         # Helper functions for display
-├── testdata.go      # Test patent numbers
-├── examples/        # Saved request/response examples
-├── go.mod           # Module definition
-└── README.md        # This file
+|-- main.go          # Entry point, CLI flags, routing
+|-- patent.go        # 13 Patent API endpoint demonstrations
+|-- petition.go      # 3 Petition API endpoint demonstrations
+|-- ptab.go          # 19 PTAB API endpoint demonstrations
+|-- bulk.go          # Bulk data browser and downloader
+|-- xmldemo.go       # XML full text retrieval and parsing
+|-- saver.go         # Example saver utility
+|-- utils.go         # Helper functions for display
+|-- testdata.go      # Test patent numbers
+|-- examples/        # Saved request/response examples
+|-- go.mod           # Module definition
+`-- README.md        # This file
 ```
 
 ## API Key Security

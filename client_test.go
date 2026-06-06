@@ -5,10 +5,12 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"math"
 	"net/http"
 	"net/http/httptest"
 	"strings"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -47,9 +49,9 @@ func TestParseRetryAfter(t *testing.T) {
 
 func TestValidatePagination(t *testing.T) {
 	tests := []struct {
-		name           string
-		offset, limit  int
-		wantErr        bool
+		name          string
+		offset, limit int
+		wantErr       bool
 	}{
 		{"ok", 0, 10, false},
 		{"ok-large", 1_000_000, 100, false},
@@ -112,9 +114,63 @@ func TestAPIError_RetryAfter(t *testing.T) {
 	}
 }
 
+// TestIsRetryableError_ContextErrors verifies that context cancellation and
+// deadline-exceeded are treated as caller intent, not transient network
+// failures. context.DeadlineExceeded satisfies net.Error.Timeout(), so without
+// the short-circuit it would be misclassified as a retryable timeout.
+func TestIsRetryableError_ContextErrors(t *testing.T) {
+	if isRetryableError(context.Canceled) {
+		t.Error("context.Canceled must not be retryable")
+	}
+	if isRetryableError(context.DeadlineExceeded) {
+		t.Error("context.DeadlineExceeded must not be retryable")
+	}
+	wrapped := fmt.Errorf("get failed: %w", context.DeadlineExceeded)
+	if isRetryableError(wrapped) {
+		t.Error("wrapped context.DeadlineExceeded must not be retryable")
+	}
+}
+
+// TestRetryableRequest_DeadlineExceededNotRetried ensures a per-request
+// deadline that fires does not trigger the retry loop: the server is hit once,
+// then the deadline-exceeded error propagates immediately.
+func TestRetryableRequest_DeadlineExceededNotRetried(t *testing.T) {
+	var hits atomic.Int32
+	release := make(chan struct{})
+	server := httptest.NewServer(http.HandlerFunc(func(_ http.ResponseWriter, r *http.Request) {
+		hits.Add(1)
+		// Block past the client's deadline; release on test teardown so the
+		// handler goroutine exits and server.Close() doesn't hang.
+		select {
+		case <-release:
+		case <-r.Context().Done():
+		}
+	}))
+	defer server.Close()
+	defer close(release)
+
+	cfg := DefaultConfig()
+	cfg.BaseURL = server.URL
+	cfg.APIKey = "test"
+	cfg.MaxRetries = 3
+	cfg.Timeout = 100 * time.Millisecond
+	client, err := NewClient(cfg)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+
+	_, err = client.SearchPatents(context.Background(), "x", 0, 1)
+	if err == nil {
+		t.Fatal("expected deadline error, got nil")
+	}
+	if got := hits.Load(); got != 1 {
+		t.Errorf("expected 1 server hit (deadline not retried), got %d", got)
+	}
+}
+
 func TestRetryableRequest_AboveCapSurfaces(t *testing.T) {
 	hits := 0
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		hits++
 		w.Header().Set("Retry-After", "600")
 		w.WriteHeader(http.StatusTooManyRequests)
@@ -154,7 +210,7 @@ func TestRetryableRequest_AboveCapSurfaces(t *testing.T) {
 // succeeds on the second attempt with a wait derived from the header.
 func TestRetryableRequest_HonorsRetryAfter(t *testing.T) {
 	hits := 0
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		hits++
 		if hits == 1 {
 			w.Header().Set("Retry-After", "1")
@@ -937,7 +993,7 @@ func TestClientWithActualResponses(t *testing.T) {
 				"bulkDataProductBag": []interface{}{
 					map[string]interface{}{
 						"productIdentifier":               "PTGRXML",
-						"productDescriptionText":          "Provides the bulk zip files that contains the concatenated full-text of each patent grant document issued weekly. This page provides an additional feature called “View Patent Records” which allows user to find or discover the patent grants that are bundled in the zip file. Even though the zip file may contain grants that belong to the applications which were filed before 2001, ODP will only show the grants that belong to the applications that were filed from 2001.",
+						"productDescriptionText":          "Provides the bulk zip files that contains the concatenated full-text of each patent grant document issued weekly. This page provides an additional feature called \"View Patent Records\" which allows user to find or discover the patent grants that are bundled in the zip file. Even though the zip file may contain grants that belong to the applications which were filed before 2001, ODP will only show the grants that belong to the applications that were filed from 2001.",
 						"productTitleText":                "Patent Grant Full-Text Data (No Images) - XML",
 						"productFrequencyText":            "WEEKLY",
 						"daysOfWeekText":                  "TUESDAY",
@@ -1458,7 +1514,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					map[string]interface{}{
 						"interferenceNumber": "106130",
 						"documentData": map[string]interface{}{
-							"documentTitleText":    "Judgment 37 C.F.R. § 41.127(a)",
+							"documentTitleText":    "Judgment 37 C.F.R. section 41.127(a)",
 							"decisionIssueDate":    "2025-01-28",
 							"documentIdentifier":   "229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b",
 							"decisionTypeCategory": "Decision",
@@ -1481,7 +1537,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					map[string]interface{}{
 						"interferenceNumber": "106130",
 						"documentData": map[string]interface{}{
-							"documentTitleText":    "Judgment 37 C.F.R. § 41.127(a)",
+							"documentTitleText":    "Judgment 37 C.F.R. section 41.127(a)",
 							"decisionIssueDate":    "2025-01-28",
 							"documentIdentifier":   "229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b",
 							"decisionTypeCategory": "Decision",
@@ -1499,7 +1555,7 @@ func TestClientWithActualResponses(t *testing.T) {
 					map[string]interface{}{
 						"interferenceNumber": "106130",
 						"documentData": map[string]interface{}{
-							"documentTitleText": "Judgment 37 C.F.R. § 41.127(a)",
+							"documentTitleText": "Judgment 37 C.F.R. section 41.127(a)",
 							"decisionIssueDate": "2025-01-28",
 						},
 					},

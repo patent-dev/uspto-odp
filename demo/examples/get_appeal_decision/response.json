@@ -4,21 +4,45 @@
     {
       "appealDocumentCategory": "Decision",
       "appealMetaData": {
-        "appealFilingDate": "2025-10-22",
-        "appealLastModifiedDate": "2025-11-20",
-        "appealLastModifiedDateTime": "2025-11-20T18:21:10",
-        "applicationTypeCategory": "Appeal",
-        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000193/2026000193.zip"
+        "appealFilingDate": "2026-04-20",
+        "appealLastModifiedDate": "2026-05-22",
+        "appealLastModifiedDateTime": "2026-05-22T11:12:28",
+        "applicationTypeCategory": "REISSUE",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001845/2026001845.zip"
       },
-      "appealNumber": "2026000193",
+      "appealNumber": "2026001845",
+      "appellantData": {
+        "applicationNumberText": "18798196",
+        "counselName": "SCHWEGMAN LUNDBERG \u0026 WOESSNER, P.A.",
+        "groupArtUnitNumber": "3993",
+        "inventorName": "Charlie Pigonska Haagendrup",
+        "patentOwnerName": "Zipplify AB",
+        "realPartyInInterestName": "Zipplify AB",
+        "technologyCenterNumber": "3900"
+      },
+      "decisionData": {
+        "appealOutcomeCategory": "Affirmed",
+        "decisionIssueDate": "2026-05-22",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "112"
+        ],
+        "statuteAndRuleBag": [
+          "35 USC 251",
+          "35 USC 134"
+        ]
+      },
       "documentData": {
-        "documentFilingDate": "2025-11-20",
-        "documentIdentifier": "6f897fb0-e318-4f51-a216-19430e93332c",
-        "documentName": "Decision_2026000193_11-20-2025.pdf",
-        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/409,019 08/23/2021 Judith Baumeister A0848.70142US12 4367\n\n159933 7590 11/21/2025\n\nSanofi (Bioverativ/Ablynx/Pasteur)/Wolf\nc/o Wolf, Greenfield \u0026 Sacks, P.C.\n600 Atlantic Avenue\nBoston, MA ...",
-        "documentSizeQuantity": 235526
+        "documentFilingDate": "2026-05-22",
+        "documentIdentifier": "52a45c0a-8bfd-4a3c-a5ae-45ecef055d27",
+        "documentName": "Decision_2026001845_05-22-2026.pdf",
+        "documentOCRText": "UNITED STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/798,196 08/08/2024 Charlie Pigonska Haagendrup 6273.043USR 6478\n\n21186 7590 05/26/2026\n\nSCHWEGMAN LUNDBERG \u0026 WOESSNER, P.A.\nP.O. BOX 2938\nMINNEAPOLIS, MN 55402\n\nEXAMINER\n\nDAVISON, LAURA L\n ...",
+        "documentSizeQuantity": 119815,
+        "documentTypeDescriptionText": "Paper",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001845/52a45c0a-8bfd-4a3c-a5ae-45ecef055d27.pdf"
       },
-      "lastModifiedDateTime": "2025-11-21T07:18:43"
+      "lastModifiedDateTime": "2026-05-22T17:32:24"
     }
-  ]
+  ],
+  "requestIdentifier": "7ee3e05e-8460-4ca1-ad3d-3202cf8cd29c"
 }

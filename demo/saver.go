@@ -92,11 +92,11 @@ func DetectFormat(data []byte) FileFormat {
 // FormatRequestDescription formats a request description with parameters
 func FormatRequestDescription(method string, params map[string]string) string {
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("Method: %s\n\n", method))
+	fmt.Fprintf(&sb, "Method: %s\n\n", method)
 	if len(params) > 0 {
 		sb.WriteString("Parameters:\n")
 		for k, v := range params {
-			sb.WriteString(fmt.Sprintf("  %s: %s\n", k, v))
+			fmt.Fprintf(&sb, "  %s: %s\n", k, v)
 		}
 	}
 	return sb.String()

@@ -1,6 +1,6 @@
-module demo
+module github.com/patent-dev/uspto-odp/demo
 
-go 1.25
+go 1.26.1
 
 require github.com/patent-dev/uspto-odp v0.0.0
 

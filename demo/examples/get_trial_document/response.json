@@ -2,38 +2,52 @@
   "count": 1,
   "patentTrialDocumentDataBag": [
     {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171247256",
-        "documentName": "NJOY-1025 Part 4 of 4 14925968_file_history_2729-3639.pdf",
-        "documentNumber": 1025,
-        "documentSizeQuantity": 38851201,
-        "documentTitleText": "U.S. Patent Application No. 14925968 File History_ Part 4 of 4",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
+      "decisionData": {
+        "decisionIssueDate": "2026-06-05",
+        "decisionTypeCategory": "Decision",
+        "trialOutcomeCategory": "Affirmed"
       },
-      "lastModifiedDateTime": "2025-11-27T05:54:59",
+      "documentData": {
+        "documentCategory": "OTHER",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339223",
+        "documentName": "Mandate 12292025 IPR2021-01598 IPR2021-01599 IPR2021-01600 IPR2021-01601 IPR2021-01602.pdf",
+        "documentNumber": 30,
+        "documentOCRText": "TransportRoom\n\n\nCase: 23-2033 Document:85 Page:1_ Filed: 12/29/2025\n\nGAnited States Court of Appeals\nfor the federal Circuit\n\nRIDESHARE DISPLAYS, INC.,\nAppellant\n\nJOHN A. SQUIRES, UNDER SECRETARY OF\nCOMMERCE FOR INTELLECTUAL PROPERTY\nAND DIRECTOR OF THE UNITED STATES\nPATENT AND TRADEMARK OFFICE,\n\nIntervenor\n\nLYFT, INC.,\nCross-Appellant\n\n2023-2033, 2023-2034, 2023-2035, 2023-2036, 2023-2037,\n2023-2038, 2023-2039\n\nAppeals from the United States Patent and Trademark\nOffice, Patent Trial and App ...",
+        "documentSizeQuantity": 125945,
+        "documentTitleText": "Other: Fed Circuit mandate",
+        "documentTypeDescriptionText": "Other: Fed Circuit mandate",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/01599/171339223.pdf",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2026-06-05T17:22:35",
       "patentOwnerData": {
-        "applicationNumberText": "17171976",
-        "grantDate": "2024-12-03",
-        "groupArtUnitNumber": "1747",
-        "inventorName": "Adam Bowen et al",
-        "patentNumber": "12156533",
-        "technologyCenterNumber": "1700"
+        "applicationNumberText": "15860939",
+        "counselName": "Sullivan, Peteret al",
+        "grantDate": "2019-01-01",
+        "groupArtUnitNumber": "2687",
+        "inventorName": "Dereje M. Demisse",
+        "patentNumber": "10169987",
+        "realPartyInInterestName": "Rideshare Displays, Inc.",
+        "technologyCenterNumber": "2600"
       },
       "regularPetitionerData": {
-        "counselName": "Renner, W. Karlet al",
-        "realPartyInInterestName": "NJOY, LLC et al."
+        "counselName": "Williams, Eliotet al",
+        "realPartyInInterestName": "Lyft, Inc."
       },
-      "trialDocumentCategory": "Document",
+      "trialDocumentCategory": "Decision",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T18:37:22",
-        "trialStatusCategory": "Pending",
+        "accordedFilingDate": "2021-10-01",
+        "institutionDecisionDate": "2022-04-11",
+        "latestDecisionDate": "2026-06-05",
+        "petitionFilingDate": "2021-10-01",
+        "terminationDate": "2023-04-10",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T10:31:05",
+        "trialStatusCategory": "Final Written Decision",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2026-00161"
+      "trialNumber": "IPR2021-01599"
     }
   ]
 }

@@ -31,6 +31,7 @@
         "documentOCRText": "Microsoft Word - 106,130 Judgment (to be mailed)\n\n\n       \nTrials@uspto.gov       Filed: January 28, 2025 \nTel: 571-272-7822 \n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n_______________ \n\n \nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n\n \n________________ \n\n  \nLEE M. KAPLAN,  \n\nALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS,  \n \n\nJunior Party  \n(Patents 10,149,867; 10,149,870; and 10,729,732; \n\nand Application 16/159,021),  \n \n\nv.  \n \n\nPATRICE CANI,  \nAMANDINE EVERARD, CLARA BELZER, an ...",
         "documentSizeQuantity": 97923,
         "documentTitleText": "Judgment 37 C.F.R. § 41.127(a)",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/Intf508_10613014862663_1738040400000.pdf",
         "interferenceOutcomeCategory": "Judgment",
         "statuteAndRuleBag": [
           "37 CFR 41.127(a)"
@@ -54,7 +55,7 @@
         "realPartyInInterestName": "Ethicon Endo-Surgery, Inc.; The General Hospital Corporation D/B/A Massachusetts General Hospital; President and Fellows of Harvard College ",
         "technologyCenterNumber": "1600"
       },
-      "lastModifiedDateTime": "2025-11-20T03:12:32",
+      "lastModifiedDateTime": "2025-12-12T17:18:56",
       "seniorPartyData": {
         "applicationNumberText": "14443829",
         "counselName": "ALSTON \u0026 BIRD and GEMINI LAW LLP ",
@@ -68,5 +69,5 @@
       }
     }
   ],
-  "requestIdentifier": "a1c6e78a-86f9-4463-b9fb-bd76ea7a7c83"
+  "requestIdentifier": "65bfea56-c7eb-4b53-bdb7-0914648d275b"
 }

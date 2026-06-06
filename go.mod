@@ -1,6 +1,6 @@
 module github.com/patent-dev/uspto-odp
 
-go 1.25
+go 1.26.1
 
 require (
 	github.com/getkin/kin-openapi v0.133.0

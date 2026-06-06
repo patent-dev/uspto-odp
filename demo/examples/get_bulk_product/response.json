@@ -2,7 +2,7 @@
   "bulkDataProductBag": [
     {
       "daysOfWeekText": "TUESDAY",
-      "lastModifiedDateTime": "2025-11-25 01:00:34",
+      "lastModifiedDateTime": "2026-06-02 00:02:57",
       "mimeTypeIdentifierArrayText": [
         "ASCII",
         "XML"
@@ -15,15 +15,355 @@
       ],
       "productDescriptionText": "Provides the bulk zip files that contains the concatenated full-text of each patent grant document issued weekly. This page provides an additional feature called “View Patent Records” which allows user to find or discover the patent grants that are bundled in the zip file. Even though the zip file may contain grants that belong to the applications which were filed before 2001, ODP will only show the grants that belong to the applications that were filed from 2001.",
       "productFileBag": {
-        "count": 1267,
+        "count": 1301,
         "fileDataBag": [
+          {
+            "fileDataFromDate": "2026-06-02",
+            "fileDataToDate": "2026-06-02",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260602.zip",
+            "fileLastModifiedDateTime": "2026-06-02 00:02:59",
+            "fileName": "ipg260602.zip",
+            "fileReleaseDate": "2026-06-02 00:02:57",
+            "fileSize": 147191020,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-05-26",
+            "fileDataToDate": "2026-05-26",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260526.zip",
+            "fileLastModifiedDateTime": "2026-05-26 00:03:00",
+            "fileName": "ipg260526.zip",
+            "fileReleaseDate": "2026-05-26 00:02:58",
+            "fileSize": 149538600,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-05-19",
+            "fileDataToDate": "2026-05-19",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260519.zip",
+            "fileLastModifiedDateTime": "2026-05-19 00:03:03",
+            "fileName": "ipg260519.zip",
+            "fileReleaseDate": "2026-05-19 00:02:57",
+            "fileSize": 164064340,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-05-12",
+            "fileDataToDate": "2026-05-12",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260512.zip",
+            "fileLastModifiedDateTime": "2026-05-12 00:02:59",
+            "fileName": "ipg260512.zip",
+            "fileReleaseDate": "2026-05-12 00:02:57",
+            "fileSize": 150355740,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-05-05",
+            "fileDataToDate": "2026-05-05",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260505.zip",
+            "fileLastModifiedDateTime": "2026-05-05 00:02:59",
+            "fileName": "ipg260505.zip",
+            "fileReleaseDate": "2026-05-05 00:02:57",
+            "fileSize": 145693300,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-04-28",
+            "fileDataToDate": "2026-04-28",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260428.zip",
+            "fileLastModifiedDateTime": "2026-04-28 00:03:00",
+            "fileName": "ipg260428.zip",
+            "fileReleaseDate": "2026-04-28 00:02:58",
+            "fileSize": 121806600,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-04-21",
+            "fileDataToDate": "2026-04-21",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260421.zip",
+            "fileLastModifiedDateTime": "2026-04-21 00:02:59",
+            "fileName": "ipg260421.zip",
+            "fileReleaseDate": "2026-04-21 00:02:57",
+            "fileSize": 133339890,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-04-14",
+            "fileDataToDate": "2026-04-14",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260414_r1.zip",
+            "fileLastModifiedDateTime": "2026-04-14 00:03:01",
+            "fileName": "ipg260414_r1.zip",
+            "fileReleaseDate": "2026-04-14 00:03:01",
+            "fileSize": 128183416,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-04-14",
+            "fileDataToDate": "2026-04-14",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260414.zip",
+            "fileLastModifiedDateTime": "2026-04-14 00:03:00",
+            "fileName": "ipg260414.zip",
+            "fileReleaseDate": "2026-04-14 00:02:58",
+            "fileSize": 128357280,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-04-07",
+            "fileDataToDate": "2026-04-07",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260407.zip",
+            "fileLastModifiedDateTime": "2026-04-07 00:02:59",
+            "fileName": "ipg260407.zip",
+            "fileReleaseDate": "2026-04-07 00:02:57",
+            "fileSize": 123831030,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-03-31",
+            "fileDataToDate": "2026-03-31",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260331.zip",
+            "fileLastModifiedDateTime": "2026-03-31 00:02:59",
+            "fileName": "ipg260331.zip",
+            "fileReleaseDate": "2026-03-31 00:02:57",
+            "fileSize": 118271080,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-03-24",
+            "fileDataToDate": "2026-03-24",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260324.zip",
+            "fileLastModifiedDateTime": "2026-03-24 02:00:34",
+            "fileName": "ipg260324.zip",
+            "fileReleaseDate": "2026-03-24 02:00:34",
+            "fileSize": 154264200,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-03-17",
+            "fileDataToDate": "2026-03-17",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260317.zip",
+            "fileLastModifiedDateTime": "2026-03-17 02:00:33",
+            "fileName": "ipg260317.zip",
+            "fileReleaseDate": "2026-03-17 02:00:33",
+            "fileSize": 165217810,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-03-10",
+            "fileDataToDate": "2026-03-10",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260310.zip",
+            "fileLastModifiedDateTime": "2026-03-10 02:00:32",
+            "fileName": "ipg260310.zip",
+            "fileReleaseDate": "2026-03-10 02:00:32",
+            "fileSize": 166631970,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-03-03",
+            "fileDataToDate": "2026-03-03",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260303.zip",
+            "fileLastModifiedDateTime": "2026-03-03 01:00:34",
+            "fileName": "ipg260303.zip",
+            "fileReleaseDate": "2026-03-03 01:00:32",
+            "fileSize": 107888520,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-02-24",
+            "fileDataToDate": "2026-02-24",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260224.zip",
+            "fileLastModifiedDateTime": "2026-02-24 01:00:34",
+            "fileName": "ipg260224.zip",
+            "fileReleaseDate": "2026-02-24 01:00:32",
+            "fileSize": 155343460,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-02-17",
+            "fileDataToDate": "2026-02-17",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260217.zip",
+            "fileLastModifiedDateTime": "2026-02-17 01:00:33",
+            "fileName": "ipg260217.zip",
+            "fileReleaseDate": "2026-02-17 01:00:33",
+            "fileSize": 166253700,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-01-06",
+            "fileDataToDate": "2026-01-06",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260106_r2.zip",
+            "fileLastModifiedDateTime": "2026-02-13 11:35:32",
+            "fileName": "ipg260106_r2.zip",
+            "fileReleaseDate": "2026-02-13 11:35:30",
+            "fileSize": 154516020,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-02-10",
+            "fileDataToDate": "2026-02-10",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260210.zip",
+            "fileLastModifiedDateTime": "2026-02-10 01:00:33",
+            "fileName": "ipg260210.zip",
+            "fileReleaseDate": "2026-02-10 01:00:33",
+            "fileSize": 162592700,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-02-03",
+            "fileDataToDate": "2026-02-03",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260203.zip",
+            "fileLastModifiedDateTime": "2026-02-03 01:00:32",
+            "fileName": "ipg260203.zip",
+            "fileReleaseDate": "2026-02-03 01:00:32",
+            "fileSize": 108135030,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-01-27",
+            "fileDataToDate": "2026-01-27",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260127.zip",
+            "fileLastModifiedDateTime": "2026-01-27 01:00:32",
+            "fileName": "ipg260127.zip",
+            "fileReleaseDate": "2026-01-27 01:00:32",
+            "fileSize": 139760620,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-01-20",
+            "fileDataToDate": "2026-01-20",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260120.zip",
+            "fileLastModifiedDateTime": "2026-01-20 01:00:32",
+            "fileName": "ipg260120.zip",
+            "fileReleaseDate": "2026-01-20 01:00:32",
+            "fileSize": 134933700,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-01-06",
+            "fileDataToDate": "2026-01-06",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260106_r1.zip",
+            "fileLastModifiedDateTime": "2026-01-16 15:40:30",
+            "fileName": "ipg260106_r1.zip",
+            "fileReleaseDate": "2026-01-16 15:40:30",
+            "fileSize": 154515980,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-01-13",
+            "fileDataToDate": "2026-01-13",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260113_r1.zip",
+            "fileLastModifiedDateTime": "2026-01-13 01:00:36",
+            "fileName": "ipg260113_r1.zip",
+            "fileReleaseDate": "2026-01-13 01:00:36",
+            "fileSize": 143700800,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-01-13",
+            "fileDataToDate": "2026-01-13",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260113.zip",
+            "fileLastModifiedDateTime": "2026-01-13 01:00:33",
+            "fileName": "ipg260113.zip",
+            "fileReleaseDate": "2026-01-13 01:00:33",
+            "fileSize": 144266200,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2025-12-23",
+            "fileDataToDate": "2025-12-23",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251223_r1.zip",
+            "fileLastModifiedDateTime": "2026-01-07 13:15:32",
+            "fileName": "ipg251223_r1.zip",
+            "fileReleaseDate": "2026-01-07 13:15:32",
+            "fileSize": 129626390,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2025-12-30",
+            "fileDataToDate": "2025-12-30",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251230_r2.zip",
+            "fileLastModifiedDateTime": "2026-01-06 11:20:32",
+            "fileName": "ipg251230_r2.zip",
+            "fileReleaseDate": "2026-01-06 11:20:32",
+            "fileSize": 143615220,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2026-01-06",
+            "fileDataToDate": "2026-01-06",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2026/ipg260106.zip",
+            "fileLastModifiedDateTime": "2026-01-06 09:16:00",
+            "fileName": "ipg260106.zip",
+            "fileReleaseDate": "2026-01-06 09:16:00",
+            "fileSize": 154849740,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2025-12-30",
+            "fileDataToDate": "2025-12-30",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251230_r1.zip",
+            "fileLastModifiedDateTime": "2025-12-30 14:40:30",
+            "fileName": "ipg251230_r1.zip",
+            "fileReleaseDate": "2025-12-30 14:40:30",
+            "fileSize": 143972130,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2025-12-30",
+            "fileDataToDate": "2025-12-30",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251230.zip",
+            "fileLastModifiedDateTime": "2025-12-30 01:00:32",
+            "fileName": "ipg251230.zip",
+            "fileReleaseDate": "2025-12-30 01:00:32",
+            "fileSize": 143973360,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2025-12-23",
+            "fileDataToDate": "2025-12-23",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251223.zip",
+            "fileLastModifiedDateTime": "2025-12-23 01:00:32",
+            "fileName": "ipg251223.zip",
+            "fileReleaseDate": "2025-12-23 01:00:32",
+            "fileSize": 94232584,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2025-12-16",
+            "fileDataToDate": "2025-12-16",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251216.zip",
+            "fileLastModifiedDateTime": "2025-12-16 01:00:32",
+            "fileName": "ipg251216.zip",
+            "fileReleaseDate": "2025-12-16 01:00:32",
+            "fileSize": 142829470,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2025-12-09",
+            "fileDataToDate": "2025-12-09",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251209.zip",
+            "fileLastModifiedDateTime": "2025-12-09 01:00:32",
+            "fileName": "ipg251209.zip",
+            "fileReleaseDate": "2025-12-09 01:00:32",
+            "fileSize": 117718160,
+            "fileTypeText": "Data"
+          },
+          {
+            "fileDataFromDate": "2025-12-02",
+            "fileDataToDate": "2025-12-02",
+            "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251202.zip",
+            "fileLastModifiedDateTime": "2025-12-02 01:00:32",
+            "fileName": "ipg251202.zip",
+            "fileReleaseDate": "2025-12-02 01:00:32",
+            "fileSize": 143548500,
+            "fileTypeText": "Data"
+          },
           {
             "fileDataFromDate": "2025-11-25",
             "fileDataToDate": "2025-11-25",
             "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251125.zip",
-            "fileLastModifiedDateTime": "2025-11-25 01:00:34",
+            "fileLastModifiedDateTime": "2025-11-25 01:00:32",
             "fileName": "ipg251125.zip",
-            "fileReleaseDate": "2025-11-25 01:00:34",
+            "fileReleaseDate": "2025-11-25 01:00:32",
             "fileSize": 146622220,
             "fileTypeText": "Data"
           },
@@ -31,9 +371,9 @@
             "fileDataFromDate": "2025-11-18",
             "fileDataToDate": "2025-11-18",
             "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251118.zip",
-            "fileLastModifiedDateTime": "2025-11-18 00:00:20",
+            "fileLastModifiedDateTime": "2025-11-18 00:00:18",
             "fileName": "ipg251118.zip",
-            "fileReleaseDate": "2025-11-18 00:00:20",
+            "fileReleaseDate": "2025-11-18 00:00:18",
             "fileSize": 149829520,
             "fileTypeText": "Data"
           },
@@ -41,9 +381,9 @@
             "fileDataFromDate": "2025-11-11",
             "fileDataToDate": "2025-11-11",
             "fileDownloadURI": "https://api.uspto.gov/api/v1/datasets/products/files/PTGRXML/2025/ipg251111.zip",
-            "fileLastModifiedDateTime": "2025-11-10 23:57:54",
+            "fileLastModifiedDateTime": "2025-11-10 23:57:53",
             "fileName": "ipg251111.zip",
-            "fileReleaseDate": "2025-11-10 23:57:54",
+            "fileReleaseDate": "2025-11-10 23:57:53",
             "fileSize": 144455800,
             "fileTypeText": "Data"
           },
@@ -12689,7 +13029,7 @@
           }
         ]
       },
-      "productFileTotalQuantity": 1277,
+      "productFileTotalQuantity": 1311,
       "productFrequencyText": "WEEKLY",
       "productFromDate": "2002-01-01",
       "productIdentifier": "PTGRXML",
@@ -12697,8 +13037,8 @@
         "Patent"
       ],
       "productTitleText": "Patent Grant Full-Text Data (No Images) - XML",
-      "productToDate": "2025-11-25",
-      "productTotalFileSize": 121808010000
+      "productToDate": "2026-06-02",
+      "productTotalFileSize": 126591030000
     }
   ],
   "count": 1

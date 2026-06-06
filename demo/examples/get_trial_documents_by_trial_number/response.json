@@ -1,855 +1,2597 @@
 {
-  "count": 36,
+  "count": 72,
   "patentTrialDocumentDataBag": [
     {
       "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246426",
-        "documentName": "Ex-1029 - Ex. A - 780 Claim Chart.pdf",
-        "documentNumber": 1029,
-        "documentSizeQuantity": 2858035,
-        "documentTitleText": "Exhibit A to Network-1’s Infringement Contentions for the ’780 Patent",
-        "documentTypeDescriptionText": "Exhibit",
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339381",
+        "documentName": "EXHIBIT 1051.pdf",
+        "documentNumber": 1051,
+        "documentSizeQuantity": 1850212,
+        "documentTitleText": "EXHIBIT 1051",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339381.pdf",
         "filingPartyCategory": "PETITIONER"
       },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
       "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
       },
       "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
       },
       "trialDocumentCategory": "Document",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
         "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
+        "trialTypeCode": "PGR"
       },
-      "trialNumber": "IPR2026-00114"
+      "trialNumber": "PGR2026-00055"
     },
     {
       "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246394",
-        "documentName": "Ex-1007 - AbiChar.pdf",
-        "documentNumber": 1007,
-        "documentSizeQuantity": 868743,
-        "documentTitleText": "A Fast and Secure Elliptic Curve Based Authenticated Key Agreement Protocol",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246410",
-        "documentName": "Ex-1021 - Boyd \u0026 Mathuria.pdf",
-        "documentNumber": 1021,
-        "documentSizeQuantity": 13200327,
-        "documentTitleText": "Protocols for Authentication and Key Establishment",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246372",
-        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part3.pdf",
-        "documentNumber": 1004,
-        "documentSizeQuantity": 35256571,
-        "documentTitleText": "Prosecution History of the ’780 Patent (Part 3 of 7)",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246422",
-        "documentName": "Ex-1027 - Reprogrammable SIMs.pdf",
-        "documentNumber": 1027,
-        "documentSizeQuantity": 3829280,
-        "documentTitleText": "Reprogrammable SIMs: Technology, Evolution and Implications",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246382",
-        "documentName": "Ex-1005 - Secure Profile Provisioning Architecture for Embedded UICC.pdf",
-        "documentNumber": 1005,
-        "documentSizeQuantity": 1361729,
-        "documentTitleText": "Secure Profile Provisioning Architecture for Embedded UICC",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171247300",
-        "documentName": "2025-11-26 SEC POA (780) (Signed).pdf",
-        "documentNumber": 1,
-        "documentSizeQuantity": 292473,
-        "documentTitleText": "Samsung Electronics Co., Ltd.’s Power of Attorney",
-        "documentTypeDescriptionText": "NOTICE",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246378",
-        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part6.pdf",
-        "documentNumber": 1004,
-        "documentSizeQuantity": 37002606,
-        "documentTitleText": "Prosecution History of the ’780 Patent (Part 6 of 7)",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246420",
-        "documentName": "Ex-1026 - GlobalPlatform Card Technology.pdf",
-        "documentNumber": 1026,
-        "documentSizeQuantity": 1760814,
-        "documentTitleText": "GlobalPlatform Card Technology, Secure Channel Protocol 03",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246412",
-        "documentName": "Ex-1022 - New Directions in Cryptography.pdf",
-        "documentNumber": 1022,
-        "documentSizeQuantity": 2593947,
-        "documentTitleText": "New Directions in Cryptography",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246402",
-        "documentName": "Ex-1015 - Declaration of Simon Blake-Wilson.pdf",
-        "documentNumber": 1015,
-        "documentSizeQuantity": 1265488,
-        "documentTitleText": "Declaration of Simon Blake-Wilson",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246416",
-        "documentName": "Ex-1024 - NIST Special Publication 800-38F.pdf",
-        "documentNumber": 1024,
-        "documentSizeQuantity": 911600,
-        "documentTitleText": "NIST Special Publication 800-38F",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246368",
-        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part1.pdf",
-        "documentNumber": 1004,
-        "documentSizeQuantity": 29477707,
-        "documentTitleText": "Prosecution History of the ’780 Patent (Part 1 of 7)",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171247284",
-        "documentName": "Ex-1030 - US11916893.pdf",
-        "documentNumber": 1030,
-        "documentSizeQuantity": 7188329,
-        "documentTitleText": "U.S. Patent No. 11,916,893",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246408",
-        "documentName": "Ex-1019 - Declaration of Gordan MacPherson .pdf",
-        "documentNumber": 1019,
-        "documentSizeQuantity": 14145875,
-        "documentTitleText": "Declaration of Gordan MacPherson",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171247296",
-        "documentName": "Ex-1003 - Curriculum Vitae of Dr. Paul S. Min.pdf",
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339275",
+        "documentName": "EXHIBIT 1003.pdf",
         "documentNumber": 1003,
-        "documentSizeQuantity": 1139388,
-        "documentTitleText": "Curriculum Vitae of Dr. Paul S. Min",
-        "documentTypeDescriptionText": "Exhibit",
+        "documentSizeQuantity": 2237693,
+        "documentTitleText": "EXHIBIT 1003",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339275.pdf",
         "filingPartyCategory": "PETITIONER"
       },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
       "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
       },
       "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
       },
       "trialDocumentCategory": "Document",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
         "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
+        "trialTypeCode": "PGR"
       },
-      "trialNumber": "IPR2026-00114"
+      "trialNumber": "PGR2026-00055"
     },
     {
       "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246376",
-        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part5.pdf",
-        "documentNumber": 1004,
-        "documentSizeQuantity": 26304605,
-        "documentTitleText": "Prosecution History of the ’780 Patent (Part 5 of 7)",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246374",
-        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part4.pdf",
-        "documentNumber": 1004,
-        "documentSizeQuantity": 30966296,
-        "documentTitleText": "Prosecution History of the ’780 Patent (Part 4 of 7)",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246400",
-        "documentName": "Ex-1011 - SCP11.pdf",
-        "documentNumber": 1011,
-        "documentSizeQuantity": 8285744,
-        "documentTitleText": "GlobalPlatform Card Secure Channel Protocol ’11’",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246366",
-        "documentName": "Ex-1001 - US11233780.pdf",
-        "documentNumber": 1001,
-        "documentSizeQuantity": 4259210,
-        "documentTitleText": "U.S. Patent No. 11,233,780 (“the ’780 Patent”)",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246380",
-        "documentName": "Ex-1004 - Prosecution History of the ’780 Patent_Part7.pdf",
-        "documentNumber": 1004,
-        "documentSizeQuantity": 22008946,
-        "documentTitleText": "Prosecution History of the ’780 Patent (Part 7 of 7)",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171247304",
-        "documentName": "2025-11-26 Samsung (Network-1) 780 Patent IPR Petition.pdf",
-        "documentNumber": 3,
-        "documentSizeQuantity": 9496703,
-        "documentTitleText": "Petition: as filed",
-        "documentTypeDescriptionText": "PETITION",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T09:54:49",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246414",
-        "documentName": "Ex-1023 - NIST Special Publication 800-57.pdf",
-        "documentNumber": 1023,
-        "documentSizeQuantity": 1745408,
-        "documentTitleText": "NIST Special Publication 800-57",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T09:54:49",
-      "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00114"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171247302",
-        "documentName": "2025-11-26 SEA POA (780) (Signed).pdf",
+        "documentCategory": "NOTICE",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339513",
+        "documentName": "Petitioner Power of Attorney - Zydus Lifesciences Global FZE (US12233106).pdf",
         "documentNumber": 2,
-        "documentSizeQuantity": 302503,
-        "documentTitleText": "Samsung Electronics America, Inc.’s Power of Attorney",
-        "documentTypeDescriptionText": "NOTICE",
+        "documentSizeQuantity": 182251,
+        "documentTitleText": "Notice: Power of Attorney (Zydus Lifesciences Global FZE)",
+        "documentTypeDescriptionText": "Notice:  Power of Attorney",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339513.pdf",
         "filingPartyCategory": "PETITIONER"
       },
-      "lastModifiedDateTime": "2025-11-27T09:54:49",
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
       "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
       },
       "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
       },
       "trialDocumentCategory": "Document",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
         "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
+        "trialTypeCode": "PGR"
       },
-      "trialNumber": "IPR2026-00114"
+      "trialNumber": "PGR2026-00055"
     },
     {
       "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246390",
-        "documentName": "Ex-1006 - GlobalPlatform_Part 2.pdf",
-        "documentNumber": 1006,
-        "documentSizeQuantity": 33509118,
-        "documentTitleText": "GlobalPlatform Card Specification (Part 2 of 3)",
-        "documentTypeDescriptionText": "Exhibit",
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339407",
+        "documentName": "EXHIBIT 1063.pdf",
+        "documentNumber": 1063,
+        "documentSizeQuantity": 3052571,
+        "documentTitleText": "EXHIBIT 1063",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339407.pdf",
         "filingPartyCategory": "PETITIONER"
       },
-      "lastModifiedDateTime": "2025-11-27T07:55:30",
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
       "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
-        "technologyCenterNumber": "2400"
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
       },
       "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
       },
       "trialDocumentCategory": "Document",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
         "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
+        "trialTypeCode": "PGR"
       },
-      "trialNumber": "IPR2026-00114"
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339315",
+        "documentName": "EXHIBIT 1022.pdf",
+        "documentNumber": 1022,
+        "documentSizeQuantity": 2328444,
+        "documentTitleText": "EXHIBIT 1022",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339315.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339357",
+        "documentName": "EXHIBIT 1043.pdf",
+        "documentNumber": 1043,
+        "documentSizeQuantity": 2386579,
+        "documentTitleText": "EXHIBIT 1043",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339357.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339389",
+        "documentName": "EXHIBIT 1054.pdf",
+        "documentNumber": 1054,
+        "documentSizeQuantity": 3231310,
+        "documentTitleText": "EXHIBIT 1054",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339389.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339353",
+        "documentName": "EXHIBIT 1042.pdf",
+        "documentNumber": 1042,
+        "documentSizeQuantity": 2078595,
+        "documentTitleText": "EXHIBIT 1042",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339353.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339307",
+        "documentName": "EXHIBIT 1018.pdf",
+        "documentNumber": 1018,
+        "documentSizeQuantity": 813948,
+        "documentTitleText": "EXHIBIT 1018",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339307.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339265",
+        "documentName": "EXHIBIT 1002.pdf",
+        "documentNumber": 1002,
+        "documentSizeQuantity": 14763575,
+        "documentTitleText": "EXHIBIT 1002",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339265.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339323",
+        "documentName": "EXHIBIT 1027.pdf",
+        "documentNumber": 1027,
+        "documentSizeQuantity": 2126167,
+        "documentTitleText": "EXHIBIT 1027",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339323.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339423",
+        "documentName": "EXHIBIT 1064.pdf",
+        "documentNumber": 1064,
+        "documentSizeQuantity": 899392,
+        "documentTitleText": "EXHIBIT 1064",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339423.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339373",
+        "documentName": "EXHIBIT 1047.pdf",
+        "documentNumber": 1047,
+        "documentSizeQuantity": 7019903,
+        "documentTitleText": "EXHIBIT 1047",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339373.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339541",
+        "documentName": "EXHIBIT 1068.pdf",
+        "documentNumber": 1068,
+        "documentSizeQuantity": 225412,
+        "documentTitleText": "EXHIBIT 1068",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339541.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339295",
+        "documentName": "EXHIBIT 1012.pdf",
+        "documentNumber": 1012,
+        "documentSizeQuantity": 2073877,
+        "documentTitleText": "EXHIBIT 1012",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339295.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339317",
+        "documentName": "EXHIBIT 1023.pdf",
+        "documentNumber": 1023,
+        "documentSizeQuantity": 17742448,
+        "documentTitleText": "EXHIBIT 1023",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339317.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339401",
+        "documentName": "EXHIBIT 1059.pdf",
+        "documentNumber": 1059,
+        "documentSizeQuantity": 540995,
+        "documentTitleText": "EXHIBIT 1059",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339401.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339375",
+        "documentName": "EXHIBIT 1048.pdf",
+        "documentNumber": 1048,
+        "documentSizeQuantity": 4086560,
+        "documentTitleText": "EXHIBIT 1048",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339375.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339339",
+        "documentName": "EXHIBIT 1036.pdf",
+        "documentNumber": 1036,
+        "documentSizeQuantity": 1159221,
+        "documentTitleText": "EXHIBIT 1036",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339339.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339405",
+        "documentName": "EXHIBIT 1062.pdf",
+        "documentNumber": 1062,
+        "documentSizeQuantity": 1159721,
+        "documentTitleText": "EXHIBIT 1062",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339405.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339369",
+        "documentName": "EXHIBIT 1046.pdf",
+        "documentNumber": 1046,
+        "documentSizeQuantity": 7185793,
+        "documentTitleText": "EXHIBIT 1046",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339369.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339327",
+        "documentName": "EXHIBIT 1029.pdf",
+        "documentNumber": 1029,
+        "documentSizeQuantity": 1598739,
+        "documentTitleText": "EXHIBIT 1029",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339327.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339393",
+        "documentName": "EXHIBIT 1055.pdf",
+        "documentNumber": 1055,
+        "documentSizeQuantity": 1573162,
+        "documentTitleText": "EXHIBIT 1055",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339393.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339285",
+        "documentName": "EXHIBIT 1007.pdf",
+        "documentNumber": 1007,
+        "documentSizeQuantity": 1534132,
+        "documentTitleText": "EXHIBIT 1007",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339285.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339343",
+        "documentName": "EXHIBIT 1037.pdf",
+        "documentNumber": 1037,
+        "documentSizeQuantity": 2235820,
+        "documentTitleText": "EXHIBIT 1037",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339343.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339365",
+        "documentName": "EXHIBIT 1045.pdf",
+        "documentNumber": 1045,
+        "documentSizeQuantity": 2076099,
+        "documentTitleText": "EXHIBIT 1045",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339365.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339297",
+        "documentName": "EXHIBIT 1013.pdf",
+        "documentNumber": 1013,
+        "documentSizeQuantity": 1080308,
+        "documentTitleText": "EXHIBIT 1013",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339297.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339321",
+        "documentName": "EXHIBIT 1026.pdf",
+        "documentNumber": 1026,
+        "documentSizeQuantity": 1579937,
+        "documentTitleText": "EXHIBIT 1026",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339321.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339385",
+        "documentName": "EXHIBIT 1053.pdf",
+        "documentNumber": 1053,
+        "documentSizeQuantity": 1372527,
+        "documentTitleText": "EXHIBIT 1053",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339385.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339283",
+        "documentName": "EXHIBIT 1006.pdf",
+        "documentNumber": 1006,
+        "documentSizeQuantity": 11274151,
+        "documentTitleText": "EXHIBIT 1006",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339283.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339313",
+        "documentName": "EXHIBIT 1021.pdf",
+        "documentNumber": 1021,
+        "documentSizeQuantity": 1602243,
+        "documentTitleText": "EXHIBIT 1021",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339313.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339293",
+        "documentName": "EXHIBIT 1011.pdf",
+        "documentNumber": 1011,
+        "documentSizeQuantity": 1521042,
+        "documentTitleText": "EXHIBIT 1011",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339293.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339543",
+        "documentName": "EXHIBIT 1069.pdf",
+        "documentNumber": 1069,
+        "documentSizeQuantity": 293913,
+        "documentTitleText": "EXHIBIT 1069",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339543.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339545",
+        "documentName": "EXHIBIT 1070_.pdf",
+        "documentNumber": 1070,
+        "documentSizeQuantity": 189970,
+        "documentTitleText": "EXHIBIT 1070",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339545.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339335",
+        "documentName": "EXHIBIT 1033.pdf",
+        "documentNumber": 1033,
+        "documentSizeQuantity": 1028441,
+        "documentTitleText": "EXHIBIT 1033",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339335.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339397",
+        "documentName": "EXHIBIT 1058.pdf",
+        "documentNumber": 1058,
+        "documentSizeQuantity": 1646286,
+        "documentTitleText": "EXHIBIT 1058",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339397.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339347",
+        "documentName": "EXHIBIT 1039.pdf",
+        "documentNumber": 1039,
+        "documentSizeQuantity": 1879406,
+        "documentTitleText": "EXHIBIT 1039",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339347.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339309",
+        "documentName": "EXHIBIT 1019.pdf",
+        "documentNumber": 1019,
+        "documentSizeQuantity": 2127115,
+        "documentTitleText": "EXHIBIT 1019",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339309.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339547",
+        "documentName": "EXHIBIT 1071.pdf",
+        "documentNumber": 1071,
+        "documentSizeQuantity": 102417,
+        "documentTitleText": "EXHIBIT 1071",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339547.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "PETITION",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339533",
+        "documentName": "PGR Petition US 12,233,106.pdf",
+        "documentNumber": 4,
+        "documentSizeQuantity": 1051294,
+        "documentTitleText": "Petition: as filed",
+        "documentTypeDescriptionText": "Petition: as filed",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339533.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339261",
+        "documentName": "EXHIBIT 1001.pdf",
+        "documentNumber": 1001,
+        "documentSizeQuantity": 10059331,
+        "documentTitleText": "EXHIBIT 1001",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339261.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339329",
+        "documentName": "EXHIBIT 1030.pdf",
+        "documentNumber": 1030,
+        "documentSizeQuantity": 831422,
+        "documentTitleText": "EXHIBIT 1030",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339329.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339337",
+        "documentName": "EXHIBIT 1035.pdf",
+        "documentNumber": 1035,
+        "documentSizeQuantity": 1129726,
+        "documentTitleText": "EXHIBIT 1035",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339337.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339279",
+        "documentName": "EXHIBIT 1005.pdf",
+        "documentNumber": 1005,
+        "documentSizeQuantity": 1132882,
+        "documentTitleText": "EXHIBIT 1005",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339279.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339311",
+        "documentName": "EXHIBIT 1020.pdf",
+        "documentNumber": 1020,
+        "documentSizeQuantity": 1640474,
+        "documentTitleText": "EXHIBIT 1020",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339311.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339289",
+        "documentName": "EXHIBIT 1009.pdf",
+        "documentNumber": 1009,
+        "documentSizeQuantity": 8977959,
+        "documentTitleText": "EXHIBIT 1009",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339289.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339349",
+        "documentName": "EXHIBIT 1040.pdf",
+        "documentNumber": 1040,
+        "documentSizeQuantity": 2143501,
+        "documentTitleText": "EXHIBIT 1040",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339349.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339539",
+        "documentName": "EXHIBIT 1067.pdf",
+        "documentNumber": 1067,
+        "documentSizeQuantity": 171331,
+        "documentTitleText": "EXHIBIT 1067",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339539.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339303",
+        "documentName": "EXHIBIT 1016.pdf",
+        "documentNumber": 1016,
+        "documentSizeQuantity": 4250562,
+        "documentTitleText": "EXHIBIT 1016",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339303.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339299",
+        "documentName": "EXHIBIT 1014.pdf",
+        "documentNumber": 1014,
+        "documentSizeQuantity": 1270107,
+        "documentTitleText": "EXHIBIT 1014",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339299.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339301",
+        "documentName": "EXHIBIT 1015.pdf",
+        "documentNumber": 1015,
+        "documentSizeQuantity": 2217880,
+        "documentTitleText": "EXHIBIT 1015",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339301.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339403",
+        "documentName": "EXHIBIT 1061.pdf",
+        "documentNumber": 1061,
+        "documentSizeQuantity": 1380133,
+        "documentTitleText": "EXHIBIT 1061",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339403.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339331",
+        "documentName": "EXHIBIT 1031.pdf",
+        "documentNumber": 1031,
+        "documentSizeQuantity": 1372722,
+        "documentTitleText": "EXHIBIT 1031",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339331.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339325",
+        "documentName": "EXHIBIT 1028.pdf",
+        "documentNumber": 1028,
+        "documentSizeQuantity": 3332636,
+        "documentTitleText": "EXHIBIT 1028",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339325.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339361",
+        "documentName": "EXHIBIT 1044.pdf",
+        "documentNumber": 1044,
+        "documentSizeQuantity": 2270671,
+        "documentTitleText": "EXHIBIT 1044",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339361.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "NOTICE",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339515",
+        "documentName": "Petitioner Power of Attorney - Zydus Pharmaceuticals (USA) Inc (US12233106).pdf",
+        "documentNumber": 3,
+        "documentSizeQuantity": 140019,
+        "documentTitleText": "Notice: Power of Attorney (Zydus Pharmaceuticals (USA) Inc)",
+        "documentTypeDescriptionText": "Notice:  Power of Attorney",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339515.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339319",
+        "documentName": "EXHIBIT 1025.pdf",
+        "documentNumber": 1025,
+        "documentSizeQuantity": 3975094,
+        "documentTitleText": "EXHIBIT 1025",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339319.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339433",
+        "documentName": "EXHIBIT 1065.pdf",
+        "documentNumber": 1065,
+        "documentSizeQuantity": 75320,
+        "documentTitleText": "EXHIBIT 1065",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339433.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339351",
+        "documentName": "EXHIBIT 1041.pdf",
+        "documentNumber": 1041,
+        "documentSizeQuantity": 2574414,
+        "documentTitleText": "EXHIBIT 1041",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339351.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "MOTION",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339535",
+        "documentName": "Motion for Joinder.pdf",
+        "documentNumber": 5,
+        "documentSizeQuantity": 604316,
+        "documentTitleText": "Motion: Joinder",
+        "documentTypeDescriptionText": "Motion:  Joinder",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339535.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339379",
+        "documentName": "EXHIBIT 1050.pdf",
+        "documentNumber": 1050,
+        "documentSizeQuantity": 1263711,
+        "documentTitleText": "EXHIBIT 1050",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339379.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339537",
+        "documentName": "EXHIBIT 1066.pdf",
+        "documentNumber": 1066,
+        "documentSizeQuantity": 1937378,
+        "documentTitleText": "EXHIBIT 1066",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339537.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339287",
+        "documentName": "EXHIBIT 1008.pdf",
+        "documentNumber": 1008,
+        "documentSizeQuantity": 1945843,
+        "documentTitleText": "EXHIBIT 1008",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339287.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339291",
+        "documentName": "EXHIBIT 1010.pdf",
+        "documentNumber": 1010,
+        "documentSizeQuantity": 1599287,
+        "documentTitleText": "EXHIBIT 1010",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339291.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339377",
+        "documentName": "EXHIBIT 1049.pdf",
+        "documentNumber": 1049,
+        "documentSizeQuantity": 16292489,
+        "documentTitleText": "EXHIBIT 1049",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339377.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339333",
+        "documentName": "EXHIBIT 1032.pdf",
+        "documentNumber": 1032,
+        "documentSizeQuantity": 1019386,
+        "documentTitleText": "EXHIBIT 1032",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339333.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339305",
+        "documentName": "EXHIBIT 1017.pdf",
+        "documentNumber": 1017,
+        "documentSizeQuantity": 4590986,
+        "documentTitleText": "EXHIBIT 1017",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339305.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339277",
+        "documentName": "EXHIBIT 1004.pdf",
+        "documentNumber": 1004,
+        "documentSizeQuantity": 1507579,
+        "documentTitleText": "EXHIBIT 1004",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339277.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "NOTICE",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339511",
+        "documentName": "Petitioner Power of Attorney - Zydus Lifesciences Limited (US12233106).pdf",
+        "documentNumber": 1,
+        "documentSizeQuantity": 682414,
+        "documentTitleText": "Notice: Power of Attorney (Zydus Lifesciences Limited)",
+        "documentTypeDescriptionText": "Notice:  Power of Attorney",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339511.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339345",
+        "documentName": "EXHIBIT 1038.pdf",
+        "documentNumber": 1038,
+        "documentSizeQuantity": 3102927,
+        "documentTitleText": "EXHIBIT 1038",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339345.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339383",
+        "documentName": "EXHIBIT 1052.pdf",
+        "documentNumber": 1052,
+        "documentSizeQuantity": 1968273,
+        "documentTitleText": "EXHIBIT 1052",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339383.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
+    },
+    {
+      "documentData": {
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339549",
+        "documentName": "EXHIBIT 1072.pdf",
+        "documentNumber": 1072,
+        "documentSizeQuantity": 136456,
+        "documentTitleText": "EXHIBIT 1072",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2026/00055/171339549.pdf",
+        "filingPartyCategory": "PETITIONER"
+      },
+      "lastModifiedDateTime": "2026-06-05T23:04:51",
+      "patentOwnerData": {
+        "applicationNumberText": "17811748",
+        "grantDate": "2025-02-25",
+        "groupArtUnitNumber": "1654",
+        "inventorName": "Jonathan Day et al",
+        "patentNumber": "12233106",
+        "technologyCenterNumber": "1600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Lee, Rogeret al",
+        "realPartyInInterestName": "ZYDUS LIFESCIENCES LIMITED et al."
+      },
+      "trialDocumentCategory": "Document",
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:54:03",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "PGR"
+      },
+      "trialNumber": "PGR2026-00055"
     }
   ]
 }

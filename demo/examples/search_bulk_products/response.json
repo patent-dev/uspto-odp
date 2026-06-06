@@ -2,7 +2,7 @@
   "bulkDataProductBag": [
     {
       "daysOfWeekText": "SUNDAY",
-      "lastModifiedDateTime": "2025-11-27 01:54:23",
+      "lastModifiedDateTime": "2026-06-06 01:35:29",
       "mimeTypeIdentifierArrayText": [
         "JSON"
       ],
@@ -21,11 +21,11 @@
         "Patent"
       ],
       "productTitleText": "Patent File Wrapper (Bulk Datasets) - Weekly",
-      "productToDate": "2025-12-31",
-      "productTotalFileSize": 60280430000
+      "productToDate": "2026-12-31",
+      "productTotalFileSize": 63734050000
     },
     {
-      "lastModifiedDateTime": "2025-11-27 00:30:41",
+      "lastModifiedDateTime": "2026-06-06 00:19:39",
       "mimeTypeIdentifierArrayText": [
         "JSON"
       ],
@@ -38,17 +38,198 @@
       "productDescriptionText": "Bibliographic and assignments static patent data compiled into file sets. The Delta Datasets (daily increments) can be downloaded in bulk.",
       "productFileTotalQuantity": 7,
       "productFrequencyText": "DAILY",
-      "productFromDate": "2025-11-20",
+      "productFromDate": "2026-05-30",
       "productIdentifier": "PTFWPRD",
       "productLabelArrayText": [
         "Patent"
       ],
       "productTitleText": "Patent File Wrapper (Bulk Datasets) - Daily",
-      "productToDate": "2025-11-26",
-      "productTotalFileSize": 19679912000
+      "productToDate": "2026-06-05",
+      "productTotalFileSize": 2960036400
     },
     {
-      "lastModifiedDateTime": "2025-11-10 18:03:00",
+      "daysOfWeekText": "MONDAY",
+      "lastModifiedDateTime": "2026-03-12 18:09:09",
+      "mimeTypeIdentifierArrayText": [
+        "CSV"
+      ],
+      "productDataSetArrayText": [
+        "PatentsView"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)",
+        "PatentsView"
+      ],
+      "productDescriptionText": "The annual datasets are constructed from PatentsView Granted Patent Disambiguated Data and provided in small, easy to manipulate csv files. Each yearly data table provides information about the inventors and assignees associated with patents granted that year.",
+      "productFileTotalQuantity": 51,
+      "productFrequencyText": "YEARLY",
+      "productFromDate": "1976-01-01",
+      "productIdentifier": "PVANNUAL",
+      "productLabelArrayText": [
+        "Patent",
+        "Research"
+      ],
+      "productTitleText": "PatentsView Annualized Patent Data",
+      "productToDate": "2024-12-31",
+      "productTotalFileSize": 685125000
+    },
+    {
+      "daysOfWeekText": "MONDAY",
+      "lastModifiedDateTime": "2026-03-12 17:58:17",
+      "mimeTypeIdentifierArrayText": [
+        "TSV"
+      ],
+      "productDataSetArrayText": [
+        "PatentsView"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Published patent applications (pre-grant publicati",
+        "PatentsView"
+      ],
+      "productDescriptionText": "Contains annual files of long-text data for pre-grant publications from 2001 to the present. The available text fields are: Brief Summary, Claims, Detail Description, and Drawing Description.",
+      "productFileTotalQuantity": 100,
+      "productFrequencyText": "YEARLY",
+      "productFromDate": "2001-03-15",
+      "productIdentifier": "PVPGPUBTXT",
+      "productLabelArrayText": [
+        "Patent",
+        "Research"
+      ],
+      "productTitleText": "PatentsView Pre-Grant Publication Long Text Data",
+      "productToDate": "2025-12-31",
+      "productTotalFileSize": 119346610000
+    },
+    {
+      "daysOfWeekText": "MONDAY",
+      "lastModifiedDateTime": "2026-03-12 17:58:17",
+      "mimeTypeIdentifierArrayText": [
+        "TSV"
+      ],
+      "productDataSetArrayText": [
+        "PatentsView"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)",
+        "PatentsView"
+      ],
+      "productDescriptionText": "Contains annual files of long-text data for granted patents from 1976 to the present. The available text fields are: Brief Summary, Claims, Detail Description, and Drawing Description.",
+      "productFileTotalQuantity": 200,
+      "productFrequencyText": "YEARLY",
+      "productFromDate": "1976-01-01",
+      "productIdentifier": "PVGPATTXT",
+      "productLabelArrayText": [
+        "Patent",
+        "Research"
+      ],
+      "productTitleText": "PatentsView Granted Patent Long Text Data",
+      "productToDate": "2025-12-31",
+      "productTotalFileSize": 109003670000
+    },
+    {
+      "daysOfWeekText": "MONDAY",
+      "lastModifiedDateTime": "2026-03-12 17:56:32",
+      "mimeTypeIdentifierArrayText": [
+        "TSV"
+      ],
+      "productDataSetArrayText": [
+        "PatentsView"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)",
+        "Published patent applications (pre-grant publicati",
+        "PatentsView"
+      ],
+      "productDescriptionText": "The sorted tables are reorganized bibliographic data that more accurately represent the roles and order of inventors, applicants, and assignees on patent applications (Pre-Grant Publications) and granted patents. They correct inconsistencies in the original XML source data that resulted from changes implemented under the Leahy-Smith America Invents Act, providing an additional resource for users while the existing tables remain available.",
+      "productFileTotalQuantity": 11,
+      "productFrequencyText": "QUARTERLY",
+      "productFromDate": "1976-01-01",
+      "productIdentifier": "PVSORTED",
+      "productLabelArrayText": [
+        "Patent",
+        "Research"
+      ],
+      "productTitleText": "PatentsView Sorted Data (Beta)",
+      "productToDate": "2025-12-31",
+      "productTotalFileSize": 4976497700
+    },
+    {
+      "daysOfWeekText": "MONDAY",
+      "lastModifiedDateTime": "2026-03-12 17:48:58",
+      "mimeTypeIdentifierArrayText": [
+        "TSV"
+      ],
+      "productDataSetArrayText": [
+        "PatentsView"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Issued patents (patent grants)",
+        "PatentsView"
+      ],
+      "productDescriptionText": "Includes 35 files for patents granted from January 1976 to the present. Information is included on applicants, assignees (both disambiguated and not disambiguated), inventors (both disambiguated and not disambiguated), and locations of inventors, assignees, and applicants. Also included are technology categories, patents and non-patent literature cited, examiner name, and statements of government interest.",
+      "productFileTotalQuantity": 36,
+      "productFrequencyText": "QUARTERLY",
+      "productFromDate": "1976-01-01",
+      "productIdentifier": "PVGPATDIS",
+      "productLabelArrayText": [
+        "Patent",
+        "Research"
+      ],
+      "productTitleText": "PatentsView Granted Patent Disambiguated Data",
+      "productToDate": "2025-12-31",
+      "productTotalFileSize": 23507239000
+    },
+    {
+      "daysOfWeekText": "MONDAY",
+      "lastModifiedDateTime": "2026-03-12 17:48:58",
+      "mimeTypeIdentifierArrayText": [
+        "TSV"
+      ],
+      "productDataSetArrayText": [
+        "PatentsView"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Published patent applications (pre-grant publicati",
+        "PatentsView"
+      ],
+      "productDescriptionText": "Includes 25 files for pre-grant publications issued since the introduction of pre-grant publication in 2001. Information is included on applicants, assignees (both disambiguated and not disambiguated), inventors (both disambiguated and not disambiguated), and locations of inventors, assignees, and applicnts. Also included are technology categories and statements of government interest.",
+      "productFileTotalQuantity": 26,
+      "productFrequencyText": "QUARTERLY",
+      "productFromDate": "2001-03-15",
+      "productIdentifier": "PVPGPUBDIS",
+      "productLabelArrayText": [
+        "Patent",
+        "Research"
+      ],
+      "productTitleText": "PatentsView Pre-Grant Publication Disambiguated Data",
+      "productToDate": "2025-12-31",
+      "productTotalFileSize": 7755043300
+    },
+    {
+      "daysOfWeekText": "MONDAY",
+      "lastModifiedDateTime": "2026-01-16 19:24:17",
+      "mimeTypeIdentifierArrayText": [
+        "XML"
+      ],
+      "productDataSetArrayText": [
+        "Authoritative"
+      ],
+      "productDataSetCategoryArrayText": [
+        "Patent Application"
+      ],
+      "productDescriptionText": "The “Office action” is a written notification to the applicant of the examiner’s decision on patentability. It generally discloses the reasons for any rejections, objections, or requirements and includes relevant information or references that the applicant may find useful for responding to the examiner and deciding whether to continue prosecuting the application. The full-text of Public Office Actions is bundled as a JSON file in downloadable weekly zip files. Each zip file contains weekly office action data in JSON format from 01/06/2020 to present.",
+      "productFileTotalQuantity": 980,
+      "productFrequencyText": "WEEKLY",
+      "productFromDate": "2023-12-18",
+      "productIdentifier": "OACT",
+      "productLabelArrayText": [
+        "Patent"
+      ],
+      "productTitleText": "Office Actions Weekly Archives",
+      "productToDate": "2026-06-01",
+      "productTotalFileSize": 65609036000
+    },
+    {
+      "lastModifiedDateTime": "2026-01-16 16:02:09",
       "mimeTypeIdentifierArrayText": [
         "ASCII",
         "XML"
@@ -59,7 +240,7 @@
       "productDataSetCategoryArrayText": [
         "Issued patents (patent grants)"
       ],
-      "productDescriptionText": "Contains the concatenated full-text of each patent grant document issued weekly (Tuesdays) from January 1, 1976 to present (excludes images/drawings). This is the subset of the Patent Grant Full Text Data with Embedded TIFF Images.",
+      "productDescriptionText": "Contains the concatenated full-text of each patent grant document issued weekly (Tuesdays) from January 1, 1976 to December 25, 2001 (excludes images/drawings). This is the subset of the Patent Grant Full Text Data with Embedded TIFF Images.",
       "productFileTotalQuantity": 1382,
       "productFrequencyText": "YEARLY",
       "productFromDate": "1976-01-06",
@@ -70,176 +251,6 @@
       "productTitleText": "Patent Grant Full-Text Data (No Images) - APS",
       "productToDate": "2001-12-25",
       "productTotalFileSize": 25938442000
-    },
-    {
-      "daysOfWeekText": "TUESDAY",
-      "lastModifiedDateTime": "2025-11-10 18:02:57",
-      "mimeTypeIdentifierArrayText": [
-        "ASCII",
-        "XML"
-      ],
-      "productDataSetArrayText": [
-        "Authoritative"
-      ],
-      "productDataSetCategoryArrayText": [
-        "Issued patents (patent grants)"
-      ],
-      "productDescriptionText": "Provides the bulk zip files that contains the concatenated full-text of each patent grant document issued weekly. This page provides an additional feature called “View Patent Records” which allows user to find or discover the patent grants that are bundled in the zip file. Even though the zip file may contain grants that belong to the applications which were filed before 2001, ODP will only show the grants that belong to the applications that were filed from 2001.",
-      "productFileTotalQuantity": 1277,
-      "productFrequencyText": "WEEKLY",
-      "productFromDate": "2002-01-01",
-      "productIdentifier": "PTGRXML",
-      "productLabelArrayText": [
-        "Patent"
-      ],
-      "productTitleText": "Patent Grant Full-Text Data (No Images) - XML",
-      "productToDate": "2025-11-25",
-      "productTotalFileSize": 121808010000
-    },
-    {
-      "daysOfWeekText": "THURSDAY",
-      "lastModifiedDateTime": "2025-11-10 18:02:30",
-      "mimeTypeIdentifierArrayText": [
-        "XML"
-      ],
-      "productDataSetArrayText": [
-        "Authoritative"
-      ],
-      "productDataSetCategoryArrayText": [
-        "Patent Application",
-        "Published patent applications (pre-grant publicati"
-      ],
-      "productDescriptionText": "Contains the full text, images/drawings, and complex work units (tables, mathematical expressions, chemical structures, and genetic sequence data) of each patent application (non-provisional utility and plant) published weekly (Thursdays) from March 15, 2001 to present.",
-      "productFileTotalQuantity": 1922,
-      "productFrequencyText": "WEEKLY",
-      "productFromDate": "2001-03-15",
-      "productIdentifier": "APPDT",
-      "productLabelArrayText": [
-        "Patent"
-      ],
-      "productTitleText": "Patent Application Full Text Data with Embedded TIFF Images (Application Red Book based on WIPO ST.36)",
-      "productToDate": "2025-11-27",
-      "productTotalFileSize": 4010114500000
-    },
-    {
-      "daysOfWeekText": "TUESDAY",
-      "lastModifiedDateTime": "2025-11-10 18:02:30",
-      "mimeTypeIdentifierArrayText": [
-        "PDF"
-      ],
-      "productDataSetArrayText": [
-        "Authoritative"
-      ],
-      "productDataSetCategoryArrayText": [
-        "Issued patents (patent grants)"
-      ],
-      "productDescriptionText": "Contains the images of each patent grant issued weekly (Tuesdays) from July 31, 1790 to present in Portable Document Format (PDF) created from the Patent Grant Single-Page TIFF Images. Also included are older grants that have new Certificates-of-Correction (C-of-C) and rescanned images of older patent grants.",
-      "productFileTotalQuantity": 1824,
-      "productFrequencyText": "WEEKLY",
-      "productFromDate": "1790-07-31",
-      "productIdentifier": "PTGRMP2",
-      "productLabelArrayText": [
-        "Patent"
-      ],
-      "productTitleText": "Patent Grant Multi-page PDF Images",
-      "productToDate": "2025-11-25",
-      "productTotalFileSize": 14173793000000
-    },
-    {
-      "daysOfWeekText": "TUESDAY",
-      "lastModifiedDateTime": "2025-11-10 18:02:23",
-      "mimeTypeIdentifierArrayText": [
-        "XML"
-      ],
-      "productDataSetArrayText": [
-        "Authoritative"
-      ],
-      "productDataSetCategoryArrayText": [
-        "Issued patents (patent grants)"
-      ],
-      "productDescriptionText": "Contains the full text, images/drawings, and complex work units (tables, mathematical expressions, chemical structures, and genetic sequence data) of each patent grant issued weekly (Tuesdays) from January 1, 2001 to present.",
-      "productFileTotalQuantity": 1595,
-      "productFrequencyText": "WEEKLY",
-      "productFromDate": "2002-01-01",
-      "productIdentifier": "PTGRDT",
-      "productLabelArrayText": [
-        "Patent"
-      ],
-      "productTitleText": "Patent Grant Full Text Data with Embedded TIFF Images (Grant Red Book based on WIPO ST.36) - XML",
-      "productToDate": "2025-11-25",
-      "productTotalFileSize": 2747187300000
-    },
-    {
-      "daysOfWeekText": "TUESDAY",
-      "lastModifiedDateTime": "2025-11-10 18:02:19",
-      "mimeTypeIdentifierArrayText": [
-        "ASCII",
-        "XML"
-      ],
-      "productDataSetArrayText": [
-        "Authoritative"
-      ],
-      "productDataSetCategoryArrayText": [
-        "Issued patents (patent grants)"
-      ],
-      "productDescriptionText": "Contains the concatenated bibliographic text (front page) of each patent grant document issued weekly (Tuesdays) from January 1, 1976 to present (excludes images/drawings). Subset of the Patent Grant Full Text Data. Note: The concatenated file in its entirety is not a valid XML document; it must be un-concatenated back to individual XML documents for XML data processing.",
-      "productFileTotalQuantity": 1307,
-      "productFrequencyText": "WEEKLY",
-      "productFromDate": "2002-01-01",
-      "productIdentifier": "PTBLXML",
-      "productLabelArrayText": [
-        "Patent"
-      ],
-      "productTitleText": "Patent Grant Bibliographic (Front Page) Text Data - XML",
-      "productToDate": "2025-11-25",
-      "productTotalFileSize": 19025486000
-    },
-    {
-      "lastModifiedDateTime": "2025-11-10 18:02:18",
-      "mimeTypeIdentifierArrayText": [
-        "XML"
-      ],
-      "productDataSetArrayText": [
-        "Authoritative"
-      ],
-      "productDataSetCategoryArrayText": [
-        "Issued patents (patent grants)"
-      ],
-      "productDescriptionText": "Contains the full text, images/drawings, and complex work units (tables, mathematical expressions, chemical structures, and genetic sequence data) of each patent grant issued weekly (Tuesdays) from January 1, 2001 to present.",
-      "productFileTotalQuantity": 53,
-      "productFrequencyText": "YEARLY",
-      "productFromDate": "2001-01-02",
-      "productIdentifier": "PTGRDSGM",
-      "productLabelArrayText": [
-        "Patent"
-      ],
-      "productTitleText": "Patent Grant Full Text Data with Embedded TIFF Images (Grant Red Book based on WIPO ST.36) - SGML",
-      "productToDate": "2001-12-25",
-      "productTotalFileSize": 39804510000
-    },
-    {
-      "lastModifiedDateTime": "2025-11-10 18:02:17",
-      "mimeTypeIdentifierArrayText": [
-        "ASCII",
-        "XML"
-      ],
-      "productDataSetArrayText": [
-        "Authoritative"
-      ],
-      "productDataSetCategoryArrayText": [
-        "Issued patents (patent grants)"
-      ],
-      "productDescriptionText": "Contains the concatenated bibliographic text (front page) of each patent grant document issued weekly (Tuesdays) from January 1, 1976 to present (excludes images/drawings). Subset of the Patent Grant Full Text Data.",
-      "productFileTotalQuantity": 253,
-      "productFrequencyText": "YEARLY",
-      "productFromDate": "1976-01-01",
-      "productIdentifier": "PTBLAPS",
-      "productLabelArrayText": [
-        "Patent"
-      ],
-      "productTitleText": "Patent Grant Bibliographic (Front Page) Text Data - APS",
-      "productToDate": "2017-04-03",
-      "productTotalFileSize": 2625304600
     }
   ],
   "count": 10

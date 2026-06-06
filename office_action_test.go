@@ -321,7 +321,7 @@ func TestGetEnrichedCitationFields(t *testing.T) {
 // --- Error Path Tests ---
 
 func TestSearchOfficeActions_ServerError(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(`{"error":"internal server error","message":"database unavailable"}`))
@@ -350,7 +350,7 @@ func TestSearchOfficeActions_ServerError(t *testing.T) {
 }
 
 func TestSearchOfficeActions_NotFound(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 		_, _ = w.Write([]byte(`{"error":"not found"}`))
 	}))
@@ -372,7 +372,7 @@ func TestSearchOfficeActions_NotFound(t *testing.T) {
 }
 
 func TestSearchOfficeActions_MalformedJSON(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_, _ = w.Write([]byte(`{invalid json`))
 	}))
@@ -387,7 +387,7 @@ func TestSearchOfficeActions_MalformedJSON(t *testing.T) {
 }
 
 func TestSearchOfficeActions_EmptyDocs(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(map[string]any{
 			"response": map[string]any{
@@ -427,7 +427,7 @@ func TestSearchOfficeActions_ContextCancellation(t *testing.T) {
 }
 
 func TestGetOfficeActionFields_ServerError(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusUnauthorized)
 		_, _ = w.Write([]byte(`{"error":"invalid API key"}`))
 	}))

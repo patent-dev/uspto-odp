@@ -183,6 +183,7 @@ type Text struct {
 // DocumentType identifies the type of XML document
 type DocumentType int
 
+// Document type values.
 const (
 	DocumentTypeUnknown DocumentType = iota
 	DocumentTypeGrant

@@ -1,121 +1,121 @@
 {
-  "count": 17903,
+  "count": 18094,
   "patentTrialProceedingDataBag": [
     {
-      "lastModifiedDateTime": "2025-11-27T11:53:36",
+      "lastModifiedDateTime": "2026-06-05T21:09:55",
       "patentOwnerData": {
-        "applicationNumberText": "16453682",
-        "grantDate": "2022-01-25",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11233780",
+        "applicationNumberText": "17236577",
+        "grantDate": "2022-05-10",
+        "groupArtUnitNumber": "2632",
+        "inventorName": "Nima Badizadegan",
+        "patentNumber": "11329655",
+        "technologyCenterNumber": "2600"
+      },
+      "regularPetitionerData": {
+        "counselName": "BUROKER, BRIAN MARKet al",
+        "realPartyInInterestName": "Optiver US LLC et al."
+      },
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T18:01:10",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00387"
+    },
+    {
+      "lastModifiedDateTime": "2026-06-05T21:09:55",
+      "patentOwnerData": {
+        "applicationNumberText": "17546594",
+        "grantDate": "2023-11-07",
+        "groupArtUnitNumber": "2156",
+        "inventorName": "Nathaniel T. Bradley et al",
+        "patentNumber": "11809431",
+        "technologyCenterNumber": "2100"
+      },
+      "regularPetitionerData": {
+        "counselName": "Solomita, Michaelet al",
+        "realPartyInInterestName": "Teladoc Health, Inc."
+      },
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T17:55:41",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00391"
+    },
+    {
+      "lastModifiedDateTime": "2026-06-05T21:09:55",
+      "patentOwnerData": {
+        "applicationNumberText": "17505166",
+        "grantDate": "2023-06-13",
+        "groupArtUnitNumber": "2156",
+        "inventorName": "Lisa A. Marshall et al",
+        "patentNumber": "11675791",
+        "technologyCenterNumber": "2100"
+      },
+      "regularPetitionerData": {
+        "counselName": "Solomita, Michaelet al",
+        "realPartyInInterestName": "Teladoc Health, Inc."
+      },
+      "trialMetaData": {
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T17:47:30",
+        "trialStatusCategory": "Pending",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2026-00390"
+    },
+    {
+      "lastModifiedDateTime": "2026-06-06T01:09:25",
+      "patentOwnerData": {
+        "applicationNumberText": "16919750",
+        "grantDate": "2021-05-11",
+        "groupArtUnitNumber": "2488",
+        "inventorName": "Kameshwar Durvasula et al",
+        "patentNumber": "11003191",
         "technologyCenterNumber": "2400"
       },
       "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+        "counselName": "Canavera, Kyleet al",
+        "realPartyInInterestName": "Beatbot Technology (USA) Co. Ltd. et al."
       },
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:07:49",
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T19:58:59",
         "trialStatusCategory": "Pending",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2026-00114"
+      "trialNumber": "IPR2026-00395"
     },
     {
-      "lastModifiedDateTime": "2025-11-27T11:53:36",
+      "lastModifiedDateTime": "2026-06-06T01:09:25",
       "patentOwnerData": {
-        "applicationNumberText": "18416534",
-        "grantDate": "2025-01-21",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "12207094",
+        "applicationNumberText": "17572388",
+        "grantDate": "2024-01-23",
+        "groupArtUnitNumber": "2488",
+        "inventorName": "Kameshwar Durvasula et al",
+        "patentNumber": "11880207",
         "technologyCenterNumber": "2400"
       },
       "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
+        "counselName": "Canavera, Kyleet al",
+        "realPartyInInterestName": "Beatbot Technology (USA) Co. Ltd. et al."
       },
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:23:56",
+        "petitionFilingDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T20:40:45",
         "trialStatusCategory": "Pending",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2026-00118"
-    },
-    {
-      "lastModifiedDateTime": "2025-11-27T11:53:36",
-      "patentOwnerData": {
-        "applicationNumberText": "17547990",
-        "grantDate": "2024-02-27",
-        "groupArtUnitNumber": "2432",
-        "inventorName": "John A. Nix",
-        "patentNumber": "11916893",
-        "technologyCenterNumber": "2400"
-      },
-      "regularPetitionerData": {
-        "counselName": "Fink, Williamet al",
-        "realPartyInInterestName": "Samsung Electronics Co., Ltd. et al."
-      },
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T20:38:29",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00119"
-    },
-    {
-      "lastModifiedDateTime": "2025-11-27T11:53:36",
-      "patentOwnerData": {
-        "applicationNumberText": "17171976",
-        "grantDate": "2024-12-03",
-        "groupArtUnitNumber": "1747",
-        "inventorName": "Adam Bowen et al",
-        "patentNumber": "12156533",
-        "technologyCenterNumber": "1700"
-      },
-      "regularPetitionerData": {
-        "counselName": "Renner, W. Karlet al",
-        "realPartyInInterestName": "NJOY, LLC et al."
-      },
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T18:37:22",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00161"
-    },
-    {
-      "lastModifiedDateTime": "2025-11-27T11:53:36",
-      "patentOwnerData": {
-        "applicationNumberText": "16268765",
-        "grantDate": "2020-07-14",
-        "groupArtUnitNumber": "2828",
-        "inventorName": "Kai-Sheng LIN et al",
-        "patentNumber": "10714890",
-        "technologyCenterNumber": "2800"
-      },
-      "regularPetitionerData": {
-        "counselName": "Bhattacharyya, Arpitaet al",
-        "realPartyInInterestName": "Eoptolink Technology USA Inc. et al."
-      },
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-25",
-        "trialLastModifiedDate": "2025-11-25",
-        "trialLastModifiedDateTime": "2025-11-25T21:28:20",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00122"
+      "trialNumber": "IPR2026-00394"
     }
   ],
-  "requestIdentifier": "d4a56274-f4e1-48f9-9eda-e9d8dcda7c96"
+  "requestIdentifier": "981f91cf-8d8a-41c7-b3d1-e3b6331b926d"
 }

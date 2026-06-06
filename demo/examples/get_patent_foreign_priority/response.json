@@ -1,15 +1,10 @@
 {
-  "count": 1,
-  "patentFileWrapperDataBag": [
+  "ApplicationNumber": "15000001",
+  "Claims": [
     {
-      "applicationNumberText": "15000001",
-      "foreignPriorityBag": [
-        {
-          "applicationNumberText": "10-2014-0009131",
-          "filingDate": "2015-01-20",
-          "ipOfficeName": "REPUBLIC OF KOREA"
-        }
-      ]
+      "ApplicationNumber": "10-2014-0009131",
+      "FilingDate": "2015-01-20",
+      "IPOfficeName": "REPUBLIC OF KOREA"
     }
   ]
 }

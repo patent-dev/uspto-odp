@@ -1,3 +1,6 @@
+// Package odp provides a Go client for the USPTO Open Data Portal (ODP),
+// covering patent and trademark application data, the Office Action APIs, and
+// TSDR (Trademark Status & Document Retrieval).
 package odp
 
 import (
@@ -7,9 +10,7 @@ import (
 	"io"
 	"math"
 	"math/rand/v2"
-	"net"
 	"net/http"
-	"strconv"
 	"strings"
 	"time"
 
@@ -169,53 +170,6 @@ func NewClient(config *Config) (*Client, error) {
 	return client, nil
 }
 
-// APIError represents an error returned by the USPTO API with status code
-type APIError struct {
-	StatusCode int
-	Message    string
-	Body       string // server response body for debugging
-	// RetryAfter, when non-zero, is the duration the server asked the client
-	// to wait before retrying (parsed from the Retry-After header).
-	RetryAfter time.Duration
-}
-
-func (e *APIError) Error() string {
-	return e.Message
-}
-
-// Detail returns the error message with the server response body, if available.
-func (e *APIError) Detail() string {
-	if e.Body != "" {
-		return fmt.Sprintf("%s: %s", e.Message, e.Body)
-	}
-	return e.Message
-}
-
-// IsRetryable returns true for transient HTTP statuses (429, 5xx). The
-// Retry-After cap is a *client* policy, enforced by retryableRequest, not
-// by the error itself.
-func (e *APIError) IsRetryable() bool {
-	return e.StatusCode == http.StatusTooManyRequests || e.StatusCode >= 500
-}
-
-func isRetryableError(err error) bool {
-	if err == nil {
-		return false
-	}
-	var apiErr *APIError
-	if errors.As(err, &apiErr) {
-		return apiErr.IsRetryable()
-	}
-	// Only retry on network-level transient errors (timeouts, connection resets)
-	var netErr net.Error
-	if errors.As(err, &netErr) {
-		return netErr.Timeout()
-	}
-	// Connection refused, reset, etc.
-	var opErr *net.OpError
-	return errors.As(err, &opErr)
-}
-
 // maxRetryAfter returns the configured Retry-After cap, falling back to the
 // default for zero (the un-set value).
 func (c *Client) maxRetryAfter() time.Duration {
@@ -223,51 +177,6 @@ func (c *Client) maxRetryAfter() time.Duration {
 		return c.config.MaxRetryAfter
 	}
 	return DefaultMaxRetryAfter
-}
-
-// parseRetryAfter parses a Retry-After header value (RFC 7231): either delta
-// seconds or an HTTP-date. Returns 0 if absent or unparseable. RFC 7231 also
-// permits "0" to mean "retry immediately" -- that maps to 0 here, which causes
-// retryableRequest to use its exponential backoff floor.
-func parseRetryAfter(headers http.Header) time.Duration {
-	if headers == nil {
-		return 0
-	}
-	v := strings.TrimSpace(headers.Get("Retry-After"))
-	if v == "" {
-		return 0
-	}
-	if secs, err := strconv.Atoi(v); err == nil && secs >= 0 {
-		return time.Duration(secs) * time.Second
-	}
-	if t, err := http.ParseTime(v); err == nil {
-		d := time.Until(t)
-		if d <= 0 {
-			return 0
-		}
-		return d
-	}
-	return 0
-}
-
-// checkResponseStatus returns an APIError for non-2xx responses, including
-// the response body for debugging. If headers is non-nil, the Retry-After
-// value (if present) is parsed onto the APIError.
-func checkResponseStatus(statusCode int, body []byte, headers http.Header) error {
-	if statusCode >= 200 && statusCode < 300 {
-		return nil
-	}
-	apiErr := &APIError{
-		StatusCode: statusCode,
-		Message:    fmt.Sprintf("API returned status %d", statusCode),
-	}
-	if len(body) > 0 {
-		// 4 KiB keeps debug payloads (USPTO often echoes the request body
-		// in 4xx responses) without exposing arbitrarily large blobs.
-		apiErr.Body = truncatePreview(string(body), 4096)
-	}
-	apiErr.RetryAfter = parseRetryAfter(headers)
-	return apiErr
 }
 
 // headerOf returns the Header of a possibly-nil *http.Response.
@@ -304,13 +213,6 @@ func truncatePreview(s string, maxLen int) string {
 		return s
 	}
 	return s[:maxLen] + "..."
-}
-
-func checkStatus(statusCode int) error {
-	if statusCode >= 200 && statusCode < 300 {
-		return nil
-	}
-	return &APIError{StatusCode: statusCode, Message: fmt.Sprintf("API returned status %d", statusCode)}
 }
 
 // retryableRequest wraps requests with retry logic, respecting context cancellation.

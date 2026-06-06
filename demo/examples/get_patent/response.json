@@ -517,7 +517,7 @@
         "xmlFileName": "17248024_11646472.xml",
         "zipFileName": "ipg230509.zip"
       },
-      "lastIngestionDateTime": "2025-11-09T14:10:21",
+      "lastIngestionDateTime": "2026-05-02T13:00:02",
       "parentContinuityBag": [
         {
           "childApplicationNumberText": "17248024",
@@ -1989,6 +1989,32 @@
               {
                 "telecomTypeCode": "TEL",
                 "telecommunicationNumber": "510-663-1100"
+              }
+            ]
+          },
+          {
+            "activeIndicator": "ACTIVE",
+            "attorneyAddressBag": [
+              {
+                "addressLineOneText": "614 BANCROFT WAY",
+                "cityName": "BERKELEY",
+                "countryCode": "US",
+                "countryName": "UNITED STATES",
+                "geographicRegionCode": "CA",
+                "geographicRegionName": "CALIFORNIA",
+                "nameLineOneText": "TWELVE BENEFIT CORPORATION",
+                "postalCode": "94710"
+              }
+            ],
+            "firstName": "RYAN",
+            "lastName": "FLAHERTY",
+            "middleName": "J.",
+            "registeredPractitionerCategory": "AGENT",
+            "registrationNumber": "75240",
+            "telecommunicationAddressBag": [
+              {
+                "telecomTypeCode": "TEL",
+                "telecommunicationNumber": "734-507-0109"
               }
             ]
           },

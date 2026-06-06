@@ -583,9 +583,9 @@ func fixResponseSchemas() error {
 				// Extract inner schema for schema refs
 				content := findChildNode(valueNode, "content")
 				if content != nil {
-					appJson := findChildNode(content, "application/json")
-					if appJson != nil {
-						innerSchema := findChildNode(appJson, "schema")
+					appJSON := findChildNode(content, "application/json")
+					if appJSON != nil {
+						innerSchema := findChildNode(appJSON, "schema")
 						if innerSchema != nil {
 							newSchemasContent = append(newSchemasContent,
 								&yaml.Node{Kind: yaml.ScalarNode, Value: keyNode.Value + "Schema"},
@@ -778,7 +778,7 @@ func isHTTPStatusCode(s string) bool {
 }
 
 // createResponseWrapper creates an OpenAPI response object that wraps a schema
-func createResponseWrapper(name string, schema *yaml.Node) *yaml.Node {
+func createResponseWrapper(name string, _ *yaml.Node) *yaml.Node {
 	// Create: description: "Error", content: application/json: schema: $ref: #/components/schemas/Name
 	return &yaml.Node{
 		Kind: yaml.MappingNode,
@@ -1094,15 +1094,15 @@ func applyOAFixes() error {
 
 			// Bug 2: Make operationIds unique (all specs use list-searchable-fields / perform-search)
 			if prefix != "" {
-				opIdIdx := findChildNodeIndex(methodNode, "operationId")
-				if opIdIdx >= 0 {
-					opIdNode := methodNode.Content[opIdIdx+1]
-					switch opIdNode.Value {
+				opIDIdx := findChildNodeIndex(methodNode, "operationId")
+				if opIDIdx >= 0 {
+					opIDNode := methodNode.Content[opIDIdx+1]
+					switch opIDNode.Value {
 					case "list-searchable-fields":
-						opIdNode.Value = prefix + "-list-fields"
+						opIDNode.Value = prefix + "-list-fields"
 						fixCount++
 					case "perform-search":
-						opIdNode.Value = prefix + "-search"
+						opIDNode.Value = prefix + "-search"
 						fixCount++
 					}
 				}

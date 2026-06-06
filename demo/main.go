@@ -44,7 +44,6 @@ var (
 	apiKey      = flag.String("key", os.Getenv("USPTO_API_KEY"), "USPTO API key")
 	patent      = flag.String("patent", TestPatentApp, "Patent number")
 	service     = flag.String("service", "", "Service filter (patent|bulk|petition|ptab|xml|officeaction|tsdr)")
-	endpoint    = flag.String("endpoint", "", "Specific endpoint to run")
 	interactive = flag.Bool("interactive", false, "Run in interactive mode")
 	examplesDir = flag.String("examples", "examples", "Directory to save examples")
 	skipSave    = flag.Bool("no-save", false, "Skip saving request/response files")

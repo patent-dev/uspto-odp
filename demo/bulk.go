@@ -367,7 +367,7 @@ func downloadSelectedFile(ctx context.Context, client *odp.Client, productID, fi
 		fmt.Printf("Error creating file: %v\n", err)
 		return
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	startTime := time.Now()
 	var lastProgress int64
@@ -401,7 +401,7 @@ func downloadSelectedFile(ctx context.Context, client *odp.Client, productID, fi
 
 	if err != nil {
 		fmt.Printf("Error downloading file: %v\n", err)
-		os.Remove(outputPath)
+		_ = os.Remove(outputPath)
 		return
 	}
 

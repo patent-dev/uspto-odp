@@ -2,37 +2,36 @@
   "count": 1,
   "petitionDecisionDataBag": [
     {
-      "applicationNumberText": "10290800",
-      "businessEntityStatusCategory": "Regular Undiscounted",
+      "applicationNumberText": "10347018",
+      "businessEntityStatusCategory": "Small",
       "courtActionIndicator": false,
-      "customerNumber": 29159,
-      "decisionDate": "2003-10-17",
-      "decisionPetitionTypeCode": 411,
+      "decisionDate": "2012-03-26",
+      "decisionPetitionTypeCode": 525,
       "decisionTypeCode": "C",
       "finalDecidingOfficeName": "OFFICE OF PETITIONS",
       "firstInventorToFileIndicator": false,
-      "groupArtUnitNumber": "3713",
-      "inventionTitle": "GAMING DEVICE HAVING IMPROVED AWARD OFFER BONUS SCHEME",
+      "groupArtUnitNumber": "1791",
+      "inventionTitle": "Edible Homogenous Supports for Comestibles with Optional Mess Guards and Drip Guards",
       "inventorBag": [
-        "Anthony J. Baerlocher",
-        "Joseph E. Kaminkow",
-        "Gregg J. Palmer"
+        "Alice Mary Kiely"
       ],
-      "lastIngestionDateTime": "2025-09-29T17:35:02",
-      "patentNumber": "6796905",
-      "petitionDecisionRecordIdentifier": "0b71b685-adb9-539d-8257-127dc9e58247",
+      "lastIngestionDateTime": "2026-03-31T15:41:46",
+      "petitionDecisionRecordIdentifier": "eafa727a-354d-534f-b6aa-a4b366afbb28",
       "petitionIssueConsideredTextBag": [
-        "Filing date"
+        "Withdrawal of abandonment"
       ],
-      "petitionMailDate": "2003-08-04",
-      "prosecutionStatusCodeDescriptionText": "Prior to examination",
+      "petitionMailDate": "2011-09-30",
+      "prosecutionStatusCodeDescriptionText": "Abandoned",
       "ruleBag": [
-        "37 CFR 1.10"
+        "37 CFR 1.181",
+        "37 CFR 1.113",
+        "37 CFR 1.137"
       ],
       "statuteBag": [
-        "35 USC 21(a)"
+        "35 USC 132",
+        "35 USC 133"
       ],
-      "technologyCenter": "3700"
+      "technologyCenter": "1700"
     }
   ]
 }

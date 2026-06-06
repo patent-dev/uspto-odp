@@ -170,9 +170,12 @@ func (c *Client) DownloadTrademarkDocument(ctx context.Context, serialNumber, do
 	}
 
 	checkPDFResponse := func(resp *http.Response) error {
-		if err := checkStatus(resp.StatusCode); err != nil {
+		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+			// Read a bounded prefix so the APIError keeps the server body and
+			// the Retry-After header (e.g. on 429), matching the other endpoints.
+			body, _ := io.ReadAll(io.LimitReader(resp.Body, 4096))
 			drainClose(resp.Body)
-			return err
+			return checkResponseStatus(resp.StatusCode, body, resp.Header)
 		}
 		ct := resp.Header.Get("Content-Type")
 		if ct != "" && !strings.HasPrefix(ct, "application/pdf") {

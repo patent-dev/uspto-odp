@@ -1,4 +1,4 @@
 Method: get_trial_decisions_by_trial_number
 
 Parameters:
-  trialNumber: IPR2024-00984
+  trialNumber: IPR2021-01599

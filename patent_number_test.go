@@ -248,7 +248,7 @@ func TestNormalizePatentNumber_RealExamples(t *testing.T) {
 					t.Error("ToApplicationNumber should not be empty")
 				}
 
-				t.Logf("✓ %s -> %s (type: %v)", tt.input, pn.Normalized, pn.Type)
+				t.Logf("OK %s -> %s (type: %v)", tt.input, pn.Normalized, pn.Type)
 			} else {
 				if err == nil {
 					t.Error("Expected error, got success")

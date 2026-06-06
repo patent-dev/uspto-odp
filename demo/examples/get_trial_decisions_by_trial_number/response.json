@@ -1,9 +1,57 @@
 {
-  "count": 2,
+  "count": 3,
   "patentTrialDocumentDataBag": [
     {
       "decisionData": {
-        "decisionIssueDate": "2025-11-26",
+        "decisionIssueDate": "2026-06-05",
+        "decisionTypeCategory": "Decision",
+        "trialOutcomeCategory": "Affirmed"
+      },
+      "documentData": {
+        "documentCategory": "OTHER",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339223",
+        "documentName": "Mandate 12292025 IPR2021-01598 IPR2021-01599 IPR2021-01600 IPR2021-01601 IPR2021-01602.pdf",
+        "documentNumber": 30,
+        "documentOCRText": "TransportRoom\n\n\nCase: 23-2033 Document:85 Page:1_ Filed: 12/29/2025\n\nGAnited States Court of Appeals\nfor the federal Circuit\n\nRIDESHARE DISPLAYS, INC.,\nAppellant\n\nJOHN A. SQUIRES, UNDER SECRETARY OF\nCOMMERCE FOR INTELLECTUAL PROPERTY\nAND DIRECTOR OF THE UNITED STATES\nPATENT AND TRADEMARK OFFICE,\n\nIntervenor\n\nLYFT, INC.,\nCross-Appellant\n\n2023-2033, 2023-2034, 2023-2035, 2023-2036, 2023-2037,\n2023-2038, 2023-2039\n\nAppeals from the United States Patent and Trademark\nOffice, Patent Trial and App ...",
+        "documentSizeQuantity": 125945,
+        "documentTitleText": "Other: Fed Circuit mandate",
+        "documentTypeDescriptionText": "Other: Fed Circuit mandate",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/01599/171339223.pdf",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2026-06-05T17:22:35",
+      "patentOwnerData": {
+        "applicationNumberText": "15860939",
+        "counselName": "Sullivan, Peteret al",
+        "grantDate": "2019-01-01",
+        "groupArtUnitNumber": "2687",
+        "inventorName": "Dereje M. Demisse",
+        "patentNumber": "10169987",
+        "realPartyInInterestName": "Rideshare Displays, Inc.",
+        "technologyCenterNumber": "2600"
+      },
+      "regularPetitionerData": {
+        "counselName": "Williams, Eliotet al",
+        "realPartyInInterestName": "Lyft, Inc."
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2021-10-01",
+        "institutionDecisionDate": "2022-04-11",
+        "latestDecisionDate": "2026-06-05",
+        "petitionFilingDate": "2021-10-01",
+        "terminationDate": "2023-04-10",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T10:31:05",
+        "trialStatusCategory": "Final Written Decision",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2021-01599"
+    },
+    {
+      "decisionData": {
+        "decisionIssueDate": "2023-04-10",
         "decisionTypeCategory": "Decision",
         "issueTypeBag": [
           "102",
@@ -12,104 +60,109 @@
         "statuteAndRuleBag": [
           "37 CFR 42.100",
           "37 CFR 42.73",
+          "35 USC 314",
+          "35 USC 312",
           "35 USC 318"
         ],
         "trialOutcomeCategory": "Final Written Decision"
       },
       "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246356",
-        "documentName": "IPR2024-00984 FWD FINAL.pdf",
-        "documentNumber": 59,
-        "documentOCRText": "Trials@uspto.gov Paper 59 \n571-272-7822 Date: November 26, 2025 \n\n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\n \nARASHI VISION (U.S.) LLC (D/B/A INSTA360), \n\nPetitioner, \n\nv. \n\nGOPRO, INC., \nPatent Owner. \n\n \n\nIPR2024-00984 \nPatent 10,015,413 B1 \n\n \n \n\nBefore WILLIAM V. SAINDON, NABEEL U. KHAN, and \nBRIAN D. RANGE, Administrative Patent Judges. \n\nKHAN, Administrative Patent Judge.  \n \n \n \n\nJUDGMENT \nFinal Written Decision \n\nDetermining Some Ch ...",
-        "documentSizeQuantity": 626123,
-        "documentTitleText": "JUDGMENT Final Written Decision Determining Some Challenged Claims Unpatentable 35 U.S.C. § 318(a)",
-        "documentTypeDescriptionText": "FINAL",
+        "documentCategory": "FINAL",
+        "documentFilingDate": "2023-04-10",
+        "documentIdentifier": "170565347",
+        "documentName": "IPR2021-01599 Final Written Decision.pdf",
+        "documentNumber": 27,
+        "documentOCRText": "Trials@uspto.gov  Paper 27 \n571-272-7822   Date: April 10, 2023  \n \n\n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\nLYFT, INC., \nPetitioner, \n\nv. \n\nRIDESHARE DISPLAYS, INC., \nPatent Owner. \n\n \n\nIPR2021-01599 \nPatent 10,169,987 B1 \n\n \n\nBefore THOMAS L. GIANNETTI, LYNNE E. PETTIGREW, and \nJOHN D. HAMANN, Administrative Patent Judges. \n\nPETTIGREW, Administrative Patent Judge. \n\nJUDGMENT \nFinal Written Decision \n\nDetermining All Challenged Claims Un ...",
+        "documentSizeQuantity": 477892,
+        "documentTitleText": "Final Written Decision:  original",
+        "documentTypeDescriptionText": "Final Written Decision:  original",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/01599/170565347.pdf",
         "filingPartyCategory": "BOARD"
       },
-      "lastModifiedDateTime": "2025-11-26T23:58:00",
+      "lastModifiedDateTime": "2025-12-30T17:24:14",
       "patentOwnerData": {
-        "applicationNumberText": "15492738",
-        "counselName": "Glass, Jameset al",
-        "grantDate": "2018-07-03",
-        "groupArtUnitNumber": "2663",
-        "inventorName": "Nicholas D. Woodman et al",
-        "patentNumber": "10015413",
-        "realPartyInInterestName": "GoPro, Inc.",
+        "applicationNumberText": "15860939",
+        "counselName": "Sullivan, Peteret al",
+        "grantDate": "2019-01-01",
+        "groupArtUnitNumber": "2687",
+        "inventorName": "Dereje M. Demisse",
+        "patentNumber": "10169987",
+        "realPartyInInterestName": "Rideshare Displays, Inc.",
         "technologyCenterNumber": "2600"
       },
       "regularPetitionerData": {
-        "counselName": "Yap, Alexet al",
-        "realPartyInInterestName": "Arashi Vision Inc. (d/b/a Insta360)"
+        "counselName": "Williams, Eliotet al",
+        "realPartyInInterestName": "Lyft, Inc."
       },
       "trialDocumentCategory": "Decision",
       "trialMetaData": {
-        "accordedFilingDate": "2024-06-20",
-        "institutionDecisionDate": "2025-01-07",
-        "latestDecisionDate": "2025-11-26",
-        "petitionFilingDate": "2024-06-20",
-        "terminationDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T08:12:03",
-        "trialStatusCategory": "Final Written Decision",
+        "accordedFilingDate": "2021-10-01",
+        "institutionDecisionDate": "2022-04-11",
+        "latestDecisionDate": "2023-04-10",
+        "petitionFilingDate": "2021-10-01",
+        "terminationDate": "2023-04-10",
+        "trialStatusCategory": "Final Written Decision - Appealed",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2024-00984"
+      "trialNumber": "IPR2021-01599"
     },
     {
       "decisionData": {
-        "decisionIssueDate": "2025-01-07",
+        "decisionIssueDate": "2022-04-11",
         "decisionTypeCategory": "Decision",
         "issueTypeBag": [
           "102",
-          "103"
+          "103",
+          "101"
         ],
         "statuteAndRuleBag": [
           "37 CFR 42.100",
-          "37 CFR 42.107",
           "37 CFR 42.108",
-          "35 USC 314"
+          "35 USC 314",
+          "35 USC 325",
+          "35 USC 315"
         ],
         "trialOutcomeCategory": "Institution Granted"
       },
       "documentData": {
-        "documentFilingDate": "2025-01-07",
-        "documentIdentifier": "170961214",
-        "documentName": "IPR2024-00984 DI FINAL.pdf",
-        "documentNumber": 13,
-        "documentOCRText": "Trials@uspto.gov Paper 13 \n571-272-7822 Date: January 7, 2025 \n\n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\n \nARASHI VISION (U.S.) LLC (D/B/A INSTA360), \n\nPetitioner, \n\nv. \n\nGOPRO, INC., \nPatent Owner. \n\n \n\nIPR2024-00984 \nPatent 10,015,413 B1 \n\n \n \n\nBefore WILLIAM V. SAINDON, NABEEL U. KHAN, and \nBRIAN D. RANGE, Administrative Patent Judges. \n\nKHAN, Administrative Patent Judge.  \n\nDECISION \nGranting Institution of Inter Partes Review \n\n35 U.S ...",
-        "documentSizeQuantity": 531813,
-        "documentTitleText": "Institution Decision: DECISION Granting Institution of Inter Partes Review 35 U.S.C. § 314",
-        "documentTypeDescriptionText": "DECISION",
+        "documentCategory": "DECISION",
+        "documentFilingDate": "2022-04-11",
+        "documentIdentifier": "170231352",
+        "documentName": "IPR2021-01599 DI.pdf",
+        "documentNumber": 8,
+        "documentOCRText": "Microsoft Word - IPR2021-01599 DI FINAL.docx\n\n\nTrials@uspto.gov Paper 8 \nTel: 571-272-7822 Entered: April 11, 2022 \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n\n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n\n \n\nLYFT, INC.,  \nPetitioner, \n\nv. \n\nRIDESHARE DISPLAYS, INC.,  \nPatent Owner. \n\n \n\nIPR2021-01599 \nPatent 10,169,987 B1 \n\n \n\n \n \nBefore THOMAS L. GIANNETTI, LYNNE E. PETTIGREW, and  \nJOHN D. HAMANN, Administrative Patent Judges. \n \nGIANNETTI, Administrative Patent Judge. \n \n \n \n\nDECISION   ...",
+        "documentSizeQuantity": 540221,
+        "documentTitleText": " DECISION  Granting Institution of Inter Partes Review 37 C.F.R. 42.108",
+        "documentTypeDescriptionText": "Institution Decision:  Grant",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/01599/170231352.pdf",
         "filingPartyCategory": "BOARD"
       },
-      "lastModifiedDateTime": "2025-11-20T01:22:56",
+      "lastModifiedDateTime": "2025-12-30T17:24:14",
       "patentOwnerData": {
-        "applicationNumberText": "15492738",
-        "counselName": "Glass, Jameset al",
-        "grantDate": "2018-07-03",
-        "groupArtUnitNumber": "2663",
-        "inventorName": "Nicholas D. Woodman et al",
-        "patentNumber": "10015413",
-        "realPartyInInterestName": "GoPro, Inc.",
+        "applicationNumberText": "15860939",
+        "counselName": "Sullivan, Peteret al",
+        "grantDate": "2019-01-01",
+        "groupArtUnitNumber": "2687",
+        "inventorName": "Dereje M. Demisse",
+        "patentNumber": "10169987",
+        "realPartyInInterestName": "Rideshare Displays, Inc.",
         "technologyCenterNumber": "2600"
       },
       "regularPetitionerData": {
-        "counselName": "Yap, Alexet al",
-        "realPartyInInterestName": "Arashi Vision Inc. (d/b/a Insta360)"
+        "counselName": "Williams, Eliotet al",
+        "realPartyInInterestName": "Lyft, Inc."
       },
       "trialDocumentCategory": "Decision",
       "trialMetaData": {
-        "accordedFilingDate": "2024-06-20",
-        "institutionDecisionDate": "2025-01-07",
-        "latestDecisionDate": "2025-01-07",
-        "petitionFilingDate": "2024-06-20",
-        "trialLastModifiedDate": "2025-10-07",
-        "trialLastModifiedDateTime": "2025-10-07T09:52:34",
-        "trialStatusCategory": "Trial Instituted",
+        "accordedFilingDate": "2021-10-01",
+        "institutionDecisionDate": "2022-04-11",
+        "latestDecisionDate": "2023-04-10",
+        "petitionFilingDate": "2021-10-01",
+        "terminationDate": "2023-04-10",
+        "trialStatusCategory": "Final Written Decision - Appealed",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2024-00984"
+      "trialNumber": "IPR2021-01599"
     }
   ]
 }

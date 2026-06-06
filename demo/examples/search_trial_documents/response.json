@@ -1,175 +1,226 @@
 {
-  "count": 1479321,
+  "count": 1520415,
   "patentTrialDocumentDataBag": [
     {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171247256",
-        "documentName": "NJOY-1025 Part 4 of 4 14925968_file_history_2729-3639.pdf",
-        "documentNumber": 1025,
-        "documentSizeQuantity": 38851201,
-        "documentTitleText": "U.S. Patent Application No. 14925968 File History_ Part 4 of 4",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
+      "decisionData": {
+        "decisionIssueDate": "2026-06-05",
+        "decisionTypeCategory": "Decision",
+        "trialOutcomeCategory": "Affirmed"
       },
-      "lastModifiedDateTime": "2025-11-27T05:54:59",
+      "documentData": {
+        "documentCategory": "OTHER",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339223",
+        "documentName": "Mandate 12292025 IPR2021-01598 IPR2021-01599 IPR2021-01600 IPR2021-01601 IPR2021-01602.pdf",
+        "documentNumber": 30,
+        "documentOCRText": "TransportRoom\n\n\nCase: 23-2033 Document:85 Page:1_ Filed: 12/29/2025\n\nGAnited States Court of Appeals\nfor the federal Circuit\n\nRIDESHARE DISPLAYS, INC.,\nAppellant\n\nJOHN A. SQUIRES, UNDER SECRETARY OF\nCOMMERCE FOR INTELLECTUAL PROPERTY\nAND DIRECTOR OF THE UNITED STATES\nPATENT AND TRADEMARK OFFICE,\n\nIntervenor\n\nLYFT, INC.,\nCross-Appellant\n\n2023-2033, 2023-2034, 2023-2035, 2023-2036, 2023-2037,\n2023-2038, 2023-2039\n\nAppeals from the United States Patent and Trademark\nOffice, Patent Trial and App ...",
+        "documentSizeQuantity": 125945,
+        "documentTitleText": "Other: Fed Circuit mandate",
+        "documentTypeDescriptionText": "Other: Fed Circuit mandate",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/01599/171339223.pdf",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2026-06-05T17:22:35",
       "patentOwnerData": {
-        "applicationNumberText": "17171976",
-        "grantDate": "2024-12-03",
-        "groupArtUnitNumber": "1747",
-        "inventorName": "Adam Bowen et al",
-        "patentNumber": "12156533",
-        "technologyCenterNumber": "1700"
+        "applicationNumberText": "15860939",
+        "counselName": "Sullivan, Peteret al",
+        "grantDate": "2019-01-01",
+        "groupArtUnitNumber": "2687",
+        "inventorName": "Dereje M. Demisse",
+        "patentNumber": "10169987",
+        "realPartyInInterestName": "Rideshare Displays, Inc.",
+        "technologyCenterNumber": "2600"
       },
       "regularPetitionerData": {
-        "counselName": "Renner, W. Karlet al",
-        "realPartyInInterestName": "NJOY, LLC et al."
+        "counselName": "Williams, Eliotet al",
+        "realPartyInInterestName": "Lyft, Inc."
       },
-      "trialDocumentCategory": "Document",
+      "trialDocumentCategory": "Decision",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T18:37:22",
-        "trialStatusCategory": "Pending",
+        "accordedFilingDate": "2021-10-01",
+        "institutionDecisionDate": "2022-04-11",
+        "latestDecisionDate": "2026-06-05",
+        "petitionFilingDate": "2021-10-01",
+        "terminationDate": "2023-04-10",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T10:31:05",
+        "trialStatusCategory": "Final Written Decision",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2026-00161"
+      "trialNumber": "IPR2021-01599"
+    },
+    {
+      "decisionData": {
+        "decisionIssueDate": "2026-06-05",
+        "decisionTypeCategory": "Decision",
+        "issueTypeBag": [
+          "103"
+        ],
+        "statuteAndRuleBag": [
+          "37 CFR 42.100",
+          "35 USC 312",
+          "35 USC 318"
+        ],
+        "trialOutcomeCategory": "Final Written Decision"
+      },
+      "documentData": {
+        "documentCategory": "FINAL",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339219",
+        "documentName": "IPR2025-00160 FWD mailed.pdf",
+        "documentNumber": 47,
+        "documentOCRText": "Microsoft Word - IPR2025-00160 FWD mailed\n\n\nTrials@uspto.gov Paper 47 \n571-272-7822 Date: June 5, 2026 \n\n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n \n\nRESMED CORP., \nPetitioner, \n\nv. \n\nCLEVELAND MEDICAL DEVICES, INC., \nPatent Owner. \n\n \n\nIPR2025-00160 \nPatent 11,786,680 B1 \n\n \n\nBefore SHERIDAN K. SNEDDEN, NEIL T. POWELL, and \nCYNTHIA M. HARDMAN, Administrative Patent Judges. \n\n \nSNEDDEN, Administrative Patent Judge. \n\nJUDGMENT \nFinal Written De ...",
+        "documentSizeQuantity": 813439,
+        "documentTitleText": "Final Written Decision:  Final Written Decision Determining No Challenged Claim Unpatentable 35 U.S.C. sec. 318a",
+        "documentTypeDescriptionText": "Final Written Decision:  original",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/00160/171339219.pdf",
+        "filingPartyCategory": "BOARD"
+      },
+      "lastModifiedDateTime": "2026-06-05T17:22:35",
+      "patentOwnerData": {
+        "applicationNumberText": "16599410",
+        "counselName": "Hannah, Jameset al",
+        "grantDate": "2023-10-17",
+        "groupArtUnitNumber": "3791",
+        "inventorName": "Hani Kayyali et al",
+        "patentNumber": "11786680",
+        "realPartyInInterestName": "Cleveland Medical Devices, Inc.",
+        "technologyCenterNumber": "3700"
+      },
+      "regularPetitionerData": {
+        "counselName": "Nguyen, Lisaet al",
+        "realPartyInInterestName": "ResMed Corp."
+      },
+      "trialDocumentCategory": "Decision",
+      "trialMetaData": {
+        "accordedFilingDate": "2024-12-06",
+        "institutionDecisionDate": "2025-06-13",
+        "latestDecisionDate": "2026-06-05",
+        "petitionFilingDate": "2024-12-06",
+        "terminationDate": "2026-06-05",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T10:27:08",
+        "trialStatusCategory": "Final Written Decision",
+        "trialTypeCode": "IPR"
+      },
+      "trialNumber": "IPR2025-00160"
     },
     {
       "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246514",
-        "documentName": "NJOY-1011 Blackman_Chemistry.pdf",
-        "documentNumber": 1011,
-        "documentSizeQuantity": 26946635,
-        "documentTitleText": "Blackman_Chemistry",
-        "documentTypeDescriptionText": "Exhibit",
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339209",
+        "documentName": "EX1035 - Flex Honored by Cisco with 2023 EMS Partner of the Year Award.pdf",
+        "documentNumber": 1035,
+        "documentSizeQuantity": 666498,
+        "documentTitleText": "1035 Flex Honored by Cisco with 2023 EMS Partner of the Year Award, November 9, 2023",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00255/171339209.pdf",
         "filingPartyCategory": "PETITIONER"
       },
-      "lastModifiedDateTime": "2025-11-27T05:54:59",
+      "lastModifiedDateTime": "2026-06-05T17:22:37",
       "patentOwnerData": {
-        "applicationNumberText": "17171976",
-        "grantDate": "2024-12-03",
-        "groupArtUnitNumber": "1747",
-        "inventorName": "Adam Bowen et al",
-        "patentNumber": "12156533",
-        "technologyCenterNumber": "1700"
+        "applicationNumberText": "16597052",
+        "counselName": "Wyde, Joshuaet al",
+        "grantDate": "2022-01-18",
+        "groupArtUnitNumber": "2653",
+        "inventorName": "Wendell D. Brown",
+        "patentNumber": "11227303",
+        "realPartyInInterestName": "Vusura Technology LLC",
+        "technologyCenterNumber": "2600"
       },
       "regularPetitionerData": {
-        "counselName": "Renner, W. Karlet al",
-        "realPartyInInterestName": "NJOY, LLC et al."
+        "counselName": "McPherson, Patricket al",
+        "realPartyInInterestName": "Cisco Systems, Inc."
       },
       "trialDocumentCategory": "Document",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T18:37:22",
+        "accordedFilingDate": "2026-02-24",
+        "petitionFilingDate": "2026-02-24",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:03:33",
         "trialStatusCategory": "Pending",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2026-00161"
+      "trialNumber": "IPR2026-00255"
     },
     {
       "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246564",
-        "documentName": "NJOY-1022 Clayton_Spectroscopic investigations into the acid-base properties.pdf",
-        "documentNumber": 1022,
-        "documentSizeQuantity": 3800812,
-        "documentTitleText": "Clayton_Spectroscopic Investigations ",
-        "documentTypeDescriptionText": "Exhibit",
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339179",
+        "documentName": "EX1020 - Median Time to Trial (US Courts - Dec 2025).pdf",
+        "documentNumber": 1020,
+        "documentSizeQuantity": 1075861,
+        "documentTitleText": "1020 Federal District Court Caseload Management Statistics – December 2025",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00255/171339179.pdf",
         "filingPartyCategory": "PETITIONER"
       },
-      "lastModifiedDateTime": "2025-11-27T05:54:59",
+      "lastModifiedDateTime": "2026-06-05T17:22:37",
       "patentOwnerData": {
-        "applicationNumberText": "17171976",
-        "grantDate": "2024-12-03",
-        "groupArtUnitNumber": "1747",
-        "inventorName": "Adam Bowen et al",
-        "patentNumber": "12156533",
-        "technologyCenterNumber": "1700"
+        "applicationNumberText": "16597052",
+        "counselName": "Wyde, Joshuaet al",
+        "grantDate": "2022-01-18",
+        "groupArtUnitNumber": "2653",
+        "inventorName": "Wendell D. Brown",
+        "patentNumber": "11227303",
+        "realPartyInInterestName": "Vusura Technology LLC",
+        "technologyCenterNumber": "2600"
       },
       "regularPetitionerData": {
-        "counselName": "Renner, W. Karlet al",
-        "realPartyInInterestName": "NJOY, LLC et al."
+        "counselName": "McPherson, Patricket al",
+        "realPartyInInterestName": "Cisco Systems, Inc."
       },
       "trialDocumentCategory": "Document",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T18:37:22",
+        "accordedFilingDate": "2026-02-24",
+        "petitionFilingDate": "2026-02-24",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:03:33",
         "trialStatusCategory": "Pending",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2026-00161"
+      "trialNumber": "IPR2026-00255"
     },
     {
       "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246546",
-        "documentName": "NJOY-1014 Modi_US Tobacco.pdf",
-        "documentNumber": 1014,
-        "documentSizeQuantity": 6613187,
-        "documentTitleText": "Modi_US Tobacco",
-        "documentTypeDescriptionText": "Exhibit",
+        "documentCategory": "Exhibit",
+        "documentFilingDate": "2026-06-05",
+        "documentIdentifier": "171339207",
+        "documentName": "EX1034 - cisco-supplier-list.pdf",
+        "documentNumber": 1034,
+        "documentSizeQuantity": 734728,
+        "documentTitleText": "1034 Cisco Supplier List",
+        "documentTypeDescriptionText": "EXHIBIT",
+        "fileDownloadURI": "https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00255/171339207.pdf",
         "filingPartyCategory": "PETITIONER"
       },
-      "lastModifiedDateTime": "2025-11-27T05:54:59",
+      "lastModifiedDateTime": "2026-06-05T17:22:37",
       "patentOwnerData": {
-        "applicationNumberText": "17171976",
-        "grantDate": "2024-12-03",
-        "groupArtUnitNumber": "1747",
-        "inventorName": "Adam Bowen et al",
-        "patentNumber": "12156533",
-        "technologyCenterNumber": "1700"
+        "applicationNumberText": "16597052",
+        "counselName": "Wyde, Joshuaet al",
+        "grantDate": "2022-01-18",
+        "groupArtUnitNumber": "2653",
+        "inventorName": "Wendell D. Brown",
+        "patentNumber": "11227303",
+        "realPartyInInterestName": "Vusura Technology LLC",
+        "technologyCenterNumber": "2600"
       },
       "regularPetitionerData": {
-        "counselName": "Renner, W. Karlet al",
-        "realPartyInInterestName": "NJOY, LLC et al."
+        "counselName": "McPherson, Patricket al",
+        "realPartyInInterestName": "Cisco Systems, Inc."
       },
       "trialDocumentCategory": "Document",
       "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T18:37:22",
+        "accordedFilingDate": "2026-02-24",
+        "petitionFilingDate": "2026-02-24",
+        "trialLastModifiedDate": "2026-06-05",
+        "trialLastModifiedDateTime": "2026-06-05T15:03:33",
         "trialStatusCategory": "Pending",
         "trialTypeCode": "IPR"
       },
-      "trialNumber": "IPR2026-00161"
-    },
-    {
-      "documentData": {
-        "documentFilingDate": "2025-11-26",
-        "documentIdentifier": "171246576",
-        "documentName": "NJOY-1024 Subrahmanyam.pdf",
-        "documentNumber": 1024,
-        "documentSizeQuantity": 13495105,
-        "documentTitleText": "Subrahmanyam ",
-        "documentTypeDescriptionText": "Exhibit",
-        "filingPartyCategory": "PETITIONER"
-      },
-      "lastModifiedDateTime": "2025-11-27T05:54:59",
-      "patentOwnerData": {
-        "applicationNumberText": "17171976",
-        "grantDate": "2024-12-03",
-        "groupArtUnitNumber": "1747",
-        "inventorName": "Adam Bowen et al",
-        "patentNumber": "12156533",
-        "technologyCenterNumber": "1700"
-      },
-      "regularPetitionerData": {
-        "counselName": "Renner, W. Karlet al",
-        "realPartyInInterestName": "NJOY, LLC et al."
-      },
-      "trialDocumentCategory": "Document",
-      "trialMetaData": {
-        "petitionFilingDate": "2025-11-26",
-        "trialLastModifiedDate": "2025-11-26",
-        "trialLastModifiedDateTime": "2025-11-26T18:37:22",
-        "trialStatusCategory": "Pending",
-        "trialTypeCode": "IPR"
-      },
-      "trialNumber": "IPR2026-00161"
+      "trialNumber": "IPR2026-00255"
     }
   ]
 }

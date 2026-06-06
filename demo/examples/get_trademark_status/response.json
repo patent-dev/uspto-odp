@@ -94,9 +94,7 @@
               "composedOf": null,
               "dbaAkaFormerly": null,
               "emailList": {
-                "addresses": [
-                  "XXXX"
-                ],
+                "addresses": [],
                 "authIndicator": "Y"
               },
               "entityNum": 1,
@@ -151,9 +149,7 @@
               "composedOf": null,
               "dbaAkaFormerly": null,
               "emailList": {
-                "addresses": [
-                  "XXXX"
-                ],
+                "addresses": [],
                 "authIndicator": "Y"
               },
               "entityNum": 1,

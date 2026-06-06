@@ -80,10 +80,10 @@ var extraUsedRawMethods = map[string]bool{
 	"EnrichedCitationsListFields":             true,
 	// TSDR: methods returning raw *http.Response because content-negotiation
 	// is broken upstream.
-	"GetCaseDocsInfoXml":     true,
-	"GetDocumentInfoXml":     true,
-	"GetDocumentContentPdf":  true,
-	"LoadXML":                true, // raw form used by GetTrademarkStatusJSON via tsdrJSONEditor
+	"GetCaseDocsInfoXml":    true,
+	"GetDocumentInfoXml":    true,
+	"GetDocumentContentPdf": true,
+	"LoadXML":               true, // raw form used by GetTrademarkStatusJSON via tsdrJSONEditor
 }
 
 func generatedMethodNames(t *testing.T) []string {
