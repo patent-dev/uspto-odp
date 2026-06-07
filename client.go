@@ -370,33 +370,194 @@ func (c *Client) resolvePublicationToApplicationNumber(ctx context.Context, publ
 	return *patent.ApplicationNumberText, nil
 }
 
-// ResolvePatentNumber resolves any patent number format (application, grant, or publication)
-// to its application number by searching the USPTO API when necessary.
-// For application numbers, returns the normalized number directly.
-// For grant and publication numbers, performs an API search to find the corresponding application number.
+// ResolvePatentNumber resolves any patent number format (application, grant, or
+// publication) to its application number, searching the USPTO API when necessary.
+// A bare 8-digit number with no kind code is ambiguous (grant vs application); this
+// entry point probes both interpretations and returns an *AmbiguousPatentNumberError
+// when they differ, so a caller acting on user input can surface a "did you mean"
+// choice. Call this with raw user input. To resolve a number you already know to be an
+// application number, see resolveApplicationNumberLenient.
 func (c *Client) ResolvePatentNumber(ctx context.Context, patentNumber string) (string, error) {
 	pn, err := NormalizePatentNumber(patentNumber)
 	if err != nil {
 		return "", fmt.Errorf("invalid patent number: %w", err)
 	}
+	if pn.Type == PatentNumberTypeApplication && pn.Ambiguous {
+		return c.resolveAmbiguousNumber(ctx, pn.Normalized)
+	}
+	return c.resolveNormalized(ctx, pn)
+}
 
+// resolveApplicationNumberLenient resolves a patent number without ambiguity probing:
+// a bare 8-digit value is taken at face value as an application number. This is the
+// correct resolver for numbers that are already known to be application numbers - for
+// example one produced by a prior grant lookup - where probing for a same-digit grant
+// would wrongly flag the application as ambiguous. Grant and publication inputs are
+// still resolved normally.
+func (c *Client) resolveApplicationNumberLenient(ctx context.Context, patentNumber string) (string, error) {
+	pn, err := NormalizePatentNumber(patentNumber)
+	if err != nil {
+		return "", fmt.Errorf("invalid patent number: %w", err)
+	}
+	return c.resolveNormalized(ctx, pn)
+}
+
+// resolveNormalized maps a parsed patent number to its application number without any
+// ambiguity probing.
+func (c *Client) resolveNormalized(ctx context.Context, pn *PatentNumber) (string, error) {
 	switch pn.Type {
 	case PatentNumberTypeGrant:
 		return c.resolveGrantToApplicationNumber(ctx, pn.Normalized)
 	case PatentNumberTypePublication:
 		return c.resolvePublicationToApplicationNumber(ctx, pn.Normalized, pn.KindCode)
 	case PatentNumberTypeApplication, PatentNumberTypePCT:
-		// PCT numbers (15-char or 12-char legacy) are accepted directly as
-		// the application path parameter; no round-trip needed.
+		// PCT numbers (15-char or 12-char legacy) are accepted directly as the
+		// application path parameter; no round-trip needed.
 		return pn.ToApplicationNumber(), nil
 	default:
 		return "", fmt.Errorf("unknown patent number type")
 	}
 }
 
-// GetPatent retrieves patent data by application, grant, or publication number
+// PatentCandidate describes one interpretation of an ambiguous bare patent number,
+// resolved far enough to show the caller what it points at.
+type PatentCandidate struct {
+	Type              PatentNumberType // PatentNumberTypeGrant or PatentNumberTypeApplication
+	Number            string           // the bare digits as entered
+	ApplicationNumber string           // application number this interpretation resolves to
+	Title             string           // invention title, for a "did you mean" prompt
+}
+
+// AmbiguousPatentNumberError is returned when a bare number resolves to both a grant
+// and a different application. It carries the candidates so the caller can ask the user
+// which one they meant instead of guessing.
+type AmbiguousPatentNumberError struct {
+	Input      string
+	Candidates []PatentCandidate
+}
+
+func (e *AmbiguousPatentNumberError) Error() string {
+	var b strings.Builder
+	fmt.Fprintf(&b, "patent number %q is ambiguous (matches both a grant and an application); did you mean", e.Input)
+	for i, c := range e.Candidates {
+		sep := ";"
+		if i == 0 {
+			sep = ""
+		}
+		kind := "application"
+		if c.Type == PatentNumberTypeGrant {
+			kind = "grant"
+		}
+		fmt.Fprintf(&b, "%s %s %s (application %s) %q", sep, kind, c.Number, c.ApplicationNumber, c.Title)
+	}
+	b.WriteString("? Specify a kind code (e.g. B2) for the grant or a slashed application number.")
+	return b.String()
+}
+
+// resolveAmbiguousNumber probes both interpretations of a bare 8-digit number:
+// the grant search and the direct application lookup. If both resolve to different
+// applications it returns an *AmbiguousPatentNumberError; otherwise it returns the one
+// that exists (fixing both the spurious 404 and the silent wrong-patent resolution).
+func (c *Client) resolveAmbiguousNumber(ctx context.Context, digits string) (string, error) {
+	grantApp, grantTitle, grantFound, err := c.findGrantCandidate(ctx, digits)
+	if err != nil {
+		return "", err
+	}
+	appTitle, appFound, err := c.findApplicationCandidate(ctx, digits)
+	if err != nil {
+		return "", err
+	}
+
+	switch {
+	case grantFound && appFound && grantApp != digits:
+		// Both interpretations exist and point at different applications.
+		return "", &AmbiguousPatentNumberError{
+			Input: digits,
+			Candidates: []PatentCandidate{
+				{Type: PatentNumberTypeGrant, Number: digits, ApplicationNumber: grantApp, Title: grantTitle},
+				{Type: PatentNumberTypeApplication, Number: digits, ApplicationNumber: digits, Title: appTitle},
+			},
+		}
+	case grantFound:
+		return grantApp, nil
+	case appFound:
+		return digits, nil
+	default:
+		return "", fmt.Errorf("no grant or application found for number %s", digits)
+	}
+}
+
+// findGrantCandidate searches for a grant with the given number and returns the
+// application it maps to plus its title. found is false (with nil error) when no grant
+// matches.
+func (c *Client) findGrantCandidate(ctx context.Context, grantNumber string) (appNumber, title string, found bool, err error) {
+	query := fmt.Sprintf("applicationMetaData.patentNumber:%s", grantNumber)
+	result, err := c.SearchPatents(ctx, query, 0, 1)
+	if err != nil {
+		if isNotFoundErr(err) {
+			return "", "", false, nil
+		}
+		return "", "", false, fmt.Errorf("failed to search for grant number %s: %w", grantNumber, err)
+	}
+	if result == nil || result.PatentFileWrapperDataBag == nil || len(*result.PatentFileWrapperDataBag) == 0 {
+		return "", "", false, nil
+	}
+	w := (*result.PatentFileWrapperDataBag)[0]
+	if w.ApplicationNumberText == nil {
+		return "", "", false, nil
+	}
+	return *w.ApplicationNumberText, titleOf(w.ApplicationMetaData), true, nil
+}
+
+// findApplicationCandidate looks up the number directly as an application number and
+// returns its title. found is false (with nil error) when no such application exists.
+// It calls the generated endpoint directly to avoid recursing back into resolution.
+func (c *Client) findApplicationCandidate(ctx context.Context, appNumber string) (title string, found bool, err error) {
+	var resp *generated.GetApiV1PatentApplicationsApplicationNumberTextResponse
+	err = c.retryableRequest(ctx, func() error {
+		var reqErr error
+		resp, reqErr = c.generated.GetApiV1PatentApplicationsApplicationNumberTextWithResponse(ctx, appNumber)
+		if reqErr != nil {
+			return reqErr
+		}
+		if resp.StatusCode() == http.StatusNotFound {
+			return nil // not found is a definitive answer, not a transient failure
+		}
+		return checkResponseStatus(resp.StatusCode(), resp.Body, headerOf(resp.HTTPResponse))
+	})
+	if err != nil {
+		return "", false, err
+	}
+	if resp.StatusCode() == http.StatusNotFound || resp.JSON200 == nil {
+		return "", false, nil
+	}
+	if resp.JSON200.PatentFileWrapperDataBag == nil || len(*resp.JSON200.PatentFileWrapperDataBag) == 0 {
+		return "", false, nil
+	}
+	return titleOf((*resp.JSON200.PatentFileWrapperDataBag)[0].ApplicationMetaData), true, nil
+}
+
+// titleOf pulls the invention title from application metadata, if present.
+func titleOf(meta *generated.ApplicationMetaData) string {
+	if meta != nil && meta.InventionTitle != nil {
+		return *meta.InventionTitle
+	}
+	return ""
+}
+
+// isNotFoundErr reports whether err is an APIError with HTTP 404 (used to treat an
+// empty ODP search, which returns 404, as "no match" rather than a hard failure).
+func isNotFoundErr(err error) bool {
+	var apiErr *APIError
+	return errors.As(err, &apiErr) && apiErr.StatusCode == http.StatusNotFound
+}
+
+// GetPatent retrieves patent data by application, grant, or publication number.
+// It resolves leniently (no grant-vs-application ambiguity probing) because it is
+// commonly called with an already-resolved application number; callers that need to
+// disambiguate raw user input should call ResolvePatentNumber first.
 func (c *Client) GetPatent(ctx context.Context, patentNumber string) (*generated.PatentDataResponse, error) {
-	applicationNumber, err := c.ResolvePatentNumber(ctx, patentNumber)
+	applicationNumber, err := c.resolveApplicationNumberLenient(ctx, patentNumber)
 	if err != nil {
 		return nil, err
 	}

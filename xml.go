@@ -159,18 +159,95 @@ type Claim struct {
 	ClaimText []ClaimText `xml:"claim-text"`
 }
 
-// ClaimText represents claim text with support for nested claim-text elements
-// This recursive structure handles the hierarchical nature of claim dependencies
+// ClaimText represents the text of a claim, including any nested <claim-text>.
+//
+// A <claim-text> element mixes character data with inline child elements - most
+// importantly <claim-ref>, which carries a dependent claim's reference to its parent
+// (e.g. "claim 1" in "The system according to <claim-ref>claim 1</claim-ref>, ...").
+// Go's struct-tag ",chardata" mapping concatenates only the character data directly
+// under the element and silently drops the text of child elements, which would render
+// that claim as "The system according to , ...". ClaimText is therefore parsed with a
+// custom UnmarshalXML (see below) that walks tokens in document order.
+//
+// Text holds the fully flattened text of this element and all of its descendants
+// (inline references and nested claim-text included). NestedClaims preserves the
+// structural tree for callers that need the hierarchy.
 type ClaimText struct {
-	ID   string `xml:"id,attr"`
-	Text string `xml:",chardata"`
-	// Nested claim-text elements for dependent claims
-	NestedClaims []ClaimText `xml:"claim-text"`
-	// Support for formatting elements
-	Sub []Sub    `xml:"sub"`
-	Sup []Sup    `xml:"sup"`
-	I   []Italic `xml:"i"`
-	B   []Bold   `xml:"b"`
+	ID           string
+	Text         string
+	NestedClaims []ClaimText
+}
+
+// UnmarshalXML flattens a <claim-text> element into its complete, in-document-order
+// text. It is the encoding/xml equivalent of itertext(): character data, the inner
+// text of inline elements such as <claim-ref> and <figref>, and the text of nested
+// <claim-text> are concatenated in the order they appear. Whitespace is preserved
+// here as-is; callers collapse it at extraction time (see Claim.ExtractClaimText).
+func (ct *ClaimText) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	for _, attr := range start.Attr {
+		if attr.Name.Local == "id" {
+			ct.ID = attr.Value
+		}
+	}
+
+	var buf strings.Builder
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return err
+		}
+		switch t := tok.(type) {
+		case xml.CharData:
+			buf.Write(t)
+		case xml.StartElement:
+			if t.Name.Local == "claim-text" {
+				// A nested claim-text: recurse so its own descendants flatten too,
+				// keep the structural node, and inline its text in place.
+				var nested ClaimText
+				if err := nested.UnmarshalXML(d, t); err != nil {
+					return err
+				}
+				ct.NestedClaims = append(ct.NestedClaims, nested)
+				buf.WriteString(nested.Text)
+			} else {
+				// Any other inline element (claim-ref, figref, b, i, sub, sup, ...):
+				// keep its inner text in place so the sentence stays intact.
+				inner, err := flattenElementText(d)
+				if err != nil {
+					return err
+				}
+				buf.WriteString(inner)
+			}
+		case xml.EndElement:
+			ct.Text = buf.String()
+			return nil
+		}
+	}
+}
+
+// flattenElementText consumes tokens until the currently open element closes and
+// returns the concatenated character data of all its descendants. The opening token
+// has already been read by the caller.
+func flattenElementText(d *xml.Decoder) (string, error) {
+	var buf strings.Builder
+	depth := 1
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return "", err
+		}
+		switch t := tok.(type) {
+		case xml.CharData:
+			buf.Write(t)
+		case xml.StartElement:
+			depth++
+		case xml.EndElement:
+			depth--
+			if depth == 0 {
+				return buf.String(), nil
+			}
+		}
+	}
 }
 
 // Text represents simple text with language attribute
@@ -313,42 +390,28 @@ func extractParagraphText(p *Paragraph) string {
 	return strings.TrimSpace(p.Text)
 }
 
-// ExtractClaimText recursively extracts full text from a claim
+// ExtractClaimText returns the full text of a claim with internal runs of whitespace
+// collapsed to single spaces. Inline references (<claim-ref>) and nested claim-text are
+// already flattened into each top-level ClaimText.Text during parsing, so no recursion
+// is needed here.
 func (c *Claim) ExtractClaimText() string {
 	if c == nil {
 		return ""
 	}
 
-	return extractClaimTextRecursive(c.ClaimText, 0)
-}
-
-// extractClaimTextRecursive recursively extracts text from nested claim-text elements
-func extractClaimTextRecursive(claimTexts []ClaimText, depth int) string {
-	var builder strings.Builder
-
-	for _, ct := range claimTexts {
-		// Add the text at this level
-		text := strings.TrimSpace(ct.Text)
-		if text != "" {
-			if builder.Len() > 0 {
-				builder.WriteString(" ")
-			}
-			builder.WriteString(text)
-		}
-
-		// Recursively process nested claim-text elements
-		if len(ct.NestedClaims) > 0 {
-			nested := extractClaimTextRecursive(ct.NestedClaims, depth+1)
-			if nested != "" {
-				if builder.Len() > 0 {
-					builder.WriteString(" ")
-				}
-				builder.WriteString(nested)
-			}
+	parts := make([]string, 0, len(c.ClaimText))
+	for _, ct := range c.ClaimText {
+		if s := normalizeSpace(ct.Text); s != "" {
+			parts = append(parts, s)
 		}
 	}
+	return strings.Join(parts, " ")
+}
 
-	return strings.TrimSpace(builder.String())
+// normalizeSpace collapses all runs of whitespace (including the newlines and
+// indentation between nested claim-text elements) into single spaces and trims.
+func normalizeSpace(s string) string {
+	return strings.Join(strings.Fields(s), " ")
 }
 
 // ExtractAllClaimsText extracts text from all claims

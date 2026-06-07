@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE us-patent-grant SYSTEM "us-patent-grant-v45-2014-04-03.dtd" [ ]>
+<us-patent-grant lang="EN" dtd-version="v4.5 2014-04-03" file="US10000000-20180619.XML" status="PRODUCTION" id="us-patent-grant" country="US" date-produced="20180612" date-publ="20180619">
+<us-bibliographic-data-grant>
+<publication-reference>
+<document-id>
+<country>US</country>
+<doc-number>10000000</doc-number>
+<kind>B2</kind>
+<date>20180619</date>
+</document-id>
+</publication-reference>
+<application-reference appl-type="utility">
+<document-id>
+<country>US</country>
+<doc-number>14643719</doc-number>
+<date>20150310</date>
+</document-id>
+</application-reference>
+<us-application-series-code>14</us-application-series-code>
+<us-term-of-grant>
+<us-term-extension>430</us-term-extension>
+</us-term-of-grant>
+<classifications-ipcr>
+<classification-ipcr>
+<ipc-version-indicator><date>20060101</date></ipc-version-indicator>
+<classification-level>A</classification-level>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>7</main-group>
+<subgroup>48</subgroup>
+<symbol-position>F</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+</classification-ipcr>
+<classification-ipcr>
+<ipc-version-indicator><date>20060101</date></ipc-version-indicator>
+<classification-level>A</classification-level>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>7</main-group>
+<subgroup>486</subgroup>
+<symbol-position>L</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+</classification-ipcr>
+<classification-ipcr>
+<ipc-version-indicator><date>20060101</date></ipc-version-indicator>
+<classification-level>A</classification-level>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>7</main-group>
+<subgroup>491</subgroup>
+<symbol-position>L</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+</classification-ipcr>
+<classification-ipcr>
+<ipc-version-indicator><date>20060101</date></ipc-version-indicator>
+<classification-level>A</classification-level>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>13</main-group>
+<subgroup>89</subgroup>
+<symbol-position>L</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+</classification-ipcr>
+</classifications-ipcr>
+<classifications-cpc>
+<main-cpc>
+<classification-cpc>
+<cpc-version-indicator><date>20130101</date></cpc-version-indicator>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>7</main-group>
+<subgroup>4863</subgroup>
+<symbol-position>F</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+<scheme-origination-code>C</scheme-origination-code>
+</classification-cpc>
+</main-cpc>
+<further-cpc>
+<classification-cpc>
+<cpc-version-indicator><date>20130101</date></cpc-version-indicator>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>7</main-group>
+<subgroup>4865</subgroup>
+<symbol-position>L</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+<scheme-origination-code>C</scheme-origination-code>
+</classification-cpc>
+<classification-cpc>
+<cpc-version-indicator><date>20130101</date></cpc-version-indicator>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>7</main-group>
+<subgroup>4914</subgroup>
+<symbol-position>L</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+<scheme-origination-code>C</scheme-origination-code>
+</classification-cpc>
+<classification-cpc>
+<cpc-version-indicator><date>20130101</date></cpc-version-indicator>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>7</main-group>
+<subgroup>4917</subgroup>
+<symbol-position>L</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+<scheme-origination-code>C</scheme-origination-code>
+</classification-cpc>
+<classification-cpc>
+<cpc-version-indicator><date>20130101</date></cpc-version-indicator>
+<section>G</section>
+<class>01</class>
+<subclass>S</subclass>
+<main-group>13</main-group>
+<subgroup>89</subgroup>
+<symbol-position>L</symbol-position>
+<classification-value>I</classification-value>
+<action-date><date>20180619</date></action-date>
+<generating-office><country>US</country></generating-office>
+<classification-status>B</classification-status>
+<classification-data-source>H</classification-data-source>
+<scheme-origination-code>C</scheme-origination-code>
+</classification-cpc>
+</further-cpc>
+</classifications-cpc>
+<invention-title id="d2e53">Coherent LADAR using intra-pixel quadrature detection</invention-title>
+<us-references-cited>
+<us-citation>
+<patcit num="00001">
+<document-id>
+<country>US</country>
+<doc-number>5093563</doc-number>
+<kind>A</kind>
+<name>Small</name>
+<date>19920300</date>
+</document-id>
+</patcit>
+<category>cited by examiner</category>
+<classification-cpc-text>G02B 27/58</classification-cpc-text>
+<classification-national><country>US</country><main-classification>2502019</main-classification></classification-national>
+</us-citation>
+<us-citation>
+<patcit num="00002">
+<document-id>
+<country>US</country>
+<doc-number>5751830</doc-number>
+<kind>A</kind>
+<name>Hutchinson</name>
+<date>19980500</date>
+</document-id>
+</patcit>
+<category>cited by applicant</category>
+</us-citation>
+<us-citation>
+<patcit num="00003">
+<document-id>
+<country>US</country>
+<doc-number>2003/0076485</doc-number>
+<kind>A1</kind>
+<name>Ruff et al.</name>
+<date>20030400</date>
+</document-id>
+</patcit>
+<category>cited by applicant</category>
+</us-citation>
+<us-citation>
+<patcit num="00004">
+<document-id>
+<country>US</country>
+<doc-number>2006/0227317</doc-number>
+<kind>A1</kind>
+<name>Henderson</name>
+<date>20061000</date>
+</document-id>
+</patcit>
+<category>cited by examiner</category>
+<classification-cpc-text>G01B 11/026</classification-cpc-text>
+<classification-national><country>US</country><main-classification>356 28</main-classification></classification-national>
+</us-citation>
+<us-citation>
+<patcit num="00005">
+<document-id>
+<country>WO</country>
+<doc-number>WO 2005/080928</doc-number>
+<kind>A1</kind>
+<date>20050900</date>
+</document-id>
+</patcit>
+<category>cited by applicant</category>
+</us-citation>
+<us-citation>
+<nplcit num="00006">
+<othercit>Li; &#x201c;Time-of-Flight Camera&#x2014;An Introduction&#x201d;; Texas Instruments White Paper; SLOA190B; Jan. 2014; revised May 2014; 10 pp.</othercit>
+</nplcit>
+<category>cited by applicant</category>
+</us-citation>
+<us-citation>
+<nplcit num="00007">
+<othercit>Niclass, et al. &#x201c;Single-Photon Synchronous Detection&#x201d;; IEEE Journal of Solid-State Circuits; vol. 44, No. 7; Jul. 2009; 13 pp.</othercit>
+</nplcit>
+<category>cited by applicant</category>
+</us-citation>
+<us-citation>
+<nplcit num="00008">
+<othercit>Marron, et al.; &#x201c;Coherent Detection with an Asynchronous Geiger Mode Receiver&#x201d;; Proc. MSS Active Meeting, Washington, D.C.; 2014.</othercit>
+</nplcit>
+<category>cited by applicant</category>
+</us-citation>
+<us-citation>
+<nplcit num="00009">
+<othercit>Joseph C. Marron et al., &#x201c;Atmospheric turbulence correction using digital holographic detection: experimental results&#x201d;, Optics Express, vol. 17, No. 14, Jul. 6, 2009, p. 11638-11651.</othercit>
+</nplcit>
+<category>cited by applicant</category>
+</us-citation>
+<us-citation>
+<nplcit num="00010">
+<othercit>Notification of Transmittal of the International Search Report and the Written Opinion of the International Searching Authority, or the Declaration dated Jun. 9, 2016 in connection with International Patent Application No. PCT/US2016/019088.</othercit>
+</nplcit>
+<category>cited by applicant</category>
+</us-citation>
+<us-citation>
+<nplcit num="00011">
+<othercit>Marron et al. &#x201c;Coherent Detection with an Asynchronous Geiger Mode Array&#x201d;; Applications of Lasers for Sensing and Free Space Communications 2015; Arlington, Virginia; Jun. 7-11, 2015; 3 pages.</othercit>
+</nplcit>
+<category>cited by applicant</category>
+</us-citation>
+</us-references-cited>
+<number-of-claims>20</number-of-claims>
+<us-exemplary-claim>1</us-exemplary-claim>
+<us-field-of-classification-search>
+<classification-cpc-text>G02B 27/58</classification-cpc-text>
+<classification-cpc-text>G02B 26/10</classification-cpc-text>
+<classification-cpc-text>G01J 1/20</classification-cpc-text>
+</us-field-of-classification-search>
+<figures>
+<number-of-drawing-sheets>6</number-of-drawing-sheets>
+<number-of-figures>7</number-of-figures>
+</figures>
+<us-related-documents>
+<related-publication>
+<document-id>
+<country>US</country>
+<doc-number>20160266243</doc-number>
+<kind>A1</kind>
+<date>20160915</date>
+</document-id>
+</related-publication>
+</us-related-documents>
+<us-parties>
+<us-applicants>
+<us-applicant sequence="001" app-type="applicant" designation="us-only" applicant-authority-category="assignee">
+<addressbook>
+<orgname>Raytheon Company</orgname>
+<address>
+<city>Waltham</city>
+<state>MA</state>
+<country>US</country>
+</address>
+</addressbook>
+<residence>
+<country>US</country>
+</residence>
+</us-applicant>
+</us-applicants>
+<inventors>
+<inventor sequence="001" designation="us-only">
+<addressbook>
+<last-name>Marron</last-name>
+<first-name>Joseph</first-name>
+<address>
+<city>Manhattan Beach</city>
+<state>CA</state>
+<country>US</country>
+</address>
+</addressbook>
+</inventor>
+</inventors>
+<agents>
+<agent sequence="01" rep-type="attorney">
+<addressbook>
+<orgname>Munck Wilson Mandala, LLP</orgname>
+<address>
+<country>unknown</country>
+</address>
+</addressbook>
+</agent>
+</agents>
+</us-parties>
+<assignees>
+<assignee>
+<addressbook>
+<orgname>Raytheon Company</orgname>
+<role>02</role>
+<address>
+<city>Waltham</city>
+<state>MA</state>
+<country>US</country>
+</address>
+</addressbook>
+</assignee>
+</assignees>
+<examiners>
+<primary-examiner>
+<last-name>Ratcliffe</last-name>
+<first-name>Luke D</first-name>
+<department>3645</department>
+</primary-examiner>
+</examiners>
+</us-bibliographic-data-grant>
+<abstract id="abstract">
+<p id="p-0001" num="0000">A frequency modulated (coherent) laser detection and ranging system includes a read-out integrated circuit formed with a two-dimensional array of detector elements each including a photosensitive region receiving both return light reflected from a target and light from a local oscillator, and local processing circuitry sampling the output of the photosensitive region four times during each sample period clock cycle to obtain quadrature components. A data bus coupled to one or more outputs of each of the detector elements receives the quadrature components from each of the detector elements for each sample period and serializes the received quadrature components. A processor coupled to the data bus receives the serialized quadrature components and determines an amplitude and a phase for at least one interfering frequency corresponding to interference between the return light and the local oscillator light using the quadrature components.</p>
+</abstract>
+<drawings id="DRAWINGS">
+<figure id="Fig-EMI-D00000" num="00000">
+<img id="EMI-D00000" he="143.68mm" wi="239.18mm" file="US10000000-20180619-D00000.TIF" alt="embedded image" img-content="drawing" img-format="tif"/>
+</figure>
+<figure id="Fig-EMI-D00001" num="00001">
+<img id="EMI-D00001" he="231.56mm" wi="146.30mm" orientation="landscape" file="US10000000-20180619-D00001.TIF" alt="embedded image" img-content="drawing" img-format="tif"/>
+</figure>
+<figure id="Fig-EMI-D00002" num="00002">
+<img id="EMI-D00002" he="234.36mm" wi="150.96mm" orientation="landscape" file="US10000000-20180619-D00002.TIF" alt="embedded image" img-content="drawing" img-format="tif"/>
+</figure>
+<figure id="Fig-EMI-D00003" num="00003">
+<img id="EMI-D00003" he="238.59mm" wi="144.19mm" orientation="landscape" file="US10000000-20180619-D00003.TIF" alt="embedded image" img-content="drawing" img-format="tif"/>
+</figure>
+<figure id="Fig-EMI-D00004" num="00004">
+<img id="EMI-D00004" he="262.72mm" wi="167.13mm" orientation="landscape" file="US10000000-20180619-D00004.TIF" alt="embedded image" img-content="drawing" img-format="tif"/>
+</figure>
+<figure id="Fig-EMI-D00005" num="00005">
+<img id="EMI-D00005" he="265.51mm" wi="183.30mm" orientation="landscape" file="US10000000-20180619-D00005.TIF" alt="embedded image" img-content="drawing" img-format="tif"/>
+</figure>
+<figure id="Fig-EMI-D00006" num="00006">
+<img id="EMI-D00006" he="215.73mm" wi="162.56mm" orientation="landscape" file="US10000000-20180619-D00006.TIF" alt="embedded image" img-content="drawing" img-format="tif"/>
+</figure>
+</drawings>
+<description id="description">
+<?BRFSUM description="Brief Summary" end="lead"?>
+<heading id="h-0001" level="1">TECHNICAL FIELD</heading>
+<p id="p-0002" num="0001">The present disclosure is directed in general to laser detection and ranging, and, more particularly, to frequency-modulated laser detection and ranging.</p>
+<heading id="h-0002" level="1">BACKGROUND OF THE DISCLOSURE</heading>
+<p id="p-0003" num="0002">Current approaches for obtaining the largest format detector arrays for frequency-modulated laser detection and ranging have involved increasing the number, size and/or complexity of amplifiers, analog-to-digital converters, and memories associated with the pixels of an array of high-bandwidth detectors. High digitization rates and the resulting large volumes of data that must be sent to a processor to compute the amplitude and phase of the return signal have limited array sizes and effectively precluded real-time operation.</p>
+<p id="p-0004" num="0003">There is, therefore, a need in the art for improved capture and handling of data employed for coherent laser detection and ranging.</p>
+<heading id="h-0003" level="1">SUMMARY OF THE DISCLOSURE</heading>
+<p id="p-0005" num="0004">A frequency modulated (coherent) laser detection and ranging system includes a read-out integrated circuit formed with a two-dimensional array of detector elements each including a photosensitive region receiving both return light reflected from a target and light from a local oscillator, and local processing circuitry sampling the output of the photosensitive region four times during each sample period clock cycle to obtain quadrature components. A data bus coupled to one or more outputs of each of the detector elements receives the quadrature components from each of the detector elements for each sample period and serializes the received quadrature components. A processor coupled to the data bus receives the serialized quadrature components and determines an amplitude and a phase for at least one interfering frequency corresponding to interference between the return light and the local oscillator light using the quadrature components.</p>
+<p id="p-0006" num="0005">Although specific advantages have been enumerated above, various embodiments may include some, none, or all of the enumerated advantages. Additionally, other technical advantages may become readily apparent to one of ordinary skill in the art after review of the following figures and description.</p>
+<?BRFSUM description="Brief Summary" end="tail"?>
+<?brief-description-of-drawings description="Brief Description of Drawings" end="lead"?>
+<description-of-drawings>
+<heading id="h-0004" level="1">BRIEF DESCRIPTION OF THE DRAWINGS</heading>
+<p id="p-0007" num="0006">For a more complete understanding of the present disclosure and its advantages, reference is now made to the following description taken in conjunction with the accompanying drawings, in which like reference numerals represent like parts:</p>
+<p id="p-0008" num="0007"><figref idref="DRAWINGS">FIGS. 1A, 1B and 1C</figref> diagrammatically illustrate operation of, respectively, a pulsed LADAR system typically employed for long-range 3D imaging, an AM LADAR system typically used for shorter range applications, and an FM LADAR system based on frequency modulation of a coherent laser source;</p>
+<p id="p-0009" num="0008"><figref idref="DRAWINGS">FIGS. 2 and 2A</figref> illustrate data processing associated with use of an FM LADAR system using GmAPD receivers in the detector array;</p>
+<p id="p-0010" num="0009"><figref idref="DRAWINGS">FIG. 3</figref> is a block diagram illustrating synchronous coherent optical detection for FM LADAR in accordance with embodiments of the present disclosure; and</p>
+<p id="p-0011" num="0010"><figref idref="DRAWINGS">FIG. 4</figref> illustrates use of synchronous coherent optical detection for FM LADAR for real-time interferometry in accordance with embodiments of the present disclosure.</p>
+</description-of-drawings>
+<?brief-description-of-drawings description="Brief Description of Drawings" end="tail"?>
+<?DETDESC description="Detailed Description" end="lead"?>
+<heading id="h-0005" level="1">DETAILED DESCRIPTION</heading>
+<p id="p-0012" num="0011">It should be understood at the outset that, although exemplary embodiments are illustrated in the figures and described below, the principles of the present disclosure may be implemented using any number of techniques, whether currently known or not. The present disclosure should in no way be limited to the exemplary implementations and techniques illustrated in the drawings and described below. Additionally, unless otherwise specifically noted, articles depicted in the drawings are not necessarily drawn to scale.</p>
+<p id="p-0013" num="0012">Laser detection and ranging (LADAR) systems are the optical analog of radar systems, in which the target is illuminated with light from a laser source and the return is detected with an optical detector. The resulting signal from the optical detector is processed to determine information about the target, such as range or velocity.</p>
+<p id="p-0014" num="0013">LADAR applications are driven to some extent by component technologies. Laser sources include both diode lasers that are generally compact, efficient, and low-cost but only low power, and eye-safe lasers that operate at wavelengths greater than about 1.5 microns (&#x3bc;m) and enable long-range, free-space LADAR. Detectors are often array detectors, to reduce the requirement for beam scanning. Processors, because processing of LADAR data can be computationally intensive, must typically enable high-speed&#x2014;and often real-time&#x2014;LADAR imaging.</p>
+<p id="p-0015" num="0014">Two-dimensional arrays of coherent detectors are required for many advanced coherent laser detection and ranging (LADAR) systems. A conventional approach is to use an array of discrete high-bandwidth detectors each having an amplifier, analog-to-digital (A/D) converter and memory. The resulting large volume of data is then sent to a processor to compute the amplitude and phase of the return signal. The high digitization rates and large volumes of resulting data have limited array sizes to a small number of pixels (on the order of 10s of pixels). There is also typically a large time interval required to process the data so that real-time operation is not achieved.</p>
+<p id="p-0016" num="0015">LADAR systems may generally be grouped into three main categories: pulsed LADAR, in which the illuminating laser is pulsed and the detector records time-of-flight; amplitude modulated (AM) LADAR, in which the amplitude of the illuminating beam is sinusoidally modulated and the detector records phase of return amplitude modulation; and frequency modulated (FM) LADAR, in which the frequency and/or phase of the laser illumination is modulated, and the detector records the relative optical phase of the return signal. (Additionally, some LADAR systems use the parallax effect, which is not considered in this disclosure.) All three categories of LADAR systems are used in various application-dependent environments, typically with use of pulsed LADAR for long range mapping, AM modulated LADAR for short range three dimensional (3D) imaging, and FM modulated LADAR for interferometry, frequency domain optical coherence tomography, and synthetic aperture imaging.</p>
+<p id="p-0017" num="0016"><figref idref="DRAWINGS">FIG. 1A</figref> diagrammatically illustrates operation of a pulsed LADAR system <b>100</b> typically employed for long-range 3D imaging. A laser source <b>101</b> emits pulsed light <b>102</b> illuminating a distant target <b>103</b>. The laser <b>101</b> is ideally an eye-safe, high pulse repetition frequency (PRF) emitting pulses on the order of 1 nanosecond (ns) duration, and high pulse energy device enabling long range, large field-of-view operation by the system <b>100</b>. A return part <b>104</b> of the light <b>102</b> reflecting off the target <b>103</b> and reaching an imaging telescope <b>105</b> is focused by the imaging telescope <b>105</b> onto a two dimensional (2D) detector array <b>106</b> comprising M&#xd7;N pixels. The detector array <b>106</b> records return time (time-of-flight) on a per-pixel basis, with the output of the detector array <b>106</b> processed by a processor (not shown separately in <figref idref="DRAWINGS">FIG. 1A</figref>) capable of handling high data and throughput rates to determine relative timing of return signals at different pixels and produce a 3D image. Implementing a detector array with sufficient timing resolution is a challenging design issue for this type of system. The detector array <b>106</b> should preferably comprise detector pixels that incorporate high-speed detection and local processing, to achieve fine timing-resolution detection and reduce the volume of data sent from the detector array to the processor. Some imaging detector arrays convert optical intensity into a serialized (raster scanned) analog signal, with an analog-to-digital (A/D) converter with memory (e.g., a frame-grabber) used to capture the data before transferring the data to a processor. 2D detectors generally incorporate digital processing into each pixel and the associated detector readout circuit, which is enabled by modern, fine-detail integrated circuit fabrication processes and which forms a digital readout integrated circuit (ROIC). Applications of digital ROIC technology are especially useful for improving data quality or reducing the volume of data. Advanced infrared (IR) detectors use digital ROICs with A/D conversion incorporated into the pixels to enhance dynamic range. LADAR systems use digital ROICs for fine resolution timing of return signals, to determine the temporal location of peak return rather than digitizing the entire temporal signal.</p>
+<p id="p-0018" num="0017">Another aspect of pulsed LADAR systems is that for long-range operation, high-sensitivity detector elements such as avalanche photo diodes (APDs) are required. In this regime, the photonic nature of the light must be considered, such that APDs are adjusted to operate in high-gain, Geiger-mode (GmAPDs). The analog signal from a GmAPD is series of temporal pulses caused by one or more of: photo-events from the return signal (shot-noise); spontaneous photo-events from dark noise (dark counts); photo-events from background light (background counts); and photo-events triggered by other events (ghosts). There can also be intra-pixel cross talk within an array of GmAPDs. Nonetheless, an array of GmAPDs with a digital ROIC is naturally well-suited for pulsed LADAR, since a GmAPD array records only time-stamps corresponding to sparse photo-events rather than digitizing temporal intensity signal and high PRF lasers allow averaging over multiple pulses to reduce impact of noise. In the photon-limited regime, the photo-sensitive detector is typically a GmAPD array with an ROIC that records arrival times for photo-events.</p>
+<p id="p-0019" num="0018"><figref idref="DRAWINGS">FIG. 1B</figref> diagrammatically illustrates operation of an AM LADAR system <b>110</b> typically used for shorter range applications. The laser source <b>111</b> in this implementation provides AM modulated light <b>112</b>. The relative phase of the return signal <b>114</b> focused by imaging telescope <b>115</b> on detector array <b>116</b> provides a relative 3D range over the target <b>113</b>. A typical modulation frequency for the light <b>112</b> is on the order of 10s of mega-Hertz (MHz)(e.g., 30 MHz, which results in an ambiguity interval of 5 meters). AM LADAR systems are often configured as a scanning system, but more recent implementations use a detector array. For detector arrays, every pixel should be capable of independently determining the distance to the object based on light received at that pixel, in effect operating as a massively parallel laser illuminated detection and ranging (LIDAR) on a single integrated circuit. Each pixel should allow accurate measurement of the arrival time of the collected photons in order to be substantially immune to detector array surface defects that might otherwise adversely affect time of flight ranging. Single photon avalanche diode (SPAD) based GmAPD pixels in the detector array enable such accurate measurement. SPAD devices detect the incoming sinusoidally modulated light intensity as series of photo-events using a high speed clock cycled through four states (quadrature detection). Photo-events that occur during these separate clock states are accumulated for use in a detection process that utilizes a synchronous clock to determine a phase of the return signal based on the accumulated photo-events corresponding to the four clock states. The gaming and machine vision industries in particular have driven development of sophisticated AM LADAR detectors with photon-counting based synchronous detection, measurement of modulation quadrature values performed at the pixel level, and fabrication based on low cost complementary metal-oxide-semiconductor (CMOS) processes.</p>
+<p id="p-0020" num="0019"><figref idref="DRAWINGS">FIG. 1C</figref> diagrammatically illustrates operation of an FM LADAR system <b>120</b> based on frequency modulation of a coherent laser source. The laser source in this implementation includes a master oscillator (MO) <b>121</b><i>a</i>, a frequency modulator (FM) <b>121</b><i>b</i>, and an amplifier (AMP) <b>121</b><i>c </i>producing the output <b>122</b> illuminating the target <b>123</b>, and a second frequency modulator <b>121</b><i>d </i>receiving a signal from the master oscillator <b>121</b><i>a </i>together with a local oscillator (LO) <b>121</b><i>e </i>producing an output <b>127</b> illuminating the detector array <b>126</b>. The target <b>123</b> is illuminated with coherent light <b>122</b> that originates from the master oscillator <b>121</b><i>a </i>and passes through the frequency modulator <b>121</b><i>b </i>and amplifier <b>121</b><i>c</i>. The return light <b>124</b> focused on the detector array <b>126</b> by the imaging telescope <b>125</b> interferes with light <b>127</b> from the local oscillator <b>121</b><i>e</i>, a frequency modulated beam derived from the master oscillator <b>121</b><i>a</i>. The amplitude and phase of the return signal <b>124</b> provide information about the target <b>123</b>. The detector pixels detect a sinusoidally modulated interference signal&#x2014;that is, the signal incident on the pixels results from coherent interference of the return beam <b>124</b> and the local oscillator beam <b>127</b>. For the simple case of a frequency offset between the return and local oscillator beams, the resulting signal intensity detected by the pixels is:</p>
+<p id="p-0021" num="0020">
+<maths id="MATH-US-00001" num="00001">
+<math overflow="scroll">
+<mtable>
+<mtr>
+<mtd>
+<mrow>
+<mrow>
+<mrow>
+<mi>I</mi>
+<mo>&#x2061;</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>I</mi>
+<mi>s</mi>
+</msub>
+<mo>+</mo>
+<msub>
+<mi>I</mi>
+<mi>LO</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<mn>2</mn>
+<mo>&#x2062;</mo>
+<msqrt>
+<msub>
+<mi>I</mi>
+<mi>s</mi>
+</msub>
+</msqrt>
+<mo>&#x2062;</mo>
+<msqrt>
+<msub>
+<mi>I</mi>
+<mi>LO</mi>
+</msub>
+</msqrt>
+<mo>&#x2062;</mo>
+<mrow>
+<mi>cos</mi>
+<mo>&#x2061;</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mn>2</mn>
+<mo>&#x2062;</mo>
+<mi>&#x3c0;</mi>
+<mo>&#x2062;</mo>
+<mstyle>
+<mspace width="0.3em" height="0.3ex"/>
+</mstyle>
+<mo>&#x2062;</mo>
+<mi>ft</mi>
+</mrow>
+<mo>+</mo>
+<mi>&#x3d5;</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+</mrow>
+</mtd>
+<mtd>
+<mstyle>
+<mspace width="0.3em" height="0.3ex"/>
+</mstyle>
+</mtd>
+</mtr>
+</mtable>
+</math>
+</maths>
+<br/>
+where I(t) is the intensity of the signal received by a pixel within the detector array, I<sub>s </sub>is the intensity of the return light <b>124</b>, I<sub>LO </sub>is the intensity of the local oscillator light <b>127</b>, f is the interfering frequency, and &#x3d5; is a phase shift between the return light <b>124</b> and the local oscillator light <b>127</b> at the interfering frequency f. A feature of FM detection is that the strength of the modulated signal is proportional to &#x221a;{square root over (I<sub>s</sub>)}&#x221a;{square root over (I<sub>LO</sub>)}, such that the signal is boosted by the local oscillator power. In addition to being useful for long range detection, FM systems are also employed in interferometry.
+</p>
+<p id="p-0022" num="0021"><figref idref="DRAWINGS">FIGS. 2 and 2A</figref> illustrate data processing <b>200</b> associated with use of an FM LADAR system using GmAPD receivers in the detector array. An intensity signal <b>201</b>, derived from interfering return and local oscillator light signals <b>202</b>, corresponds to photo-events <b>203</b>. Processing of the photo-event sequence <b>204</b> yields target information, including values <b>205</b> such as those illustrated in the figure. To avoid saturation of the GmAPD detector, the local oscillator level is reduced. The signal intensity detected is:</p>
+<p id="p-0023" num="0022">
+<maths id="MATH-US-00002" num="00002">
+<math overflow="scroll">
+<mrow>
+<mrow>
+<mrow>
+<mi>I</mi>
+<mo>&#x2061;</mo>
+<mrow>
+<mo>(</mo>
+<mi>t</mi>
+<mo>)</mo>
+</mrow>
+</mrow>
+<mo>=</mo>
+<mrow>
+<msub>
+<mi>N</mi>
+<mi>s</mi>
+</msub>
+<mo>+</mo>
+<msub>
+<mi>N</mi>
+<mi>LO</mi>
+</msub>
+<mo>+</mo>
+<msub>
+<mi>N</mi>
+<mi>DCR</mi>
+</msub>
+<mo>+</mo>
+<mrow>
+<mn>2</mn>
+<mo>&#x2062;</mo>
+<msqrt>
+<msub>
+<mi>&#x3b7;</mi>
+<mi>HET</mi>
+</msub>
+</msqrt>
+<mo>&#x2062;</mo>
+<msqrt>
+<msub>
+<mi>I</mi>
+<mi>s</mi>
+</msub>
+</msqrt>
+<mo>&#x2062;</mo>
+<msqrt>
+<msub>
+<mi>I</mi>
+<mi>LO</mi>
+</msub>
+</msqrt>
+<mo>&#x2062;</mo>
+<mrow>
+<mi>cos</mi>
+<mo>&#x2061;</mo>
+<mrow>
+<mo>(</mo>
+<mrow>
+<mrow>
+<mn>2</mn>
+<mo>&#x2062;</mo>
+<mi>&#x3c0;</mi>
+<mo>&#x2062;</mo>
+<mstyle>
+<mspace width="0.3em" height="0.3ex"/>
+</mstyle>
+<mo>&#x2062;</mo>
+<mi>ft</mi>
+</mrow>
+<mo>+</mo>
+<mi>&#x3d5;</mi>
+</mrow>
+<mo>)</mo>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+</mrow>
+<mo>,</mo>
+</mrow>
+</math>
+</maths>
+<br/>
+where N<sub>s </sub>is the number of signal photo-events, N<sub>LO </sub>is the number of local oscillator photo-events, N<sub>DCR </sub>is the number of dark counts, and &#x3b7;<sub>HET </sub>is heterodyne detection efficiency. A typical approach to implementing FM LADAR with GmAPD detector arrays has been to record a temporal sequence of photo-events and depicted in <figref idref="DRAWINGS">FIG. 2</figref>, then process the recorded events to compute a Fourier transform resulting in a frequency spectrum mapping of the events as illustrated in <figref idref="DRAWINGS">FIG. 2A</figref> to determine f and &#x3d5;.
+</p>
+<p id="p-0024" num="0023"><figref idref="DRAWINGS">FIG. 3</figref> is a block diagram illustrating synchronous coherent optical detection for FM LADAR in accordance with embodiments of the present disclosure. The optical detector <b>300</b> is employed as the detector array <b>126</b> in the system depicted in <figref idref="DRAWINGS">FIG. 1C</figref>. The optical detector <b>300</b> is formed by a two-dimensional M&#xd7;N array of pixels. The optical detector <b>300</b> is a large format array having more than on the order of ten pixels in each direction and preferably having on the order of hundreds of pixels or more in each direction (e.g., a 512&#xd7;512 or larger array). Each pixel within the optical detector <b>300</b> has a photosensitive material <b>301</b> receiving the sinusoidal return comprising return light and coherently interfering local oscillator light as described above in connection with <figref idref="DRAWINGS">FIGS. 1C and 2</figref>. The photosensitive material <b>301</b> for each pixel produces an analog output <b>303</b> received by a local processing circuit <b>304</b> for the respective pixel. Each local processing circuit <b>304</b> receives a local clock signal <b>305</b> and outputs four quadrature value signals <b>306</b> representing sampling of the analog output <b>303</b> at intervals during a single sample period. The local clock signal <b>305</b> is received from, and the quadrature signals <b>306</b> are provided to, a data bus <b>307</b> that operates under the control of one or more timing/control signals <b>308</b> and that outputs serialized digital representations of the quadrature signals <b>306</b> on a signal line <b>309</b> to a processor or computer <b>310</b>. Processor/computer <b>310</b> (or at least portions thereof) may be formed on the same integrated circuit chip and/or packaged within the same integrated circuit package as the remainder of optical detector <b>300</b>. Within the processor/computer <b>310</b>, each of the quadrature signals is separately processed in the manner described above in connection with <figref idref="DRAWINGS">FIGS. 2 and 2A</figref>. The detector <b>300</b> thus applies ROIC technology to coherent detection, computing quadrature components Q<sub>0</sub>, Q<sub>1</sub>, Q<sub>2</sub>, Q<sub>3 </sub>of a single interfering frequency (IF) component or optionally a small number of IF components. The quadrature components&#x2014;and therefore the amplitude and phase&#x2014;of the IF are computed at the sensor frame rate, allowing detection to be performed on a large format 2D detector.</p>
+<p id="p-0025" num="0024">It should be noted that, although quadrature components are described in the exemplary embodiment above, the number of samples captured during a clock sample period may be less (e.g., three) or more (e.g., five or greater) than four. The number of parallel signal lines <b>306</b> from the local processing circuit <b>304</b> for each pixel and the data bus <b>307</b> would naturally match the number of samples captured at intervals during a single sample period.</p>
+<p id="p-0026" num="0025">Applications of synchronous coherent optical detection for FM LADAR include real-time interferometry, velocity measurement, vibration sensing, two-wavelength 3D imaging, and wavefront sensing for atmospheric compensation. Synchronous coherent optical detection for FM LADAR enables 3D imaging at much longer ranges than AM systems, and is applicable to the gaming industry and virtual reality systems.</p>
+<p id="p-0027" num="0026"><figref idref="DRAWINGS">FIG. 4</figref> illustrates use of synchronous coherent optical detection for FM LADAR for real-time interferometry in accordance with embodiments of the present disclosure. For real-time interferometry, the phase data from coherent synchronous detection is equivalent to an interferogram, and quadrature detection is equivalent to phase-shifting interferometry. In the real-time interferometry system <b>400</b>, an FM laser source <b>401</b> emits illumination <b>402</b> that is split by a beam splitter <b>403</b> such that a portion is received by a frequency modulator <b>404</b>, which produces frequency modulated illumination <b>405</b> based on the emitted light <b>402</b>. A remainder of the emitted light <b>402</b> passes through a lens <b>406</b> onto a half-silvered mirror <b>407</b> that reflects part of the light onto a test surface <b>408</b>. Portions of the light reflecting off test surface <b>408</b> passes through mirror <b>407</b> and through lens <b>409</b> to impinge upon an optical detector <b>410</b> structured as depicted in <figref idref="DRAWINGS">FIG. 3</figref>. The reference light <b>405</b> passes through a lens <b>411</b> and reflects off half-silvered mirror <b>407</b>, and then also passes through lens <b>409</b> to impinge upon the optical detector <b>410</b>. In this implementation, the light reflected off test surface <b>408</b> and passing through mirror <b>407</b> to reach the optical detector <b>410</b> corresponds to the return light <b>124</b> reflected off the target <b>123</b> in <figref idref="DRAWINGS">FIG. 1C</figref>, while the reference light <b>405</b> reflected off the mirror <b>407</b> to reach the optical detector <b>410</b> corresponds to the local oscillator light <b>127</b>. In this application, the high frame-rate capability of the optical detector <b>410</b> allows analysis of components in dynamic conditions. The phase difference between interferograms at different times allows determination of displacement, and therefore velocity measurement (since displacement per unit time is velocity), and measurement of velocity periodicity allows determination of vibration. The difference between phase measurements at two wavelengths (which may be recorded sequentially or, for an advanced synchronous detector, on two interference frequencies) provides 3D imaging.</p>
+<p id="p-0028" num="0027">For turbulence compensation, coherent synchronous detection also allows real-time recording of complex-values images, to which a sharpness algorithm may be used to determine atmospheric phase error to produce a turbulence-corrected image or to determine the correction to be applied to pre-compensate a high-energy laser. Additional details of turbulence correction may be found in J. C. Marron, et al., &#x201c;Atmospheric turbulence correction using digital holographic detection: experimental results,&#x201d; <i>Optics Express, </i>17, 11638-11651 (2009).</p>
+<p id="p-0029" num="0028">For digital holography, conventional detector arrays employ long pulse illumination with zero interference frequency. The static fringe pattern recorded represents coherent information recorded on a spatial carrier frequency. Synchronous coherent detection can operate at Q=1 rather than Q=2.</p>
+<p id="p-0030" num="0029">Modifications, additions, or omissions may be made to the systems, apparatuses, and methods described herein without departing from the scope of the disclosure. For example, the components of the systems and apparatuses may be integrated or separated. Moreover, the operations of the systems and apparatuses disclosed herein may be performed by more, fewer, or other components and the methods described may include more, fewer, or other steps. Additionally, steps may be performed in any suitable order. As used in this document, &#x201c;each&#x201d; refers to each member of a set or each member of a subset of a set.</p>
+<p id="p-0031" num="0030">To aid the Patent Office and any readers of any patent issued on this application in interpreting the claims appended hereto, applicants wish to note that they do not intend any of the appended claims or claim elements to invoke 35 U.S.C. &#xa7; 112(f) unless the words &#x201c;means for&#x201d; or &#x201c;step for&#x201d; are explicitly used in the particular claim.</p>
+<?DETDESC description="Detailed Description" end="tail"?>
+</description>
+<us-math idrefs="MATH-US-00001" nb-file="US10000000-20180619-M00001.NB">
+<img id="EMI-M00001" he="4.23mm" wi="76.20mm" file="US10000000-20180619-M00001.TIF" alt="embedded image " img-content="math" img-format="tif"/>
+</us-math>
+<us-math idrefs="MATH-US-00002" nb-file="US10000000-20180619-M00002.NB">
+<img id="EMI-M00002" he="3.89mm" wi="76.20mm" file="US10000000-20180619-M00002.TIF" alt="embedded image " img-content="math" img-format="tif"/>
+</us-math>
+<us-claim-statement>What is claimed is:</us-claim-statement>
+<claims id="claims">
+<claim id="CLM-00001" num="00001">
+<claim-text>1. A laser detection and ranging (LADAR) system, comprising:
+<claim-text>a two-dimensional array of detector elements, each detector element within the array including:
+<claim-text>a photosensitive region configured to receive return light reflected from a target and oscillating local light from a local light source, and</claim-text>
+<claim-text>local processing circuitry coupled to an output of the respective photosensitive region and configured to receive an analog signal on the output and to sample the analog signal a plurality of times during each sample period clock cycle to obtain a plurality of components for a sample during each sample period clock cycle;</claim-text>
+</claim-text>
+<claim-text>a data bus coupled to one or more outputs of each of the detector elements and configured to receive the plurality of sample components from each of the detector elements for each sample period clock cycle; and</claim-text>
+<claim-text>a processor coupled to the data bus and configured to receive, from the data bus, the plurality of sample components from each of the detector elements for each sample period clock cycle and to determine an amplitude and a phase for an interfering frequency corresponding to interference between the return light and the oscillating local light using the plurality of sample components.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00002" num="00002">
+<claim-text>2. The system according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the two-dimensional array of detector elements comprises a large format array.</claim-text>
+</claim>
+<claim id="CLM-00003" num="00003">
+<claim-text>3. The system according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the plurality of sample components are quadrature components and wherein the quadrature components are employed to determine an amplitude and a phase for each of a plurality of interfering frequencies corresponding to interference between the return light and the oscillating local light.</claim-text>
+</claim>
+<claim id="CLM-00004" num="00004">
+<claim-text>4. The system according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein each detector element within the array includes sample component signal line connections to the data bus.</claim-text>
+</claim>
+<claim id="CLM-00005" num="00005">
+<claim-text>5. The system according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein each detector element within the array is configured to receive a clock signal from the data bus.</claim-text>
+</claim>
+<claim id="CLM-00006" num="00006">
+<claim-text>6. The system according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the data bus is configured to serialize the plurality of sample components from each of the detector elements for each sample period clock cycle for transmission to the processor.</claim-text>
+</claim>
+<claim id="CLM-00007" num="00007">
+<claim-text>7. The system according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, wherein the two-dimensional array of detector elements and the data bus are contained within a read-out integrated circuit (ROIC).</claim-text>
+</claim>
+<claim id="CLM-00008" num="00008">
+<claim-text>8. The system according to <claim-ref idref="CLM-00001">claim 1</claim-ref>, further comprising:
+<claim-text>a laser source configured to emit both light illuminating the target and the oscillating local light; and</claim-text>
+<claim-text>an imaging telescope positioned between the target and the two-dimensional array of detector elements and configured to focus the return light reflected from the target onto the two-dimensional array of detector elements.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00009" num="00009">
+<claim-text>9. A laser detection and ranging (LADAR) system, comprising:
+<claim-text>a two-dimensional array of detector elements, each detector element within the array including:
+<claim-text>a photosensitive region configured to receive return light reflected from a target and oscillating local light from a local light source, and</claim-text>
+<claim-text>local processing circuitry coupled to an output of the respective photosensitive region and configured to receive an analog signal on the output and to sample the analog signal a plurality of times during each sample period clock cycle to obtain components for a sample during each sample period clock cycle;</claim-text>
+</claim-text>
+<claim-text>a data bus coupled to one or more outputs of each of the detector elements and configured to receive the plurality of sample components from each of the detector elements for each sample period clock cycle;</claim-text>
+<claim-text>a processor coupled to the data bus and configured to receive, from the data bus, the plurality of sample components from each of the detector elements for each sample period clock cycle and to determine an amplitude and a phase for an interfering frequency corresponding to interference between the return light and the oscillating local light using the plurality of sample components;</claim-text>
+<claim-text>a laser source configured to emit both light illuminating the target and the oscillating local light, wherein the laser source comprises:
+<claim-text>a master oscillator,</claim-text>
+<claim-text>a first frequency modulator coupled to the master oscillator and configured to modulate a frequency of a signal output by the master oscillator used to generate a signal corresponding to the emitted light illuminating the target, and</claim-text>
+<claim-text>a second frequency modulator coupled to the master oscillator and configured to modulate the frequency of the signal output by the master oscillator used to generate a signal corresponding to the emitted oscillating local light; and</claim-text>
+</claim-text>
+<claim-text>an imaging telescope positioned between the target and the two-dimensional array of detector elements and configured to focus the return light reflected from the target onto the two-dimensional array of detector elements.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00010" num="00010">
+<claim-text>10. The system according to <claim-ref idref="CLM-00009">claim 9</claim-ref>, wherein the laser source further comprises:
+<claim-text>an amplifier coupled between the first frequency modulator and a light source emitting the light illuminating the target; and</claim-text>
+<claim-text>a local oscillator coupled between the second frequency modulator and the local light source emitting the oscillating local light, the local oscillator configured to respond to a signal output by the second frequency modulator.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00011" num="00011">
+<claim-text>11. A laser detection and ranging (LADAR) method, comprising:
+<claim-text>receiving, at a two-dimensional array of detector elements, return light reflected from a target, each detector element within the array including:
+<claim-text>a photosensitive region configured to receive the return light reflected from the target and oscillating local light from a local light source, and</claim-text>
+<claim-text>local processing circuitry coupled to an output of the respective photosensitive region and configured to receive an analog signal on the output and to sample the analog signal a plurality of times during each sample period clock cycle to obtain a plurality of components for a sample during each sample period clock cycle;</claim-text>
+</claim-text>
+<claim-text>receiving, on a data bus coupled to one or more outputs of each of the detector elements, the plurality of sample components from each of the detector elements for each sample period clock cycle;</claim-text>
+<claim-text>transmitting, to a processor coupled to the data bus, the plurality of sample components from each of the detector elements for each sample period clock cycle; and</claim-text>
+<claim-text>determining, with the processor, an amplitude and a phase for an interfering frequency corresponding to interference between the return light and the oscillating local light using the plurality of sample components.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00012" num="00012">
+<claim-text>12. The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the two-dimensional array of detector elements comprises a large format array.</claim-text>
+</claim>
+<claim id="CLM-00013" num="00013">
+<claim-text>13. The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the plurality of sample components comprise quadrature components, the method further comprising:
+<claim-text>employing the quadrature components to determine an amplitude and a phase for each of a plurality of interfering frequencies corresponding to interference between the return light and the oscillating local light.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00014" num="00014">
+<claim-text>14. The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein each detector element within the array includes sample component signal line connections to the data bus.</claim-text>
+</claim>
+<claim id="CLM-00015" num="00015">
+<claim-text>15. The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein each detector element within the array is configured to receive a clock signal from the data bus.</claim-text>
+</claim>
+<claim id="CLM-00016" num="00016">
+<claim-text>16. The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising:
+<claim-text>serializing, in the data bus, the plurality of sample components from each of the detector elements for each sample period clock cycle for transmission to the processor.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00017" num="00017">
+<claim-text>17. The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, wherein the two-dimensional array of detector elements and the data bus are contained within a read-out integrated circuit (ROIC).</claim-text>
+</claim>
+<claim id="CLM-00018" num="00018">
+<claim-text>18. The method according to <claim-ref idref="CLM-00011">claim 11</claim-ref>, further comprising:
+<claim-text>emitting both light illuminating the target and the oscillating local light from a laser source; and</claim-text>
+<claim-text>positioning an imaging telescope between the target and the two-dimensional array of detector elements to focus the return light reflected from the target onto the two-dimensional array of detector elements.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00019" num="00019">
+<claim-text>19. The method according to <claim-ref idref="CLM-00018">claim 18</claim-ref>, further comprising:
+<claim-text>employing a first frequency modulator coupled to a master oscillator to modulate a frequency of a signal output by the master oscillator used to generate a signal corresponding to the emitted light illuminating the target; and</claim-text>
+<claim-text>employing a second frequency modulator coupled to the master oscillator to modulate the frequency of the signal output by the master oscillator used to generate a signal corresponding to the emitted oscillating local light.</claim-text>
+</claim-text>
+</claim>
+<claim id="CLM-00020" num="00020">
+<claim-text>20. The method according to <claim-ref idref="CLM-00019">claim 19</claim-ref>, further comprising:
+<claim-text>amplifying an output of the first frequency modulator to drive the light source emitting the light illuminating the target; and</claim-text>
+<claim-text>receiving an output of the second frequency modulator at a local oscillator driving the light source emitting the oscillating local light, the local oscillator configured to respond to a signal output by the second frequency modulator.</claim-text>
+</claim-text>
+</claim>
+</claims>
+</us-patent-grant>

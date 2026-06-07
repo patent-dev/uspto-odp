@@ -3,7 +3,18 @@ package odp
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
+)
+
+// US grant numbers reached 8 digits at 10,000,000 (June 2018) and, as of 2026, run to
+// roughly 12.7 million. An 8-digit value in this range is ambiguous because it can be
+// either such a grant or an application in series 10-12. An 8-digit value at or beyond
+// application series 13 (>= 13,000,000) cannot currently be a grant, so it is treated as
+// an unambiguous application. Raise the upper bound as grant numbers grow.
+const (
+	firstEightDigitGrant = 10000000
+	maxEightDigitGrant   = 12999999
 )
 
 // PatentNumberType indicates the type of patent number
@@ -31,6 +42,11 @@ type PatentNumber struct {
 	// display only -- USPTO's search API ignores grant kind codes when
 	// resolving to an application number.
 	KindCode string
+	// Ambiguous is true when the input was a bare number that could be either a
+	// grant or an application (an 8-digit value with no kind code, slash, or
+	// comma to disambiguate). Resolution probes both interpretations rather than
+	// silently assuming one. See Client.ResolvePatentNumber.
+	Ambiguous bool
 }
 
 // Patent number patterns
@@ -38,8 +54,10 @@ var (
 	// Application with slash: 17/248,024, 17/248024, US 17/248,024
 	applicationWithSlashPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{2})/(\d{3})[,\s]*(\d{3})$`)
 
-	// Grant with kind code: US 11,646,472 B2, 9,123,456 B1
-	grantWithKindPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{1,2})[,\s]*(\d{3})[,\s]*(\d{3})[\s]+([A-Z]\d)$`)
+	// Grant with kind code, separated or compact: US 11,646,472 B2, 9,123,456 B1,
+	// US11646472B2. The whitespace before the kind code is optional so the compact
+	// form (no separators) parses the same as the formatted one.
+	grantWithKindPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{1,2})[,\s]*(\d{3})[,\s]*(\d{3})[\s]*([A-Z]\d)$`)
 
 	// Grant with comma formatting: 11,646,472, US 11,646,472
 	grantWithCommaPattern = regexp.MustCompile(`^(?:US)?[\s]*(\d{1,2}),(\d{3}),(\d{3})$`)
@@ -147,23 +165,35 @@ func NormalizePatentNumber(input string) (*PatentNumber, error) {
 		return result, nil
 	}
 
-	// Fallback: digits only
-	if digitsOnlyPattern.MatchString(cleaned) {
-		result.Normalized = cleaned
+	// Fallback: digits only, optionally with a US prefix (e.g. "US11646472").
+	// The grant/application/publication patterns above already accept an optional
+	// "US"; mirror that here so a bare prefixed number resolves the same way.
+	bare := cleaned
+	if t := strings.TrimPrefix(strings.TrimPrefix(cleaned, "US"), "us"); digitsOnlyPattern.MatchString(t) {
+		bare = t
+	}
+	if digitsOnlyPattern.MatchString(bare) {
+		result.Normalized = bare
 
 		// Heuristics based on length
-		length := len(cleaned)
+		length := len(bare)
 		switch length {
 		case 7:
 			// 7-digit grant number (e.g., 9123456)
 			result.Type = PatentNumberTypeGrant
 		case 8, 9:
-			// 8-9 digit application number (e.g., 17248024)
-			// Note: 8 digits is ambiguous (could be recent grant or application).
-			// Without formatting clues (commas, slashes, kind codes), we default to
-			// application as both work with the API and applications are more common.
+			// 8-9 digit application number (e.g., 17248024). An 8-digit value in
+			// the 8-digit grant range is ambiguous (grant vs application series
+			// 10-12); resolution probes both. Everything else here is treated as
+			// an unambiguous application, preserving the direct lookup.
 			result.Type = PatentNumberTypeApplication
-			result.ApplicationNo = cleaned
+			result.ApplicationNo = bare
+			if length == 8 {
+				if n, convErr := strconv.Atoi(bare); convErr == nil &&
+					n >= firstEightDigitGrant && n <= maxEightDigitGrant {
+					result.Ambiguous = true
+				}
+			}
 		case 11:
 			// 11-digit publication number (e.g., 20250087686)
 			result.Type = PatentNumberTypePublication

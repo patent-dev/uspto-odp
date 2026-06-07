@@ -334,6 +334,42 @@ func TestNormalizePatentNumber_GrantKindCode(t *testing.T) {
 	}
 }
 
+// A grant kind code may be supplied without separators (e.g. "US11646472B2"). This
+// should parse identically to the comma/space-separated form, not fall through to the
+// ambiguous bare-number path.
+func TestNormalizePatentNumber_CompactGrantKindCode(t *testing.T) {
+	tests := []struct {
+		input          string
+		wantNormalized string
+		wantKind       string
+	}{
+		{"US11646472B2", "11646472", "B2"},
+		{"11646472B2", "11646472", "B2"},
+		{"US 11,646,472 B2", "11646472", "B2"}, // separated form still works
+		{"9123456B1", "9123456", "B1"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.input, func(t *testing.T) {
+			pn, err := NormalizePatentNumber(tt.input)
+			if err != nil {
+				t.Fatalf("NormalizePatentNumber(%q): %v", tt.input, err)
+			}
+			if pn.Type != PatentNumberTypeGrant {
+				t.Errorf("Type = %v, want Grant", pn.Type)
+			}
+			if pn.Normalized != tt.wantNormalized {
+				t.Errorf("Normalized = %q, want %q", pn.Normalized, tt.wantNormalized)
+			}
+			if pn.KindCode != tt.wantKind {
+				t.Errorf("KindCode = %q, want %q", pn.KindCode, tt.wantKind)
+			}
+			if pn.Ambiguous {
+				t.Errorf("a kind-coded grant must not be flagged ambiguous")
+			}
+		})
+	}
+}
+
 func BenchmarkNormalizePatentNumber(b *testing.B) {
 	inputs := []string{
 		"17248024",
