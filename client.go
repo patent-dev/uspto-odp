@@ -781,20 +781,25 @@ func (c *Client) DownloadBulkFile(ctx context.Context, fileDownloadURI string, w
 	return c.DownloadBulkFileWithProgress(ctx, fileDownloadURI, w, nil)
 }
 
-// DownloadBulkFileWithProgress downloads a file using FileDownloadURI with
-// progress tracking.
+// DownloadBulkFileWithProgress downloads a bulk dataset file using its
+// FileDownloadURI, reporting progress through the optional callback. See
+// streamDownload for the retry and mid-stream-failure semantics.
+func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadURI string, w io.Writer, progress func(bytesComplete int64, bytesTotal int64)) error {
+	if err := c.validateFileDownloadURI(fileDownloadURI); err != nil {
+		return err
+	}
+	return c.streamDownload(ctx, fileDownloadURI, w, progress)
+}
+
+// streamDownload performs an authenticated streaming GET of uri into w.
 //
 // Retry behavior: the connection-setup phase (request creation, transport
 // errors, non-2xx status) goes through retryableRequest with full backoff
 // and Retry-After honoring. Mid-stream errors (connection reset after the
 // 200 response started flowing) propagate without retry -- restarting from
 // zero would silently overwrite however many bytes the caller already
-// committed to its writer.
-func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadURI string, w io.Writer, progress func(bytesComplete int64, bytesTotal int64)) error {
-	if err := c.validateFileDownloadURI(fileDownloadURI); err != nil {
-		return err
-	}
-
+// committed to its writer. URI validation is the caller's responsibility.
+func (c *Client) streamDownload(ctx context.Context, uri string, w io.Writer, progress func(bytesComplete int64, bytesTotal int64)) error {
 	var resp *http.Response
 	err := c.retryableRequest(ctx, func() error {
 		// Discard any prior attempt's response before retrying.
@@ -802,7 +807,7 @@ func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadU
 			drainClose(resp.Body)
 			resp = nil
 		}
-		req, err := http.NewRequestWithContext(ctx, "GET", fileDownloadURI, nil)
+		req, err := http.NewRequestWithContext(ctx, "GET", uri, nil)
 		if err != nil {
 			return fmt.Errorf("creating request: %w", err)
 		}
@@ -844,6 +849,33 @@ func (c *Client) DownloadBulkFileWithProgress(ctx context.Context, fileDownloadU
 	}
 
 	return nil
+}
+
+// validateDocumentDownloadURL ensures downloadURL is an ODP patent-application
+// document download URL (a DownloadOptionBag.DownloadUrl from GetPatentDocuments,
+// e.g. {BaseURL}/api/v1/download/applications/{appNum}/{id}.pdf). Restricting to
+// the configured host with the document download path keeps the authenticated
+// request from being pointed at an arbitrary host.
+func (c *Client) validateDocumentDownloadURL(downloadURL string) error {
+	if downloadURL == "" {
+		return fmt.Errorf("downloadURL cannot be empty")
+	}
+	expectedPrefix := c.config.BaseURL + "/api/v1/download/"
+	if !strings.HasPrefix(downloadURL, expectedPrefix) {
+		return fmt.Errorf("invalid document downloadURL: must start with %s (got: %s)", expectedPrefix, downloadURL)
+	}
+	return nil
+}
+
+// DownloadPatentDocument streams a patent file-wrapper document to w. downloadURL
+// is a DownloadOptionBag.DownloadUrl returned by GetPatentDocuments (the documents
+// are served as PDF). Covers applicant remarks, claim amendments, IDS, examiner's
+// amendments, and the rest of the file wrapper.
+func (c *Client) DownloadPatentDocument(ctx context.Context, downloadURL string, w io.Writer) error {
+	if err := c.validateDocumentDownloadURL(downloadURL); err != nil {
+		return err
+	}
+	return c.streamDownload(ctx, downloadURL, w, nil)
 }
 
 // SearchPetitions searches for petition decisions
