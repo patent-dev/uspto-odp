@@ -36,6 +36,9 @@ type DSAPIFieldsResponse struct {
 	APIStatus           string   `json:"apiStatus"`
 	FieldCount          int      `json:"fieldCount"`
 	Fields              []string `json:"fields"`
+	// LastDataUpdatedDate is the dataset's last-update timestamp. The API returns
+	// a non-ISO datetime string (e.g. "2020-03-12 11:19:05.0"), kept as a string.
+	LastDataUpdatedDate string `json:"lastDataUpdatedDate"`
 }
 
 // readJSONResponse reads an HTTP response body, checks status, and unmarshals JSON into result.

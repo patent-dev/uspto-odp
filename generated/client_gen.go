@@ -5925,6 +5925,7 @@ type GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse struct {
 			// PatentTermAdjustmentData Patent term adjustment data
 			PatentTermAdjustmentData *PatentTermAdjustment `json:"patentTermAdjustmentData,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
 	JSON400 *struct {
 		Code              interface{} `json:"code,omitempty"`
@@ -5976,6 +5977,7 @@ type GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse struct {
 			ApplicationNumberText *string       `json:"applicationNumberText,omitempty"`
 			AssignmentBag         *[]Assignment `json:"assignmentBag,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
 	JSON400 *struct {
 		Code              interface{} `json:"code,omitempty"`
@@ -6033,6 +6035,7 @@ type GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse 
 			PgpubDocumentMetaData *PGPubFileMetaData `json:"pgpubDocumentMetaData,omitempty"`
 			RequestIdentifier     *string            `json:"requestIdentifier,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
 	JSON400 *struct {
 		Code              interface{} `json:"code,omitempty"`
@@ -6086,6 +6089,7 @@ type GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse struct {
 			// RecordAttorney An attorney selected by the applicant or owner of an intellectual property to represent them before the national office.
 			RecordAttorney *RecordAttorney `json:"recordAttorney,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
 	JSON400 *struct {
 		Code              interface{} `json:"code,omitempty"`
@@ -6139,6 +6143,7 @@ type GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse struct {
 			ParentContinuityBag   *[]ParentContinuityData `json:"parentContinuityBag,omitempty"`
 			RequestIdentifier     *string                 `json:"requestIdentifier,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
 }
 
@@ -6212,6 +6217,7 @@ type GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse stru
 			ApplicationNumberText *string            `json:"applicationNumberText,omitempty"`
 			ForeignPriorityBag    *[]ForeignPriority `json:"foreignPriorityBag,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
 	JSON400 *struct {
 		Code              interface{} `json:"code,omitempty"`
@@ -6317,6 +6323,7 @@ type GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse struct 
 			ApplicationNumberText *string      `json:"applicationNumberText,omitempty"`
 			EventDataBag          *[]EventData `json:"eventDataBag,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
 	JSON400 *struct {
 		Code              interface{} `json:"code,omitempty"`
@@ -8717,6 +8724,7 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse(rsp 
 				// PatentTermAdjustmentData Patent term adjustment data
 				PatentTermAdjustmentData *PatentTermAdjustment `json:"patentTermAdjustmentData,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -8796,6 +8804,7 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse(rsp 
 				ApplicationNumberText *string       `json:"applicationNumberText,omitempty"`
 				AssignmentBag         *[]Assignment `json:"assignmentBag,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -8881,6 +8890,7 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResp
 				PgpubDocumentMetaData *PGPubFileMetaData `json:"pgpubDocumentMetaData,omitempty"`
 				RequestIdentifier     *string            `json:"requestIdentifier,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -8962,6 +8972,7 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse(rsp *h
 				// RecordAttorney An attorney selected by the applicant or owner of an intellectual property to represent them before the national office.
 				RecordAttorney *RecordAttorney `json:"recordAttorney,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -9043,6 +9054,7 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextContinuityResponse(rsp 
 				ParentContinuityBag   *[]ParentContinuityData `json:"parentContinuityBag,omitempty"`
 				RequestIdentifier     *string                 `json:"requestIdentifier,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -9148,6 +9160,7 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
 				ApplicationNumberText *string            `json:"applicationNumberText,omitempty"`
 				ForeignPriorityBag    *[]ForeignPriority `json:"foreignPriorityBag,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -9309,6 +9322,7 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse(rs
 				ApplicationNumberText *string      `json:"applicationNumberText,omitempty"`
 				EventDataBag          *[]EventData `json:"eventDataBag,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err

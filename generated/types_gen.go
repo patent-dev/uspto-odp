@@ -191,6 +191,7 @@ type Assignment struct {
 		AssignorName  *string `json:"assignorName,omitempty"`
 		ExecutionDate *string `json:"executionDate,omitempty"`
 	} `json:"assignorBag,omitempty"`
+	AttorneyDocketNumber *string `json:"attorneyDocketNumber,omitempty"`
 
 	// ConveyanceText A description of the nature of the interest conveyed or transaction to be recorded in an assignment. Examples of the types of descriptions `include:` assignment, security agreement, merger, change of name, license, foreclosure, lien,
 	ConveyanceText        *string                 `json:"conveyanceText,omitempty"`
@@ -283,6 +284,7 @@ type DecisionDataResponse struct {
 	Count                      *int                          `json:"count,omitempty"`
 	Facets                     *[]Facet                      `json:"facets,omitempty"`
 	PatentTrialDocumentDataBag *[]PatentTrialDecisionDataBag `json:"patentTrialDocumentDataBag,omitempty"`
+	RequestIdentifier          *string                       `json:"requestIdentifier,omitempty"`
 }
 
 // DerivationPetitionerData defines model for DerivationPetitionerData.
@@ -300,8 +302,10 @@ type DerivationPetitionerData struct {
 
 // DocumentBag defines model for DocumentBag.
 type DocumentBag struct {
+	Count       *int `json:"count,omitempty"`
 	DocumentBag *[]struct {
 		ApplicationNumberText       *string `json:"applicationNumberText,omitempty"`
+		DirectionCategory           *string `json:"directionCategory,omitempty"`
 		DocumentCode                *string `json:"documentCode,omitempty"`
 		DocumentCodeDescriptionText *string `json:"documentCodeDescriptionText,omitempty"`
 		DocumentDirectionCategory   *string `json:"documentDirectionCategory,omitempty"`
@@ -336,6 +340,7 @@ type DocumentDataResponse struct {
 	Count                      *int                          `json:"count,omitempty"`
 	Facets                     *[]Facet                      `json:"facets,omitempty"`
 	PatentTrialDocumentDataBag *[]PatentTrialDocumentDataBag `json:"patentTrialDocumentDataBag,omitempty"`
+	RequestIdentifier          *string                       `json:"requestIdentifier,omitempty"`
 }
 
 // DownloadRequest defines model for DownloadRequest.
@@ -442,9 +447,11 @@ type InterferenceDecisionRecord struct {
 	} `json:"additionalPartyDataBag,omitempty"`
 	DocumentData         *InterferenceDecisionDocumentData `json:"documentData,omitempty"`
 	InterferenceMetaData *struct {
-		FileDownloadURI              *string             `json:"fileDownloadURI,omitempty"`
-		InterferenceLastModifiedDate *openapi_types.Date `json:"interferenceLastModifiedDate,omitempty"`
-		InterferenceStyleName        *string             `json:"interferenceStyleName,omitempty"`
+		DeclarationDate                  *string             `json:"declarationDate,omitempty"`
+		FileDownloadURI                  *string             `json:"fileDownloadURI,omitempty"`
+		InterferenceLastModifiedDate     *openapi_types.Date `json:"interferenceLastModifiedDate,omitempty"`
+		InterferenceLastModifiedDateTime *string             `json:"interferenceLastModifiedDateTime,omitempty"`
+		InterferenceStyleName            *string             `json:"interferenceStyleName,omitempty"`
 	} `json:"interferenceMetaData,omitempty"`
 	InterferenceNumber   string                 `json:"interferenceNumber"`
 	JuniorPartyData      *InterferencePartyData `json:"juniorPartyData,omitempty"`
@@ -549,6 +556,7 @@ type PatentDataResponse struct {
 		// RecordAttorney An attorney selected by the applicant or owner of an intellectual property to represent them before the national office.
 		RecordAttorney *RecordAttorney `json:"recordAttorney,omitempty"`
 	} `json:"patentFileWrapperDataBag,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 }
 
 // PatentDownloadRequest defines model for PatentDownloadRequest.
@@ -614,7 +622,9 @@ type PatentTermAdjustment struct {
 	BDelayQuantity *int `json:"bDelayQuantity,omitempty"`
 
 	// CDelayQuantity C delays quantity number of adjustments to the term of the patent based upon USPTO delays caused by interference proceedings, secrecy orders, and successful appellate reviews.
-	CDelayQuantity *int `json:"cDelayQuantity,omitempty"`
+	CDelayQuantity                  *int     `json:"cDelayQuantity,omitempty"`
+	IpOfficeAdjustmentDelayQuantity *float32 `json:"ipOfficeAdjustmentDelayQuantity,omitempty"`
+	NonOverlappingDayDelayQuantity  *float32 `json:"nonOverlappingDayDelayQuantity,omitempty"`
 
 	// NonOverlappingDayQuantity Patent term adjustment non overlapping days quantity number of overall summation of the USPTO delays minus any overlapping days.
 	NonOverlappingDayQuantity *float32 `json:"nonOverlappingDayQuantity,omitempty"`
@@ -647,6 +657,7 @@ type PetitionDecision struct {
 	DecisionPetitionTypeCode                *int      `json:"decisionPetitionTypeCode,omitempty"`
 	DecisionPetitionTypeCodeDescriptionText *string   `json:"decisionPetitionTypeCodeDescriptionText,omitempty"`
 	DecisionTypeCode                        *string   `json:"decisionTypeCode,omitempty"`
+	DecisionTypeCodeDescriptionText         *string   `json:"decisionTypeCodeDescriptionText,omitempty"`
 	FinalDecidingOfficeName                 *string   `json:"finalDecidingOfficeName,omitempty"`
 	FirstApplicantName                      *string   `json:"firstApplicantName,omitempty"`
 	FirstInventorToFileIndicator            *bool     `json:"firstInventorToFileIndicator,omitempty"`
@@ -658,6 +669,7 @@ type PetitionDecision struct {
 	PetitionDecisionRecordIdentifier        *string   `json:"petitionDecisionRecordIdentifier,omitempty"`
 	PetitionIssueConsideredTextBag          *[]string `json:"petitionIssueConsideredTextBag,omitempty"`
 	PetitionMailDate                        *string   `json:"petitionMailDate,omitempty"`
+	ProsecutionStatusCode                   *int      `json:"prosecutionStatusCode,omitempty"`
 	ProsecutionStatusCodeDescriptionText    *string   `json:"prosecutionStatusCodeDescriptionText,omitempty"`
 	RuleBag                                 *[]string `json:"ruleBag,omitempty"`
 	StatuteBag                              *[]string `json:"statuteBag,omitempty"`
@@ -670,6 +682,7 @@ type PetitionDecisionAndDocuments = PetitionDecision
 // PetitionDecisionDocument defines model for PetitionDecisionDocument.
 type PetitionDecisionDocument struct {
 	ApplicationNumberText       *string `json:"applicationNumberText,omitempty"`
+	DirectionCategory           *string `json:"directionCategory,omitempty"`
 	DocumentCode                *string `json:"documentCode,omitempty"`
 	DocumentCodeDescriptionText *string `json:"documentCodeDescriptionText,omitempty"`
 	DocumentDirectionCategory   *string `json:"documentDirectionCategory,omitempty"`
@@ -734,6 +747,7 @@ type PetitionDecisionFilter struct {
 type PetitionDecisionIdentifierResponseBag struct {
 	Count                   *int                            `json:"count,omitempty"`
 	PetitionDecisionDataBag *[]PetitionDecisionAndDocuments `json:"petitionDecisionDataBag,omitempty"`
+	RequestIdentifier       *string                         `json:"requestIdentifier,omitempty"`
 }
 
 // PetitionDecisionRange Range filter. Provide field from dataset and valueFrom and valueTo. If range filter is for date field, date must be in “yyyy-MM-dd” format
@@ -748,6 +762,7 @@ type PetitionDecisionResponseBag struct {
 	Count                   *int                     `json:"count,omitempty"`
 	Facets                  *[]PetitionDecisionFacet `json:"facets,omitempty"`
 	PetitionDecisionDataBag *[]PetitionDecision      `json:"petitionDecisionDataBag,omitempty"`
+	RequestIdentifier       *string                  `json:"requestIdentifier,omitempty"`
 }
 
 // PetitionDecisionSearchRequest defines model for PetitionDecisionSearchRequest.
@@ -991,6 +1006,7 @@ type StatusCodeSearchResponse struct {
 // TrialMetaData defines model for TrialMetaData.
 type TrialMetaData struct {
 	AccordedFilingDate        *openapi_types.Date `json:"accordedFilingDate,omitempty"`
+	FileDownloadURI           *string             `json:"fileDownloadURI,omitempty"`
 	InstitutionDecisionDate   *openapi_types.Date `json:"institutionDecisionDate,omitempty"`
 	LatestDecisionDate        *openapi_types.Date `json:"latestDecisionDate,omitempty"`
 	PetitionFilingDate        *openapi_types.Date `json:"petitionFilingDate,omitempty"`
@@ -1053,6 +1069,7 @@ type PatentTrialDecisionDataBag struct {
 	DecisionData             *DecisionData             `json:"decisionData,omitempty"`
 	DerivationPetitionerData *DerivationPetitionerData `json:"derivationPetitionerData,omitempty"`
 	DocumentData             *DocumentData             `json:"documentData,omitempty"`
+	FileDownloadURI          *string                   `json:"fileDownloadURI,omitempty"`
 	LastModifiedDateTime     *string                   `json:"lastModifiedDateTime,omitempty"`
 	PatentOwnerData          *PatentOwnerData          `json:"patentOwnerData,omitempty"`
 	RegularPetitionerData    *RegularPetitionerData    `json:"regularPetitionerData,omitempty"`
@@ -1068,6 +1085,7 @@ type PatentTrialDocumentDataBag struct {
 	DecisionData             *DecisionData             `json:"decisionData,omitempty"`
 	DerivationPetitionerData *DerivationPetitionerData `json:"derivationPetitionerData,omitempty"`
 	DocumentData             *DocumentData             `json:"documentData,omitempty"`
+	FileDownloadURI          *string                   `json:"fileDownloadURI,omitempty"`
 	LastModifiedDateTime     *string                   `json:"lastModifiedDateTime,omitempty"`
 	PatentOwnerData          *PatentOwnerData          `json:"patentOwnerData,omitempty"`
 	RegularPetitionerData    *RegularPetitionerData    `json:"regularPetitionerData,omitempty"`

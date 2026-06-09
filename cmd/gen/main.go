@@ -505,12 +505,254 @@ func applyFixes() error {
 		return fmt.Errorf("writing %s: %w", fixedFile, err)
 	}
 
+	// Fix 14: Add fields the live API returns but the spec omits. Done as a
+	// YAML-tree pass (Go's regexp has no backreferences, so indentation-sensitive
+	// regex injection is impractical). This covers both the top-level envelope
+	// fields (requestIdentifier/count on ~20 endpoints) and the nested component
+	// properties (directionCategory, PTA delay quantities, attorneyDocketNumber,
+	// petition decision/status codes, trial/interference metadata fields).
+	if err := addMissingFields(); err != nil {
+		return fmt.Errorf("adding missing fields: %w", err)
+	}
+
 	// Fix 5: Move response-like schemas to components/responses
 	if err := fixResponseSchemas(); err != nil {
 		return fmt.Errorf("fixing response schemas: %w", err)
 	}
 
 	return nil
+}
+
+// nestedFieldFix describes a sibling property to inject into any "properties"
+// mapping that already contains a given anchor property. anchor pins us to the
+// right schema (the modelled field that sits next to the dropped one); add lists
+// the properties to insert if absent.
+type nestedFieldFix struct {
+	anchor string
+	add    []addField
+	desc   string
+}
+
+type addField struct {
+	name string
+	typ  string
+}
+
+// nestedFieldFixes lists the dropped nested properties the live API returns.
+// Each is anchored on a sibling that uniquely identifies the owning schema, so
+// the recursive walk only touches the intended objects.
+var nestedFieldFixes = []nestedFieldFix{
+	// DocumentBag.documentBag[]: API returns directionCategory in addition to the
+	// modelled documentDirectionCategory.
+	{anchor: "documentDirectionCategory", add: []addField{{"directionCategory", "string"}}, desc: "DocumentBag.directionCategory"},
+	// PatentTermAdjustment: API returns these delay quantities; spec models only
+	// nonOverlappingDayQuantity.
+	{anchor: "nonOverlappingDayQuantity", add: []addField{{"ipOfficeAdjustmentDelayQuantity", "number"}, {"nonOverlappingDayDelayQuantity", "number"}}, desc: "PatentTermAdjustment delay quantities"},
+	// PetitionDecision: API returns these alongside decisionPetitionTypeCode.
+	// prosecutionStatusCode comes back as a number (e.g. 168).
+	{anchor: "decisionPetitionTypeCodeDescriptionText", add: []addField{{"decisionTypeCodeDescriptionText", "string"}, {"prosecutionStatusCode", "integer"}}, desc: "PetitionDecision decision/status codes"},
+	// TrialMetaData: API returns a fileDownloadURI; anchor on trialTypeCode.
+	{anchor: "trialTypeCode", add: []addField{{"fileDownloadURI", "string"}}, desc: "TrialMetaData.fileDownloadURI"},
+	// interferenceMetaData (inline): API returns these alongside interferenceStyleName.
+	{anchor: "interferenceStyleName", add: []addField{{"interferenceLastModifiedDateTime", "string"}, {"declarationDate", "string"}}, desc: "interferenceMetaData modified/declaration dates"},
+}
+
+// addMissingFields injects fields the live API returns but the USPTO spec omits.
+// It performs two passes over the bundled spec:
+//
+//   - Envelope fields: the top-level requestIdentifier (and, for the documents
+//     DocumentBag, count) on the ~20 response schemas that carry a data bag --
+//     both shared component schemas and inline 200-response schemas under paths.
+//   - Nested fields: dropped properties on component/inline object schemas
+//     (directionCategory, PTA delay quantities, attorneyDocketNumber, petition
+//     decision/status codes, trial/interference metadata fields), injected via a
+//     recursive walk anchored on a modelled sibling property.
+func addMissingFields() error {
+	data, err := os.ReadFile(fixedFile)
+	if err != nil {
+		return err
+	}
+
+	var doc yaml.Node
+	if err := yaml.Unmarshal(data, &doc); err != nil {
+		return fmt.Errorf("parsing YAML: %w", err)
+	}
+
+	root := getDocRoot(&doc)
+	count := 0
+
+	// --- Envelope fields ---
+
+	// Shared component response schemas that lack requestIdentifier. Restricted to
+	// an explicit allow-list: these are the top-level response envelopes; other
+	// schemas that merely carry a *DataBag property (e.g. PatentTermAdjustment's
+	// history bag, item records) must not gain a requestIdentifier.
+	envelopeSchemas := map[string]bool{
+		"PatentDataResponse":                    true, // search, /{n}, /meta-data
+		"PetitionDecisionResponseBag":           true, // petition search
+		"PetitionDecisionIdentifierResponseBag": true, // petition by record id
+		"DecisionDataResponse":                  true, // trials decisions search + single
+		"DocumentDataResponse":                  true, // trials documents search + single
+	}
+	schemas := findNode(&doc, "components", "schemas")
+	if schemas != nil {
+		for i := 0; i+1 < len(schemas.Content); i += 2 {
+			name := schemas.Content[i].Value
+			schema := schemas.Content[i+1]
+			props := findChildNode(schema, "properties")
+			if props == nil {
+				continue
+			}
+			// Assignment carries an attorneyDocketNumber the spec omits. It is a
+			// schema, not a response, so handle it here rather than via an anchor.
+			if name == "Assignment" {
+				if addProp(props, "attorneyDocketNumber", scalarSchema("string")) {
+					count++
+					log.Println("  - Added Assignment.attorneyDocketNumber (API returns it)")
+				}
+				continue
+			}
+			if name == "DocumentBag" {
+				// DocumentBag is returned bare (count + documentBag, no requestIdentifier).
+				if addProp(props, "count", scalarSchema("integer")) {
+					count++
+					log.Println("  - Added DocumentBag.count (top-level envelope)")
+				}
+				continue
+			}
+			if envelopeSchemas[name] && addProp(props, "requestIdentifier", scalarSchema("string")) {
+				count++
+				log.Printf("  - Added %s.requestIdentifier (top-level envelope)", name)
+			}
+		}
+	}
+
+	// Inline 200-response schemas under paths.
+	paths := findChildNode(root, "paths")
+	if paths != nil {
+		for i := 0; i+1 < len(paths.Content); i += 2 {
+			pathNode := paths.Content[i+1]
+			for j := 0; j+1 < len(pathNode.Content); j += 2 {
+				method := pathNode.Content[j+1]
+				resp200 := findNode2(method, "responses", "200", "content", "application/json", "schema")
+				if resp200 == nil {
+					continue
+				}
+				props := findChildNode(resp200, "properties")
+				if props == nil {
+					continue
+				}
+				if hasDataBag(props) && addProp(props, "requestIdentifier", scalarSchema("string")) {
+					count++
+					log.Printf("  - Added requestIdentifier to inline 200 schema for %s", paths.Content[i].Value)
+				}
+			}
+		}
+	}
+
+	// --- Nested fields ---
+
+	for _, fix := range nestedFieldFixes {
+		if n := injectNested(&doc, fix); n > 0 {
+			count += n
+			log.Printf("  - Added %s (API returns it)", fix.desc)
+		}
+	}
+
+	log.Printf("  Applied %d missing-field additions", count)
+
+	out, err := yaml.Marshal(&doc)
+	if err != nil {
+		return fmt.Errorf("marshaling YAML: %w", err)
+	}
+	return os.WriteFile(fixedFile, out, 0644)
+}
+
+// injectNested walks the tree and, for every "properties" mapping that contains
+// fix.anchor, inserts fix.add entries that are absent. Returns the number of
+// properties mappings it modified.
+func injectNested(node *yaml.Node, fix nestedFieldFix) int {
+	if node == nil {
+		return 0
+	}
+	n := 0
+	switch node.Kind {
+	case yaml.DocumentNode, yaml.SequenceNode:
+		for _, c := range node.Content {
+			n += injectNested(c, fix)
+		}
+	case yaml.MappingNode:
+		for i := 0; i+1 < len(node.Content); i += 2 {
+			key := node.Content[i].Value
+			val := node.Content[i+1]
+			if key == "properties" && val.Kind == yaml.MappingNode && findChildNode(val, fix.anchor) != nil {
+				touched := false
+				for _, f := range fix.add {
+					if addProp(val, f.name, scalarSchema(f.typ)) {
+						touched = true
+					}
+				}
+				if touched {
+					n++
+				}
+			}
+			n += injectNested(val, fix)
+		}
+	}
+	return n
+}
+
+// hasDataBag reports whether a properties mapping carries a data-bag property
+// (a *DataBag or *ResponseBag), the marker of a paginated envelope.
+func hasDataBag(props *yaml.Node) bool {
+	if props == nil || props.Kind != yaml.MappingNode {
+		return false
+	}
+	for i := 0; i+1 < len(props.Content); i += 2 {
+		k := props.Content[i].Value
+		if strings.HasSuffix(k, "DataBag") || strings.HasSuffix(k, "ResponseBag") {
+			return true
+		}
+	}
+	return false
+}
+
+// addProp adds a property to a properties mapping if absent. Returns true if added.
+func addProp(props *yaml.Node, name string, value *yaml.Node) bool {
+	if props == nil || props.Kind != yaml.MappingNode {
+		return false
+	}
+	if findChildNode(props, name) != nil {
+		return false
+	}
+	props.Content = append(props.Content,
+		&yaml.Node{Kind: yaml.ScalarNode, Value: name},
+		value,
+	)
+	return true
+}
+
+// scalarSchema builds a minimal {type: <t>} schema node.
+func scalarSchema(t string) *yaml.Node {
+	return &yaml.Node{
+		Kind: yaml.MappingNode,
+		Content: []*yaml.Node{
+			{Kind: yaml.ScalarNode, Value: "type"},
+			{Kind: yaml.ScalarNode, Value: t},
+		},
+	}
+}
+
+// findNode2 is findNode anchored at an arbitrary node (not the document root).
+func findNode2(node *yaml.Node, keys ...string) *yaml.Node {
+	current := node
+	for _, key := range keys {
+		current = findChildNode(current, key)
+		if current == nil {
+			return nil
+		}
+	}
+	return current
 }
 
 // fixResponseSchemas handles response-like schema definitions.

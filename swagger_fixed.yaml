@@ -780,6 +780,8 @@ paths:
                                                     description: Free format of application number
                                                 patentTermAdjustmentData:
                                                     $ref: '#/components/schemas/PatentTermAdjustment'
+                                    requestIdentifier:
+                                        type: string
                 '400':
                     description: Bad Request
                     content:
@@ -870,6 +872,8 @@ paths:
                                                     type: array
                                                     items:
                                                         $ref: '#/components/schemas/Assignment'
+                                    requestIdentifier:
+                                        type: string
                 '400':
                     description: Bad Request
                     content:
@@ -958,6 +962,8 @@ paths:
                                                     description: Free format of application number
                                                 recordAttorney:
                                                     $ref: '#/components/schemas/RecordAttorney'
+                                    requestIdentifier:
+                                        type: string
                 '400':
                     description: Bad Request
                     content:
@@ -1055,6 +1061,8 @@ paths:
                                                 requestIdentifier:
                                                     type: string
                                                     example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+                                    requestIdentifier:
+                                        type: string
     /api/v1/patent/applications/{applicationNumberText}/foreign-priority:
         x-ip-domain: Patent
         x-service-type: Dissemination
@@ -1093,6 +1101,8 @@ paths:
                                                     type: array
                                                     items:
                                                         $ref: '#/components/schemas/ForeignPriority'
+                                    requestIdentifier:
+                                        type: string
                 '400':
                     description: Bad Request
                     content:
@@ -1183,6 +1193,8 @@ paths:
                                                     type: array
                                                     items:
                                                         $ref: '#/components/schemas/EventData'
+                                    requestIdentifier:
+                                        type: string
                 '400':
                     description: Bad Request
                     content:
@@ -1382,6 +1394,8 @@ paths:
                                                 requestIdentifier:
                                                     type: string
                                                     example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+                                    requestIdentifier:
+                                        type: string
                 '400':
                     description: Bad Request
                     content:
@@ -4566,6 +4580,8 @@ components:
                                         count:
                                             type: integer
                                             example: 44673
+                requestIdentifier:
+                    type: string
         ApplicationMetaData:
             type: object
             description: Represents patent application meta data properties
@@ -4891,6 +4907,10 @@ components:
                             ptaPTECode:
                                 type: string
                                 example: PTA
+                ipOfficeAdjustmentDelayQuantity:
+                    type: number
+                nonOverlappingDayDelayQuantity:
+                    type: number
         Assignment:
             type: object
             description: The collection of national assignments related to a patent
@@ -5047,6 +5067,8 @@ components:
                         lastIngestionDateTime:
                             type: string
                             example: 2025-04-23T02:47:58
+                attorneyDocketNumber:
+                    type: string
         RecordAttorney:
             type: object
             description: An attorney selected by the applicant or owner of an intellectual property to represent them before the national office.
@@ -5397,6 +5419,10 @@ components:
                                         pageTotalQuantity:
                                             type: integer
                                             example: 2
+                            directionCategory:
+                                type: string
+                count:
+                    type: integer
         PGPubFileMetaData:
             type: object
             description: Contains pgpub zip and xml file meta data for an application
@@ -5484,6 +5510,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/PetitionDecisionFacet'
+                requestIdentifier:
+                    type: string
         PetitionDecisionIdentifierResponseBag:
             type: object
             properties:
@@ -5494,6 +5522,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/PetitionDecisionAndDocuments'
+                requestIdentifier:
+                    type: string
         # Trial – Proceedings
         ProceedingDataResponse:
             type: object
@@ -5524,6 +5554,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Facet'
+                requestIdentifier:
+                    type: string
         PatentTrialDocumentDataBag:
             $ref: '#/components/schemas/patentTrialDocumentDataBag'
         # Trial – Decisions
@@ -5541,6 +5573,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Facet'
+                requestIdentifier:
+                    type: string
         PatentTrialDecisionDataBag:
             $ref: '#/components/schemas/patentTrialDecisionDataBag'
         # Trial – Interferences (decisions)
@@ -5709,6 +5743,8 @@ components:
                     $ref: '#/components/schemas/DocumentData'
                 decisionData:
                     $ref: '#/components/schemas/DecisionData'
+                fileDownloadURI:
+                    type: string
         patentTrialDecisionDataBag:
             type: object
             description: A single PTAB document record.
@@ -5739,6 +5775,8 @@ components:
                     $ref: '#/components/schemas/DocumentData'
                 decisionData:
                     $ref: '#/components/schemas/DecisionData'
+                fileDownloadURI:
+                    type: string
         SearchRequest:
             allOf:
                 - $ref: '#/components/schemas/PatentSearchRequest'
@@ -5789,6 +5827,8 @@ components:
                 trialTypeCode:
                     type: string
                     example: "102"
+                fileDownloadURI:
+                    type: string
         PatentOwnerData:
             type: object
             properties:
@@ -6025,6 +6065,10 @@ components:
                         fileDownloadURI:
                             type: string
                             example: "/download"
+                        interferenceLastModifiedDateTime:
+                            type: string
+                        declarationDate:
+                            type: string
                 seniorPartyData:
                     $ref: '#/components/schemas/InterferencePartyData'
                 juniorPartyData:
@@ -6668,6 +6712,10 @@ components:
                     items:
                         type: string
                     example: ["35 USC 134"]
+                decisionTypeCodeDescriptionText:
+                    type: string
+                prosecutionStatusCode:
+                    type: integer
         PetitionDecisionAndDocuments:
             allOf:
                 - $ref: '#/components/schemas/PetitionDecision'
@@ -6772,6 +6820,8 @@ components:
                             pageTotalQuantity:
                                 type: integer
                                 example: 2
+                directionCategory:
+                    type: string
         ParamQ:
             type: string
             description: Boolean/wildcard search query string.
