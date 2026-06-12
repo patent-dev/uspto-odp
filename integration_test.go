@@ -316,7 +316,7 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 			t.Fatalf("SearchPatentsDownload failed: %v", err)
 		}
 
-		if result == nil || len(result) == 0 {
+		if len(result) == 0 {
 			t.Fatal("Expected download data")
 		}
 
@@ -351,7 +351,7 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 			t.Fatalf("SearchPetitionsDownload failed: %v", err)
 		}
 
-		if result == nil || len(result) == 0 {
+		if len(result) == 0 {
 			t.Fatal("Expected download data")
 		}
 
@@ -380,7 +380,7 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 		}
 
 		// Look for specific file ipg250916.zip
-		var fileIndex int = -1
+		fileIndex := -1
 		for i, f := range *product.ProductFileBag.FileDataBag {
 			if f.FileName != nil && strings.Contains(*f.FileName, "ipg250916.zip") {
 				fileIndex = i

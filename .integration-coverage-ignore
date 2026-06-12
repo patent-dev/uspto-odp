@@ -1,0 +1,6 @@
+# Exported *Client methods that are NOT USPTO endpoints and therefore need no
+# per-endpoint integration test. One method name per line.
+#
+# (None at present: every exported *Client method in the root package maps to a
+# live endpoint and has a TestIntegration<Method>. ResolvePatentNumber and the XML
+# helpers each issue a real request, so they are covered too.)

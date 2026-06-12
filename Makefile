@@ -1,4 +1,4 @@
-.PHONY: generate test test-integration lint fmt coverage tidy examples
+.PHONY: generate test test-integration check-integration refresh-fixtures lint fmt coverage tidy
 
 # generate re-applies the OpenAPI fixes (if a script is present) and regenerates
 # the typed client via the //go:generate directives.
@@ -13,6 +13,11 @@ test:
 test-integration:
 	go test -race -count=1 -tags=integration ./...
 
+# check-integration verifies every exported endpoint Client method has a
+# per-endpoint TestIntegration<Method> in a //go:build integration test file.
+check-integration:
+	./scripts/check-integration-coverage.sh
+
 lint:
 	golangci-lint run
 
@@ -26,8 +31,11 @@ coverage:
 tidy:
 	go mod tidy
 
-# examples runs the demo against the live API to refresh demo/examples (recorded
-# request/response pairs). Requires the API credentials in the environment.
-# The weekly response-watch workflow runs this and diffs the result.
-examples:
-	cd demo && go run .
+# refresh-fixtures deliberately re-captures the committed golden response bodies
+# under testdata/strictdecode/ from the live API (requires USPTO_API_KEY). The
+# deterministic tests (TestFixtures in decode_examples_test.go) read the COMMITTED
+# copies, so re-capturing does not change test behavior until the new bodies are
+# reviewed and committed. Search/list goldens are truncated by hand afterward.
+refresh-fixtures:
+	./scripts/refresh-fixtures.sh
+	@echo "testdata/strictdecode updated; review 'git diff testdata/strictdecode' before committing."
