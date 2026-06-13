@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"math"
 	"net/http"
 	"net/http/httptest"
@@ -111,6 +112,47 @@ func TestAPIError_RetryAfter(t *testing.T) {
 	}
 	if !apiErr.IsRetryable() {
 		t.Error("expected 429 to be retryable")
+	}
+}
+
+// TestCheckEmptyBody verifies a success status with no body becomes a clear,
+// retryable error instead of being passed on to a parser that would fail with an
+// opaque "unexpected end of JSON input" / "EOF".
+func TestCheckEmptyBody(t *testing.T) {
+	if err := checkEmptyBody(200, []byte(`{"a":1}`)); err != nil {
+		t.Errorf("non-empty body: got %v, want nil", err)
+	}
+	for _, body := range [][]byte{nil, {}, []byte("  \n\t")} {
+		err := checkEmptyBody(200, body)
+		var apiErr *APIError
+		if !errors.As(err, &apiErr) {
+			t.Fatalf("empty body %q: got %T, want *APIError", body, err)
+		}
+		if !apiErr.Empty || !apiErr.IsRetryable() {
+			t.Errorf("empty body %q: Empty=%v IsRetryable=%v, want true/true", body, apiErr.Empty, apiErr.IsRetryable())
+		}
+		if !strings.Contains(apiErr.Error(), "empty response body") {
+			t.Errorf("empty body %q: message %q should name the empty body", body, apiErr.Error())
+		}
+	}
+}
+
+// TestReadJSONResponse_Empty200 ensures an empty 200 surfaces as the clear
+// empty-body error rather than json.Unmarshal's "unexpected end of JSON input".
+func TestReadJSONResponse_Empty200(t *testing.T) {
+	resp := &http.Response{
+		StatusCode: 200,
+		Body:       io.NopCloser(strings.NewReader("")),
+		Header:     http.Header{},
+	}
+	var out map[string]any
+	err := readJSONResponse(resp, &out)
+	var apiErr *APIError
+	if !errors.As(err, &apiErr) || !apiErr.Empty {
+		t.Fatalf("empty 200: got %v (%T), want empty-body APIError", err, err)
+	}
+	if strings.Contains(err.Error(), "unexpected end of JSON") {
+		t.Errorf("should not surface the opaque json message: %q", err.Error())
 	}
 }
 

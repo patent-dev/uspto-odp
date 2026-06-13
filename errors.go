@@ -1,6 +1,7 @@
 package odp
 
 import (
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
@@ -19,6 +20,9 @@ type APIError struct {
 	// RetryAfter, when non-zero, is the duration the server asked the client
 	// to wait before retrying (parsed from the Retry-After header).
 	RetryAfter time.Duration
+	// Empty is set when the server returned a success status with no body. USPTO
+	// services (notably TSDR) do this when degraded; it is treated as transient.
+	Empty bool
 }
 
 func (e *APIError) Error() string {
@@ -33,11 +37,12 @@ func (e *APIError) Detail() string {
 	return e.Message
 }
 
-// IsRetryable returns true for transient HTTP statuses (429, 5xx). The
-// Retry-After cap is a *client* policy, enforced by retryableRequest, not
-// by the error itself.
+// IsRetryable returns true for transient conditions: HTTP 429, 5xx, or an empty
+// body on a success status (a degraded-service symptom that often clears on a
+// retry). The Retry-After cap is a *client* policy, enforced by retryableRequest,
+// not by the error itself.
 func (e *APIError) IsRetryable() bool {
-	return e.StatusCode == http.StatusTooManyRequests || e.StatusCode >= 500
+	return e.Empty || e.StatusCode == http.StatusTooManyRequests || e.StatusCode >= 500
 }
 
 func isRetryableError(err error) bool {
@@ -107,4 +112,20 @@ func checkResponseStatus(statusCode int, body []byte, headers http.Header) error
 	}
 	apiErr.RetryAfter = parseRetryAfter(headers)
 	return apiErr
+}
+
+// checkEmptyBody reports a clear, retryable error when a success response carries
+// no body. USPTO services (notably TSDR) occasionally return an empty 200/204 when
+// degraded; without this, callers fail later with an opaque "unexpected end of
+// JSON input" or "XML unmarshal: EOF" that hides the real cause. Call it only
+// after checkResponseStatus has confirmed a 2xx.
+func checkEmptyBody(statusCode int, body []byte) error {
+	if len(bytes.TrimSpace(body)) > 0 {
+		return nil
+	}
+	return &APIError{
+		StatusCode: statusCode,
+		Empty:      true,
+		Message:    fmt.Sprintf("USPTO returned an empty response body with HTTP %d", statusCode),
+	}
 }

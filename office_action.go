@@ -51,6 +51,9 @@ func readJSONResponse(resp *http.Response, result any) error {
 	if err := checkResponseStatus(resp.StatusCode, body, resp.Header); err != nil {
 		return err
 	}
+	if err := checkEmptyBody(resp.StatusCode, body); err != nil {
+		return err
+	}
 	return json.Unmarshal(body, result)
 }
 

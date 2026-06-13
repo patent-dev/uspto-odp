@@ -56,6 +56,9 @@ func (c *Client) GetTrademarkStatus(ctx context.Context, serialNumber string) (*
 		if err := checkResponseStatus(resp.StatusCode(), resp.Body, headerOf(resp.HTTPResponse)); err != nil {
 			return err
 		}
+		if err := checkEmptyBody(resp.StatusCode(), resp.Body); err != nil {
+			return err
+		}
 		return nil
 	})
 	if err != nil {
@@ -119,6 +122,9 @@ func (c *Client) GetTrademarkDocumentsXML(ctx context.Context, serialNumber stri
 		if err := checkResponseStatus(resp.StatusCode, body, resp.Header); err != nil {
 			return err
 		}
+		if err := checkEmptyBody(resp.StatusCode, body); err != nil {
+			return err
+		}
 		result = body
 		return nil
 	})
@@ -149,6 +155,9 @@ func (c *Client) GetTrademarkDocumentInfo(ctx context.Context, serialNumber, doc
 			return fmt.Errorf("reading response: %w", err)
 		}
 		if err := checkResponseStatus(resp.StatusCode, body, resp.Header); err != nil {
+			return err
+		}
+		if err := checkEmptyBody(resp.StatusCode, body); err != nil {
 			return err
 		}
 		result = body
@@ -239,6 +248,9 @@ func (c *Client) GetTrademarkLastUpdate(ctx context.Context, serialNumber string
 		if err := checkResponseStatus(resp.StatusCode(), resp.Body, headerOf(resp.HTTPResponse)); err != nil {
 			return err
 		}
+		if err := checkEmptyBody(resp.StatusCode(), resp.Body); err != nil {
+			return err
+		}
 		return nil
 	})
 	if err != nil {
@@ -269,6 +281,9 @@ func (c *Client) GetTrademarkMultiStatus(ctx context.Context, pType string, numb
 			return err
 		}
 		if err := checkResponseStatus(resp.StatusCode(), resp.Body, headerOf(resp.HTTPResponse)); err != nil {
+			return err
+		}
+		if err := checkEmptyBody(resp.StatusCode(), resp.Body); err != nil {
 			return err
 		}
 		return nil
