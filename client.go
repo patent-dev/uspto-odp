@@ -298,12 +298,30 @@ type PatentSearchSort struct {
 	Order string
 }
 
+// PatentSearchFilter is a server-side term filter: a document field constrained
+// to one or more exact values (OR-ed within the field, AND-ed across filters).
+type PatentSearchFilter struct {
+	Field  string
+	Values []string
+}
+
+// PatentSearchRange is a server-side range filter on a date/number field. An
+// empty From or To leaves that bound open.
+type PatentSearchRange struct {
+	Field string
+	From  string
+	To    string
+}
+
 // PatentSearchOptions carries the optional refinements for
-// SearchPatentsWithOptions on top of the query and pagination: an ordered list of
-// sort keys and a response field projection (the document fields to return).
+// SearchPatentsWithOptions on top of the query and pagination: sort keys, a
+// response field projection, and the server-side term/range filters the ODP
+// search endpoint supports (faceted filtering and date/number windows).
 type PatentSearchOptions struct {
-	Sort   []PatentSearchSort
-	Fields []string
+	Sort         []PatentSearchSort
+	Fields       []string
+	Filters      []PatentSearchFilter
+	RangeFilters []PatentSearchRange
 }
 
 // SearchPatentsWithOptions searches for patent applications with optional sort
@@ -326,6 +344,12 @@ func (c *Client) SearchPatentsWithOptions(ctx context.Context, query string, off
 		if len(opts.Fields) > 0 {
 			fields := append([]string(nil), opts.Fields...)
 			req.Fields = &fields
+		}
+		if filters := buildSearchFilters(opts.Filters); len(filters) > 0 {
+			req.Filters = &filters
+		}
+		if ranges := buildSearchRanges(opts.RangeFilters); len(ranges) > 0 {
+			req.RangeFilters = &ranges
 		}
 	}
 
@@ -367,6 +391,40 @@ func buildSearchSort(keys []PatentSearchSort) []generated.Sort {
 			s.Order = &order
 		}
 		out = append(out, s)
+	}
+	return out
+}
+
+// buildSearchFilters maps the public term filters onto the generated Filter
+// entries, skipping filters with no field or no values.
+func buildSearchFilters(filters []PatentSearchFilter) []generated.Filter {
+	out := make([]generated.Filter, 0, len(filters))
+	for _, f := range filters {
+		if f.Field == "" || len(f.Values) == 0 {
+			continue
+		}
+		values := append([]string(nil), f.Values...)
+		out = append(out, generated.Filter{Name: StringPtr(f.Field), Value: &values})
+	}
+	return out
+}
+
+// buildSearchRanges maps the public range filters onto the generated Range
+// entries, skipping ranges with no field or no bound at all.
+func buildSearchRanges(ranges []PatentSearchRange) []generated.Range {
+	out := make([]generated.Range, 0, len(ranges))
+	for _, r := range ranges {
+		if r.Field == "" || (r.From == "" && r.To == "") {
+			continue
+		}
+		entry := generated.Range{Field: StringPtr(r.Field)}
+		if r.From != "" {
+			entry.ValueFrom = StringPtr(r.From)
+		}
+		if r.To != "" {
+			entry.ValueTo = StringPtr(r.To)
+		}
+		out = append(out, entry)
 	}
 	return out
 }

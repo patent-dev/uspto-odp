@@ -79,3 +79,46 @@ func TestIntegrationSearchPatentsSort(t *testing.T) {
 		t.Errorf("asc and desc returned the same ordering (%v vs %v) - sort had no effect", asc, desc)
 	}
 }
+
+// TestIntegrationSearchPatentsRangeFilter verifies that a RangeFilter reaches the
+// real USPTO ODP API and narrows the result: every returned application's filing
+// date falls inside the requested window. Skipped without USPTO_API_KEY.
+func TestIntegrationSearchPatentsRangeFilter(t *testing.T) {
+	apiKey := os.Getenv("USPTO_API_KEY")
+	if apiKey == "" {
+		t.Skip("USPTO_API_KEY environment variable is required. Set it before running tests")
+	}
+	client, err := NewClient(&Config{
+		BaseURL: "https://api.uspto.gov", APIKey: apiKey,
+		MaxRetries: 2, RetryDelay: 1 * time.Second, Timeout: 30 * time.Second,
+	})
+	if err != nil {
+		t.Fatalf("Failed to create client: %v", err)
+	}
+	ctx := testCtx(t)
+
+	const from, to = "2022-01-01", "2022-12-31"
+	res, err := client.SearchPatentsWithOptions(ctx, "applicationMetaData.inventionTitle:semiconductor", 0, 25, &PatentSearchOptions{
+		RangeFilters: []PatentSearchRange{{Field: "applicationMetaData.filingDate", From: from, To: to}},
+	})
+	if err != nil {
+		t.Fatalf("SearchPatentsWithOptions(range): %v", err)
+	}
+	if res == nil || res.PatentFileWrapperDataBag == nil || len(*res.PatentFileWrapperDataBag) == 0 {
+		t.Fatal("range-filtered search returned no results")
+	}
+	n := 0
+	for _, w := range *res.PatentFileWrapperDataBag {
+		if w.ApplicationMetaData == nil || w.ApplicationMetaData.FilingDate == nil {
+			continue
+		}
+		fd := *w.ApplicationMetaData.FilingDate
+		if fd < from || fd > to {
+			t.Errorf("filing date %q outside requested window %s..%s - range filter not applied", fd, from, to)
+		}
+		n++
+	}
+	if n == 0 {
+		t.Fatal("no dated results to verify the range window")
+	}
+}
