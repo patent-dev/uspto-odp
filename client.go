@@ -285,8 +285,30 @@ func (pr *progressReader) Read(p []byte) (int, error) {
 	return n, err
 }
 
-// SearchPatents searches for patent applications
+// SearchPatents searches for patent applications. It is the simple form of
+// SearchPatentsWithOptions (query + pagination, no sort or field projection).
 func (c *Client) SearchPatents(ctx context.Context, query string, offset, limit int) (*generated.PatentDataResponse, error) {
+	return c.SearchPatentsWithOptions(ctx, query, offset, limit, nil)
+}
+
+// PatentSearchSort is one sort key for a patent search: a document field and an
+// optional order ("Asc"/"Desc", case-insensitive; empty applies the API default).
+type PatentSearchSort struct {
+	Field string
+	Order string
+}
+
+// PatentSearchOptions carries the optional refinements for
+// SearchPatentsWithOptions on top of the query and pagination: an ordered list of
+// sort keys and a response field projection (the document fields to return).
+type PatentSearchOptions struct {
+	Sort   []PatentSearchSort
+	Fields []string
+}
+
+// SearchPatentsWithOptions searches for patent applications with optional sort
+// and field-projection refinements. A nil opts behaves exactly like SearchPatents.
+func (c *Client) SearchPatentsWithOptions(ctx context.Context, query string, offset, limit int, opts *PatentSearchOptions) (*generated.PatentDataResponse, error) {
 	if err := validatePagination(offset, limit); err != nil {
 		return nil, err
 	}
@@ -296,6 +318,15 @@ func (c *Client) SearchPatents(ctx context.Context, query string, offset, limit 
 			Offset: Int32Ptr(int32(offset)),
 			Limit:  Int32Ptr(int32(limit)),
 		},
+	}
+	if opts != nil {
+		if sort := buildSearchSort(opts.Sort); len(sort) > 0 {
+			req.Sort = &sort
+		}
+		if len(opts.Fields) > 0 {
+			fields := append([]string(nil), opts.Fields...)
+			req.Fields = &fields
+		}
 	}
 
 	var resp *generated.PostApiV1PatentApplicationsSearchResponse
@@ -315,6 +346,29 @@ func (c *Client) SearchPatents(ctx context.Context, query string, offset, limit 
 		return nil, err
 	}
 	return resp.JSON200, nil
+}
+
+// buildSearchSort maps the public sort keys onto the generated Sort entries,
+// skipping keys with no field. An empty order is left unset so the API applies
+// its default; otherwise it is normalized to the API's "Asc"/"Desc" spelling.
+func buildSearchSort(keys []PatentSearchSort) []generated.Sort {
+	out := make([]generated.Sort, 0, len(keys))
+	for _, k := range keys {
+		if k.Field == "" {
+			continue
+		}
+		s := generated.Sort{Field: StringPtr(k.Field)}
+		switch strings.ToLower(strings.TrimSpace(k.Order)) {
+		case "asc":
+			order := generated.SortOrderAsc
+			s.Order = &order
+		case "desc":
+			order := generated.SortOrderDesc
+			s.Order = &order
+		}
+		out = append(out, s)
+	}
+	return out
 }
 
 // resolveGrantToApplicationNumber searches for a grant number and returns its application number
