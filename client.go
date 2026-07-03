@@ -21,7 +21,7 @@ import (
 
 // Version is the library version. Bumped per release; surfaces through the
 // default User-Agent.
-const Version = "1.5.0"
+const Version = "1.6.8"
 
 // DefaultUserAgent identifies this library in outbound requests. The
 // product token is the library name so the request is grepable in USPTO

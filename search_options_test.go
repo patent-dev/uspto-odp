@@ -29,10 +29,10 @@ func TestBuildSearchFilters(t *testing.T) {
 
 func TestBuildSearchRanges(t *testing.T) {
 	in := []PatentSearchRange{
-		{Field: "", From: "a", To: "b"},                                  // no field -> skip
-		{Field: "applicationMetaData.filingDate", From: "", To: ""},      // no bound -> skip
-		{Field: "applicationMetaData.filingDate", From: "2022-01-01"},    // open upper bound
-		{Field: "applicationMetaData.grantDate", To: "2023-12-31"},       // open lower bound
+		{Field: "", From: "a", To: "b"},                               // no field -> skip
+		{Field: "applicationMetaData.filingDate", From: "", To: ""},   // no bound -> skip
+		{Field: "applicationMetaData.filingDate", From: "2022-01-01"}, // open upper bound
+		{Field: "applicationMetaData.grantDate", To: "2023-12-31"},    // open lower bound
 	}
 	out := buildSearchRanges(in)
 	if len(out) != 2 {
