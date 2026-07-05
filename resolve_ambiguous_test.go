@@ -93,10 +93,12 @@ func TestNormalizePatentNumber_AmbiguousFlag(t *testing.T) {
 		{"11646472", true, PatentNumberTypeApplication},    // grant 11,646,472 vs app series 11
 		{"US11646472", true, PatentNumberTypeApplication},  // same, with US prefix
 		{"10000000", true, PatentNumberTypeApplication},    // first 8-digit grant
-		{"12999999", true, PatentNumberTypeApplication},    // top of the grant range
-		{"13000000", false, PatentNumberTypeApplication},   // app series 13: not yet a grant
-		{"14643719", false, PatentNumberTypeApplication},   // Raytheon application
-		{"17248024", false, PatentNumberTypeApplication},   // PolyPlus application
+		{"12999999", true, PatentNumberTypeApplication},    // grant vs app series 12
+		{"13000000", true, PatentNumberTypeApplication},    // future grant range: still ambiguous
+		{"14643719", true, PatentNumberTypeApplication},    // future grant range: still ambiguous
+		{"17248024", true, PatentNumberTypeApplication},    // future grant range: still ambiguous
+		{"99999999", true, PatentNumberTypeApplication},    // top of the 8-digit range
+		{"09123456", false, PatentNumberTypeApplication},   // leading zero (< 10,000,000): app only
 		{"17/248,024", false, PatentNumberTypeApplication}, // slash => unambiguous app
 		{"US 11,646,472 B2", false, PatentNumberTypeGrant}, // kind code => unambiguous grant
 		{"9123456", false, PatentNumberTypeGrant},          // 7-digit grant

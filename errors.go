@@ -129,3 +129,24 @@ func checkEmptyBody(statusCode int, body []byte) error {
 		Message:    fmt.Sprintf("USPTO returned an empty response body with HTTP %d", statusCode),
 	}
 }
+
+// checkJSONPayload reports a clear, retryable error when a success response did
+// not yield a decoded JSON payload (decoded is false). Without it, callers of the
+// generated *WithResponse methods would return (nil, nil) when a content-negotiation
+// hiccup delivers a 2xx with a non-JSON body. The truly-empty case is delegated to
+// checkEmptyBody; otherwise the undecodable body is reported with a preview. Call it
+// only after checkResponseStatus has confirmed a 2xx.
+func checkJSONPayload(statusCode int, body []byte, decoded bool) error {
+	if decoded {
+		return nil
+	}
+	if err := checkEmptyBody(statusCode, body); err != nil {
+		return err
+	}
+	return &APIError{
+		StatusCode: statusCode,
+		Empty:      true,
+		Message:    fmt.Sprintf("USPTO returned HTTP %d without a decodable JSON payload", statusCode),
+		Body:       truncatePreview(string(body), 4096),
+	}
+}

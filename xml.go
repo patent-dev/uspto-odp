@@ -1,11 +1,10 @@
 package odp
 
 import (
+	"bytes"
 	"context"
 	"encoding/xml"
 	"fmt"
-	"io"
-	"net/http"
 	"strings"
 )
 
@@ -458,40 +457,29 @@ func (c *Claims) ExtractAllClaimsTextFormatted() string {
 	return builder.String()
 }
 
-// DownloadXML downloads and parses an XML document from a given URL
+// DownloadXML downloads and parses an XML document from a given URL.
+// The URL must be a FileLocationURI from the USPTO API (see GetXMLURLForApplication);
+// arbitrary hosts are rejected so the API key is never sent elsewhere.
 // If you know the document type, use DownloadXMLWithType for better performance
 func (c *Client) DownloadXML(ctx context.Context, url string) (*XMLDocument, error) {
 	return c.DownloadXMLWithType(ctx, url, DocumentTypeUnknown)
 }
 
-// DownloadXMLWithType downloads and parses an XML document with a known type hint
+// DownloadXMLWithType downloads and parses an XML document with a known type hint.
+// The URL is validated like the other authenticated download paths (it must be a
+// FileLocationURI under the configured host) and fetched through streamDownload,
+// so typed errors, Retry-After handling, and retries all apply.
 func (c *Client) DownloadXMLWithType(ctx context.Context, url string, expectedType DocumentType) (*XMLDocument, error) {
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("creating request: %w", err)
+	if err := c.validateFileDownloadURI(url); err != nil {
+		return nil, err
 	}
 
-	req.Header.Set("User-Agent", c.config.UserAgent)
-	if c.config.APIKey != "" {
-		req.Header.Set("X-API-Key", c.config.APIKey)
-	}
-
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
+	var buf bytes.Buffer
+	if err := c.streamDownload(ctx, url, &buf, nil); err != nil {
 		return nil, fmt.Errorf("downloading XML: %w", err)
 	}
-	defer drainClose(resp.Body)
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("download failed with status %d", resp.StatusCode)
-	}
-
-	xmlData, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("reading XML data: %w", err)
-	}
-
-	return ParseXMLWithType(xmlData, expectedType)
+	return ParseXMLWithType(buf.Bytes(), expectedType)
 }
 
 // ParseXML parses XML data and auto-detects the document type

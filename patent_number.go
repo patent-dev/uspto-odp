@@ -7,15 +7,15 @@ import (
 	"strings"
 )
 
-// US grant numbers reached 8 digits at 10,000,000 (June 2018) and, as of 2026, run to
-// roughly 12.7 million. An 8-digit value in this range is ambiguous because it can be
-// either such a grant or an application in series 10-12. An 8-digit value at or beyond
-// application series 13 (>= 13,000,000) cannot currently be a grant, so it is treated as
-// an unambiguous application. Raise the upper bound as grant numbers grow.
-const (
-	firstEightDigitGrant = 10000000
-	maxEightDigitGrant   = 12999999
-)
+// US grant numbers reached 8 digits at 10,000,000 (June 2018). Any bare 8-digit
+// value at or above that is ambiguous: it can be such a grant or an application in
+// series 10+. There is deliberately no upper bound - a fixed cap would silently
+// misclassify future grants as unambiguous applications once grant numbers grow past
+// it. The dual-probe resolver (see Client.ResolvePatentNumber) auto-resolves numbers
+// where only one interpretation exists, so flagging not-yet-issued grant ranges as
+// ambiguous costs one extra lookup at most. 8-digit values below 10,000,000 (leading
+// zero, e.g. 09123456) remain unambiguous applications.
+const firstEightDigitGrant = 10000000
 
 // PatentNumberType indicates the type of patent number
 type PatentNumberType int
@@ -183,14 +183,13 @@ func NormalizePatentNumber(input string) (*PatentNumber, error) {
 			result.Type = PatentNumberTypeGrant
 		case 8, 9:
 			// 8-9 digit application number (e.g., 17248024). An 8-digit value in
-			// the 8-digit grant range is ambiguous (grant vs application series
-			// 10-12); resolution probes both. Everything else here is treated as
-			// an unambiguous application, preserving the direct lookup.
+			// the 8-digit grant range (>= 10,000,000, no upper bound) is ambiguous
+			// (grant vs application); resolution probes both. Everything else here
+			// is treated as an unambiguous application, preserving the direct lookup.
 			result.Type = PatentNumberTypeApplication
 			result.ApplicationNo = bare
 			if length == 8 {
-				if n, convErr := strconv.Atoi(bare); convErr == nil &&
-					n >= firstEightDigitGrant && n <= maxEightDigitGrant {
+				if n, convErr := strconv.Atoi(bare); convErr == nil && n >= firstEightDigitGrant {
 					result.Ambiguous = true
 				}
 			}

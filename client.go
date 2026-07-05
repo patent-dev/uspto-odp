@@ -34,14 +34,23 @@ const DefaultUserAgent = "uspto-odp/" + Version + " (patent.dev; +https://github
 type Client struct {
 	config     *Config
 	httpClient *http.Client
-	generated  *generated.ClientWithResponses
-	oa         *oa.ClientWithResponses
-	tsdr       *tsdrgen.ClientWithResponses
+	// downloadClient serves streaming file downloads. It has no overall
+	// Timeout (a bulk dataset can legitimately take longer than any sensible
+	// per-request deadline); instead Config.Timeout bounds the wait for
+	// response headers, and the caller's context bounds the transfer.
+	downloadClient *http.Client
+	generated      *generated.ClientWithResponses
+	oa             *oa.ClientWithResponses
+	tsdr           *tsdrgen.ClientWithResponses
 }
 
 // Config holds client configuration.
 // Note: Timeout applies to all APIs (ODP, OA, TSDR) uniformly. If TSDR document
 // downloads need a longer timeout, create a separate Client with a higher Timeout.
+// For streaming file downloads (bulk datasets, XML documents, file-wrapper
+// documents) Timeout bounds only the wait for response headers - not the body
+// transfer - so large downloads are not cut off mid-stream. Use the context to
+// bound the total transfer time.
 type Config struct {
 	BaseURL    string
 	APIKey     string
@@ -98,6 +107,14 @@ func NewClient(config *Config) (*Client, error) {
 		Timeout: config.Timeout,
 	}
 
+	// Streaming downloads must not be bounded by the overall request timeout:
+	// a bulk dataset transfer can take far longer than any sensible API
+	// deadline. Bound only the wait for response headers instead; the body
+	// transfer is bounded by the request context.
+	downloadTransport := http.DefaultTransport.(*http.Transport).Clone()
+	downloadTransport.ResponseHeaderTimeout = config.Timeout
+	downloadClient := &http.Client{Transport: downloadTransport}
+
 	// ODP and the OA APIs both authenticate with X-API-Key on api.uspto.gov.
 	odpEditor := func(_ context.Context, req *http.Request) error {
 		req.Header.Set("User-Agent", config.UserAgent)
@@ -137,10 +154,11 @@ func NewClient(config *Config) (*Client, error) {
 	}
 
 	client := &Client{
-		config:     config,
-		httpClient: httpClient,
-		generated:  genClient,
-		oa:         oaClient,
+		config:         config,
+		httpClient:     httpClient,
+		downloadClient: downloadClient,
+		generated:      genClient,
+		oa:             oaClient,
 	}
 
 	// TSDR client (optional, only initialized if TSDRAPIKey is set)
@@ -363,7 +381,7 @@ func (c *Client) SearchPatentsWithOptions(ctx context.Context, query string, off
 		if err := checkResponseStatus(resp.StatusCode(), resp.Body, headerOf(resp.HTTPResponse)); err != nil {
 			return err
 		}
-		return nil
+		return checkJSONPayload(resp.StatusCode(), resp.Body, resp.JSON200 != nil)
 	})
 
 	if err != nil {
@@ -450,17 +468,15 @@ func (c *Client) resolveGrantToApplicationNumber(ctx context.Context, grantNumbe
 	return *patent.ApplicationNumberText, nil
 }
 
-// resolvePublicationToApplicationNumber searches for a publication number and returns its application number.
-// kindCode is the publication kind suffix when supplied by the caller (e.g., "A1", "A2", "A9");
-// empty string defaults to "A1".
-func (c *Client) resolvePublicationToApplicationNumber(ctx context.Context, publicationNumber, kindCode string) (string, error) {
-	if kindCode == "" {
-		kindCode = "A1"
-	}
-	// Format publication number for search (e.g., 20250087686 -> US20250087686A1)
+// resolvePublicationToApplicationNumber searches for a publication number and returns
+// its application number. The search matches any publication kind via a wildcard
+// (e.g., 20250087686 -> US20250087686A*): applicationMetaData.earliestPublicationNumber
+// always carries the earliest publication (usually A1), so querying with a caller-supplied
+// republished kind (A2, A9) or assuming A1 would miss records.
+func (c *Client) resolvePublicationToApplicationNumber(ctx context.Context, publicationNumber string) (string, error) {
 	formattedPub := publicationNumber
 	if len(publicationNumber) == 11 && !strings.HasPrefix(publicationNumber, "US") {
-		formattedPub = "US" + publicationNumber + kindCode
+		formattedPub = "US" + publicationNumber + "A*"
 	}
 
 	query := fmt.Sprintf("applicationMetaData.earliestPublicationNumber:%s", formattedPub)
@@ -521,7 +537,7 @@ func (c *Client) resolveNormalized(ctx context.Context, pn *PatentNumber) (strin
 	case PatentNumberTypeGrant:
 		return c.resolveGrantToApplicationNumber(ctx, pn.Normalized)
 	case PatentNumberTypePublication:
-		return c.resolvePublicationToApplicationNumber(ctx, pn.Normalized, pn.KindCode)
+		return c.resolvePublicationToApplicationNumber(ctx, pn.Normalized)
 	case PatentNumberTypeApplication, PatentNumberTypePCT:
 		// PCT numbers (15-char or 12-char legacy) are accepted directly as the
 		// application path parameter; no round-trip needed.
@@ -684,7 +700,7 @@ func (c *Client) GetPatent(ctx context.Context, patentNumber string) (*generated
 		if err := checkResponseStatus(resp.StatusCode(), resp.Body, headerOf(resp.HTTPResponse)); err != nil {
 			return err
 		}
-		return nil
+		return checkJSONPayload(resp.StatusCode(), resp.Body, resp.JSON200 != nil)
 	})
 
 	if err != nil {
@@ -880,7 +896,7 @@ func (c *Client) validateFileDownloadURI(fileDownloadURI string) error {
 		return fmt.Errorf("fileDownloadURI cannot be empty")
 	}
 
-	expectedPrefix := c.config.BaseURL + "/api/v1/datasets/products/files/"
+	expectedPrefix := strings.TrimRight(c.config.BaseURL, "/") + "/api/v1/datasets/products/files/"
 	if !strings.HasPrefix(fileDownloadURI, expectedPrefix) {
 		return fmt.Errorf("invalid FileDownloadURI: must start with %s (got: %s)", expectedPrefix, fileDownloadURI)
 	}
@@ -927,7 +943,7 @@ func (c *Client) streamDownload(ctx context.Context, uri string, w io.Writer, pr
 		if c.config.APIKey != "" {
 			req.Header.Set("X-API-Key", c.config.APIKey)
 		}
-		r, err := c.httpClient.Do(req)
+		r, err := c.downloadClient.Do(req)
 		if err != nil {
 			return err
 		}
@@ -972,7 +988,7 @@ func (c *Client) validateDocumentDownloadURL(downloadURL string) error {
 	if downloadURL == "" {
 		return fmt.Errorf("downloadURL cannot be empty")
 	}
-	expectedPrefix := c.config.BaseURL + "/api/v1/download/"
+	expectedPrefix := strings.TrimRight(c.config.BaseURL, "/") + "/api/v1/download/"
 	if !strings.HasPrefix(downloadURL, expectedPrefix) {
 		return fmt.Errorf("invalid document downloadURL: must start with %s (got: %s)", expectedPrefix, downloadURL)
 	}

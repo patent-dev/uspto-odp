@@ -188,8 +188,14 @@ func (c *Client) DownloadTrademarkDocument(ctx context.Context, serialNumber, do
 		}
 		ct := resp.Header.Get("Content-Type")
 		if ct != "" && !strings.HasPrefix(ct, "application/pdf") {
-			body, _ := io.ReadAll(resp.Body)
-			return fmt.Errorf("expected application/pdf but got %s: %s", ct, truncatePreview(string(body), 256))
+			// Typed and non-retryable (2xx, not Empty): the server answered but
+			// with the wrong payload type; a bounded preview aids debugging.
+			body, _ := io.ReadAll(io.LimitReader(resp.Body, 4096))
+			return &APIError{
+				StatusCode: resp.StatusCode,
+				Message:    fmt.Sprintf("expected application/pdf but got %s", ct),
+				Body:       string(body),
+			}
 		}
 		return nil
 	}

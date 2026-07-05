@@ -280,6 +280,61 @@ func TestDownloadTrademarkDocument_ErrorBody(t *testing.T) {
 	}
 }
 
+// A 200 with a non-PDF Content-Type (TSDR serves an HTML error page when degraded)
+// must surface as a typed, non-retryable *APIError with a bounded body preview,
+// not an opaque untyped error.
+func TestDownloadTrademarkDocument_NonPDFTypedError(t *testing.T) {
+	largeBody := strings.Repeat("x", 10000)
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte("<html>maintenance</html>" + largeBody))
+	}))
+	defer server.Close()
+
+	config := &Config{
+		BaseURL:     server.URL,
+		APIKey:      "test",
+		TSDRBaseURL: server.URL,
+		TSDRAPIKey:  "test",
+		MaxRetries:  0,
+		Timeout:     10 * time.Second,
+		UserAgent:   "test",
+	}
+	client, err := NewClient(config)
+	if err != nil {
+		t.Fatalf("NewClient: %v", err)
+	}
+
+	var buf bytes.Buffer
+	err = client.DownloadTrademarkDocument(context.Background(), "97123456", "NOA20230322", &buf)
+	if err == nil {
+		t.Fatal("expected error for non-PDF response, got nil")
+	}
+	var apiErr *APIError
+	if !errors.As(err, &apiErr) {
+		t.Fatalf("expected *APIError, got %T: %v", err, err)
+	}
+	if apiErr.StatusCode != http.StatusOK {
+		t.Errorf("StatusCode = %d, want 200", apiErr.StatusCode)
+	}
+	if !strings.Contains(apiErr.Message, "application/pdf") || !strings.Contains(apiErr.Message, "text/html") {
+		t.Errorf("Message = %q, want both expected and actual content type", apiErr.Message)
+	}
+	if !strings.Contains(apiErr.Body, "maintenance") {
+		t.Errorf("expected body preview, got %q", apiErr.Body)
+	}
+	if len(apiErr.Body) > 4096 {
+		t.Errorf("body preview not bounded: %d bytes", len(apiErr.Body))
+	}
+	if apiErr.IsRetryable() {
+		t.Error("non-PDF payload on 200 must not be retryable")
+	}
+	if buf.Len() != 0 {
+		t.Errorf("nothing should be written to the output, got %d bytes", buf.Len())
+	}
+}
+
 func TestGetTrademarkLastUpdate(t *testing.T) {
 	server, client := setupTSDRMockServer(t)
 	defer server.Close()
