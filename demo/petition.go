@@ -78,13 +78,15 @@ func demoGetPetitionDecisionCtx(dctx *DemoContext) {
 		return
 	}
 
-	result, err := dctx.Client.GetPetitionDecision(dctx.Ctx, recordID, true)
+	// includeDocuments stays false: the live API returns HTTP 500 for every
+	// record when it is true (see GetPetitionDecision).
+	result, err := dctx.Client.GetPetitionDecision(dctx.Ctx, recordID, false)
 	if err != nil {
 		printError(err)
 		return
 	}
 
-	dctx.savePatentExample("get_petition_decision", map[string]string{"recordID": recordID, "includeDocuments": "true"}, result)
+	dctx.savePatentExample("get_petition_decision", map[string]string{"recordID": recordID, "includeDocuments": "false"}, result)
 	printPetitionDecisionResult(result)
 }
 

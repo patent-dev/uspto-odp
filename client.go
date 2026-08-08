@@ -21,7 +21,7 @@ import (
 
 // Version is the library version. Bumped per release; surfaces through the
 // default User-Agent.
-const Version = "1.6.8"
+const Version = "1.6.10"
 
 // DefaultUserAgent identifies this library in outbound requests. The
 // product token is the library name so the request is grepable in USPTO
@@ -1392,7 +1392,14 @@ func (c *Client) SearchPatentsDownload(ctx context.Context, req generated.Patent
 	return resp.Body, nil
 }
 
-// GetPetitionDecision retrieves a specific petition decision
+// GetPetitionDecision retrieves a specific petition decision.
+//
+// includeDocuments=true asks the API to attach the decision's documents as
+// documentBag on each record. As of 2026-08-08 the live API returns HTTP 500
+// for every record when the parameter is true (USPTO defect, reproduced across
+// old and new records); pass false and fetch the decision PDFs through the
+// application's file wrapper (GetPatentDocuments, document code PETDEC) until
+// USPTO fixes the endpoint.
 func (c *Client) GetPetitionDecision(ctx context.Context, recordID string, includeDocuments bool) (*generated.PetitionDecisionIdentifierResponseBag, error) {
 	params := &generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams{
 		IncludeDocuments: &includeDocuments,

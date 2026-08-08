@@ -6719,12 +6719,12 @@ components:
         PetitionDecisionAndDocuments:
             allOf:
                 - $ref: '#/components/schemas/PetitionDecision'
-            type: object
-            properties:
-                documentBag:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionDocument'
+                - type: object
+                  properties:
+                    documentBag:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/PetitionDecisionDocument'
         PetitionDecisionFacetEntity:
             type: object
             properties:

@@ -515,12 +515,76 @@ func applyFixes() error {
 		return fmt.Errorf("adding missing fields: %w", err)
 	}
 
+	// Fix 15: Rewrite PetitionDecisionAndDocuments into a well-formed allOf so
+	// documentBag survives code generation.
+	if err := fixPetitionDecisionAndDocuments(); err != nil {
+		return fmt.Errorf("fixing PetitionDecisionAndDocuments: %w", err)
+	}
+
 	// Fix 5: Move response-like schemas to components/responses
 	if err := fixResponseSchemas(); err != nil {
 		return fmt.Errorf("fixing response schemas: %w", err)
 	}
 
 	return nil
+}
+
+// fixPetitionDecisionAndDocuments restructures the PetitionDecisionAndDocuments
+// schema. The USPTO spec declares it as a single-member allOf ($ref to
+// PetitionDecision) with sibling type/properties carrying documentBag.
+// oapi-codegen collapses a single-member allOf to a type alias and ignores the
+// siblings, so the generated type dropped documentBag entirely. Moving the
+// sibling properties into a second allOf member makes oapi-codegen emit a
+// merged struct that keeps documentBag.
+func fixPetitionDecisionAndDocuments() error {
+	data, err := os.ReadFile(fixedFile)
+	if err != nil {
+		return err
+	}
+
+	var doc yaml.Node
+	if err := yaml.Unmarshal(data, &doc); err != nil {
+		return fmt.Errorf("parsing YAML: %w", err)
+	}
+
+	schema := findNode(&doc, "components", "schemas", "PetitionDecisionAndDocuments")
+	if schema == nil {
+		return fmt.Errorf("PetitionDecisionAndDocuments schema not found")
+	}
+	allOf := findChildNode(schema, "allOf")
+	props := findChildNode(schema, "properties")
+	if allOf == nil || allOf.Kind != yaml.SequenceNode || props == nil {
+		return fmt.Errorf("PetitionDecisionAndDocuments has unexpected shape (allOf=%v properties=%v)", allOf != nil, props != nil)
+	}
+
+	// Append the sibling properties as a second allOf member.
+	allOf.Content = append(allOf.Content, &yaml.Node{
+		Kind: yaml.MappingNode,
+		Content: []*yaml.Node{
+			{Kind: yaml.ScalarNode, Value: "type"},
+			{Kind: yaml.ScalarNode, Value: "object"},
+			{Kind: yaml.ScalarNode, Value: "properties"},
+			props,
+		},
+	})
+
+	// Drop the now-redundant sibling type/properties keys, keeping allOf only.
+	kept := make([]*yaml.Node, 0, len(schema.Content))
+	for i := 0; i+1 < len(schema.Content); i += 2 {
+		if k := schema.Content[i].Value; k == "type" || k == "properties" {
+			continue
+		}
+		kept = append(kept, schema.Content[i], schema.Content[i+1])
+	}
+	schema.Content = kept
+
+	log.Println("  - Fixed PetitionDecisionAndDocuments: sibling documentBag folded into allOf (was dropped by codegen)")
+
+	out, err := yaml.Marshal(&doc)
+	if err != nil {
+		return fmt.Errorf("marshaling YAML: %w", err)
+	}
+	return os.WriteFile(fixedFile, out, 0644)
 }
 
 // nestedFieldFix describes a sibling property to inject into any "properties"

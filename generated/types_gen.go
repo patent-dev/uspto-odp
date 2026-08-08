@@ -677,7 +677,35 @@ type PetitionDecision struct {
 }
 
 // PetitionDecisionAndDocuments defines model for PetitionDecisionAndDocuments.
-type PetitionDecisionAndDocuments = PetitionDecision
+type PetitionDecisionAndDocuments struct {
+	ActionTakenByCourtName                  *string                     `json:"actionTakenByCourtName,omitempty"`
+	ApplicationNumberText                   *string                     `json:"applicationNumberText,omitempty"`
+	BusinessEntityStatusCategory            *string                     `json:"businessEntityStatusCategory,omitempty"`
+	CourtActionIndicator                    *bool                       `json:"courtActionIndicator,omitempty"`
+	CustomerNumber                          *int                        `json:"customerNumber,omitempty"`
+	DecisionDate                            *string                     `json:"decisionDate,omitempty"`
+	DecisionPetitionTypeCode                *int                        `json:"decisionPetitionTypeCode,omitempty"`
+	DecisionPetitionTypeCodeDescriptionText *string                     `json:"decisionPetitionTypeCodeDescriptionText,omitempty"`
+	DecisionTypeCode                        *string                     `json:"decisionTypeCode,omitempty"`
+	DecisionTypeCodeDescriptionText         *string                     `json:"decisionTypeCodeDescriptionText,omitempty"`
+	DocumentBag                             *[]PetitionDecisionDocument `json:"documentBag,omitempty"`
+	FinalDecidingOfficeName                 *string                     `json:"finalDecidingOfficeName,omitempty"`
+	FirstApplicantName                      *string                     `json:"firstApplicantName,omitempty"`
+	FirstInventorToFileIndicator            *bool                       `json:"firstInventorToFileIndicator,omitempty"`
+	GroupArtUnitNumber                      *string                     `json:"groupArtUnitNumber,omitempty"`
+	InventionTitle                          *string                     `json:"inventionTitle,omitempty"`
+	InventorBag                             *[]string                   `json:"inventorBag,omitempty"`
+	LastIngestionDateTime                   *string                     `json:"lastIngestionDateTime,omitempty"`
+	PatentNumber                            *string                     `json:"patentNumber,omitempty"`
+	PetitionDecisionRecordIdentifier        *string                     `json:"petitionDecisionRecordIdentifier,omitempty"`
+	PetitionIssueConsideredTextBag          *[]string                   `json:"petitionIssueConsideredTextBag,omitempty"`
+	PetitionMailDate                        *string                     `json:"petitionMailDate,omitempty"`
+	ProsecutionStatusCode                   *int                        `json:"prosecutionStatusCode,omitempty"`
+	ProsecutionStatusCodeDescriptionText    *string                     `json:"prosecutionStatusCodeDescriptionText,omitempty"`
+	RuleBag                                 *[]string                   `json:"ruleBag,omitempty"`
+	StatuteBag                              *[]string                   `json:"statuteBag,omitempty"`
+	TechnologyCenter                        *string                     `json:"technologyCenter,omitempty"`
+}
 
 // PetitionDecisionDocument defines model for PetitionDecisionDocument.
 type PetitionDecisionDocument struct {
