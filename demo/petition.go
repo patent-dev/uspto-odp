@@ -78,19 +78,17 @@ func demoGetPetitionDecisionCtx(dctx *DemoContext) {
 		return
 	}
 
-	// includeDocuments stays false: the live API returns HTTP 500 for every
-	// record when it is true (see GetPetitionDecision).
-	result, err := dctx.Client.GetPetitionDecision(dctx.Ctx, recordID, false)
+	result, err := dctx.Client.GetPetitionDecision(dctx.Ctx, recordID)
 	if err != nil {
 		printError(err)
 		return
 	}
 
-	dctx.savePatentExample("get_petition_decision", map[string]string{"recordID": recordID, "includeDocuments": "false"}, result)
+	dctx.savePatentExample("get_petition_decision", map[string]string{"recordID": recordID}, result)
 	printPetitionDecisionResult(result)
 }
 
-func printPetitionDecisionResult(result *generated.PetitionDecisionIdentifierResponseBag) {
+func printPetitionDecisionResult(result *generated.PetitionDecisionResponseBag) {
 	if result.PetitionDecisionDataBag != nil && len(*result.PetitionDecisionDataBag) > 0 {
 		petition := (*result.PetitionDecisionDataBag)[0]
 		if petition.PetitionDecisionRecordIdentifier != nil {
@@ -98,6 +96,9 @@ func printPetitionDecisionResult(result *generated.PetitionDecisionIdentifierRes
 		}
 		if petition.DecisionPetitionTypeCodeDescriptionText != nil {
 			printResult("Type", *petition.DecisionPetitionTypeCodeDescriptionText)
+		}
+		if petition.DecidedPetitionTypeCodeDescriptionText != nil {
+			printResult("Decided", *petition.DecidedPetitionTypeCodeDescriptionText)
 		}
 		if petition.DecisionDate != nil {
 			printResult("Date", *petition.DecisionDate)

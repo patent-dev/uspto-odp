@@ -12,6 +12,24 @@ const (
 	STREET        AddressLineTextTypeAddressLineCategory = "STREET"
 )
 
+// Valid indicates whether the value is a known member of the AddressLineTextTypeAddressLineCategory enum.
+func (e AddressLineTextTypeAddressLineCategory) Valid() bool {
+	switch e {
+	case BUILDING:
+		return true
+	case FLOOR:
+		return true
+	case POSTOFFICEBOX:
+		return true
+	case ROOM:
+		return true
+	case STREET:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ApplicantTypeOperationCategory.
 const (
 	ApplicantTypeOperationCategoryDELETE ApplicantTypeOperationCategory = "DELETE"
@@ -20,6 +38,22 @@ const (
 	ApplicantTypeOperationCategoryUPDATE ApplicantTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the ApplicantTypeOperationCategory enum.
+func (e ApplicantTypeOperationCategory) Valid() bool {
+	switch e {
+	case ApplicantTypeOperationCategoryDELETE:
+		return true
+	case ApplicantTypeOperationCategoryINSERT:
+		return true
+	case ApplicantTypeOperationCategorySELECT:
+		return true
+	case ApplicantTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AssigneeTypeOperationCategory.
 const (
 	AssigneeTypeOperationCategoryDELETE AssigneeTypeOperationCategory = "DELETE"
@@ -27,6 +61,22 @@ const (
 	AssigneeTypeOperationCategorySELECT AssigneeTypeOperationCategory = "SELECT"
 	AssigneeTypeOperationCategoryUPDATE AssigneeTypeOperationCategory = "UPDATE"
 )
+
+// Valid indicates whether the value is a known member of the AssigneeTypeOperationCategory enum.
+func (e AssigneeTypeOperationCategory) Valid() bool {
+	switch e {
+	case AssigneeTypeOperationCategoryDELETE:
+		return true
+	case AssigneeTypeOperationCategoryINSERT:
+		return true
+	case AssigneeTypeOperationCategorySELECT:
+		return true
+	case AssigneeTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for AssignmentConveyanceType.
 const (
@@ -52,6 +102,54 @@ const (
 	AssignmentConveyanceTypeSECURITYINTEREST                               AssignmentConveyanceType = "SECURITY_INTEREST"
 )
 
+// Valid indicates whether the value is a known member of the AssignmentConveyanceType enum.
+func (e AssignmentConveyanceType) Valid() bool {
+	switch e {
+	case AssignmentConveyanceTypeASSIGNMENTOFANUNDIVIDEDPARTOFASSIGNORSINTEREST:
+		return true
+	case AssignmentConveyanceTypeASSIGNSTHEENTIREINTERESTANDTHEGOODWILL:
+		return true
+	case AssignmentConveyanceTypeCHANGEOFNAME:
+		return true
+	case AssignmentConveyanceTypeCONDITIONALASSIGNMENT:
+		return true
+	case AssignmentConveyanceTypeCORRECTIVEASSIGNMENT:
+		return true
+	case AssignmentConveyanceTypeCOURTAPPOINTMENTOFTRUSTEE:
+		return true
+	case AssignmentConveyanceTypeCOURTORDER:
+		return true
+	case AssignmentConveyanceTypeDECREEOFDISTRIBUTION:
+		return true
+	case AssignmentConveyanceTypeENTITYCONVERSION:
+		return true
+	case AssignmentConveyanceTypeLETTERSTESTAMENTARY:
+		return true
+	case AssignmentConveyanceTypeLICENSE:
+		return true
+	case AssignmentConveyanceTypeLIEN:
+		return true
+	case AssignmentConveyanceTypeMERGER:
+		return true
+	case AssignmentConveyanceTypeMERGERANDCHANGEOFNAME:
+		return true
+	case AssignmentConveyanceTypeMORTGAGE:
+		return true
+	case AssignmentConveyanceTypeNUNCPROTUNCASSIGNMENT:
+		return true
+	case AssignmentConveyanceTypeOPTION:
+		return true
+	case AssignmentConveyanceTypeOTHER:
+		return true
+	case AssignmentConveyanceTypeRELEASEOFSECURITYINTEREST:
+		return true
+	case AssignmentConveyanceTypeSECURITYINTEREST:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AssignorTypeOperationCategory.
 const (
 	AssignorTypeOperationCategoryDELETE AssignorTypeOperationCategory = "DELETE"
@@ -59,6 +157,22 @@ const (
 	AssignorTypeOperationCategorySELECT AssignorTypeOperationCategory = "SELECT"
 	AssignorTypeOperationCategoryUPDATE AssignorTypeOperationCategory = "UPDATE"
 )
+
+// Valid indicates whether the value is a known member of the AssignorTypeOperationCategory enum.
+func (e AssignorTypeOperationCategory) Valid() bool {
+	switch e {
+	case AssignorTypeOperationCategoryDELETE:
+		return true
+	case AssignorTypeOperationCategoryINSERT:
+		return true
+	case AssignorTypeOperationCategorySELECT:
+		return true
+	case AssignorTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for AssociatedMarkTypeAssociationCategory.
 const (
@@ -79,6 +193,44 @@ const (
 	AssociatedMarkTypeAssociationCategoryTRANSFORMEDTO                          AssociatedMarkTypeAssociationCategory = "TRANSFORMED_TO"
 )
 
+// Valid indicates whether the value is a known member of the AssociatedMarkTypeAssociationCategory enum.
+func (e AssociatedMarkTypeAssociationCategory) Valid() bool {
+	switch e {
+	case AssociatedMarkTypeAssociationCategoryASSOCIATEDOPPOSITION:
+		return true
+	case AssociatedMarkTypeAssociationCategoryCLAIMEDPRIORREGISTRATION:
+		return true
+	case AssociatedMarkTypeAssociationCategoryCONSOLIDATEDCHILD:
+		return true
+	case AssociatedMarkTypeAssociationCategoryCONSOLIDATEDPARENT:
+		return true
+	case AssociatedMarkTypeAssociationCategoryDIVISIONALCHILD:
+		return true
+	case AssociatedMarkTypeAssociationCategoryDIVISIONALPARENT:
+		return true
+	case AssociatedMarkTypeAssociationCategoryINTERNATIONALAPPLICATIONORREGISTRATION:
+		return true
+	case AssociatedMarkTypeAssociationCategoryPARTIALTRANSFERFROM:
+		return true
+	case AssociatedMarkTypeAssociationCategoryPARTIALTRANSFERTO:
+		return true
+	case AssociatedMarkTypeAssociationCategoryRELATEDINTERNATIONALREGISTRATION:
+		return true
+	case AssociatedMarkTypeAssociationCategoryREPLACEDBY:
+		return true
+	case AssociatedMarkTypeAssociationCategoryREPLACES:
+		return true
+	case AssociatedMarkTypeAssociationCategoryTRADEMARKRELATEDTOLEGALPROCEEDING:
+		return true
+	case AssociatedMarkTypeAssociationCategoryTRANSFORMEDFROM:
+		return true
+	case AssociatedMarkTypeAssociationCategoryTRANSFORMEDTO:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AssociatedProceedingTypeAssociationCategory.
 const (
 	AssociatedProceedingTypeAssociationCategoryASSOCIATEDOPPOSITION                   AssociatedProceedingTypeAssociationCategory = "ASSOCIATED_OPPOSITION"
@@ -98,11 +250,61 @@ const (
 	AssociatedProceedingTypeAssociationCategoryTRANSFORMEDTO                          AssociatedProceedingTypeAssociationCategory = "TRANSFORMED_TO"
 )
 
+// Valid indicates whether the value is a known member of the AssociatedProceedingTypeAssociationCategory enum.
+func (e AssociatedProceedingTypeAssociationCategory) Valid() bool {
+	switch e {
+	case AssociatedProceedingTypeAssociationCategoryASSOCIATEDOPPOSITION:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryCLAIMEDPRIORREGISTRATION:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryCONSOLIDATEDCHILD:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryCONSOLIDATEDPARENT:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryDIVISIONALCHILD:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryDIVISIONALPARENT:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryINTERNATIONALAPPLICATIONORREGISTRATION:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryPARTIALTRANSFERFROM:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryPARTIALTRANSFERTO:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryRELATEDINTERNATIONALREGISTRATION:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryREPLACEDBY:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryREPLACES:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryTRADEMARKRELATEDTOLEGALPROCEEDING:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryTRANSFORMEDFROM:
+		return true
+	case AssociatedProceedingTypeAssociationCategoryTRANSFORMEDTO:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AuthorizationTypeAuthorizationCategory.
 const (
 	AuthorizationTypeAuthorizationCategoryGENERALAUTHORIZATION  AuthorizationTypeAuthorizationCategory = "GENERAL_AUTHORIZATION"
 	AuthorizationTypeAuthorizationCategorySPECIFICAUTHORIZATION AuthorizationTypeAuthorizationCategory = "SPECIFIC_AUTHORIZATION"
 )
+
+// Valid indicates whether the value is a known member of the AuthorizationTypeAuthorizationCategory enum.
+func (e AuthorizationTypeAuthorizationCategory) Valid() bool {
+	switch e {
+	case AuthorizationTypeAuthorizationCategoryGENERALAUTHORIZATION:
+		return true
+	case AuthorizationTypeAuthorizationCategorySPECIFICAUTHORIZATION:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for AuthorizationTypeAuthorizationDocumentSupplyCategory.
 const (
@@ -110,6 +312,20 @@ const (
 	AuthorizationTypeAuthorizationDocumentSupplyCategoryATTACHED      AuthorizationTypeAuthorizationDocumentSupplyCategory = "ATTACHED"
 	AuthorizationTypeAuthorizationDocumentSupplyCategoryTOFOLLOW      AuthorizationTypeAuthorizationDocumentSupplyCategory = "TO_FOLLOW"
 )
+
+// Valid indicates whether the value is a known member of the AuthorizationTypeAuthorizationDocumentSupplyCategory enum.
+func (e AuthorizationTypeAuthorizationDocumentSupplyCategory) Valid() bool {
+	switch e {
+	case AuthorizationTypeAuthorizationDocumentSupplyCategoryALREADYONFILE:
+		return true
+	case AuthorizationTypeAuthorizationDocumentSupplyCategoryATTACHED:
+		return true
+	case AuthorizationTypeAuthorizationDocumentSupplyCategoryTOFOLLOW:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for BasicRecordTypeBasicRecordCategory.
 const (
@@ -148,11 +364,97 @@ const (
 	BasicRecordTypeBasicRecordCategoryTRANSFERREFUSAL          BasicRecordTypeBasicRecordCategory = "TRANSFER_REFUSAL"
 )
 
+// Valid indicates whether the value is a known member of the BasicRecordTypeBasicRecordCategory enum.
+func (e BasicRecordTypeBasicRecordCategory) Valid() bool {
+	switch e {
+	case BasicRecordTypeBasicRecordCategoryAPPEALEXPIRED:
+		return true
+	case BasicRecordTypeBasicRecordCategoryAPPEALLAPSED:
+		return true
+	case BasicRecordTypeBasicRecordCategoryAPPEALWITHDRAWN:
+		return true
+	case BasicRecordTypeBasicRecordCategoryCOMPLEMENTARYRENEWAL:
+		return true
+	case BasicRecordTypeBasicRecordCategoryEFFECTCONTINUATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryFINALCONFIRMATIONREFUSAL:
+		return true
+	case BasicRecordTypeBasicRecordCategoryFINALOTHERDECISION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryFINALREVERSINGREFUSAL:
+		return true
+	case BasicRecordTypeBasicRecordCategoryFINALTOTALREFUSAL:
+		return true
+	case BasicRecordTypeBasicRecordCategoryJUDICIALACTION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryLIMITATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryNOEFFECTLIMITATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryNONRENEWAL:
+		return true
+	case BasicRecordTypeBasicRecordCategoryNONRENEWALCERTAINPARTIES:
+		return true
+	case BasicRecordTypeBasicRecordCategoryNONRENEWALUNDERRULE403:
+		return true
+	case BasicRecordTypeBasicRecordCategoryPARTIALCANCELLATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryPARTIALCEASINGEFFECT:
+		return true
+	case BasicRecordTypeBasicRecordCategoryPARTIALINVALIDATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryPARTIALREFUSAL:
+		return true
+	case BasicRecordTypeBasicRecordCategoryPROTECTIONGRANTED:
+		return true
+	case BasicRecordTypeBasicRecordCategoryREGISTRATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryRENEWAL:
+		return true
+	case BasicRecordTypeBasicRecordCategoryRENEWALUNDERRULE403:
+		return true
+	case BasicRecordTypeBasicRecordCategoryRENUNCIATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryREPRESENTATIVEAPPOINTED:
+		return true
+	case BasicRecordTypeBasicRecordCategorySECONDPARTFEENOTPAID:
+		return true
+	case BasicRecordTypeBasicRecordCategorySECONDPARTFEEPAID:
+		return true
+	case BasicRecordTypeBasicRecordCategorySUBSEQUENTDESIGNATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryTOTALCANCELLATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryTOTALCEASINGEFFECT:
+		return true
+	case BasicRecordTypeBasicRecordCategoryTOTALINVALIDATION:
+		return true
+	case BasicRecordTypeBasicRecordCategoryTOTALREFUSAL:
+		return true
+	case BasicRecordTypeBasicRecordCategoryTRANSFERREFUSAL:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for BasicRecordTypeRecordCurrentStatusCategory.
 const (
 	BasicRecordTypeRecordCurrentStatusCategoryRECORDFILED BasicRecordTypeRecordCurrentStatusCategory = "RECORD_FILED"
 	BasicRecordTypeRecordCurrentStatusCategoryUNDEFINED   BasicRecordTypeRecordCurrentStatusCategory = "UNDEFINED"
 )
+
+// Valid indicates whether the value is a known member of the BasicRecordTypeRecordCurrentStatusCategory enum.
+func (e BasicRecordTypeRecordCurrentStatusCategory) Valid() bool {
+	switch e {
+	case BasicRecordTypeRecordCurrentStatusCategoryRECORDFILED:
+		return true
+	case BasicRecordTypeRecordCurrentStatusCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for CardTypeCardProviderCategory.
 const (
@@ -168,6 +470,34 @@ const (
 	CardTypeCardProviderCategoryVISA       CardTypeCardProviderCategory = "VISA"
 )
 
+// Valid indicates whether the value is a known member of the CardTypeCardProviderCategory enum.
+func (e CardTypeCardProviderCategory) Valid() bool {
+	switch e {
+	case CardTypeCardProviderCategoryAMEX:
+		return true
+	case CardTypeCardProviderCategoryDELTA:
+		return true
+	case CardTypeCardProviderCategoryDINERS:
+		return true
+	case CardTypeCardProviderCategoryDISCOVER:
+		return true
+	case CardTypeCardProviderCategoryMAESTRO:
+		return true
+	case CardTypeCardProviderCategoryMASTERCARD:
+		return true
+	case CardTypeCardProviderCategoryOTHER:
+		return true
+	case CardTypeCardProviderCategorySOLO:
+		return true
+	case CardTypeCardProviderCategorySWITCH:
+		return true
+	case CardTypeCardProviderCategoryVISA:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for CaseReferenceTextTypeCaseReferenceCategory.
 const (
 	CaseReferenceTextTypeCaseReferenceCategoryAPPEAL               CaseReferenceTextTypeCaseReferenceCategory = "APPEAL"
@@ -181,6 +511,32 @@ const (
 	CaseReferenceTextTypeCaseReferenceCategoryTRADEMARK            CaseReferenceTextTypeCaseReferenceCategory = "TRADEMARK"
 )
 
+// Valid indicates whether the value is a known member of the CaseReferenceTextTypeCaseReferenceCategory enum.
+func (e CaseReferenceTextTypeCaseReferenceCategory) Valid() bool {
+	switch e {
+	case CaseReferenceTextTypeCaseReferenceCategoryAPPEAL:
+		return true
+	case CaseReferenceTextTypeCaseReferenceCategoryCURRENTACCOUNT:
+		return true
+	case CaseReferenceTextTypeCaseReferenceCategoryDECISION:
+		return true
+	case CaseReferenceTextTypeCaseReferenceCategoryGENERALAUTHORIZATION:
+		return true
+	case CaseReferenceTextTypeCaseReferenceCategoryMARKRECORD:
+		return true
+	case CaseReferenceTextTypeCaseReferenceCategoryOPPOSITION:
+		return true
+	case CaseReferenceTextTypeCaseReferenceCategoryOTHER:
+		return true
+	case CaseReferenceTextTypeCaseReferenceCategoryREPRESENTATIVELIST:
+		return true
+	case CaseReferenceTextTypeCaseReferenceCategoryTRADEMARK:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ClaimantTypeOperationCategory.
 const (
 	ClaimantTypeOperationCategoryDELETE ClaimantTypeOperationCategory = "DELETE"
@@ -189,11 +545,39 @@ const (
 	ClaimantTypeOperationCategoryUPDATE ClaimantTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the ClaimantTypeOperationCategory enum.
+func (e ClaimantTypeOperationCategory) Valid() bool {
+	switch e {
+	case ClaimantTypeOperationCategoryDELETE:
+		return true
+	case ClaimantTypeOperationCategoryINSERT:
+		return true
+	case ClaimantTypeOperationCategorySELECT:
+		return true
+	case ClaimantTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ClassDescriptionTypeClassNumberStatusCategory.
 const (
 	ClassDescriptionTypeClassNumberStatusCategoryNATIONAL    ClassDescriptionTypeClassNumberStatusCategory = "NATIONAL"
 	ClassDescriptionTypeClassNumberStatusCategoryPROVISIONAL ClassDescriptionTypeClassNumberStatusCategory = "PROVISIONAL"
 )
+
+// Valid indicates whether the value is a known member of the ClassDescriptionTypeClassNumberStatusCategory enum.
+func (e ClassDescriptionTypeClassNumberStatusCategory) Valid() bool {
+	switch e {
+	case ClassDescriptionTypeClassNumberStatusCategoryNATIONAL:
+		return true
+	case ClassDescriptionTypeClassNumberStatusCategoryPROVISIONAL:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for ClassificationTermStatusTypeValue.
 const (
@@ -203,6 +587,22 @@ const (
 	ClassificationTermStatusTypeValueREQUESTED     ClassificationTermStatusTypeValue = "REQUESTED"
 )
 
+// Valid indicates whether the value is a known member of the ClassificationTermStatusTypeValue enum.
+func (e ClassificationTermStatusTypeValue) Valid() bool {
+	switch e {
+	case ClassificationTermStatusTypeValueACCEPTED:
+		return true
+	case ClassificationTermStatusTypeValueNOLONGERINUSE:
+		return true
+	case ClassificationTermStatusTypeValueREFUSED:
+		return true
+	case ClassificationTermStatusTypeValueREQUESTED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ClassificationTermTypeClassificationTermSourceCategory.
 const (
 	EMJPUS ClassificationTermTypeClassificationTermSourceCategory = "EM_JP_US"
@@ -211,6 +611,22 @@ const (
 	OFFICE ClassificationTermTypeClassificationTermSourceCategory = "OFFICE"
 )
 
+// Valid indicates whether the value is a known member of the ClassificationTermTypeClassificationTermSourceCategory enum.
+func (e ClassificationTermTypeClassificationTermSourceCategory) Valid() bool {
+	switch e {
+	case EMJPUS:
+		return true
+	case EMUS:
+		return true
+	case NICE:
+		return true
+	case OFFICE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ClassificationTermTypeOperationCategory.
 const (
 	ClassificationTermTypeOperationCategoryDELETE ClassificationTermTypeOperationCategory = "DELETE"
@@ -218,6 +634,22 @@ const (
 	ClassificationTermTypeOperationCategorySELECT ClassificationTermTypeOperationCategory = "SELECT"
 	ClassificationTermTypeOperationCategoryUPDATE ClassificationTermTypeOperationCategory = "UPDATE"
 )
+
+// Valid indicates whether the value is a known member of the ClassificationTermTypeOperationCategory enum.
+func (e ClassificationTermTypeOperationCategory) Valid() bool {
+	switch e {
+	case ClassificationTermTypeOperationCategoryDELETE:
+		return true
+	case ClassificationTermTypeOperationCategoryINSERT:
+		return true
+	case ClassificationTermTypeOperationCategorySELECT:
+		return true
+	case ClassificationTermTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for ConversionApplicationBagTypeMarkCategory.
 const (
@@ -236,11 +668,57 @@ const (
 	ConversionApplicationBagTypeMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE163 ConversionApplicationBagTypeMarkCategory = "WELL_KNOWN_MARK_UNDER_TRIPS_ARTICLE_16_3"
 )
 
+// Valid indicates whether the value is a known member of the ConversionApplicationBagTypeMarkCategory enum.
+func (e ConversionApplicationBagTypeMarkCategory) Valid() bool {
+	switch e {
+	case ConversionApplicationBagTypeMarkCategoryCERTIFICATIONMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryCOLLECTIVEMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryCOLLECTIVEMEMBERSHIPMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryCOLLECTIVESERVICEMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryCOLLECTIVETRADEMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryDEFENSIVEMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryINDIVIDUALMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategorySERVICEMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryTRADEMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryWELLKNOWNCOLLECTIVEMARK:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE162:
+		return true
+	case ConversionApplicationBagTypeMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE163:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for CorrespondenceAddressTypeCorrespondenceAddressPartyCategory.
 const (
 	CorrespondenceAddressTypeCorrespondenceAddressPartyCategoryAPPLICANT      CorrespondenceAddressTypeCorrespondenceAddressPartyCategory = "APPLICANT"
 	CorrespondenceAddressTypeCorrespondenceAddressPartyCategoryREPRESENTATIVE CorrespondenceAddressTypeCorrespondenceAddressPartyCategory = "REPRESENTATIVE"
 )
+
+// Valid indicates whether the value is a known member of the CorrespondenceAddressTypeCorrespondenceAddressPartyCategory enum.
+func (e CorrespondenceAddressTypeCorrespondenceAddressPartyCategory) Valid() bool {
+	switch e {
+	case CorrespondenceAddressTypeCorrespondenceAddressPartyCategoryAPPLICANT:
+		return true
+	case CorrespondenceAddressTypeCorrespondenceAddressPartyCategoryREPRESENTATIVE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for CorrespondentTypeOperationCategory.
 const (
@@ -250,6 +728,22 @@ const (
 	CorrespondentTypeOperationCategoryUPDATE CorrespondentTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the CorrespondentTypeOperationCategory enum.
+func (e CorrespondentTypeOperationCategory) Valid() bool {
+	switch e {
+	case CorrespondentTypeOperationCategoryDELETE:
+		return true
+	case CorrespondentTypeOperationCategoryINSERT:
+		return true
+	case CorrespondentTypeOperationCategorySELECT:
+		return true
+	case CorrespondentTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DecisionEventTypeDecisionEventCategory.
 const (
 	DecisionEventTypeDecisionEventCategoryDECISIONFILED   DecisionEventTypeDecisionEventCategory = "DECISION_FILED"
@@ -257,12 +751,40 @@ const (
 	DecisionEventTypeDecisionEventCategoryFINALDECISION   DecisionEventTypeDecisionEventCategory = "FINAL_DECISION"
 )
 
+// Valid indicates whether the value is a known member of the DecisionEventTypeDecisionEventCategory enum.
+func (e DecisionEventTypeDecisionEventCategory) Valid() bool {
+	switch e {
+	case DecisionEventTypeDecisionEventCategoryDECISIONFILED:
+		return true
+	case DecisionEventTypeDecisionEventCategoryDECISIONPENDING:
+		return true
+	case DecisionEventTypeDecisionEventCategoryFINALDECISION:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DecisionTypeDecisionCurrentStatusCategory.
 const (
 	DecisionTypeDecisionCurrentStatusCategoryDECISIONFILED   DecisionTypeDecisionCurrentStatusCategory = "DECISION_FILED"
 	DecisionTypeDecisionCurrentStatusCategoryDECISIONPENDING DecisionTypeDecisionCurrentStatusCategory = "DECISION_PENDING"
 	DecisionTypeDecisionCurrentStatusCategoryFINALDECISION   DecisionTypeDecisionCurrentStatusCategory = "FINAL_DECISION"
 )
+
+// Valid indicates whether the value is a known member of the DecisionTypeDecisionCurrentStatusCategory enum.
+func (e DecisionTypeDecisionCurrentStatusCategory) Valid() bool {
+	switch e {
+	case DecisionTypeDecisionCurrentStatusCategoryDECISIONFILED:
+		return true
+	case DecisionTypeDecisionCurrentStatusCategoryDECISIONPENDING:
+		return true
+	case DecisionTypeDecisionCurrentStatusCategoryFINALDECISION:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for DecisionTypeDecisionResponsibleCategory.
 const (
@@ -275,6 +797,28 @@ const (
 	DecisionTypeDecisionResponsibleCategoryTRADEMARKEXAMINER                            DecisionTypeDecisionResponsibleCategory = "TRADEMARK_EXAMINER"
 )
 
+// Valid indicates whether the value is a known member of the DecisionTypeDecisionResponsibleCategory enum.
+func (e DecisionTypeDecisionResponsibleCategory) Valid() bool {
+	switch e {
+	case DecisionTypeDecisionResponsibleCategoryADMINISTRATIONOFTRADEMARKANDDESIGNDEPARTMENT:
+		return true
+	case DecisionTypeDecisionResponsibleCategoryCOMMUNITYTRADEMARKCANCELLATIONDIVISION:
+		return true
+	case DecisionTypeDecisionResponsibleCategoryDESIGNEXAMINER:
+		return true
+	case DecisionTypeDecisionResponsibleCategoryDESIGNINVALIDITYDIVISION:
+		return true
+	case DecisionTypeDecisionResponsibleCategoryOPPOSITIONDIVISION:
+		return true
+	case DecisionTypeDecisionResponsibleCategoryOTHER:
+		return true
+	case DecisionTypeDecisionResponsibleCategoryTRADEMARKEXAMINER:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DefendantTypeOperationCategory.
 const (
 	DefendantTypeOperationCategoryDELETE DefendantTypeOperationCategory = "DELETE"
@@ -283,12 +827,42 @@ const (
 	DefendantTypeOperationCategoryUPDATE DefendantTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the DefendantTypeOperationCategory enum.
+func (e DefendantTypeOperationCategory) Valid() bool {
+	switch e {
+	case DefendantTypeOperationCategoryDELETE:
+		return true
+	case DefendantTypeOperationCategoryINSERT:
+		return true
+	case DefendantTypeOperationCategorySELECT:
+		return true
+	case DefendantTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DesignatedCountryTypeMadridSystemCategory.
 const (
 	AGREEMENT              DesignatedCountryTypeMadridSystemCategory = "AGREEMENT"
 	PROTOCOL               DesignatedCountryTypeMadridSystemCategory = "PROTOCOL"
 	PROTOCOLARTICLE9SEXIES DesignatedCountryTypeMadridSystemCategory = "PROTOCOL_ARTICLE_9_SEXIES"
 )
+
+// Valid indicates whether the value is a known member of the DesignatedCountryTypeMadridSystemCategory enum.
+func (e DesignatedCountryTypeMadridSystemCategory) Valid() bool {
+	switch e {
+	case AGREEMENT:
+		return true
+	case PROTOCOL:
+		return true
+	case PROTOCOLARTICLE9SEXIES:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for EarlierMarkTypeEarlierMarkCategory.
 const (
@@ -307,11 +881,57 @@ const (
 	EarlierMarkTypeEarlierMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE163 EarlierMarkTypeEarlierMarkCategory = "WELL_KNOWN_MARK_UNDER_TRIPS_ARTICLE_16_3"
 )
 
+// Valid indicates whether the value is a known member of the EarlierMarkTypeEarlierMarkCategory enum.
+func (e EarlierMarkTypeEarlierMarkCategory) Valid() bool {
+	switch e {
+	case EarlierMarkTypeEarlierMarkCategoryCERTIFICATIONMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryCOLLECTIVEMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryCOLLECTIVEMEMBERSHIPMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryCOLLECTIVESERVICEMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryCOLLECTIVETRADEMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryDEFENSIVEMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryINDIVIDUALMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategorySERVICEMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryTRADEMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryWELLKNOWNCOLLECTIVEMARK:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE162:
+		return true
+	case EarlierMarkTypeEarlierMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE163:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for EmailAddressTextTypeEmailAddressCategory.
 const (
 	EmailAddressTextTypeEmailAddressCategoryBUSINESS EmailAddressTextTypeEmailAddressCategory = "BUSINESS"
 	EmailAddressTextTypeEmailAddressCategoryPRIVATE  EmailAddressTextTypeEmailAddressCategory = "PRIVATE"
 )
+
+// Valid indicates whether the value is a known member of the EmailAddressTextTypeEmailAddressCategory enum.
+func (e EmailAddressTextTypeEmailAddressCategory) Valid() bool {
+	switch e {
+	case EmailAddressTextTypeEmailAddressCategoryBUSINESS:
+		return true
+	case EmailAddressTextTypeEmailAddressCategoryPRIVATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for EmailAddressTextTypeEmailAddressPurposeCategory.
 const (
@@ -322,6 +942,24 @@ const (
 	MAIN      EmailAddressTextTypeEmailAddressPurposeCategory = "MAIN"
 )
 
+// Valid indicates whether the value is a known member of the EmailAddressTextTypeEmailAddressPurposeCategory enum.
+func (e EmailAddressTextTypeEmailAddressPurposeCategory) Valid() bool {
+	switch e {
+	case ADVANCE:
+		return true
+	case ALTERNATE:
+		return true
+	case GENERAL:
+		return true
+	case INFORMAL:
+		return true
+	case MAIN:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ExhibitionPriorityTypeExhibitionStatusCategory.
 const (
 	ExhibitionPriorityTypeExhibitionStatusCategoryACCEPTED ExhibitionPriorityTypeExhibitionStatusCategory = "ACCEPTED"
@@ -329,11 +967,37 @@ const (
 	ExhibitionPriorityTypeExhibitionStatusCategoryREFUSED  ExhibitionPriorityTypeExhibitionStatusCategory = "REFUSED"
 )
 
+// Valid indicates whether the value is a known member of the ExhibitionPriorityTypeExhibitionStatusCategory enum.
+func (e ExhibitionPriorityTypeExhibitionStatusCategory) Valid() bool {
+	switch e {
+	case ExhibitionPriorityTypeExhibitionStatusCategoryACCEPTED:
+		return true
+	case ExhibitionPriorityTypeExhibitionStatusCategoryCLAIMED:
+		return true
+	case ExhibitionPriorityTypeExhibitionStatusCategoryREFUSED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for FaxNumberTypeFaxNumberCategory.
 const (
 	FaxNumberTypeFaxNumberCategoryBUSINESS FaxNumberTypeFaxNumberCategory = "BUSINESS"
 	FaxNumberTypeFaxNumberCategoryPRIVATE  FaxNumberTypeFaxNumberCategory = "PRIVATE"
 )
+
+// Valid indicates whether the value is a known member of the FaxNumberTypeFaxNumberCategory enum.
+func (e FaxNumberTypeFaxNumberCategory) Valid() bool {
+	switch e {
+	case FaxNumberTypeFaxNumberCategoryBUSINESS:
+		return true
+	case FaxNumberTypeFaxNumberCategoryPRIVATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for GeographicRegionNameTypeGeographicRegionCategory.
 const (
@@ -353,11 +1017,59 @@ const (
 	VILLAGE            GeographicRegionNameTypeGeographicRegionCategory = "VILLAGE"
 )
 
+// Valid indicates whether the value is a known member of the GeographicRegionNameTypeGeographicRegionCategory enum.
+func (e GeographicRegionNameTypeGeographicRegionCategory) Valid() bool {
+	switch e {
+	case CANTON:
+		return true
+	case CITYDISTRICT:
+		return true
+	case COUNTY:
+		return true
+	case DISTRICT:
+		return true
+	case MUNICIPALITY:
+		return true
+	case NEIGHBOURHOOD:
+		return true
+	case PROVINCE:
+		return true
+	case PROVINCIALDISTRICT:
+		return true
+	case QUARTIER:
+		return true
+	case SECTOR:
+		return true
+	case STATE:
+		return true
+	case SUBURB:
+		return true
+	case TOWN:
+		return true
+	case VILLAGE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GoodsServicesLimitationTypeGoodsServicesLimitationCategory.
 const (
 	LISTLIMITEDTO  GoodsServicesLimitationTypeGoodsServicesLimitationCategory = "LIST_LIMITED_TO"
 	REMOVEFROMLIST GoodsServicesLimitationTypeGoodsServicesLimitationCategory = "REMOVE_FROM_LIST"
 )
+
+// Valid indicates whether the value is a known member of the GoodsServicesLimitationTypeGoodsServicesLimitationCategory enum.
+func (e GoodsServicesLimitationTypeGoodsServicesLimitationCategory) Valid() bool {
+	switch e {
+	case LISTLIMITEDTO:
+		return true
+	case REMOVEFROMLIST:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for LicenceEventTypeLicenceEventCategory.
 const (
@@ -367,12 +1079,42 @@ const (
 	LicenceEventTypeLicenceEventCategoryWITHDRAWN LicenceEventTypeLicenceEventCategory = "WITHDRAWN"
 )
 
+// Valid indicates whether the value is a known member of the LicenceEventTypeLicenceEventCategory enum.
+func (e LicenceEventTypeLicenceEventCategory) Valid() bool {
+	switch e {
+	case LicenceEventTypeLicenceEventCategoryACCEPTED:
+		return true
+	case LicenceEventTypeLicenceEventCategoryREJECTED:
+		return true
+	case LicenceEventTypeLicenceEventCategoryTOCHECK:
+		return true
+	case LicenceEventTypeLicenceEventCategoryWITHDRAWN:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for LicenceTypeLicenceCategory.
 const (
 	LicenceTypeLicenceCategoryEXCLUSIVE    LicenceTypeLicenceCategory = "EXCLUSIVE"
 	LicenceTypeLicenceCategoryNONEXCLUSIVE LicenceTypeLicenceCategory = "NON_EXCLUSIVE"
 	LicenceTypeLicenceCategoryUNKNOWN      LicenceTypeLicenceCategory = "UNKNOWN"
 )
+
+// Valid indicates whether the value is a known member of the LicenceTypeLicenceCategory enum.
+func (e LicenceTypeLicenceCategory) Valid() bool {
+	switch e {
+	case LicenceTypeLicenceCategoryEXCLUSIVE:
+		return true
+	case LicenceTypeLicenceCategoryNONEXCLUSIVE:
+		return true
+	case LicenceTypeLicenceCategoryUNKNOWN:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for LicenceTypeLicenceStatusCategory.
 const (
@@ -382,6 +1124,22 @@ const (
 	VALID     LicenceTypeLicenceStatusCategory = "VALID"
 )
 
+// Valid indicates whether the value is a known member of the LicenceTypeLicenceStatusCategory enum.
+func (e LicenceTypeLicenceStatusCategory) Valid() bool {
+	switch e {
+	case CANCELLED:
+		return true
+	case EXPIRED:
+		return true
+	case TOVERIFY:
+		return true
+	case VALID:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for LicenseeTypeOperationCategory.
 const (
 	LicenseeTypeOperationCategoryDELETE LicenseeTypeOperationCategory = "DELETE"
@@ -389,6 +1147,22 @@ const (
 	LicenseeTypeOperationCategorySELECT LicenseeTypeOperationCategory = "SELECT"
 	LicenseeTypeOperationCategoryUPDATE LicenseeTypeOperationCategory = "UPDATE"
 )
+
+// Valid indicates whether the value is a known member of the LicenseeTypeOperationCategory enum.
+func (e LicenseeTypeOperationCategory) Valid() bool {
+	switch e {
+	case LicenseeTypeOperationCategoryDELETE:
+		return true
+	case LicenseeTypeOperationCategoryINSERT:
+		return true
+	case LicenseeTypeOperationCategorySELECT:
+		return true
+	case LicenseeTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for MarkEventTypeMarkEventCategory.
 const (
@@ -416,12 +1190,78 @@ const (
 	REVOCATIONPROCEEDINGPENDING                  MarkEventTypeMarkEventCategory = "REVOCATION_PROCEEDING_PENDING"
 )
 
+// Valid indicates whether the value is a known member of the MarkEventTypeMarkEventCategory enum.
+func (e MarkEventTypeMarkEventCategory) Valid() bool {
+	switch e {
+	case ACTIONBEFORECOURTOFJUSTICEPENDING:
+		return true
+	case APPEALPENDING:
+		return true
+	case APPLICATIONACCEPTED:
+		return true
+	case APPLICATIONFILED:
+		return true
+	case APPLICATIONPUBLISHED:
+		return true
+	case APPLICATIONREFUSED:
+		return true
+	case APPLICATIONWITHDRAWN:
+		return true
+	case CLASSIFICATIONCHECKED:
+		return true
+	case CONVERSIONREQUESTED:
+		return true
+	case DOMESTICINTERNATIONALAPPLICATIONHISTORYENTRY:
+		return true
+	case FILINGDATEACCORDED:
+		return true
+	case INTERRUPTIONOFPROCEEDING:
+		return true
+	case INVALIDITYPROCEEDINGPENDING:
+		return true
+	case LOCATIONHISTORYENTRY:
+		return true
+	case NATIONALASSIGNMENTHISTORYENTRY:
+		return true
+	case NATIONALBOARDPROCEEDINGHISTORYENTRY:
+		return true
+	case NATIONALPROSECUTIONHISTORYENTRY:
+		return true
+	case OPPOSITIONPENDING:
+		return true
+	case REGISTRATIONCANCELLED:
+		return true
+	case REGISTRATIONPUBLISHED:
+		return true
+	case REGISTRATIONSURRENDERED:
+		return true
+	case REVOCATIONPROCEEDINGPENDING:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MarkImageRenditionTypeColourModeCategory.
 const (
 	MarkImageRenditionTypeColourModeCategoryBLACKANDWHITE MarkImageRenditionTypeColourModeCategory = "BLACK_AND_WHITE"
 	MarkImageRenditionTypeColourModeCategoryCOLOUR        MarkImageRenditionTypeColourModeCategory = "COLOUR"
 	MarkImageRenditionTypeColourModeCategoryGREYSCALE     MarkImageRenditionTypeColourModeCategory = "GREYSCALE"
 )
+
+// Valid indicates whether the value is a known member of the MarkImageRenditionTypeColourModeCategory enum.
+func (e MarkImageRenditionTypeColourModeCategory) Valid() bool {
+	switch e {
+	case MarkImageRenditionTypeColourModeCategoryBLACKANDWHITE:
+		return true
+	case MarkImageRenditionTypeColourModeCategoryCOLOUR:
+		return true
+	case MarkImageRenditionTypeColourModeCategoryGREYSCALE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for MarkImageRenditionTypeImageFormatCategory.
 const (
@@ -432,6 +1272,24 @@ const (
 	MarkImageRenditionTypeImageFormatCategoryTIFF MarkImageRenditionTypeImageFormatCategory = "TIFF"
 )
 
+// Valid indicates whether the value is a known member of the MarkImageRenditionTypeImageFormatCategory enum.
+func (e MarkImageRenditionTypeImageFormatCategory) Valid() bool {
+	switch e {
+	case MarkImageRenditionTypeImageFormatCategoryGIF:
+		return true
+	case MarkImageRenditionTypeImageFormatCategoryJPEG:
+		return true
+	case MarkImageRenditionTypeImageFormatCategoryPNG:
+		return true
+	case MarkImageRenditionTypeImageFormatCategorySVG:
+		return true
+	case MarkImageRenditionTypeImageFormatCategoryTIFF:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MarkImageRenditionTypeMarkImageRenditionCategory.
 const (
 	MarkImageRenditionTypeMarkImageRenditionCategoryGREYSCALE  MarkImageRenditionTypeMarkImageRenditionCategory = "GREYSCALE"
@@ -439,12 +1297,40 @@ const (
 	MarkImageRenditionTypeMarkImageRenditionCategoryTHUMBNAIL  MarkImageRenditionTypeMarkImageRenditionCategory = "THUMBNAIL"
 )
 
+// Valid indicates whether the value is a known member of the MarkImageRenditionTypeMarkImageRenditionCategory enum.
+func (e MarkImageRenditionTypeMarkImageRenditionCategory) Valid() bool {
+	switch e {
+	case MarkImageRenditionTypeMarkImageRenditionCategoryGREYSCALE:
+		return true
+	case MarkImageRenditionTypeMarkImageRenditionCategoryOFFICECOPY:
+		return true
+	case MarkImageRenditionTypeMarkImageRenditionCategoryTHUMBNAIL:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MarkImageTypeColourModeCategory.
 const (
-	BLACKANDWHITE MarkImageTypeColourModeCategory = "BLACK_AND_WHITE"
-	COLOUR        MarkImageTypeColourModeCategory = "COLOUR"
-	GREYSCALE     MarkImageTypeColourModeCategory = "GREYSCALE"
+	MarkImageTypeColourModeCategoryBLACKANDWHITE MarkImageTypeColourModeCategory = "BLACK_AND_WHITE"
+	MarkImageTypeColourModeCategoryCOLOUR        MarkImageTypeColourModeCategory = "COLOUR"
+	MarkImageTypeColourModeCategoryGREYSCALE     MarkImageTypeColourModeCategory = "GREYSCALE"
 )
+
+// Valid indicates whether the value is a known member of the MarkImageTypeColourModeCategory enum.
+func (e MarkImageTypeColourModeCategory) Valid() bool {
+	switch e {
+	case MarkImageTypeColourModeCategoryBLACKANDWHITE:
+		return true
+	case MarkImageTypeColourModeCategoryCOLOUR:
+		return true
+	case MarkImageTypeColourModeCategoryGREYSCALE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for MarkImageTypeImageFormatCategory.
 const (
@@ -454,6 +1340,24 @@ const (
 	MarkImageTypeImageFormatCategorySVG  MarkImageTypeImageFormatCategory = "SVG"
 	MarkImageTypeImageFormatCategoryTIFF MarkImageTypeImageFormatCategory = "TIFF"
 )
+
+// Valid indicates whether the value is a known member of the MarkImageTypeImageFormatCategory enum.
+func (e MarkImageTypeImageFormatCategory) Valid() bool {
+	switch e {
+	case MarkImageTypeImageFormatCategoryGIF:
+		return true
+	case MarkImageTypeImageFormatCategoryJPEG:
+		return true
+	case MarkImageTypeImageFormatCategoryPNG:
+		return true
+	case MarkImageTypeImageFormatCategorySVG:
+		return true
+	case MarkImageTypeImageFormatCategoryTIFF:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for MarkRepresentationTypeMarkFeatureCategory.
 const (
@@ -475,6 +1379,46 @@ const (
 	MarkRepresentationTypeMarkFeatureCategoryWORD               MarkRepresentationTypeMarkFeatureCategory = "WORD"
 )
 
+// Valid indicates whether the value is a known member of the MarkRepresentationTypeMarkFeatureCategory enum.
+func (e MarkRepresentationTypeMarkFeatureCategory) Valid() bool {
+	switch e {
+	case MarkRepresentationTypeMarkFeatureCategoryCOLOUR:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryCOMBINED:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryFIGURATIVE:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryHOLOGRAM:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryMOTION:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryMULTIMEDIA:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryOLFACTORY:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryOTHER:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryPOSITION:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategorySOUND:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategorySTYLIZEDCHARACTERS:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryTASTE:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryTHREEDIMENSIONAL:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryTOUCH:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryTRACER:
+		return true
+	case MarkRepresentationTypeMarkFeatureCategoryWORD:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MeasureTypeMeasureUnitCode.
 const (
 	MeasureTypeMeasureUnitCodeCM MeasureTypeMeasureUnitCode = "CM"
@@ -485,6 +1429,26 @@ const (
 	MeasureTypeMeasureUnitCodeTP MeasureTypeMeasureUnitCode = "TP"
 )
 
+// Valid indicates whether the value is a known member of the MeasureTypeMeasureUnitCode enum.
+func (e MeasureTypeMeasureUnitCode) Valid() bool {
+	switch e {
+	case MeasureTypeMeasureUnitCodeCM:
+		return true
+	case MeasureTypeMeasureUnitCodeIN:
+		return true
+	case MeasureTypeMeasureUnitCodeMM:
+		return true
+	case MeasureTypeMeasureUnitCodePT:
+		return true
+	case MeasureTypeMeasureUnitCodePX:
+		return true
+	case MeasureTypeMeasureUnitCodeTP:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NationalRepresentativeTypeOperationCategory.
 const (
 	NationalRepresentativeTypeOperationCategoryDELETE NationalRepresentativeTypeOperationCategory = "DELETE"
@@ -493,11 +1457,39 @@ const (
 	NationalRepresentativeTypeOperationCategoryUPDATE NationalRepresentativeTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the NationalRepresentativeTypeOperationCategory enum.
+func (e NationalRepresentativeTypeOperationCategory) Valid() bool {
+	switch e {
+	case NationalRepresentativeTypeOperationCategoryDELETE:
+		return true
+	case NationalRepresentativeTypeOperationCategoryINSERT:
+		return true
+	case NationalRepresentativeTypeOperationCategorySELECT:
+		return true
+	case NationalRepresentativeTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NationalStatusTypeClassNumberStatusCategory.
 const (
 	NationalStatusTypeClassNumberStatusCategoryNATIONAL    NationalStatusTypeClassNumberStatusCategory = "NATIONAL"
 	NationalStatusTypeClassNumberStatusCategoryPROVISIONAL NationalStatusTypeClassNumberStatusCategory = "PROVISIONAL"
 )
+
+// Valid indicates whether the value is a known member of the NationalStatusTypeClassNumberStatusCategory enum.
+func (e NationalStatusTypeClassNumberStatusCategory) Valid() bool {
+	switch e {
+	case NationalStatusTypeClassNumberStatusCategoryNATIONAL:
+		return true
+	case NationalStatusTypeClassNumberStatusCategoryPROVISIONAL:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for NationalStatusTypeNationalStatusCategory.
 const (
@@ -508,12 +1500,44 @@ const (
 	PREVIOUSREGISTRATIONSTATUS    NationalStatusTypeNationalStatusCategory = "PREVIOUS_REGISTRATION_STATUS"
 )
 
+// Valid indicates whether the value is a known member of the NationalStatusTypeNationalStatusCategory enum.
+func (e NationalStatusTypeNationalStatusCategory) Valid() bool {
+	switch e {
+	case NATIONALCLASSSTATUS:
+		return true
+	case NATIONALLEGALPROCEEDINGSTATUS:
+		return true
+	case NATIONALTERMSTATUS:
+		return true
+	case NATIONALTRADEMARKSTATUS:
+		return true
+	case PREVIOUSREGISTRATIONSTATUS:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for NationalTrademarkInformationTypeRegisterCategory.
 const (
 	NationalTrademarkInformationTypeRegisterCategoryPRIMARY      NationalTrademarkInformationTypeRegisterCategory = "PRIMARY"
 	NationalTrademarkInformationTypeRegisterCategorySUPPLEMENTAL NationalTrademarkInformationTypeRegisterCategory = "SUPPLEMENTAL"
 	NationalTrademarkInformationTypeRegisterCategoryUNKNOWN      NationalTrademarkInformationTypeRegisterCategory = "UNKNOWN"
 )
+
+// Valid indicates whether the value is a known member of the NationalTrademarkInformationTypeRegisterCategory enum.
+func (e NationalTrademarkInformationTypeRegisterCategory) Valid() bool {
+	switch e {
+	case NationalTrademarkInformationTypeRegisterCategoryPRIMARY:
+		return true
+	case NationalTrademarkInformationTypeRegisterCategorySUPPLEMENTAL:
+		return true
+	case NationalTrademarkInformationTypeRegisterCategoryUNKNOWN:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for OppositionEventTypeOppositionEventCategory.
 const (
@@ -534,12 +1558,64 @@ const (
 	OppositionEventTypeOppositionEventCategoryOPPOSITIONFILED                       OppositionEventTypeOppositionEventCategory = "OPPOSITION_FILED"
 )
 
+// Valid indicates whether the value is a known member of the OppositionEventTypeOppositionEventCategory enum.
+func (e OppositionEventTypeOppositionEventCategory) Valid() bool {
+	switch e {
+	case OppositionEventTypeOppositionEventCategoryADMISSIBILITYCHECKED:
+		return true
+	case OppositionEventTypeOppositionEventCategoryAGREEMENTBETWEENPARTIES:
+		return true
+	case OppositionEventTypeOppositionEventCategoryCOMMENCEMENTOFPROCEEDING:
+		return true
+	case OppositionEventTypeOppositionEventCategoryCOOLINGOFFPERIOD:
+		return true
+	case OppositionEventTypeOppositionEventCategoryFINALDECISIONCTMLIMITED:
+		return true
+	case OppositionEventTypeOppositionEventCategoryFINALDECISIONCTMREJECTED:
+		return true
+	case OppositionEventTypeOppositionEventCategoryFINALDECISIONCTMREJECTEDBYED:
+		return true
+	case OppositionEventTypeOppositionEventCategoryFINALDECISIONCTMREJECTEDINPART:
+		return true
+	case OppositionEventTypeOppositionEventCategoryFINALDECISIONCTMWITHDRAWN:
+		return true
+	case OppositionEventTypeOppositionEventCategoryFINALDECISIONOPPOSITIONNOTDULYENTERED:
+		return true
+	case OppositionEventTypeOppositionEventCategoryFINALDECISIONOPPOSITIONREJECTED:
+		return true
+	case OppositionEventTypeOppositionEventCategoryFINALDECISIONOPPOSITIONWITHDRAWN:
+		return true
+	case OppositionEventTypeOppositionEventCategoryNODECISIONOPPOSITIONNOTDULYENTERED:
+		return true
+	case OppositionEventTypeOppositionEventCategoryOPPOSITIONCLOSED:
+		return true
+	case OppositionEventTypeOppositionEventCategoryOPPOSITIONFILED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for OppositionTypeEarlierRightCategory.
 const (
 	FILINGDATE       OppositionTypeEarlierRightCategory = "FILING_DATE"
 	REGISTRATIONDATE OppositionTypeEarlierRightCategory = "REGISTRATION_DATE"
 	USEDATE          OppositionTypeEarlierRightCategory = "USE_DATE"
 )
+
+// Valid indicates whether the value is a known member of the OppositionTypeEarlierRightCategory enum.
+func (e OppositionTypeEarlierRightCategory) Valid() bool {
+	switch e {
+	case FILINGDATE:
+		return true
+	case REGISTRATIONDATE:
+		return true
+	case USEDATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for OppositionTypeOppositionBasisCategory.
 const (
@@ -551,6 +1627,28 @@ const (
 	OppositionTypeOppositionBasisCategoryUNDEFINED                    OppositionTypeOppositionBasisCategory = "UNDEFINED"
 	OppositionTypeOppositionBasisCategoryWELLKNOWNMARK                OppositionTypeOppositionBasisCategory = "WELL_KNOWN_MARK"
 )
+
+// Valid indicates whether the value is a known member of the OppositionTypeOppositionBasisCategory enum.
+func (e OppositionTypeOppositionBasisCategory) Valid() bool {
+	switch e {
+	case OppositionTypeOppositionBasisCategoryMARK:
+		return true
+	case OppositionTypeOppositionBasisCategoryMARKFILEDBYANAGENT:
+		return true
+	case OppositionTypeOppositionBasisCategoryNONREGISTEREDMARK:
+		return true
+	case OppositionTypeOppositionBasisCategoryREGISTEREDMARKWITHREPUTATION:
+		return true
+	case OppositionTypeOppositionBasisCategorySIGNUSEDINTRADE:
+		return true
+	case OppositionTypeOppositionBasisCategoryUNDEFINED:
+		return true
+	case OppositionTypeOppositionBasisCategoryWELLKNOWNMARK:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for OppositionTypeOppositionCurrentStatusCategory.
 const (
@@ -569,6 +1667,40 @@ const (
 	OppositionTypeOppositionCurrentStatusCategoryPROCEEDINGSOFOPPOSITIONCOMMENCED            OppositionTypeOppositionCurrentStatusCategory = "PROCEEDINGS_OF_OPPOSITION_COMMENCED"
 )
 
+// Valid indicates whether the value is a known member of the OppositionTypeOppositionCurrentStatusCategory enum.
+func (e OppositionTypeOppositionCurrentStatusCategory) Valid() bool {
+	switch e {
+	case OppositionTypeOppositionCurrentStatusCategoryADMISSIBILITYOFOPPOSITIONFILINGCHECKED:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryAGREEMENTBETWEENPARTIESREACHED:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryAPPLICATIONORTRADEMARKFINALLYLIMITED:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryAPPLICATIONORTRADEMARKFINALLYREJECTEDINFULL:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryAPPLICATIONORTRADEMARKFINALLYREJECTEDINPART:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryAPPLICATIONORTRADEMARKFINALLYWITHDRAWN:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryCOOLINGOFFPERIODTAKEN:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryOPPOSITIONCLOSED:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryOPPOSITIONDEEMEDTOBEWITHDRAWN:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryOPPOSITIONFILED:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryOPPOSITIONFINALLYREJECTED:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryOPPOSITIONFINALLYWITHDRAWN:
+		return true
+	case OppositionTypeOppositionCurrentStatusCategoryPROCEEDINGSOFOPPOSITIONCOMMENCED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for OtherDateTypeOtherDateCategory.
 const (
 	CERTIFICATIONAGREEMENTDATE                 OtherDateTypeOtherDateCategory = "CERTIFICATION_AGREEMENT_DATE"
@@ -577,11 +1709,39 @@ const (
 	IRREGULARITYREPLYBYDATE                    OtherDateTypeOtherDateCategory = "IRREGULARITY_REPLY_BY_DATE"
 )
 
+// Valid indicates whether the value is a known member of the OtherDateTypeOtherDateCategory enum.
+func (e OtherDateTypeOtherDateCategory) Valid() bool {
+	switch e {
+	case CERTIFICATIONAGREEMENTDATE:
+		return true
+	case INTERNATIONALAPPLICATIONORREGISTRATIONDATE:
+		return true
+	case INTERNATIONALREGISTRATIONRENEWALDATE:
+		return true
+	case IRREGULARITYREPLYBYDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for OtherElectronicAddressTextTypeOtherElectronicAddressCategory.
 const (
 	OtherElectronicAddressTextTypeOtherElectronicAddressCategoryBUSINESS OtherElectronicAddressTextTypeOtherElectronicAddressCategory = "BUSINESS"
 	OtherElectronicAddressTextTypeOtherElectronicAddressCategoryPRIVATE  OtherElectronicAddressTextTypeOtherElectronicAddressCategory = "PRIVATE"
 )
+
+// Valid indicates whether the value is a known member of the OtherElectronicAddressTextTypeOtherElectronicAddressCategory enum.
+func (e OtherElectronicAddressTextTypeOtherElectronicAddressCategory) Valid() bool {
+	switch e {
+	case OtherElectronicAddressTextTypeOtherElectronicAddressCategoryBUSINESS:
+		return true
+	case OtherElectronicAddressTextTypeOtherElectronicAddressCategoryPRIVATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for PXFormType.
 const (
@@ -589,6 +1749,20 @@ const (
 	CHANGED PXFormType = "CHANGED"
 	DELETED PXFormType = "DELETED"
 )
+
+// Valid indicates whether the value is a known member of the PXFormType enum.
+func (e PXFormType) Valid() bool {
+	switch e {
+	case ADDED:
+		return true
+	case CHANGED:
+		return true
+	case DELETED:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for PaymentTypePaymentModeCategory.
 const (
@@ -606,6 +1780,38 @@ const (
 	PaymentTypePaymentModeCategorySTAMPS         PaymentTypePaymentModeCategory = "STAMPS"
 )
 
+// Valid indicates whether the value is a known member of the PaymentTypePaymentModeCategory enum.
+func (e PaymentTypePaymentModeCategory) Valid() bool {
+	switch e {
+	case PaymentTypePaymentModeCategoryBANKDRAFT:
+		return true
+	case PaymentTypePaymentModeCategoryCARD:
+		return true
+	case PaymentTypePaymentModeCategoryCASH:
+		return true
+	case PaymentTypePaymentModeCategoryCHARGE:
+		return true
+	case PaymentTypePaymentModeCategoryCHEQUE:
+		return true
+	case PaymentTypePaymentModeCategoryCOUPONS:
+		return true
+	case PaymentTypePaymentModeCategoryCREDITCARD:
+		return true
+	case PaymentTypePaymentModeCategoryCURRENTACCOUNT:
+		return true
+	case PaymentTypePaymentModeCategoryDEBITCARD:
+		return true
+	case PaymentTypePaymentModeCategoryLATERPAYMENT:
+		return true
+	case PaymentTypePaymentModeCategoryPOSTALORDER:
+		return true
+	case PaymentTypePaymentModeCategorySTAMPS:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PaymentTypePaymentStatusCategory.
 const (
 	PaymentTypePaymentStatusCategoryATTACHED             PaymentTypePaymentStatusCategory = "ATTACHED"
@@ -614,6 +1820,24 @@ const (
 	PaymentTypePaymentStatusCategoryTOFOLLOW             PaymentTypePaymentStatusCategory = "TO_FOLLOW"
 	PaymentTypePaymentStatusCategoryUNDEFINED            PaymentTypePaymentStatusCategory = "UNDEFINED"
 )
+
+// Valid indicates whether the value is a known member of the PaymentTypePaymentStatusCategory enum.
+func (e PaymentTypePaymentStatusCategory) Valid() bool {
+	switch e {
+	case PaymentTypePaymentStatusCategoryATTACHED:
+		return true
+	case PaymentTypePaymentStatusCategoryBANKTRANSFERTOFOLLOW:
+		return true
+	case PaymentTypePaymentStatusCategoryDONE:
+		return true
+	case PaymentTypePaymentStatusCategoryTOFOLLOW:
+		return true
+	case PaymentTypePaymentStatusCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for PhoneNumberTypePhoneNumberCategory.
 const (
@@ -624,6 +1848,24 @@ const (
 	PhoneNumberTypePhoneNumberCategoryPRIVATEMOBILE  PhoneNumberTypePhoneNumberCategory = "PRIVATE_MOBILE"
 )
 
+// Valid indicates whether the value is a known member of the PhoneNumberTypePhoneNumberCategory enum.
+func (e PhoneNumberTypePhoneNumberCategory) Valid() bool {
+	switch e {
+	case PhoneNumberTypePhoneNumberCategoryBUSINESSFIXED:
+		return true
+	case PhoneNumberTypePhoneNumberCategoryBUSINESSMOBILE:
+		return true
+	case PhoneNumberTypePhoneNumberCategoryOTHER:
+		return true
+	case PhoneNumberTypePhoneNumberCategoryPRIVATEFIXED:
+		return true
+	case PhoneNumberTypePhoneNumberCategoryPRIVATEMOBILE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PlaintiffTypeOperationCategory.
 const (
 	PlaintiffTypeOperationCategoryDELETE PlaintiffTypeOperationCategory = "DELETE"
@@ -632,17 +1874,57 @@ const (
 	PlaintiffTypeOperationCategoryUPDATE PlaintiffTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the PlaintiffTypeOperationCategory enum.
+func (e PlaintiffTypeOperationCategory) Valid() bool {
+	switch e {
+	case PlaintiffTypeOperationCategoryDELETE:
+		return true
+	case PlaintiffTypeOperationCategoryINSERT:
+		return true
+	case PlaintiffTypeOperationCategorySELECT:
+		return true
+	case PlaintiffTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PostalStructuredAddressTypePostalAddressCategory.
 const (
 	PostalStructuredAddressTypePostalAddressCategoryBUSINESS PostalStructuredAddressTypePostalAddressCategory = "BUSINESS"
 	PostalStructuredAddressTypePostalAddressCategoryHOME     PostalStructuredAddressTypePostalAddressCategory = "HOME"
 )
 
+// Valid indicates whether the value is a known member of the PostalStructuredAddressTypePostalAddressCategory enum.
+func (e PostalStructuredAddressTypePostalAddressCategory) Valid() bool {
+	switch e {
+	case PostalStructuredAddressTypePostalAddressCategoryBUSINESS:
+		return true
+	case PostalStructuredAddressTypePostalAddressCategoryHOME:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PreviousRegistrationTypePreviousRegistrationBasisCategory.
 const (
 	PreviousRegistrationTypePreviousRegistrationBasisCategoryRENEWAL        PreviousRegistrationTypePreviousRegistrationBasisCategory = "RENEWAL"
 	PreviousRegistrationTypePreviousRegistrationBasisCategoryTRANSFORMATION PreviousRegistrationTypePreviousRegistrationBasisCategory = "TRANSFORMATION"
 )
+
+// Valid indicates whether the value is a known member of the PreviousRegistrationTypePreviousRegistrationBasisCategory enum.
+func (e PreviousRegistrationTypePreviousRegistrationBasisCategory) Valid() bool {
+	switch e {
+	case PreviousRegistrationTypePreviousRegistrationBasisCategoryRENEWAL:
+		return true
+	case PreviousRegistrationTypePreviousRegistrationBasisCategoryTRANSFORMATION:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for PriorityTypePriorityStatusCategory.
 const (
@@ -654,6 +1936,26 @@ const (
 	PriorityTypePriorityStatusCategoryUNDEFINED        PriorityTypePriorityStatusCategory = "UNDEFINED"
 )
 
+// Valid indicates whether the value is a known member of the PriorityTypePriorityStatusCategory enum.
+func (e PriorityTypePriorityStatusCategory) Valid() bool {
+	switch e {
+	case PriorityTypePriorityStatusCategoryABANDONED:
+		return true
+	case PriorityTypePriorityStatusCategoryACCEPTED:
+		return true
+	case PriorityTypePriorityStatusCategoryCLAIMED:
+		return true
+	case PriorityTypePriorityStatusCategoryPARTIALLYREFUSED:
+		return true
+	case PriorityTypePriorityStatusCategoryREFUSED:
+		return true
+	case PriorityTypePriorityStatusCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ProceedingPartyPartyType.
 const (
 	Applicant        ProceedingPartyPartyType = "Applicant"
@@ -663,6 +1965,26 @@ const (
 	Registrant       ProceedingPartyPartyType = "Registrant"
 	User             ProceedingPartyPartyType = "User"
 )
+
+// Valid indicates whether the value is a known member of the ProceedingPartyPartyType enum.
+func (e ProceedingPartyPartyType) Valid() bool {
+	switch e {
+	case Applicant:
+		return true
+	case Defendant:
+		return true
+	case Plantiff:
+		return true
+	case PotentialOpposer:
+		return true
+	case Registrant:
+		return true
+	case User:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for PublicationTypePublicationSectionCategory.
 const (
@@ -693,21 +2015,111 @@ const (
 	WITHDRAWALS                                        PublicationTypePublicationSectionCategory = "WITHDRAWALS"
 )
 
+// Valid indicates whether the value is a known member of the PublicationTypePublicationSectionCategory enum.
+func (e PublicationTypePublicationSectionCategory) Valid() bool {
+	switch e {
+	case AMENDMENTSTOAPPLICATIONS:
+		return true
+	case APPLICATIONS:
+		return true
+	case APPLICATIONSPUBLISHINGFOROPPOSITION:
+		return true
+	case APPOINTMENTOFANEWREPRESENTATIVE:
+		return true
+	case CHANGEOFNAMEANDADDRESSOFPROPRIETOR:
+		return true
+	case CHANGEOFNAMEANDPROFESSIONALADDRESSOFREPRESENTATIVE:
+		return true
+	case CORRECTIONOFERRORSONAPPLICATIONS:
+		return true
+	case CORRECTIONOFERRORSONREGISTRATIONS:
+		return true
+	case DELETIONOFTHEREPRESENTATIVE:
+		return true
+	case LIMITATIONS:
+		return true
+	case PARTIALREFUSALS:
+		return true
+	case PARTIALSURRENDEROFTRADEMARKS:
+		return true
+	case PARTIALTRANSFERS:
+		return true
+	case REGISTRATIONREPUBLISHED:
+		return true
+	case REGISTRATIONSNOLONGERINEFFECT:
+		return true
+	case REGISTRATIONSPUBLISHING:
+		return true
+	case REGISTRATIONSRENEWED:
+		return true
+	case REGISTRATIONSWITHAMENDMENTS:
+		return true
+	case REGISTRATIONSWITHNOAMENDMENTS:
+		return true
+	case REGISTRATIONSWITHRESTRICTIONS:
+		return true
+	case REPLACEMENTOFREPRESENTATIVE:
+		return true
+	case TOTALREFUSALS:
+		return true
+	case TOTALSURRENDEROFTRADEMARKS:
+		return true
+	case TOTALTRANSFERS:
+		return true
+	case WITHDRAWALS:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReasonDocumentTypeReasonDocumentCategory.
 const (
-	DECISIONOFCHANGEINCONTRACT      ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_CHANGE_IN_CONTRACT"
-	DECISIONOFCORRECTION            ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_CORRECTION"
-	DECISIONOFNONCONTRACTEDTRANSFER ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_NON_CONTRACTED_TRANSFER"
-	DECISIONOFPARTIALTRANSFER       ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_PARTIAL_TRANSFER"
-	DECISIONOFPLEDGE                ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_PLEDGE"
-	DECISIONOFREGISTRATION          ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_REGISTRATION"
-	DECISIONOFREGISTRATIONLICENSEE  ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_REGISTRATION_LICENSEE"
-	DECISIONOFSUBSEQUENTPLEDGE      ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_SUBSEQUENT_PLEDGE"
-	DECISIONOFTRANSFER              ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_TRANSFER"
-	JUDICIALACTION                  ReasonDocumentTypeReasonDocumentCategory = "JUDICIAL_ACTION"
-	NONRENEWAL                      ReasonDocumentTypeReasonDocumentCategory = "NON_RENEWAL"
-	REQUESTOFTHEHOLDER              ReasonDocumentTypeReasonDocumentCategory = "REQUEST_OF_THE_HOLDER"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFCHANGEINCONTRACT      ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_CHANGE_IN_CONTRACT"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFCORRECTION            ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_CORRECTION"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFNONCONTRACTEDTRANSFER ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_NON_CONTRACTED_TRANSFER"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFPARTIALTRANSFER       ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_PARTIAL_TRANSFER"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFPLEDGE                ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_PLEDGE"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFREGISTRATION          ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_REGISTRATION"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFREGISTRATIONLICENSEE  ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_REGISTRATION_LICENSEE"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFSUBSEQUENTPLEDGE      ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_SUBSEQUENT_PLEDGE"
+	ReasonDocumentTypeReasonDocumentCategoryDECISIONOFTRANSFER              ReasonDocumentTypeReasonDocumentCategory = "DECISION_OF_TRANSFER"
+	ReasonDocumentTypeReasonDocumentCategoryJUDICIALACTION                  ReasonDocumentTypeReasonDocumentCategory = "JUDICIAL_ACTION"
+	ReasonDocumentTypeReasonDocumentCategoryNONRENEWAL                      ReasonDocumentTypeReasonDocumentCategory = "NON_RENEWAL"
+	ReasonDocumentTypeReasonDocumentCategoryREQUESTOFTHEHOLDER              ReasonDocumentTypeReasonDocumentCategory = "REQUEST_OF_THE_HOLDER"
 )
+
+// Valid indicates whether the value is a known member of the ReasonDocumentTypeReasonDocumentCategory enum.
+func (e ReasonDocumentTypeReasonDocumentCategory) Valid() bool {
+	switch e {
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFCHANGEINCONTRACT:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFCORRECTION:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFNONCONTRACTEDTRANSFER:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFPARTIALTRANSFER:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFPLEDGE:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFREGISTRATION:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFREGISTRATIONLICENSEE:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFSUBSEQUENTPLEDGE:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryDECISIONOFTRANSFER:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryJUDICIALACTION:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryNONRENEWAL:
+		return true
+	case ReasonDocumentTypeReasonDocumentCategoryREQUESTOFTHEHOLDER:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for RecordAttorneyTypeOperationCategory.
 const (
@@ -717,6 +2129,22 @@ const (
 	RecordAttorneyTypeOperationCategoryUPDATE RecordAttorneyTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the RecordAttorneyTypeOperationCategory enum.
+func (e RecordAttorneyTypeOperationCategory) Valid() bool {
+	switch e {
+	case RecordAttorneyTypeOperationCategoryDELETE:
+		return true
+	case RecordAttorneyTypeOperationCategoryINSERT:
+		return true
+	case RecordAttorneyTypeOperationCategorySELECT:
+		return true
+	case RecordAttorneyTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RecordChangeNameAddressTypeRecordChangeNameAddressCategory.
 const (
 	RecordChangeNameAddressTypeRecordChangeNameAddressCategoryCHANGEAPPLICANTNAMEORADDRESS RecordChangeNameAddressTypeRecordChangeNameAddressCategory = "CHANGE_APPLICANT_NAME_OR_ADDRESS"
@@ -725,11 +2153,39 @@ const (
 	RecordChangeNameAddressTypeRecordChangeNameAddressCategoryOTHER                        RecordChangeNameAddressTypeRecordChangeNameAddressCategory = "OTHER"
 )
 
+// Valid indicates whether the value is a known member of the RecordChangeNameAddressTypeRecordChangeNameAddressCategory enum.
+func (e RecordChangeNameAddressTypeRecordChangeNameAddressCategory) Valid() bool {
+	switch e {
+	case RecordChangeNameAddressTypeRecordChangeNameAddressCategoryCHANGEAPPLICANTNAMEORADDRESS:
+		return true
+	case RecordChangeNameAddressTypeRecordChangeNameAddressCategoryHOLDER:
+		return true
+	case RecordChangeNameAddressTypeRecordChangeNameAddressCategoryLICENSEE:
+		return true
+	case RecordChangeNameAddressTypeRecordChangeNameAddressCategoryOTHER:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RecordChangeNameAddressTypeRecordCurrentStatusCategory.
 const (
 	RecordChangeNameAddressTypeRecordCurrentStatusCategoryRECORDFILED RecordChangeNameAddressTypeRecordCurrentStatusCategory = "RECORD_FILED"
 	RecordChangeNameAddressTypeRecordCurrentStatusCategoryUNDEFINED   RecordChangeNameAddressTypeRecordCurrentStatusCategory = "UNDEFINED"
 )
+
+// Valid indicates whether the value is a known member of the RecordChangeNameAddressTypeRecordCurrentStatusCategory enum.
+func (e RecordChangeNameAddressTypeRecordCurrentStatusCategory) Valid() bool {
+	switch e {
+	case RecordChangeNameAddressTypeRecordCurrentStatusCategoryRECORDFILED:
+		return true
+	case RecordChangeNameAddressTypeRecordCurrentStatusCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for RecordEventTypeRecordEventCategory.
 const (
@@ -739,11 +2195,39 @@ const (
 	RecordEventTypeRecordEventCategoryWITHDRAWN RecordEventTypeRecordEventCategory = "WITHDRAWN"
 )
 
+// Valid indicates whether the value is a known member of the RecordEventTypeRecordEventCategory enum.
+func (e RecordEventTypeRecordEventCategory) Valid() bool {
+	switch e {
+	case RecordEventTypeRecordEventCategoryACCEPTED:
+		return true
+	case RecordEventTypeRecordEventCategoryREJECTED:
+		return true
+	case RecordEventTypeRecordEventCategoryTOCHECK:
+		return true
+	case RecordEventTypeRecordEventCategoryWITHDRAWN:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RecordLicenceTypeRecordCurrentStatusCategory.
 const (
 	RecordLicenceTypeRecordCurrentStatusCategoryRECORDFILED RecordLicenceTypeRecordCurrentStatusCategory = "RECORD_FILED"
 	RecordLicenceTypeRecordCurrentStatusCategoryUNDEFINED   RecordLicenceTypeRecordCurrentStatusCategory = "UNDEFINED"
 )
+
+// Valid indicates whether the value is a known member of the RecordLicenceTypeRecordCurrentStatusCategory enum.
+func (e RecordLicenceTypeRecordCurrentStatusCategory) Valid() bool {
+	switch e {
+	case RecordLicenceTypeRecordCurrentStatusCategoryRECORDFILED:
+		return true
+	case RecordLicenceTypeRecordCurrentStatusCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for RecordLicenceTypeRecordLicenceCategory.
 const (
@@ -751,6 +2235,20 @@ const (
 	RecordLicenceTypeRecordLicenceCategoryOTHER      RecordLicenceTypeRecordLicenceCategory = "OTHER"
 	RecordLicenceTypeRecordLicenceCategorySUBLICENCE RecordLicenceTypeRecordLicenceCategory = "SUBLICENCE"
 )
+
+// Valid indicates whether the value is a known member of the RecordLicenceTypeRecordLicenceCategory enum.
+func (e RecordLicenceTypeRecordLicenceCategory) Valid() bool {
+	switch e {
+	case RecordLicenceTypeRecordLicenceCategoryLICENCE:
+		return true
+	case RecordLicenceTypeRecordLicenceCategoryOTHER:
+		return true
+	case RecordLicenceTypeRecordLicenceCategorySUBLICENCE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for RecordOppositionPeriodTypeRecordOppositionPeriodCategory.
 const (
@@ -760,6 +2258,22 @@ const (
 	RecordOppositionPeriodTypeRecordOppositionPeriodCategoryPROTECTIONGRANTEDOPPOSITIONPERIOD      RecordOppositionPeriodTypeRecordOppositionPeriodCategory = "PROTECTION_GRANTED_OPPOSITION_PERIOD"
 )
 
+// Valid indicates whether the value is a known member of the RecordOppositionPeriodTypeRecordOppositionPeriodCategory enum.
+func (e RecordOppositionPeriodTypeRecordOppositionPeriodCategory) Valid() bool {
+	switch e {
+	case RecordOppositionPeriodTypeRecordOppositionPeriodCategoryHOLDERRIGHTRESTRICTIONOPPOSITIONPERIOD:
+		return true
+	case RecordOppositionPeriodTypeRecordOppositionPeriodCategoryOPPOSITIONPERIOD:
+		return true
+	case RecordOppositionPeriodTypeRecordOppositionPeriodCategoryOTHER:
+		return true
+	case RecordOppositionPeriodTypeRecordOppositionPeriodCategoryPROTECTIONGRANTEDOPPOSITIONPERIOD:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RecordShortNotationTypeRecordShortNotationCategory.
 const (
 	RecordShortNotationTypeRecordShortNotationCategoryMERGER          RecordShortNotationTypeRecordShortNotationCategory = "MERGER"
@@ -767,11 +2281,37 @@ const (
 	RecordShortNotationTypeRecordShortNotationCategorySHORTNOTATION   RecordShortNotationTypeRecordShortNotationCategory = "SHORT_NOTATION"
 )
 
+// Valid indicates whether the value is a known member of the RecordShortNotationTypeRecordShortNotationCategory enum.
+func (e RecordShortNotationTypeRecordShortNotationCategory) Valid() bool {
+	switch e {
+	case RecordShortNotationTypeRecordShortNotationCategoryMERGER:
+		return true
+	case RecordShortNotationTypeRecordShortNotationCategoryPARTIALTRANSFER:
+		return true
+	case RecordShortNotationTypeRecordShortNotationCategorySHORTNOTATION:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RecordTransferTypeRecordCurrentStatusCategory.
 const (
 	RecordTransferTypeRecordCurrentStatusCategoryRECORDFILED RecordTransferTypeRecordCurrentStatusCategory = "RECORD_FILED"
 	RecordTransferTypeRecordCurrentStatusCategoryUNDEFINED   RecordTransferTypeRecordCurrentStatusCategory = "UNDEFINED"
 )
+
+// Valid indicates whether the value is a known member of the RecordTransferTypeRecordCurrentStatusCategory enum.
+func (e RecordTransferTypeRecordCurrentStatusCategory) Valid() bool {
+	switch e {
+	case RecordTransferTypeRecordCurrentStatusCategoryRECORDFILED:
+		return true
+	case RecordTransferTypeRecordCurrentStatusCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for RecordTransferTypeRecordTransferCategory.
 const (
@@ -780,6 +2320,20 @@ const (
 	RecordTransferTypeRecordTransferCategoryTOTALTRANSFER   RecordTransferTypeRecordTransferCategory = "TOTAL_TRANSFER"
 )
 
+// Valid indicates whether the value is a known member of the RecordTransferTypeRecordTransferCategory enum.
+func (e RecordTransferTypeRecordTransferCategory) Valid() bool {
+	switch e {
+	case RecordTransferTypeRecordTransferCategoryOTHER:
+		return true
+	case RecordTransferTypeRecordTransferCategoryPARTIALTRANSFER:
+		return true
+	case RecordTransferTypeRecordTransferCategoryTOTALTRANSFER:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RegistrantTypeOperationCategory.
 const (
 	RegistrantTypeOperationCategoryDELETE RegistrantTypeOperationCategory = "DELETE"
@@ -787,6 +2341,22 @@ const (
 	RegistrantTypeOperationCategorySELECT RegistrantTypeOperationCategory = "SELECT"
 	RegistrantTypeOperationCategoryUPDATE RegistrantTypeOperationCategory = "UPDATE"
 )
+
+// Valid indicates whether the value is a known member of the RegistrantTypeOperationCategory enum.
+func (e RegistrantTypeOperationCategory) Valid() bool {
+	switch e {
+	case RegistrantTypeOperationCategoryDELETE:
+		return true
+	case RegistrantTypeOperationCategoryINSERT:
+		return true
+	case RegistrantTypeOperationCategorySELECT:
+		return true
+	case RegistrantTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for ReimbursementTypeReimbursementModeCategory.
 const (
@@ -804,6 +2374,38 @@ const (
 	ReimbursementTypeReimbursementModeCategorySTAMPS         ReimbursementTypeReimbursementModeCategory = "STAMPS"
 )
 
+// Valid indicates whether the value is a known member of the ReimbursementTypeReimbursementModeCategory enum.
+func (e ReimbursementTypeReimbursementModeCategory) Valid() bool {
+	switch e {
+	case ReimbursementTypeReimbursementModeCategoryBANKDRAFT:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryCARD:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryCASH:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryCHARGE:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryCHEQUE:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryCOUPONS:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryCREDITCARD:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryCURRENTACCOUNT:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryDEBITCARD:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryLATERPAYMENT:
+		return true
+	case ReimbursementTypeReimbursementModeCategoryPOSTALORDER:
+		return true
+	case ReimbursementTypeReimbursementModeCategorySTAMPS:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RepresentativeTypeOperationCategory.
 const (
 	RepresentativeTypeOperationCategoryDELETE RepresentativeTypeOperationCategory = "DELETE"
@@ -811,6 +2413,22 @@ const (
 	RepresentativeTypeOperationCategorySELECT RepresentativeTypeOperationCategory = "SELECT"
 	RepresentativeTypeOperationCategoryUPDATE RepresentativeTypeOperationCategory = "UPDATE"
 )
+
+// Valid indicates whether the value is a known member of the RepresentativeTypeOperationCategory enum.
+func (e RepresentativeTypeOperationCategory) Valid() bool {
+	switch e {
+	case RepresentativeTypeOperationCategoryDELETE:
+		return true
+	case RepresentativeTypeOperationCategoryINSERT:
+		return true
+	case RepresentativeTypeOperationCategorySELECT:
+		return true
+	case RepresentativeTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for RepresentativeTypeRepresentativeCategory.
 const (
@@ -822,12 +2440,46 @@ const (
 	RepresentativeTypeRepresentativeCategoryUNDEFINED                  RepresentativeTypeRepresentativeCategory = "UNDEFINED"
 )
 
+// Valid indicates whether the value is a known member of the RepresentativeTypeRepresentativeCategory enum.
+func (e RepresentativeTypeRepresentativeCategory) Valid() bool {
+	switch e {
+	case RepresentativeTypeRepresentativeCategoryASSOCIATION:
+		return true
+	case RepresentativeTypeRepresentativeCategoryEMPLOYEE:
+		return true
+	case RepresentativeTypeRepresentativeCategoryLAWYER:
+		return true
+	case RepresentativeTypeRepresentativeCategoryOTHER:
+		return true
+	case RepresentativeTypeRepresentativeCategoryPROFESSIONALREPRESENTATIVE:
+		return true
+	case RepresentativeTypeRepresentativeCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for RequestExaminationTypeRequestExaminationCategory.
 const (
 	RequestExaminationTypeRequestExaminationCategoryACCELERATED RequestExaminationTypeRequestExaminationCategory = "ACCELERATED"
 	RequestExaminationTypeRequestExaminationCategoryNORMAL      RequestExaminationTypeRequestExaminationCategory = "NORMAL"
 	RequestExaminationTypeRequestExaminationCategoryUNDEFINED   RequestExaminationTypeRequestExaminationCategory = "UNDEFINED"
 )
+
+// Valid indicates whether the value is a known member of the RequestExaminationTypeRequestExaminationCategory enum.
+func (e RequestExaminationTypeRequestExaminationCategory) Valid() bool {
+	switch e {
+	case RequestExaminationTypeRequestExaminationCategoryACCELERATED:
+		return true
+	case RequestExaminationTypeRequestExaminationCategoryNORMAL:
+		return true
+	case RequestExaminationTypeRequestExaminationCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for RequestSearchTypeRequestSearchCategory.
 const (
@@ -838,11 +2490,41 @@ const (
 	RequestSearchTypeRequestSearchCategoryUNDEFINED     RequestSearchTypeRequestSearchCategory = "UNDEFINED"
 )
 
+// Valid indicates whether the value is a known member of the RequestSearchTypeRequestSearchCategory enum.
+func (e RequestSearchTypeRequestSearchCategory) Valid() bool {
+	switch e {
+	case RequestSearchTypeRequestSearchCategoryACCELERATED:
+		return true
+	case RequestSearchTypeRequestSearchCategoryEARLIERSEARCH:
+		return true
+	case RequestSearchTypeRequestSearchCategoryNORMAL:
+		return true
+	case RequestSearchTypeRequestSearchCategoryNOSEARCH:
+		return true
+	case RequestSearchTypeRequestSearchCategoryUNDEFINED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for SeniorityTypeInternationalTrademarkCategory.
 const (
 	EU     SeniorityTypeInternationalTrademarkCategory = "EU"
 	MADRID SeniorityTypeInternationalTrademarkCategory = "MADRID"
 )
+
+// Valid indicates whether the value is a known member of the SeniorityTypeInternationalTrademarkCategory enum.
+func (e SeniorityTypeInternationalTrademarkCategory) Valid() bool {
+	switch e {
+	case EU:
+		return true
+	case MADRID:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for SeniorityTypeSeniorityStatusCategory.
 const (
@@ -852,6 +2534,24 @@ const (
 	SeniorityTypeSeniorityStatusCategoryPARTIALLYREFUSED SeniorityTypeSeniorityStatusCategory = "PARTIALLY_REFUSED"
 	SeniorityTypeSeniorityStatusCategoryREFUSED          SeniorityTypeSeniorityStatusCategory = "REFUSED"
 )
+
+// Valid indicates whether the value is a known member of the SeniorityTypeSeniorityStatusCategory enum.
+func (e SeniorityTypeSeniorityStatusCategory) Valid() bool {
+	switch e {
+	case SeniorityTypeSeniorityStatusCategoryABANDONED:
+		return true
+	case SeniorityTypeSeniorityStatusCategoryACCEPTED:
+		return true
+	case SeniorityTypeSeniorityStatusCategoryCLAIMED:
+		return true
+	case SeniorityTypeSeniorityStatusCategoryPARTIALLYREFUSED:
+		return true
+	case SeniorityTypeSeniorityStatusCategoryREFUSED:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for SignatureTypeSignatoryCapacityCategory.
 const (
@@ -890,6 +2590,80 @@ const (
 	SignatureTypeSignatoryCapacityCategoryTRUSTEE             SignatureTypeSignatoryCapacityCategory = "TRUSTEE"
 )
 
+// Valid indicates whether the value is a known member of the SignatureTypeSignatoryCapacityCategory enum.
+func (e SignatureTypeSignatoryCapacityCategory) Valid() bool {
+	switch e {
+	case SignatureTypeSignatoryCapacityCategoryAGENT:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryAPPEALEXAMINER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryAPPLICANT:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryASSIGNEE:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryASSISTANTEXAMINER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryATTORNEY:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryAUTHOR:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryAUTHORIZEDOFFICER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryBREEDER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryCORRESPONDENT:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryCREATOR:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryDESIGNER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryEMPLOYEE:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryEXAMINER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryFORMALITYEXAMINER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryHOLDER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryIPOFFICE:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryJUDGE:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryLAWYER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryLEGALPRACTITIONER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryLICENSEE:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryMORTGAGEE:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryOPPONENT:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryOWNER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryPRIMARYEXAMINER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryREGISTRANT:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryREPRESENTATIVE:
+		return true
+	case SignatureTypeSignatoryCapacityCategorySUBSTANTIVEEXAMINER:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryTHIRDPARTYREQUESTOR:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryTRANSFEREE:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryTRANSFEROR:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryTRANSLATOR:
+		return true
+	case SignatureTypeSignatoryCapacityCategoryTRUSTEE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for TermSynonymRelationTypeOperationCategory.
 const (
 	TermSynonymRelationTypeOperationCategoryDELETE TermSynonymRelationTypeOperationCategory = "DELETE"
@@ -897,6 +2671,22 @@ const (
 	TermSynonymRelationTypeOperationCategorySELECT TermSynonymRelationTypeOperationCategory = "SELECT"
 	TermSynonymRelationTypeOperationCategoryUPDATE TermSynonymRelationTypeOperationCategory = "UPDATE"
 )
+
+// Valid indicates whether the value is a known member of the TermSynonymRelationTypeOperationCategory enum.
+func (e TermSynonymRelationTypeOperationCategory) Valid() bool {
+	switch e {
+	case TermSynonymRelationTypeOperationCategoryDELETE:
+		return true
+	case TermSynonymRelationTypeOperationCategoryINSERT:
+		return true
+	case TermSynonymRelationTypeOperationCategorySELECT:
+		return true
+	case TermSynonymRelationTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for TermTranslationRelationTypeOperationCategory.
 const (
@@ -906,48 +2696,150 @@ const (
 	TermTranslationRelationTypeOperationCategoryUPDATE TermTranslationRelationTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the TermTranslationRelationTypeOperationCategory enum.
+func (e TermTranslationRelationTypeOperationCategory) Valid() bool {
+	switch e {
+	case TermTranslationRelationTypeOperationCategoryDELETE:
+		return true
+	case TermTranslationRelationTypeOperationCategoryINSERT:
+		return true
+	case TermTranslationRelationTypeOperationCategorySELECT:
+		return true
+	case TermTranslationRelationTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for TrademarkDocumentTypeDocumentFormatCategory.
 const (
-	CDX     TrademarkDocumentTypeDocumentFormatCategory = "CDX"
-	EPS     TrademarkDocumentTypeDocumentFormatCategory = "EPS"
-	HTML    TrademarkDocumentTypeDocumentFormatCategory = "HTML"
-	JPEG    TrademarkDocumentTypeDocumentFormatCategory = "JPEG"
-	MOL     TrademarkDocumentTypeDocumentFormatCategory = "MOL"
-	MSEXCEL TrademarkDocumentTypeDocumentFormatCategory = "MS_EXCEL"
-	MSWORD  TrademarkDocumentTypeDocumentFormatCategory = "MS_WORD"
-	NB      TrademarkDocumentTypeDocumentFormatCategory = "NB"
-	PDF     TrademarkDocumentTypeDocumentFormatCategory = "PDF"
-	PNG     TrademarkDocumentTypeDocumentFormatCategory = "PNG"
-	SVG     TrademarkDocumentTypeDocumentFormatCategory = "SVG"
-	TEXT    TrademarkDocumentTypeDocumentFormatCategory = "TEXT"
-	TIFF    TrademarkDocumentTypeDocumentFormatCategory = "TIFF"
-	XML     TrademarkDocumentTypeDocumentFormatCategory = "XML"
+	TrademarkDocumentTypeDocumentFormatCategoryCDX     TrademarkDocumentTypeDocumentFormatCategory = "CDX"
+	TrademarkDocumentTypeDocumentFormatCategoryEPS     TrademarkDocumentTypeDocumentFormatCategory = "EPS"
+	TrademarkDocumentTypeDocumentFormatCategoryHTML    TrademarkDocumentTypeDocumentFormatCategory = "HTML"
+	TrademarkDocumentTypeDocumentFormatCategoryJPEG    TrademarkDocumentTypeDocumentFormatCategory = "JPEG"
+	TrademarkDocumentTypeDocumentFormatCategoryMOL     TrademarkDocumentTypeDocumentFormatCategory = "MOL"
+	TrademarkDocumentTypeDocumentFormatCategoryMSEXCEL TrademarkDocumentTypeDocumentFormatCategory = "MS_EXCEL"
+	TrademarkDocumentTypeDocumentFormatCategoryMSWORD  TrademarkDocumentTypeDocumentFormatCategory = "MS_WORD"
+	TrademarkDocumentTypeDocumentFormatCategoryNB      TrademarkDocumentTypeDocumentFormatCategory = "NB"
+	TrademarkDocumentTypeDocumentFormatCategoryPDF     TrademarkDocumentTypeDocumentFormatCategory = "PDF"
+	TrademarkDocumentTypeDocumentFormatCategoryPNG     TrademarkDocumentTypeDocumentFormatCategory = "PNG"
+	TrademarkDocumentTypeDocumentFormatCategorySVG     TrademarkDocumentTypeDocumentFormatCategory = "SVG"
+	TrademarkDocumentTypeDocumentFormatCategoryTEXT    TrademarkDocumentTypeDocumentFormatCategory = "TEXT"
+	TrademarkDocumentTypeDocumentFormatCategoryTIFF    TrademarkDocumentTypeDocumentFormatCategory = "TIFF"
+	TrademarkDocumentTypeDocumentFormatCategoryXML     TrademarkDocumentTypeDocumentFormatCategory = "XML"
 )
+
+// Valid indicates whether the value is a known member of the TrademarkDocumentTypeDocumentFormatCategory enum.
+func (e TrademarkDocumentTypeDocumentFormatCategory) Valid() bool {
+	switch e {
+	case TrademarkDocumentTypeDocumentFormatCategoryCDX:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryEPS:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryHTML:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryJPEG:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryMOL:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryMSEXCEL:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryMSWORD:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryNB:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryPDF:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryPNG:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategorySVG:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryTEXT:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryTIFF:
+		return true
+	case TrademarkDocumentTypeDocumentFormatCategoryXML:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for TrademarkDocumentTypeDocumentMediaCategory.
 const (
-	FAX   TrademarkDocumentTypeDocumentMediaCategory = "FAX"
-	FILE  TrademarkDocumentTypeDocumentMediaCategory = "FILE"
-	OTHER TrademarkDocumentTypeDocumentMediaCategory = "OTHER"
-	PAPER TrademarkDocumentTypeDocumentMediaCategory = "PAPER"
+	TrademarkDocumentTypeDocumentMediaCategoryFAX   TrademarkDocumentTypeDocumentMediaCategory = "FAX"
+	TrademarkDocumentTypeDocumentMediaCategoryFILE  TrademarkDocumentTypeDocumentMediaCategory = "FILE"
+	TrademarkDocumentTypeDocumentMediaCategoryOTHER TrademarkDocumentTypeDocumentMediaCategory = "OTHER"
+	TrademarkDocumentTypeDocumentMediaCategoryPAPER TrademarkDocumentTypeDocumentMediaCategory = "PAPER"
 )
+
+// Valid indicates whether the value is a known member of the TrademarkDocumentTypeDocumentMediaCategory enum.
+func (e TrademarkDocumentTypeDocumentMediaCategory) Valid() bool {
+	switch e {
+	case TrademarkDocumentTypeDocumentMediaCategoryFAX:
+		return true
+	case TrademarkDocumentTypeDocumentMediaCategoryFILE:
+		return true
+	case TrademarkDocumentTypeDocumentMediaCategoryOTHER:
+		return true
+	case TrademarkDocumentTypeDocumentMediaCategoryPAPER:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for TrademarkTypeMarkCategory.
 const (
-	CERTIFICATIONMARK                 TrademarkTypeMarkCategory = "CERTIFICATION_MARK"
-	COLLECTIVEMARK                    TrademarkTypeMarkCategory = "COLLECTIVE_MARK"
-	COLLECTIVEMEMBERSHIPMARK          TrademarkTypeMarkCategory = "COLLECTIVE_MEMBERSHIP_MARK"
-	COLLECTIVESERVICEMARK             TrademarkTypeMarkCategory = "COLLECTIVE_SERVICE_MARK"
-	COLLECTIVETRADEMARK               TrademarkTypeMarkCategory = "COLLECTIVE_TRADEMARK"
-	DEFENSIVEMARK                     TrademarkTypeMarkCategory = "DEFENSIVE_MARK"
-	INDIVIDUALMARK                    TrademarkTypeMarkCategory = "INDIVIDUAL_MARK"
-	MARK                              TrademarkTypeMarkCategory = "MARK"
-	SERVICEMARK                       TrademarkTypeMarkCategory = "SERVICE_MARK"
-	TRADEMARK                         TrademarkTypeMarkCategory = "TRADEMARK"
-	WELLKNOWNCOLLECTIVEMARK           TrademarkTypeMarkCategory = "WELL_KNOWN_COLLECTIVE_MARK"
-	WELLKNOWNMARKUNDERTRIPSARTICLE162 TrademarkTypeMarkCategory = "WELL_KNOWN_MARK_UNDER_TRIPS_ARTICLE_16_2"
-	WELLKNOWNMARKUNDERTRIPSARTICLE163 TrademarkTypeMarkCategory = "WELL_KNOWN_MARK_UNDER_TRIPS_ARTICLE_16_3"
+	TrademarkTypeMarkCategoryCERTIFICATIONMARK                 TrademarkTypeMarkCategory = "CERTIFICATION_MARK"
+	TrademarkTypeMarkCategoryCOLLECTIVEMARK                    TrademarkTypeMarkCategory = "COLLECTIVE_MARK"
+	TrademarkTypeMarkCategoryCOLLECTIVEMEMBERSHIPMARK          TrademarkTypeMarkCategory = "COLLECTIVE_MEMBERSHIP_MARK"
+	TrademarkTypeMarkCategoryCOLLECTIVESERVICEMARK             TrademarkTypeMarkCategory = "COLLECTIVE_SERVICE_MARK"
+	TrademarkTypeMarkCategoryCOLLECTIVETRADEMARK               TrademarkTypeMarkCategory = "COLLECTIVE_TRADEMARK"
+	TrademarkTypeMarkCategoryDEFENSIVEMARK                     TrademarkTypeMarkCategory = "DEFENSIVE_MARK"
+	TrademarkTypeMarkCategoryINDIVIDUALMARK                    TrademarkTypeMarkCategory = "INDIVIDUAL_MARK"
+	TrademarkTypeMarkCategoryMARK                              TrademarkTypeMarkCategory = "MARK"
+	TrademarkTypeMarkCategorySERVICEMARK                       TrademarkTypeMarkCategory = "SERVICE_MARK"
+	TrademarkTypeMarkCategoryTRADEMARK                         TrademarkTypeMarkCategory = "TRADEMARK"
+	TrademarkTypeMarkCategoryWELLKNOWNCOLLECTIVEMARK           TrademarkTypeMarkCategory = "WELL_KNOWN_COLLECTIVE_MARK"
+	TrademarkTypeMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE162 TrademarkTypeMarkCategory = "WELL_KNOWN_MARK_UNDER_TRIPS_ARTICLE_16_2"
+	TrademarkTypeMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE163 TrademarkTypeMarkCategory = "WELL_KNOWN_MARK_UNDER_TRIPS_ARTICLE_16_3"
 )
+
+// Valid indicates whether the value is a known member of the TrademarkTypeMarkCategory enum.
+func (e TrademarkTypeMarkCategory) Valid() bool {
+	switch e {
+	case TrademarkTypeMarkCategoryCERTIFICATIONMARK:
+		return true
+	case TrademarkTypeMarkCategoryCOLLECTIVEMARK:
+		return true
+	case TrademarkTypeMarkCategoryCOLLECTIVEMEMBERSHIPMARK:
+		return true
+	case TrademarkTypeMarkCategoryCOLLECTIVESERVICEMARK:
+		return true
+	case TrademarkTypeMarkCategoryCOLLECTIVETRADEMARK:
+		return true
+	case TrademarkTypeMarkCategoryDEFENSIVEMARK:
+		return true
+	case TrademarkTypeMarkCategoryINDIVIDUALMARK:
+		return true
+	case TrademarkTypeMarkCategoryMARK:
+		return true
+	case TrademarkTypeMarkCategorySERVICEMARK:
+		return true
+	case TrademarkTypeMarkCategoryTRADEMARK:
+		return true
+	case TrademarkTypeMarkCategoryWELLKNOWNCOLLECTIVEMARK:
+		return true
+	case TrademarkTypeMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE162:
+		return true
+	case TrademarkTypeMarkCategoryWELLKNOWNMARKUNDERTRIPSARTICLE163:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for TrademarkTypeOperationCategory.
 const (
@@ -957,131 +2849,399 @@ const (
 	TrademarkTypeOperationCategoryUPDATE TrademarkTypeOperationCategory = "UPDATE"
 )
 
+// Valid indicates whether the value is a known member of the TrademarkTypeOperationCategory enum.
+func (e TrademarkTypeOperationCategory) Valid() bool {
+	switch e {
+	case TrademarkTypeOperationCategoryDELETE:
+		return true
+	case TrademarkTypeOperationCategoryINSERT:
+		return true
+	case TrademarkTypeOperationCategorySELECT:
+		return true
+	case TrademarkTypeOperationCategoryUPDATE:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for TransactionContentBagTypeTransactionCategory.
 const (
-	ACCEPTDEMANDFORATRIAL                                         TransactionContentBagTypeTransactionCategory = "ACCEPT_DEMAND_FOR_A_TRIAL"
-	ACCEPTDESIGNAMENDMENTDOCUMENT                                 TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_AMENDMENT_DOCUMENT"
-	ACCEPTDESIGNAPPLICANTDOCUMENT                                 TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_APPLICANT_DOCUMENT"
-	ACCEPTDESIGNAPPLICATIONDOCUMENT                               TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_APPLICATION_DOCUMENT"
-	ACCEPTDESIGNATTORNEYDOCUMENT                                  TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_ATTORNEY_DOCUMENT"
-	ACCEPTDESIGNREQUESTFORINSPECTION                              TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_REQUEST_FOR_INSPECTION"
-	ACCEPTDESIGNRESPONSEDOCUMENT                                  TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_RESPONSE_DOCUMENT"
-	ACCEPTDESIGNSUBMISSIONDOCUMENT                                TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_SUBMISSION_DOCUMENT"
-	ACCEPTDESIGNWITHDRAWALANDABANDONMENTDOCUMENT                  TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_WITHDRAWAL_AND_ABANDONMENT_DOCUMENT"
-	ACCEPTDOCUMENTLIST                                            TransactionContentBagTypeTransactionCategory = "ACCEPT_DOCUMENT_LIST"
-	ACCEPTTRIALINTERMEDIATEDOCUMENT                               TransactionContentBagTypeTransactionCategory = "ACCEPT_TRIAL_INTERMEDIATE_DOCUMENT"
-	ADDITIONALAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "ADDITIONAL_APPLICATION"
-	AMENDMENTAPPLICATION                                          TransactionContentBagTypeTransactionCategory = "AMENDMENT_APPLICATION"
-	AMENDMENTREGISTEREDDESIGN                                     TransactionContentBagTypeTransactionCategory = "AMENDMENT_REGISTERED_DESIGN"
-	APPLICATIONINFORMATION                                        TransactionContentBagTypeTransactionCategory = "APPLICATION_INFORMATION"
-	APPLICATIONRECEIPT                                            TransactionContentBagTypeTransactionCategory = "APPLICATION_RECEIPT"
-	ASSIGNMENTAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "ASSIGNMENT_APPLICATION"
-	ASSIGNMENTREGISTEREDDESIGN                                    TransactionContentBagTypeTransactionCategory = "ASSIGNMENT_REGISTERED_DESIGN"
-	BALANCESHEETREFERENCE                                         TransactionContentBagTypeTransactionCategory = "BALANCE_SHEET_REFERENCE"
-	CANCELLATIONREPRESENTATIVEAPPOINTMENT                         TransactionContentBagTypeTransactionCategory = "CANCELLATION_REPRESENTATIVE_APPOINTMENT"
-	CERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION       TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_DESIGN_FORMALITY_EXAMINATION"
-	CERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNREGISTRATION               TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_DESIGN_REGISTRATION"
-	CERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION     TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
-	CERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATION                 TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION"
-	CERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATIONDECISION         TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_DECISION"
-	CERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION       TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_INVITATION"
-	CHANGEOFNAME                                                  TransactionContentBagTypeTransactionCategory = "CHANGE_OF_NAME"
-	CONVENTIONAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "CONVENTION_APPLICATION"
-	DESIGNB2BFILING                                               TransactionContentBagTypeTransactionCategory = "DESIGN_B_2_B_FILING"
-	DESIGNEFILING                                                 TransactionContentBagTypeTransactionCategory = "DESIGN_E_FILING"
-	DESIGNIDENTIFIERLIST                                          TransactionContentBagTypeTransactionCategory = "DESIGN_IDENTIFIER_LIST"
-	DESIGNINFORMATION                                             TransactionContentBagTypeTransactionCategory = "DESIGN_INFORMATION"
-	DESIGNLIST                                                    TransactionContentBagTypeTransactionCategory = "DESIGN_LIST"
-	DESIGNOPPOSITIONEFILING                                       TransactionContentBagTypeTransactionCategory = "DESIGN_OPPOSITION_E_FILING"
-	DESIGNOPPOSITIONIDENTIFIERLIST                                TransactionContentBagTypeTransactionCategory = "DESIGN_OPPOSITION_IDENTIFIER_LIST"
-	DESIGNOPPOSITIONINFORMATION                                   TransactionContentBagTypeTransactionCategory = "DESIGN_OPPOSITION_INFORMATION"
-	DISCHARGEMORTGAGEE                                            TransactionContentBagTypeTransactionCategory = "DISCHARGE_MORTGAGEE"
-	DIVISIONALAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "DIVISIONAL_APPLICATION"
-	DIVISIONINTERNATIONALREGISTRATIONNOTIFICATION                 TransactionContentBagTypeTransactionCategory = "DIVISION_INTERNATIONAL_REGISTRATION_NOTIFICATION"
-	DIVISIONNUMBERLIST                                            TransactionContentBagTypeTransactionCategory = "DIVISION_NUMBER_LIST"
-	DUPLICATECERTIFICATE                                          TransactionContentBagTypeTransactionCategory = "DUPLICATE_CERTIFICATE"
-	EXPIRYNOTICE                                                  TransactionContentBagTypeTransactionCategory = "EXPIRY_NOTICE"
-	INSPECTIONACCEPTDEMANDFORATRIAL                               TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DEMAND_FOR_A_TRIAL"
-	INSPECTIONACCEPTDESIGNAPPLICANTDOCUMENT                       TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_APPLICANT_DOCUMENT"
-	INSPECTIONACCEPTDESIGNAPPLICATIONDOCUMENT                     TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_APPLICATION_DOCUMENT"
-	INSPECTIONACCEPTDESIGNATTORNEYDOCUMENT                        TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_ATTORNEY_DOCUMENT"
-	INSPECTIONACCEPTDESIGNREQUESTFORINSPECTION                    TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_REQUEST_FOR_INSPECTION"
-	INSPECTIONACCEPTDESIGNRESPONSEDOCUMENT                        TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_RESPONSE_DOCUMENT"
-	INSPECTIONACCEPTDESIGNSMENDMENTDOCUMENT                       TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_SMENDMENT_DOCUMENT"
-	INSPECTIONACCEPTDESIGNSUBMISSIONDOCUMENT                      TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_SUBMISSION_DOCUMENT"
-	INSPECTIONACCEPTDESIGNWITHDRAWALANDABANDONMENTDOCUMENT        TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_WITHDRAWAL_AND_ABANDONMENT_DOCUMENT"
-	INSPECTIONACCEPTTRIALINTERMEDIATEDOCUMENT                     TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_TRIAL_INTERMEDIATE_DOCUMENT"
-	INSPECTIONMEMOBYDESIGNFORMALITYEXAMINATION                    TransactionContentBagTypeTransactionCategory = "INSPECTION_MEMO_BY_DESIGN_FORMALITY_EXAMINATION"
-	INSPECTIONMEMOBYDESIGNSUBSTANTIALEXAMINATION                  TransactionContentBagTypeTransactionCategory = "INSPECTION_MEMO_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
-	INSPECTIONMEMOBYTRIALEXAMINATION                              TransactionContentBagTypeTransactionCategory = "INSPECTION_MEMO_BY_TRIAL_EXAMINATION"
-	INSPECTIONMEMOBYTRIALNOTICE                                   TransactionContentBagTypeTransactionCategory = "INSPECTION_MEMO_BY_TRIAL_NOTICE"
-	INSPECTIONNOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION          TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_DESIGN_FORMALITY_EXAMINATION"
-	INSPECTIONNOTICEDOCUMENTBYDESIGNREGISTRATION                  TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_DESIGN_REGISTRATION"
-	INSPECTIONNOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION        TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
-	INSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATION                    TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION"
-	INSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATIONDECISION            TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_DECISION"
-	INSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION          TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_INVITATION"
-	INVALIDATIONNOTIFICATION                                      TransactionContentBagTypeTransactionCategory = "INVALIDATION_NOTIFICATION"
-	IRREGULARITIES                                                TransactionContentBagTypeTransactionCategory = "IRREGULARITIES"
-	MEMOBYDESIGNFORMALITYEXAMINATION                              TransactionContentBagTypeTransactionCategory = "MEMO_BY_DESIGN_FORMALITY_EXAMINATION"
-	MEMOBYDESIGNSUBSTANTIALEXAMINATION                            TransactionContentBagTypeTransactionCategory = "MEMO_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
-	MEMOBYTRIALEXAMINATION                                        TransactionContentBagTypeTransactionCategory = "MEMO_BY_TRIAL_EXAMINATION"
-	MEMOBYTRIALEXAMINATIONCORRECTION                              TransactionContentBagTypeTransactionCategory = "MEMO_BY_TRIAL_EXAMINATION_CORRECTION"
-	MEMOBYTRIALNOTICE                                             TransactionContentBagTypeTransactionCategory = "MEMO_BY_TRIAL_NOTICE"
-	NATIONALLEGALPROCEEDING                                       TransactionContentBagTypeTransactionCategory = "NATIONAL_LEGAL_PROCEEDING"
-	NATIONALTRADEMARKAPPLICATION                                  TransactionContentBagTypeTransactionCategory = "NATIONAL_TRADEMARK_APPLICATION"
-	NATIONALTRADEMARKASSIGNMENT                                   TransactionContentBagTypeTransactionCategory = "NATIONAL_TRADEMARK_ASSIGNMENT"
-	NATIONALTRADEMARKREGISTRATION                                 TransactionContentBagTypeTransactionCategory = "NATIONAL_TRADEMARK_REGISTRATION"
-	NATIONALVIEWOFINTERNATIONALTRADEMARKAPPLICATIONORREGISTRATION TransactionContentBagTypeTransactionCategory = "NATIONAL_VIEW_OF_INTERNATIONAL_TRADEMARK_APPLICATION_OR_REGISTRATION"
-	NOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION                    TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_DESIGN_FORMALITY_EXAMINATION"
-	NOTICEDOCUMENTBYDESIGNREGISTRATION                            TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_DESIGN_REGISTRATION"
-	NOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION                  TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
-	NOTICEDOCUMENTBYTRIALEXAMINATION                              TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION"
-	NOTICEDOCUMENTBYTRIALEXAMINATIONDECISION                      TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_DECISION"
-	NOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION                    TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_INVITATION"
-	NOTICEDOCUMENTLIST                                            TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_LIST"
-	OFFERSURRENDER                                                TransactionContentBagTypeTransactionCategory = "OFFER_SURRENDER"
-	OPPOSITIONEFILING                                             TransactionContentBagTypeTransactionCategory = "OPPOSITION_E_FILING"
-	OPPOSITIONFIRSTEXTENSION                                      TransactionContentBagTypeTransactionCategory = "OPPOSITION_FIRST_EXTENSION"
-	OPPOSITIONIDENTIFIERLIST                                      TransactionContentBagTypeTransactionCategory = "OPPOSITION_IDENTIFIER_LIST"
-	OPPOSITIONINFORMATION                                         TransactionContentBagTypeTransactionCategory = "OPPOSITION_INFORMATION"
-	OPPOSITIONVARIOUSRENEWALOREXTENSIONOFREGISTRATIONRESTORATION  TransactionContentBagTypeTransactionCategory = "OPPOSITION_VARIOUS_RENEWAL_OR_EXTENSION_OF_REGISTRATION_RESTORATION"
-	PROVIDINGCERTIFICATETOHOLDER                                  TransactionContentBagTypeTransactionCategory = "PROVIDING_CERTIFICATE_TO_HOLDER"
-	RECORDLICENCE                                                 TransactionContentBagTypeTransactionCategory = "RECORD_LICENCE"
-	RECORDMORTGAGEE                                               TransactionContentBagTypeTransactionCategory = "RECORD_MORTGAGEE"
-	REFUSALNOTIFICATION                                           TransactionContentBagTypeTransactionCategory = "REFUSAL_NOTIFICATION"
-	REFUSALWITHDRAWALNOTIFICATION                                 TransactionContentBagTypeTransactionCategory = "REFUSAL_WITHDRAWAL_NOTIFICATION"
-	REPRESENTATIVEAPPOINTMENT                                     TransactionContentBagTypeTransactionCategory = "REPRESENTATIVE_APPOINTMENT"
-	REQUESTACCELERATEDEXAMINATION                                 TransactionContentBagTypeTransactionCategory = "REQUEST_ACCELERATED_EXAMINATION"
-	REQUESTCERTIFIEDCOPIES                                        TransactionContentBagTypeTransactionCategory = "REQUEST_CERTIFIED_COPIES"
-	REQUESTCONVERSION                                             TransactionContentBagTypeTransactionCategory = "REQUEST_CONVERSION"
-	REQUESTDELAYEDREGISTRATION                                    TransactionContentBagTypeTransactionCategory = "REQUEST_DELAYED_REGISTRATION"
-	REQUESTEXCLUSION                                              TransactionContentBagTypeTransactionCategory = "REQUEST_EXCLUSION"
-	REQUESTEXTENSIONTIME                                          TransactionContentBagTypeTransactionCategory = "REQUEST_EXTENSION_TIME"
-	REQUESTHEARING                                                TransactionContentBagTypeTransactionCategory = "REQUEST_HEARING"
-	REQUESTPUBLICATION                                            TransactionContentBagTypeTransactionCategory = "REQUEST_PUBLICATION"
-	REQUESTREGISTRATION                                           TransactionContentBagTypeTransactionCategory = "REQUEST_REGISTRATION"
-	REQUESTSUPPLYDOCUMENTS                                        TransactionContentBagTypeTransactionCategory = "REQUEST_SUPPLY_DOCUMENTS"
-	RESPONSEEXAMINATIONREPORT                                     TransactionContentBagTypeTransactionCategory = "RESPONSE_EXAMINATION_REPORT"
-	STATEMENTSUPPORT                                              TransactionContentBagTypeTransactionCategory = "STATEMENT_SUPPORT"
-	SUBSEQUENTAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "SUBSEQUENT_APPLICATION"
-	TERMINATELICENCE                                              TransactionContentBagTypeTransactionCategory = "TERMINATE_LICENCE"
-	TRADEMARKB2BFILING                                            TransactionContentBagTypeTransactionCategory = "TRADEMARK_B_2_B_FILING"
-	TRADEMARKIDENTIFIERLIST                                       TransactionContentBagTypeTransactionCategory = "TRADEMARK_IDENTIFIER_LIST"
-	TRADEMARKINFORMATION                                          TransactionContentBagTypeTransactionCategory = "TRADEMARK_INFORMATION"
-	TRADEMARKLIST                                                 TransactionContentBagTypeTransactionCategory = "TRADEMARK_LIST"
-	TRANSMITTALAPPLICATIONTOIB                                    TransactionContentBagTypeTransactionCategory = "TRANSMITTAL_APPLICATION_TO_IB"
-	WITHDRAWAL                                                    TransactionContentBagTypeTransactionCategory = "WITHDRAWAL"
-	WITHDRAWAPPLICATION                                           TransactionContentBagTypeTransactionCategory = "WITHDRAW_APPLICATION"
-	WITHDRAWDESIGN                                                TransactionContentBagTypeTransactionCategory = "WITHDRAW_DESIGN"
-	WITHDRAWSERVICEREQUEST                                        TransactionContentBagTypeTransactionCategory = "WITHDRAW_SERVICE_REQUEST"
+	TransactionContentBagTypeTransactionCategoryACCEPTDEMANDFORATRIAL                                         TransactionContentBagTypeTransactionCategory = "ACCEPT_DEMAND_FOR_A_TRIAL"
+	TransactionContentBagTypeTransactionCategoryACCEPTDESIGNAMENDMENTDOCUMENT                                 TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_AMENDMENT_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryACCEPTDESIGNAPPLICANTDOCUMENT                                 TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_APPLICANT_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryACCEPTDESIGNAPPLICATIONDOCUMENT                               TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_APPLICATION_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryACCEPTDESIGNATTORNEYDOCUMENT                                  TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_ATTORNEY_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryACCEPTDESIGNREQUESTFORINSPECTION                              TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_REQUEST_FOR_INSPECTION"
+	TransactionContentBagTypeTransactionCategoryACCEPTDESIGNRESPONSEDOCUMENT                                  TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_RESPONSE_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryACCEPTDESIGNSUBMISSIONDOCUMENT                                TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_SUBMISSION_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryACCEPTDESIGNWITHDRAWALANDABANDONMENTDOCUMENT                  TransactionContentBagTypeTransactionCategory = "ACCEPT_DESIGN_WITHDRAWAL_AND_ABANDONMENT_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryACCEPTDOCUMENTLIST                                            TransactionContentBagTypeTransactionCategory = "ACCEPT_DOCUMENT_LIST"
+	TransactionContentBagTypeTransactionCategoryACCEPTTRIALINTERMEDIATEDOCUMENT                               TransactionContentBagTypeTransactionCategory = "ACCEPT_TRIAL_INTERMEDIATE_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryADDITIONALAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "ADDITIONAL_APPLICATION"
+	TransactionContentBagTypeTransactionCategoryAMENDMENTAPPLICATION                                          TransactionContentBagTypeTransactionCategory = "AMENDMENT_APPLICATION"
+	TransactionContentBagTypeTransactionCategoryAMENDMENTREGISTEREDDESIGN                                     TransactionContentBagTypeTransactionCategory = "AMENDMENT_REGISTERED_DESIGN"
+	TransactionContentBagTypeTransactionCategoryAPPLICATIONINFORMATION                                        TransactionContentBagTypeTransactionCategory = "APPLICATION_INFORMATION"
+	TransactionContentBagTypeTransactionCategoryAPPLICATIONRECEIPT                                            TransactionContentBagTypeTransactionCategory = "APPLICATION_RECEIPT"
+	TransactionContentBagTypeTransactionCategoryASSIGNMENTAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "ASSIGNMENT_APPLICATION"
+	TransactionContentBagTypeTransactionCategoryASSIGNMENTREGISTEREDDESIGN                                    TransactionContentBagTypeTransactionCategory = "ASSIGNMENT_REGISTERED_DESIGN"
+	TransactionContentBagTypeTransactionCategoryBALANCESHEETREFERENCE                                         TransactionContentBagTypeTransactionCategory = "BALANCE_SHEET_REFERENCE"
+	TransactionContentBagTypeTransactionCategoryCANCELLATIONREPRESENTATIVEAPPOINTMENT                         TransactionContentBagTypeTransactionCategory = "CANCELLATION_REPRESENTATIVE_APPOINTMENT"
+	TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION       TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_DESIGN_FORMALITY_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNREGISTRATION               TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_DESIGN_REGISTRATION"
+	TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION     TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATION                 TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATIONDECISION         TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_DECISION"
+	TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION       TransactionContentBagTypeTransactionCategory = "CERTIFIED_COPY_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_INVITATION"
+	TransactionContentBagTypeTransactionCategoryCHANGEOFNAME                                                  TransactionContentBagTypeTransactionCategory = "CHANGE_OF_NAME"
+	TransactionContentBagTypeTransactionCategoryCONVENTIONAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "CONVENTION_APPLICATION"
+	TransactionContentBagTypeTransactionCategoryDESIGNB2BFILING                                               TransactionContentBagTypeTransactionCategory = "DESIGN_B_2_B_FILING"
+	TransactionContentBagTypeTransactionCategoryDESIGNEFILING                                                 TransactionContentBagTypeTransactionCategory = "DESIGN_E_FILING"
+	TransactionContentBagTypeTransactionCategoryDESIGNIDENTIFIERLIST                                          TransactionContentBagTypeTransactionCategory = "DESIGN_IDENTIFIER_LIST"
+	TransactionContentBagTypeTransactionCategoryDESIGNINFORMATION                                             TransactionContentBagTypeTransactionCategory = "DESIGN_INFORMATION"
+	TransactionContentBagTypeTransactionCategoryDESIGNLIST                                                    TransactionContentBagTypeTransactionCategory = "DESIGN_LIST"
+	TransactionContentBagTypeTransactionCategoryDESIGNOPPOSITIONEFILING                                       TransactionContentBagTypeTransactionCategory = "DESIGN_OPPOSITION_E_FILING"
+	TransactionContentBagTypeTransactionCategoryDESIGNOPPOSITIONIDENTIFIERLIST                                TransactionContentBagTypeTransactionCategory = "DESIGN_OPPOSITION_IDENTIFIER_LIST"
+	TransactionContentBagTypeTransactionCategoryDESIGNOPPOSITIONINFORMATION                                   TransactionContentBagTypeTransactionCategory = "DESIGN_OPPOSITION_INFORMATION"
+	TransactionContentBagTypeTransactionCategoryDISCHARGEMORTGAGEE                                            TransactionContentBagTypeTransactionCategory = "DISCHARGE_MORTGAGEE"
+	TransactionContentBagTypeTransactionCategoryDIVISIONALAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "DIVISIONAL_APPLICATION"
+	TransactionContentBagTypeTransactionCategoryDIVISIONINTERNATIONALREGISTRATIONNOTIFICATION                 TransactionContentBagTypeTransactionCategory = "DIVISION_INTERNATIONAL_REGISTRATION_NOTIFICATION"
+	TransactionContentBagTypeTransactionCategoryDIVISIONNUMBERLIST                                            TransactionContentBagTypeTransactionCategory = "DIVISION_NUMBER_LIST"
+	TransactionContentBagTypeTransactionCategoryDUPLICATECERTIFICATE                                          TransactionContentBagTypeTransactionCategory = "DUPLICATE_CERTIFICATE"
+	TransactionContentBagTypeTransactionCategoryEXPIRYNOTICE                                                  TransactionContentBagTypeTransactionCategory = "EXPIRY_NOTICE"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDEMANDFORATRIAL                               TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DEMAND_FOR_A_TRIAL"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNAPPLICANTDOCUMENT                       TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_APPLICANT_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNAPPLICATIONDOCUMENT                     TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_APPLICATION_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNATTORNEYDOCUMENT                        TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_ATTORNEY_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNREQUESTFORINSPECTION                    TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_REQUEST_FOR_INSPECTION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNRESPONSEDOCUMENT                        TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_RESPONSE_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNSMENDMENTDOCUMENT                       TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_SMENDMENT_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNSUBMISSIONDOCUMENT                      TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_SUBMISSION_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNWITHDRAWALANDABANDONMENTDOCUMENT        TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_DESIGN_WITHDRAWAL_AND_ABANDONMENT_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTTRIALINTERMEDIATEDOCUMENT                     TransactionContentBagTypeTransactionCategory = "INSPECTION_ACCEPT_TRIAL_INTERMEDIATE_DOCUMENT"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONMEMOBYDESIGNFORMALITYEXAMINATION                    TransactionContentBagTypeTransactionCategory = "INSPECTION_MEMO_BY_DESIGN_FORMALITY_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONMEMOBYDESIGNSUBSTANTIALEXAMINATION                  TransactionContentBagTypeTransactionCategory = "INSPECTION_MEMO_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONMEMOBYTRIALEXAMINATION                              TransactionContentBagTypeTransactionCategory = "INSPECTION_MEMO_BY_TRIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONMEMOBYTRIALNOTICE                                   TransactionContentBagTypeTransactionCategory = "INSPECTION_MEMO_BY_TRIAL_NOTICE"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION          TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_DESIGN_FORMALITY_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYDESIGNREGISTRATION                  TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_DESIGN_REGISTRATION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION        TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATION                    TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATIONDECISION            TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_DECISION"
+	TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION          TransactionContentBagTypeTransactionCategory = "INSPECTION_NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_INVITATION"
+	TransactionContentBagTypeTransactionCategoryINVALIDATIONNOTIFICATION                                      TransactionContentBagTypeTransactionCategory = "INVALIDATION_NOTIFICATION"
+	TransactionContentBagTypeTransactionCategoryIRREGULARITIES                                                TransactionContentBagTypeTransactionCategory = "IRREGULARITIES"
+	TransactionContentBagTypeTransactionCategoryMEMOBYDESIGNFORMALITYEXAMINATION                              TransactionContentBagTypeTransactionCategory = "MEMO_BY_DESIGN_FORMALITY_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryMEMOBYDESIGNSUBSTANTIALEXAMINATION                            TransactionContentBagTypeTransactionCategory = "MEMO_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryMEMOBYTRIALEXAMINATION                                        TransactionContentBagTypeTransactionCategory = "MEMO_BY_TRIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryMEMOBYTRIALEXAMINATIONCORRECTION                              TransactionContentBagTypeTransactionCategory = "MEMO_BY_TRIAL_EXAMINATION_CORRECTION"
+	TransactionContentBagTypeTransactionCategoryMEMOBYTRIALNOTICE                                             TransactionContentBagTypeTransactionCategory = "MEMO_BY_TRIAL_NOTICE"
+	TransactionContentBagTypeTransactionCategoryNATIONALLEGALPROCEEDING                                       TransactionContentBagTypeTransactionCategory = "NATIONAL_LEGAL_PROCEEDING"
+	TransactionContentBagTypeTransactionCategoryNATIONALTRADEMARKAPPLICATION                                  TransactionContentBagTypeTransactionCategory = "NATIONAL_TRADEMARK_APPLICATION"
+	TransactionContentBagTypeTransactionCategoryNATIONALTRADEMARKASSIGNMENT                                   TransactionContentBagTypeTransactionCategory = "NATIONAL_TRADEMARK_ASSIGNMENT"
+	TransactionContentBagTypeTransactionCategoryNATIONALTRADEMARKREGISTRATION                                 TransactionContentBagTypeTransactionCategory = "NATIONAL_TRADEMARK_REGISTRATION"
+	TransactionContentBagTypeTransactionCategoryNATIONALVIEWOFINTERNATIONALTRADEMARKAPPLICATIONORREGISTRATION TransactionContentBagTypeTransactionCategory = "NATIONAL_VIEW_OF_INTERNATIONAL_TRADEMARK_APPLICATION_OR_REGISTRATION"
+	TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION                    TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_DESIGN_FORMALITY_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYDESIGNREGISTRATION                            TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_DESIGN_REGISTRATION"
+	TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION                  TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_DESIGN_SUBSTANTIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYTRIALEXAMINATION                              TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYTRIALEXAMINATIONDECISION                      TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_DECISION"
+	TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION                    TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_BY_TRIAL_EXAMINATION_INVITATION"
+	TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTLIST                                            TransactionContentBagTypeTransactionCategory = "NOTICE_DOCUMENT_LIST"
+	TransactionContentBagTypeTransactionCategoryOFFERSURRENDER                                                TransactionContentBagTypeTransactionCategory = "OFFER_SURRENDER"
+	TransactionContentBagTypeTransactionCategoryOPPOSITIONEFILING                                             TransactionContentBagTypeTransactionCategory = "OPPOSITION_E_FILING"
+	TransactionContentBagTypeTransactionCategoryOPPOSITIONFIRSTEXTENSION                                      TransactionContentBagTypeTransactionCategory = "OPPOSITION_FIRST_EXTENSION"
+	TransactionContentBagTypeTransactionCategoryOPPOSITIONIDENTIFIERLIST                                      TransactionContentBagTypeTransactionCategory = "OPPOSITION_IDENTIFIER_LIST"
+	TransactionContentBagTypeTransactionCategoryOPPOSITIONINFORMATION                                         TransactionContentBagTypeTransactionCategory = "OPPOSITION_INFORMATION"
+	TransactionContentBagTypeTransactionCategoryOPPOSITIONVARIOUSRENEWALOREXTENSIONOFREGISTRATIONRESTORATION  TransactionContentBagTypeTransactionCategory = "OPPOSITION_VARIOUS_RENEWAL_OR_EXTENSION_OF_REGISTRATION_RESTORATION"
+	TransactionContentBagTypeTransactionCategoryPROVIDINGCERTIFICATETOHOLDER                                  TransactionContentBagTypeTransactionCategory = "PROVIDING_CERTIFICATE_TO_HOLDER"
+	TransactionContentBagTypeTransactionCategoryRECORDLICENCE                                                 TransactionContentBagTypeTransactionCategory = "RECORD_LICENCE"
+	TransactionContentBagTypeTransactionCategoryRECORDMORTGAGEE                                               TransactionContentBagTypeTransactionCategory = "RECORD_MORTGAGEE"
+	TransactionContentBagTypeTransactionCategoryREFUSALNOTIFICATION                                           TransactionContentBagTypeTransactionCategory = "REFUSAL_NOTIFICATION"
+	TransactionContentBagTypeTransactionCategoryREFUSALWITHDRAWALNOTIFICATION                                 TransactionContentBagTypeTransactionCategory = "REFUSAL_WITHDRAWAL_NOTIFICATION"
+	TransactionContentBagTypeTransactionCategoryREPRESENTATIVEAPPOINTMENT                                     TransactionContentBagTypeTransactionCategory = "REPRESENTATIVE_APPOINTMENT"
+	TransactionContentBagTypeTransactionCategoryREQUESTACCELERATEDEXAMINATION                                 TransactionContentBagTypeTransactionCategory = "REQUEST_ACCELERATED_EXAMINATION"
+	TransactionContentBagTypeTransactionCategoryREQUESTCERTIFIEDCOPIES                                        TransactionContentBagTypeTransactionCategory = "REQUEST_CERTIFIED_COPIES"
+	TransactionContentBagTypeTransactionCategoryREQUESTCONVERSION                                             TransactionContentBagTypeTransactionCategory = "REQUEST_CONVERSION"
+	TransactionContentBagTypeTransactionCategoryREQUESTDELAYEDREGISTRATION                                    TransactionContentBagTypeTransactionCategory = "REQUEST_DELAYED_REGISTRATION"
+	TransactionContentBagTypeTransactionCategoryREQUESTEXCLUSION                                              TransactionContentBagTypeTransactionCategory = "REQUEST_EXCLUSION"
+	TransactionContentBagTypeTransactionCategoryREQUESTEXTENSIONTIME                                          TransactionContentBagTypeTransactionCategory = "REQUEST_EXTENSION_TIME"
+	TransactionContentBagTypeTransactionCategoryREQUESTHEARING                                                TransactionContentBagTypeTransactionCategory = "REQUEST_HEARING"
+	TransactionContentBagTypeTransactionCategoryREQUESTPUBLICATION                                            TransactionContentBagTypeTransactionCategory = "REQUEST_PUBLICATION"
+	TransactionContentBagTypeTransactionCategoryREQUESTREGISTRATION                                           TransactionContentBagTypeTransactionCategory = "REQUEST_REGISTRATION"
+	TransactionContentBagTypeTransactionCategoryREQUESTSUPPLYDOCUMENTS                                        TransactionContentBagTypeTransactionCategory = "REQUEST_SUPPLY_DOCUMENTS"
+	TransactionContentBagTypeTransactionCategoryRESPONSEEXAMINATIONREPORT                                     TransactionContentBagTypeTransactionCategory = "RESPONSE_EXAMINATION_REPORT"
+	TransactionContentBagTypeTransactionCategorySTATEMENTSUPPORT                                              TransactionContentBagTypeTransactionCategory = "STATEMENT_SUPPORT"
+	TransactionContentBagTypeTransactionCategorySUBSEQUENTAPPLICATION                                         TransactionContentBagTypeTransactionCategory = "SUBSEQUENT_APPLICATION"
+	TransactionContentBagTypeTransactionCategoryTERMINATELICENCE                                              TransactionContentBagTypeTransactionCategory = "TERMINATE_LICENCE"
+	TransactionContentBagTypeTransactionCategoryTRADEMARKB2BFILING                                            TransactionContentBagTypeTransactionCategory = "TRADEMARK_B_2_B_FILING"
+	TransactionContentBagTypeTransactionCategoryTRADEMARKIDENTIFIERLIST                                       TransactionContentBagTypeTransactionCategory = "TRADEMARK_IDENTIFIER_LIST"
+	TransactionContentBagTypeTransactionCategoryTRADEMARKINFORMATION                                          TransactionContentBagTypeTransactionCategory = "TRADEMARK_INFORMATION"
+	TransactionContentBagTypeTransactionCategoryTRADEMARKLIST                                                 TransactionContentBagTypeTransactionCategory = "TRADEMARK_LIST"
+	TransactionContentBagTypeTransactionCategoryTRANSMITTALAPPLICATIONTOIB                                    TransactionContentBagTypeTransactionCategory = "TRANSMITTAL_APPLICATION_TO_IB"
+	TransactionContentBagTypeTransactionCategoryWITHDRAWAL                                                    TransactionContentBagTypeTransactionCategory = "WITHDRAWAL"
+	TransactionContentBagTypeTransactionCategoryWITHDRAWAPPLICATION                                           TransactionContentBagTypeTransactionCategory = "WITHDRAW_APPLICATION"
+	TransactionContentBagTypeTransactionCategoryWITHDRAWDESIGN                                                TransactionContentBagTypeTransactionCategory = "WITHDRAW_DESIGN"
+	TransactionContentBagTypeTransactionCategoryWITHDRAWSERVICEREQUEST                                        TransactionContentBagTypeTransactionCategory = "WITHDRAW_SERVICE_REQUEST"
 )
+
+// Valid indicates whether the value is a known member of the TransactionContentBagTypeTransactionCategory enum.
+func (e TransactionContentBagTypeTransactionCategory) Valid() bool {
+	switch e {
+	case TransactionContentBagTypeTransactionCategoryACCEPTDEMANDFORATRIAL:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDESIGNAMENDMENTDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDESIGNAPPLICANTDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDESIGNAPPLICATIONDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDESIGNATTORNEYDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDESIGNREQUESTFORINSPECTION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDESIGNRESPONSEDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDESIGNSUBMISSIONDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDESIGNWITHDRAWALANDABANDONMENTDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTDOCUMENTLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryACCEPTTRIALINTERMEDIATEDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryADDITIONALAPPLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryAMENDMENTAPPLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryAMENDMENTREGISTEREDDESIGN:
+		return true
+	case TransactionContentBagTypeTransactionCategoryAPPLICATIONINFORMATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryAPPLICATIONRECEIPT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryASSIGNMENTAPPLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryASSIGNMENTREGISTEREDDESIGN:
+		return true
+	case TransactionContentBagTypeTransactionCategoryBALANCESHEETREFERENCE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCANCELLATIONREPRESENTATIVEAPPOINTMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNREGISTRATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATIONDECISION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCERTIFIEDCOPYNOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCHANGEOFNAME:
+		return true
+	case TransactionContentBagTypeTransactionCategoryCONVENTIONAPPLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDESIGNB2BFILING:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDESIGNEFILING:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDESIGNIDENTIFIERLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDESIGNINFORMATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDESIGNLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDESIGNOPPOSITIONEFILING:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDESIGNOPPOSITIONIDENTIFIERLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDESIGNOPPOSITIONINFORMATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDISCHARGEMORTGAGEE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDIVISIONALAPPLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDIVISIONINTERNATIONALREGISTRATIONNOTIFICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDIVISIONNUMBERLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryDUPLICATECERTIFICATE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryEXPIRYNOTICE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDEMANDFORATRIAL:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNAPPLICANTDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNAPPLICATIONDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNATTORNEYDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNREQUESTFORINSPECTION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNRESPONSEDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNSMENDMENTDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNSUBMISSIONDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTDESIGNWITHDRAWALANDABANDONMENTDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONACCEPTTRIALINTERMEDIATEDOCUMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONMEMOBYDESIGNFORMALITYEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONMEMOBYDESIGNSUBSTANTIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONMEMOBYTRIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONMEMOBYTRIALNOTICE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYDESIGNREGISTRATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATIONDECISION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINSPECTIONNOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryINVALIDATIONNOTIFICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryIRREGULARITIES:
+		return true
+	case TransactionContentBagTypeTransactionCategoryMEMOBYDESIGNFORMALITYEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryMEMOBYDESIGNSUBSTANTIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryMEMOBYTRIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryMEMOBYTRIALEXAMINATIONCORRECTION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryMEMOBYTRIALNOTICE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNATIONALLEGALPROCEEDING:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNATIONALTRADEMARKAPPLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNATIONALTRADEMARKASSIGNMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNATIONALTRADEMARKREGISTRATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNATIONALVIEWOFINTERNATIONALTRADEMARKAPPLICATIONORREGISTRATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYDESIGNFORMALITYEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYDESIGNREGISTRATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYDESIGNSUBSTANTIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYTRIALEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYTRIALEXAMINATIONDECISION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTBYTRIALEXAMINATIONINVITATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryNOTICEDOCUMENTLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryOFFERSURRENDER:
+		return true
+	case TransactionContentBagTypeTransactionCategoryOPPOSITIONEFILING:
+		return true
+	case TransactionContentBagTypeTransactionCategoryOPPOSITIONFIRSTEXTENSION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryOPPOSITIONIDENTIFIERLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryOPPOSITIONINFORMATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryOPPOSITIONVARIOUSRENEWALOREXTENSIONOFREGISTRATIONRESTORATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryPROVIDINGCERTIFICATETOHOLDER:
+		return true
+	case TransactionContentBagTypeTransactionCategoryRECORDLICENCE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryRECORDMORTGAGEE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREFUSALNOTIFICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREFUSALWITHDRAWALNOTIFICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREPRESENTATIVEAPPOINTMENT:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTACCELERATEDEXAMINATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTCERTIFIEDCOPIES:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTCONVERSION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTDELAYEDREGISTRATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTEXCLUSION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTEXTENSIONTIME:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTHEARING:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTPUBLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTREGISTRATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryREQUESTSUPPLYDOCUMENTS:
+		return true
+	case TransactionContentBagTypeTransactionCategoryRESPONSEEXAMINATIONREPORT:
+		return true
+	case TransactionContentBagTypeTransactionCategorySTATEMENTSUPPORT:
+		return true
+	case TransactionContentBagTypeTransactionCategorySUBSEQUENTAPPLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryTERMINATELICENCE:
+		return true
+	case TransactionContentBagTypeTransactionCategoryTRADEMARKB2BFILING:
+		return true
+	case TransactionContentBagTypeTransactionCategoryTRADEMARKIDENTIFIERLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryTRADEMARKINFORMATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryTRADEMARKLIST:
+		return true
+	case TransactionContentBagTypeTransactionCategoryTRANSMITTALAPPLICATIONTOIB:
+		return true
+	case TransactionContentBagTypeTransactionCategoryWITHDRAWAL:
+		return true
+	case TransactionContentBagTypeTransactionCategoryWITHDRAWAPPLICATION:
+		return true
+	case TransactionContentBagTypeTransactionCategoryWITHDRAWDESIGN:
+		return true
+	case TransactionContentBagTypeTransactionCategoryWITHDRAWSERVICEREQUEST:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for WebAddressURITypeWebAddressCategory.
 const (
-	BUSINESS WebAddressURITypeWebAddressCategory = "BUSINESS"
-	PRIVATE  WebAddressURITypeWebAddressCategory = "PRIVATE"
+	WebAddressURITypeWebAddressCategoryBUSINESS WebAddressURITypeWebAddressCategory = "BUSINESS"
+	WebAddressURITypeWebAddressCategoryPRIVATE  WebAddressURITypeWebAddressCategory = "PRIVATE"
 )
+
+// Valid indicates whether the value is a known member of the WebAddressURITypeWebAddressCategory enum.
+func (e WebAddressURITypeWebAddressCategory) Valid() bool {
+	switch e {
+	case WebAddressURITypeWebAddressCategoryBUSINESS:
+		return true
+	case WebAddressURITypeWebAddressCategoryPRIVATE:
+		return true
+	default:
+		return false
+	}
+}
 
 // AddressLineTextType defines model for AddressLineTextType.
 type AddressLineTextType struct {

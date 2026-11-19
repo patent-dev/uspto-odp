@@ -1,0 +1,666 @@
+openapi: 3.0.3
+info:
+    title: Trademark Proceedings Decisions API
+    description: API for searching and retrieving USPTO trademark decisions.
+    version: 1.0.0
+    contact:
+        name: USPTO
+        email: data@uspto.gov
+        url: https://data.uspto.gov/apis/getting-started
+servers:
+    - url: https://api.uspto.gov
+      description: Trademark Proceedings And Decisions API
+security:
+    - ApiKeyAuth: []
+tags:
+    - name: Search
+      description: Search and retrieve trademark decisions
+paths:
+    /api/v1/trademark/decision-proceeding/search:
+        get:
+            summary: Search trademark decisions
+            description: "Search trademark decisions using query string parameters. All parameters are optional. Empty request returns top 25 records sorted by decisionActionDate desc.\n\n**Example curl:**\n```bash\ncurl -X GET \"https://api.uspto.gov/api/v1/trademark/decision-proceeding/search?q=Sanctions&filters=precedentialIndicator%20true&limit=25\" \\\n  -H \"X-API-KEY: your-api-key\"\n```"
+            operationId: searchGet
+            tags:
+                - Search
+            parameters:
+                - &id007
+                  $ref: '#/components/parameters/q'
+                - &id008
+                  $ref: '#/components/parameters/filters'
+                - &id009
+                  $ref: '#/components/parameters/rangeFilters'
+                - &id010
+                  $ref: '#/components/parameters/sort'
+                - &id011
+                  $ref: '#/components/parameters/fields'
+                - &id012
+                  $ref: '#/components/parameters/offset'
+                - &id013
+                  $ref: '#/components/parameters/limit'
+                - $ref: '#/components/parameters/facets'
+            responses:
+                '200': &id001
+                    description: Successful search response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SearchResponse'
+                '400': &id002
+                    description: Bad Request - Validation error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Response400'
+                '401': &id003
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Response401'
+                '403': &id004
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Response403'
+                '404': &id005
+                    description: Not Found - No records match the search criteria
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Response404'
+                '500': &id006
+                    description: Internal Server Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Response500'
+        post:
+            summary: Search trademark decisions
+            description: Search trademark decisions using a JSON request body. All fields are optional. Empty request body returns top 25 records sorted by decisionActionDate desc.
+            operationId: searchPost
+            tags:
+                - Search
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SearchRequest'
+            responses:
+                '200': *id001
+                '400': *id002
+                '401': *id003
+                '403': *id004
+                '404': *id005
+                '500': *id006
+    /api/v1/trademark/decision-proceeding/search/download:
+        get:
+            summary: Download trademark decisions as CSV or JSON
+            description: Download trademark decisions as a file using query string parameters. All parameters are optional. Facets are not supported on this endpoint.
+            operationId: searchDownloadGet
+            tags:
+                - Search
+            parameters:
+                - *id007
+                - *id008
+                - *id009
+                - *id010
+                - *id011
+                - &id014
+                  $ref: '#/components/parameters/format'
+                - *id012
+                - *id013
+            responses:
+                '200': &id013
+                    description: CSV file download
+                    headers:
+                        Content-Disposition:
+                            schema:
+                                type: string
+                            description: attachment; filename=trademark-decisions-{requestId}.csv
+                    content:
+                        text/csv:
+                            schema:
+                                type: string
+                                format: binary
+                '400': *id002
+                '401': *id003
+                '403': *id004
+                '404': *id005
+                '500': *id006
+        post:
+            summary: Download trademark decisions as CSV or JSON
+            description: Download trademark decisions as a file using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+            operationId: searchDownloadPost
+            tags:
+                - Search
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DownloadRequest'
+            responses:
+                '200': *id013
+                '400': *id002
+                '401': *id003
+                '403': *id004
+                '404': *id005
+                '500': *id006
+    /api/v1/trademark/decision-proceeding/search/{documentIdentifier}:
+        get:
+            summary: Get a single trademark decision by document identifier
+            description: Retrieve a single trademark decision record by its unique document identifier.
+            operationId: getByDocumentIdentifier
+            tags:
+                - Search
+            parameters:
+                - name: documentIdentifier
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                  description: Unique document identifier.
+                  example: 12a626f1300548b91f5622715d1b6153fe4abdfb29da957f1273d0f674d8081c
+            responses:
+                '200':
+                    description: Single trademark decision record
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TrademarkDecisionResponse'
+                '400': *id002
+                '401': *id003
+                '403': *id004
+                '404': *id005
+                '500': *id006
+components:
+    schemas:
+        TrademarkDecisionRecord:
+            type: object
+            description: A single trademark decision record.
+            properties:
+                decisionProceedingCategory:
+                    type: string
+                    description: Trademark decision/proceedings category. Supports exact match, sorting and aggregation.
+                    enum:
+                        - "PetitionsToDirector"
+                        - "ExpungReexam"
+                        - "Administrative"
+                    example: PetitionsToDirector
+                decisionActionDate:
+                    type: string
+                    format: date
+                    description: Date the trademark action was taken.
+                    example: '2026-07-04'
+                initiatedByDirectorIndicator:
+                    type: boolean
+                    description: Indicates whether this proceeding was initiated by the Director.
+                    example: false
+                documentTypeDescriptionText:
+                    type: string
+                    description: Type of trademark decision document. Supports exact match, sorting and aggregation.
+                    example: Petition to director - granted
+                fileName:
+                    type: string
+                    description: Name of the associated decision document file. Supports exact match, sorting and aggregation.
+                    example: 88535467.pdf
+                fileSize:
+                    type: integer
+                    format: int64
+                    description: Size of the decision document file in kb.
+                    example: 943
+                filingBasis:
+                    type: string
+                    description: Trademark filing basis. Supports exact match, sorting and aggregation.
+                    example: 44(e)
+                investigationNumber:
+                    type: integer
+                    format: int64
+                    description: Unique investigation number for the trademark proceeding.
+                    example: 91234567
+                lastModifiedDateTime:
+                    type: string
+                    description: Date and time when the record was last modified.
+                    example: '2025-07-17T20:24:01'
+                markLiteralText:
+                    type: string
+                    description: Literal text of the trademark mark. Supports exact match, sorting and aggregation.
+                    example: WETA
+                ocrSearchText:
+                    type: string
+                    description: OCR extracted text content from the document. Returns up to 500 characters with search term highlighting.
+                    example: United States Patent and Trademark Office Commissioner for Trademarks...
+                partyName:
+                    type: string
+                    description: Name of the party involved in the trademark decision. Supports exact match, sorting and aggregation.
+                    example: TMHC LIMITED
+                proceedingNumber:
+                    type: string
+                    description: Proceeding number, applicable for petition to decisions and expung/reexam data.
+                    example: 2026-105793R
+                petitionNumber:
+                    type: string
+                    description: Unique petition identifier available for Administrative data only.
+                    example: 2022-100012R
+                petitionerName:
+                    type: string
+                    description: Name of the petitioner who filed the petition. Supports exact match, sorting and aggregation.
+                    example: Dinsmore & Shohl LLP
+                precedentialIndicator:
+                    type: boolean
+                    description: Indicates whether this decision is precedential.
+                    example: false
+                proceedingTypeCategory:
+                    type: string
+                    description: Category of the trademark proceeding. Supports exact match, sorting and aggregation.
+                    example: Expungement
+                registrantCitizenshipCountryName:
+                    type: string
+                    description: Country of citizenship of the trademark registrant. Supports exact match, sorting and aggregation.
+                    example: JAPAN
+                registrantName:
+                    type: string
+                    description: Name of the trademark registrant. Supports exact match, sorting and aggregation.
+                    example: Sharp Kabushiki Kaisha
+                registrationNumber:
+                    type: integer
+                    format: int64
+                serialNumber:
+                    type: integer
+                    format: int64
+                documentIdentifier:
+                    type: string
+                    description: Unique record identifier.
+                    example: 12a626f1300548b91f5622715d1b6153fe4abdfb29da957f1273d0f674d8081c
+                documentURI:
+                    type: string
+                    description: Link representing tsdr document.
+                    example: https://tsdr.uspto.gov/#caseNumber=99159039&caseSearchType=US_APPLICATION&caseType=DEFAULT&searchType=documentSearch
+                markImageURI:
+                    type: string
+                    description: Link representing tsdr image.
+                    example: https://tsdr.uspto.gov/img/99159039/tiny?1908591396
+                fileDownloadURI:
+                    type: string
+                textractStatus:
+                    type: string
+        FilterClause:
+            type: object
+            required:
+                - name
+                - value
+            properties:
+                name:
+                    type: string
+                    description: Field name to filter on.
+                    example: precedentialIndicator
+                    enum:
+                        - decisionProceedingCategory
+                        - documentTypeDescriptionText
+                        - filingBasis
+                        - markLiteralText
+                        - partyName
+                        - petitionNumber
+                        - petitionerName
+                        - precedentialIndicator
+                        - proceedingTypeCategory
+                        - registrantCitizenshipCountryName
+                        - registrantName
+                        - registrationNumber
+                        - serialNumber
+                        - initiatedByDirectorIndicator
+                value:
+                    type: array
+                    items:
+                        type: string
+                    description: List of values to filter by.
+                    example:
+                        - 'true'
+        RangeFilter:
+            type: object
+            required:
+                - field
+            properties:
+                field:
+                    type: string
+                    description: Field name to apply range filter on.
+                    example: decisionActionDate
+                    enum:
+                        - decisionActionDate
+                        - fileSize
+                        - investigationNumber
+                valueFrom:
+                    type: string
+                    description: Range start value inclusive. Date format YYYY-MM-DD.
+                    example: '2010-08-04'
+                valueTo:
+                    type: string
+                    description: Range end value inclusive. Date format YYYY-MM-DD.
+                    example: '2022-08-04'
+        SortClause:
+            type: object
+            required:
+                - field
+                - order
+            properties:
+                field:
+                    type: string
+                    description: Field to sort by.
+                    example: decisionActionDate
+                order:
+                    type: string
+                    enum:
+                        - asc
+                        - desc
+                    description: Sort direction.
+                    example: desc
+        Pagination:
+            type: object
+            properties:
+                offset:
+                    type: integer
+                    description: Number of records to skip.
+                    default: 0
+                    example: 0
+                limit:
+                    type: integer
+                    description: Maximum records to return. Max 100.
+                    default: 25
+                    maximum: 100
+                    example: 25
+        SearchRequest:
+            type: object
+            description: Search request body. All fields optional. Empty request returns top 25 records by decisionActionDate desc.
+            properties:
+                q:
+                    type: string
+                    description: Free-text or advanced Lucene query string. Searches across allSearchableFields and ocrSearchText. Supports boolean (OR/AND/NOT), wildcards (Sanction*), phrases ("Show cause"), field-specific (precedentialIndicator:false).
+                    example: Sanctions OR Show-cause
+                filters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/FilterClause'
+                    description: List of exact match filters.
+                rangeFilters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RangeFilter'
+                    description: List of range filters.
+                sort:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/SortClause'
+                    description: Sort order. Defaults to decisionActionDate desc.
+                fields:
+                    type: array
+                    items:
+                        type: string
+                    description: Fields to include in response. Returns all if omitted.
+                    example:
+                        - decisionProceedingCategory
+                        - registrantName
+                        - registrationNumber
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+                facets:
+                    type: array
+                    items:
+                        type: string
+                    description: Fields to aggregate. Not supported on /search/download.
+                    example:
+                        - proceedingTypeCategory
+                        - documentTypeDescriptionText
+        DownloadRequest:
+            type: object
+            description: 'Download request body. All fields optional. Empty request body downloads top 25 records sorted by decisionActionDate desc. Note: ''fields'' and ''facets'' are not supported for download requests.'
+            properties:
+                q:
+                    type: string
+                    description: Free-text or advanced Lucene query string. Supports boolean (OR/AND/NOT), wildcards (Sanction*), phrases ("Show cause"), field-specific (precedentialIndicator:false).
+                    example: Sanctions OR Show-cause
+                filters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/FilterClause'
+                    description: List of exact match filters.
+                rangeFilters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RangeFilter'
+                    description: List of range filters.
+                fields:
+                    type: array
+                    items:
+                        type: string
+                    description: Fields to include in response. Returns all if omitted.
+                    example:
+                        - decisionProceedingCategory
+                        - registrantName
+                        - registrationNumber
+                sort:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/SortClause'
+                    description: Sort order. Defaults to decisionActionDate desc.
+                format:
+                    type: string
+                    enum:
+                        - csv
+                        - json
+                    default: csv
+                    description: Download file format. 'csv' returns a CSV file attachment. 'json' returns a JSON file attachment.
+                    example: csv
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+        FacetValue:
+            type: object
+            properties:
+                value:
+                    type: string
+                    example: In re Fast Filing Services Inc.
+                count:
+                    type: integer
+                    example: 1
+        SearchResponse:
+            type: object
+            properties:
+                count:
+                    type: integer
+                    description: Total number of matching records.
+                    example: 9
+                requestIdentifier:
+                    type: string
+                    description: Unique request identifier for traceability.
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+                trademarkDecisionsDataBag:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TrademarkDecisionRecord'
+                facets:
+                    type: object
+                    description: Aggregation results per requested facet field.
+                    additionalProperties:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/FacetValue'
+                    example:
+                        partyName:
+                            - value: In re Fast Filing Services Inc.
+                              count: 1
+        Response400:
+            type: object
+            description: Bad Request — the request was invalid or malformed.
+            properties:
+                code:
+                    type: integer
+                    example: 400
+                error:
+                    type: string
+                    example: Bad Request
+                errorDetails:
+                    type: string
+                    example: Invalid request, review office action data request and try again.
+                requestIdentifier:
+                    type: string
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Response401:
+            type: object
+            description: Unauthorized — missing or invalid authentication token.
+            properties:
+                code:
+                    type: integer
+                    example: 401
+                error:
+                    type: string
+                    example: Unauthorized
+                errorDetails:
+                    type: string
+                    example: Missing or invalid Bearer token. Please provide a valid Authorization header.
+                requestIdentifier:
+                    type: string
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Response403:
+            type: object
+            description: Forbidden — authenticated but not authorized to access this resource.
+            properties:
+                code:
+                    type: integer
+                    example: 403
+                error:
+                    type: string
+                    example: Forbidden
+                errorDetails:
+                    type: string
+                    example: You do not have permission to access this resource.
+                requestIdentifier:
+                    type: string
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Response404:
+            type: object
+            description: Not Found — no records match the search criteria.
+            properties:
+                code:
+                    type: integer
+                    example: 404
+                error:
+                    type: string
+                    example: Not Found
+                errorDetails:
+                    type: string
+                    example: No matching records found, refine your search criteria and try again.
+                requestIdentifier:
+                    type: string
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Response500:
+            type: object
+            description: Internal Server Error — an unexpected error occurred.
+            properties:
+                code:
+                    type: integer
+                    example: 500
+                error:
+                    type: string
+                    example: Internal Server Error
+                errorDetails:
+                    type: string
+                    example: An unexpected error occurred. Please contact the Help Desk.
+                requestIdentifier:
+                    type: string
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        TrademarkDecisionResponse:
+            type: object
+            properties:
+                requestIdentifier:
+                    type: string
+                trademarkDecisionsDataBag:
+                    $ref: '#/components/schemas/TrademarkDecisionRecord'
+                count:
+                    type: integer
+    parameters:
+        q:
+            name: q
+            in: query
+            required: false
+            schema:
+                type: string
+            description: Free-text or Lucene query. e.g. 'Sanctions OR Show-cause'
+            example: Show-cause
+        filters:
+            name: filters
+            in: query
+            required: false
+            schema:
+                type: string
+            description: Comma-separated 'fieldName value' pairs. e.g. 'precedentialIndicator true'
+            example: precedentialIndicator true
+        rangeFilters:
+            name: rangeFilters
+            in: query
+            required: false
+            schema:
+                type: string
+            description: Comma-separated 'fieldName from:to'. e.g. 'decisionActionDate 2010-08-04:2026-08-04'
+            example: decisionActionDate 2010-08-04:2026-08-04
+        sort:
+            name: sort
+            in: query
+            required: false
+            schema:
+                type: string
+            description: Comma-separated 'fieldName order'. e.g. 'decisionActionDate desc'
+            example: decisionActionDate desc
+        fields:
+            name: fields
+            in: query
+            required: false
+            schema:
+                type: string
+            description: Comma-separated field names to include in response.
+            example: decisionProceedingCategory,registrantName,registrationNumber
+        facets:
+            name: facets
+            in: query
+            required: false
+            schema:
+                type: string
+            description: Comma-separated field names to aggregate.
+            example: proceedingTypeCategory,documentTypeDescriptionText
+        offset:
+            name: offset
+            in: query
+            required: false
+            schema:
+                type: integer
+                default: 0
+            description: Number of records to skip.
+            example: 0
+        limit:
+            name: limit
+            in: query
+            required: false
+            schema:
+                type: integer
+                default: 25
+                maximum: 100
+            description: Maximum records to return.
+            example: 25
+        format:
+            name: format
+            in: query
+            required: false
+            schema:
+                type: string
+                enum:
+                    - csv
+                    - json
+                default: csv
+            description: Download format. 'csv' or 'json'.
+            example: csv
+    securitySchemes:
+        ApiKeyAuth:
+            type: apiKey
+            in: header
+            name: X-API-KEY

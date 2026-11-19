@@ -45,6 +45,23 @@ const (
 	tsdrTypesOutput  = "generated/tsdr/types_gen.go"
 	tsdrClientOutput = "generated/tsdr/client_gen.go"
 	tsdrPackageName  = "tsdr"
+
+	// Trademark Decisions and Proceedings (ODP 5.1) - separate package: the
+	// spec uses generic names (SearchRequest, Pagination, searchGet) that
+	// would collide with the main ODP bundle.
+	tmdSourceFile   = "swagger/trademark-decisions.yaml"
+	tmdFixedFile    = "swagger_tmd_fixed.yaml"
+	tmdTypesOutput  = "generated/tmd/types_gen.go"
+	tmdClientOutput = "generated/tmd/client_gen.go"
+	tmdPackageName  = "tmd"
+
+	// ODP Office Action Search (ODP 5.0) - separate package for the same
+	// reason (SearchSuccess, Pagination, BadRequest).
+	oasSourceFile   = "swagger/office-actions.yaml"
+	oasFixedFile    = "swagger_oas_fixed.yaml"
+	oasTypesOutput  = "generated/oasearch/types_gen.go"
+	oasClientOutput = "generated/oasearch/client_gen.go"
+	oasPackageName  = "oasearch"
 )
 
 // Office Action spec files and their unique operationId prefixes
@@ -56,6 +73,13 @@ var oaSpecs = []struct {
 	{"oa-citations.yaml", "oa-citations"},
 	{"oa-rejections.yaml", "oa-rejections"},
 	{"oa-enriched-citations.yaml", "enriched-citations"},
+}
+
+// standaloneSpecs are ODP specs that USPTO publishes separately from
+// swagger.yaml (which does not $ref their paths). Their paths are merged into
+// the main bundle as a whole.
+var standaloneSpecs = map[string]bool{
+	"petition-decisions.yaml": true,
 }
 
 func main() {
@@ -124,6 +148,38 @@ func main() {
 		log.Fatalf("Failed to generate TSDR code: %v", err)
 	}
 
+	// === Trademark Decisions and Proceedings API ===
+	log.Println("")
+	log.Println("Trademark Decisions and Proceedings API")
+
+	// Step 9: Apply TMD fixes
+	log.Println("Step 9: Applying trademark decisions fixes...")
+	if err := applyTMDFixes(); err != nil {
+		log.Fatalf("Failed to apply trademark decisions fixes: %v", err)
+	}
+
+	// Step 10: Generate TMD code
+	log.Println("Step 10: Generating trademark decisions code...")
+	if err := generatePackage(tmdFixedFile, tmdPackageName, tmdTypesOutput, tmdClientOutput); err != nil {
+		log.Fatalf("Failed to generate trademark decisions code: %v", err)
+	}
+
+	// === ODP Office Action Search API ===
+	log.Println("")
+	log.Println("ODP Office Action Search API")
+
+	// Step 11: Apply OA search fixes
+	log.Println("Step 11: Applying office action search fixes...")
+	if err := applyOASearchFixes(); err != nil {
+		log.Fatalf("Failed to apply office action search fixes: %v", err)
+	}
+
+	// Step 12: Generate OA search code
+	log.Println("Step 12: Generating office action search code...")
+	if err := generatePackage(oasFixedFile, oasPackageName, oasTypesOutput, oasClientOutput); err != nil {
+		log.Fatalf("Failed to generate office action search code: %v", err)
+	}
+
 	log.Println("Done!")
 }
 
@@ -141,6 +197,9 @@ func bundleSwagger() error {
 	for _, entry := range entries {
 		if !entry.IsDir() && strings.HasSuffix(entry.Name(), ".yaml") {
 			path := filepath.Join(swaggerDir, entry.Name())
+			if path == tmdSourceFile || path == oasSourceFile {
+				continue // generated into its own package
+			}
 			data, err := os.ReadFile(path)
 			if err != nil {
 				return fmt.Errorf("reading %s: %w", path, err)
@@ -249,7 +308,7 @@ func resolveExternalRefs(node *yaml.Node, files map[string]*yaml.Node) error {
 }
 
 // mergeComponents merges components and paths from source file into the main document
-func mergeComponents(mainDoc *yaml.Node, sourceFile *yaml.Node, _ string) error {
+func mergeComponents(mainDoc *yaml.Node, sourceFile *yaml.Node, filename string) error {
 	mainRoot := getDocRoot(mainDoc)
 	sourceRoot := getDocRoot(sourceFile)
 
@@ -334,6 +393,15 @@ func mergeComponents(mainDoc *yaml.Node, sourceFile *yaml.Node, _ string) error 
 			}
 		}
 
+		// Standalone specs are no longer $ref'd from swagger.yaml; take all of
+		// their paths.
+		if standaloneSpecs[filename] {
+			for i := 0; i+1 < len(sourcePaths.Content); i += 2 {
+				if findChildNodeIndex(mainPaths, sourcePaths.Content[i].Value) < 0 {
+					mainPaths.Content = append(mainPaths.Content, sourcePaths.Content[i], sourcePaths.Content[i+1])
+				}
+			}
+		}
 	}
 
 	return nil
@@ -362,14 +430,6 @@ func applyFixes() error {
 		content = re2.ReplaceAllString(content, "${1} integer")
 		fixCount++
 		log.Println("  - Fixed reelNumber: string -> integer")
-	}
-
-	// Fix 3: petitionIssueConsideredTextBag items: type: object -> type: string
-	re3 := regexp.MustCompile(`(petitionIssueConsideredTextBag:\s*\n\s+type:\s*array\s*\n\s+items:\s*\n\s+type:)\s*object`)
-	if re3.MatchString(content) {
-		content = re3.ReplaceAllString(content, "${1} string")
-		fixCount++
-		log.Println("  - Fixed petitionIssueConsideredTextBag items: object -> string")
 	}
 
 	// Fix 4: Remove the empty /api/v1/patent/applications/text-to-search endpoint
@@ -404,6 +464,7 @@ func applyFixes() error {
 		"decisionIssueDate",
 		"lastModifiedDateTime",
 		"createdDateTime",
+		"officialDate",
 	}
 	for _, field := range datetimeFields {
 		re := regexp.MustCompile(fmt.Sprintf(`(%s:\s*\n\s+type:\s*string)\s*\n\s+format:\s*date-time\b`, field))
@@ -515,10 +576,9 @@ func applyFixes() error {
 		return fmt.Errorf("adding missing fields: %w", err)
 	}
 
-	// Fix 15: Rewrite PetitionDecisionAndDocuments into a well-formed allOf so
-	// documentBag survives code generation.
-	if err := fixPetitionDecisionAndDocuments(); err != nil {
-		return fmt.Errorf("fixing PetitionDecisionAndDocuments: %w", err)
+	// Fix 15: Align the petition decisions schemas with the live API.
+	if err := fixPetitionDecisionSchemas(); err != nil {
+		return fmt.Errorf("fixing petition decision schemas: %w", err)
 	}
 
 	// Fix 5: Move response-like schemas to components/responses
@@ -529,62 +589,161 @@ func applyFixes() error {
 	return nil
 }
 
-// fixPetitionDecisionAndDocuments restructures the PetitionDecisionAndDocuments
-// schema. The USPTO spec declares it as a single-member allOf ($ref to
-// PetitionDecision) with sibling type/properties carrying documentBag.
-// oapi-codegen collapses a single-member allOf to a type alias and ignores the
-// siblings, so the generated type dropped documentBag entirely. Moving the
-// sibling properties into a second allOf member makes oapi-codegen emit a
-// merged struct that keeps documentBag.
-func fixPetitionDecisionAndDocuments() error {
+// fixPetitionDecisionSchemas aligns the petition decisions spec
+// (petition-decisions.yaml, ODP release 5.0) with what the live API returns:
+//
+//   - The search envelope PetitionDecisionSearchResponse is renamed to
+//     PetitionDecisionResponseBag, the name the client has always exposed.
+//   - GET /api/v1/petition/decisions/{id} is declared to return a bare
+//     PetitionDecision, but the API wraps it in the same envelope as search
+//     (count, requestIdentifier, petitionDecisionDataBag[]).
+//   - decisionPetitionTypeCode is declared integer but returned as a string
+//     (e.g. "505").
+func fixPetitionDecisionSchemas() error {
 	data, err := os.ReadFile(fixedFile)
 	if err != nil {
 		return err
 	}
 
+	const (
+		oldName = "PetitionDecisionSearchResponse"
+		newName = "PetitionDecisionResponseBag"
+	)
 	var doc yaml.Node
 	if err := yaml.Unmarshal(data, &doc); err != nil {
 		return fmt.Errorf("parsing YAML: %w", err)
 	}
 
-	schema := findNode(&doc, "components", "schemas", "PetitionDecisionAndDocuments")
-	if schema == nil {
-		return fmt.Errorf("PetitionDecisionAndDocuments schema not found")
+	schemas := findNode(&doc, "components", "schemas")
+	if schemas == nil {
+		return fmt.Errorf("components.schemas not found")
 	}
-	allOf := findChildNode(schema, "allOf")
-	props := findChildNode(schema, "properties")
-	if allOf == nil || allOf.Kind != yaml.SequenceNode || props == nil {
-		return fmt.Errorf("PetitionDecisionAndDocuments has unexpected shape (allOf=%v properties=%v)", allOf != nil, props != nil)
-	}
-
-	// Append the sibling properties as a second allOf member.
-	allOf.Content = append(allOf.Content, &yaml.Node{
-		Kind: yaml.MappingNode,
-		Content: []*yaml.Node{
-			{Kind: yaml.ScalarNode, Value: "type"},
-			{Kind: yaml.ScalarNode, Value: "object"},
-			{Kind: yaml.ScalarNode, Value: "properties"},
-			props,
-		},
-	})
-
-	// Drop the now-redundant sibling type/properties keys, keeping allOf only.
-	kept := make([]*yaml.Node, 0, len(schema.Content))
-	for i := 0; i+1 < len(schema.Content); i += 2 {
-		if k := schema.Content[i].Value; k == "type" || k == "properties" {
-			continue
+	// swagger.yaml still lists the pre-5.0 petition schemas as $refs into
+	// odp-common-base.yaml, which no longer defines them. Drop those dangling
+	// entries; the petition-decisions.yaml schemas replace them.
+	for _, stale := range []string{newName, "PetitionDecisionIdentifierResponseBag"} {
+		if i := findChildNodeIndex(schemas, stale); i >= 0 && isJustRef(schemas.Content[i+1]) {
+			schemas.Content = append(schemas.Content[:i], schemas.Content[i+2:]...)
+			log.Printf("  - Dropped dangling %s $ref (removed from odp-common-base.yaml)", stale)
 		}
-		kept = append(kept, schema.Content[i], schema.Content[i+1])
 	}
-	schema.Content = kept
 
-	log.Println("  - Fixed PetitionDecisionAndDocuments: sibling documentBag folded into allOf (was dropped by codegen)")
+	idx := findChildNodeIndex(schemas, oldName)
+	if idx < 0 {
+		return fmt.Errorf("%s schema not found", oldName)
+	}
+	schemas.Content[idx].Value = newName
+	renameRefs(&doc, "#/components/schemas/"+oldName, "#/components/schemas/"+newName)
+	log.Printf("  - Renamed %s -> %s", oldName, newName)
+
+	getByID := findNode(&doc, "paths", "/api/v1/petition/decisions/{petitionDecisionRecordIdentifier}", "get", "responses", "200", "content", "application/json", "schema")
+	if getByID == nil {
+		return fmt.Errorf("petition get-by-id 200 schema not found")
+	}
+	*getByID = yaml.Node{Kind: yaml.MappingNode, Content: []*yaml.Node{
+		{Kind: yaml.ScalarNode, Value: "$ref"},
+		{Kind: yaml.ScalarNode, Value: "#/components/schemas/" + newName},
+	}}
+	log.Println("  - Fixed petition get-by-id: bare PetitionDecision -> search envelope (API returns envelope)")
+
+	// petition-decisions.yaml is the only spec using components/parameters.
+	// oapi-codegen emits a Go type per parameter component, and "facets"
+	// collides with an existing Facets type, so inline them into the paths.
+	if n := inlineParameterRefs(&doc); n > 0 {
+		log.Printf("  - Inlined %d components/parameters refs (Facets type collision)", n)
+	}
+
+	typeCode := findNode(&doc, "components", "schemas", "PetitionDecision", "properties", "decisionPetitionTypeCode")
+	if typeCode == nil {
+		return fmt.Errorf("PetitionDecision.decisionPetitionTypeCode not found")
+	}
+	*typeCode = *scalarSchema("string")
+	log.Println("  - Fixed decisionPetitionTypeCode: integer -> string (API returns string)")
+
+	// petition-decisions.yaml declares the record identifier format: uuid,
+	// which generates a [16]byte UUID type. Keep it a plain string as before
+	// 5.0: callers pass it straight back into the path.
+	recordID := findNode(&doc, "components", "schemas", "PetitionDecision", "properties", "petitionDecisionRecordIdentifier")
+	if recordID == nil {
+		return fmt.Errorf("PetitionDecision.petitionDecisionRecordIdentifier not found")
+	}
+	*recordID = *scalarSchema("string")
+	log.Println("  - Fixed petitionDecisionRecordIdentifier: dropped format: uuid (kept as string)")
+
+	// The pre-5.0 spec modelled the petition dates as plain strings; keep
+	// them that way rather than switching consumers to openapi_types.Date.
+	for _, name := range []string{"decisionDate", "decisionMailDate", "petitionMailDate", "applicationStatusDate"} {
+		prop := findNode(&doc, "components", "schemas", "PetitionDecision", "properties", name)
+		if prop == nil {
+			return fmt.Errorf("PetitionDecision.%s not found", name)
+		}
+		if i := findChildNodeIndex(prop, "format"); i >= 0 {
+			prop.Content = append(prop.Content[:i], prop.Content[i+2:]...)
+		}
+	}
+	log.Println("  - Fixed petition dates: dropped format: date (kept as strings)")
 
 	out, err := yaml.Marshal(&doc)
 	if err != nil {
 		return fmt.Errorf("marshaling YAML: %w", err)
 	}
 	return os.WriteFile(fixedFile, out, 0644)
+}
+
+// inlineParameterRefs replaces every "#/components/parameters/X" $ref under
+// paths with the parameter definition and removes components.parameters.
+// Returns the number of refs inlined.
+func inlineParameterRefs(doc *yaml.Node) int {
+	components := findNode(doc, "components")
+	params := findChildNode(components, "parameters")
+	if params == nil {
+		return 0
+	}
+	const prefix = "#/components/parameters/"
+	count := 0
+	var walk func(n *yaml.Node)
+	walk = func(n *yaml.Node) {
+		for i, c := range n.Content {
+			if ref := findChildNode(c, "$ref"); ref != nil && isJustRef(c) && strings.HasPrefix(ref.Value, prefix) {
+				if def := findChildNode(params, strings.TrimPrefix(ref.Value, prefix)); def != nil {
+					n.Content[i] = def
+					count++
+					continue
+				}
+			}
+			walk(c)
+		}
+	}
+	walk(findNode(doc, "paths"))
+	if i := findChildNodeIndex(components, "parameters"); i >= 0 {
+		components.Content = append(components.Content[:i], components.Content[i+2:]...)
+	}
+	return count
+}
+
+// setChild sets key to value in a mapping node, replacing an existing entry.
+// petition-decisions.yaml brings its own BadRequest/Forbidden/NotFound
+// responses, which the ODP-wide error responses supersede.
+func setChild(mapping *yaml.Node, key string, value *yaml.Node) {
+	if i := findChildNodeIndex(mapping, key); i >= 0 {
+		mapping.Content[i+1] = value
+		return
+	}
+	mapping.Content = append(mapping.Content, &yaml.Node{Kind: yaml.ScalarNode, Value: key}, value)
+}
+
+// renameRefs rewrites every $ref equal to from into to.
+func renameRefs(node *yaml.Node, from, to string) {
+	if node.Kind == yaml.MappingNode {
+		for i := 0; i+1 < len(node.Content); i += 2 {
+			if node.Content[i].Value == "$ref" && node.Content[i+1].Value == from {
+				node.Content[i+1].Value = to
+			}
+		}
+	}
+	for _, c := range node.Content {
+		renameRefs(c, from, to)
+	}
 }
 
 // nestedFieldFix describes a sibling property to inject into any "properties"
@@ -612,9 +771,12 @@ var nestedFieldFixes = []nestedFieldFix{
 	// PatentTermAdjustment: API returns these delay quantities; spec models only
 	// nonOverlappingDayQuantity.
 	{anchor: "nonOverlappingDayQuantity", add: []addField{{"ipOfficeAdjustmentDelayQuantity", "number"}, {"nonOverlappingDayDelayQuantity", "number"}}, desc: "PatentTermAdjustment delay quantities"},
-	// PetitionDecision: API returns these alongside decisionPetitionTypeCode.
-	// prosecutionStatusCode comes back as a number (e.g. 168).
-	{anchor: "decisionPetitionTypeCodeDescriptionText", add: []addField{{"decisionTypeCodeDescriptionText", "string"}, {"prosecutionStatusCode", "integer"}}, desc: "PetitionDecision decision/status codes"},
+	// PetitionDecision: API returns allSearchableFields (the concatenated
+	// searchable text, including the full OCR) alongside the modelled fields.
+	{anchor: "decidedPetitionTypeCodeDescriptionText", add: []addField{{"allSearchableFields", "string"}}, desc: "PetitionDecision.allSearchableFields"},
+	// PetitionDecisionDocument.downloadOptionBag[]: spec models documentURI, the
+	// API returns downloadUrl and pageTotalQuantity instead.
+	{anchor: "documentURI", add: []addField{{"downloadUrl", "string"}, {"pageTotalQuantity", "integer"}}, desc: "PetitionDecisionDocument download options"},
 	// TrialMetaData: API returns a fileDownloadURI; anchor on trialTypeCode.
 	{anchor: "trialTypeCode", add: []addField{{"fileDownloadURI", "string"}}, desc: "TrialMetaData.fileDownloadURI"},
 	// interferenceMetaData (inline): API returns these alongside interferenceStyleName.
@@ -881,10 +1043,7 @@ func fixResponseSchemas() error {
 		if isResponseSchema {
 			if findChildNode(valueNode, "content") != nil {
 				// Already has response structure - move to responses, keep schema version
-				responses.Content = append(responses.Content,
-					&yaml.Node{Kind: yaml.ScalarNode, Value: keyNode.Value},
-					valueNode,
-				)
+				setChild(responses, keyNode.Value, valueNode)
 
 				// Extract inner schema for schema refs
 				content := findChildNode(valueNode, "content")
@@ -909,10 +1068,7 @@ func fixResponseSchemas() error {
 
 				// Create response that wraps this schema
 				responseNode := createResponseWrapper(keyNode.Value, valueNode)
-				responses.Content = append(responses.Content,
-					&yaml.Node{Kind: yaml.ScalarNode, Value: keyNode.Value},
-					responseNode,
-				)
+				setChild(responses, keyNode.Value, responseNode)
 
 				fixCount++
 				log.Printf("  - Created response wrapper for schema %s", keyNode.Value)
@@ -1582,5 +1738,213 @@ func generateTSDRCode() error {
 	}
 	log.Printf("  - Written %s (%d bytes)", tsdrClientOutput, len(clientCode))
 
+	return nil
+}
+
+// applyTMDFixes aligns trademark-decisions.yaml with the live API
+// (verified 2026-11-19 across all three decisionProceedingCategory values).
+func applyTMDFixes() error {
+	data, err := os.ReadFile(tmdSourceFile)
+	if err != nil {
+		return fmt.Errorf("reading %s: %w", tmdSourceFile, err)
+	}
+	var doc yaml.Node
+	if err := yaml.Unmarshal(data, &doc); err != nil {
+		return fmt.Errorf("parsing YAML: %w", err)
+	}
+
+	record := findNode(&doc, "components", "schemas", "TrademarkDecisionRecord", "properties")
+	if record == nil {
+		return fmt.Errorf("TrademarkDecisionRecord properties not found")
+	}
+
+	// serialNumber and registrationNumber are declared string but returned as
+	// JSON numbers.
+	for _, name := range []string{"serialNumber", "registrationNumber"} {
+		prop := findChildNode(record, name)
+		if prop == nil {
+			return fmt.Errorf("TrademarkDecisionRecord.%s not found", name)
+		}
+		*prop = yaml.Node{Kind: yaml.MappingNode, Content: []*yaml.Node{
+			{Kind: yaml.ScalarNode, Value: "type"}, {Kind: yaml.ScalarNode, Value: "integer"},
+			{Kind: yaml.ScalarNode, Value: "format"}, {Kind: yaml.ScalarNode, Value: "int64"},
+		}}
+		log.Printf("  - Fixed %s: string -> integer (API returns number)", name)
+	}
+
+	// The enums are incomplete: the API returns upper-case values
+	// ("REEXAMINATION", "PETITION TO DIRECTOR DENIED") and many more document
+	// types than listed.
+	for _, name := range []string{"documentTypeDescriptionText", "proceedingTypeCategory"} {
+		if prop := findChildNode(record, name); prop != nil {
+			if i := findChildNodeIndex(prop, "enum"); i >= 0 {
+				prop.Content = append(prop.Content[:i], prop.Content[i+2:]...)
+				log.Printf("  - Dropped incomplete enum on %s", name)
+			}
+		}
+	}
+
+	// lastModifiedDateTime has no timezone ("2026-11-18T15:15:39").
+	if prop := findChildNode(record, "lastModifiedDateTime"); prop != nil {
+		if i := findChildNodeIndex(prop, "format"); i >= 0 {
+			prop.Content = append(prop.Content[:i], prop.Content[i+2:]...)
+			log.Println("  - Fixed lastModifiedDateTime: removed format: date-time (non-RFC3339)")
+		}
+	}
+
+	// Fields the API returns but the spec omits.
+	for _, name := range []string{"fileDownloadURI", "textractStatus"} {
+		if addProp(record, name, scalarSchema("string")) {
+			log.Printf("  - Added TrademarkDecisionRecord.%s (API returns it)", name)
+		}
+	}
+
+	// POST search/download declares SearchRequest as its body, so format
+	// cannot be set. The API takes the (otherwise unused) DownloadRequest
+	// schema, including format.
+	dlBody := findNode(&doc, "paths", "/api/v1/trademark/decision-proceeding/search/download", "post", "requestBody", "content", "application/json", "schema")
+	if dlBody == nil {
+		return fmt.Errorf("searchDownloadPost request body not found")
+	}
+	if ref := findChildNode(dlBody, "$ref"); ref != nil {
+		ref.Value = "#/components/schemas/DownloadRequest"
+		log.Println("  - Fixed searchDownloadPost body: SearchRequest -> DownloadRequest (API accepts format)")
+	}
+
+	// The by-identifier response is an inline schema (an anonymous Go struct)
+	// and omits count. Name it TrademarkDecisionResponse and add count.
+	byID := findNode(&doc, "paths", "/api/v1/trademark/decision-proceeding/search/{documentIdentifier}", "get", "responses", "200", "content", "application/json")
+	byIDSchema := findChildNode(byID, "schema")
+	if byIDSchema == nil {
+		return fmt.Errorf("getByDocumentIdentifier 200 schema not found")
+	}
+	if addProp(findChildNode(byIDSchema, "properties"), "count", scalarSchema("integer")) {
+		log.Println("  - Added count to getByDocumentIdentifier response (API returns it)")
+	}
+	setChild(findNode(&doc, "components", "schemas"), "TrademarkDecisionResponse", byIDSchema)
+	setChild(byID, "schema", &yaml.Node{Kind: yaml.MappingNode, Content: []*yaml.Node{
+		{Kind: yaml.ScalarNode, Value: "$ref"},
+		{Kind: yaml.ScalarNode, Value: "#/components/schemas/TrademarkDecisionResponse"},
+	}})
+	log.Println("  - Named getByDocumentIdentifier response TrademarkDecisionResponse")
+
+	out, err := yaml.Marshal(&doc)
+	if err != nil {
+		return fmt.Errorf("marshaling YAML: %w", err)
+	}
+	// requestIdentifier is declared format: uuid; keep it a plain string.
+	content := regexp.MustCompile(`(requestIdentifier:\s*\n\s+type:\s*string)\s*\n\s+format:\s*uuid\b`).ReplaceAllString(string(out), "${1}")
+	if err := os.WriteFile(tmdFixedFile, []byte(content), 0644); err != nil {
+		return err
+	}
+	log.Printf("  - Written %s", tmdFixedFile)
+	return nil
+}
+
+// generatePackage generates the types and client of one fixed spec into its
+// own package.
+func generatePackage(specFile, pkg, typesOut, clientOut string) error {
+	if err := os.MkdirAll(filepath.Dir(typesOut), 0755); err != nil {
+		return fmt.Errorf("creating %s: %w", filepath.Dir(typesOut), err)
+	}
+	loader := openapi3.NewLoader()
+	spec, err := loader.LoadFromFile(specFile)
+	if err != nil {
+		return fmt.Errorf("loading %s: %w", specFile, err)
+	}
+	for _, out := range []struct {
+		path string
+		opts codegen.GenerateOptions
+	}{
+		{typesOut, codegen.GenerateOptions{Models: true}},
+		{clientOut, codegen.GenerateOptions{Client: true}},
+	} {
+		code, err := codegen.Generate(spec, codegen.Configuration{PackageName: pkg, Generate: out.opts})
+		if err != nil {
+			return fmt.Errorf("generating %s: %w", out.path, err)
+		}
+		if err := os.WriteFile(out.path, []byte(code), 0644); err != nil {
+			return fmt.Errorf("writing %s: %w", out.path, err)
+		}
+		log.Printf("  - Written %s (%d bytes)", out.path, len(code))
+	}
+	return nil
+}
+
+// applyOASearchFixes aligns office-actions.yaml (ODP 5.0 Office Action
+// Search) with the live API (verified 2026-11-19).
+func applyOASearchFixes() error {
+	data, err := os.ReadFile(oasSourceFile)
+	if err != nil {
+		return fmt.Errorf("reading %s: %w", oasSourceFile, err)
+	}
+	var doc yaml.Node
+	if err := yaml.Unmarshal(data, &doc); err != nil {
+		return fmt.Errorf("parsing YAML: %w", err)
+	}
+
+	record := findNode(&doc, "components", "schemas", "OfficeAction", "properties")
+	if record == nil {
+		return fmt.Errorf("OfficeAction properties not found")
+	}
+
+	// lastModifiedDateTime is declared format: date but carries a time
+	// ("2026-10-09T18:32:59").
+	if prop := findChildNode(record, "lastModifiedDateTime"); prop != nil {
+		if i := findChildNodeIndex(prop, "format"); i >= 0 {
+			prop.Content = append(prop.Content[:i], prop.Content[i+2:]...)
+			log.Println("  - Fixed lastModifiedDateTime: removed format: date (returns datetime)")
+		}
+	}
+
+	// Fields the API returns but the spec omits.
+	if addProp(record, "inventionTitle", scalarSchema("string")) {
+		log.Println("  - Added OfficeAction.inventionTitle (API returns it)")
+	}
+	if addProp(record, "publicStatusIndicator", scalarSchema("boolean")) {
+		log.Println("  - Added OfficeAction.publicStatusIndicator (API returns it)")
+	}
+
+	// Error bodies carry code as a string ("404") plus message and
+	// detailedMessage; the spec declares an integer code, which makes the
+	// generated client fail to parse every 4xx/5xx (including the 404 the
+	// API returns for a search without matches).
+	schemas := findNode(&doc, "components", "schemas")
+	for _, name := range []string{"Response400", "Response401", "Response403", "Response404", "Response500"} {
+		props := findChildNode(findChildNode(schemas, name), "properties")
+		if props == nil {
+			return fmt.Errorf("%s properties not found", name)
+		}
+		setChild(props, "code", scalarSchema("string"))
+		addProp(props, "message", scalarSchema("string"))
+		addProp(props, "detailedMessage", scalarSchema("string"))
+	}
+	log.Println("  - Fixed error responses: code integer -> string, added message/detailedMessage (API returns them)")
+
+	// The by-identifier response is an inline schema (an anonymous Go
+	// struct); name it OfficeActionResponse.
+	byID := findNode(&doc, "paths", "/api/v1/patent/office-action/{officeActionRecordIdentifier}", "get", "responses", "200", "content", "application/json")
+	byIDSchema := findChildNode(byID, "schema")
+	if byIDSchema == nil {
+		return fmt.Errorf("getOfficeActionById 200 schema not found")
+	}
+	setChild(byIDSchema, "type", &yaml.Node{Kind: yaml.ScalarNode, Value: "object"})
+	setChild(findNode(&doc, "components", "schemas"), "OfficeActionResponse", byIDSchema)
+	setChild(byID, "schema", &yaml.Node{Kind: yaml.MappingNode, Content: []*yaml.Node{
+		{Kind: yaml.ScalarNode, Value: "$ref"},
+		{Kind: yaml.ScalarNode, Value: "#/components/schemas/OfficeActionResponse"},
+	}})
+	log.Println("  - Named getOfficeActionById response OfficeActionResponse")
+
+	out, err := yaml.Marshal(&doc)
+	if err != nil {
+		return fmt.Errorf("marshaling YAML: %w", err)
+	}
+	// requestIdentifier is declared format: uuid; keep it a plain string.
+	content := regexp.MustCompile(`(requestIdentifier:\s*\n\s+type:\s*string)\s*\n\s+format:\s*uuid\b`).ReplaceAllString(string(out), "${1}")
+	if err := os.WriteFile(oasFixedFile, []byte(content), 0644); err != nil {
+		return err
+	}
+	log.Printf("  - Written %s", oasFixedFile)
 	return nil
 }

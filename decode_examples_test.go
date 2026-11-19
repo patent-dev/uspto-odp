@@ -9,6 +9,8 @@ import (
 	"testing"
 
 	generated "github.com/patent-dev/uspto-odp/generated"
+	"github.com/patent-dev/uspto-odp/generated/oasearch"
+	"github.com/patent-dev/uspto-odp/generated/tmd"
 )
 
 // testdata/strictdecode holds one recorded raw USPTO ODP API response body per
@@ -306,14 +308,58 @@ var endpoints = []endpoint{
 		target: func() any { return new(generated.PetitionDecisionResponseBag) },
 		checks: []check{
 			{path: "petitionDecisionDataBag[0].applicationNumberText"},
+			{path: "petitionDecisionDataBag[0].decidedPetitionTypeCodeDescriptionText", want: eq("GRANTED")},
 		},
 	},
 	{
 		file: "get_petition_decision", kind: kindTyped,
-		target: func() any { return new(generated.PetitionDecisionIdentifierResponseBag) },
+		target: func() any { return new(generated.PetitionDecisionResponseBag) },
 		checks: []check{
 			{path: "count", want: eq("1")},
-			{path: "petitionDecisionDataBag[0].applicationNumberText", want: eq("10347018")},
+			{path: "petitionDecisionDataBag[0].applicationNumberText", want: eq("18029590")},
+			{path: "petitionDecisionDataBag[0].decisionPetitionTypeCode", want: eq("502")},
+			{path: "petitionDecisionDataBag[0].documentBag[0].documentIdentifier"},
+		},
+	},
+
+	// --- Trademark decisions and proceedings (typed) -------------------------
+	{
+		file: "search_trademark_decisions", kind: kindTyped,
+		target: func() any { return new(tmd.SearchResponse) },
+		checks: []check{
+			{path: "count", want: eq("7")},
+			{path: "trademarkDecisionsDataBag[0].serialNumber", want: eq("79295732")},
+			{path: "trademarkDecisionsDataBag[0].decisionProceedingCategory", want: eq("ExpungReexam")},
+			{path: "trademarkDecisionsDataBag[0].markLiteralText", want: eq("NEOWISE")},
+		},
+	},
+	{
+		file: "get_trademark_decision", kind: kindTyped,
+		target: func() any { return new(tmd.TrademarkDecisionResponse) },
+		checks: []check{
+			{path: "count", want: eq("1")},
+			{path: "trademarkDecisionsDataBag.decisionProceedingCategory", want: eq("Administrative")},
+			{path: "trademarkDecisionsDataBag.fileDownloadURI"},
+		},
+	},
+
+	// --- ODP Office Action Search (typed) -----------------------------------
+	{
+		file: "search_office_action_records", kind: kindTyped,
+		target: func() any { return new(oasearch.OfficeActionSearchResponse) },
+		checks: []check{
+			{path: "count", want: eq("3")},
+			{path: "officeActionDataBag[0].applicationNumberText", want: eq("17248024")},
+			{path: "officeActionDataBag[0].groupArtUnitNumber", want: eq("1727")},
+		},
+	},
+	{
+		file: "get_office_action_record", kind: kindTyped,
+		target: func() any { return new(oasearch.OfficeActionResponse) },
+		checks: []check{
+			{path: "count", want: eq("1")},
+			{path: "officeActionDataBag[0].officeActionRecordIdentifier", want: eq("34210cf962f8077d9639d69f4fb0c5fb")},
+			{path: "officeActionDataBag[0].documentCode", want: eq("PETDEC")},
 		},
 	},
 

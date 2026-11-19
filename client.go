@@ -16,12 +16,14 @@ import (
 
 	"github.com/patent-dev/uspto-odp/generated"
 	oa "github.com/patent-dev/uspto-odp/generated/oa"
+	"github.com/patent-dev/uspto-odp/generated/oasearch"
+	"github.com/patent-dev/uspto-odp/generated/tmd"
 	tsdrgen "github.com/patent-dev/uspto-odp/generated/tsdr"
 )
 
 // Version is the library version. Bumped per release; surfaces through the
 // default User-Agent.
-const Version = "1.6.12"
+const Version = "1.7.0"
 
 // DefaultUserAgent identifies this library in outbound requests. The
 // product token is the library name so the request is grepable in USPTO
@@ -41,6 +43,8 @@ type Client struct {
 	downloadClient *http.Client
 	generated      *generated.ClientWithResponses
 	oa             *oa.ClientWithResponses
+	tmd            *tmd.ClientWithResponses
+	oasearch       *oasearch.ClientWithResponses
 	tsdr           *tsdrgen.ClientWithResponses
 }
 
@@ -153,12 +157,32 @@ func NewClient(config *Config) (*Client, error) {
 		return nil, fmt.Errorf("failed to create OA client: %w", err)
 	}
 
+	tmdClient, err := tmd.NewClientWithResponses(
+		config.BaseURL,
+		tmd.WithHTTPClient(httpClient),
+		tmd.WithRequestEditorFn(tmd.RequestEditorFn(odpEditor)),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create trademark decisions client: %w", err)
+	}
+
+	oasClient, err := oasearch.NewClientWithResponses(
+		config.BaseURL,
+		oasearch.WithHTTPClient(httpClient),
+		oasearch.WithRequestEditorFn(oasearch.RequestEditorFn(odpEditor)),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create office action search client: %w", err)
+	}
+
 	client := &Client{
 		config:         config,
 		httpClient:     httpClient,
 		downloadClient: downloadClient,
 		generated:      genClient,
 		oa:             oaClient,
+		tmd:            tmdClient,
+		oasearch:       oasClient,
 	}
 
 	// TSDR client (optional, only initialized if TSDRAPIKey is set)
@@ -1019,10 +1043,10 @@ func (c *Client) SearchPetitions(ctx context.Context, query string, offset, limi
 		},
 	}
 
-	var resp *generated.PostApiV1PetitionDecisionsSearchResponse
+	var resp *generated.SearchPetitionDecisionsPostResponse
 	err := c.retryableRequest(ctx, func() error {
 		var err error
-		resp, err = c.generated.PostApiV1PetitionDecisionsSearchWithResponse(ctx, req)
+		resp, err = c.generated.SearchPetitionDecisionsPostWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -1087,13 +1111,7 @@ func (c *Client) GetPatentAssignment(ctx context.Context, applicationNumber stri
 						if assignee.AssigneeAddress != nil {
 							addr := assignee.AssigneeAddress
 							p.City = derefStr(addr.CityName)
-							// 3.6 consolidated location into geographicRegionCode;
-							// fall back to the deprecated countryOrStateCode for
-							// older records.
 							p.GeographicRegion = derefStr(addr.GeographicRegionCode)
-							if p.GeographicRegion == "" {
-								p.GeographicRegion = derefStr(addr.CountryOrStateCode)
-							}
 							p.PostalCode = derefStr(addr.PostalCode)
 							p.CountryName = derefStr(addr.CountryName)
 						}
@@ -1392,22 +1410,18 @@ func (c *Client) SearchPatentsDownload(ctx context.Context, req generated.Patent
 	return resp.Body, nil
 }
 
-// GetPetitionDecision retrieves a specific petition decision.
+// GetPetitionDecision retrieves a specific petition decision. The record
+// comes back as the single entry of PetitionDecisionDataBag and carries the
+// decision documents in its DocumentBag.
 //
-// includeDocuments=true asks the API to attach the decision's documents as
-// documentBag on each record. As of 2026-08-08 the live API returns HTTP 500
-// for every record when the parameter is true (USPTO defect, reproduced across
-// old and new records); pass false and fetch the decision PDFs through the
-// application's file wrapper (GetPatentDocuments, document code PETDEC) until
-// USPTO fixes the endpoint.
-func (c *Client) GetPetitionDecision(ctx context.Context, recordID string, includeDocuments bool) (*generated.PetitionDecisionIdentifierResponseBag, error) {
-	params := &generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams{
-		IncludeDocuments: &includeDocuments,
-	}
-	var resp *generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse
+// The pre-5.0 includeDocuments query parameter is gone from the spec; the live
+// API now ignores the record identifier when it is sent and returns the
+// default search instead, so it is not offered here.
+func (c *Client) GetPetitionDecision(ctx context.Context, recordID string) (*generated.PetitionDecisionResponseBag, error) {
+	var resp *generated.GetPetitionDecisionByIdResponse
 	err := c.retryableRequest(ctx, func() error {
 		var err error
-		resp, err = c.generated.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierWithResponse(ctx, recordID, params)
+		resp, err = c.generated.GetPetitionDecisionByIdWithResponse(ctx, recordID)
 		if err != nil {
 			return err
 		}
@@ -1425,10 +1439,10 @@ func (c *Client) GetPetitionDecision(ctx context.Context, recordID string, inclu
 
 // SearchPetitionsDownload downloads petition search results
 func (c *Client) SearchPetitionsDownload(ctx context.Context, req generated.PetitionDecisionDownloadRequest) ([]byte, error) {
-	var resp *generated.PostApiV1PetitionDecisionsSearchDownloadResponse
+	var resp *generated.DownloadPetitionDecisionsPostResponse
 	err := c.retryableRequest(ctx, func() error {
 		var err error
-		resp, err = c.generated.PostApiV1PetitionDecisionsSearchDownloadWithResponse(ctx, req)
+		resp, err = c.generated.DownloadPetitionDecisionsPostWithResponse(ctx, req)
 		if err != nil {
 			return err
 		}

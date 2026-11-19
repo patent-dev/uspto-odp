@@ -10,6 +10,8 @@ import (
 	"math"
 	"net/http"
 	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -1079,36 +1081,8 @@ func TestClientWithActualResponses(t *testing.T) {
 			_ = json.NewEncoder(w).Encode(response)
 
 		case "/api/v1/petition/decisions/search":
-			// Actual response from SearchPetitions
-			response := map[string]interface{}{
-				"count":             6,
-				"requestIdentifier": "ebc0d202-5e5a-499e-80d9-450be6f821b4",
-				"petitionDecisionDataBag": []interface{}{
-					map[string]interface{}{
-						"applicationNumberText":                "13986179",
-						"businessEntityStatusCategory":         "Micro",
-						"courtActionIndicator":                 false,
-						"decisionDate":                         "2020-11-30",
-						"decisionPetitionTypeCode":             502,
-						"decisionTypeCode":                     "C",
-						"decisionTypeCodeDescriptionText":      "DENIED",
-						"finalDecidingOfficeName":              "OFFICE OF PETITIONS",
-						"groupArtUnitNumber":                   "3656",
-						"inventionTitle":                       "Centrifugal machine",
-						"inventorBag":                          []string{"Richard Foore"},
-						"lastIngestionDateTime":                "2025-07-16T19:49:16",
-						"petitionDecisionRecordIdentifier":     "9dc6b94a-afa0-5e66-beef-f26fa80992b8",
-						"petitionIssueConsideredTextBag":       []string{"Revival of an abandoned application"},
-						"petitionMailDate":                     "2020-05-15",
-						"prosecutionStatusCode":                161,
-						"prosecutionStatusCodeDescriptionText": "Abandoned",
-						"ruleBag":                              []string{"37 CFR 1.137(a)", "37 CFR 1.137(b)(1)"},
-						"statuteBag":                           []string{"35 USC 27"},
-						"technologyCenter":                     "3600",
-					},
-				},
-			}
-			_ = json.NewEncoder(w).Encode(response)
+			// Recorded live response (testdata/strictdecode/search_petitions.json).
+			serveFixture(t, w, "search_petitions")
 
 		case "/api/v1/datasets/products/files/PTGRXML/2025/ipg250916.zip":
 			// GetBulkFileURL endpoint - returns 302 redirect
@@ -1351,21 +1325,8 @@ func TestClientWithActualResponses(t *testing.T) {
 			_, _ = w.Write(csvData)
 
 		case "/api/v1/petition/decisions/test-petition-id":
-			// Mock response for GetPetitionDecision
-			response := map[string]interface{}{
-				"petitionDecisionData": map[string]interface{}{
-					"petitionDecisionRecordIdentifier": "test-petition-id",
-					"applicationNumberText":            "13986179",
-					"decisionDate":                     "2020-11-30",
-					"decisionTypeCode":                 "C",
-					"decisionTypeCodeDescriptionText":  "DENIED",
-					"finalDecidingOfficeName":          "OFFICE OF PETITIONS",
-					"inventionTitle":                   "Centrifugal machine",
-					"petitionIssueConsideredTextBag":   []string{"Revival of an abandoned application"},
-					"ruleBag":                          []string{"37 CFR 1.137(a)", "37 CFR 1.137(b)(1)"},
-				},
-			}
-			_ = json.NewEncoder(w).Encode(response)
+			// Recorded live response (testdata/strictdecode/get_petition_decision.json).
+			serveFixture(t, w, "get_petition_decision")
 
 		case "/api/v1/petition/decisions/search/download":
 			// Mock response for SearchPetitionsDownload - returns CSV data
@@ -2109,7 +2070,7 @@ func TestClientWithActualResponses(t *testing.T) {
 	})
 
 	t.Run("GetPetitionDecision", func(t *testing.T) {
-		result, err := client.GetPetitionDecision(ctx, "test-petition-id", false)
+		result, err := client.GetPetitionDecision(ctx, "test-petition-id")
 		if err != nil {
 			t.Fatalf("GetPetitionDecision failed: %v", err)
 		}
@@ -2440,4 +2401,17 @@ func TestClientWithActualResponses(t *testing.T) {
 		}
 	})
 
+}
+
+// serveFixture writes a recorded live response body from testdata/strictdecode.
+func serveFixture(t *testing.T, w http.ResponseWriter, name string) {
+	t.Helper()
+	body, err := os.ReadFile(filepath.Join("testdata", "strictdecode", name+".json"))
+	if err != nil {
+		t.Errorf("reading fixture %s: %v", name, err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	_, _ = w.Write(body)
 }

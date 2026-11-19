@@ -2,36 +2,51 @@
   "count": 1,
   "petitionDecisionDataBag": [
     {
-      "applicationNumberText": "10347018",
-      "businessEntityStatusCategory": "Small",
+      "allSearchableFields": "18695171 Withdraw from issue awaiting action To withdraw from issue after payment of the issue fee \t(37 CFR 1.313(c)(1) or (2). GRANTED OFFICE OF PETITIONS Telefonaktiebolaget LM Ericsson (publ) Prioritized Rekeying of Security Associations Daiying Liu Congjie Zhang Daniel Migault Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/695,171 11/18/2026 37 CFR 1.313(c)(2) 1009-6753 / P102439US01\n\nTitle of Invention\n\nPrioritized Rekeying of Security Associations\n\nIn re Application of Daiying Liu\n\nThis is an electronic decision on the petition under 37 CFR 1.313(c)(2), filed November 18, 2026 to withdraw the\nabove-identified application from issue after payment of the issue fee.\n\nThe request is GRANTED.\n\nThe above-identified application is withdrawn from issue for consideration of a submission under 37 CFR 1.114\n(request for continued examination). See 37 CFR 1.313(c)(2).\n\nPetitioner is advised that the issue fee paid in this application cannot be refunded. If, however, this\napplication is again allowed, petitioner may request that it be applied towards the issue fee required by\nthe new Notice of Allowance.\n\nThe application is being referred to Technology Center AU 2408 for consideration of the request for continued\nexamination (Quick Path Information Disclosure Statement) under 37 CFR 1.114.\n\nTelephone inquired concerning this decision should be directed to the Patent Electronic Business Center (EBC)\nat 866-217-9197.\n\nOffice of Petitions",
+      "applicationNumberText": "18695171",
+      "applicationStatusDate": "2026-11-18",
+      "applicationStatusDescriptionText": "Withdraw from issue awaiting action",
+      "businessEntityStatusCategory": "Regular Undiscounted",
       "courtActionIndicator": false,
-      "decisionDate": "2012-03-26",
-      "decisionPetitionTypeCode": 525,
-      "decisionTypeCode": "C",
+      "customerNumber": 102721,
+      "decidedPetitionTypeCode": "A",
+      "decidedPetitionTypeCodeDescriptionText": "GRANTED",
+      "decisionDate": "2026-11-18",
+      "decisionMailDate": "2026-11-18",
+      "decisionPetitionTypeCode": "505",
+      "decisionPetitionTypeCodeDescriptionText": "To withdraw from issue after payment of the issue fee \t(37 CFR 1.313(c)(1) or (2).",
+      "documentBag": [
+        {
+          "documentCode": "PET.DEC.AUTO",
+          "documentCodeDescriptionText": "ePetition Grant Letter",
+          "documentIdentifier": "MWMPMLNI120X149",
+          "downloadOptionBag": [
+            {
+              "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/18695171/MWMPMLNI120X149/files/grantLetter.pdf",
+              "mimeTypeIdentifier": "PDF",
+              "pageTotalQuantity": 1
+            }
+          ],
+          "officialDate": "2026-11-18T22:44:02"
+        }
+      ],
       "finalDecidingOfficeName": "OFFICE OF PETITIONS",
-      "firstInventorToFileIndicator": false,
-      "groupArtUnitNumber": "1791",
-      "inventionTitle": "Edible Homogenous Supports for Comestibles with Optional Mess Guards and Drip Guards",
+      "finalPetitionDecisionIndicator": false,
+      "firstApplicantName": "Telefonaktiebolaget LM Ericsson (publ)",
+      "firstInventorToFileIndicator": true,
+      "groupArtUnitNumber": "2408",
+      "inventionTitle": "Prioritized Rekeying of Security Associations",
       "inventorBag": [
-        "Alice Mary Kiely"
+        "Daiying Liu",
+        "Congjie Zhang",
+        "Daniel Migault"
       ],
-      "lastIngestionDateTime": "2026-03-31T15:41:46",
-      "petitionDecisionRecordIdentifier": "eafa727a-354d-534f-b6aa-a4b366afbb28",
-      "petitionIssueConsideredTextBag": [
-        "Withdrawal of abandonment"
-      ],
-      "petitionMailDate": "2011-09-30",
-      "prosecutionStatusCodeDescriptionText": "Abandoned",
-      "ruleBag": [
-        "37 CFR 1.181",
-        "37 CFR 1.113",
-        "37 CFR 1.137"
-      ],
-      "statuteBag": [
-        "35 USC 132",
-        "35 USC 133"
-      ],
-      "technologyCenter": "1700"
+      "lastModifiedDateTime": "2026-11-19T11:57:10",
+      "ocrSearchText": "Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/695,171 11/18/2026 37 CFR 1.313(c)(2) 1009-6753 / P102439US01\n\nTitle of Invention\n\nPrioritized Rekeying of Security Associations\n\nIn re Application of Daiying Liu\n\nThis is an electronic decision on the petition under 37 CFR 1.313(c)(2), filed Novembe ...",
+      "petitionDecisionRecordIdentifier": "ea54bce6-5cfa-546f-b4f2-6a9145f67424",
+      "petitionMailDate": "2026-11-18",
+      "technologyCenter": "2400"
     }
-  ]
+  ],
+  "requestIdentifier": "3fec71d4-8a60-4cb3-960a-d1cd4d38dedb"
 }

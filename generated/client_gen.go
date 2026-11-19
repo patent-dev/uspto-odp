@@ -16,7 +16,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-// RequestEditorFn  is the function signature for the RequestEditor callback function
+// RequestEditorFn is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
 
 // Doer performs HTTP requests.
@@ -89,196 +89,453 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// GetApiV1DatasetsProductsFilesProductIdentifierFileName request
+
+	// GetApiV1DatasetsProductsFilesProductIdentifierFileName Download bulk data product file
+	//
+	// Returns a 302 redirect to the actual download location for the given productIdentifier and fileName.
+	//
+	// Corresponds with GET /api/v1/datasets/products/files/{productIdentifier}/{fileName} (the `GetApiV1DatasetsProductsFilesProductIdentifierFileName` operationId).
 	GetApiV1DatasetsProductsFilesProductIdentifierFileName(ctx context.Context, productIdentifier string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1DatasetsProductsSearch request
+	// GetApiV1DatasetsProductsSearch Search bulk datasets products by supplying query parameters
+	//
+	// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+	//
+	// Corresponds with GET /api/v1/datasets/products/search (the `GetApiV1DatasetsProductsSearch` operationId).
 	GetApiV1DatasetsProductsSearch(ctx context.Context, params *GetApiV1DatasetsProductsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1DatasetsProductsProductIdentifier request
+	// GetApiV1DatasetsProductsProductIdentifier Bulk data- find a product by its identifier (shortName)
+	//
+	// Corresponds with GET /api/v1/datasets/products/{productIdentifier} (the `GetApiV1DatasetsProductsProductIdentifier` operationId).
 	GetApiV1DatasetsProductsProductIdentifier(ctx context.Context, productIdentifier string, params *GetApiV1DatasetsProductsProductIdentifierParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentAppealsDecisionsSearch request
+	// GetApiV1PatentAppealsDecisionsSearch Search appeals decisions using query parameters
+	//
+	// Corresponds with GET /api/v1/patent/appeals/decisions/search (the `GetApiV1PatentAppealsDecisionsSearch` operationId).
 	GetApiV1PatentAppealsDecisionsSearch(ctx context.Context, params *GetApiV1PatentAppealsDecisionsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentAppealsDecisionsSearchWithBody request with any body
+	// PostApiV1PatentAppealsDecisionsSearchWithBody Search appeals decisions using json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/appeals/decisions/search (the `PostApiV1PatentAppealsDecisionsSearch` operationId).
 	PostApiV1PatentAppealsDecisionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentAppealsDecisionsSearch Search appeals decisions using json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/appeals/decisions/search (the `PostApiV1PatentAppealsDecisionsSearch` operationId).
 	PostApiV1PatentAppealsDecisionsSearch(ctx context.Context, body PostApiV1PatentAppealsDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentAppealsDecisionsSearchDownload request
+	// GetApiV1PatentAppealsDecisionsSearchDownload Download appeals decisions search results in json or csv format using query parameters
+	//
+	// Corresponds with GET /api/v1/patent/appeals/decisions/search/download (the `GetApiV1PatentAppealsDecisionsSearchDownload` operationId).
 	GetApiV1PatentAppealsDecisionsSearchDownload(ctx context.Context, params *GetApiV1PatentAppealsDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentAppealsDecisionsSearchDownloadWithBody request with any body
+	// PostApiV1PatentAppealsDecisionsSearchDownloadWithBody Download appeals decisions search results in json or csv format using json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/appeals/decisions/search/download (the `PostApiV1PatentAppealsDecisionsSearchDownload` operationId).
 	PostApiV1PatentAppealsDecisionsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentAppealsDecisionsSearchDownload Download appeals decisions search results in json or csv format using json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/appeals/decisions/search/download (the `PostApiV1PatentAppealsDecisionsSearchDownload` operationId).
 	PostApiV1PatentAppealsDecisionsSearchDownload(ctx context.Context, body PostApiV1PatentAppealsDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentAppealsDecisionsDocumentIdentifier request
+	// GetApiV1PatentAppealsDecisionsDocumentIdentifier Retrieve appeals decisions by document Identifier
+	//
+	// Corresponds with GET /api/v1/patent/appeals/decisions/{documentIdentifier} (the `GetApiV1PatentAppealsDecisionsDocumentIdentifier` operationId).
 	GetApiV1PatentAppealsDecisionsDocumentIdentifier(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentAppealsAppealNumberDecisions request
+	// GetApiV1PatentAppealsAppealNumberDecisions Retrieve appeals decisions by appeal number
+	//
+	// Corresponds with GET /api/v1/patent/appeals/{appealNumber}/decisions (the `GetApiV1PatentAppealsAppealNumberDecisions` operationId).
 	GetApiV1PatentAppealsAppealNumberDecisions(ctx context.Context, appealNumber string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsSearch request
+	// GetApiV1PatentApplicationsSearch Patent application search by supplying query parameters
+	//
+	// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+	//
+	// Corresponds with GET /api/v1/patent/applications/search (the `GetApiV1PatentApplicationsSearch` operationId).
 	GetApiV1PatentApplicationsSearch(ctx context.Context, params *GetApiV1PatentApplicationsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentApplicationsSearchWithBody request with any body
+	// PostApiV1PatentApplicationsSearchWithBody Search patent applications by supplying json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/applications/search (the `PostApiV1PatentApplicationsSearch` operationId).
 	PostApiV1PatentApplicationsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentApplicationsSearch Search patent applications by supplying json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/applications/search (the `PostApiV1PatentApplicationsSearch` operationId).
 	PostApiV1PatentApplicationsSearch(ctx context.Context, body PostApiV1PatentApplicationsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsSearchDownload request
+	// GetApiV1PatentApplicationsSearchDownload Patent application search by supplying query parameters
+	//
+	// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+	//
+	// Corresponds with GET /api/v1/patent/applications/search/download (the `GetApiV1PatentApplicationsSearchDownload` operationId).
 	GetApiV1PatentApplicationsSearchDownload(ctx context.Context, params *GetApiV1PatentApplicationsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentApplicationsSearchDownloadWithBody request with any body
+	// PostApiV1PatentApplicationsSearchDownloadWithBody Download patent data by supplying json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/applications/search/download (the `PostApiV1PatentApplicationsSearchDownload` operationId).
 	PostApiV1PatentApplicationsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentApplicationsSearchDownload Download patent data by supplying json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/applications/search/download (the `PostApiV1PatentApplicationsSearchDownload` operationId).
 	PostApiV1PatentApplicationsSearchDownload(ctx context.Context, body PostApiV1PatentApplicationsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberText request
+	// GetApiV1PatentApplicationsApplicationNumberText Patent application data for a provided application number
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText} (the `GetApiV1PatentApplicationsApplicationNumberText` operationId).
 	GetApiV1PatentApplicationsApplicationNumberText(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextAdjustment request
+	// GetApiV1PatentApplicationsApplicationNumberTextAdjustment Get patent term adjustment data for an application number
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/adjustment (the `GetApiV1PatentApplicationsApplicationNumberTextAdjustment` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextAdjustment(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextAssignment request
+	// GetApiV1PatentApplicationsApplicationNumberTextAssignment Get patent assignment data for an application number
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/assignment (the `GetApiV1PatentApplicationsApplicationNumberTextAssignment` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextAssignment(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments request
+	// GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments Associated (pgpub, grant) documents meta-data for an application
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/associated-documents (the `GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextAttorney request
+	// GetApiV1PatentApplicationsApplicationNumberTextAttorney Get attorney/agent data for an application number
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/attorney (the `GetApiV1PatentApplicationsApplicationNumberTextAttorney` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextAttorney(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextContinuity request
+	// GetApiV1PatentApplicationsApplicationNumberTextContinuity Get continuity data for an application number
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/continuity (the `GetApiV1PatentApplicationsApplicationNumberTextContinuity` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextContinuity(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextDocuments request
+	// GetApiV1PatentApplicationsApplicationNumberTextDocuments Documents details for an application number
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/documents (the `GetApiV1PatentApplicationsApplicationNumberTextDocuments` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextDocuments(ctx context.Context, applicationNumberText string, params *GetApiV1PatentApplicationsApplicationNumberTextDocumentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextForeignPriority request
+	// GetApiV1PatentApplicationsApplicationNumberTextForeignPriority Get foreign-priority data for an application number
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/foreign-priority (the `GetApiV1PatentApplicationsApplicationNumberTextForeignPriority` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextForeignPriority(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextMetaData request
+	// GetApiV1PatentApplicationsApplicationNumberTextMetaData Get patent application meta data
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/meta-data (the `GetApiV1PatentApplicationsApplicationNumberTextMetaData` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextMetaData(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextTransactions request
+	// GetApiV1PatentApplicationsApplicationNumberTextTransactions Get transaction data for an application number
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/transactions (the `GetApiV1PatentApplicationsApplicationNumberTextTransactions` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextTransactions(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentInterferencesDecisionsSearch request
+	// GetApiV1PatentInterferencesDecisionsSearch Search interferences decisions using query parameters
+	//
+	// Query interference decisions (decision type/category, party names, date ranges, etc.).
+	//
+	// Corresponds with GET /api/v1/patent/interferences/decisions/search (the `GetApiV1PatentInterferencesDecisionsSearch` operationId).
 	GetApiV1PatentInterferencesDecisionsSearch(ctx context.Context, params *GetApiV1PatentInterferencesDecisionsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentInterferencesDecisionsSearchWithBody request with any body
+	// PostApiV1PatentInterferencesDecisionsSearchWithBody Search interferences decisions using json payload
+	//
+	// Request body matches PatentSearchRequest; example tailored for interferences.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/interferences/decisions/search (the `PostApiV1PatentInterferencesDecisionsSearch` operationId).
 	PostApiV1PatentInterferencesDecisionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentInterferencesDecisionsSearch Search interferences decisions using json payload
+	//
+	// Request body matches PatentSearchRequest; example tailored for interferences.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/interferences/decisions/search (the `PostApiV1PatentInterferencesDecisionsSearch` operationId).
 	PostApiV1PatentInterferencesDecisionsSearch(ctx context.Context, body PostApiV1PatentInterferencesDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentInterferencesDecisionsSearchDownload request
+	// GetApiV1PatentInterferencesDecisionsSearchDownload Download interferences decisions search results in json or csv format using query parameters
+	//
+	// Same parameters as search; add `format` for export type.
+	//
+	// Corresponds with GET /api/v1/patent/interferences/decisions/search/download (the `GetApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 	GetApiV1PatentInterferencesDecisionsSearchDownload(ctx context.Context, params *GetApiV1PatentInterferencesDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentInterferencesDecisionsSearchDownloadWithBody request with any body
+	// PostApiV1PatentInterferencesDecisionsSearchDownloadWithBody Download interferences decisions search results in json or csv format using json payload
+	//
+	// Request body matches PatentDownloadRequest; example tailored for interferences.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/interferences/decisions/search/download (the `PostApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 	PostApiV1PatentInterferencesDecisionsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentInterferencesDecisionsSearchDownload Download interferences decisions search results in json or csv format using json payload
+	//
+	// Request body matches PatentDownloadRequest; example tailored for interferences.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/interferences/decisions/search/download (the `PostApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 	PostApiV1PatentInterferencesDecisionsSearchDownload(ctx context.Context, body PostApiV1PatentInterferencesDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentInterferencesDecisionsDocumentIdentifier request
+	// GetApiV1PatentInterferencesDecisionsDocumentIdentifier Retrieve interferences decisions by document identifier
+	//
+	// Returns a single interference decision document for the provided `documentIdentifier`.
+	//
+	// Corresponds with GET /api/v1/patent/interferences/decisions/{documentIdentifier} (the `GetApiV1PatentInterferencesDecisionsDocumentIdentifier` operationId).
 	GetApiV1PatentInterferencesDecisionsDocumentIdentifier(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentInterferencesInterferenceNumberDecisions request
+	// GetApiV1PatentInterferencesInterferenceNumberDecisions Retrieve interferences decisions by interference number
+	//
+	// Returns one or more interference decision records for the provided `interferenceNumber`.
+	//
+	// Corresponds with GET /api/v1/patent/interferences/{interferenceNumber}/decisions (the `GetApiV1PatentInterferencesInterferenceNumberDecisions` operationId).
 	GetApiV1PatentInterferencesInterferenceNumberDecisions(ctx context.Context, interferenceNumber string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentStatusCodes request
+	// GetApiV1PatentStatusCodes Search patent application status codes and status code description
+	//
+	// Query parameters are optional.
+	//
+	// Corresponds with GET /api/v1/patent/status-codes (the `GetApiV1PatentStatusCodes` operationId).
 	GetApiV1PatentStatusCodes(ctx context.Context, params *GetApiV1PatentStatusCodesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentStatusCodesWithBody request with any body
+	// PostApiV1PatentStatusCodesWithBody Search patent application status codes and status code description
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/status-codes (the `PostApiV1PatentStatusCodes` operationId).
 	PostApiV1PatentStatusCodesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentStatusCodes Search patent application status codes and status code description
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/status-codes (the `PostApiV1PatentStatusCodes` operationId).
 	PostApiV1PatentStatusCodes(ctx context.Context, body PostApiV1PatentStatusCodesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsDecisionsSearch request
+	// GetApiV1PatentTrialsDecisionsSearch Search trials decisions documents using query parameters
+	//
+	// Corresponds with GET /api/v1/patent/trials/decisions/search (the `GetApiV1PatentTrialsDecisionsSearch` operationId).
 	GetApiV1PatentTrialsDecisionsSearch(ctx context.Context, params *GetApiV1PatentTrialsDecisionsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentTrialsDecisionsSearchWithBody request with any body
+	// PostApiV1PatentTrialsDecisionsSearchWithBody Search trials decisions documents using json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/decisions/search (the `PostApiV1PatentTrialsDecisionsSearch` operationId).
 	PostApiV1PatentTrialsDecisionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentTrialsDecisionsSearch Search trials decisions documents using json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/decisions/search (the `PostApiV1PatentTrialsDecisionsSearch` operationId).
 	PostApiV1PatentTrialsDecisionsSearch(ctx context.Context, body PostApiV1PatentTrialsDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsDecisionsSearchDownload request
+	// GetApiV1PatentTrialsDecisionsSearchDownload Download trials decisions documents search results in json or csv format using query parameters
+	//
+	// Corresponds with GET /api/v1/patent/trials/decisions/search/download (the `GetApiV1PatentTrialsDecisionsSearchDownload` operationId).
 	GetApiV1PatentTrialsDecisionsSearchDownload(ctx context.Context, params *GetApiV1PatentTrialsDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentTrialsDecisionsSearchDownloadWithBody request with any body
+	// PostApiV1PatentTrialsDecisionsSearchDownloadWithBody Download trials decisions documents search results in json or csv format using json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/decisions/search/download (the `PostApiV1PatentTrialsDecisionsSearchDownload` operationId).
 	PostApiV1PatentTrialsDecisionsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentTrialsDecisionsSearchDownload Download trials decisions documents search results in json or csv format using json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/decisions/search/download (the `PostApiV1PatentTrialsDecisionsSearchDownload` operationId).
 	PostApiV1PatentTrialsDecisionsSearchDownload(ctx context.Context, body PostApiV1PatentTrialsDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsDecisionsDocumentIdentifier request
+	// GetApiV1PatentTrialsDecisionsDocumentIdentifier Retrieve a single trials decisions document by document identifier
+	//
+	// Corresponds with GET /api/v1/patent/trials/decisions/{documentIdentifier} (the `GetApiV1PatentTrialsDecisionsDocumentIdentifier` operationId).
 	GetApiV1PatentTrialsDecisionsDocumentIdentifier(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsDocumentsSearch request
+	// GetApiV1PatentTrialsDocumentsSearch Search trials documents using query parameters
+	//
+	// Corresponds with GET /api/v1/patent/trials/documents/search (the `GetApiV1PatentTrialsDocumentsSearch` operationId).
 	GetApiV1PatentTrialsDocumentsSearch(ctx context.Context, params *GetApiV1PatentTrialsDocumentsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentTrialsDocumentsSearchWithBody request with any body
+	// PostApiV1PatentTrialsDocumentsSearchWithBody Search trials documents using json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/documents/search (the `PostApiV1PatentTrialsDocumentsSearch` operationId).
 	PostApiV1PatentTrialsDocumentsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentTrialsDocumentsSearch Search trials documents using json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/documents/search (the `PostApiV1PatentTrialsDocumentsSearch` operationId).
 	PostApiV1PatentTrialsDocumentsSearch(ctx context.Context, body PostApiV1PatentTrialsDocumentsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsDocumentsSearchDownload request
+	// GetApiV1PatentTrialsDocumentsSearchDownload Download trials document search results in json or csv format using query parameters
+	//
+	// Corresponds with GET /api/v1/patent/trials/documents/search/download (the `GetApiV1PatentTrialsDocumentsSearchDownload` operationId).
 	GetApiV1PatentTrialsDocumentsSearchDownload(ctx context.Context, params *GetApiV1PatentTrialsDocumentsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentTrialsDocumentsSearchDownloadWithBody request with any body
+	// PostApiV1PatentTrialsDocumentsSearchDownloadWithBody Download trials documents search results in json or csv format using json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/documents/search/download (the `PostApiV1PatentTrialsDocumentsSearchDownload` operationId).
 	PostApiV1PatentTrialsDocumentsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentTrialsDocumentsSearchDownload Download trials documents search results in json or csv format using json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/documents/search/download (the `PostApiV1PatentTrialsDocumentsSearchDownload` operationId).
 	PostApiV1PatentTrialsDocumentsSearchDownload(ctx context.Context, body PostApiV1PatentTrialsDocumentsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsDocumentsDocumentIdentifier request
+	// GetApiV1PatentTrialsDocumentsDocumentIdentifier Retrieve a single trials document by document identifier
+	//
+	// Corresponds with GET /api/v1/patent/trials/documents/{documentIdentifier} (the `GetApiV1PatentTrialsDocumentsDocumentIdentifier` operationId).
 	GetApiV1PatentTrialsDocumentsDocumentIdentifier(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsProceedingsSearch request
+	// GetApiV1PatentTrialsProceedingsSearch Search trials proceedings using query parameters
+	//
+	// Corresponds with GET /api/v1/patent/trials/proceedings/search (the `GetApiV1PatentTrialsProceedingsSearch` operationId).
 	GetApiV1PatentTrialsProceedingsSearch(ctx context.Context, params *GetApiV1PatentTrialsProceedingsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentTrialsProceedingsSearchWithBody request with any body
+	// PostApiV1PatentTrialsProceedingsSearchWithBody Search trials proceedings using json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/proceedings/search (the `PostApiV1PatentTrialsProceedingsSearch` operationId).
 	PostApiV1PatentTrialsProceedingsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentTrialsProceedingsSearch Search trials proceedings using json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/proceedings/search (the `PostApiV1PatentTrialsProceedingsSearch` operationId).
 	PostApiV1PatentTrialsProceedingsSearch(ctx context.Context, body PostApiV1PatentTrialsProceedingsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsProceedingsSearchDownload request
+	// GetApiV1PatentTrialsProceedingsSearchDownload Download trials proceedings search results in json or csv format using query parameters
+	//
+	// Corresponds with GET /api/v1/patent/trials/proceedings/search/download (the `GetApiV1PatentTrialsProceedingsSearchDownload` operationId).
 	GetApiV1PatentTrialsProceedingsSearchDownload(ctx context.Context, params *GetApiV1PatentTrialsProceedingsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PatentTrialsProceedingsSearchDownloadWithBody request with any body
+	// PostApiV1PatentTrialsProceedingsSearchDownloadWithBody Download trials proceedings search results in json or csv format using json payload
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/proceedings/search/download (the `PostApiV1PatentTrialsProceedingsSearchDownload` operationId).
 	PostApiV1PatentTrialsProceedingsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostApiV1PatentTrialsProceedingsSearchDownload Download trials proceedings search results in json or csv format using json payload
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/patent/trials/proceedings/search/download (the `PostApiV1PatentTrialsProceedingsSearchDownload` operationId).
 	PostApiV1PatentTrialsProceedingsSearchDownload(ctx context.Context, body PostApiV1PatentTrialsProceedingsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsProceedingsTrialNumber request
+	// GetApiV1PatentTrialsProceedingsTrialNumber Retrieve a single trials proceeding by trial number
+	//
+	// Corresponds with GET /api/v1/patent/trials/proceedings/{trialNumber} (the `GetApiV1PatentTrialsProceedingsTrialNumber` operationId).
 	GetApiV1PatentTrialsProceedingsTrialNumber(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsTrialNumberDecisions request
+	// GetApiV1PatentTrialsTrialNumberDecisions Retrieve all trials decisions documents by trial number
+	//
+	// Corresponds with GET /api/v1/patent/trials/{trialNumber}/decisions (the `GetApiV1PatentTrialsTrialNumberDecisions` operationId).
 	GetApiV1PatentTrialsTrialNumberDecisions(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PatentTrialsTrialNumberDocuments request
+	// GetApiV1PatentTrialsTrialNumberDocuments Retrieve all trials documents by trial number
+	//
+	// Corresponds with GET /api/v1/patent/trials/{trialNumber}/documents (the `GetApiV1PatentTrialsTrialNumberDocuments` operationId).
 	GetApiV1PatentTrialsTrialNumberDocuments(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PetitionDecisionsSearch request
-	GetApiV1PetitionDecisionsSearch(ctx context.Context, params *GetApiV1PetitionDecisionsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// SearchPetitionDecisionsGet Search petition decisions by query parameters
+	//
+	// Search petition decisions using query string parameters. All parameters are optional. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+	//
+	// Corresponds with GET /api/v1/petition/decisions/search (the `SearchPetitionDecisionsGet` operationId).
+	SearchPetitionDecisionsGet(ctx context.Context, params *SearchPetitionDecisionsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PetitionDecisionsSearchWithBody request with any body
-	PostApiV1PetitionDecisionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// SearchPetitionDecisionsPostWithBody Search petition decisions by JSON request body
+	//
+	// Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/petition/decisions/search (the `SearchPetitionDecisionsPost` operationId).
+	SearchPetitionDecisionsPostWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApiV1PetitionDecisionsSearch(ctx context.Context, body PostApiV1PetitionDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// SearchPetitionDecisionsPost Search petition decisions by JSON request body
+	//
+	// Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/petition/decisions/search (the `SearchPetitionDecisionsPost` operationId).
+	SearchPetitionDecisionsPost(ctx context.Context, body SearchPetitionDecisionsPostJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PetitionDecisionsSearchDownload request
-	GetApiV1PetitionDecisionsSearchDownload(ctx context.Context, params *GetApiV1PetitionDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DownloadPetitionDecisionsGet Download petition decisions by query parameters
+	//
+	// Download petition decisions as CSV or JSON using query string parameters. All parameters are optional. Facets are not supported on this endpoint. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+	//
+	// Corresponds with GET /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsGet` operationId).
+	DownloadPetitionDecisionsGet(ctx context.Context, params *DownloadPetitionDecisionsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1PetitionDecisionsSearchDownloadWithBody request with any body
-	PostApiV1PetitionDecisionsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DownloadPetitionDecisionsPostWithBody Download petition decisions by JSON request body
+	//
+	// Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsPost` operationId).
+	DownloadPetitionDecisionsPostWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApiV1PetitionDecisionsSearchDownload(ctx context.Context, body PostApiV1PetitionDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DownloadPetitionDecisionsPost Download petition decisions by JSON request body
+	//
+	// Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsPost` operationId).
+	DownloadPetitionDecisionsPost(ctx context.Context, body DownloadPetitionDecisionsPostJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifier request
-	GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifier(ctx context.Context, petitionDecisionRecordIdentifier string, params *GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetPetitionDecisionById Get a single petition decision by record identifier
+	//
+	// Retrieve a single petition decision record by its unique petition decision record identifier.
+	//
+	// Corresponds with GET /api/v1/petition/decisions/{petitionDecisionRecordIdentifier} (the `GetPetitionDecisionById` operationId).
+	GetPetitionDecisionById(ctx context.Context, petitionDecisionRecordIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
+// GetApiV1DatasetsProductsFilesProductIdentifierFileName Download bulk data product file
+//
+// Returns a 302 redirect to the actual download location for the given productIdentifier and fileName.
+//
+// Corresponds with GET /api/v1/datasets/products/files/{productIdentifier}/{fileName} (the `GetApiV1DatasetsProductsFilesProductIdentifierFileName` operationId).
 func (c *Client) GetApiV1DatasetsProductsFilesProductIdentifierFileName(ctx context.Context, productIdentifier string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1DatasetsProductsFilesProductIdentifierFileNameRequest(c.Server, productIdentifier, fileName)
 	if err != nil {
@@ -291,6 +548,11 @@ func (c *Client) GetApiV1DatasetsProductsFilesProductIdentifierFileName(ctx cont
 	return c.Client.Do(req)
 }
 
+// GetApiV1DatasetsProductsSearch Search bulk datasets products by supplying query parameters
+//
+// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+//
+// Corresponds with GET /api/v1/datasets/products/search (the `GetApiV1DatasetsProductsSearch` operationId).
 func (c *Client) GetApiV1DatasetsProductsSearch(ctx context.Context, params *GetApiV1DatasetsProductsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1DatasetsProductsSearchRequest(c.Server, params)
 	if err != nil {
@@ -303,6 +565,9 @@ func (c *Client) GetApiV1DatasetsProductsSearch(ctx context.Context, params *Get
 	return c.Client.Do(req)
 }
 
+// GetApiV1DatasetsProductsProductIdentifier Bulk data- find a product by its identifier (shortName)
+//
+// Corresponds with GET /api/v1/datasets/products/{productIdentifier} (the `GetApiV1DatasetsProductsProductIdentifier` operationId).
 func (c *Client) GetApiV1DatasetsProductsProductIdentifier(ctx context.Context, productIdentifier string, params *GetApiV1DatasetsProductsProductIdentifierParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1DatasetsProductsProductIdentifierRequest(c.Server, productIdentifier, params)
 	if err != nil {
@@ -315,6 +580,9 @@ func (c *Client) GetApiV1DatasetsProductsProductIdentifier(ctx context.Context, 
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentAppealsDecisionsSearch Search appeals decisions using query parameters
+//
+// Corresponds with GET /api/v1/patent/appeals/decisions/search (the `GetApiV1PatentAppealsDecisionsSearch` operationId).
 func (c *Client) GetApiV1PatentAppealsDecisionsSearch(ctx context.Context, params *GetApiV1PatentAppealsDecisionsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentAppealsDecisionsSearchRequest(c.Server, params)
 	if err != nil {
@@ -327,6 +595,11 @@ func (c *Client) GetApiV1PatentAppealsDecisionsSearch(ctx context.Context, param
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentAppealsDecisionsSearchWithBody Search appeals decisions using json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/appeals/decisions/search (the `PostApiV1PatentAppealsDecisionsSearch` operationId).
 func (c *Client) PostApiV1PatentAppealsDecisionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentAppealsDecisionsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -339,6 +612,11 @@ func (c *Client) PostApiV1PatentAppealsDecisionsSearchWithBody(ctx context.Conte
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentAppealsDecisionsSearch Search appeals decisions using json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/appeals/decisions/search (the `PostApiV1PatentAppealsDecisionsSearch` operationId).
 func (c *Client) PostApiV1PatentAppealsDecisionsSearch(ctx context.Context, body PostApiV1PatentAppealsDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentAppealsDecisionsSearchRequest(c.Server, body)
 	if err != nil {
@@ -351,6 +629,9 @@ func (c *Client) PostApiV1PatentAppealsDecisionsSearch(ctx context.Context, body
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentAppealsDecisionsSearchDownload Download appeals decisions search results in json or csv format using query parameters
+//
+// Corresponds with GET /api/v1/patent/appeals/decisions/search/download (the `GetApiV1PatentAppealsDecisionsSearchDownload` operationId).
 func (c *Client) GetApiV1PatentAppealsDecisionsSearchDownload(ctx context.Context, params *GetApiV1PatentAppealsDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(c.Server, params)
 	if err != nil {
@@ -363,6 +644,11 @@ func (c *Client) GetApiV1PatentAppealsDecisionsSearchDownload(ctx context.Contex
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentAppealsDecisionsSearchDownloadWithBody Download appeals decisions search results in json or csv format using json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/appeals/decisions/search/download (the `PostApiV1PatentAppealsDecisionsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentAppealsDecisionsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentAppealsDecisionsSearchDownloadRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -375,6 +661,11 @@ func (c *Client) PostApiV1PatentAppealsDecisionsSearchDownloadWithBody(ctx conte
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentAppealsDecisionsSearchDownload Download appeals decisions search results in json or csv format using json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/appeals/decisions/search/download (the `PostApiV1PatentAppealsDecisionsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentAppealsDecisionsSearchDownload(ctx context.Context, body PostApiV1PatentAppealsDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentAppealsDecisionsSearchDownloadRequest(c.Server, body)
 	if err != nil {
@@ -387,6 +678,9 @@ func (c *Client) PostApiV1PatentAppealsDecisionsSearchDownload(ctx context.Conte
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentAppealsDecisionsDocumentIdentifier Retrieve appeals decisions by document Identifier
+//
+// Corresponds with GET /api/v1/patent/appeals/decisions/{documentIdentifier} (the `GetApiV1PatentAppealsDecisionsDocumentIdentifier` operationId).
 func (c *Client) GetApiV1PatentAppealsDecisionsDocumentIdentifier(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentAppealsDecisionsDocumentIdentifierRequest(c.Server, documentIdentifier)
 	if err != nil {
@@ -399,6 +693,9 @@ func (c *Client) GetApiV1PatentAppealsDecisionsDocumentIdentifier(ctx context.Co
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentAppealsAppealNumberDecisions Retrieve appeals decisions by appeal number
+//
+// Corresponds with GET /api/v1/patent/appeals/{appealNumber}/decisions (the `GetApiV1PatentAppealsAppealNumberDecisions` operationId).
 func (c *Client) GetApiV1PatentAppealsAppealNumberDecisions(ctx context.Context, appealNumber string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentAppealsAppealNumberDecisionsRequest(c.Server, appealNumber)
 	if err != nil {
@@ -411,6 +708,11 @@ func (c *Client) GetApiV1PatentAppealsAppealNumberDecisions(ctx context.Context,
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsSearch Patent application search by supplying query parameters
+//
+// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+//
+// Corresponds with GET /api/v1/patent/applications/search (the `GetApiV1PatentApplicationsSearch` operationId).
 func (c *Client) GetApiV1PatentApplicationsSearch(ctx context.Context, params *GetApiV1PatentApplicationsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsSearchRequest(c.Server, params)
 	if err != nil {
@@ -423,6 +725,11 @@ func (c *Client) GetApiV1PatentApplicationsSearch(ctx context.Context, params *G
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentApplicationsSearchWithBody Search patent applications by supplying json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/applications/search (the `PostApiV1PatentApplicationsSearch` operationId).
 func (c *Client) PostApiV1PatentApplicationsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentApplicationsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -435,6 +742,11 @@ func (c *Client) PostApiV1PatentApplicationsSearchWithBody(ctx context.Context, 
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentApplicationsSearch Search patent applications by supplying json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/applications/search (the `PostApiV1PatentApplicationsSearch` operationId).
 func (c *Client) PostApiV1PatentApplicationsSearch(ctx context.Context, body PostApiV1PatentApplicationsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentApplicationsSearchRequest(c.Server, body)
 	if err != nil {
@@ -447,6 +759,11 @@ func (c *Client) PostApiV1PatentApplicationsSearch(ctx context.Context, body Pos
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsSearchDownload Patent application search by supplying query parameters
+//
+// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+//
+// Corresponds with GET /api/v1/patent/applications/search/download (the `GetApiV1PatentApplicationsSearchDownload` operationId).
 func (c *Client) GetApiV1PatentApplicationsSearchDownload(ctx context.Context, params *GetApiV1PatentApplicationsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsSearchDownloadRequest(c.Server, params)
 	if err != nil {
@@ -459,6 +776,11 @@ func (c *Client) GetApiV1PatentApplicationsSearchDownload(ctx context.Context, p
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentApplicationsSearchDownloadWithBody Download patent data by supplying json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/applications/search/download (the `PostApiV1PatentApplicationsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentApplicationsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentApplicationsSearchDownloadRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -471,6 +793,11 @@ func (c *Client) PostApiV1PatentApplicationsSearchDownloadWithBody(ctx context.C
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentApplicationsSearchDownload Download patent data by supplying json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/applications/search/download (the `PostApiV1PatentApplicationsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentApplicationsSearchDownload(ctx context.Context, body PostApiV1PatentApplicationsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentApplicationsSearchDownloadRequest(c.Server, body)
 	if err != nil {
@@ -483,6 +810,9 @@ func (c *Client) PostApiV1PatentApplicationsSearchDownload(ctx context.Context, 
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberText Patent application data for a provided application number
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText} (the `GetApiV1PatentApplicationsApplicationNumberText` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberText(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -495,6 +825,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberText(ctx context.Con
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextAdjustment Get patent term adjustment data for an application number
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/adjustment (the `GetApiV1PatentApplicationsApplicationNumberTextAdjustment` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextAdjustment(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextAdjustmentRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -507,6 +840,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextAdjustment(ctx c
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextAssignment Get patent assignment data for an application number
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/assignment (the `GetApiV1PatentApplicationsApplicationNumberTextAssignment` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextAssignment(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextAssignmentRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -519,6 +855,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextAssignment(ctx c
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments Associated (pgpub, grant) documents meta-data for an application
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/associated-documents (the `GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -531,6 +870,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocume
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextAttorney Get attorney/agent data for an application number
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/attorney (the `GetApiV1PatentApplicationsApplicationNumberTextAttorney` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextAttorney(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextAttorneyRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -543,6 +885,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextAttorney(ctx con
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextContinuity Get continuity data for an application number
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/continuity (the `GetApiV1PatentApplicationsApplicationNumberTextContinuity` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextContinuity(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextContinuityRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -555,6 +900,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextContinuity(ctx c
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextDocuments Documents details for an application number
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/documents (the `GetApiV1PatentApplicationsApplicationNumberTextDocuments` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextDocuments(ctx context.Context, applicationNumberText string, params *GetApiV1PatentApplicationsApplicationNumberTextDocumentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextDocumentsRequest(c.Server, applicationNumberText, params)
 	if err != nil {
@@ -567,6 +915,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextDocuments(ctx co
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextForeignPriority Get foreign-priority data for an application number
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/foreign-priority (the `GetApiV1PatentApplicationsApplicationNumberTextForeignPriority` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextForeignPriority(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -579,6 +930,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextForeignPriority(
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextMetaData Get patent application meta data
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/meta-data (the `GetApiV1PatentApplicationsApplicationNumberTextMetaData` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextMetaData(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextMetaDataRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -591,6 +945,9 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextMetaData(ctx con
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentApplicationsApplicationNumberTextTransactions Get transaction data for an application number
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/transactions (the `GetApiV1PatentApplicationsApplicationNumberTextTransactions` operationId).
 func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextTransactions(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentApplicationsApplicationNumberTextTransactionsRequest(c.Server, applicationNumberText)
 	if err != nil {
@@ -603,6 +960,11 @@ func (c *Client) GetApiV1PatentApplicationsApplicationNumberTextTransactions(ctx
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentInterferencesDecisionsSearch Search interferences decisions using query parameters
+//
+// Query interference decisions (decision type/category, party names, date ranges, etc.).
+//
+// Corresponds with GET /api/v1/patent/interferences/decisions/search (the `GetApiV1PatentInterferencesDecisionsSearch` operationId).
 func (c *Client) GetApiV1PatentInterferencesDecisionsSearch(ctx context.Context, params *GetApiV1PatentInterferencesDecisionsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentInterferencesDecisionsSearchRequest(c.Server, params)
 	if err != nil {
@@ -615,6 +977,13 @@ func (c *Client) GetApiV1PatentInterferencesDecisionsSearch(ctx context.Context,
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentInterferencesDecisionsSearchWithBody Search interferences decisions using json payload
+//
+// Request body matches PatentSearchRequest; example tailored for interferences.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/interferences/decisions/search (the `PostApiV1PatentInterferencesDecisionsSearch` operationId).
 func (c *Client) PostApiV1PatentInterferencesDecisionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentInterferencesDecisionsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -627,6 +996,13 @@ func (c *Client) PostApiV1PatentInterferencesDecisionsSearchWithBody(ctx context
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentInterferencesDecisionsSearch Search interferences decisions using json payload
+//
+// Request body matches PatentSearchRequest; example tailored for interferences.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/interferences/decisions/search (the `PostApiV1PatentInterferencesDecisionsSearch` operationId).
 func (c *Client) PostApiV1PatentInterferencesDecisionsSearch(ctx context.Context, body PostApiV1PatentInterferencesDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentInterferencesDecisionsSearchRequest(c.Server, body)
 	if err != nil {
@@ -639,6 +1015,11 @@ func (c *Client) PostApiV1PatentInterferencesDecisionsSearch(ctx context.Context
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentInterferencesDecisionsSearchDownload Download interferences decisions search results in json or csv format using query parameters
+//
+// Same parameters as search; add `format` for export type.
+//
+// Corresponds with GET /api/v1/patent/interferences/decisions/search/download (the `GetApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 func (c *Client) GetApiV1PatentInterferencesDecisionsSearchDownload(ctx context.Context, params *GetApiV1PatentInterferencesDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(c.Server, params)
 	if err != nil {
@@ -651,6 +1032,13 @@ func (c *Client) GetApiV1PatentInterferencesDecisionsSearchDownload(ctx context.
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentInterferencesDecisionsSearchDownloadWithBody Download interferences decisions search results in json or csv format using json payload
+//
+// Request body matches PatentDownloadRequest; example tailored for interferences.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/interferences/decisions/search/download (the `PostApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentInterferencesDecisionsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -663,6 +1051,13 @@ func (c *Client) PostApiV1PatentInterferencesDecisionsSearchDownloadWithBody(ctx
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentInterferencesDecisionsSearchDownload Download interferences decisions search results in json or csv format using json payload
+//
+// Request body matches PatentDownloadRequest; example tailored for interferences.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/interferences/decisions/search/download (the `PostApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentInterferencesDecisionsSearchDownload(ctx context.Context, body PostApiV1PatentInterferencesDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequest(c.Server, body)
 	if err != nil {
@@ -675,6 +1070,11 @@ func (c *Client) PostApiV1PatentInterferencesDecisionsSearchDownload(ctx context
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentInterferencesDecisionsDocumentIdentifier Retrieve interferences decisions by document identifier
+//
+// Returns a single interference decision document for the provided `documentIdentifier`.
+//
+// Corresponds with GET /api/v1/patent/interferences/decisions/{documentIdentifier} (the `GetApiV1PatentInterferencesDecisionsDocumentIdentifier` operationId).
 func (c *Client) GetApiV1PatentInterferencesDecisionsDocumentIdentifier(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentInterferencesDecisionsDocumentIdentifierRequest(c.Server, documentIdentifier)
 	if err != nil {
@@ -687,6 +1087,11 @@ func (c *Client) GetApiV1PatentInterferencesDecisionsDocumentIdentifier(ctx cont
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentInterferencesInterferenceNumberDecisions Retrieve interferences decisions by interference number
+//
+// Returns one or more interference decision records for the provided `interferenceNumber`.
+//
+// Corresponds with GET /api/v1/patent/interferences/{interferenceNumber}/decisions (the `GetApiV1PatentInterferencesInterferenceNumberDecisions` operationId).
 func (c *Client) GetApiV1PatentInterferencesInterferenceNumberDecisions(ctx context.Context, interferenceNumber string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentInterferencesInterferenceNumberDecisionsRequest(c.Server, interferenceNumber)
 	if err != nil {
@@ -699,6 +1104,11 @@ func (c *Client) GetApiV1PatentInterferencesInterferenceNumberDecisions(ctx cont
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentStatusCodes Search patent application status codes and status code description
+//
+// Query parameters are optional.
+//
+// Corresponds with GET /api/v1/patent/status-codes (the `GetApiV1PatentStatusCodes` operationId).
 func (c *Client) GetApiV1PatentStatusCodes(ctx context.Context, params *GetApiV1PatentStatusCodesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentStatusCodesRequest(c.Server, params)
 	if err != nil {
@@ -711,6 +1121,11 @@ func (c *Client) GetApiV1PatentStatusCodes(ctx context.Context, params *GetApiV1
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentStatusCodesWithBody Search patent application status codes and status code description
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/status-codes (the `PostApiV1PatentStatusCodes` operationId).
 func (c *Client) PostApiV1PatentStatusCodesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentStatusCodesRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -723,6 +1138,11 @@ func (c *Client) PostApiV1PatentStatusCodesWithBody(ctx context.Context, content
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentStatusCodes Search patent application status codes and status code description
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/status-codes (the `PostApiV1PatentStatusCodes` operationId).
 func (c *Client) PostApiV1PatentStatusCodes(ctx context.Context, body PostApiV1PatentStatusCodesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentStatusCodesRequest(c.Server, body)
 	if err != nil {
@@ -735,6 +1155,9 @@ func (c *Client) PostApiV1PatentStatusCodes(ctx context.Context, body PostApiV1P
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsDecisionsSearch Search trials decisions documents using query parameters
+//
+// Corresponds with GET /api/v1/patent/trials/decisions/search (the `GetApiV1PatentTrialsDecisionsSearch` operationId).
 func (c *Client) GetApiV1PatentTrialsDecisionsSearch(ctx context.Context, params *GetApiV1PatentTrialsDecisionsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsDecisionsSearchRequest(c.Server, params)
 	if err != nil {
@@ -747,6 +1170,11 @@ func (c *Client) GetApiV1PatentTrialsDecisionsSearch(ctx context.Context, params
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsDecisionsSearchWithBody Search trials decisions documents using json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/trials/decisions/search (the `PostApiV1PatentTrialsDecisionsSearch` operationId).
 func (c *Client) PostApiV1PatentTrialsDecisionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsDecisionsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -759,6 +1187,11 @@ func (c *Client) PostApiV1PatentTrialsDecisionsSearchWithBody(ctx context.Contex
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsDecisionsSearch Search trials decisions documents using json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/trials/decisions/search (the `PostApiV1PatentTrialsDecisionsSearch` operationId).
 func (c *Client) PostApiV1PatentTrialsDecisionsSearch(ctx context.Context, body PostApiV1PatentTrialsDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsDecisionsSearchRequest(c.Server, body)
 	if err != nil {
@@ -771,6 +1204,9 @@ func (c *Client) PostApiV1PatentTrialsDecisionsSearch(ctx context.Context, body 
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsDecisionsSearchDownload Download trials decisions documents search results in json or csv format using query parameters
+//
+// Corresponds with GET /api/v1/patent/trials/decisions/search/download (the `GetApiV1PatentTrialsDecisionsSearchDownload` operationId).
 func (c *Client) GetApiV1PatentTrialsDecisionsSearchDownload(ctx context.Context, params *GetApiV1PatentTrialsDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(c.Server, params)
 	if err != nil {
@@ -783,6 +1219,11 @@ func (c *Client) GetApiV1PatentTrialsDecisionsSearchDownload(ctx context.Context
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsDecisionsSearchDownloadWithBody Download trials decisions documents search results in json or csv format using json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/trials/decisions/search/download (the `PostApiV1PatentTrialsDecisionsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentTrialsDecisionsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsDecisionsSearchDownloadRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -795,6 +1236,11 @@ func (c *Client) PostApiV1PatentTrialsDecisionsSearchDownloadWithBody(ctx contex
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsDecisionsSearchDownload Download trials decisions documents search results in json or csv format using json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/trials/decisions/search/download (the `PostApiV1PatentTrialsDecisionsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentTrialsDecisionsSearchDownload(ctx context.Context, body PostApiV1PatentTrialsDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsDecisionsSearchDownloadRequest(c.Server, body)
 	if err != nil {
@@ -807,6 +1253,9 @@ func (c *Client) PostApiV1PatentTrialsDecisionsSearchDownload(ctx context.Contex
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsDecisionsDocumentIdentifier Retrieve a single trials decisions document by document identifier
+//
+// Corresponds with GET /api/v1/patent/trials/decisions/{documentIdentifier} (the `GetApiV1PatentTrialsDecisionsDocumentIdentifier` operationId).
 func (c *Client) GetApiV1PatentTrialsDecisionsDocumentIdentifier(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsDecisionsDocumentIdentifierRequest(c.Server, documentIdentifier)
 	if err != nil {
@@ -819,6 +1268,9 @@ func (c *Client) GetApiV1PatentTrialsDecisionsDocumentIdentifier(ctx context.Con
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsDocumentsSearch Search trials documents using query parameters
+//
+// Corresponds with GET /api/v1/patent/trials/documents/search (the `GetApiV1PatentTrialsDocumentsSearch` operationId).
 func (c *Client) GetApiV1PatentTrialsDocumentsSearch(ctx context.Context, params *GetApiV1PatentTrialsDocumentsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsDocumentsSearchRequest(c.Server, params)
 	if err != nil {
@@ -831,6 +1283,11 @@ func (c *Client) GetApiV1PatentTrialsDocumentsSearch(ctx context.Context, params
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsDocumentsSearchWithBody Search trials documents using json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/trials/documents/search (the `PostApiV1PatentTrialsDocumentsSearch` operationId).
 func (c *Client) PostApiV1PatentTrialsDocumentsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsDocumentsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -843,6 +1300,11 @@ func (c *Client) PostApiV1PatentTrialsDocumentsSearchWithBody(ctx context.Contex
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsDocumentsSearch Search trials documents using json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/trials/documents/search (the `PostApiV1PatentTrialsDocumentsSearch` operationId).
 func (c *Client) PostApiV1PatentTrialsDocumentsSearch(ctx context.Context, body PostApiV1PatentTrialsDocumentsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsDocumentsSearchRequest(c.Server, body)
 	if err != nil {
@@ -855,6 +1317,9 @@ func (c *Client) PostApiV1PatentTrialsDocumentsSearch(ctx context.Context, body 
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsDocumentsSearchDownload Download trials document search results in json or csv format using query parameters
+//
+// Corresponds with GET /api/v1/patent/trials/documents/search/download (the `GetApiV1PatentTrialsDocumentsSearchDownload` operationId).
 func (c *Client) GetApiV1PatentTrialsDocumentsSearchDownload(ctx context.Context, params *GetApiV1PatentTrialsDocumentsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(c.Server, params)
 	if err != nil {
@@ -867,6 +1332,11 @@ func (c *Client) GetApiV1PatentTrialsDocumentsSearchDownload(ctx context.Context
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsDocumentsSearchDownloadWithBody Download trials documents search results in json or csv format using json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/trials/documents/search/download (the `PostApiV1PatentTrialsDocumentsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentTrialsDocumentsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsDocumentsSearchDownloadRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -879,6 +1349,11 @@ func (c *Client) PostApiV1PatentTrialsDocumentsSearchDownloadWithBody(ctx contex
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsDocumentsSearchDownload Download trials documents search results in json or csv format using json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/trials/documents/search/download (the `PostApiV1PatentTrialsDocumentsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentTrialsDocumentsSearchDownload(ctx context.Context, body PostApiV1PatentTrialsDocumentsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsDocumentsSearchDownloadRequest(c.Server, body)
 	if err != nil {
@@ -891,6 +1366,9 @@ func (c *Client) PostApiV1PatentTrialsDocumentsSearchDownload(ctx context.Contex
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsDocumentsDocumentIdentifier Retrieve a single trials document by document identifier
+//
+// Corresponds with GET /api/v1/patent/trials/documents/{documentIdentifier} (the `GetApiV1PatentTrialsDocumentsDocumentIdentifier` operationId).
 func (c *Client) GetApiV1PatentTrialsDocumentsDocumentIdentifier(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsDocumentsDocumentIdentifierRequest(c.Server, documentIdentifier)
 	if err != nil {
@@ -903,6 +1381,9 @@ func (c *Client) GetApiV1PatentTrialsDocumentsDocumentIdentifier(ctx context.Con
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsProceedingsSearch Search trials proceedings using query parameters
+//
+// Corresponds with GET /api/v1/patent/trials/proceedings/search (the `GetApiV1PatentTrialsProceedingsSearch` operationId).
 func (c *Client) GetApiV1PatentTrialsProceedingsSearch(ctx context.Context, params *GetApiV1PatentTrialsProceedingsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsProceedingsSearchRequest(c.Server, params)
 	if err != nil {
@@ -915,6 +1396,11 @@ func (c *Client) GetApiV1PatentTrialsProceedingsSearch(ctx context.Context, para
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsProceedingsSearchWithBody Search trials proceedings using json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/trials/proceedings/search (the `PostApiV1PatentTrialsProceedingsSearch` operationId).
 func (c *Client) PostApiV1PatentTrialsProceedingsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsProceedingsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -927,6 +1413,11 @@ func (c *Client) PostApiV1PatentTrialsProceedingsSearchWithBody(ctx context.Cont
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsProceedingsSearch Search trials proceedings using json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/trials/proceedings/search (the `PostApiV1PatentTrialsProceedingsSearch` operationId).
 func (c *Client) PostApiV1PatentTrialsProceedingsSearch(ctx context.Context, body PostApiV1PatentTrialsProceedingsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsProceedingsSearchRequest(c.Server, body)
 	if err != nil {
@@ -939,6 +1430,9 @@ func (c *Client) PostApiV1PatentTrialsProceedingsSearch(ctx context.Context, bod
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsProceedingsSearchDownload Download trials proceedings search results in json or csv format using query parameters
+//
+// Corresponds with GET /api/v1/patent/trials/proceedings/search/download (the `GetApiV1PatentTrialsProceedingsSearchDownload` operationId).
 func (c *Client) GetApiV1PatentTrialsProceedingsSearchDownload(ctx context.Context, params *GetApiV1PatentTrialsProceedingsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(c.Server, params)
 	if err != nil {
@@ -951,6 +1445,11 @@ func (c *Client) GetApiV1PatentTrialsProceedingsSearchDownload(ctx context.Conte
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsProceedingsSearchDownloadWithBody Download trials proceedings search results in json or csv format using json payload
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/trials/proceedings/search/download (the `PostApiV1PatentTrialsProceedingsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentTrialsProceedingsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsProceedingsSearchDownloadRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -963,6 +1462,11 @@ func (c *Client) PostApiV1PatentTrialsProceedingsSearchDownloadWithBody(ctx cont
 	return c.Client.Do(req)
 }
 
+// PostApiV1PatentTrialsProceedingsSearchDownload Download trials proceedings search results in json or csv format using json payload
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/patent/trials/proceedings/search/download (the `PostApiV1PatentTrialsProceedingsSearchDownload` operationId).
 func (c *Client) PostApiV1PatentTrialsProceedingsSearchDownload(ctx context.Context, body PostApiV1PatentTrialsProceedingsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiV1PatentTrialsProceedingsSearchDownloadRequest(c.Server, body)
 	if err != nil {
@@ -975,6 +1479,9 @@ func (c *Client) PostApiV1PatentTrialsProceedingsSearchDownload(ctx context.Cont
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsProceedingsTrialNumber Retrieve a single trials proceeding by trial number
+//
+// Corresponds with GET /api/v1/patent/trials/proceedings/{trialNumber} (the `GetApiV1PatentTrialsProceedingsTrialNumber` operationId).
 func (c *Client) GetApiV1PatentTrialsProceedingsTrialNumber(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsProceedingsTrialNumberRequest(c.Server, trialNumber)
 	if err != nil {
@@ -987,6 +1494,9 @@ func (c *Client) GetApiV1PatentTrialsProceedingsTrialNumber(ctx context.Context,
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsTrialNumberDecisions Retrieve all trials decisions documents by trial number
+//
+// Corresponds with GET /api/v1/patent/trials/{trialNumber}/decisions (the `GetApiV1PatentTrialsTrialNumberDecisions` operationId).
 func (c *Client) GetApiV1PatentTrialsTrialNumberDecisions(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsTrialNumberDecisionsRequest(c.Server, trialNumber)
 	if err != nil {
@@ -999,6 +1509,9 @@ func (c *Client) GetApiV1PatentTrialsTrialNumberDecisions(ctx context.Context, t
 	return c.Client.Do(req)
 }
 
+// GetApiV1PatentTrialsTrialNumberDocuments Retrieve all trials documents by trial number
+//
+// Corresponds with GET /api/v1/patent/trials/{trialNumber}/documents (the `GetApiV1PatentTrialsTrialNumberDocuments` operationId).
 func (c *Client) GetApiV1PatentTrialsTrialNumberDocuments(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiV1PatentTrialsTrialNumberDocumentsRequest(c.Server, trialNumber)
 	if err != nil {
@@ -1011,8 +1524,13 @@ func (c *Client) GetApiV1PatentTrialsTrialNumberDocuments(ctx context.Context, t
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1PetitionDecisionsSearch(ctx context.Context, params *GetApiV1PetitionDecisionsSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1PetitionDecisionsSearchRequest(c.Server, params)
+// SearchPetitionDecisionsGet Search petition decisions by query parameters
+//
+// Search petition decisions using query string parameters. All parameters are optional. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+//
+// Corresponds with GET /api/v1/petition/decisions/search (the `SearchPetitionDecisionsGet` operationId).
+func (c *Client) SearchPetitionDecisionsGet(ctx context.Context, params *SearchPetitionDecisionsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSearchPetitionDecisionsGetRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -1023,8 +1541,15 @@ func (c *Client) GetApiV1PetitionDecisionsSearch(ctx context.Context, params *Ge
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1PetitionDecisionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1PetitionDecisionsSearchRequestWithBody(c.Server, contentType, body)
+// SearchPetitionDecisionsPostWithBody Search petition decisions by JSON request body
+//
+// Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/petition/decisions/search (the `SearchPetitionDecisionsPost` operationId).
+func (c *Client) SearchPetitionDecisionsPostWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSearchPetitionDecisionsPostRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -1035,8 +1560,15 @@ func (c *Client) PostApiV1PetitionDecisionsSearchWithBody(ctx context.Context, c
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1PetitionDecisionsSearch(ctx context.Context, body PostApiV1PetitionDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1PetitionDecisionsSearchRequest(c.Server, body)
+// SearchPetitionDecisionsPost Search petition decisions by JSON request body
+//
+// Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/petition/decisions/search (the `SearchPetitionDecisionsPost` operationId).
+func (c *Client) SearchPetitionDecisionsPost(ctx context.Context, body SearchPetitionDecisionsPostJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSearchPetitionDecisionsPostRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -1047,8 +1579,13 @@ func (c *Client) PostApiV1PetitionDecisionsSearch(ctx context.Context, body Post
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1PetitionDecisionsSearchDownload(ctx context.Context, params *GetApiV1PetitionDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1PetitionDecisionsSearchDownloadRequest(c.Server, params)
+// DownloadPetitionDecisionsGet Download petition decisions by query parameters
+//
+// Download petition decisions as CSV or JSON using query string parameters. All parameters are optional. Facets are not supported on this endpoint. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+//
+// Corresponds with GET /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsGet` operationId).
+func (c *Client) DownloadPetitionDecisionsGet(ctx context.Context, params *DownloadPetitionDecisionsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDownloadPetitionDecisionsGetRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -1059,8 +1596,15 @@ func (c *Client) GetApiV1PetitionDecisionsSearchDownload(ctx context.Context, pa
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1PetitionDecisionsSearchDownloadWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1PetitionDecisionsSearchDownloadRequestWithBody(c.Server, contentType, body)
+// DownloadPetitionDecisionsPostWithBody Download petition decisions by JSON request body
+//
+// Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsPost` operationId).
+func (c *Client) DownloadPetitionDecisionsPostWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDownloadPetitionDecisionsPostRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -1071,8 +1615,15 @@ func (c *Client) PostApiV1PetitionDecisionsSearchDownloadWithBody(ctx context.Co
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1PetitionDecisionsSearchDownload(ctx context.Context, body PostApiV1PetitionDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1PetitionDecisionsSearchDownloadRequest(c.Server, body)
+// DownloadPetitionDecisionsPost Download petition decisions by JSON request body
+//
+// Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsPost` operationId).
+func (c *Client) DownloadPetitionDecisionsPost(ctx context.Context, body DownloadPetitionDecisionsPostJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDownloadPetitionDecisionsPostRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -1083,8 +1634,13 @@ func (c *Client) PostApiV1PetitionDecisionsSearchDownload(ctx context.Context, b
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifier(ctx context.Context, petitionDecisionRecordIdentifier string, params *GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierRequest(c.Server, petitionDecisionRecordIdentifier, params)
+// GetPetitionDecisionById Get a single petition decision by record identifier
+//
+// Retrieve a single petition decision record by its unique petition decision record identifier.
+//
+// Corresponds with GET /api/v1/petition/decisions/{petitionDecisionRecordIdentifier} (the `GetPetitionDecisionById` operationId).
+func (c *Client) GetPetitionDecisionById(ctx context.Context, petitionDecisionRecordIdentifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPetitionDecisionByIdRequest(c.Server, petitionDecisionRecordIdentifier)
 	if err != nil {
 		return nil, err
 	}
@@ -1095,20 +1651,20 @@ func (c *Client) GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifier(ctx c
 	return c.Client.Do(req)
 }
 
-// NewGetApiV1DatasetsProductsFilesProductIdentifierFileNameRequest generates requests for GetApiV1DatasetsProductsFilesProductIdentifierFileName
+// NewGetApiV1DatasetsProductsFilesProductIdentifierFileNameRequest constructs an http.Request for the GetApiV1DatasetsProductsFilesProductIdentifierFileName method
 func NewGetApiV1DatasetsProductsFilesProductIdentifierFileNameRequest(server string, productIdentifier string, fileName string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "productIdentifier", runtime.ParamLocationPath, productIdentifier)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "productIdentifier", productIdentifier, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "fileName", runtime.ParamLocationPath, fileName)
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "fileName", fileName, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1128,7 +1684,7 @@ func NewGetApiV1DatasetsProductsFilesProductIdentifierFileNameRequest(server str
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1136,7 +1692,7 @@ func NewGetApiV1DatasetsProductsFilesProductIdentifierFileNameRequest(server str
 	return req, nil
 }
 
-// NewGetApiV1DatasetsProductsSearchRequest generates requests for GetApiV1DatasetsProductsSearch
+// NewGetApiV1DatasetsProductsSearchRequest constructs an http.Request for the GetApiV1DatasetsProductsSearch method
 func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1DatasetsProductsSearchParams) (*http.Request, error) {
 	var err error
 
@@ -1156,19 +1712,21 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1176,15 +1734,11 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1192,15 +1746,11 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1208,15 +1758,11 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1224,15 +1770,11 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1240,15 +1782,11 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1256,15 +1794,11 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1272,24 +1806,23 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1297,13 +1830,13 @@ func NewGetApiV1DatasetsProductsSearchRequest(server string, params *GetApiV1Dat
 	return req, nil
 }
 
-// NewGetApiV1DatasetsProductsProductIdentifierRequest generates requests for GetApiV1DatasetsProductsProductIdentifier
+// NewGetApiV1DatasetsProductsProductIdentifierRequest constructs an http.Request for the GetApiV1DatasetsProductsProductIdentifier method
 func NewGetApiV1DatasetsProductsProductIdentifierRequest(server string, productIdentifier string, params *GetApiV1DatasetsProductsProductIdentifierParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "productIdentifier", runtime.ParamLocationPath, productIdentifier)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "productIdentifier", productIdentifier, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1324,19 +1857,21 @@ func NewGetApiV1DatasetsProductsProductIdentifierRequest(server string, productI
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.FileDataFromDate != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fileDataFromDate", runtime.ParamLocationQuery, *params.FileDataFromDate); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fileDataFromDate", *params.FileDataFromDate, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "yyyy-MM-dd"}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1344,15 +1879,11 @@ func NewGetApiV1DatasetsProductsProductIdentifierRequest(server string, productI
 
 		if params.FileDataToDate != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fileDataToDate", runtime.ParamLocationQuery, *params.FileDataToDate); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fileDataToDate", *params.FileDataToDate, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "yyyy-MM-dd"}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1360,15 +1891,11 @@ func NewGetApiV1DatasetsProductsProductIdentifierRequest(server string, productI
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1376,15 +1903,11 @@ func NewGetApiV1DatasetsProductsProductIdentifierRequest(server string, productI
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1392,15 +1915,11 @@ func NewGetApiV1DatasetsProductsProductIdentifierRequest(server string, productI
 
 		if params.IncludeFiles != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "includeFiles", runtime.ParamLocationQuery, *params.IncludeFiles); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "includeFiles", *params.IncludeFiles, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1408,24 +1927,23 @@ func NewGetApiV1DatasetsProductsProductIdentifierRequest(server string, productI
 
 		if params.Latest != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "latest", runtime.ParamLocationQuery, *params.Latest); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "latest", *params.Latest, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1433,7 +1951,7 @@ func NewGetApiV1DatasetsProductsProductIdentifierRequest(server string, productI
 	return req, nil
 }
 
-// NewGetApiV1PatentAppealsDecisionsSearchRequest generates requests for GetApiV1PatentAppealsDecisionsSearch
+// NewGetApiV1PatentAppealsDecisionsSearchRequest constructs an http.Request for the GetApiV1PatentAppealsDecisionsSearch method
 func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetApiV1PatentAppealsDecisionsSearchParams) (*http.Request, error) {
 	var err error
 
@@ -1453,19 +1971,21 @@ func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetAp
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1473,15 +1993,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetAp
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1489,15 +2005,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetAp
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1505,15 +2017,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetAp
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1521,15 +2029,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetAp
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1537,15 +2041,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetAp
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1553,15 +2053,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetAp
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1569,24 +2065,23 @@ func NewGetApiV1PatentAppealsDecisionsSearchRequest(server string, params *GetAp
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1605,7 +2100,7 @@ func NewPostApiV1PatentAppealsDecisionsSearchRequest(server string, body PostApi
 	return NewPostApiV1PatentAppealsDecisionsSearchRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentAppealsDecisionsSearchRequestWithBody generates requests for PostApiV1PatentAppealsDecisionsSearch with any type of body
+// NewPostApiV1PatentAppealsDecisionsSearchRequestWithBody constructs an http.Request for the PostApiV1PatentAppealsDecisionsSearch method, with any body, and a specified content type
 func NewPostApiV1PatentAppealsDecisionsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -1624,7 +2119,7 @@ func NewPostApiV1PatentAppealsDecisionsSearchRequestWithBody(server string, cont
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -1634,7 +2129,7 @@ func NewPostApiV1PatentAppealsDecisionsSearchRequestWithBody(server string, cont
 	return req, nil
 }
 
-// NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest generates requests for GetApiV1PatentAppealsDecisionsSearchDownload
+// NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest constructs an http.Request for the GetApiV1PatentAppealsDecisionsSearchDownload method
 func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, params *GetApiV1PatentAppealsDecisionsSearchDownloadParams) (*http.Request, error) {
 	var err error
 
@@ -1654,19 +2149,21 @@ func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, param
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1674,15 +2171,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, param
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1690,15 +2183,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, param
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1706,15 +2195,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, param
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1722,15 +2207,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, param
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1738,15 +2219,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, param
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1754,15 +2231,11 @@ func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, param
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1770,24 +2243,23 @@ func NewGetApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, param
 
 		if params.Format != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "format", runtime.ParamLocationQuery, *params.Format); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "format", *params.Format, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1806,7 +2278,7 @@ func NewPostApiV1PatentAppealsDecisionsSearchDownloadRequest(server string, body
 	return NewPostApiV1PatentAppealsDecisionsSearchDownloadRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentAppealsDecisionsSearchDownloadRequestWithBody generates requests for PostApiV1PatentAppealsDecisionsSearchDownload with any type of body
+// NewPostApiV1PatentAppealsDecisionsSearchDownloadRequestWithBody constructs an http.Request for the PostApiV1PatentAppealsDecisionsSearchDownload method, with any body, and a specified content type
 func NewPostApiV1PatentAppealsDecisionsSearchDownloadRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -1825,7 +2297,7 @@ func NewPostApiV1PatentAppealsDecisionsSearchDownloadRequestWithBody(server stri
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -1835,13 +2307,13 @@ func NewPostApiV1PatentAppealsDecisionsSearchDownloadRequestWithBody(server stri
 	return req, nil
 }
 
-// NewGetApiV1PatentAppealsDecisionsDocumentIdentifierRequest generates requests for GetApiV1PatentAppealsDecisionsDocumentIdentifier
+// NewGetApiV1PatentAppealsDecisionsDocumentIdentifierRequest constructs an http.Request for the GetApiV1PatentAppealsDecisionsDocumentIdentifier method
 func NewGetApiV1PatentAppealsDecisionsDocumentIdentifierRequest(server string, documentIdentifier string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "documentIdentifier", runtime.ParamLocationPath, documentIdentifier)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "documentIdentifier", documentIdentifier, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1861,7 +2333,7 @@ func NewGetApiV1PatentAppealsDecisionsDocumentIdentifierRequest(server string, d
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1869,13 +2341,13 @@ func NewGetApiV1PatentAppealsDecisionsDocumentIdentifierRequest(server string, d
 	return req, nil
 }
 
-// NewGetApiV1PatentAppealsAppealNumberDecisionsRequest generates requests for GetApiV1PatentAppealsAppealNumberDecisions
+// NewGetApiV1PatentAppealsAppealNumberDecisionsRequest constructs an http.Request for the GetApiV1PatentAppealsAppealNumberDecisions method
 func NewGetApiV1PatentAppealsAppealNumberDecisionsRequest(server string, appealNumber string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "appealNumber", runtime.ParamLocationPath, appealNumber)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "appealNumber", appealNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1895,7 +2367,7 @@ func NewGetApiV1PatentAppealsAppealNumberDecisionsRequest(server string, appealN
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1903,7 +2375,7 @@ func NewGetApiV1PatentAppealsAppealNumberDecisionsRequest(server string, appealN
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsSearchRequest generates requests for GetApiV1PatentApplicationsSearch
+// NewGetApiV1PatentApplicationsSearchRequest constructs an http.Request for the GetApiV1PatentApplicationsSearch method
 func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1PatentApplicationsSearchParams) (*http.Request, error) {
 	var err error
 
@@ -1923,19 +2395,21 @@ func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1P
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1943,15 +2417,11 @@ func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1P
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1959,15 +2429,11 @@ func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1P
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1975,15 +2441,11 @@ func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1P
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -1991,15 +2453,11 @@ func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1P
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2007,15 +2465,11 @@ func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1P
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2023,15 +2477,11 @@ func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1P
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2039,24 +2489,23 @@ func NewGetApiV1PatentApplicationsSearchRequest(server string, params *GetApiV1P
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2075,7 +2524,7 @@ func NewPostApiV1PatentApplicationsSearchRequest(server string, body PostApiV1Pa
 	return NewPostApiV1PatentApplicationsSearchRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentApplicationsSearchRequestWithBody generates requests for PostApiV1PatentApplicationsSearch with any type of body
+// NewPostApiV1PatentApplicationsSearchRequestWithBody constructs an http.Request for the PostApiV1PatentApplicationsSearch method, with any body, and a specified content type
 func NewPostApiV1PatentApplicationsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2094,7 +2543,7 @@ func NewPostApiV1PatentApplicationsSearchRequestWithBody(server string, contentT
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -2104,7 +2553,7 @@ func NewPostApiV1PatentApplicationsSearchRequestWithBody(server string, contentT
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsSearchDownloadRequest generates requests for GetApiV1PatentApplicationsSearchDownload
+// NewGetApiV1PatentApplicationsSearchDownloadRequest constructs an http.Request for the GetApiV1PatentApplicationsSearchDownload method
 func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *GetApiV1PatentApplicationsSearchDownloadParams) (*http.Request, error) {
 	var err error
 
@@ -2124,19 +2573,21 @@ func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *G
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2144,15 +2595,11 @@ func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *G
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2160,15 +2607,11 @@ func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *G
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2176,15 +2619,11 @@ func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *G
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2192,15 +2631,11 @@ func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *G
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2208,15 +2643,11 @@ func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *G
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2224,15 +2655,11 @@ func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *G
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2240,24 +2667,23 @@ func NewGetApiV1PatentApplicationsSearchDownloadRequest(server string, params *G
 
 		if params.Format != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "format", runtime.ParamLocationQuery, *params.Format); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "format", *params.Format, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2276,7 +2702,7 @@ func NewPostApiV1PatentApplicationsSearchDownloadRequest(server string, body Pos
 	return NewPostApiV1PatentApplicationsSearchDownloadRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentApplicationsSearchDownloadRequestWithBody generates requests for PostApiV1PatentApplicationsSearchDownload with any type of body
+// NewPostApiV1PatentApplicationsSearchDownloadRequestWithBody constructs an http.Request for the PostApiV1PatentApplicationsSearchDownload method, with any body, and a specified content type
 func NewPostApiV1PatentApplicationsSearchDownloadRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2295,7 +2721,7 @@ func NewPostApiV1PatentApplicationsSearchDownloadRequestWithBody(server string, 
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -2305,13 +2731,13 @@ func NewPostApiV1PatentApplicationsSearchDownloadRequestWithBody(server string, 
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextRequest generates requests for GetApiV1PatentApplicationsApplicationNumberText
+// NewGetApiV1PatentApplicationsApplicationNumberTextRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberText method
 func NewGetApiV1PatentApplicationsApplicationNumberTextRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2331,7 +2757,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextRequest(server string, ap
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2339,13 +2765,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextRequest(server string, ap
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextAdjustmentRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextAdjustment
+// NewGetApiV1PatentApplicationsApplicationNumberTextAdjustmentRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextAdjustment method
 func NewGetApiV1PatentApplicationsApplicationNumberTextAdjustmentRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2365,7 +2791,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextAdjustmentRequest(server 
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2373,13 +2799,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextAdjustmentRequest(server 
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextAssignmentRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextAssignment
+// NewGetApiV1PatentApplicationsApplicationNumberTextAssignmentRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextAssignment method
 func NewGetApiV1PatentApplicationsApplicationNumberTextAssignmentRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2399,7 +2825,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextAssignmentRequest(server 
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2407,13 +2833,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextAssignmentRequest(server 
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments
+// NewGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments method
 func NewGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2433,7 +2859,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsReques
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2441,13 +2867,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsReques
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextAttorneyRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextAttorney
+// NewGetApiV1PatentApplicationsApplicationNumberTextAttorneyRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextAttorney method
 func NewGetApiV1PatentApplicationsApplicationNumberTextAttorneyRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2467,7 +2893,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextAttorneyRequest(server st
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2475,13 +2901,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextAttorneyRequest(server st
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextContinuityRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextContinuity
+// NewGetApiV1PatentApplicationsApplicationNumberTextContinuityRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextContinuity method
 func NewGetApiV1PatentApplicationsApplicationNumberTextContinuityRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2501,7 +2927,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextContinuityRequest(server 
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2509,13 +2935,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextContinuityRequest(server 
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextDocumentsRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextDocuments
+// NewGetApiV1PatentApplicationsApplicationNumberTextDocumentsRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextDocuments method
 func NewGetApiV1PatentApplicationsApplicationNumberTextDocumentsRequest(server string, applicationNumberText string, params *GetApiV1PatentApplicationsApplicationNumberTextDocumentsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2536,19 +2962,21 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextDocumentsRequest(server s
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.DocumentCodes != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "documentCodes", runtime.ParamLocationQuery, *params.DocumentCodes); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "documentCodes", *params.DocumentCodes, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2556,15 +2984,11 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextDocumentsRequest(server s
 
 		if params.OfficialDateFrom != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "officialDateFrom", runtime.ParamLocationQuery, *params.OfficialDateFrom); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "officialDateFrom", *params.OfficialDateFrom, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "yyyy-MM-dd"}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2572,24 +2996,23 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextDocumentsRequest(server s
 
 		if params.OfficialDateTo != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "officialDateTo", runtime.ParamLocationQuery, *params.OfficialDateTo); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "officialDateTo", *params.OfficialDateTo, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "yyyy-MM-dd"}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2597,13 +3020,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextDocumentsRequest(server s
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextForeignPriority
+// NewGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextForeignPriority method
 func NewGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2623,7 +3046,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityRequest(se
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2631,13 +3054,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityRequest(se
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextMetaDataRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextMetaData
+// NewGetApiV1PatentApplicationsApplicationNumberTextMetaDataRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextMetaData method
 func NewGetApiV1PatentApplicationsApplicationNumberTextMetaDataRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2657,7 +3080,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextMetaDataRequest(server st
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2665,13 +3088,13 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextMetaDataRequest(server st
 	return req, nil
 }
 
-// NewGetApiV1PatentApplicationsApplicationNumberTextTransactionsRequest generates requests for GetApiV1PatentApplicationsApplicationNumberTextTransactions
+// NewGetApiV1PatentApplicationsApplicationNumberTextTransactionsRequest constructs an http.Request for the GetApiV1PatentApplicationsApplicationNumberTextTransactions method
 func NewGetApiV1PatentApplicationsApplicationNumberTextTransactionsRequest(server string, applicationNumberText string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "applicationNumberText", runtime.ParamLocationPath, applicationNumberText)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "applicationNumberText", applicationNumberText, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -2691,7 +3114,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextTransactionsRequest(serve
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2699,7 +3122,7 @@ func NewGetApiV1PatentApplicationsApplicationNumberTextTransactionsRequest(serve
 	return req, nil
 }
 
-// NewGetApiV1PatentInterferencesDecisionsSearchRequest generates requests for GetApiV1PatentInterferencesDecisionsSearch
+// NewGetApiV1PatentInterferencesDecisionsSearchRequest constructs an http.Request for the GetApiV1PatentInterferencesDecisionsSearch method
 func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params *GetApiV1PatentInterferencesDecisionsSearchParams) (*http.Request, error) {
 	var err error
 
@@ -2719,19 +3142,21 @@ func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params 
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2739,15 +3164,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params 
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2755,15 +3176,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params 
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2771,15 +3188,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params 
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2787,15 +3200,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params 
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2803,15 +3212,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params 
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2819,15 +3224,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params 
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2835,24 +3236,23 @@ func NewGetApiV1PatentInterferencesDecisionsSearchRequest(server string, params 
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2871,7 +3271,7 @@ func NewPostApiV1PatentInterferencesDecisionsSearchRequest(server string, body P
 	return NewPostApiV1PatentInterferencesDecisionsSearchRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentInterferencesDecisionsSearchRequestWithBody generates requests for PostApiV1PatentInterferencesDecisionsSearch with any type of body
+// NewPostApiV1PatentInterferencesDecisionsSearchRequestWithBody constructs an http.Request for the PostApiV1PatentInterferencesDecisionsSearch method, with any body, and a specified content type
 func NewPostApiV1PatentInterferencesDecisionsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2890,7 +3290,7 @@ func NewPostApiV1PatentInterferencesDecisionsSearchRequestWithBody(server string
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -2900,7 +3300,7 @@ func NewPostApiV1PatentInterferencesDecisionsSearchRequestWithBody(server string
 	return req, nil
 }
 
-// NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest generates requests for GetApiV1PatentInterferencesDecisionsSearchDownload
+// NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest constructs an http.Request for the GetApiV1PatentInterferencesDecisionsSearchDownload method
 func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string, params *GetApiV1PatentInterferencesDecisionsSearchDownloadParams) (*http.Request, error) {
 	var err error
 
@@ -2920,19 +3320,21 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2940,15 +3342,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2956,15 +3354,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2972,15 +3366,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -2988,15 +3378,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3004,15 +3390,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3020,15 +3402,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3036,15 +3414,11 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3052,24 +3426,23 @@ func NewGetApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string,
 
 		if params.Format != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "format", runtime.ParamLocationQuery, *params.Format); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "format", *params.Format, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3088,7 +3461,7 @@ func NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequest(server string
 	return NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequestWithBody generates requests for PostApiV1PatentInterferencesDecisionsSearchDownload with any type of body
+// NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequestWithBody constructs an http.Request for the PostApiV1PatentInterferencesDecisionsSearchDownload method, with any body, and a specified content type
 func NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -3107,7 +3480,7 @@ func NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequestWithBody(serve
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -3117,13 +3490,13 @@ func NewPostApiV1PatentInterferencesDecisionsSearchDownloadRequestWithBody(serve
 	return req, nil
 }
 
-// NewGetApiV1PatentInterferencesDecisionsDocumentIdentifierRequest generates requests for GetApiV1PatentInterferencesDecisionsDocumentIdentifier
+// NewGetApiV1PatentInterferencesDecisionsDocumentIdentifierRequest constructs an http.Request for the GetApiV1PatentInterferencesDecisionsDocumentIdentifier method
 func NewGetApiV1PatentInterferencesDecisionsDocumentIdentifierRequest(server string, documentIdentifier string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "documentIdentifier", runtime.ParamLocationPath, documentIdentifier)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "documentIdentifier", documentIdentifier, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -3143,7 +3516,7 @@ func NewGetApiV1PatentInterferencesDecisionsDocumentIdentifierRequest(server str
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3151,13 +3524,13 @@ func NewGetApiV1PatentInterferencesDecisionsDocumentIdentifierRequest(server str
 	return req, nil
 }
 
-// NewGetApiV1PatentInterferencesInterferenceNumberDecisionsRequest generates requests for GetApiV1PatentInterferencesInterferenceNumberDecisions
+// NewGetApiV1PatentInterferencesInterferenceNumberDecisionsRequest constructs an http.Request for the GetApiV1PatentInterferencesInterferenceNumberDecisions method
 func NewGetApiV1PatentInterferencesInterferenceNumberDecisionsRequest(server string, interferenceNumber string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "interferenceNumber", runtime.ParamLocationPath, interferenceNumber)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "interferenceNumber", interferenceNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -3177,7 +3550,7 @@ func NewGetApiV1PatentInterferencesInterferenceNumberDecisionsRequest(server str
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3185,7 +3558,7 @@ func NewGetApiV1PatentInterferencesInterferenceNumberDecisionsRequest(server str
 	return req, nil
 }
 
-// NewGetApiV1PatentStatusCodesRequest generates requests for GetApiV1PatentStatusCodes
+// NewGetApiV1PatentStatusCodesRequest constructs an http.Request for the GetApiV1PatentStatusCodes method
 func NewGetApiV1PatentStatusCodesRequest(server string, params *GetApiV1PatentStatusCodesParams) (*http.Request, error) {
 	var err error
 
@@ -3205,19 +3578,21 @@ func NewGetApiV1PatentStatusCodesRequest(server string, params *GetApiV1PatentSt
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3225,15 +3600,11 @@ func NewGetApiV1PatentStatusCodesRequest(server string, params *GetApiV1PatentSt
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3241,24 +3612,23 @@ func NewGetApiV1PatentStatusCodesRequest(server string, params *GetApiV1PatentSt
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3277,7 +3647,7 @@ func NewPostApiV1PatentStatusCodesRequest(server string, body PostApiV1PatentSta
 	return NewPostApiV1PatentStatusCodesRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentStatusCodesRequestWithBody generates requests for PostApiV1PatentStatusCodes with any type of body
+// NewPostApiV1PatentStatusCodesRequestWithBody constructs an http.Request for the PostApiV1PatentStatusCodes method, with any body, and a specified content type
 func NewPostApiV1PatentStatusCodesRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -3296,7 +3666,7 @@ func NewPostApiV1PatentStatusCodesRequestWithBody(server string, contentType str
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -3306,7 +3676,7 @@ func NewPostApiV1PatentStatusCodesRequestWithBody(server string, contentType str
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsDecisionsSearchRequest generates requests for GetApiV1PatentTrialsDecisionsSearch
+// NewGetApiV1PatentTrialsDecisionsSearchRequest constructs an http.Request for the GetApiV1PatentTrialsDecisionsSearch method
 func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApiV1PatentTrialsDecisionsSearchParams) (*http.Request, error) {
 	var err error
 
@@ -3326,19 +3696,21 @@ func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApi
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3346,15 +3718,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApi
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3362,15 +3730,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApi
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3378,15 +3742,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApi
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3394,15 +3754,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApi
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3410,15 +3766,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApi
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3426,15 +3778,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApi
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3442,24 +3790,23 @@ func NewGetApiV1PatentTrialsDecisionsSearchRequest(server string, params *GetApi
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3478,7 +3825,7 @@ func NewPostApiV1PatentTrialsDecisionsSearchRequest(server string, body PostApiV
 	return NewPostApiV1PatentTrialsDecisionsSearchRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentTrialsDecisionsSearchRequestWithBody generates requests for PostApiV1PatentTrialsDecisionsSearch with any type of body
+// NewPostApiV1PatentTrialsDecisionsSearchRequestWithBody constructs an http.Request for the PostApiV1PatentTrialsDecisionsSearch method, with any body, and a specified content type
 func NewPostApiV1PatentTrialsDecisionsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -3497,7 +3844,7 @@ func NewPostApiV1PatentTrialsDecisionsSearchRequestWithBody(server string, conte
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -3507,7 +3854,7 @@ func NewPostApiV1PatentTrialsDecisionsSearchRequestWithBody(server string, conte
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest generates requests for GetApiV1PatentTrialsDecisionsSearchDownload
+// NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest constructs an http.Request for the GetApiV1PatentTrialsDecisionsSearchDownload method
 func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params *GetApiV1PatentTrialsDecisionsSearchDownloadParams) (*http.Request, error) {
 	var err error
 
@@ -3527,19 +3874,21 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3547,15 +3896,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3563,15 +3908,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3579,15 +3920,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3595,15 +3932,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3611,15 +3944,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3627,15 +3956,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3643,15 +3968,11 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3659,24 +3980,23 @@ func NewGetApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, params
 
 		if params.Format != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "format", runtime.ParamLocationQuery, *params.Format); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "format", *params.Format, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3695,7 +4015,7 @@ func NewPostApiV1PatentTrialsDecisionsSearchDownloadRequest(server string, body 
 	return NewPostApiV1PatentTrialsDecisionsSearchDownloadRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentTrialsDecisionsSearchDownloadRequestWithBody generates requests for PostApiV1PatentTrialsDecisionsSearchDownload with any type of body
+// NewPostApiV1PatentTrialsDecisionsSearchDownloadRequestWithBody constructs an http.Request for the PostApiV1PatentTrialsDecisionsSearchDownload method, with any body, and a specified content type
 func NewPostApiV1PatentTrialsDecisionsSearchDownloadRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -3714,7 +4034,7 @@ func NewPostApiV1PatentTrialsDecisionsSearchDownloadRequestWithBody(server strin
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -3724,13 +4044,13 @@ func NewPostApiV1PatentTrialsDecisionsSearchDownloadRequestWithBody(server strin
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsDecisionsDocumentIdentifierRequest generates requests for GetApiV1PatentTrialsDecisionsDocumentIdentifier
+// NewGetApiV1PatentTrialsDecisionsDocumentIdentifierRequest constructs an http.Request for the GetApiV1PatentTrialsDecisionsDocumentIdentifier method
 func NewGetApiV1PatentTrialsDecisionsDocumentIdentifierRequest(server string, documentIdentifier string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "documentIdentifier", runtime.ParamLocationPath, documentIdentifier)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "documentIdentifier", documentIdentifier, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -3750,7 +4070,7 @@ func NewGetApiV1PatentTrialsDecisionsDocumentIdentifierRequest(server string, do
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3758,7 +4078,7 @@ func NewGetApiV1PatentTrialsDecisionsDocumentIdentifierRequest(server string, do
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsDocumentsSearchRequest generates requests for GetApiV1PatentTrialsDocumentsSearch
+// NewGetApiV1PatentTrialsDocumentsSearchRequest constructs an http.Request for the GetApiV1PatentTrialsDocumentsSearch method
 func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApiV1PatentTrialsDocumentsSearchParams) (*http.Request, error) {
 	var err error
 
@@ -3778,19 +4098,21 @@ func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApi
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3798,15 +4120,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApi
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3814,15 +4132,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApi
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3830,15 +4144,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApi
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3846,15 +4156,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApi
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3862,15 +4168,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApi
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3878,15 +4180,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApi
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3894,24 +4192,23 @@ func NewGetApiV1PatentTrialsDocumentsSearchRequest(server string, params *GetApi
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -3930,7 +4227,7 @@ func NewPostApiV1PatentTrialsDocumentsSearchRequest(server string, body PostApiV
 	return NewPostApiV1PatentTrialsDocumentsSearchRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentTrialsDocumentsSearchRequestWithBody generates requests for PostApiV1PatentTrialsDocumentsSearch with any type of body
+// NewPostApiV1PatentTrialsDocumentsSearchRequestWithBody constructs an http.Request for the PostApiV1PatentTrialsDocumentsSearch method, with any body, and a specified content type
 func NewPostApiV1PatentTrialsDocumentsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -3949,7 +4246,7 @@ func NewPostApiV1PatentTrialsDocumentsSearchRequestWithBody(server string, conte
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -3959,7 +4256,7 @@ func NewPostApiV1PatentTrialsDocumentsSearchRequestWithBody(server string, conte
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest generates requests for GetApiV1PatentTrialsDocumentsSearchDownload
+// NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest constructs an http.Request for the GetApiV1PatentTrialsDocumentsSearchDownload method
 func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params *GetApiV1PatentTrialsDocumentsSearchDownloadParams) (*http.Request, error) {
 	var err error
 
@@ -3979,19 +4276,21 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -3999,15 +4298,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4015,15 +4310,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4031,15 +4322,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4047,15 +4334,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4063,15 +4346,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4079,15 +4358,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4095,15 +4370,11 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4111,24 +4382,23 @@ func NewGetApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, params
 
 		if params.Format != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "format", runtime.ParamLocationQuery, *params.Format); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "format", *params.Format, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -4147,7 +4417,7 @@ func NewPostApiV1PatentTrialsDocumentsSearchDownloadRequest(server string, body 
 	return NewPostApiV1PatentTrialsDocumentsSearchDownloadRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentTrialsDocumentsSearchDownloadRequestWithBody generates requests for PostApiV1PatentTrialsDocumentsSearchDownload with any type of body
+// NewPostApiV1PatentTrialsDocumentsSearchDownloadRequestWithBody constructs an http.Request for the PostApiV1PatentTrialsDocumentsSearchDownload method, with any body, and a specified content type
 func NewPostApiV1PatentTrialsDocumentsSearchDownloadRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -4166,7 +4436,7 @@ func NewPostApiV1PatentTrialsDocumentsSearchDownloadRequestWithBody(server strin
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -4176,13 +4446,13 @@ func NewPostApiV1PatentTrialsDocumentsSearchDownloadRequestWithBody(server strin
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsDocumentsDocumentIdentifierRequest generates requests for GetApiV1PatentTrialsDocumentsDocumentIdentifier
+// NewGetApiV1PatentTrialsDocumentsDocumentIdentifierRequest constructs an http.Request for the GetApiV1PatentTrialsDocumentsDocumentIdentifier method
 func NewGetApiV1PatentTrialsDocumentsDocumentIdentifierRequest(server string, documentIdentifier string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "documentIdentifier", runtime.ParamLocationPath, documentIdentifier)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "documentIdentifier", documentIdentifier, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -4202,7 +4472,7 @@ func NewGetApiV1PatentTrialsDocumentsDocumentIdentifierRequest(server string, do
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -4210,7 +4480,7 @@ func NewGetApiV1PatentTrialsDocumentsDocumentIdentifierRequest(server string, do
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsProceedingsSearchRequest generates requests for GetApiV1PatentTrialsProceedingsSearch
+// NewGetApiV1PatentTrialsProceedingsSearchRequest constructs an http.Request for the GetApiV1PatentTrialsProceedingsSearch method
 func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetApiV1PatentTrialsProceedingsSearchParams) (*http.Request, error) {
 	var err error
 
@@ -4230,19 +4500,21 @@ func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetA
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4250,15 +4522,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetA
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4266,15 +4534,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetA
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4282,15 +4546,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetA
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4298,15 +4558,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetA
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4314,15 +4570,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetA
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4330,15 +4582,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetA
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4346,24 +4594,23 @@ func NewGetApiV1PatentTrialsProceedingsSearchRequest(server string, params *GetA
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -4382,7 +4629,7 @@ func NewPostApiV1PatentTrialsProceedingsSearchRequest(server string, body PostAp
 	return NewPostApiV1PatentTrialsProceedingsSearchRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentTrialsProceedingsSearchRequestWithBody generates requests for PostApiV1PatentTrialsProceedingsSearch with any type of body
+// NewPostApiV1PatentTrialsProceedingsSearchRequestWithBody constructs an http.Request for the PostApiV1PatentTrialsProceedingsSearch method, with any body, and a specified content type
 func NewPostApiV1PatentTrialsProceedingsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -4401,7 +4648,7 @@ func NewPostApiV1PatentTrialsProceedingsSearchRequestWithBody(server string, con
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -4411,7 +4658,7 @@ func NewPostApiV1PatentTrialsProceedingsSearchRequestWithBody(server string, con
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest generates requests for GetApiV1PatentTrialsProceedingsSearchDownload
+// NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest constructs an http.Request for the GetApiV1PatentTrialsProceedingsSearchDownload method
 func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, params *GetApiV1PatentTrialsProceedingsSearchDownloadParams) (*http.Request, error) {
 	var err error
 
@@ -4431,19 +4678,21 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4451,15 +4700,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4467,15 +4712,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4483,15 +4724,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4499,15 +4736,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4515,15 +4748,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4531,15 +4760,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4547,15 +4772,11 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4563,24 +4784,23 @@ func NewGetApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, para
 
 		if params.Format != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "format", runtime.ParamLocationQuery, *params.Format); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "format", *params.Format, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -4599,7 +4819,7 @@ func NewPostApiV1PatentTrialsProceedingsSearchDownloadRequest(server string, bod
 	return NewPostApiV1PatentTrialsProceedingsSearchDownloadRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PatentTrialsProceedingsSearchDownloadRequestWithBody generates requests for PostApiV1PatentTrialsProceedingsSearchDownload with any type of body
+// NewPostApiV1PatentTrialsProceedingsSearchDownloadRequestWithBody constructs an http.Request for the PostApiV1PatentTrialsProceedingsSearchDownload method, with any body, and a specified content type
 func NewPostApiV1PatentTrialsProceedingsSearchDownloadRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -4618,7 +4838,7 @@ func NewPostApiV1PatentTrialsProceedingsSearchDownloadRequestWithBody(server str
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -4628,13 +4848,13 @@ func NewPostApiV1PatentTrialsProceedingsSearchDownloadRequestWithBody(server str
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsProceedingsTrialNumberRequest generates requests for GetApiV1PatentTrialsProceedingsTrialNumber
+// NewGetApiV1PatentTrialsProceedingsTrialNumberRequest constructs an http.Request for the GetApiV1PatentTrialsProceedingsTrialNumber method
 func NewGetApiV1PatentTrialsProceedingsTrialNumberRequest(server string, trialNumber string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "trialNumber", runtime.ParamLocationPath, trialNumber)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "trialNumber", trialNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -4654,7 +4874,7 @@ func NewGetApiV1PatentTrialsProceedingsTrialNumberRequest(server string, trialNu
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -4662,13 +4882,13 @@ func NewGetApiV1PatentTrialsProceedingsTrialNumberRequest(server string, trialNu
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsTrialNumberDecisionsRequest generates requests for GetApiV1PatentTrialsTrialNumberDecisions
+// NewGetApiV1PatentTrialsTrialNumberDecisionsRequest constructs an http.Request for the GetApiV1PatentTrialsTrialNumberDecisions method
 func NewGetApiV1PatentTrialsTrialNumberDecisionsRequest(server string, trialNumber string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "trialNumber", runtime.ParamLocationPath, trialNumber)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "trialNumber", trialNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -4688,7 +4908,7 @@ func NewGetApiV1PatentTrialsTrialNumberDecisionsRequest(server string, trialNumb
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -4696,13 +4916,13 @@ func NewGetApiV1PatentTrialsTrialNumberDecisionsRequest(server string, trialNumb
 	return req, nil
 }
 
-// NewGetApiV1PatentTrialsTrialNumberDocumentsRequest generates requests for GetApiV1PatentTrialsTrialNumberDocuments
+// NewGetApiV1PatentTrialsTrialNumberDocumentsRequest constructs an http.Request for the GetApiV1PatentTrialsTrialNumberDocuments method
 func NewGetApiV1PatentTrialsTrialNumberDocumentsRequest(server string, trialNumber string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "trialNumber", runtime.ParamLocationPath, trialNumber)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "trialNumber", trialNumber, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -4722,7 +4942,7 @@ func NewGetApiV1PatentTrialsTrialNumberDocumentsRequest(server string, trialNumb
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -4730,8 +4950,8 @@ func NewGetApiV1PatentTrialsTrialNumberDocumentsRequest(server string, trialNumb
 	return req, nil
 }
 
-// NewGetApiV1PetitionDecisionsSearchRequest generates requests for GetApiV1PetitionDecisionsSearch
-func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1PetitionDecisionsSearchParams) (*http.Request, error) {
+// NewSearchPetitionDecisionsGetRequest constructs an http.Request for the SearchPetitionDecisionsGet method
+func NewSearchPetitionDecisionsGetRequest(server string, params *SearchPetitionDecisionsGetParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -4750,19 +4970,21 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4770,15 +4992,11 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4786,15 +5004,11 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4802,15 +5016,11 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4818,15 +5028,11 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 
 		if params.Facets != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "facets", runtime.ParamLocationQuery, *params.Facets); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "facets", *params.Facets, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4834,15 +5040,11 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4850,15 +5052,11 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4866,24 +5064,23 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -4891,19 +5088,19 @@ func NewGetApiV1PetitionDecisionsSearchRequest(server string, params *GetApiV1Pe
 	return req, nil
 }
 
-// NewPostApiV1PetitionDecisionsSearchRequest calls the generic PostApiV1PetitionDecisionsSearch builder with application/json body
-func NewPostApiV1PetitionDecisionsSearchRequest(server string, body PostApiV1PetitionDecisionsSearchJSONRequestBody) (*http.Request, error) {
+// NewSearchPetitionDecisionsPostRequest calls the generic SearchPetitionDecisionsPost builder with application/json body
+func NewSearchPetitionDecisionsPostRequest(server string, body SearchPetitionDecisionsPostJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApiV1PetitionDecisionsSearchRequestWithBody(server, "application/json", bodyReader)
+	return NewSearchPetitionDecisionsPostRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PetitionDecisionsSearchRequestWithBody generates requests for PostApiV1PetitionDecisionsSearch with any type of body
-func NewPostApiV1PetitionDecisionsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewSearchPetitionDecisionsPostRequestWithBody constructs an http.Request for the SearchPetitionDecisionsPost method, with any body, and a specified content type
+func NewSearchPetitionDecisionsPostRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -4921,7 +5118,7 @@ func NewPostApiV1PetitionDecisionsSearchRequestWithBody(server string, contentTy
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -4931,8 +5128,8 @@ func NewPostApiV1PetitionDecisionsSearchRequestWithBody(server string, contentTy
 	return req, nil
 }
 
-// NewGetApiV1PetitionDecisionsSearchDownloadRequest generates requests for GetApiV1PetitionDecisionsSearchDownload
-func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *GetApiV1PetitionDecisionsSearchDownloadParams) (*http.Request, error) {
+// NewDownloadPetitionDecisionsGetRequest constructs an http.Request for the DownloadPetitionDecisionsGet method
+func NewDownloadPetitionDecisionsGetRequest(server string, params *DownloadPetitionDecisionsGetParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -4951,19 +5148,21 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.Q != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "q", runtime.ParamLocationQuery, *params.Q); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4971,15 +5170,11 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 
 		if params.Sort != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort", runtime.ParamLocationQuery, *params.Sort); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -4987,15 +5182,11 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 
 		if params.Offset != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -5003,15 +5194,11 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 
 		if params.Limit != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -5019,15 +5206,11 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 
 		if params.Fields != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fields", runtime.ParamLocationQuery, *params.Fields); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fields", *params.Fields, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -5035,15 +5218,11 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 
 		if params.Filters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filters", runtime.ParamLocationQuery, *params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filters", *params.Filters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -5051,15 +5230,11 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 
 		if params.RangeFilters != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rangeFilters", runtime.ParamLocationQuery, *params.RangeFilters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rangeFilters", *params.RangeFilters, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -5067,24 +5242,23 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 
 		if params.Format != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "format", runtime.ParamLocationQuery, *params.Format); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "format", *params.Format, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -5092,19 +5266,19 @@ func NewGetApiV1PetitionDecisionsSearchDownloadRequest(server string, params *Ge
 	return req, nil
 }
 
-// NewPostApiV1PetitionDecisionsSearchDownloadRequest calls the generic PostApiV1PetitionDecisionsSearchDownload builder with application/json body
-func NewPostApiV1PetitionDecisionsSearchDownloadRequest(server string, body PostApiV1PetitionDecisionsSearchDownloadJSONRequestBody) (*http.Request, error) {
+// NewDownloadPetitionDecisionsPostRequest calls the generic DownloadPetitionDecisionsPost builder with application/json body
+func NewDownloadPetitionDecisionsPostRequest(server string, body DownloadPetitionDecisionsPostJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApiV1PetitionDecisionsSearchDownloadRequestWithBody(server, "application/json", bodyReader)
+	return NewDownloadPetitionDecisionsPostRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1PetitionDecisionsSearchDownloadRequestWithBody generates requests for PostApiV1PetitionDecisionsSearchDownload with any type of body
-func NewPostApiV1PetitionDecisionsSearchDownloadRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewDownloadPetitionDecisionsPostRequestWithBody constructs an http.Request for the DownloadPetitionDecisionsPost method, with any body, and a specified content type
+func NewDownloadPetitionDecisionsPostRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -5122,7 +5296,7 @@ func NewPostApiV1PetitionDecisionsSearchDownloadRequestWithBody(server string, c
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -5132,13 +5306,13 @@ func NewPostApiV1PetitionDecisionsSearchDownloadRequestWithBody(server string, c
 	return req, nil
 }
 
-// NewGetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierRequest generates requests for GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifier
-func NewGetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierRequest(server string, petitionDecisionRecordIdentifier string, params *GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams) (*http.Request, error) {
+// NewGetPetitionDecisionByIdRequest constructs an http.Request for the GetPetitionDecisionById method
+func NewGetPetitionDecisionByIdRequest(server string, petitionDecisionRecordIdentifier string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "petitionDecisionRecordIdentifier", runtime.ParamLocationPath, petitionDecisionRecordIdentifier)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "petitionDecisionRecordIdentifier", petitionDecisionRecordIdentifier, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -5158,29 +5332,7 @@ func NewGetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierRequest(server 
 		return nil, err
 	}
 
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.IncludeDocuments != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "includeDocuments", runtime.ParamLocationQuery, *params.IncludeDocuments); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -5231,199 +5383,532 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// GetApiV1DatasetsProductsFilesProductIdentifierFileNameWithResponse request
+
+	// GetApiV1DatasetsProductsFilesProductIdentifierFileNameWithResponse Download bulk data product file
+	//
+	// Returns a 302 redirect to the actual download location for the given productIdentifier and fileName.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/datasets/products/files/{productIdentifier}/{fileName} (the `GetApiV1DatasetsProductsFilesProductIdentifierFileName` operationId).
 	GetApiV1DatasetsProductsFilesProductIdentifierFileNameWithResponse(ctx context.Context, productIdentifier string, fileName string, reqEditors ...RequestEditorFn) (*GetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse, error)
 
-	// GetApiV1DatasetsProductsSearchWithResponse request
+	// GetApiV1DatasetsProductsSearchWithResponse Search bulk datasets products by supplying query parameters
+	//
+	// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/datasets/products/search (the `GetApiV1DatasetsProductsSearch` operationId).
 	GetApiV1DatasetsProductsSearchWithResponse(ctx context.Context, params *GetApiV1DatasetsProductsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1DatasetsProductsSearchResponse, error)
 
-	// GetApiV1DatasetsProductsProductIdentifierWithResponse request
+	// GetApiV1DatasetsProductsProductIdentifierWithResponse Bulk data- find a product by its identifier (shortName)
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/datasets/products/{productIdentifier} (the `GetApiV1DatasetsProductsProductIdentifier` operationId).
 	GetApiV1DatasetsProductsProductIdentifierWithResponse(ctx context.Context, productIdentifier string, params *GetApiV1DatasetsProductsProductIdentifierParams, reqEditors ...RequestEditorFn) (*GetApiV1DatasetsProductsProductIdentifierResponse, error)
 
-	// GetApiV1PatentAppealsDecisionsSearchWithResponse request
+	// GetApiV1PatentAppealsDecisionsSearchWithResponse Search appeals decisions using query parameters
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/appeals/decisions/search (the `GetApiV1PatentAppealsDecisionsSearch` operationId).
 	GetApiV1PatentAppealsDecisionsSearchWithResponse(ctx context.Context, params *GetApiV1PatentAppealsDecisionsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentAppealsDecisionsSearchResponse, error)
 
-	// PostApiV1PatentAppealsDecisionsSearchWithBodyWithResponse request with any body
+	// PostApiV1PatentAppealsDecisionsSearchWithBodyWithResponse Search appeals decisions using json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/appeals/decisions/search (the `PostApiV1PatentAppealsDecisionsSearch` operationId).
 	PostApiV1PatentAppealsDecisionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentAppealsDecisionsSearchResponse, error)
 
+	// PostApiV1PatentAppealsDecisionsSearchWithResponse Search appeals decisions using json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/appeals/decisions/search (the `PostApiV1PatentAppealsDecisionsSearch` operationId).
 	PostApiV1PatentAppealsDecisionsSearchWithResponse(ctx context.Context, body PostApiV1PatentAppealsDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentAppealsDecisionsSearchResponse, error)
 
-	// GetApiV1PatentAppealsDecisionsSearchDownloadWithResponse request
+	// GetApiV1PatentAppealsDecisionsSearchDownloadWithResponse Download appeals decisions search results in json or csv format using query parameters
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/appeals/decisions/search/download (the `GetApiV1PatentAppealsDecisionsSearchDownload` operationId).
 	GetApiV1PatentAppealsDecisionsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentAppealsDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentAppealsDecisionsSearchDownloadResponse, error)
 
-	// PostApiV1PatentAppealsDecisionsSearchDownloadWithBodyWithResponse request with any body
+	// PostApiV1PatentAppealsDecisionsSearchDownloadWithBodyWithResponse Download appeals decisions search results in json or csv format using json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/appeals/decisions/search/download (the `PostApiV1PatentAppealsDecisionsSearchDownload` operationId).
 	PostApiV1PatentAppealsDecisionsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentAppealsDecisionsSearchDownloadResponse, error)
 
+	// PostApiV1PatentAppealsDecisionsSearchDownloadWithResponse Download appeals decisions search results in json or csv format using json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/appeals/decisions/search/download (the `PostApiV1PatentAppealsDecisionsSearchDownload` operationId).
 	PostApiV1PatentAppealsDecisionsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentAppealsDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentAppealsDecisionsSearchDownloadResponse, error)
 
-	// GetApiV1PatentAppealsDecisionsDocumentIdentifierWithResponse request
+	// GetApiV1PatentAppealsDecisionsDocumentIdentifierWithResponse Retrieve appeals decisions by document Identifier
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/appeals/decisions/{documentIdentifier} (the `GetApiV1PatentAppealsDecisionsDocumentIdentifier` operationId).
 	GetApiV1PatentAppealsDecisionsDocumentIdentifierWithResponse(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse, error)
 
-	// GetApiV1PatentAppealsAppealNumberDecisionsWithResponse request
+	// GetApiV1PatentAppealsAppealNumberDecisionsWithResponse Retrieve appeals decisions by appeal number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/appeals/{appealNumber}/decisions (the `GetApiV1PatentAppealsAppealNumberDecisions` operationId).
 	GetApiV1PatentAppealsAppealNumberDecisionsWithResponse(ctx context.Context, appealNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentAppealsAppealNumberDecisionsResponse, error)
 
-	// GetApiV1PatentApplicationsSearchWithResponse request
+	// GetApiV1PatentApplicationsSearchWithResponse Patent application search by supplying query parameters
+	//
+	// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/search (the `GetApiV1PatentApplicationsSearch` operationId).
 	GetApiV1PatentApplicationsSearchWithResponse(ctx context.Context, params *GetApiV1PatentApplicationsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsSearchResponse, error)
 
-	// PostApiV1PatentApplicationsSearchWithBodyWithResponse request with any body
+	// PostApiV1PatentApplicationsSearchWithBodyWithResponse Search patent applications by supplying json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/applications/search (the `PostApiV1PatentApplicationsSearch` operationId).
 	PostApiV1PatentApplicationsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentApplicationsSearchResponse, error)
 
+	// PostApiV1PatentApplicationsSearchWithResponse Search patent applications by supplying json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/applications/search (the `PostApiV1PatentApplicationsSearch` operationId).
 	PostApiV1PatentApplicationsSearchWithResponse(ctx context.Context, body PostApiV1PatentApplicationsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentApplicationsSearchResponse, error)
 
-	// GetApiV1PatentApplicationsSearchDownloadWithResponse request
+	// GetApiV1PatentApplicationsSearchDownloadWithResponse Patent application search by supplying query parameters
+	//
+	// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/search/download (the `GetApiV1PatentApplicationsSearchDownload` operationId).
 	GetApiV1PatentApplicationsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentApplicationsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsSearchDownloadResponse, error)
 
-	// PostApiV1PatentApplicationsSearchDownloadWithBodyWithResponse request with any body
+	// PostApiV1PatentApplicationsSearchDownloadWithBodyWithResponse Download patent data by supplying json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/applications/search/download (the `PostApiV1PatentApplicationsSearchDownload` operationId).
 	PostApiV1PatentApplicationsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentApplicationsSearchDownloadResponse, error)
 
+	// PostApiV1PatentApplicationsSearchDownloadWithResponse Download patent data by supplying json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/applications/search/download (the `PostApiV1PatentApplicationsSearchDownload` operationId).
 	PostApiV1PatentApplicationsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentApplicationsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentApplicationsSearchDownloadResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextWithResponse Patent application data for a provided application number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText} (the `GetApiV1PatentApplicationsApplicationNumberText` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextAdjustmentWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextAdjustmentWithResponse Get patent term adjustment data for an application number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/adjustment (the `GetApiV1PatentApplicationsApplicationNumberTextAdjustment` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextAdjustmentWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextAssignmentWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextAssignmentWithResponse Get patent assignment data for an application number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/assignment (the `GetApiV1PatentApplicationsApplicationNumberTextAssignment` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextAssignmentWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsWithResponse Associated (pgpub, grant) documents meta-data for an application
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/associated-documents (the `GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextAttorneyWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextAttorneyWithResponse Get attorney/agent data for an application number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/attorney (the `GetApiV1PatentApplicationsApplicationNumberTextAttorney` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextAttorneyWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextContinuityWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextContinuityWithResponse Get continuity data for an application number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/continuity (the `GetApiV1PatentApplicationsApplicationNumberTextContinuity` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextContinuityWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextDocumentsWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextDocumentsWithResponse Documents details for an application number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/documents (the `GetApiV1PatentApplicationsApplicationNumberTextDocuments` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextDocumentsWithResponse(ctx context.Context, applicationNumberText string, params *GetApiV1PatentApplicationsApplicationNumberTextDocumentsParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityWithResponse Get foreign-priority data for an application number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/foreign-priority (the `GetApiV1PatentApplicationsApplicationNumberTextForeignPriority` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextMetaDataWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextMetaDataWithResponse Get patent application meta data
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/meta-data (the `GetApiV1PatentApplicationsApplicationNumberTextMetaData` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextMetaDataWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse, error)
 
-	// GetApiV1PatentApplicationsApplicationNumberTextTransactionsWithResponse request
+	// GetApiV1PatentApplicationsApplicationNumberTextTransactionsWithResponse Get transaction data for an application number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/transactions (the `GetApiV1PatentApplicationsApplicationNumberTextTransactions` operationId).
 	GetApiV1PatentApplicationsApplicationNumberTextTransactionsWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse, error)
 
-	// GetApiV1PatentInterferencesDecisionsSearchWithResponse request
+	// GetApiV1PatentInterferencesDecisionsSearchWithResponse Search interferences decisions using query parameters
+	//
+	// Query interference decisions (decision type/category, party names, date ranges, etc.).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/interferences/decisions/search (the `GetApiV1PatentInterferencesDecisionsSearch` operationId).
 	GetApiV1PatentInterferencesDecisionsSearchWithResponse(ctx context.Context, params *GetApiV1PatentInterferencesDecisionsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentInterferencesDecisionsSearchResponse, error)
 
-	// PostApiV1PatentInterferencesDecisionsSearchWithBodyWithResponse request with any body
+	// PostApiV1PatentInterferencesDecisionsSearchWithBodyWithResponse Search interferences decisions using json payload
+	//
+	// Request body matches PatentSearchRequest; example tailored for interferences.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/interferences/decisions/search (the `PostApiV1PatentInterferencesDecisionsSearch` operationId).
 	PostApiV1PatentInterferencesDecisionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentInterferencesDecisionsSearchResponse, error)
 
+	// PostApiV1PatentInterferencesDecisionsSearchWithResponse Search interferences decisions using json payload
+	//
+	// Request body matches PatentSearchRequest; example tailored for interferences.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/interferences/decisions/search (the `PostApiV1PatentInterferencesDecisionsSearch` operationId).
 	PostApiV1PatentInterferencesDecisionsSearchWithResponse(ctx context.Context, body PostApiV1PatentInterferencesDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentInterferencesDecisionsSearchResponse, error)
 
-	// GetApiV1PatentInterferencesDecisionsSearchDownloadWithResponse request
+	// GetApiV1PatentInterferencesDecisionsSearchDownloadWithResponse Download interferences decisions search results in json or csv format using query parameters
+	//
+	// Same parameters as search; add `format` for export type.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/interferences/decisions/search/download (the `GetApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 	GetApiV1PatentInterferencesDecisionsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentInterferencesDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentInterferencesDecisionsSearchDownloadResponse, error)
 
-	// PostApiV1PatentInterferencesDecisionsSearchDownloadWithBodyWithResponse request with any body
+	// PostApiV1PatentInterferencesDecisionsSearchDownloadWithBodyWithResponse Download interferences decisions search results in json or csv format using json payload
+	//
+	// Request body matches PatentDownloadRequest; example tailored for interferences.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/interferences/decisions/search/download (the `PostApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 	PostApiV1PatentInterferencesDecisionsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentInterferencesDecisionsSearchDownloadResponse, error)
 
+	// PostApiV1PatentInterferencesDecisionsSearchDownloadWithResponse Download interferences decisions search results in json or csv format using json payload
+	//
+	// Request body matches PatentDownloadRequest; example tailored for interferences.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/interferences/decisions/search/download (the `PostApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 	PostApiV1PatentInterferencesDecisionsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentInterferencesDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentInterferencesDecisionsSearchDownloadResponse, error)
 
-	// GetApiV1PatentInterferencesDecisionsDocumentIdentifierWithResponse request
+	// GetApiV1PatentInterferencesDecisionsDocumentIdentifierWithResponse Retrieve interferences decisions by document identifier
+	//
+	// Returns a single interference decision document for the provided `documentIdentifier`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/interferences/decisions/{documentIdentifier} (the `GetApiV1PatentInterferencesDecisionsDocumentIdentifier` operationId).
 	GetApiV1PatentInterferencesDecisionsDocumentIdentifierWithResponse(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse, error)
 
-	// GetApiV1PatentInterferencesInterferenceNumberDecisionsWithResponse request
+	// GetApiV1PatentInterferencesInterferenceNumberDecisionsWithResponse Retrieve interferences decisions by interference number
+	//
+	// Returns one or more interference decision records for the provided `interferenceNumber`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/interferences/{interferenceNumber}/decisions (the `GetApiV1PatentInterferencesInterferenceNumberDecisions` operationId).
 	GetApiV1PatentInterferencesInterferenceNumberDecisionsWithResponse(ctx context.Context, interferenceNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse, error)
 
-	// GetApiV1PatentStatusCodesWithResponse request
+	// GetApiV1PatentStatusCodesWithResponse Search patent application status codes and status code description
+	//
+	// Query parameters are optional.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/status-codes (the `GetApiV1PatentStatusCodes` operationId).
 	GetApiV1PatentStatusCodesWithResponse(ctx context.Context, params *GetApiV1PatentStatusCodesParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentStatusCodesResponse, error)
 
-	// PostApiV1PatentStatusCodesWithBodyWithResponse request with any body
+	// PostApiV1PatentStatusCodesWithBodyWithResponse Search patent application status codes and status code description
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/status-codes (the `PostApiV1PatentStatusCodes` operationId).
 	PostApiV1PatentStatusCodesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentStatusCodesResponse, error)
 
+	// PostApiV1PatentStatusCodesWithResponse Search patent application status codes and status code description
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/status-codes (the `PostApiV1PatentStatusCodes` operationId).
 	PostApiV1PatentStatusCodesWithResponse(ctx context.Context, body PostApiV1PatentStatusCodesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentStatusCodesResponse, error)
 
-	// GetApiV1PatentTrialsDecisionsSearchWithResponse request
+	// GetApiV1PatentTrialsDecisionsSearchWithResponse Search trials decisions documents using query parameters
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/decisions/search (the `GetApiV1PatentTrialsDecisionsSearch` operationId).
 	GetApiV1PatentTrialsDecisionsSearchWithResponse(ctx context.Context, params *GetApiV1PatentTrialsDecisionsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDecisionsSearchResponse, error)
 
-	// PostApiV1PatentTrialsDecisionsSearchWithBodyWithResponse request with any body
+	// PostApiV1PatentTrialsDecisionsSearchWithBodyWithResponse Search trials decisions documents using json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/decisions/search (the `PostApiV1PatentTrialsDecisionsSearch` operationId).
 	PostApiV1PatentTrialsDecisionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDecisionsSearchResponse, error)
 
+	// PostApiV1PatentTrialsDecisionsSearchWithResponse Search trials decisions documents using json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/decisions/search (the `PostApiV1PatentTrialsDecisionsSearch` operationId).
 	PostApiV1PatentTrialsDecisionsSearchWithResponse(ctx context.Context, body PostApiV1PatentTrialsDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDecisionsSearchResponse, error)
 
-	// GetApiV1PatentTrialsDecisionsSearchDownloadWithResponse request
+	// GetApiV1PatentTrialsDecisionsSearchDownloadWithResponse Download trials decisions documents search results in json or csv format using query parameters
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/decisions/search/download (the `GetApiV1PatentTrialsDecisionsSearchDownload` operationId).
 	GetApiV1PatentTrialsDecisionsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentTrialsDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDecisionsSearchDownloadResponse, error)
 
-	// PostApiV1PatentTrialsDecisionsSearchDownloadWithBodyWithResponse request with any body
+	// PostApiV1PatentTrialsDecisionsSearchDownloadWithBodyWithResponse Download trials decisions documents search results in json or csv format using json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/decisions/search/download (the `PostApiV1PatentTrialsDecisionsSearchDownload` operationId).
 	PostApiV1PatentTrialsDecisionsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDecisionsSearchDownloadResponse, error)
 
+	// PostApiV1PatentTrialsDecisionsSearchDownloadWithResponse Download trials decisions documents search results in json or csv format using json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/decisions/search/download (the `PostApiV1PatentTrialsDecisionsSearchDownload` operationId).
 	PostApiV1PatentTrialsDecisionsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentTrialsDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDecisionsSearchDownloadResponse, error)
 
-	// GetApiV1PatentTrialsDecisionsDocumentIdentifierWithResponse request
+	// GetApiV1PatentTrialsDecisionsDocumentIdentifierWithResponse Retrieve a single trials decisions document by document identifier
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/decisions/{documentIdentifier} (the `GetApiV1PatentTrialsDecisionsDocumentIdentifier` operationId).
 	GetApiV1PatentTrialsDecisionsDocumentIdentifierWithResponse(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse, error)
 
-	// GetApiV1PatentTrialsDocumentsSearchWithResponse request
+	// GetApiV1PatentTrialsDocumentsSearchWithResponse Search trials documents using query parameters
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/documents/search (the `GetApiV1PatentTrialsDocumentsSearch` operationId).
 	GetApiV1PatentTrialsDocumentsSearchWithResponse(ctx context.Context, params *GetApiV1PatentTrialsDocumentsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDocumentsSearchResponse, error)
 
-	// PostApiV1PatentTrialsDocumentsSearchWithBodyWithResponse request with any body
+	// PostApiV1PatentTrialsDocumentsSearchWithBodyWithResponse Search trials documents using json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/documents/search (the `PostApiV1PatentTrialsDocumentsSearch` operationId).
 	PostApiV1PatentTrialsDocumentsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDocumentsSearchResponse, error)
 
+	// PostApiV1PatentTrialsDocumentsSearchWithResponse Search trials documents using json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/documents/search (the `PostApiV1PatentTrialsDocumentsSearch` operationId).
 	PostApiV1PatentTrialsDocumentsSearchWithResponse(ctx context.Context, body PostApiV1PatentTrialsDocumentsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDocumentsSearchResponse, error)
 
-	// GetApiV1PatentTrialsDocumentsSearchDownloadWithResponse request
+	// GetApiV1PatentTrialsDocumentsSearchDownloadWithResponse Download trials document search results in json or csv format using query parameters
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/documents/search/download (the `GetApiV1PatentTrialsDocumentsSearchDownload` operationId).
 	GetApiV1PatentTrialsDocumentsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentTrialsDocumentsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDocumentsSearchDownloadResponse, error)
 
-	// PostApiV1PatentTrialsDocumentsSearchDownloadWithBodyWithResponse request with any body
+	// PostApiV1PatentTrialsDocumentsSearchDownloadWithBodyWithResponse Download trials documents search results in json or csv format using json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/documents/search/download (the `PostApiV1PatentTrialsDocumentsSearchDownload` operationId).
 	PostApiV1PatentTrialsDocumentsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDocumentsSearchDownloadResponse, error)
 
+	// PostApiV1PatentTrialsDocumentsSearchDownloadWithResponse Download trials documents search results in json or csv format using json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/documents/search/download (the `PostApiV1PatentTrialsDocumentsSearchDownload` operationId).
 	PostApiV1PatentTrialsDocumentsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentTrialsDocumentsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDocumentsSearchDownloadResponse, error)
 
-	// GetApiV1PatentTrialsDocumentsDocumentIdentifierWithResponse request
+	// GetApiV1PatentTrialsDocumentsDocumentIdentifierWithResponse Retrieve a single trials document by document identifier
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/documents/{documentIdentifier} (the `GetApiV1PatentTrialsDocumentsDocumentIdentifier` operationId).
 	GetApiV1PatentTrialsDocumentsDocumentIdentifierWithResponse(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse, error)
 
-	// GetApiV1PatentTrialsProceedingsSearchWithResponse request
+	// GetApiV1PatentTrialsProceedingsSearchWithResponse Search trials proceedings using query parameters
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/proceedings/search (the `GetApiV1PatentTrialsProceedingsSearch` operationId).
 	GetApiV1PatentTrialsProceedingsSearchWithResponse(ctx context.Context, params *GetApiV1PatentTrialsProceedingsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsProceedingsSearchResponse, error)
 
-	// PostApiV1PatentTrialsProceedingsSearchWithBodyWithResponse request with any body
+	// PostApiV1PatentTrialsProceedingsSearchWithBodyWithResponse Search trials proceedings using json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/proceedings/search (the `PostApiV1PatentTrialsProceedingsSearch` operationId).
 	PostApiV1PatentTrialsProceedingsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsProceedingsSearchResponse, error)
 
+	// PostApiV1PatentTrialsProceedingsSearchWithResponse Search trials proceedings using json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/proceedings/search (the `PostApiV1PatentTrialsProceedingsSearch` operationId).
 	PostApiV1PatentTrialsProceedingsSearchWithResponse(ctx context.Context, body PostApiV1PatentTrialsProceedingsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsProceedingsSearchResponse, error)
 
-	// GetApiV1PatentTrialsProceedingsSearchDownloadWithResponse request
+	// GetApiV1PatentTrialsProceedingsSearchDownloadWithResponse Download trials proceedings search results in json or csv format using query parameters
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/proceedings/search/download (the `GetApiV1PatentTrialsProceedingsSearchDownload` operationId).
 	GetApiV1PatentTrialsProceedingsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentTrialsProceedingsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsProceedingsSearchDownloadResponse, error)
 
-	// PostApiV1PatentTrialsProceedingsSearchDownloadWithBodyWithResponse request with any body
+	// PostApiV1PatentTrialsProceedingsSearchDownloadWithBodyWithResponse Download trials proceedings search results in json or csv format using json payload
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/proceedings/search/download (the `PostApiV1PatentTrialsProceedingsSearchDownload` operationId).
 	PostApiV1PatentTrialsProceedingsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsProceedingsSearchDownloadResponse, error)
 
+	// PostApiV1PatentTrialsProceedingsSearchDownloadWithResponse Download trials proceedings search results in json or csv format using json payload
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/trials/proceedings/search/download (the `PostApiV1PatentTrialsProceedingsSearchDownload` operationId).
 	PostApiV1PatentTrialsProceedingsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentTrialsProceedingsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsProceedingsSearchDownloadResponse, error)
 
-	// GetApiV1PatentTrialsProceedingsTrialNumberWithResponse request
+	// GetApiV1PatentTrialsProceedingsTrialNumberWithResponse Retrieve a single trials proceeding by trial number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/proceedings/{trialNumber} (the `GetApiV1PatentTrialsProceedingsTrialNumber` operationId).
 	GetApiV1PatentTrialsProceedingsTrialNumberWithResponse(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsProceedingsTrialNumberResponse, error)
 
-	// GetApiV1PatentTrialsTrialNumberDecisionsWithResponse request
+	// GetApiV1PatentTrialsTrialNumberDecisionsWithResponse Retrieve all trials decisions documents by trial number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/{trialNumber}/decisions (the `GetApiV1PatentTrialsTrialNumberDecisions` operationId).
 	GetApiV1PatentTrialsTrialNumberDecisionsWithResponse(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsTrialNumberDecisionsResponse, error)
 
-	// GetApiV1PatentTrialsTrialNumberDocumentsWithResponse request
+	// GetApiV1PatentTrialsTrialNumberDocumentsWithResponse Retrieve all trials documents by trial number
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/trials/{trialNumber}/documents (the `GetApiV1PatentTrialsTrialNumberDocuments` operationId).
 	GetApiV1PatentTrialsTrialNumberDocumentsWithResponse(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsTrialNumberDocumentsResponse, error)
 
-	// GetApiV1PetitionDecisionsSearchWithResponse request
-	GetApiV1PetitionDecisionsSearchWithResponse(ctx context.Context, params *GetApiV1PetitionDecisionsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PetitionDecisionsSearchResponse, error)
+	// SearchPetitionDecisionsGetWithResponse Search petition decisions by query parameters
+	//
+	// Search petition decisions using query string parameters. All parameters are optional. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/petition/decisions/search (the `SearchPetitionDecisionsGet` operationId).
+	SearchPetitionDecisionsGetWithResponse(ctx context.Context, params *SearchPetitionDecisionsGetParams, reqEditors ...RequestEditorFn) (*SearchPetitionDecisionsGetResponse, error)
 
-	// PostApiV1PetitionDecisionsSearchWithBodyWithResponse request with any body
-	PostApiV1PetitionDecisionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PetitionDecisionsSearchResponse, error)
+	// SearchPetitionDecisionsPostWithBodyWithResponse Search petition decisions by JSON request body
+	//
+	// Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/petition/decisions/search (the `SearchPetitionDecisionsPost` operationId).
+	SearchPetitionDecisionsPostWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SearchPetitionDecisionsPostResponse, error)
 
-	PostApiV1PetitionDecisionsSearchWithResponse(ctx context.Context, body PostApiV1PetitionDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PetitionDecisionsSearchResponse, error)
+	// SearchPetitionDecisionsPostWithResponse Search petition decisions by JSON request body
+	//
+	// Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/petition/decisions/search (the `SearchPetitionDecisionsPost` operationId).
+	SearchPetitionDecisionsPostWithResponse(ctx context.Context, body SearchPetitionDecisionsPostJSONRequestBody, reqEditors ...RequestEditorFn) (*SearchPetitionDecisionsPostResponse, error)
 
-	// GetApiV1PetitionDecisionsSearchDownloadWithResponse request
-	GetApiV1PetitionDecisionsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PetitionDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PetitionDecisionsSearchDownloadResponse, error)
+	// DownloadPetitionDecisionsGetWithResponse Download petition decisions by query parameters
+	//
+	// Download petition decisions as CSV or JSON using query string parameters. All parameters are optional. Facets are not supported on this endpoint. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsGet` operationId).
+	DownloadPetitionDecisionsGetWithResponse(ctx context.Context, params *DownloadPetitionDecisionsGetParams, reqEditors ...RequestEditorFn) (*DownloadPetitionDecisionsGetResponse, error)
 
-	// PostApiV1PetitionDecisionsSearchDownloadWithBodyWithResponse request with any body
-	PostApiV1PetitionDecisionsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PetitionDecisionsSearchDownloadResponse, error)
+	// DownloadPetitionDecisionsPostWithBodyWithResponse Download petition decisions by JSON request body
+	//
+	// Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsPost` operationId).
+	DownloadPetitionDecisionsPostWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DownloadPetitionDecisionsPostResponse, error)
 
-	PostApiV1PetitionDecisionsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PetitionDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PetitionDecisionsSearchDownloadResponse, error)
+	// DownloadPetitionDecisionsPostWithResponse Download petition decisions by JSON request body
+	//
+	// Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsPost` operationId).
+	DownloadPetitionDecisionsPostWithResponse(ctx context.Context, body DownloadPetitionDecisionsPostJSONRequestBody, reqEditors ...RequestEditorFn) (*DownloadPetitionDecisionsPostResponse, error)
 
-	// GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierWithResponse request
-	GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierWithResponse(ctx context.Context, petitionDecisionRecordIdentifier string, params *GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams, reqEditors ...RequestEditorFn) (*GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse, error)
+	// GetPetitionDecisionByIdWithResponse Get a single petition decision by record identifier
+	//
+	// Retrieve a single petition decision record by its unique petition decision record identifier.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/petition/decisions/{petitionDecisionRecordIdentifier} (the `GetPetitionDecisionById` operationId).
+	GetPetitionDecisionByIdWithResponse(ctx context.Context, petitionDecisionRecordIdentifier string, reqEditors ...RequestEditorFn) (*GetPetitionDecisionByIdResponse, error)
 }
 
 type GetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5442,32 +5927,141 @@ func (r GetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse) StatusCo
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1DatasetsProductsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *BdssResponseBag
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *BdssResponseBag
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review data requested try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1DatasetsProductsSearchResponse) GetJSON200() *BdssResponseBag {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1DatasetsProductsSearchResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review data requested try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1DatasetsProductsSearchResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1DatasetsProductsSearchResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1DatasetsProductsSearchResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1DatasetsProductsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5486,32 +6080,141 @@ func (r GetApiV1DatasetsProductsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1DatasetsProductsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1DatasetsProductsProductIdentifierResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *BdssResponseProductBag
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *BdssResponseProductBag
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review data requested try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1DatasetsProductsProductIdentifierResponse) GetJSON200() *BdssResponseProductBag {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1DatasetsProductsProductIdentifierResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review data requested try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1DatasetsProductsProductIdentifierResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1DatasetsProductsProductIdentifierResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1DatasetsProductsProductIdentifierResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1DatasetsProductsProductIdentifierResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5530,15 +6233,64 @@ func (r GetApiV1DatasetsProductsProductIdentifierResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1DatasetsProductsProductIdentifierResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentAppealsDecisionsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AppealDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AppealDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchResponse) GetJSON200() *AppealDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentAppealsDecisionsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5557,15 +6309,64 @@ func (r GetApiV1PatentAppealsDecisionsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentAppealsDecisionsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentAppealsDecisionsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AppealDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AppealDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchResponse) GetJSON200() *AppealDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentAppealsDecisionsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5584,15 +6385,64 @@ func (r PostApiV1PatentAppealsDecisionsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentAppealsDecisionsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentAppealsDecisionsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AppealDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AppealDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON200() *AppealDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5611,15 +6461,64 @@ func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentAppealsDecisionsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentAppealsDecisionsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AppealDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AppealDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON200() *AppealDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5638,15 +6537,64 @@ func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) StatusCode() int 
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentAppealsDecisionsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AppealDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AppealDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) GetJSON200() *AppealDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5665,15 +6613,64 @@ func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) StatusCode() i
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentAppealsAppealNumberDecisionsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AppealDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AppealDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) GetJSON200() *AppealDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5692,33 +6689,148 @@ func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentAppealsAppealNumberDecisionsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PatentDataResponse
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *PatentDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON413 the response for an HTTP 413 `application/json` response
 	JSON413 *Status413Schema
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsSearchResponse) GetJSON200() *PatentDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsSearchResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsSearchResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsSearchResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentApplicationsSearchResponse) GetJSON413() *Status413Schema {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsSearchResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5737,33 +6849,148 @@ func (r GetApiV1PatentApplicationsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentApplicationsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PatentDataResponse
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *PatentDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON413 the response for an HTTP 413 `application/json` response
 	JSON413 *Status413Schema
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentApplicationsSearchResponse) GetJSON200() *PatentDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentApplicationsSearchResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentApplicationsSearchResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentApplicationsSearchResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentApplicationsSearchResponse) GetJSON413() *Status413Schema {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentApplicationsSearchResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentApplicationsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5782,31 +7009,135 @@ func (r PostApiV1PatentApplicationsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentApplicationsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PatentDataResponse
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *PatentDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
+		// Message Example: Forbidden
 		Message interface{} `json:"message,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsSearchDownloadResponse) GetJSON200() *PatentDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsSearchDownloadResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsSearchDownloadResponse) GetJSON403() *struct {
+	// Message Example: Forbidden
+	Message interface{} `json:"message,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsSearchDownloadResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsSearchDownloadResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5825,32 +7156,141 @@ func (r GetApiV1PatentApplicationsSearchDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentApplicationsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PatentDataResponse
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *PatentDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentApplicationsSearchDownloadResponse) GetJSON200() *PatentDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentApplicationsSearchDownloadResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentApplicationsSearchDownloadResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentApplicationsSearchDownloadResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentApplicationsSearchDownloadResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentApplicationsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5869,32 +7309,141 @@ func (r PostApiV1PatentApplicationsSearchDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentApplicationsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PatentDataResponse
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *PatentDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetailed     interface{} `json:"errorDetailed,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetailed Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetailed interface{} `json:"errorDetailed,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextResponse) GetJSON200() *PatentDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetailed Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetailed interface{} `json:"errorDetailed,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5913,13 +7462,25 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextResponse) StatusCode() in
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Count Example: 1
 		Count                    *int `json:"count,omitempty"`
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationNumberText Free format of application number
+			//
+			// Example: 14104993
 			ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
 
 			// PatentTermAdjustmentData Patent term adjustment data
@@ -5927,28 +7488,141 @@ type GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse struct {
 		} `json:"patentFileWrapperDataBag,omitempty"`
 		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
+	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse) GetJSON200() *struct {
+	// Count Example: 1
+	Count                    *int `json:"count,omitempty"`
+	PatentFileWrapperDataBag *[]struct {
+		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
+		ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+		// PatentTermAdjustmentData Patent term adjustment data
+		PatentTermAdjustmentData *PatentTermAdjustment `json:"patentTermAdjustmentData,omitempty"`
+	} `json:"patentFileWrapperDataBag,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -5967,40 +7641,163 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse) Statu
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Count Example: 1
 		Count                    *int `json:"count,omitempty"`
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationNumberText Free format of application number
+			//
+			// Example: 14104993
 			ApplicationNumberText *string       `json:"applicationNumberText,omitempty"`
 			AssignmentBag         *[]Assignment `json:"assignmentBag,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
 		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
+	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse) GetJSON200() *struct {
+	// Count Example: 1
+	Count                    *int `json:"count,omitempty"`
+	PatentFileWrapperDataBag *[]struct {
+		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
+		ApplicationNumberText *string       `json:"applicationNumberText,omitempty"`
+		AssignmentBag         *[]Assignment `json:"assignmentBag,omitempty"`
+	} `json:"patentFileWrapperDataBag,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6019,13 +7816,25 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse) Statu
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Count Example: 1
 		Count                    *int `json:"count,omitempty"`
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationNumberText Free format of application number
+			//
+			// Example: 14104993
 			ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
 
 			// GrantDocumentMetaData Contains patent grant zip and xml file meta data for an application
@@ -6033,32 +7842,153 @@ type GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse 
 
 			// PgpubDocumentMetaData Contains pgpub zip and xml file meta data for an application
 			PgpubDocumentMetaData *PGPubFileMetaData `json:"pgpubDocumentMetaData,omitempty"`
-			RequestIdentifier     *string            `json:"requestIdentifier,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
 		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
+	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse) GetJSON200() *struct {
+	// Count Example: 1
+	Count                    *int `json:"count,omitempty"`
+	PatentFileWrapperDataBag *[]struct {
+		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
+		ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+		// GrantDocumentMetaData Contains patent grant zip and xml file meta data for an application
+		GrantDocumentMetaData *GrantFileMetaData `json:"grantDocumentMetaData,omitempty"`
+
+		// PgpubDocumentMetaData Contains pgpub zip and xml file meta data for an application
+		PgpubDocumentMetaData *PGPubFileMetaData `json:"pgpubDocumentMetaData,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+	} `json:"patentFileWrapperDataBag,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6077,13 +8007,25 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsRespon
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Count Example: 1
 		Count                    *int `json:"count,omitempty"`
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationNumberText Free format of application number
+			//
+			// Example: 14104993
 			ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
 
 			// RecordAttorney An attorney selected by the applicant or owner of an intellectual property to represent them before the national office.
@@ -6091,28 +8033,141 @@ type GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse struct {
 		} `json:"patentFileWrapperDataBag,omitempty"`
 		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
+	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse) GetJSON200() *struct {
+	// Count Example: 1
+	Count                    *int `json:"count,omitempty"`
+	PatentFileWrapperDataBag *[]struct {
+		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
+		ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+		// RecordAttorney An attorney selected by the applicant or owner of an intellectual property to represent them before the national office.
+		RecordAttorney *RecordAttorney `json:"recordAttorney,omitempty"`
+	} `json:"patentFileWrapperDataBag,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6131,20 +8186,59 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse) StatusC
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Count Example: 1
 		Count                    *int `json:"count,omitempty"`
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationNumberText Free format of application number
+			//
+			// Example: 14104993
 			ApplicationNumberText *string                 `json:"applicationNumberText,omitempty"`
 			ChildContinuityBag    *[]ChildContinuityData  `json:"childContinuityBag,omitempty"`
 			ParentContinuityBag   *[]ParentContinuityData `json:"parentContinuityBag,omitempty"`
-			RequestIdentifier     *string                 `json:"requestIdentifier,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
 		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse) GetJSON200() *struct {
+	// Count Example: 1
+	Count                    *int `json:"count,omitempty"`
+	PatentFileWrapperDataBag *[]struct {
+		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
+		ApplicationNumberText *string                 `json:"applicationNumberText,omitempty"`
+		ChildContinuityBag    *[]ChildContinuityData  `json:"childContinuityBag,omitempty"`
+		ParentContinuityBag   *[]ParentContinuityData `json:"parentContinuityBag,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+	} `json:"patentFileWrapperDataBag,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6163,32 +8257,141 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse) Statu
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *DocumentBag
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DocumentBag
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse) GetJSON200() *DocumentBag {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6207,40 +8410,163 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse) Status
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Count Example: 1
 		Count                    *int `json:"count,omitempty"`
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationNumberText Free format of application number
+			//
+			// Example: 14104993
 			ApplicationNumberText *string            `json:"applicationNumberText,omitempty"`
 			ForeignPriorityBag    *[]ForeignPriority `json:"foreignPriorityBag,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
 		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
+	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse) GetJSON200() *struct {
+	// Count Example: 1
+	Count                    *int `json:"count,omitempty"`
+	PatentFileWrapperDataBag *[]struct {
+		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
+		ApplicationNumberText *string            `json:"applicationNumberText,omitempty"`
+		ForeignPriorityBag    *[]ForeignPriority `json:"foreignPriorityBag,omitempty"`
+	} `json:"patentFileWrapperDataBag,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6259,42 +8585,171 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse) 
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Count Example: 1
 		Count                    interface{} `json:"count,omitempty"`
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationMetaData Represents patent application meta data properties
 			ApplicationMetaData *ApplicationMetaData `json:"applicationMetaData,omitempty"`
 
 			// ApplicationNumberText Free format of application number
+			//
+			// Example: 14104993
 			ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
+
+		// RequestIdentifier Example: 0ff4c603-a290-4659-8092-f68b408150c4
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse) GetJSON200() *struct {
+	// Count Example: 1
+	Count                    interface{} `json:"count,omitempty"`
+	PatentFileWrapperDataBag *[]struct {
+		// ApplicationMetaData Represents patent application meta data properties
+		ApplicationMetaData *ApplicationMetaData `json:"applicationMetaData,omitempty"`
+
+		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
+		ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+	} `json:"patentFileWrapperDataBag,omitempty"`
+
+	// RequestIdentifier Example: 0ff4c603-a290-4659-8092-f68b408150c4
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6313,40 +8768,163 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse) StatusC
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Count Example: 1
 		Count                    *int `json:"count,omitempty"`
 		PatentFileWrapperDataBag *[]struct {
 			// ApplicationNumberText Free format of application number
+			//
+			// Example: 14104993
 			ApplicationNumberText *string      `json:"applicationNumberText,omitempty"`
 			EventDataBag          *[]EventData `json:"eventDataBag,omitempty"`
 		} `json:"patentFileWrapperDataBag,omitempty"`
 		RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	}
+	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse) GetJSON200() *struct {
+	// Count Example: 1
+	Count                    *int `json:"count,omitempty"`
+	PatentFileWrapperDataBag *[]struct {
+		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
+		ApplicationNumberText *string      `json:"applicationNumberText,omitempty"`
+		EventDataBag          *[]EventData `json:"eventDataBag,omitempty"`
+	} `json:"patentFileWrapperDataBag,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6365,15 +8943,64 @@ func (r GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse) Sta
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentInterferencesDecisionsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InterferenceDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *InterferenceDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchResponse) GetJSON200() *InterferenceDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentInterferencesDecisionsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6392,15 +9019,64 @@ func (r GetApiV1PatentInterferencesDecisionsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentInterferencesDecisionsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentInterferencesDecisionsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InterferenceDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *InterferenceDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchResponse) GetJSON200() *InterferenceDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentInterferencesDecisionsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6419,15 +9095,64 @@ func (r PostApiV1PatentInterferencesDecisionsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentInterferencesDecisionsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentInterferencesDecisionsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InterferenceDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *InterferenceDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON200() *InterferenceDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6446,15 +9171,64 @@ func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) StatusCode()
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentInterferencesDecisionsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentInterferencesDecisionsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InterferenceDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *InterferenceDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON200() *InterferenceDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6473,15 +9247,64 @@ func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) StatusCode(
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentInterferencesDecisionsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InterferenceDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *InterferenceDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) GetJSON200() *InterferenceDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6500,15 +9323,64 @@ func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) StatusCo
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *InterferenceDecisionDataResponse
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *InterferenceDecisionDataResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) GetJSON200() *InterferenceDecisionDataResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6527,32 +9399,141 @@ func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) StatusCo
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentStatusCodesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *StatusCodeSearchResponse
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *StatusCodeSearchResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentStatusCodesResponse) GetJSON200() *StatusCodeSearchResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentStatusCodesResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentStatusCodesResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentStatusCodesResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentStatusCodesResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentStatusCodesResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6571,32 +9552,141 @@ func (r GetApiV1PatentStatusCodesResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentStatusCodesResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentStatusCodesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *StatusCodeSearchResponse
-	JSON400      *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *StatusCodeSearchResponse
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *struct {
+		// Code Example: 400
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Bad Request
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Invalid request, review search request and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON403 the response for an HTTP 403 `application/json` response
 	JSON403 *struct {
-		Code  interface{} `json:"code,omitempty"`
+		// Code Example: 403
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Forbidden
 		Error interface{} `json:"error,omitempty"`
 	}
+	// JSON404 the response for an HTTP 404 `application/json` response
 	JSON404 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 404
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Not Found
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: No matching records found, refine your search criteria and try again
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *struct {
-		Code              interface{} `json:"code,omitempty"`
-		Error             interface{} `json:"error,omitempty"`
-		ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+		// Code Example: 500
+		Code interface{} `json:"code,omitempty"`
+
+		// Error Example: Internal Server Error
+		Error interface{} `json:"error,omitempty"`
+
+		// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+		ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+		// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 		RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 	}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentStatusCodesResponse) GetJSON200() *StatusCodeSearchResponse {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentStatusCodesResponse) GetJSON400() *struct {
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review search request and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentStatusCodesResponse) GetJSON403() *struct {
+	// Code Example: 403
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Forbidden
+	Error interface{} `json:"error,omitempty"`
+} {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentStatusCodesResponse) GetJSON404() *struct {
+	// Code Example: 404
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found, refine your search criteria and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentStatusCodesResponse) GetJSON500() *struct {
+	// Code Example: 500
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+} {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentStatusCodesResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6615,15 +9705,64 @@ func (r PostApiV1PatentStatusCodesResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentStatusCodesResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsDecisionsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Decision200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Decision200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchResponse) GetJSON200() *Decision200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsDecisionsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6642,15 +9781,64 @@ func (r GetApiV1PatentTrialsDecisionsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsDecisionsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentTrialsDecisionsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Decision200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Decision200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchResponse) GetJSON200() *Decision200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentTrialsDecisionsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6669,15 +9857,64 @@ func (r PostApiV1PatentTrialsDecisionsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentTrialsDecisionsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsDecisionsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Decision200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Decision200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON200() *Decision200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6696,15 +9933,64 @@ func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsDecisionsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentTrialsDecisionsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Decision200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Decision200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON200() *Decision200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6723,15 +10009,64 @@ func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentTrialsDecisionsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Decision200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Decision200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) GetJSON200() *Decision200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6750,15 +10085,64 @@ func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) StatusCode() in
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsDocumentsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Document200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Document200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchResponse) GetJSON200() *Document200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsDocumentsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6777,15 +10161,64 @@ func (r GetApiV1PatentTrialsDocumentsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsDocumentsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentTrialsDocumentsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Document200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Document200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchResponse) GetJSON200() *Document200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentTrialsDocumentsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6804,15 +10237,64 @@ func (r PostApiV1PatentTrialsDocumentsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentTrialsDocumentsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsDocumentsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Document200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Document200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON200() *Document200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6831,15 +10313,64 @@ func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsDocumentsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentTrialsDocumentsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Document200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Document200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON200() *Document200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6858,15 +10389,64 @@ func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentTrialsDocumentsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Document200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Document200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) GetJSON200() *Document200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6885,15 +10465,64 @@ func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) StatusCode() in
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsProceedingsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Proceeding200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Proceeding200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchResponse) GetJSON200() *Proceeding200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsProceedingsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6912,15 +10541,64 @@ func (r GetApiV1PatentTrialsProceedingsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsProceedingsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentTrialsProceedingsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Proceeding200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Proceeding200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchResponse) GetJSON200() *Proceeding200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentTrialsProceedingsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6939,15 +10617,64 @@ func (r PostApiV1PatentTrialsProceedingsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentTrialsProceedingsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsProceedingsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Proceeding200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Proceeding200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON200() *Proceeding200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6966,15 +10693,64 @@ func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) StatusCode() int 
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsProceedingsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type PostApiV1PatentTrialsProceedingsSearchDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Proceeding200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Proceeding200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON200() *Proceeding200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -6993,15 +10769,64 @@ func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) StatusCode() int
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PostApiV1PatentTrialsProceedingsSearchDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsProceedingsTrialNumberResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Proceeding200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Proceeding200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) GetJSON200() *Proceeding200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -7020,15 +10845,64 @@ func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsProceedingsTrialNumberResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsTrialNumberDecisionsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Decision200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Decision200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) GetJSON200() *Decision200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -7047,15 +10921,64 @@ func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsTrialNumberDecisionsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetApiV1PatentTrialsTrialNumberDocumentsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Document200
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON413      *Status413
-	JSON500      *InternalError
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *Document200
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON413 the response for an HTTP 413 `application/json` response
+	JSON413 *Status413
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) GetJSON200() *Document200 {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON413 returns the response for an HTTP 413 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) GetJSON413() *Status413 {
+	return r.JSON413
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) GetJSON500() *InternalError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -7074,18 +10997,68 @@ func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) StatusCode() int {
 	return 0
 }
 
-type GetApiV1PetitionDecisionsSearchResponse struct {
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetApiV1PatentTrialsTrialNumberDocumentsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type SearchPetitionDecisionsGetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PetitionDecisionResponseBag
-	JSON400      *Response400
-	JSON403      *Response403
-	JSON404      *Response404
-	JSON500      *Response500
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *SearchSuccess
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *Unauthorized
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r SearchPetitionDecisionsGetResponse) GetJSON200() *SearchSuccess {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r SearchPetitionDecisionsGetResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r SearchPetitionDecisionsGetResponse) GetJSON401() *Unauthorized {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r SearchPetitionDecisionsGetResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r SearchPetitionDecisionsGetResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r SearchPetitionDecisionsGetResponse) GetJSON500() *InternalServerError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r SearchPetitionDecisionsGetResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1PetitionDecisionsSearchResponse) Status() string {
+func (r SearchPetitionDecisionsGetResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7093,25 +11066,75 @@ func (r GetApiV1PetitionDecisionsSearchResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1PetitionDecisionsSearchResponse) StatusCode() int {
+func (r SearchPetitionDecisionsGetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1PetitionDecisionsSearchResponse struct {
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r SearchPetitionDecisionsGetResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type SearchPetitionDecisionsPostResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PetitionDecisionResponseBag
-	JSON400      *Response400
-	JSON403      *Response403
-	JSON404      *Response404
-	JSON500      *Response500
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *SearchSuccess
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *Unauthorized
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r SearchPetitionDecisionsPostResponse) GetJSON200() *SearchSuccess {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r SearchPetitionDecisionsPostResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r SearchPetitionDecisionsPostResponse) GetJSON401() *Unauthorized {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r SearchPetitionDecisionsPostResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r SearchPetitionDecisionsPostResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r SearchPetitionDecisionsPostResponse) GetJSON500() *InternalServerError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r SearchPetitionDecisionsPostResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1PetitionDecisionsSearchResponse) Status() string {
+func (r SearchPetitionDecisionsPostResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7119,25 +11142,82 @@ func (r PostApiV1PetitionDecisionsSearchResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1PetitionDecisionsSearchResponse) StatusCode() int {
+func (r SearchPetitionDecisionsPostResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1PetitionDecisionsSearchDownloadResponse struct {
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r SearchPetitionDecisionsPostResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// DownloadPetitionDecisionsGetResponse200Headers the declared response headers of an HTTP 200 response for DownloadPetitionDecisionsGet
+type DownloadPetitionDecisionsGetResponse200Headers struct {
+	ContentDisposition *string
+}
+
+type DownloadPetitionDecisionsGetResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PetitionDecisionResponseBag
-	JSON400      *Response400
-	JSON403      *Response403
-	JSON404      *Response404
-	JSON500      *Response500
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DownloadSuccess
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *Unauthorized
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerError
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *DownloadPetitionDecisionsGetResponse200Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DownloadPetitionDecisionsGetResponse) GetJSON200() *DownloadSuccess {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r DownloadPetitionDecisionsGetResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DownloadPetitionDecisionsGetResponse) GetJSON401() *Unauthorized {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DownloadPetitionDecisionsGetResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DownloadPetitionDecisionsGetResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DownloadPetitionDecisionsGetResponse) GetJSON500() *InternalServerError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DownloadPetitionDecisionsGetResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1PetitionDecisionsSearchDownloadResponse) Status() string {
+func (r DownloadPetitionDecisionsGetResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7145,25 +11225,82 @@ func (r GetApiV1PetitionDecisionsSearchDownloadResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1PetitionDecisionsSearchDownloadResponse) StatusCode() int {
+func (r DownloadPetitionDecisionsGetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1PetitionDecisionsSearchDownloadResponse struct {
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DownloadPetitionDecisionsGetResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// DownloadPetitionDecisionsPostResponse200Headers the declared response headers of an HTTP 200 response for DownloadPetitionDecisionsPost
+type DownloadPetitionDecisionsPostResponse200Headers struct {
+	ContentDisposition *string
+}
+
+type DownloadPetitionDecisionsPostResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PetitionDecisionResponseBag
-	JSON400      *Response400
-	JSON403      *Response403
-	JSON404      *Response404
-	JSON500      *Response500
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DownloadSuccess
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *Unauthorized
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerError
+	// Headers200 the parsed response headers for an HTTP 200 response
+	Headers200 *DownloadPetitionDecisionsPostResponse200Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DownloadPetitionDecisionsPostResponse) GetJSON200() *DownloadSuccess {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r DownloadPetitionDecisionsPostResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DownloadPetitionDecisionsPostResponse) GetJSON401() *Unauthorized {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DownloadPetitionDecisionsPostResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DownloadPetitionDecisionsPostResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DownloadPetitionDecisionsPostResponse) GetJSON500() *InternalServerError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DownloadPetitionDecisionsPostResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1PetitionDecisionsSearchDownloadResponse) Status() string {
+func (r DownloadPetitionDecisionsPostResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7171,25 +11308,75 @@ func (r PostApiV1PetitionDecisionsSearchDownloadResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1PetitionDecisionsSearchDownloadResponse) StatusCode() int {
+func (r DownloadPetitionDecisionsPostResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse struct {
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DownloadPetitionDecisionsPostResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetPetitionDecisionByIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *PetitionDecisionIdentifierResponseBag
-	JSON400      *Response400
-	JSON403      *Response403
-	JSON404      *Response404
-	JSON500      *Response500
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *PetitionDecisionResponseBag
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *BadRequest
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *Unauthorized
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *Forbidden
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *NotFound
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *InternalServerError
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetPetitionDecisionByIdResponse) GetJSON200() *PetitionDecisionResponseBag {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r GetPetitionDecisionByIdResponse) GetJSON400() *BadRequest {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetPetitionDecisionByIdResponse) GetJSON401() *Unauthorized {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetPetitionDecisionByIdResponse) GetJSON403() *Forbidden {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetPetitionDecisionByIdResponse) GetJSON404() *NotFound {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetPetitionDecisionByIdResponse) GetJSON500() *InternalServerError {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GetPetitionDecisionByIdResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse) Status() string {
+func (r GetPetitionDecisionByIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -7197,14 +11384,28 @@ func (r GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse) Statu
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse) StatusCode() int {
+func (r GetPetitionDecisionByIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-// GetApiV1DatasetsProductsFilesProductIdentifierFileNameWithResponse request returning *GetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetPetitionDecisionByIdResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetApiV1DatasetsProductsFilesProductIdentifierFileNameWithResponse Download bulk data product file
+//
+// Returns a 302 redirect to the actual download location for the given productIdentifier and fileName.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/datasets/products/files/{productIdentifier}/{fileName} (the `GetApiV1DatasetsProductsFilesProductIdentifierFileName` operationId).
 func (c *ClientWithResponses) GetApiV1DatasetsProductsFilesProductIdentifierFileNameWithResponse(ctx context.Context, productIdentifier string, fileName string, reqEditors ...RequestEditorFn) (*GetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse, error) {
 	rsp, err := c.GetApiV1DatasetsProductsFilesProductIdentifierFileName(ctx, productIdentifier, fileName, reqEditors...)
 	if err != nil {
@@ -7213,7 +11414,13 @@ func (c *ClientWithResponses) GetApiV1DatasetsProductsFilesProductIdentifierFile
 	return ParseGetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse(rsp)
 }
 
-// GetApiV1DatasetsProductsSearchWithResponse request returning *GetApiV1DatasetsProductsSearchResponse
+// GetApiV1DatasetsProductsSearchWithResponse Search bulk datasets products by supplying query parameters
+//
+// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/datasets/products/search (the `GetApiV1DatasetsProductsSearch` operationId).
 func (c *ClientWithResponses) GetApiV1DatasetsProductsSearchWithResponse(ctx context.Context, params *GetApiV1DatasetsProductsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1DatasetsProductsSearchResponse, error) {
 	rsp, err := c.GetApiV1DatasetsProductsSearch(ctx, params, reqEditors...)
 	if err != nil {
@@ -7222,7 +11429,11 @@ func (c *ClientWithResponses) GetApiV1DatasetsProductsSearchWithResponse(ctx con
 	return ParseGetApiV1DatasetsProductsSearchResponse(rsp)
 }
 
-// GetApiV1DatasetsProductsProductIdentifierWithResponse request returning *GetApiV1DatasetsProductsProductIdentifierResponse
+// GetApiV1DatasetsProductsProductIdentifierWithResponse Bulk data- find a product by its identifier (shortName)
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/datasets/products/{productIdentifier} (the `GetApiV1DatasetsProductsProductIdentifier` operationId).
 func (c *ClientWithResponses) GetApiV1DatasetsProductsProductIdentifierWithResponse(ctx context.Context, productIdentifier string, params *GetApiV1DatasetsProductsProductIdentifierParams, reqEditors ...RequestEditorFn) (*GetApiV1DatasetsProductsProductIdentifierResponse, error) {
 	rsp, err := c.GetApiV1DatasetsProductsProductIdentifier(ctx, productIdentifier, params, reqEditors...)
 	if err != nil {
@@ -7231,7 +11442,11 @@ func (c *ClientWithResponses) GetApiV1DatasetsProductsProductIdentifierWithRespo
 	return ParseGetApiV1DatasetsProductsProductIdentifierResponse(rsp)
 }
 
-// GetApiV1PatentAppealsDecisionsSearchWithResponse request returning *GetApiV1PatentAppealsDecisionsSearchResponse
+// GetApiV1PatentAppealsDecisionsSearchWithResponse Search appeals decisions using query parameters
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/appeals/decisions/search (the `GetApiV1PatentAppealsDecisionsSearch` operationId).
 func (c *ClientWithResponses) GetApiV1PatentAppealsDecisionsSearchWithResponse(ctx context.Context, params *GetApiV1PatentAppealsDecisionsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentAppealsDecisionsSearchResponse, error) {
 	rsp, err := c.GetApiV1PatentAppealsDecisionsSearch(ctx, params, reqEditors...)
 	if err != nil {
@@ -7240,7 +11455,11 @@ func (c *ClientWithResponses) GetApiV1PatentAppealsDecisionsSearchWithResponse(c
 	return ParseGetApiV1PatentAppealsDecisionsSearchResponse(rsp)
 }
 
-// PostApiV1PatentAppealsDecisionsSearchWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentAppealsDecisionsSearchResponse
+// PostApiV1PatentAppealsDecisionsSearchWithBodyWithResponse Search appeals decisions using json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/appeals/decisions/search (the `PostApiV1PatentAppealsDecisionsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentAppealsDecisionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentAppealsDecisionsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentAppealsDecisionsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7249,6 +11468,11 @@ func (c *ClientWithResponses) PostApiV1PatentAppealsDecisionsSearchWithBodyWithR
 	return ParsePostApiV1PatentAppealsDecisionsSearchResponse(rsp)
 }
 
+// PostApiV1PatentAppealsDecisionsSearchWithResponse Search appeals decisions using json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/appeals/decisions/search (the `PostApiV1PatentAppealsDecisionsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentAppealsDecisionsSearchWithResponse(ctx context.Context, body PostApiV1PatentAppealsDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentAppealsDecisionsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentAppealsDecisionsSearch(ctx, body, reqEditors...)
 	if err != nil {
@@ -7257,7 +11481,11 @@ func (c *ClientWithResponses) PostApiV1PatentAppealsDecisionsSearchWithResponse(
 	return ParsePostApiV1PatentAppealsDecisionsSearchResponse(rsp)
 }
 
-// GetApiV1PatentAppealsDecisionsSearchDownloadWithResponse request returning *GetApiV1PatentAppealsDecisionsSearchDownloadResponse
+// GetApiV1PatentAppealsDecisionsSearchDownloadWithResponse Download appeals decisions search results in json or csv format using query parameters
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/appeals/decisions/search/download (the `GetApiV1PatentAppealsDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) GetApiV1PatentAppealsDecisionsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentAppealsDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentAppealsDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.GetApiV1PatentAppealsDecisionsSearchDownload(ctx, params, reqEditors...)
 	if err != nil {
@@ -7266,7 +11494,11 @@ func (c *ClientWithResponses) GetApiV1PatentAppealsDecisionsSearchDownloadWithRe
 	return ParseGetApiV1PatentAppealsDecisionsSearchDownloadResponse(rsp)
 }
 
-// PostApiV1PatentAppealsDecisionsSearchDownloadWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentAppealsDecisionsSearchDownloadResponse
+// PostApiV1PatentAppealsDecisionsSearchDownloadWithBodyWithResponse Download appeals decisions search results in json or csv format using json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/appeals/decisions/search/download (the `PostApiV1PatentAppealsDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentAppealsDecisionsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentAppealsDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentAppealsDecisionsSearchDownloadWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7275,6 +11507,11 @@ func (c *ClientWithResponses) PostApiV1PatentAppealsDecisionsSearchDownloadWithB
 	return ParsePostApiV1PatentAppealsDecisionsSearchDownloadResponse(rsp)
 }
 
+// PostApiV1PatentAppealsDecisionsSearchDownloadWithResponse Download appeals decisions search results in json or csv format using json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/appeals/decisions/search/download (the `PostApiV1PatentAppealsDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentAppealsDecisionsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentAppealsDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentAppealsDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentAppealsDecisionsSearchDownload(ctx, body, reqEditors...)
 	if err != nil {
@@ -7283,7 +11520,11 @@ func (c *ClientWithResponses) PostApiV1PatentAppealsDecisionsSearchDownloadWithR
 	return ParsePostApiV1PatentAppealsDecisionsSearchDownloadResponse(rsp)
 }
 
-// GetApiV1PatentAppealsDecisionsDocumentIdentifierWithResponse request returning *GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse
+// GetApiV1PatentAppealsDecisionsDocumentIdentifierWithResponse Retrieve appeals decisions by document Identifier
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/appeals/decisions/{documentIdentifier} (the `GetApiV1PatentAppealsDecisionsDocumentIdentifier` operationId).
 func (c *ClientWithResponses) GetApiV1PatentAppealsDecisionsDocumentIdentifierWithResponse(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*GetApiV1PatentAppealsDecisionsDocumentIdentifierResponse, error) {
 	rsp, err := c.GetApiV1PatentAppealsDecisionsDocumentIdentifier(ctx, documentIdentifier, reqEditors...)
 	if err != nil {
@@ -7292,7 +11533,11 @@ func (c *ClientWithResponses) GetApiV1PatentAppealsDecisionsDocumentIdentifierWi
 	return ParseGetApiV1PatentAppealsDecisionsDocumentIdentifierResponse(rsp)
 }
 
-// GetApiV1PatentAppealsAppealNumberDecisionsWithResponse request returning *GetApiV1PatentAppealsAppealNumberDecisionsResponse
+// GetApiV1PatentAppealsAppealNumberDecisionsWithResponse Retrieve appeals decisions by appeal number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/appeals/{appealNumber}/decisions (the `GetApiV1PatentAppealsAppealNumberDecisions` operationId).
 func (c *ClientWithResponses) GetApiV1PatentAppealsAppealNumberDecisionsWithResponse(ctx context.Context, appealNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentAppealsAppealNumberDecisionsResponse, error) {
 	rsp, err := c.GetApiV1PatentAppealsAppealNumberDecisions(ctx, appealNumber, reqEditors...)
 	if err != nil {
@@ -7301,7 +11546,13 @@ func (c *ClientWithResponses) GetApiV1PatentAppealsAppealNumberDecisionsWithResp
 	return ParseGetApiV1PatentAppealsAppealNumberDecisionsResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsSearchWithResponse request returning *GetApiV1PatentApplicationsSearchResponse
+// GetApiV1PatentApplicationsSearchWithResponse Patent application search by supplying query parameters
+//
+// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/search (the `GetApiV1PatentApplicationsSearch` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsSearchWithResponse(ctx context.Context, params *GetApiV1PatentApplicationsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsSearchResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsSearch(ctx, params, reqEditors...)
 	if err != nil {
@@ -7310,7 +11561,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsSearchWithResponse(ctx c
 	return ParseGetApiV1PatentApplicationsSearchResponse(rsp)
 }
 
-// PostApiV1PatentApplicationsSearchWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentApplicationsSearchResponse
+// PostApiV1PatentApplicationsSearchWithBodyWithResponse Search patent applications by supplying json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/applications/search (the `PostApiV1PatentApplicationsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentApplicationsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentApplicationsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentApplicationsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7319,6 +11574,11 @@ func (c *ClientWithResponses) PostApiV1PatentApplicationsSearchWithBodyWithRespo
 	return ParsePostApiV1PatentApplicationsSearchResponse(rsp)
 }
 
+// PostApiV1PatentApplicationsSearchWithResponse Search patent applications by supplying json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/applications/search (the `PostApiV1PatentApplicationsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentApplicationsSearchWithResponse(ctx context.Context, body PostApiV1PatentApplicationsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentApplicationsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentApplicationsSearch(ctx, body, reqEditors...)
 	if err != nil {
@@ -7327,7 +11587,13 @@ func (c *ClientWithResponses) PostApiV1PatentApplicationsSearchWithResponse(ctx 
 	return ParsePostApiV1PatentApplicationsSearchResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsSearchDownloadWithResponse request returning *GetApiV1PatentApplicationsSearchDownloadResponse
+// GetApiV1PatentApplicationsSearchDownloadWithResponse Patent application search by supplying query parameters
+//
+// Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/search/download (the `GetApiV1PatentApplicationsSearchDownload` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentApplicationsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsSearchDownloadResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsSearchDownload(ctx, params, reqEditors...)
 	if err != nil {
@@ -7336,7 +11602,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsSearchDownloadWithRespon
 	return ParseGetApiV1PatentApplicationsSearchDownloadResponse(rsp)
 }
 
-// PostApiV1PatentApplicationsSearchDownloadWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentApplicationsSearchDownloadResponse
+// PostApiV1PatentApplicationsSearchDownloadWithBodyWithResponse Download patent data by supplying json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/applications/search/download (the `PostApiV1PatentApplicationsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentApplicationsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentApplicationsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentApplicationsSearchDownloadWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7345,6 +11615,11 @@ func (c *ClientWithResponses) PostApiV1PatentApplicationsSearchDownloadWithBodyW
 	return ParsePostApiV1PatentApplicationsSearchDownloadResponse(rsp)
 }
 
+// PostApiV1PatentApplicationsSearchDownloadWithResponse Download patent data by supplying json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/applications/search/download (the `PostApiV1PatentApplicationsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentApplicationsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentApplicationsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentApplicationsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentApplicationsSearchDownload(ctx, body, reqEditors...)
 	if err != nil {
@@ -7353,7 +11628,11 @@ func (c *ClientWithResponses) PostApiV1PatentApplicationsSearchDownloadWithRespo
 	return ParsePostApiV1PatentApplicationsSearchDownloadResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextResponse
+// GetApiV1PatentApplicationsApplicationNumberTextWithResponse Patent application data for a provided application number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText} (the `GetApiV1PatentApplicationsApplicationNumberText` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberText(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7362,7 +11641,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextWit
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextAdjustmentWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse
+// GetApiV1PatentApplicationsApplicationNumberTextAdjustmentWithResponse Get patent term adjustment data for an application number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/adjustment (the `GetApiV1PatentApplicationsApplicationNumberTextAdjustment` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextAdjustmentWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextAdjustment(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7371,7 +11654,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextAdj
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextAssignmentWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse
+// GetApiV1PatentApplicationsApplicationNumberTextAssignmentWithResponse Get patent assignment data for an application number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/assignment (the `GetApiV1PatentApplicationsApplicationNumberTextAssignment` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextAssignmentWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextAssignment(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7380,7 +11667,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextAss
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse
+// GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsWithResponse Associated (pgpub, grant) documents meta-data for an application
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/associated-documents (the `GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextAssociatedDocuments(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7389,7 +11680,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextAss
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextAttorneyWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse
+// GetApiV1PatentApplicationsApplicationNumberTextAttorneyWithResponse Get attorney/agent data for an application number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/attorney (the `GetApiV1PatentApplicationsApplicationNumberTextAttorney` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextAttorneyWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextAttorney(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7398,7 +11693,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextAtt
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextContinuityWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse
+// GetApiV1PatentApplicationsApplicationNumberTextContinuityWithResponse Get continuity data for an application number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/continuity (the `GetApiV1PatentApplicationsApplicationNumberTextContinuity` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextContinuityWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextContinuityResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextContinuity(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7407,7 +11706,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextCon
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextContinuityResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextDocumentsWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse
+// GetApiV1PatentApplicationsApplicationNumberTextDocumentsWithResponse Documents details for an application number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/documents (the `GetApiV1PatentApplicationsApplicationNumberTextDocuments` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextDocumentsWithResponse(ctx context.Context, applicationNumberText string, params *GetApiV1PatentApplicationsApplicationNumberTextDocumentsParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextDocuments(ctx, applicationNumberText, params, reqEditors...)
 	if err != nil {
@@ -7416,7 +11719,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextDoc
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
+// GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityWithResponse Get foreign-priority data for an application number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/foreign-priority (the `GetApiV1PatentApplicationsApplicationNumberTextForeignPriority` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextForeignPriority(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7425,7 +11732,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextFor
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextMetaDataWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse
+// GetApiV1PatentApplicationsApplicationNumberTextMetaDataWithResponse Get patent application meta data
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/meta-data (the `GetApiV1PatentApplicationsApplicationNumberTextMetaData` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextMetaDataWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextMetaData(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7434,7 +11745,11 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextMet
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse(rsp)
 }
 
-// GetApiV1PatentApplicationsApplicationNumberTextTransactionsWithResponse request returning *GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse
+// GetApiV1PatentApplicationsApplicationNumberTextTransactionsWithResponse Get transaction data for an application number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/applications/{applicationNumberText}/transactions (the `GetApiV1PatentApplicationsApplicationNumberTextTransactions` operationId).
 func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextTransactionsWithResponse(ctx context.Context, applicationNumberText string, reqEditors ...RequestEditorFn) (*GetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse, error) {
 	rsp, err := c.GetApiV1PatentApplicationsApplicationNumberTextTransactions(ctx, applicationNumberText, reqEditors...)
 	if err != nil {
@@ -7443,7 +11758,13 @@ func (c *ClientWithResponses) GetApiV1PatentApplicationsApplicationNumberTextTra
 	return ParseGetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse(rsp)
 }
 
-// GetApiV1PatentInterferencesDecisionsSearchWithResponse request returning *GetApiV1PatentInterferencesDecisionsSearchResponse
+// GetApiV1PatentInterferencesDecisionsSearchWithResponse Search interferences decisions using query parameters
+//
+// Query interference decisions (decision type/category, party names, date ranges, etc.).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/interferences/decisions/search (the `GetApiV1PatentInterferencesDecisionsSearch` operationId).
 func (c *ClientWithResponses) GetApiV1PatentInterferencesDecisionsSearchWithResponse(ctx context.Context, params *GetApiV1PatentInterferencesDecisionsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentInterferencesDecisionsSearchResponse, error) {
 	rsp, err := c.GetApiV1PatentInterferencesDecisionsSearch(ctx, params, reqEditors...)
 	if err != nil {
@@ -7452,7 +11773,13 @@ func (c *ClientWithResponses) GetApiV1PatentInterferencesDecisionsSearchWithResp
 	return ParseGetApiV1PatentInterferencesDecisionsSearchResponse(rsp)
 }
 
-// PostApiV1PatentInterferencesDecisionsSearchWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentInterferencesDecisionsSearchResponse
+// PostApiV1PatentInterferencesDecisionsSearchWithBodyWithResponse Search interferences decisions using json payload
+//
+// Request body matches PatentSearchRequest; example tailored for interferences.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/interferences/decisions/search (the `PostApiV1PatentInterferencesDecisionsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentInterferencesDecisionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentInterferencesDecisionsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentInterferencesDecisionsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7461,6 +11788,13 @@ func (c *ClientWithResponses) PostApiV1PatentInterferencesDecisionsSearchWithBod
 	return ParsePostApiV1PatentInterferencesDecisionsSearchResponse(rsp)
 }
 
+// PostApiV1PatentInterferencesDecisionsSearchWithResponse Search interferences decisions using json payload
+//
+// Request body matches PatentSearchRequest; example tailored for interferences.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/interferences/decisions/search (the `PostApiV1PatentInterferencesDecisionsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentInterferencesDecisionsSearchWithResponse(ctx context.Context, body PostApiV1PatentInterferencesDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentInterferencesDecisionsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentInterferencesDecisionsSearch(ctx, body, reqEditors...)
 	if err != nil {
@@ -7469,7 +11803,13 @@ func (c *ClientWithResponses) PostApiV1PatentInterferencesDecisionsSearchWithRes
 	return ParsePostApiV1PatentInterferencesDecisionsSearchResponse(rsp)
 }
 
-// GetApiV1PatentInterferencesDecisionsSearchDownloadWithResponse request returning *GetApiV1PatentInterferencesDecisionsSearchDownloadResponse
+// GetApiV1PatentInterferencesDecisionsSearchDownloadWithResponse Download interferences decisions search results in json or csv format using query parameters
+//
+// Same parameters as search; add `format` for export type.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/interferences/decisions/search/download (the `GetApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) GetApiV1PatentInterferencesDecisionsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentInterferencesDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentInterferencesDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.GetApiV1PatentInterferencesDecisionsSearchDownload(ctx, params, reqEditors...)
 	if err != nil {
@@ -7478,7 +11818,13 @@ func (c *ClientWithResponses) GetApiV1PatentInterferencesDecisionsSearchDownload
 	return ParseGetApiV1PatentInterferencesDecisionsSearchDownloadResponse(rsp)
 }
 
-// PostApiV1PatentInterferencesDecisionsSearchDownloadWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentInterferencesDecisionsSearchDownloadResponse
+// PostApiV1PatentInterferencesDecisionsSearchDownloadWithBodyWithResponse Download interferences decisions search results in json or csv format using json payload
+//
+// Request body matches PatentDownloadRequest; example tailored for interferences.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/interferences/decisions/search/download (the `PostApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentInterferencesDecisionsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentInterferencesDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentInterferencesDecisionsSearchDownloadWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7487,6 +11833,13 @@ func (c *ClientWithResponses) PostApiV1PatentInterferencesDecisionsSearchDownloa
 	return ParsePostApiV1PatentInterferencesDecisionsSearchDownloadResponse(rsp)
 }
 
+// PostApiV1PatentInterferencesDecisionsSearchDownloadWithResponse Download interferences decisions search results in json or csv format using json payload
+//
+// Request body matches PatentDownloadRequest; example tailored for interferences.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/interferences/decisions/search/download (the `PostApiV1PatentInterferencesDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentInterferencesDecisionsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentInterferencesDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentInterferencesDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentInterferencesDecisionsSearchDownload(ctx, body, reqEditors...)
 	if err != nil {
@@ -7495,7 +11848,13 @@ func (c *ClientWithResponses) PostApiV1PatentInterferencesDecisionsSearchDownloa
 	return ParsePostApiV1PatentInterferencesDecisionsSearchDownloadResponse(rsp)
 }
 
-// GetApiV1PatentInterferencesDecisionsDocumentIdentifierWithResponse request returning *GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse
+// GetApiV1PatentInterferencesDecisionsDocumentIdentifierWithResponse Retrieve interferences decisions by document identifier
+//
+// Returns a single interference decision document for the provided `documentIdentifier`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/interferences/decisions/{documentIdentifier} (the `GetApiV1PatentInterferencesDecisionsDocumentIdentifier` operationId).
 func (c *ClientWithResponses) GetApiV1PatentInterferencesDecisionsDocumentIdentifierWithResponse(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*GetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse, error) {
 	rsp, err := c.GetApiV1PatentInterferencesDecisionsDocumentIdentifier(ctx, documentIdentifier, reqEditors...)
 	if err != nil {
@@ -7504,7 +11863,13 @@ func (c *ClientWithResponses) GetApiV1PatentInterferencesDecisionsDocumentIdenti
 	return ParseGetApiV1PatentInterferencesDecisionsDocumentIdentifierResponse(rsp)
 }
 
-// GetApiV1PatentInterferencesInterferenceNumberDecisionsWithResponse request returning *GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse
+// GetApiV1PatentInterferencesInterferenceNumberDecisionsWithResponse Retrieve interferences decisions by interference number
+//
+// Returns one or more interference decision records for the provided `interferenceNumber`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/interferences/{interferenceNumber}/decisions (the `GetApiV1PatentInterferencesInterferenceNumberDecisions` operationId).
 func (c *ClientWithResponses) GetApiV1PatentInterferencesInterferenceNumberDecisionsWithResponse(ctx context.Context, interferenceNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentInterferencesInterferenceNumberDecisionsResponse, error) {
 	rsp, err := c.GetApiV1PatentInterferencesInterferenceNumberDecisions(ctx, interferenceNumber, reqEditors...)
 	if err != nil {
@@ -7513,7 +11878,13 @@ func (c *ClientWithResponses) GetApiV1PatentInterferencesInterferenceNumberDecis
 	return ParseGetApiV1PatentInterferencesInterferenceNumberDecisionsResponse(rsp)
 }
 
-// GetApiV1PatentStatusCodesWithResponse request returning *GetApiV1PatentStatusCodesResponse
+// GetApiV1PatentStatusCodesWithResponse Search patent application status codes and status code description
+//
+// Query parameters are optional.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/status-codes (the `GetApiV1PatentStatusCodes` operationId).
 func (c *ClientWithResponses) GetApiV1PatentStatusCodesWithResponse(ctx context.Context, params *GetApiV1PatentStatusCodesParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentStatusCodesResponse, error) {
 	rsp, err := c.GetApiV1PatentStatusCodes(ctx, params, reqEditors...)
 	if err != nil {
@@ -7522,7 +11893,11 @@ func (c *ClientWithResponses) GetApiV1PatentStatusCodesWithResponse(ctx context.
 	return ParseGetApiV1PatentStatusCodesResponse(rsp)
 }
 
-// PostApiV1PatentStatusCodesWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentStatusCodesResponse
+// PostApiV1PatentStatusCodesWithBodyWithResponse Search patent application status codes and status code description
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/status-codes (the `PostApiV1PatentStatusCodes` operationId).
 func (c *ClientWithResponses) PostApiV1PatentStatusCodesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentStatusCodesResponse, error) {
 	rsp, err := c.PostApiV1PatentStatusCodesWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7531,6 +11906,11 @@ func (c *ClientWithResponses) PostApiV1PatentStatusCodesWithBodyWithResponse(ctx
 	return ParsePostApiV1PatentStatusCodesResponse(rsp)
 }
 
+// PostApiV1PatentStatusCodesWithResponse Search patent application status codes and status code description
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/status-codes (the `PostApiV1PatentStatusCodes` operationId).
 func (c *ClientWithResponses) PostApiV1PatentStatusCodesWithResponse(ctx context.Context, body PostApiV1PatentStatusCodesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentStatusCodesResponse, error) {
 	rsp, err := c.PostApiV1PatentStatusCodes(ctx, body, reqEditors...)
 	if err != nil {
@@ -7539,7 +11919,11 @@ func (c *ClientWithResponses) PostApiV1PatentStatusCodesWithResponse(ctx context
 	return ParsePostApiV1PatentStatusCodesResponse(rsp)
 }
 
-// GetApiV1PatentTrialsDecisionsSearchWithResponse request returning *GetApiV1PatentTrialsDecisionsSearchResponse
+// GetApiV1PatentTrialsDecisionsSearchWithResponse Search trials decisions documents using query parameters
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/decisions/search (the `GetApiV1PatentTrialsDecisionsSearch` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsDecisionsSearchWithResponse(ctx context.Context, params *GetApiV1PatentTrialsDecisionsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDecisionsSearchResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsDecisionsSearch(ctx, params, reqEditors...)
 	if err != nil {
@@ -7548,7 +11932,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsDecisionsSearchWithResponse(ct
 	return ParseGetApiV1PatentTrialsDecisionsSearchResponse(rsp)
 }
 
-// PostApiV1PatentTrialsDecisionsSearchWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentTrialsDecisionsSearchResponse
+// PostApiV1PatentTrialsDecisionsSearchWithBodyWithResponse Search trials decisions documents using json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/decisions/search (the `PostApiV1PatentTrialsDecisionsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsDecisionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDecisionsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsDecisionsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7557,6 +11945,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsDecisionsSearchWithBodyWithRe
 	return ParsePostApiV1PatentTrialsDecisionsSearchResponse(rsp)
 }
 
+// PostApiV1PatentTrialsDecisionsSearchWithResponse Search trials decisions documents using json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/decisions/search (the `PostApiV1PatentTrialsDecisionsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsDecisionsSearchWithResponse(ctx context.Context, body PostApiV1PatentTrialsDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDecisionsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsDecisionsSearch(ctx, body, reqEditors...)
 	if err != nil {
@@ -7565,7 +11958,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsDecisionsSearchWithResponse(c
 	return ParsePostApiV1PatentTrialsDecisionsSearchResponse(rsp)
 }
 
-// GetApiV1PatentTrialsDecisionsSearchDownloadWithResponse request returning *GetApiV1PatentTrialsDecisionsSearchDownloadResponse
+// GetApiV1PatentTrialsDecisionsSearchDownloadWithResponse Download trials decisions documents search results in json or csv format using query parameters
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/decisions/search/download (the `GetApiV1PatentTrialsDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsDecisionsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentTrialsDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsDecisionsSearchDownload(ctx, params, reqEditors...)
 	if err != nil {
@@ -7574,7 +11971,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsDecisionsSearchDownloadWithRes
 	return ParseGetApiV1PatentTrialsDecisionsSearchDownloadResponse(rsp)
 }
 
-// PostApiV1PatentTrialsDecisionsSearchDownloadWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentTrialsDecisionsSearchDownloadResponse
+// PostApiV1PatentTrialsDecisionsSearchDownloadWithBodyWithResponse Download trials decisions documents search results in json or csv format using json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/decisions/search/download (the `PostApiV1PatentTrialsDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsDecisionsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsDecisionsSearchDownloadWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7583,6 +11984,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsDecisionsSearchDownloadWithBo
 	return ParsePostApiV1PatentTrialsDecisionsSearchDownloadResponse(rsp)
 }
 
+// PostApiV1PatentTrialsDecisionsSearchDownloadWithResponse Download trials decisions documents search results in json or csv format using json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/decisions/search/download (the `PostApiV1PatentTrialsDecisionsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsDecisionsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentTrialsDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDecisionsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsDecisionsSearchDownload(ctx, body, reqEditors...)
 	if err != nil {
@@ -7591,7 +11997,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsDecisionsSearchDownloadWithRe
 	return ParsePostApiV1PatentTrialsDecisionsSearchDownloadResponse(rsp)
 }
 
-// GetApiV1PatentTrialsDecisionsDocumentIdentifierWithResponse request returning *GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse
+// GetApiV1PatentTrialsDecisionsDocumentIdentifierWithResponse Retrieve a single trials decisions document by document identifier
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/decisions/{documentIdentifier} (the `GetApiV1PatentTrialsDecisionsDocumentIdentifier` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsDecisionsDocumentIdentifierWithResponse(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDecisionsDocumentIdentifierResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsDecisionsDocumentIdentifier(ctx, documentIdentifier, reqEditors...)
 	if err != nil {
@@ -7600,7 +12010,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsDecisionsDocumentIdentifierWit
 	return ParseGetApiV1PatentTrialsDecisionsDocumentIdentifierResponse(rsp)
 }
 
-// GetApiV1PatentTrialsDocumentsSearchWithResponse request returning *GetApiV1PatentTrialsDocumentsSearchResponse
+// GetApiV1PatentTrialsDocumentsSearchWithResponse Search trials documents using query parameters
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/documents/search (the `GetApiV1PatentTrialsDocumentsSearch` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsDocumentsSearchWithResponse(ctx context.Context, params *GetApiV1PatentTrialsDocumentsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDocumentsSearchResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsDocumentsSearch(ctx, params, reqEditors...)
 	if err != nil {
@@ -7609,7 +12023,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsDocumentsSearchWithResponse(ct
 	return ParseGetApiV1PatentTrialsDocumentsSearchResponse(rsp)
 }
 
-// PostApiV1PatentTrialsDocumentsSearchWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentTrialsDocumentsSearchResponse
+// PostApiV1PatentTrialsDocumentsSearchWithBodyWithResponse Search trials documents using json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/documents/search (the `PostApiV1PatentTrialsDocumentsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsDocumentsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDocumentsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsDocumentsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7618,6 +12036,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsDocumentsSearchWithBodyWithRe
 	return ParsePostApiV1PatentTrialsDocumentsSearchResponse(rsp)
 }
 
+// PostApiV1PatentTrialsDocumentsSearchWithResponse Search trials documents using json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/documents/search (the `PostApiV1PatentTrialsDocumentsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsDocumentsSearchWithResponse(ctx context.Context, body PostApiV1PatentTrialsDocumentsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDocumentsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsDocumentsSearch(ctx, body, reqEditors...)
 	if err != nil {
@@ -7626,7 +12049,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsDocumentsSearchWithResponse(c
 	return ParsePostApiV1PatentTrialsDocumentsSearchResponse(rsp)
 }
 
-// GetApiV1PatentTrialsDocumentsSearchDownloadWithResponse request returning *GetApiV1PatentTrialsDocumentsSearchDownloadResponse
+// GetApiV1PatentTrialsDocumentsSearchDownloadWithResponse Download trials document search results in json or csv format using query parameters
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/documents/search/download (the `GetApiV1PatentTrialsDocumentsSearchDownload` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsDocumentsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentTrialsDocumentsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDocumentsSearchDownloadResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsDocumentsSearchDownload(ctx, params, reqEditors...)
 	if err != nil {
@@ -7635,7 +12062,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsDocumentsSearchDownloadWithRes
 	return ParseGetApiV1PatentTrialsDocumentsSearchDownloadResponse(rsp)
 }
 
-// PostApiV1PatentTrialsDocumentsSearchDownloadWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentTrialsDocumentsSearchDownloadResponse
+// PostApiV1PatentTrialsDocumentsSearchDownloadWithBodyWithResponse Download trials documents search results in json or csv format using json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/documents/search/download (the `PostApiV1PatentTrialsDocumentsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsDocumentsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDocumentsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsDocumentsSearchDownloadWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7644,6 +12075,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsDocumentsSearchDownloadWithBo
 	return ParsePostApiV1PatentTrialsDocumentsSearchDownloadResponse(rsp)
 }
 
+// PostApiV1PatentTrialsDocumentsSearchDownloadWithResponse Download trials documents search results in json or csv format using json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/documents/search/download (the `PostApiV1PatentTrialsDocumentsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsDocumentsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentTrialsDocumentsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsDocumentsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsDocumentsSearchDownload(ctx, body, reqEditors...)
 	if err != nil {
@@ -7652,7 +12088,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsDocumentsSearchDownloadWithRe
 	return ParsePostApiV1PatentTrialsDocumentsSearchDownloadResponse(rsp)
 }
 
-// GetApiV1PatentTrialsDocumentsDocumentIdentifierWithResponse request returning *GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse
+// GetApiV1PatentTrialsDocumentsDocumentIdentifierWithResponse Retrieve a single trials document by document identifier
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/documents/{documentIdentifier} (the `GetApiV1PatentTrialsDocumentsDocumentIdentifier` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsDocumentsDocumentIdentifierWithResponse(ctx context.Context, documentIdentifier string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsDocumentsDocumentIdentifierResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsDocumentsDocumentIdentifier(ctx, documentIdentifier, reqEditors...)
 	if err != nil {
@@ -7661,7 +12101,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsDocumentsDocumentIdentifierWit
 	return ParseGetApiV1PatentTrialsDocumentsDocumentIdentifierResponse(rsp)
 }
 
-// GetApiV1PatentTrialsProceedingsSearchWithResponse request returning *GetApiV1PatentTrialsProceedingsSearchResponse
+// GetApiV1PatentTrialsProceedingsSearchWithResponse Search trials proceedings using query parameters
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/proceedings/search (the `GetApiV1PatentTrialsProceedingsSearch` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsProceedingsSearchWithResponse(ctx context.Context, params *GetApiV1PatentTrialsProceedingsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsProceedingsSearchResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsProceedingsSearch(ctx, params, reqEditors...)
 	if err != nil {
@@ -7670,7 +12114,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsProceedingsSearchWithResponse(
 	return ParseGetApiV1PatentTrialsProceedingsSearchResponse(rsp)
 }
 
-// PostApiV1PatentTrialsProceedingsSearchWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentTrialsProceedingsSearchResponse
+// PostApiV1PatentTrialsProceedingsSearchWithBodyWithResponse Search trials proceedings using json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/proceedings/search (the `PostApiV1PatentTrialsProceedingsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsProceedingsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsProceedingsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsProceedingsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7679,6 +12127,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsProceedingsSearchWithBodyWith
 	return ParsePostApiV1PatentTrialsProceedingsSearchResponse(rsp)
 }
 
+// PostApiV1PatentTrialsProceedingsSearchWithResponse Search trials proceedings using json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/proceedings/search (the `PostApiV1PatentTrialsProceedingsSearch` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsProceedingsSearchWithResponse(ctx context.Context, body PostApiV1PatentTrialsProceedingsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsProceedingsSearchResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsProceedingsSearch(ctx, body, reqEditors...)
 	if err != nil {
@@ -7687,7 +12140,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsProceedingsSearchWithResponse
 	return ParsePostApiV1PatentTrialsProceedingsSearchResponse(rsp)
 }
 
-// GetApiV1PatentTrialsProceedingsSearchDownloadWithResponse request returning *GetApiV1PatentTrialsProceedingsSearchDownloadResponse
+// GetApiV1PatentTrialsProceedingsSearchDownloadWithResponse Download trials proceedings search results in json or csv format using query parameters
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/proceedings/search/download (the `GetApiV1PatentTrialsProceedingsSearchDownload` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsProceedingsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PatentTrialsProceedingsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsProceedingsSearchDownloadResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsProceedingsSearchDownload(ctx, params, reqEditors...)
 	if err != nil {
@@ -7696,7 +12153,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsProceedingsSearchDownloadWithR
 	return ParseGetApiV1PatentTrialsProceedingsSearchDownloadResponse(rsp)
 }
 
-// PostApiV1PatentTrialsProceedingsSearchDownloadWithBodyWithResponse request with arbitrary body returning *PostApiV1PatentTrialsProceedingsSearchDownloadResponse
+// PostApiV1PatentTrialsProceedingsSearchDownloadWithBodyWithResponse Download trials proceedings search results in json or csv format using json payload
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/proceedings/search/download (the `PostApiV1PatentTrialsProceedingsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsProceedingsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsProceedingsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsProceedingsSearchDownloadWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -7705,6 +12166,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsProceedingsSearchDownloadWith
 	return ParsePostApiV1PatentTrialsProceedingsSearchDownloadResponse(rsp)
 }
 
+// PostApiV1PatentTrialsProceedingsSearchDownloadWithResponse Download trials proceedings search results in json or csv format using json payload
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/trials/proceedings/search/download (the `PostApiV1PatentTrialsProceedingsSearchDownload` operationId).
 func (c *ClientWithResponses) PostApiV1PatentTrialsProceedingsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PatentTrialsProceedingsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PatentTrialsProceedingsSearchDownloadResponse, error) {
 	rsp, err := c.PostApiV1PatentTrialsProceedingsSearchDownload(ctx, body, reqEditors...)
 	if err != nil {
@@ -7713,7 +12179,11 @@ func (c *ClientWithResponses) PostApiV1PatentTrialsProceedingsSearchDownloadWith
 	return ParsePostApiV1PatentTrialsProceedingsSearchDownloadResponse(rsp)
 }
 
-// GetApiV1PatentTrialsProceedingsTrialNumberWithResponse request returning *GetApiV1PatentTrialsProceedingsTrialNumberResponse
+// GetApiV1PatentTrialsProceedingsTrialNumberWithResponse Retrieve a single trials proceeding by trial number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/proceedings/{trialNumber} (the `GetApiV1PatentTrialsProceedingsTrialNumber` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsProceedingsTrialNumberWithResponse(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsProceedingsTrialNumberResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsProceedingsTrialNumber(ctx, trialNumber, reqEditors...)
 	if err != nil {
@@ -7722,7 +12192,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsProceedingsTrialNumberWithResp
 	return ParseGetApiV1PatentTrialsProceedingsTrialNumberResponse(rsp)
 }
 
-// GetApiV1PatentTrialsTrialNumberDecisionsWithResponse request returning *GetApiV1PatentTrialsTrialNumberDecisionsResponse
+// GetApiV1PatentTrialsTrialNumberDecisionsWithResponse Retrieve all trials decisions documents by trial number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/{trialNumber}/decisions (the `GetApiV1PatentTrialsTrialNumberDecisions` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsTrialNumberDecisionsWithResponse(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsTrialNumberDecisionsResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsTrialNumberDecisions(ctx, trialNumber, reqEditors...)
 	if err != nil {
@@ -7731,7 +12205,11 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsTrialNumberDecisionsWithRespon
 	return ParseGetApiV1PatentTrialsTrialNumberDecisionsResponse(rsp)
 }
 
-// GetApiV1PatentTrialsTrialNumberDocumentsWithResponse request returning *GetApiV1PatentTrialsTrialNumberDocumentsResponse
+// GetApiV1PatentTrialsTrialNumberDocumentsWithResponse Retrieve all trials documents by trial number
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/trials/{trialNumber}/documents (the `GetApiV1PatentTrialsTrialNumberDocuments` operationId).
 func (c *ClientWithResponses) GetApiV1PatentTrialsTrialNumberDocumentsWithResponse(ctx context.Context, trialNumber string, reqEditors ...RequestEditorFn) (*GetApiV1PatentTrialsTrialNumberDocumentsResponse, error) {
 	rsp, err := c.GetApiV1PatentTrialsTrialNumberDocuments(ctx, trialNumber, reqEditors...)
 	if err != nil {
@@ -7740,65 +12218,109 @@ func (c *ClientWithResponses) GetApiV1PatentTrialsTrialNumberDocumentsWithRespon
 	return ParseGetApiV1PatentTrialsTrialNumberDocumentsResponse(rsp)
 }
 
-// GetApiV1PetitionDecisionsSearchWithResponse request returning *GetApiV1PetitionDecisionsSearchResponse
-func (c *ClientWithResponses) GetApiV1PetitionDecisionsSearchWithResponse(ctx context.Context, params *GetApiV1PetitionDecisionsSearchParams, reqEditors ...RequestEditorFn) (*GetApiV1PetitionDecisionsSearchResponse, error) {
-	rsp, err := c.GetApiV1PetitionDecisionsSearch(ctx, params, reqEditors...)
+// SearchPetitionDecisionsGetWithResponse Search petition decisions by query parameters
+//
+// Search petition decisions using query string parameters. All parameters are optional. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/petition/decisions/search (the `SearchPetitionDecisionsGet` operationId).
+func (c *ClientWithResponses) SearchPetitionDecisionsGetWithResponse(ctx context.Context, params *SearchPetitionDecisionsGetParams, reqEditors ...RequestEditorFn) (*SearchPetitionDecisionsGetResponse, error) {
+	rsp, err := c.SearchPetitionDecisionsGet(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1PetitionDecisionsSearchResponse(rsp)
+	return ParseSearchPetitionDecisionsGetResponse(rsp)
 }
 
-// PostApiV1PetitionDecisionsSearchWithBodyWithResponse request with arbitrary body returning *PostApiV1PetitionDecisionsSearchResponse
-func (c *ClientWithResponses) PostApiV1PetitionDecisionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PetitionDecisionsSearchResponse, error) {
-	rsp, err := c.PostApiV1PetitionDecisionsSearchWithBody(ctx, contentType, body, reqEditors...)
+// SearchPetitionDecisionsPostWithBodyWithResponse Search petition decisions by JSON request body
+//
+// Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/petition/decisions/search (the `SearchPetitionDecisionsPost` operationId).
+func (c *ClientWithResponses) SearchPetitionDecisionsPostWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SearchPetitionDecisionsPostResponse, error) {
+	rsp, err := c.SearchPetitionDecisionsPostWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1PetitionDecisionsSearchResponse(rsp)
+	return ParseSearchPetitionDecisionsPostResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApiV1PetitionDecisionsSearchWithResponse(ctx context.Context, body PostApiV1PetitionDecisionsSearchJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PetitionDecisionsSearchResponse, error) {
-	rsp, err := c.PostApiV1PetitionDecisionsSearch(ctx, body, reqEditors...)
+// SearchPetitionDecisionsPostWithResponse Search petition decisions by JSON request body
+//
+// Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/petition/decisions/search (the `SearchPetitionDecisionsPost` operationId).
+func (c *ClientWithResponses) SearchPetitionDecisionsPostWithResponse(ctx context.Context, body SearchPetitionDecisionsPostJSONRequestBody, reqEditors ...RequestEditorFn) (*SearchPetitionDecisionsPostResponse, error) {
+	rsp, err := c.SearchPetitionDecisionsPost(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1PetitionDecisionsSearchResponse(rsp)
+	return ParseSearchPetitionDecisionsPostResponse(rsp)
 }
 
-// GetApiV1PetitionDecisionsSearchDownloadWithResponse request returning *GetApiV1PetitionDecisionsSearchDownloadResponse
-func (c *ClientWithResponses) GetApiV1PetitionDecisionsSearchDownloadWithResponse(ctx context.Context, params *GetApiV1PetitionDecisionsSearchDownloadParams, reqEditors ...RequestEditorFn) (*GetApiV1PetitionDecisionsSearchDownloadResponse, error) {
-	rsp, err := c.GetApiV1PetitionDecisionsSearchDownload(ctx, params, reqEditors...)
+// DownloadPetitionDecisionsGetWithResponse Download petition decisions by query parameters
+//
+// Download petition decisions as CSV or JSON using query string parameters. All parameters are optional. Facets are not supported on this endpoint. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsGet` operationId).
+func (c *ClientWithResponses) DownloadPetitionDecisionsGetWithResponse(ctx context.Context, params *DownloadPetitionDecisionsGetParams, reqEditors ...RequestEditorFn) (*DownloadPetitionDecisionsGetResponse, error) {
+	rsp, err := c.DownloadPetitionDecisionsGet(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1PetitionDecisionsSearchDownloadResponse(rsp)
+	return ParseDownloadPetitionDecisionsGetResponse(rsp)
 }
 
-// PostApiV1PetitionDecisionsSearchDownloadWithBodyWithResponse request with arbitrary body returning *PostApiV1PetitionDecisionsSearchDownloadResponse
-func (c *ClientWithResponses) PostApiV1PetitionDecisionsSearchDownloadWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1PetitionDecisionsSearchDownloadResponse, error) {
-	rsp, err := c.PostApiV1PetitionDecisionsSearchDownloadWithBody(ctx, contentType, body, reqEditors...)
+// DownloadPetitionDecisionsPostWithBodyWithResponse Download petition decisions by JSON request body
+//
+// Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsPost` operationId).
+func (c *ClientWithResponses) DownloadPetitionDecisionsPostWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DownloadPetitionDecisionsPostResponse, error) {
+	rsp, err := c.DownloadPetitionDecisionsPostWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1PetitionDecisionsSearchDownloadResponse(rsp)
+	return ParseDownloadPetitionDecisionsPostResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApiV1PetitionDecisionsSearchDownloadWithResponse(ctx context.Context, body PostApiV1PetitionDecisionsSearchDownloadJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1PetitionDecisionsSearchDownloadResponse, error) {
-	rsp, err := c.PostApiV1PetitionDecisionsSearchDownload(ctx, body, reqEditors...)
+// DownloadPetitionDecisionsPostWithResponse Download petition decisions by JSON request body
+//
+// Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/petition/decisions/search/download (the `DownloadPetitionDecisionsPost` operationId).
+func (c *ClientWithResponses) DownloadPetitionDecisionsPostWithResponse(ctx context.Context, body DownloadPetitionDecisionsPostJSONRequestBody, reqEditors ...RequestEditorFn) (*DownloadPetitionDecisionsPostResponse, error) {
+	rsp, err := c.DownloadPetitionDecisionsPost(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1PetitionDecisionsSearchDownloadResponse(rsp)
+	return ParseDownloadPetitionDecisionsPostResponse(rsp)
 }
 
-// GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierWithResponse request returning *GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse
-func (c *ClientWithResponses) GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierWithResponse(ctx context.Context, petitionDecisionRecordIdentifier string, params *GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams, reqEditors ...RequestEditorFn) (*GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse, error) {
-	rsp, err := c.GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifier(ctx, petitionDecisionRecordIdentifier, params, reqEditors...)
+// GetPetitionDecisionByIdWithResponse Get a single petition decision by record identifier
+//
+// Retrieve a single petition decision record by its unique petition decision record identifier.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/petition/decisions/{petitionDecisionRecordIdentifier} (the `GetPetitionDecisionById` operationId).
+func (c *ClientWithResponses) GetPetitionDecisionByIdWithResponse(ctx context.Context, petitionDecisionRecordIdentifier string, reqEditors ...RequestEditorFn) (*GetPetitionDecisionByIdResponse, error) {
+	rsp, err := c.GetPetitionDecisionById(ctx, petitionDecisionRecordIdentifier, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse(rsp)
+	return ParseGetPetitionDecisionByIdResponse(rsp)
 }
 
 // ParseGetApiV1DatasetsProductsFilesProductIdentifierFileNameResponse parses an HTTP response from a GetApiV1DatasetsProductsFilesProductIdentifierFileNameWithResponse call
@@ -7840,9 +12362,16 @@ func ParseGetApiV1DatasetsProductsSearchResponse(rsp *http.Response) (*GetApiV1D
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review data requested try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -7852,7 +12381,10 @@ func ParseGetApiV1DatasetsProductsSearchResponse(rsp *http.Response) (*GetApiV1D
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -7862,9 +12394,16 @@ func ParseGetApiV1DatasetsProductsSearchResponse(rsp *http.Response) (*GetApiV1D
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -7874,9 +12413,16 @@ func ParseGetApiV1DatasetsProductsSearchResponse(rsp *http.Response) (*GetApiV1D
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -7912,9 +12458,16 @@ func ParseGetApiV1DatasetsProductsProductIdentifierResponse(rsp *http.Response) 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review data requested try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -7924,7 +12477,10 @@ func ParseGetApiV1DatasetsProductsProductIdentifierResponse(rsp *http.Response) 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -7934,9 +12490,16 @@ func ParseGetApiV1DatasetsProductsProductIdentifierResponse(rsp *http.Response) 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -7946,9 +12509,16 @@ func ParseGetApiV1DatasetsProductsProductIdentifierResponse(rsp *http.Response) 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8350,9 +12920,16 @@ func ParseGetApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*GetApiV
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8362,7 +12939,10 @@ func ParseGetApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*GetApiV
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8372,9 +12952,16 @@ func ParseGetApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*GetApiV
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8391,9 +12978,16 @@ func ParseGetApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*GetApiV
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8429,9 +13023,16 @@ func ParsePostApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*PostAp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8441,7 +13042,10 @@ func ParsePostApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*PostAp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8451,9 +13055,16 @@ func ParsePostApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*PostAp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8470,9 +13081,16 @@ func ParsePostApiV1PatentApplicationsSearchResponse(rsp *http.Response) (*PostAp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8508,9 +13126,16 @@ func ParseGetApiV1PatentApplicationsSearchDownloadResponse(rsp *http.Response) (
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8520,6 +13145,7 @@ func ParseGetApiV1PatentApplicationsSearchDownloadResponse(rsp *http.Response) (
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
+			// Message Example: Forbidden
 			Message interface{} `json:"message,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8529,9 +13155,16 @@ func ParseGetApiV1PatentApplicationsSearchDownloadResponse(rsp *http.Response) (
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8541,9 +13174,16 @@ func ParseGetApiV1PatentApplicationsSearchDownloadResponse(rsp *http.Response) (
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8579,9 +13219,16 @@ func ParsePostApiV1PatentApplicationsSearchDownloadResponse(rsp *http.Response) 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8591,7 +13238,10 @@ func ParsePostApiV1PatentApplicationsSearchDownloadResponse(rsp *http.Response) 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8601,9 +13251,16 @@ func ParsePostApiV1PatentApplicationsSearchDownloadResponse(rsp *http.Response) 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8613,9 +13270,16 @@ func ParsePostApiV1PatentApplicationsSearchDownloadResponse(rsp *http.Response) 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8651,9 +13315,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextResponse(rsp *http.Resp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8663,7 +13334,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextResponse(rsp *http.Resp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8673,9 +13347,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextResponse(rsp *http.Resp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8685,9 +13366,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextResponse(rsp *http.Resp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetailed     interface{} `json:"errorDetailed,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetailed Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetailed interface{} `json:"errorDetailed,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8716,9 +13404,12 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse(rsp 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			// Count Example: 1
 			Count                    *int `json:"count,omitempty"`
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationNumberText Free format of application number
+				//
+				// Example: 14104993
 				ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
 
 				// PatentTermAdjustmentData Patent term adjustment data
@@ -8733,9 +13424,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse(rsp 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8745,7 +13443,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse(rsp 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8755,9 +13456,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse(rsp 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8767,9 +13475,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAdjustmentResponse(rsp 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8798,9 +13513,12 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse(rsp 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			// Count Example: 1
 			Count                    *int `json:"count,omitempty"`
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationNumberText Free format of application number
+				//
+				// Example: 14104993
 				ApplicationNumberText *string       `json:"applicationNumberText,omitempty"`
 				AssignmentBag         *[]Assignment `json:"assignmentBag,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
@@ -8813,9 +13531,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse(rsp 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8825,7 +13550,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse(rsp 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8835,9 +13563,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse(rsp 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8847,9 +13582,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssignmentResponse(rsp 
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8878,9 +13620,12 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResp
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			// Count Example: 1
 			Count                    *int `json:"count,omitempty"`
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationNumberText Free format of application number
+				//
+				// Example: 14104993
 				ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
 
 				// GrantDocumentMetaData Contains patent grant zip and xml file meta data for an application
@@ -8888,7 +13633,9 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResp
 
 				// PgpubDocumentMetaData Contains pgpub zip and xml file meta data for an application
 				PgpubDocumentMetaData *PGPubFileMetaData `json:"pgpubDocumentMetaData,omitempty"`
-				RequestIdentifier     *string            `json:"requestIdentifier,omitempty"`
+
+				// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+				RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
 			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
@@ -8899,9 +13646,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8911,7 +13665,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8921,9 +13678,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8933,9 +13697,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAssociatedDocumentsResp
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8964,9 +13735,12 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse(rsp *h
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			// Count Example: 1
 			Count                    *int `json:"count,omitempty"`
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationNumberText Free format of application number
+				//
+				// Example: 14104993
 				ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
 
 				// RecordAttorney An attorney selected by the applicant or owner of an intellectual property to represent them before the national office.
@@ -8981,9 +13755,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse(rsp *h
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -8993,7 +13774,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse(rsp *h
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9003,9 +13787,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse(rsp *h
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9015,9 +13806,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextAttorneyResponse(rsp *h
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9046,13 +13844,18 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextContinuityResponse(rsp 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			// Count Example: 1
 			Count                    *int `json:"count,omitempty"`
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationNumberText Free format of application number
+				//
+				// Example: 14104993
 				ApplicationNumberText *string                 `json:"applicationNumberText,omitempty"`
 				ChildContinuityBag    *[]ChildContinuityData  `json:"childContinuityBag,omitempty"`
 				ParentContinuityBag   *[]ParentContinuityData `json:"parentContinuityBag,omitempty"`
-				RequestIdentifier     *string                 `json:"requestIdentifier,omitempty"`
+
+				// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+				RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
 			RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 		}
@@ -9089,9 +13892,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse(rsp *
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9101,7 +13911,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse(rsp *
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9111,9 +13924,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse(rsp *
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9123,9 +13943,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextDocumentsResponse(rsp *
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9154,9 +13981,12 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			// Count Example: 1
 			Count                    *int `json:"count,omitempty"`
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationNumberText Free format of application number
+				//
+				// Example: 14104993
 				ApplicationNumberText *string            `json:"applicationNumberText,omitempty"`
 				ForeignPriorityBag    *[]ForeignPriority `json:"foreignPriorityBag,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
@@ -9169,9 +13999,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9181,7 +14018,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9191,9 +14031,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9203,9 +14050,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextForeignPriorityResponse
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9234,14 +14088,19 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse(rsp *h
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			// Count Example: 1
 			Count                    interface{} `json:"count,omitempty"`
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationMetaData Represents patent application meta data properties
 				ApplicationMetaData *ApplicationMetaData `json:"applicationMetaData,omitempty"`
 
 				// ApplicationNumberText Free format of application number
+				//
+				// Example: 14104993
 				ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
+
+			// RequestIdentifier Example: 0ff4c603-a290-4659-8092-f68b408150c4
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9251,9 +14110,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse(rsp *h
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9263,7 +14129,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse(rsp *h
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9273,9 +14142,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse(rsp *h
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9285,9 +14161,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextMetaDataResponse(rsp *h
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9316,9 +14199,12 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse(rs
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
+			// Count Example: 1
 			Count                    *int `json:"count,omitempty"`
 			PatentFileWrapperDataBag *[]struct {
 				// ApplicationNumberText Free format of application number
+				//
+				// Example: 14104993
 				ApplicationNumberText *string      `json:"applicationNumberText,omitempty"`
 				EventDataBag          *[]EventData `json:"eventDataBag,omitempty"`
 			} `json:"patentFileWrapperDataBag,omitempty"`
@@ -9331,9 +14217,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse(rs
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9343,7 +14236,10 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse(rs
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9353,9 +14249,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse(rs
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9365,9 +14268,16 @@ func ParseGetApiV1PatentApplicationsApplicationNumberTextTransactionsResponse(rs
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9769,9 +14679,16 @@ func ParseGetApiV1PatentStatusCodesResponse(rsp *http.Response) (*GetApiV1Patent
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9781,7 +14698,10 @@ func ParseGetApiV1PatentStatusCodesResponse(rsp *http.Response) (*GetApiV1Patent
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9791,9 +14711,16 @@ func ParseGetApiV1PatentStatusCodesResponse(rsp *http.Response) (*GetApiV1Patent
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9803,9 +14730,16 @@ func ParseGetApiV1PatentStatusCodesResponse(rsp *http.Response) (*GetApiV1Patent
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9841,9 +14775,16 @@ func ParsePostApiV1PatentStatusCodesResponse(rsp *http.Response) (*PostApiV1Pate
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 400
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Bad Request
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Invalid request, review search request and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9853,7 +14794,10 @@ func ParsePostApiV1PatentStatusCodesResponse(rsp *http.Response) (*PostApiV1Pate
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
 		var dest struct {
-			Code  interface{} `json:"code,omitempty"`
+			// Code Example: 403
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Forbidden
 			Error interface{} `json:"error,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9863,9 +14807,16 @@ func ParsePostApiV1PatentStatusCodesResponse(rsp *http.Response) (*PostApiV1Pate
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 404
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Not Found
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: No matching records found, refine your search criteria and try again
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -9875,9 +14826,16 @@ func ParsePostApiV1PatentStatusCodesResponse(rsp *http.Response) (*PostApiV1Pate
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest struct {
-			Code              interface{} `json:"code,omitempty"`
-			Error             interface{} `json:"error,omitempty"`
-			ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+			// Code Example: 500
+			Code interface{} `json:"code,omitempty"`
+
+			// Error Example: Internal Server Error
+			Error interface{} `json:"error,omitempty"`
+
+			// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+			ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+			// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 			RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -10927,15 +15885,291 @@ func ParseGetApiV1PatentTrialsTrialNumberDocumentsResponse(rsp *http.Response) (
 	return response, nil
 }
 
-// ParseGetApiV1PetitionDecisionsSearchResponse parses an HTTP response from a GetApiV1PetitionDecisionsSearchWithResponse call
-func ParseGetApiV1PetitionDecisionsSearchResponse(rsp *http.Response) (*GetApiV1PetitionDecisionsSearchResponse, error) {
+// ParseSearchPetitionDecisionsGetResponse parses an HTTP response from a SearchPetitionDecisionsGetWithResponse call
+func ParseSearchPetitionDecisionsGetResponse(rsp *http.Response) (*SearchPetitionDecisionsGetResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1PetitionDecisionsSearchResponse{
+	response := &SearchPetitionDecisionsGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SearchSuccess
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseSearchPetitionDecisionsPostResponse parses an HTTP response from a SearchPetitionDecisionsPostWithResponse call
+func ParseSearchPetitionDecisionsPostResponse(rsp *http.Response) (*SearchPetitionDecisionsPostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SearchPetitionDecisionsPostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SearchSuccess
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDownloadPetitionDecisionsGetResponse parses an HTTP response from a DownloadPetitionDecisionsGetWithResponse call
+func ParseDownloadPetitionDecisionsGetResponse(rsp *http.Response) (*DownloadPetitionDecisionsGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DownloadPetitionDecisionsGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DownloadSuccess
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case rsp.StatusCode == 200:
+		// Content-type (text/csv) unsupported
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers DownloadPetitionDecisionsGetResponse200Headers
+		if values := rsp.Header.Values("Content-Disposition"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "Content-Disposition", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ContentDisposition = &value
+		}
+		response.Headers200 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseDownloadPetitionDecisionsPostResponse parses an HTTP response from a DownloadPetitionDecisionsPostWithResponse call
+func ParseDownloadPetitionDecisionsPostResponse(rsp *http.Response) (*DownloadPetitionDecisionsPostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DownloadPetitionDecisionsPostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DownloadSuccess
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalServerError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case rsp.StatusCode == 200:
+		// Content-type (text/csv) unsupported
+
+	}
+
+	switch {
+	case rsp.StatusCode == 200:
+		var headers DownloadPetitionDecisionsPostResponse200Headers
+		if values := rsp.Header.Values("Content-Disposition"); len(values) > 0 {
+			var value string
+			if err := runtime.BindStyledParameterWithOptions("simple", "Content-Disposition", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.ContentDisposition = &value
+		}
+		response.Headers200 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseGetPetitionDecisionByIdResponse parses an HTTP response from a GetPetitionDecisionByIdWithResponse call
+func ParseGetPetitionDecisionByIdResponse(rsp *http.Response) (*GetPetitionDecisionByIdResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPetitionDecisionByIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -10949,244 +16183,35 @@ func ParseGetApiV1PetitionDecisionsSearchResponse(rsp *http.Response) (*GetApiV1
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Response400
+		var dest BadRequest
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Response403
+		var dest Forbidden
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON403 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Response404
+		var dest NotFound
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest Response500
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParsePostApiV1PetitionDecisionsSearchResponse parses an HTTP response from a PostApiV1PetitionDecisionsSearchWithResponse call
-func ParsePostApiV1PetitionDecisionsSearchResponse(rsp *http.Response) (*PostApiV1PetitionDecisionsSearchResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PostApiV1PetitionDecisionsSearchResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PetitionDecisionResponseBag
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Response400
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Response403
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Response404
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest Response500
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetApiV1PetitionDecisionsSearchDownloadResponse parses an HTTP response from a GetApiV1PetitionDecisionsSearchDownloadWithResponse call
-func ParseGetApiV1PetitionDecisionsSearchDownloadResponse(rsp *http.Response) (*GetApiV1PetitionDecisionsSearchDownloadResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiV1PetitionDecisionsSearchDownloadResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PetitionDecisionResponseBag
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Response400
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Response403
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Response404
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest Response500
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParsePostApiV1PetitionDecisionsSearchDownloadResponse parses an HTTP response from a PostApiV1PetitionDecisionsSearchDownloadWithResponse call
-func ParsePostApiV1PetitionDecisionsSearchDownloadResponse(rsp *http.Response) (*PostApiV1PetitionDecisionsSearchDownloadResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PostApiV1PetitionDecisionsSearchDownloadResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PetitionDecisionResponseBag
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Response400
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Response403
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Response404
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest Response500
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse parses an HTTP response from a GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierWithResponse call
-func ParseGetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse(rsp *http.Response) (*GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PetitionDecisionIdentifierResponseBag
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Response400
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Response403
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Response404
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest Response500
+		var dest InternalServerError
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

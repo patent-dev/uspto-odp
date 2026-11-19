@@ -7,15 +7,23 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
-const (
-	ApiKeyAuthScopes = "ApiKeyAuth.Scopes"
-)
-
 // Defines values for PatentDownloadRequestFormat.
 const (
 	PatentDownloadRequestFormatCsv  PatentDownloadRequestFormat = "csv"
 	PatentDownloadRequestFormatJson PatentDownloadRequestFormat = "json"
 )
+
+// Valid indicates whether the value is a known member of the PatentDownloadRequestFormat enum.
+func (e PatentDownloadRequestFormat) Valid() bool {
+	switch e {
+	case PatentDownloadRequestFormatCsv:
+		return true
+	case PatentDownloadRequestFormatJson:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for PetitionDecisionDownloadRequestFormat.
 const (
@@ -23,13 +31,35 @@ const (
 	PetitionDecisionDownloadRequestFormatJson PetitionDecisionDownloadRequestFormat = "json"
 )
 
+// Valid indicates whether the value is a known member of the PetitionDecisionDownloadRequestFormat enum.
+func (e PetitionDecisionDownloadRequestFormat) Valid() bool {
+	switch e {
+	case PetitionDecisionDownloadRequestFormatCsv:
+		return true
+	case PetitionDecisionDownloadRequestFormatJson:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PetitionDecisionSortOrder.
 const (
-	PetitionDecisionSortOrderAsc   PetitionDecisionSortOrder = "Asc"
-	PetitionDecisionSortOrderAsc1  PetitionDecisionSortOrder = "asc"
-	PetitionDecisionSortOrderDesc  PetitionDecisionSortOrder = "Desc"
-	PetitionDecisionSortOrderDesc1 PetitionDecisionSortOrder = "desc"
+	PetitionDecisionSortOrderAsc  PetitionDecisionSortOrder = "asc"
+	PetitionDecisionSortOrderDesc PetitionDecisionSortOrder = "desc"
 )
+
+// Valid indicates whether the value is a known member of the PetitionDecisionSortOrder enum.
+func (e PetitionDecisionSortOrder) Valid() bool {
+	switch e {
+	case PetitionDecisionSortOrderAsc:
+		return true
+	case PetitionDecisionSortOrderDesc:
+		return true
+	default:
+		return false
+	}
+}
 
 // Defines values for SortOrder.
 const (
@@ -39,65 +69,162 @@ const (
 	SortOrderDesc1 SortOrder = "desc"
 )
 
+// Valid indicates whether the value is a known member of the SortOrder enum.
+func (e SortOrder) Valid() bool {
+	switch e {
+	case SortOrderAsc:
+		return true
+	case SortOrderAsc1:
+		return true
+	case SortOrderDesc:
+		return true
+	case SortOrderDesc1:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for DownloadPetitionDecisionsGetParamsFormat.
+const (
+	DownloadPetitionDecisionsGetParamsFormatCsv  DownloadPetitionDecisionsGetParamsFormat = "csv"
+	DownloadPetitionDecisionsGetParamsFormatJson DownloadPetitionDecisionsGetParamsFormat = "json"
+)
+
+// Valid indicates whether the value is a known member of the DownloadPetitionDecisionsGetParamsFormat enum.
+func (e DownloadPetitionDecisionsGetParamsFormat) Valid() bool {
+	switch e {
+	case DownloadPetitionDecisionsGetParamsFormatCsv:
+		return true
+	case DownloadPetitionDecisionsGetParamsFormatJson:
+		return true
+	default:
+		return false
+	}
+}
+
 // AppealDecisionDataResponse defines model for AppealDecisionDataResponse.
 type AppealDecisionDataResponse struct {
+	// Count Example: 1
 	Count               *int                   `json:"count,omitempty"`
 	PatentAppealDataBag *[]PatentAppealDataBag `json:"patentAppealDataBag,omitempty"`
-	RequestIdentifier   *string                `json:"requestIdentifier,omitempty"`
+
+	// RequestIdentifier Example: 501eacc7-c785-4d85-96ac-a39f3f5533aa
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 }
 
 // ApplicationMetaData Represents patent application meta data properties
 type ApplicationMetaData struct {
 	ApplicantBag *[]struct {
+		// ApplicantNameText Example: John Smith
 		ApplicantNameText        *string `json:"applicantNameText,omitempty"`
 		CorrespondenceAddressBag *[]struct {
-			CityName              *string `json:"cityName,omitempty"`
-			CountryCode           *string `json:"countryCode,omitempty"`
-			CountryName           *string `json:"countryName,omitempty"`
-			GeographicRegionCode  *string `json:"geographicRegionCode,omitempty"`
-			GeographicRegionName  *string `json:"geographicRegionName,omitempty"`
-			NameLineOneText       *string `json:"nameLineOneText,omitempty"`
-			NameLineTwoText       *string `json:"nameLineTwoText,omitempty"`
+			// CityName Example: Montrouge
+			CityName *string `json:"cityName,omitempty"`
+
+			// CountryCode Example: FR
+			CountryCode *string `json:"countryCode,omitempty"`
+
+			// CountryName Example: FRANCE
+			CountryName *string `json:"countryName,omitempty"`
+
+			// GeographicRegionCode Example: Minnesota
+			GeographicRegionCode *string `json:"geographicRegionCode,omitempty"`
+
+			// GeographicRegionName Example: MN
+			GeographicRegionName *string `json:"geographicRegionName,omitempty"`
+
+			// NameLineOneText Example: STMicroelectronics S.A.
+			NameLineOneText *string `json:"nameLineOneText,omitempty"`
+
+			// NameLineTwoText Example: Electronics
+			NameLineTwoText *string `json:"nameLineTwoText,omitempty"`
+
+			// PostalAddressCategory Example: commercial
 			PostalAddressCategory *string `json:"postalAddressCategory,omitempty"`
 		} `json:"correspondenceAddressBag,omitempty"`
-		CountryCode   *string `json:"countryCode,omitempty"`
-		FirstName     *string `json:"firstName,omitempty"`
-		LastName      *string `json:"lastName,omitempty"`
-		MiddleName    *string `json:"middleName,omitempty"`
-		NamePrefix    *string `json:"namePrefix,omitempty"`
-		NameSuffix    *string `json:"nameSuffix,omitempty"`
+
+		// CountryCode Example: US
+		CountryCode *string `json:"countryCode,omitempty"`
+
+		// FirstName Example: John
+		FirstName *string `json:"firstName,omitempty"`
+
+		// LastName Example: Smith
+		LastName *string `json:"lastName,omitempty"`
+
+		// MiddleName Example: P
+		MiddleName *string `json:"middleName,omitempty"`
+
+		// NamePrefix Example: Mr.
+		NamePrefix *string `json:"namePrefix,omitempty"`
+
+		// NameSuffix Example: Jr.
+		NameSuffix *string `json:"nameSuffix,omitempty"`
+
+		// PreferredName Example: John Smith
 		PreferredName *string `json:"preferredName,omitempty"`
 	} `json:"applicantBag,omitempty"`
-	ApplicationConfirmationNumber    *float32 `json:"applicationConfirmationNumber,omitempty"`
-	ApplicationStatusCode            *int     `json:"applicationStatusCode,omitempty"`
-	ApplicationStatusDate            *string  `json:"applicationStatusDate,omitempty"`
-	ApplicationStatusDescriptionText *string  `json:"applicationStatusDescriptionText,omitempty"`
-	ApplicationTypeCategory          *string  `json:"applicationTypeCategory,omitempty"`
+
+	// ApplicationConfirmationNumber Example: 1061
+	ApplicationConfirmationNumber *float32 `json:"applicationConfirmationNumber,omitempty"`
+
+	// ApplicationStatusCode Example: 150
+	ApplicationStatusCode *int `json:"applicationStatusCode,omitempty"`
+
+	// ApplicationStatusDate Example: 2016-05-18
+	ApplicationStatusDate *string `json:"applicationStatusDate,omitempty"`
+
+	// ApplicationStatusDescriptionText Example: Patented Case
+	ApplicationStatusDescriptionText *string `json:"applicationStatusDescriptionText,omitempty"`
+
+	// ApplicationTypeCategory Example: electronics
+	ApplicationTypeCategory *string `json:"applicationTypeCategory,omitempty"`
 
 	// ApplicationTypeCode Code corresponding to Utility, Plant, Design, or Reissue
-	ApplicationTypeCode      *string `json:"applicationTypeCode,omitempty"`
+	//
+	// Example: UTL
+	ApplicationTypeCode *string `json:"applicationTypeCode,omitempty"`
+
+	// ApplicationTypeLabelName Example: Utility
 	ApplicationTypeLabelName *string `json:"applicationTypeLabelName,omitempty"`
 
 	// Class The first hierarchical level in the USPC classification schedule
+	//
+	// Example: 257
 	Class *string `json:"class,omitempty"`
 
 	// CpcClassificationBag Collection of Classifications for CPC
+	//
+	// Example: ["H01L29/66325","H01L27/0623","H01L29/7378","H01L21/8249","H01L29/737","H01L29/66242"]
 	CpcClassificationBag *[]string `json:"cpcClassificationBag,omitempty"`
 
 	// CustomerNumber Correspondence address of the application inherited from the customer.
-	CustomerNumber          *int    `json:"customerNumber,omitempty"`
-	DocketNumber            *string `json:"docketNumber,omitempty"`
+	//
+	// Example: 38106
+	CustomerNumber *int `json:"customerNumber,omitempty"`
+
+	// DocketNumber Example: 12GR10425US01/859063.688
+	DocketNumber *string `json:"docketNumber,omitempty"`
+
+	// EarliestPublicationDate Example: 2014-06-19
 	EarliestPublicationDate *string `json:"earliestPublicationDate,omitempty"`
 
 	// EarliestPublicationNumber Publication number corresponding to the earliest publication
+	//
+	// Example: US 2014-0167116 A1
 	EarliestPublicationNumber *string `json:"earliestPublicationNumber,omitempty"`
 
 	// EffectiveFilingDate The date according to PTO criteria that the patent case qualified as having been 'filed'.  The effective filing date is the same or later than the Filing Date.  The filing date can be changed due to a subsequent action on an application patent case.
+	//
+	// Example: 2013-12-12
 	EffectiveFilingDate *string `json:"effectiveFilingDate,omitempty"`
 
 	// EntityStatusData Indicates the applicant's entity status
 	EntityStatusData *struct {
 		// BusinessEntityStatusCategory Status of business entity being established for the purpose of paying a fee such as a filing fee and a maintenance fee
+		//
+		// Example: Undiscounted
 		BusinessEntityStatusCategory *string `json:"businessEntityStatusCategory,omitempty"`
 
 		// SmallEntityStatusIndicator Indicates whether the applicant qualifies for small entity status
@@ -105,60 +232,121 @@ type ApplicationMetaData struct {
 	} `json:"entityStatusData,omitempty"`
 
 	// ExaminerNameText Name of patent examiner
+	//
+	// Example: HUI TSAI JEY
 	ExaminerNameText *string `json:"examinerNameText,omitempty"`
 
 	// FilingDate The date assigned by the Patent Office that identifies when an application meets certain criteria to qualify as having been filed. Refers to ST.9 INID Code 22.
-	FilingDate                   *string `json:"filingDate,omitempty"`
-	FirstApplicantName           *string `json:"firstApplicantName,omitempty"`
-	FirstInventorName            *string `json:"firstInventorName,omitempty"`
+	//
+	// Example: 2012-12-19
+	FilingDate *string `json:"filingDate,omitempty"`
+
+	// FirstApplicantName Example: STMicroelectronics S.A.
+	FirstApplicantName *string `json:"firstApplicantName,omitempty"`
+
+	// FirstInventorName Example: Pascal Chevalier
+	FirstInventorName *string `json:"firstInventorName,omitempty"`
+
+	// FirstInventorToFileIndicator Example: Y
 	FirstInventorToFileIndicator *string `json:"firstInventorToFileIndicator,omitempty"`
-	GrantDate                    *string `json:"grantDate,omitempty"`
+
+	// GrantDate Example: 2016-06-07
+	GrantDate *string `json:"grantDate,omitempty"`
 
 	// GroupArtUnitNumber GAU Code
+	//
+	// Example: TTAB
 	GroupArtUnitNumber *string `json:"groupArtUnitNumber,omitempty"`
 
 	// InternationalRegistrationNumber The number assigned by the International Bureau to an international registration upon registering an industrial design, a trademark or other type of IPR in the International Register
+	//
+	// Example: DM/091304
 	InternationalRegistrationNumber *string `json:"internationalRegistrationNumber,omitempty"`
 
 	// InternationalRegistrationPublicationDate The date that the IPR is published by the International Bureau
+	//
+	// Example: 2016-12-16
 	InternationalRegistrationPublicationDate *string `json:"internationalRegistrationPublicationDate,omitempty"`
-	InventionTitle                           *string `json:"inventionTitle,omitempty"`
-	InventorBag                              *[]struct {
+
+	// InventionTitle Example: HETEROJUNCTION BIPOLAR TRANSISTOR
+	InventionTitle *string `json:"inventionTitle,omitempty"`
+	InventorBag    *[]struct {
 		CorrespondenceAddressBag *[]struct {
-			CityName              *string `json:"cityName,omitempty"`
-			CountryCode           *string `json:"countryCode,omitempty"`
-			CountryName           *string `json:"countryName,omitempty"`
-			GeographicRegionCode  *string `json:"geographicRegionCode,omitempty"`
-			GeographicRegionName  *string `json:"geographicRegionName,omitempty"`
-			NameLineOneText       *string `json:"nameLineOneText,omitempty"`
-			NameLineTwoText       *string `json:"nameLineTwoText,omitempty"`
+			// CityName Example: Chapareillan
+			CityName *string `json:"cityName,omitempty"`
+
+			// CountryCode Example: FR
+			CountryCode *string `json:"countryCode,omitempty"`
+
+			// CountryName Example: FRANCE
+			CountryName *string `json:"countryName,omitempty"`
+
+			// GeographicRegionCode Example: FR
+			GeographicRegionCode *string `json:"geographicRegionCode,omitempty"`
+
+			// GeographicRegionName Example: Region Name
+			GeographicRegionName *string `json:"geographicRegionName,omitempty"`
+
+			// NameLineOneText Example: Pascal  Chevalier
+			NameLineOneText *string `json:"nameLineOneText,omitempty"`
+
+			// NameLineTwoText Example: Name Two
+			NameLineTwoText *string `json:"nameLineTwoText,omitempty"`
+
+			// PostalAddressCategory Example: commercial
 			PostalAddressCategory *string `json:"postalAddressCategory,omitempty"`
 		} `json:"correspondenceAddressBag,omitempty"`
-		CountryCode      *string `json:"countryCode,omitempty"`
-		FirstName        *string `json:"firstName,omitempty"`
+
+		// CountryCode Example: US
+		CountryCode *string `json:"countryCode,omitempty"`
+
+		// FirstName Example: John
+		FirstName *string `json:"firstName,omitempty"`
+
+		// InventorNameText Example: Pascal Chevalier
 		InventorNameText *string `json:"inventorNameText,omitempty"`
-		LastName         *string `json:"lastName,omitempty"`
-		MiddleName       *string `json:"middleName,omitempty"`
-		NamePrefix       *string `json:"namePrefix,omitempty"`
-		NameSuffix       *string `json:"nameSuffix,omitempty"`
-		PreferredName    *string `json:"preferredName,omitempty"`
+
+		// LastName Example: Smith
+		LastName *string `json:"lastName,omitempty"`
+
+		// MiddleName Example: K
+		MiddleName *string `json:"middleName,omitempty"`
+
+		// NamePrefix Example: Mr.
+		NamePrefix *string `json:"namePrefix,omitempty"`
+
+		// NameSuffix Example: Sr.
+		NameSuffix *string `json:"nameSuffix,omitempty"`
+
+		// PreferredName Example: John Smith
+		PreferredName *string `json:"preferredName,omitempty"`
 	} `json:"inventorBag,omitempty"`
 
 	// NationalStageIndicator Indicates whether this application is a national application which entered the national stage from an international PCT application
-	NationalStageIndicator *bool   `json:"nationalStageIndicator,omitempty"`
-	PatentNumber           *string `json:"patentNumber,omitempty"`
-	PctPublicationDate     *string `json:"pctPublicationDate,omitempty"`
+	NationalStageIndicator *bool `json:"nationalStageIndicator,omitempty"`
+
+	// PatentNumber Example: 9362380
+	PatentNumber *string `json:"patentNumber,omitempty"`
+
+	// PctPublicationDate Example: 2016-12-16
+	PctPublicationDate *string `json:"pctPublicationDate,omitempty"`
 
 	// PctPublicationNumber The unique identifier assigned to the publication of an international patent application in the PCT Gazette by the International Bureau (IB) of the World Intellectual Property Organization (WIPO).
+	//
+	// Example: WO 2009/064413
 	PctPublicationNumber         *string   `json:"pctPublicationNumber,omitempty"`
 	PublicationCategoryBag       *[]string `json:"publicationCategoryBag,omitempty"`
 	PublicationDateBag           *[]string `json:"publicationDateBag,omitempty"`
 	PublicationSequenceNumberBag *[]string `json:"publicationSequenceNumberBag,omitempty"`
 
 	// Subclass The second highest hierarchical level  in the USP C classification schedule
+	//
+	// Example: 197000
 	Subclass *string `json:"subclass,omitempty"`
 
 	// UspcSymbolText The first hierarchical level in the USPC classification schedule/ The second highest hierarchical level in the USP C classification schedule
+	//
+	// Example: 257/197000
 	UspcSymbolText *string `json:"uspcSymbolText,omitempty"`
 }
 
@@ -166,121 +354,211 @@ type ApplicationMetaData struct {
 type Assignment struct {
 	AssigneeBag *[]struct {
 		AssigneeAddress *struct {
-			AddressLineFourText  *string `json:"addressLineFourText,omitempty"`
+			AddressLineFourText *string `json:"addressLineFourText,omitempty"`
+
+			// AddressLineOneText Example: CHEMIN DU CHAMP-DES-FILLES 39
 			AddressLineOneText   *string `json:"addressLineOneText,omitempty"`
 			AddressLineThreeText *string `json:"addressLineThreeText,omitempty"`
-			AddressLineTwoText   *string `json:"addressLineTwoText,omitempty"`
-			CityName             *string `json:"cityName,omitempty"`
+
+			// AddressLineTwoText Example: 1228 PLAN-LES-OUATES
+			AddressLineTwoText *string `json:"addressLineTwoText,omitempty"`
+
+			// CityName Example: GENEVA
+			CityName *string `json:"cityName,omitempty"`
+
+			// CountryName Example: Switzerland
 			CountryName          *string `json:"countryName,omitempty"`
-			CountryOrStateCode   *string `json:"countryOrStateCode,omitempty"`
 			GeographicRegionCode *string `json:"geographicRegionCode,omitempty"`
+
+			// GeographicRegionName Example: CHX
 			GeographicRegionName *string `json:"geographicRegionName,omitempty"`
 			IctCountryCode       *string `json:"ictCountryCode,omitempty"`
 			IctStateCode         *string `json:"ictStateCode,omitempty"`
-			PostalCode           *string `json:"postalCode,omitempty"`
+
+			// PostalCode Example: 20123
+			PostalCode *string `json:"postalCode,omitempty"`
 		} `json:"assigneeAddress,omitempty"`
+
+		// AssigneeNameText Example: STMICROELECTRONICS SA
 		AssigneeNameText *string `json:"assigneeNameText,omitempty"`
 	} `json:"assigneeBag,omitempty"`
+
+	// AssignmentDocumentLocationURI Example: https://legacy-assignments.uspto.gov/assignments/assignment-pat-060620-0769.pdf
 	AssignmentDocumentLocationURI *string `json:"assignmentDocumentLocationURI,omitempty"`
 
 	// AssignmentMailedDate The date an assignment request was mailed to the office or received by the office
-	AssignmentMailedDate   *string `json:"assignmentMailedDate,omitempty"`
+	//
+	// Example: 2022-07-28
+	AssignmentMailedDate *string `json:"assignmentMailedDate,omitempty"`
+
+	// AssignmentReceivedDate Example: 2022-07-11
 	AssignmentReceivedDate *string `json:"assignmentReceivedDate,omitempty"`
+
+	// AssignmentRecordedDate Example: 2022-07-11
 	AssignmentRecordedDate *string `json:"assignmentRecordedDate,omitempty"`
 	AssignorBag            *[]struct {
-		AssignorName  *string `json:"assignorName,omitempty"`
+		// AssignorName Example: STMICROELECTRONICS SA
+		AssignorName *string `json:"assignorName,omitempty"`
+
+		// ExecutionDate Example: 2022-06-30
 		ExecutionDate *string `json:"executionDate,omitempty"`
 	} `json:"assignorBag,omitempty"`
 	AttorneyDocketNumber *string `json:"attorneyDocketNumber,omitempty"`
 
 	// ConveyanceText A description of the nature of the interest conveyed or transaction to be recorded in an assignment. Examples of the types of descriptions `include:` assignment, security agreement, merger, change of name, license, foreclosure, lien,
+	//
+	// Example: ASSIGNMENT OF ASSIGNORS INTEREST (SEE DOCUMENT FOR DETAILS).
 	ConveyanceText        *string                 `json:"conveyanceText,omitempty"`
 	CorrespondenceAddress *map[string]interface{} `json:"correspondenceAddress,omitempty"`
 
 	// DomesticRepresentative US representative for foreign entity
 	DomesticRepresentative *struct {
-		AddressLineFourText   *string `json:"addressLineFourText,omitempty"`
-		AddressLineOneText    *string `json:"addressLineOneText,omitempty"`
-		AddressLineThreeText  *string `json:"addressLineThreeText,omitempty"`
-		AddressLineTwoText    *string `json:"addressLineTwoText,omitempty"`
-		CityName              *string `json:"cityName,omitempty"`
-		CountryName           *string `json:"countryName,omitempty"`
-		EmailAddress          *string `json:"emailAddress,omitempty"`
-		GeographicRegionName  *string `json:"geographicRegionName,omitempty"`
+		AddressLineFourText  *string `json:"addressLineFourText,omitempty"`
+		AddressLineOneText   *string `json:"addressLineOneText,omitempty"`
+		AddressLineThreeText *string `json:"addressLineThreeText,omitempty"`
+		AddressLineTwoText   *string `json:"addressLineTwoText,omitempty"`
+		CityName             *string `json:"cityName,omitempty"`
+		CountryName          *string `json:"countryName,omitempty"`
+		EmailAddress         *string `json:"emailAddress,omitempty"`
+		GeographicRegionName *string `json:"geographicRegionName,omitempty"`
+
+		// LastIngestionDateTime Example: 2025-04-23T02:47:58
 		LastIngestionDateTime *string `json:"lastIngestionDateTime,omitempty"`
 		Name                  *string `json:"name,omitempty"`
 		PostalCode            *string `json:"postalCode,omitempty"`
 	} `json:"domesticRepresentative,omitempty"`
 
 	// FrameNumber 1-4 digit number that identifies the frame number to be used to locate the first image(page) of the assignment on microfilm.
-	FrameNumber              *int    `json:"frameNumber,omitempty"`
-	ImageAvailableStatusCode *bool   `json:"imageAvailableStatusCode,omitempty"`
-	PageTotalQuantity        *int    `json:"pageTotalQuantity,omitempty"`
-	ReelAndFrameNumber       *string `json:"reelAndFrameNumber,omitempty"`
+	//
+	// Example: 769
+	FrameNumber *int `json:"frameNumber,omitempty"`
+
+	// ImageAvailableStatusCode Example: false
+	ImageAvailableStatusCode *bool `json:"imageAvailableStatusCode,omitempty"`
+
+	// PageTotalQuantity Example: 16
+	PageTotalQuantity *int `json:"pageTotalQuantity,omitempty"`
+
+	// ReelAndFrameNumber Example: 60620/769
+	ReelAndFrameNumber *string `json:"reelAndFrameNumber,omitempty"`
 
 	// ReelNumber 1-6 digit number identifies the reel number to be used to locate the assignment on microfilm.
+	//
+	// Example: 60620
 	ReelNumber *int `json:"reelNumber,omitempty"`
 }
 
 // BdssResponseBag defines model for BdssResponseBag.
 type BdssResponseBag struct {
 	BulkDataProductBag *[]BulkDataProductBag `json:"bulkDataProductBag,omitempty"`
-	Count              *int                  `json:"count,omitempty"`
-	Facets             *Facets               `json:"facets,omitempty"`
+
+	// Count Example: 25
+	Count  *int    `json:"count,omitempty"`
+	Facets *Facets `json:"facets,omitempty"`
 }
 
 // BdssResponseProductBag defines model for BdssResponseProductBag.
 type BdssResponseProductBag struct {
 	BulkDataProductBag *[]BulkDataProductBag `json:"bulkDataProductBag,omitempty"`
-	Count              *int                  `json:"count,omitempty"`
+
+	// Count Example: 25
+	Count *int `json:"count,omitempty"`
 }
 
 // BulkDataProductBag defines model for BulkDataProductBag.
 type BulkDataProductBag struct {
-	DaysOfWeekText                  *string             `json:"daysOfWeekText,omitempty"`
-	LastModifiedDateTime            *string             `json:"lastModifiedDateTime,omitempty"`
-	MimeTypeIdentifierArrayText     *[]string           `json:"mimeTypeIdentifierArrayText,omitempty"`
-	ProductDataSetArrayText         *[]string           `json:"productDataSetArrayText,omitempty"`
-	ProductDataSetCategoryArrayText *[]string           `json:"productDataSetCategoryArrayText,omitempty"`
-	ProductDescriptionText          *string             `json:"productDescriptionText,omitempty"`
-	ProductFileBag                  *ProductFileBag     `json:"productFileBag,omitempty"`
-	ProductFileTotalQuantity        *float32            `json:"productFileTotalQuantity,omitempty"`
-	ProductFrequencyText            *string             `json:"productFrequencyText,omitempty"`
-	ProductFromDate                 *openapi_types.Date `json:"productFromDate,omitempty"`
-	ProductIdentifier               *string             `json:"productIdentifier,omitempty"`
-	ProductLabelArrayText           *[]string           `json:"productLabelArrayText,omitempty"`
-	ProductTitleText                *string             `json:"productTitleText,omitempty"`
-	ProductToDate                   *openapi_types.Date `json:"productToDate,omitempty"`
-	ProductTotalFileSize            *float32            `json:"productTotalFileSize,omitempty"`
+	// DaysOfWeekText Example: SUNDAY
+	DaysOfWeekText *string `json:"daysOfWeekText,omitempty"`
+
+	// LastModifiedDateTime Example: 2023-12-07T15:52:00.000Z
+	LastModifiedDateTime            *string   `json:"lastModifiedDateTime,omitempty"`
+	MimeTypeIdentifierArrayText     *[]string `json:"mimeTypeIdentifierArrayText,omitempty"`
+	ProductDataSetArrayText         *[]string `json:"productDataSetArrayText,omitempty"`
+	ProductDataSetCategoryArrayText *[]string `json:"productDataSetCategoryArrayText,omitempty"`
+
+	// ProductDescriptionText Example: Bibliographic and assignments static patent data compiled into file sets. The Weekly Datasets (10-year increments) can be downloaded in bulk.
+	ProductDescriptionText *string         `json:"productDescriptionText,omitempty"`
+	ProductFileBag         *ProductFileBag `json:"productFileBag,omitempty"`
+
+	// ProductFileTotalQuantity Example: 3
+	ProductFileTotalQuantity *float32 `json:"productFileTotalQuantity,omitempty"`
+
+	// ProductFrequencyText Example: WEEKLY
+	ProductFrequencyText *string `json:"productFrequencyText,omitempty"`
+
+	// ProductFromDate Example: 2001-01-01
+	ProductFromDate *openapi_types.Date `json:"productFromDate,omitempty"`
+
+	// ProductIdentifier Example: PTFWPRE
+	ProductIdentifier     *string   `json:"productIdentifier,omitempty"`
+	ProductLabelArrayText *[]string `json:"productLabelArrayText,omitempty"`
+
+	// ProductTitleText Example: Patent File Wrapper (Bulk Datasets) - Weekly
+	ProductTitleText *string `json:"productTitleText,omitempty"`
+
+	// ProductToDate Example: 2025-12-31
+	ProductToDate *openapi_types.Date `json:"productToDate,omitempty"`
+
+	// ProductTotalFileSize Example: 32511973080
+	ProductTotalFileSize *float32 `json:"productTotalFileSize,omitempty"`
 }
 
 // ChildContinuityData defines model for ChildContinuityData.
 type ChildContinuityData struct {
+	// ChildApplicationFilingDate Example: 2015-09-14
 	ChildApplicationFilingDate *string `json:"childApplicationFilingDate,omitempty"`
 
 	// ChildApplicationNumberText Application number of the child application, which is the unique value assigned by the USPTO to a patent application upon receipt
-	ChildApplicationNumberText            *string  `json:"childApplicationNumberText,omitempty"`
-	ChildApplicationStatusCode            *float32 `json:"childApplicationStatusCode,omitempty"`
-	ChildApplicationStatusDescriptionText *string  `json:"childApplicationStatusDescriptionText,omitempty"`
-	ChildPatentNumber                     *string  `json:"childPatentNumber,omitempty"`
-	ClaimParentageTypeCode                *string  `json:"claimParentageTypeCode,omitempty"`
-	ClaimParentageTypeCodeDescriptionText *string  `json:"claimParentageTypeCodeDescriptionText,omitempty"`
-	FirstInventorToFileIndicator          *bool    `json:"firstInventorToFileIndicator,omitempty"`
-	ParentApplicationNumberText           *string  `json:"parentApplicationNumberText,omitempty"`
+	//
+	// Example: 14853719
+	ChildApplicationNumberText *string `json:"childApplicationNumberText,omitempty"`
+
+	// ChildApplicationStatusCode Example: 150
+	ChildApplicationStatusCode *float32 `json:"childApplicationStatusCode,omitempty"`
+
+	// ChildApplicationStatusDescriptionText Example: Patented Case
+	ChildApplicationStatusDescriptionText *string `json:"childApplicationStatusDescriptionText,omitempty"`
+
+	// ChildPatentNumber Example: 9704967
+	ChildPatentNumber *string `json:"childPatentNumber,omitempty"`
+
+	// ClaimParentageTypeCode Example: DIV
+	ClaimParentageTypeCode *string `json:"claimParentageTypeCode,omitempty"`
+
+	// ClaimParentageTypeCodeDescriptionText Example: Claims priority from a provisional application
+	ClaimParentageTypeCodeDescriptionText *string `json:"claimParentageTypeCodeDescriptionText,omitempty"`
+
+	// FirstInventorToFileIndicator Example: false
+	FirstInventorToFileIndicator *bool `json:"firstInventorToFileIndicator,omitempty"`
+
+	// ParentApplicationNumberText Example: 14104993
+	ParentApplicationNumberText *string `json:"parentApplicationNumberText,omitempty"`
 }
 
 // DecisionData defines model for DecisionData.
 type DecisionData struct {
-	AppealOutcomeCategory *string             `json:"appealOutcomeCategory,omitempty"`
-	DecisionIssueDate     *openapi_types.Date `json:"decisionIssueDate,omitempty"`
-	DecisionTypeCategory  *string             `json:"decisionTypeCategory,omitempty"`
-	IssueTypeBag          *[]string           `json:"issueTypeBag,omitempty"`
-	StatuteAndRuleBag     *[]string           `json:"statuteAndRuleBag,omitempty"`
-	TrialOutcomeCategory  *string             `json:"trialOutcomeCategory,omitempty"`
+	// AppealOutcomeCategory Example: Denied
+	AppealOutcomeCategory *string `json:"appealOutcomeCategory,omitempty"`
+
+	// DecisionIssueDate Example: 2025-01-15
+	DecisionIssueDate *openapi_types.Date `json:"decisionIssueDate,omitempty"`
+
+	// DecisionTypeCategory Example: Final Written Decision
+	DecisionTypeCategory *string `json:"decisionTypeCategory,omitempty"`
+
+	// IssueTypeBag Example: ["112","103"]
+	IssueTypeBag *[]string `json:"issueTypeBag,omitempty"`
+
+	// StatuteAndRuleBag Example: ["37 CFR 42.100","37 CFR 43.100"]
+	StatuteAndRuleBag *[]string `json:"statuteAndRuleBag,omitempty"`
+
+	// TrialOutcomeCategory Example: Denied
+	TrialOutcomeCategory *string `json:"trialOutcomeCategory,omitempty"`
 }
 
 // DecisionDataResponse defines model for DecisionDataResponse.
 type DecisionDataResponse struct {
+	// Count Example: 100
 	Count                      *int                          `json:"count,omitempty"`
 	Facets                     *[]Facet                      `json:"facets,omitempty"`
 	PatentTrialDocumentDataBag *[]PatentTrialDecisionDataBag `json:"patentTrialDocumentDataBag,omitempty"`
@@ -289,54 +567,111 @@ type DecisionDataResponse struct {
 
 // DerivationPetitionerData defines model for DerivationPetitionerData.
 type DerivationPetitionerData struct {
-	ApplicationNumberText   *string             `json:"applicationNumberText,omitempty"`
-	CounselName             *string             `json:"counselName,omitempty"`
-	GrantDate               *openapi_types.Date `json:"grantDate,omitempty"`
-	GroupArtUnitNumber      *string             `json:"groupArtUnitNumber,omitempty"`
-	InventorName            *string             `json:"inventorName,omitempty"`
-	PatentNumber            *string             `json:"patentNumber,omitempty"`
-	PatentOwnerName         *string             `json:"patentOwnerName,omitempty"`
-	RealPartyInInterestName *string             `json:"realPartyInInterestName,omitempty"`
-	TechnologyCenterNumber  *string             `json:"technologyCenterNumber,omitempty"`
+	// ApplicationNumberText Example: 13112233
+	ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+	// CounselName Example: Alex M. Advocate
+	CounselName *string `json:"counselName,omitempty"`
+
+	// GrantDate Example: 2018-11-05
+	GrantDate *openapi_types.Date `json:"grantDate,omitempty"`
+
+	// GroupArtUnitNumber Example: 2876
+	GroupArtUnitNumber *string `json:"groupArtUnitNumber,omitempty"`
+
+	// InventorName Example: Noah Davis
+	InventorName *string `json:"inventorName,omitempty"`
+
+	// PatentNumber Example: US9001002B1
+	PatentNumber *string `json:"patentNumber,omitempty"`
+
+	// PatentOwnerName Example: PQR Ventures
+	PatentOwnerName *string `json:"patentOwnerName,omitempty"`
+
+	// RealPartyInInterestName Example: MNO Partners
+	RealPartyInInterestName *string `json:"realPartyInInterestName,omitempty"`
+
+	// TechnologyCenterNumber Example: 2800
+	TechnologyCenterNumber *string `json:"technologyCenterNumber,omitempty"`
 }
 
 // DocumentBag defines model for DocumentBag.
 type DocumentBag struct {
 	Count       *int `json:"count,omitempty"`
 	DocumentBag *[]struct {
-		ApplicationNumberText       *string `json:"applicationNumberText,omitempty"`
-		DirectionCategory           *string `json:"directionCategory,omitempty"`
-		DocumentCode                *string `json:"documentCode,omitempty"`
+		// ApplicationNumberText Example: 16123123
+		ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+		DirectionCategory     *string `json:"directionCategory,omitempty"`
+
+		// DocumentCode Example: WFEE
+		DocumentCode *string `json:"documentCode,omitempty"`
+
+		// DocumentCodeDescriptionText Example: Fee Worksheet (SB06)
 		DocumentCodeDescriptionText *string `json:"documentCodeDescriptionText,omitempty"`
-		DocumentDirectionCategory   *string `json:"documentDirectionCategory,omitempty"`
-		DocumentIdentifier          *string `json:"documentIdentifier,omitempty"`
-		DownloadOptionBag           *[]struct {
-			DownloadUrl        *string `json:"downloadUrl,omitempty"`
+
+		// DocumentDirectionCategory Example: INTERNAL
+		DocumentDirectionCategory *string `json:"documentDirectionCategory,omitempty"`
+
+		// DocumentIdentifier Example: LDXBTPQ7XBLUEX3
+		DocumentIdentifier *string `json:"documentIdentifier,omitempty"`
+		DownloadOptionBag  *[]struct {
+			// DownloadUrl Example: https://api.uspto.gov/api/v1/patent/application/documents/16123123/LDXBTPQ7XBLUEX3.pdf
+			DownloadUrl *string `json:"downloadUrl,omitempty"`
+
+			// MimeTypeIdentifier Example: PDF
 			MimeTypeIdentifier *string `json:"mimeTypeIdentifier,omitempty"`
-			PageTotalQuantity  *int    `json:"pageTotalQuantity,omitempty"`
+
+			// PageTotalQuantity Example: 2
+			PageTotalQuantity *int `json:"pageTotalQuantity,omitempty"`
 		} `json:"downloadOptionBag,omitempty"`
+
+		// OfficialDate Example: 2020-08-31T01:20:29.000-0400
 		OfficialDate *string `json:"officialDate,omitempty"`
 	} `json:"documentBag,omitempty"`
 }
 
 // DocumentData defines model for DocumentData.
 type DocumentData struct {
-	DocumentCategory            *string             `json:"documentCategory,omitempty"`
-	DocumentFilingDate          *openapi_types.Date `json:"documentFilingDate,omitempty"`
-	DocumentIdentifier          *string             `json:"documentIdentifier,omitempty"`
-	DocumentName                *string             `json:"documentName,omitempty"`
-	DocumentNumber              *int                `json:"documentNumber,omitempty"`
-	DocumentOCRText             *string             `json:"documentOCRText,omitempty"`
-	DocumentSizeQuantity        *int                `json:"documentSizeQuantity,omitempty"`
-	DocumentTitleText           *string             `json:"documentTitleText,omitempty"`
-	DocumentTypeDescriptionText *string             `json:"documentTypeDescriptionText,omitempty"`
-	FileDownloadURI             *string             `json:"fileDownloadURI,omitempty"`
-	FilingPartyCategory         *string             `json:"filingPartyCategory,omitempty"`
-	MimeTypeIdentifier          *string             `json:"mimeTypeIdentifier,omitempty"`
+	// DocumentCategory Example: Petition
+	DocumentCategory *string `json:"documentCategory,omitempty"`
+
+	// DocumentFilingDate Example: 2024-04-12
+	DocumentFilingDate *openapi_types.Date `json:"documentFilingDate,omitempty"`
+
+	// DocumentIdentifier Example: 100012345
+	DocumentIdentifier *string `json:"documentIdentifier,omitempty"`
+
+	// DocumentName Example: petition.pdf
+	DocumentName *string `json:"documentName,omitempty"`
+
+	// DocumentNumber Example: 1
+	DocumentNumber *int `json:"documentNumber,omitempty"`
+
+	// DocumentOCRText Example: …
+	DocumentOCRText *string `json:"documentOCRText,omitempty"`
+
+	// DocumentSizeQuantity Example: 123456
+	DocumentSizeQuantity *int `json:"documentSizeQuantity,omitempty"`
+
+	// DocumentTitleText Example: Petition
+	DocumentTitleText *string `json:"documentTitleText,omitempty"`
+
+	// DocumentTypeDescriptionText Example: Petition Type
+	DocumentTypeDescriptionText *string `json:"documentTypeDescriptionText,omitempty"`
+
+	// FileDownloadURI Example: https://ptab.uspto.gov/doc/100012345
+	FileDownloadURI *string `json:"fileDownloadURI,omitempty"`
+
+	// FilingPartyCategory Example: Petitioner
+	FilingPartyCategory *string `json:"filingPartyCategory,omitempty"`
+
+	// MimeTypeIdentifier Example: application/pdf
+	MimeTypeIdentifier *string `json:"mimeTypeIdentifier,omitempty"`
 }
 
 // DocumentDataResponse defines model for DocumentDataResponse.
 type DocumentDataResponse struct {
+	// Count Example: 100
 	Count                      *int                          `json:"count,omitempty"`
 	Facets                     *[]Facet                      `json:"facets,omitempty"`
 	PatentTrialDocumentDataBag *[]PatentTrialDocumentDataBag `json:"patentTrialDocumentDataBag,omitempty"`
@@ -348,10 +683,15 @@ type DownloadRequest = PatentDownloadRequest
 
 // EventData The date the patent case action was recorded.
 type EventData struct {
+	// EventCode Example: ELC_RVW
 	EventCode *string `json:"eventCode,omitempty"`
 
 	// EventDate The date the patent case action was recorded.
-	EventDate            *string `json:"eventDate,omitempty"`
+	//
+	// Example: 2018-10-18
+	EventDate *string `json:"eventDate,omitempty"`
+
+	// EventDescriptionText Example: Electronic Review
 	EventDescriptionText *string `json:"eventDescriptionText,omitempty"`
 }
 
@@ -364,155 +704,299 @@ type Facet struct {
 
 // FacetItem defines model for FacetItem.
 type FacetItem struct {
-	Name     *string `json:"name,omitempty"`
-	Quantity *int    `json:"quantity,omitempty"`
+	// Name Example: IPR
+	Name *string `json:"name,omitempty"`
+
+	// Quantity Example: 16951
+	Quantity *int `json:"quantity,omitempty"`
+}
+
+// FacetValue A single facet value with its document count.
+type FacetValue struct {
+	// Count Number of records matching this facet value.
+	//
+	// Example: 7355
+	Count *int `json:"count,omitempty"`
+
+	// Value The facet value.
+	//
+	// Example: OFFICE OF PETITIONS
+	Value *string `json:"value,omitempty"`
 }
 
 // Facets defines model for Facets.
 type Facets struct {
 	MimeTypeIdentifierArrayText *[]struct {
-		Count *int    `json:"count,omitempty"`
+		// Count Example: 1
+		Count *int `json:"count,omitempty"`
+
+		// Value Example: XML
 		Value *string `json:"value,omitempty"`
 	} `json:"mimeTypeIdentifierArrayText,omitempty"`
 	ProductCategoryArrayText *[]struct {
-		Count *int    `json:"count,omitempty"`
+		// Count Example: 1
+		Count *int `json:"count,omitempty"`
+
+		// Value Example: Patent applications
 		Value *string `json:"value,omitempty"`
 	} `json:"productCategoryArrayText,omitempty"`
 	ProductDataSetArrayText *[]struct {
-		Count *int    `json:"count,omitempty"`
+		// Count Example: 1
+		Count *int `json:"count,omitempty"`
+
+		// Value Example: Research
 		Value *string `json:"value,omitempty"`
 	} `json:"productDataSetArrayText,omitempty"`
 	ProductFrequencyArrayText *[]struct {
-		Count *int    `json:"count,omitempty"`
+		// Count Example: 1
+		Count *int `json:"count,omitempty"`
+
+		// Value Example: DAILY
 		Value *string `json:"value,omitempty"`
 	} `json:"productFrequencyArrayText,omitempty"`
 	ProductLabelArrayText *[]struct {
-		Count *int    `json:"count,omitempty"`
+		// Count Example: 1
+		Count *int `json:"count,omitempty"`
+
+		// Value Example: PATENT
 		Value *string `json:"value,omitempty"`
 	} `json:"productLabelArrayText,omitempty"`
 }
 
 // Filter Add filters to your search request by providing filter name and filter value where name in filter request some field in data set.
 type Filter struct {
+	// Name Example: applicationMetaData.applicationStatusDescriptionText
 	Name  *string   `json:"name,omitempty"`
 	Value *[]string `json:"value,omitempty"`
 }
 
 // ForeignPriority defines model for ForeignPriority.
 type ForeignPriority struct {
+	// ApplicationNumberText Example: 1262321
 	ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
-	FilingDate            *string `json:"filingDate,omitempty"`
-	IpOfficeName          *string `json:"ipOfficeName,omitempty"`
+
+	// FilingDate Example: 2012-12-19
+	FilingDate *string `json:"filingDate,omitempty"`
+
+	// IpOfficeName Example: FRANCE
+	IpOfficeName *string `json:"ipOfficeName,omitempty"`
 }
 
 // GrantFileMetaData Contains patent grant zip and xml file meta data for an application
 type GrantFileMetaData struct {
+	// FileCreateDateTime Example: 2024-08-09:11:30:00
 	FileCreateDateTime *string `json:"fileCreateDateTime,omitempty"`
-	FileLocationURI    *string `json:"fileLocationURI,omitempty"`
-	ProductIdentifier  *string `json:"productIdentifier,omitempty"`
-	XmlFileName        *string `json:"xmlFileName,omitempty"`
-	ZipFileName        *string `json:"zipFileName,omitempty"`
+
+	// FileLocationURI Example: https://bulkdata.uspto.gov/data/patent/grant/redbook/fulltext/2016/ipg160405.zip
+	FileLocationURI *string `json:"fileLocationURI,omitempty"`
+
+	// ProductIdentifier Example: PTGRXML
+	ProductIdentifier *string `json:"productIdentifier,omitempty"`
+
+	// XmlFileName Example: ipg160405.xml
+	XmlFileName *string `json:"xmlFileName,omitempty"`
+
+	// ZipFileName Example: ipg240102.zip
+	ZipFileName *string `json:"zipFileName,omitempty"`
 }
 
 // InterferenceDecisionDataResponse defines model for InterferenceDecisionDataResponse.
 type InterferenceDecisionDataResponse struct {
+	// Count Example: 1490
 	Count                     int32                        `json:"count"`
 	PatentInterferenceDataBag []InterferenceDecisionRecord `json:"patentInterferenceDataBag"`
-	RequestIdentifier         string                       `json:"requestIdentifier"`
+
+	// RequestIdentifier Example: cff9c3ed-82ca-4d2c-a2e6-c43d5710c2ce
+	RequestIdentifier string `json:"requestIdentifier"`
 }
 
 // InterferenceDecisionDocumentData defines model for InterferenceDecisionDocumentData.
 type InterferenceDecisionDocumentData struct {
-	DecisionIssueDate           *openapi_types.Date `json:"decisionIssueDate,omitempty"`
-	DecisionTypeCategory        *string             `json:"decisionTypeCategory,omitempty"`
-	DocumentFilingDate          *openapi_types.Date `json:"documentFilingDate,omitempty"`
-	DocumentIdentifier          *string             `json:"documentIdentifier,omitempty"`
-	DocumentName                *string             `json:"documentName,omitempty"`
-	DocumentOCRText             *string             `json:"documentOCRText,omitempty"`
-	DocumentSizeQuantity        *int64              `json:"documentSizeQuantity,omitempty"`
-	DocumentTitleText           *string             `json:"documentTitleText,omitempty"`
-	FileDownloadURI             *string             `json:"fileDownloadURI,omitempty"`
-	InterferenceOutcomeCategory *string             `json:"interferenceOutcomeCategory,omitempty"`
-	IssueTypeBag                *[]string           `json:"issueTypeBag,omitempty"`
-	StatuteAndRuleBag           *[]string           `json:"statuteAndRuleBag,omitempty"`
+	// DecisionIssueDate Example: 2002-02-25
+	DecisionIssueDate *openapi_types.Date `json:"decisionIssueDate,omitempty"`
+
+	// DecisionTypeCategory Example: Decision
+	DecisionTypeCategory *string `json:"decisionTypeCategory,omitempty"`
+
+	// DocumentFilingDate Example: 2002-02-01
+	DocumentFilingDate *openapi_types.Date `json:"documentFilingDate,omitempty"`
+
+	// DocumentIdentifier Example: a1adf3e98f9e07271420b607222b5ad0...
+	DocumentIdentifier *string `json:"documentIdentifier,omitempty"`
+
+	// DocumentName Example: jd103751
+	DocumentName *string `json:"documentName,omitempty"`
+
+	// DocumentOCRText Example: The opinion in support of the decision...
+	DocumentOCRText *string `json:"documentOCRText,omitempty"`
+
+	// DocumentSizeQuantity Example: 45224
+	DocumentSizeQuantity *int64 `json:"documentSizeQuantity,omitempty"`
+
+	// DocumentTitleText Example: DECISION-103751
+	DocumentTitleText *string `json:"documentTitleText,omitempty"`
+
+	// FileDownloadURI Example: https://example.org/path/to/document.pdf
+	FileDownloadURI *string `json:"fileDownloadURI,omitempty"`
+
+	// InterferenceOutcomeCategory Example: Interference
+	InterferenceOutcomeCategory *string `json:"interferenceOutcomeCategory,omitempty"`
+
+	// IssueTypeBag Example: ["Substantive","Procedural"]
+	IssueTypeBag *[]string `json:"issueTypeBag,omitempty"`
+
+	// StatuteAndRuleBag Example: ["37 CFR 42.100","37 CFR 43.100"]
+	StatuteAndRuleBag *[]string `json:"statuteAndRuleBag,omitempty"`
 }
 
 // InterferenceDecisionRecord defines model for InterferenceDecisionRecord.
 type InterferenceDecisionRecord struct {
 	AdditionalPartyDataBag *[]struct {
-		AdditionalPartyName   *string `json:"additionalPartyName,omitempty"`
+		// AdditionalPartyName Example: ACME CORP
+		AdditionalPartyName *string `json:"additionalPartyName,omitempty"`
+
+		// ApplicationNumberText Example: 07996817
 		ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
-		InventorName          *string `json:"inventorName,omitempty"`
-		PatentNumber          *string `json:"patentNumber,omitempty"`
+
+		// InventorName Example: DOE, JOHN
+		InventorName *string `json:"inventorName,omitempty"`
+
+		// PatentNumber Example: 6614529
+		PatentNumber *string `json:"patentNumber,omitempty"`
 	} `json:"additionalPartyDataBag,omitempty"`
 	DocumentData         *InterferenceDecisionDocumentData `json:"documentData,omitempty"`
 	InterferenceMetaData *struct {
-		DeclarationDate                  *string             `json:"declarationDate,omitempty"`
-		FileDownloadURI                  *string             `json:"fileDownloadURI,omitempty"`
+		DeclarationDate *string `json:"declarationDate,omitempty"`
+
+		// FileDownloadURI Example: /download
+		FileDownloadURI *string `json:"fileDownloadURI,omitempty"`
+
+		// InterferenceLastModifiedDate Example: 2025-05-05
 		InterferenceLastModifiedDate     *openapi_types.Date `json:"interferenceLastModifiedDate,omitempty"`
 		InterferenceLastModifiedDateTime *string             `json:"interferenceLastModifiedDateTime,omitempty"`
-		InterferenceStyleName            *string             `json:"interferenceStyleName,omitempty"`
+
+		// InterferenceStyleName Example: TANG
+		InterferenceStyleName *string `json:"interferenceStyleName,omitempty"`
 	} `json:"interferenceMetaData,omitempty"`
-	InterferenceNumber   string                 `json:"interferenceNumber"`
-	JuniorPartyData      *InterferencePartyData `json:"juniorPartyData,omitempty"`
+
+	// InterferenceNumber Example: 103751
+	InterferenceNumber string                 `json:"interferenceNumber"`
+	JuniorPartyData    *InterferencePartyData `json:"juniorPartyData,omitempty"`
+
+	// LastModifiedDateTime Example: 2025-07-28T21:03:54
 	LastModifiedDateTime *string                `json:"lastModifiedDateTime,omitempty"`
 	SeniorPartyData      *InterferencePartyData `json:"seniorPartyData,omitempty"`
 }
 
 // InterferencePartyData defines model for InterferencePartyData.
 type InterferencePartyData struct {
-	ApplicationNumberText   *string             `json:"applicationNumberText,omitempty"`
-	CounselName             *string             `json:"counselName,omitempty"`
-	GrantDate               *openapi_types.Date `json:"grantDate,omitempty"`
-	GroupArtUnitNumber      *string             `json:"groupArtUnitNumber,omitempty"`
-	InventorName            *string             `json:"inventorName,omitempty"`
-	PatentNumber            *string             `json:"patentNumber,omitempty"`
-	PatentOwnerName         *string             `json:"patentOwnerName,omitempty"`
-	PublicationDate         *openapi_types.Date `json:"publicationDate,omitempty"`
-	PublicationNumber       *string             `json:"publicationNumber,omitempty"`
-	RealPartyInInterestName *string             `json:"realPartyInInterestName,omitempty"`
-	TechnologyCenterNumber  *string             `json:"technologyCenterNumber,omitempty"`
+	// ApplicationNumberText Example: 07996817
+	ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+	// CounselName Example: SMITH, JANE
+	CounselName *string `json:"counselName,omitempty"`
+
+	// GrantDate Example: 2003-09-02
+	GrantDate *openapi_types.Date `json:"grantDate,omitempty"`
+
+	// GroupArtUnitNumber Example: 1763
+	GroupArtUnitNumber *string `json:"groupArtUnitNumber,omitempty"`
+
+	// InventorName Example: TANG
+	InventorName *string `json:"inventorName,omitempty"`
+
+	// PatentNumber Example: 6614529
+	PatentNumber *string `json:"patentNumber,omitempty"`
+
+	// PatentOwnerName Example: TANG
+	PatentOwnerName *string `json:"patentOwnerName,omitempty"`
+
+	// PublicationDate Example: 2002-01-15
+	PublicationDate *openapi_types.Date `json:"publicationDate,omitempty"`
+
+	// PublicationNumber Example: US2002XXXXXXA1
+	PublicationNumber *string `json:"publicationNumber,omitempty"`
+
+	// RealPartyInInterestName Example: TANG
+	RealPartyInInterestName *string `json:"realPartyInInterestName,omitempty"`
+
+	// TechnologyCenterNumber Example: 1700
+	TechnologyCenterNumber *string `json:"technologyCenterNumber,omitempty"`
 }
 
 // PGPubFileMetaData Contains pgpub zip and xml file meta data for an application
 type PGPubFileMetaData struct {
+	// FileCreateDateTime Example: 2024-08-09:11:30:00
 	FileCreateDateTime *string `json:"fileCreateDateTime,omitempty"`
-	FileLocationURI    *string `json:"fileLocationURI,omitempty"`
-	ProductIdentifier  *string `json:"productIdentifier,omitempty"`
-	XmlFileName        *string `json:"xmlFileName,omitempty"`
-	ZipFileName        *string `json:"zipFileName,omitempty"`
+
+	// FileLocationURI Example: https://bulkdata.uspto.gov/data/patent/application/redbook/fulltext/2024/ipa240104.zip
+	FileLocationURI *string `json:"fileLocationURI,omitempty"`
+
+	// ProductIdentifier Example: APPXML
+	ProductIdentifier *string `json:"productIdentifier,omitempty"`
+
+	// XmlFileName Example: ipa240801.xml
+	XmlFileName *string `json:"xmlFileName,omitempty"`
+
+	// ZipFileName Example: ipa240801.zip
+	ZipFileName *string `json:"zipFileName,omitempty"`
 }
 
-// Pagination Pagination information.
+// Pagination Pagination options for controlling result set size and offset.
 type Pagination struct {
-	// Limit Maximum number of patent records to be returned in response
+	// Limit Maximum number of records to return. Max 500.
+	//
+	// Example: 25
 	Limit *int32 `json:"limit,omitempty"`
 
-	// Offset Start
+	// Offset Number of records to skip before returning results.
+	//
+	// Example: 0
 	Offset *int32 `json:"offset,omitempty"`
 }
 
 // ParentContinuityData defines model for ParentContinuityData.
 type ParentContinuityData struct {
-	ChildApplicationNumberText            *string `json:"childApplicationNumberText,omitempty"`
-	ClaimParentageTypeCode                *string `json:"claimParentageTypeCode,omitempty"`
+	// ChildApplicationNumberText Example: 10121016
+	ChildApplicationNumberText *string `json:"childApplicationNumberText,omitempty"`
+
+	// ClaimParentageTypeCode Example: CODE
+	ClaimParentageTypeCode *string `json:"claimParentageTypeCode,omitempty"`
+
+	// ClaimParentageTypeCodeDescriptionText Example: Claims priority from a provisional application
 	ClaimParentageTypeCodeDescriptionText *string `json:"claimParentageTypeCodeDescriptionText,omitempty"`
 
 	// FirstInventorToFileIndicator Indicates first inventor to file.
-	FirstInventorToFileIndicator           *bool   `json:"firstInventorToFileIndicator,omitempty"`
-	ParentApplicationFilingDate            *string `json:"parentApplicationFilingDate,omitempty"`
-	ParentApplicationNumberText            *string `json:"parentApplicationNumberText,omitempty"`
-	ParentApplicationStatusCode            *int    `json:"parentApplicationStatusCode,omitempty"`
+	//
+	// Example: true
+	FirstInventorToFileIndicator *bool `json:"firstInventorToFileIndicator,omitempty"`
+
+	// ParentApplicationFilingDate Example: 2012-05-23
+	ParentApplicationFilingDate *string `json:"parentApplicationFilingDate,omitempty"`
+
+	// ParentApplicationNumberText Example: 123123133
+	ParentApplicationNumberText *string `json:"parentApplicationNumberText,omitempty"`
+
+	// ParentApplicationStatusCode Example: 159
+	ParentApplicationStatusCode *int `json:"parentApplicationStatusCode,omitempty"`
+
+	// ParentApplicationStatusDescriptionText Example: Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362
 	ParentApplicationStatusDescriptionText *string `json:"parentApplicationStatusDescriptionText,omitempty"`
-	ParentPatentNumber                     *string `json:"parentPatentNumber,omitempty"`
+
+	// ParentPatentNumber Example: 8968299
+	ParentPatentNumber *string `json:"parentPatentNumber,omitempty"`
 }
 
 // PatentDataResponse This json structure represents all data fields possible for a patent application. Not all fields mentioned here will be returned in API response, only fields that have data should present in the response.
 type PatentDataResponse struct {
+	// Count Example: 1
 	Count  *int `json:"count,omitempty"`
 	Facets *[]struct {
 		ApplicationStatusCode *[]struct {
-			Count *int    `json:"count,omitempty"`
+			// Count Example: 44673
+			Count *int `json:"count,omitempty"`
+
+			// Value Example: Utility
 			Value *string `json:"value,omitempty"`
 		} `json:"applicationStatusCode,omitempty"`
 	} `json:"facets,omitempty"`
@@ -521,29 +1005,54 @@ type PatentDataResponse struct {
 		ApplicationMetaData *ApplicationMetaData `json:"applicationMetaData,omitempty"`
 
 		// ApplicationNumberText Free format of application number
+		//
+		// Example: 14104993
 		ApplicationNumberText *string                `json:"applicationNumberText,omitempty"`
 		AssignmentBag         *[]Assignment          `json:"assignmentBag,omitempty"`
 		ChildContinuityBag    *[]ChildContinuityData `json:"childContinuityBag,omitempty"`
 
 		// CorrespondenceAddressBag Collection of correspondences
 		CorrespondenceAddressBag *[]struct {
-			AddressLineOneText    *string `json:"addressLineOneText,omitempty"`
-			AddressLineTwoText    *string `json:"addressLineTwoText,omitempty"`
-			CityName              *string `json:"cityName,omitempty"`
-			CountryCode           *string `json:"countryCode,omitempty"`
-			CountryName           *string `json:"countryName,omitempty"`
-			GeographicRegionCode  *string `json:"geographicRegionCode,omitempty"`
-			GeographicRegionName  *string `json:"geographicRegionName,omitempty"`
-			NameLineOneText       *string `json:"nameLineOneText,omitempty"`
-			NameLineTwoText       *string `json:"nameLineTwoText,omitempty"`
+			// AddressLineOneText Example: 701 FIFTH AVENUE, SUITE 5400
+			AddressLineOneText *string `json:"addressLineOneText,omitempty"`
+
+			// AddressLineTwoText Example: Suite 501
+			AddressLineTwoText *string `json:"addressLineTwoText,omitempty"`
+
+			// CityName Example: SEATTLE
+			CityName *string `json:"cityName,omitempty"`
+
+			// CountryCode Example: US
+			CountryCode *string `json:"countryCode,omitempty"`
+
+			// CountryName Example: USA
+			CountryName *string `json:"countryName,omitempty"`
+
+			// GeographicRegionCode Example: WA
+			GeographicRegionCode *string `json:"geographicRegionCode,omitempty"`
+
+			// GeographicRegionName Example: WASHINGTON
+			GeographicRegionName *string `json:"geographicRegionName,omitempty"`
+
+			// NameLineOneText Example: Seed IP Law Group LLP/ST (EP ORIGINATING)
+			NameLineOneText *string `json:"nameLineOneText,omitempty"`
+
+			// NameLineTwoText Example: Attn- IP Docket
+			NameLineTwoText *string `json:"nameLineTwoText,omitempty"`
+
+			// PostalAddressCategory Example: commercial
 			PostalAddressCategory *string `json:"postalAddressCategory,omitempty"`
-			PostalCode            *string `json:"postalCode,omitempty"`
+
+			// PostalCode Example: 98104-7092
+			PostalCode *string `json:"postalCode,omitempty"`
 		} `json:"correspondenceAddressBag,omitempty"`
 		EventDataBag       *[]EventData       `json:"eventDataBag,omitempty"`
 		ForeignPriorityBag *[]ForeignPriority `json:"foreignPriorityBag,omitempty"`
 
 		// GrantDocumentMetaData Contains patent grant zip and xml file meta data for an application
-		GrantDocumentMetaData *GrantFileMetaData      `json:"grantDocumentMetaData,omitempty"`
+		GrantDocumentMetaData *GrantFileMetaData `json:"grantDocumentMetaData,omitempty"`
+
+		// LastIngestionDateTime Example: 2024-09-15T21:19:01
 		LastIngestionDateTime *string                 `json:"lastIngestionDateTime,omitempty"`
 		ParentContinuityBag   *[]ParentContinuityData `json:"parentContinuityBag,omitempty"`
 
@@ -561,47 +1070,76 @@ type PatentDataResponse struct {
 
 // PatentDownloadRequest defines model for PatentDownloadRequest.
 type PatentDownloadRequest struct {
+	// Fields Example: ["applicationNumberText","correspondenceAddressBag","applicationMetaData.filingDate"]
 	Fields  *[]string `json:"fields,omitempty"`
 	Filters *[]Filter `json:"filters,omitempty"`
 
 	// Format Download format. csv or json
+	//
+	// Example: json
 	Format *PatentDownloadRequestFormat `json:"format,omitempty"`
 
-	// Pagination Pagination information.
+	// Pagination Pagination options for controlling result set size and offset.
 	Pagination *Pagination `json:"pagination,omitempty"`
 
 	// Q Search by field value or pass opensearch string query syntax
+	//
+	// Example: applicationMetaData.applicationTypeLabelName:Utility
 	Q            *string  `json:"q,omitempty"`
 	RangeFilters *[]Range `json:"rangeFilters,omitempty"`
 	Sort         *[]Sort  `json:"sort,omitempty"`
 }
 
 // PatentDownloadRequestFormat Download format. csv or json
+//
+// Example: json
 type PatentDownloadRequestFormat string
 
 // PatentOwnerData defines model for PatentOwnerData.
 type PatentOwnerData struct {
-	ApplicationNumberText   *string             `json:"applicationNumberText,omitempty"`
-	CounselName             *string             `json:"counselName,omitempty"`
-	GrantDate               *openapi_types.Date `json:"grantDate,omitempty"`
-	GroupArtUnitNumber      *string             `json:"groupArtUnitNumber,omitempty"`
-	InventorName            *string             `json:"inventorName,omitempty"`
-	PatentNumber            *string             `json:"patentNumber,omitempty"`
-	PatentOwnerName         *string             `json:"patentOwnerName,omitempty"`
-	RealPartyInInterestName *string             `json:"realPartyInInterestName,omitempty"`
-	TechnologyCenterNumber  *string             `json:"technologyCenterNumber,omitempty"`
+	// ApplicationNumberText Example: 14412875
+	ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+	// CounselName Example: Jane Q. Attorney
+	CounselName *string `json:"counselName,omitempty"`
+
+	// GrantDate Example: 2019-09-10
+	GrantDate *openapi_types.Date `json:"grantDate,omitempty"`
+
+	// GroupArtUnitNumber Example: 3689
+	GroupArtUnitNumber *string `json:"groupArtUnitNumber,omitempty"`
+
+	// InventorName Example: Liam Johnson
+	InventorName *string `json:"inventorName,omitempty"`
+
+	// PatentNumber Example: US9876543B2
+	PatentNumber *string `json:"patentNumber,omitempty"`
+
+	// PatentOwnerName Example: XYZ Holdings LLC
+	PatentOwnerName *string `json:"patentOwnerName,omitempty"`
+
+	// RealPartyInInterestName Example: ABC Corp.
+	RealPartyInInterestName *string `json:"realPartyInInterestName,omitempty"`
+
+	// TechnologyCenterNumber Example: 3600
+	TechnologyCenterNumber *string `json:"technologyCenterNumber,omitempty"`
 }
 
 // PatentSearchRequest defines model for PatentSearchRequest.
 type PatentSearchRequest struct {
-	Facets  *[]string `json:"facets,omitempty"`
+	// Facets Example: ["applicationMetaData.applicationTypeLabelName","applicationMetaData.applicationStatusCode"]
+	Facets *[]string `json:"facets,omitempty"`
+
+	// Fields Example: ["applicationNumberText","correspondenceAddressBag","applicationMetaData.filingDate"]
 	Fields  *[]string `json:"fields,omitempty"`
 	Filters *[]Filter `json:"filters,omitempty"`
 
-	// Pagination Pagination information.
+	// Pagination Pagination options for controlling result set size and offset.
 	Pagination *Pagination `json:"pagination,omitempty"`
 
 	// Q Search by field value or pass opensearch string query syntax
+	//
+	// Example: applicationMetaData.applicationTypeLabelName:Utility
 	Q            *string  `json:"q,omitempty"`
 	RangeFilters *[]Range `json:"rangeFilters,omitempty"`
 	Sort         *[]Sort  `json:"sort,omitempty"`
@@ -610,322 +1148,628 @@ type PatentSearchRequest struct {
 // PatentTermAdjustment Patent term adjustment data
 type PatentTermAdjustment struct {
 	// ADelayQuantity A delays quantity number of adjustments to the term of the patent based upon USPTO delays included in the PTA determination that is mailed as part of the ISSUE NOTIFICATION LETTER.
+	//
+	// Example: 0
 	ADelayQuantity *int `json:"aDelayQuantity,omitempty"`
 
 	// AdjustmentTotalQuantity Patent term adjustment total quantity number that is a summation of NONOVERLAPPING USPTO DELAYS (+/- PTO MANUAL ADJUSTMENTS) - APPLICANT DELAYS.
+	//
+	// Example: 0
 	AdjustmentTotalQuantity *int `json:"adjustmentTotalQuantity,omitempty"`
 
 	// ApplicantDayDelayQuantity Patent term adjustment applicant delays quantity number of the patent term due to the Applicant's failure to engage in reasonable efforts to conclude prosecution of the application for the cumulative period in excess of three
+	//
+	// Example: 28
 	ApplicantDayDelayQuantity *int `json:"applicantDayDelayQuantity,omitempty"`
 
 	// BDelayQuantity B delays quantity number of adjustments to the term of the patent based upon the patent failing to issue within three years of the actual filing date of the application at the time that the issue notification letter is generated and an issue date has been established.
+	//
+	// Example: 0
 	BDelayQuantity *int `json:"bDelayQuantity,omitempty"`
 
 	// CDelayQuantity C delays quantity number of adjustments to the term of the patent based upon USPTO delays caused by interference proceedings, secrecy orders, and successful appellate reviews.
+	//
+	// Example: 0
 	CDelayQuantity                  *int     `json:"cDelayQuantity,omitempty"`
 	IpOfficeAdjustmentDelayQuantity *float32 `json:"ipOfficeAdjustmentDelayQuantity,omitempty"`
 	NonOverlappingDayDelayQuantity  *float32 `json:"nonOverlappingDayDelayQuantity,omitempty"`
 
 	// NonOverlappingDayQuantity Patent term adjustment non overlapping days quantity number of overall summation of the USPTO delays minus any overlapping days.
+	//
+	// Example: 0
 	NonOverlappingDayQuantity *float32 `json:"nonOverlappingDayQuantity,omitempty"`
 
 	// OverlappingDayQuantity Patent term adjustment overlapping days quantity number that reflects the calculation of overlapping delays consistent with the federal circuit's interpretation.
+	//
+	// Example: 0
 	OverlappingDayQuantity             *float32 `json:"overlappingDayQuantity,omitempty"`
 	PatentTermAdjustmentHistoryDataBag *[]struct {
+		// ApplicantDayDelayQuantity Example: 4
 		ApplicantDayDelayQuantity *int `json:"applicantDayDelayQuantity,omitempty"`
 
 		// EventDate The date that the symbol was assigned to the patent document
-		EventDate            *string  `json:"eventDate,omitempty"`
-		EventDescriptionText *string  `json:"eventDescriptionText,omitempty"`
-		EventSequenceNumber  *float32 `json:"eventSequenceNumber,omitempty"`
+		//
+		// Example: 2016-06-07
+		EventDate *string `json:"eventDate,omitempty"`
+
+		// EventDescriptionText Example: Patent Issue Date Used in PTA Calculation
+		EventDescriptionText *string `json:"eventDescriptionText,omitempty"`
+
+		// EventSequenceNumber Example: 0.5
+		EventSequenceNumber *float32 `json:"eventSequenceNumber,omitempty"`
 
 		// IpOfficeDayDelayQuantity Number of days the UPSTO personnel adjusting the calculation to increase or decrease the patent term adjustment based upon a request for reconsideration of the patent term adjustment.
-		IpOfficeDayDelayQuantity       *int     `json:"ipOfficeDayDelayQuantity,omitempty"`
+		//
+		// Example: 0
+		IpOfficeDayDelayQuantity *int `json:"ipOfficeDayDelayQuantity,omitempty"`
+
+		// OriginatingEventSequenceNumber Example: 0
 		OriginatingEventSequenceNumber *float32 `json:"originatingEventSequenceNumber,omitempty"`
-		PtaPTECode                     *string  `json:"ptaPTECode,omitempty"`
+
+		// PtaPTECode Example: PTA
+		PtaPTECode *string `json:"ptaPTECode,omitempty"`
 	} `json:"patentTermAdjustmentHistoryDataBag,omitempty"`
 }
 
-// PetitionDecision defines model for PetitionDecision.
+// PetitionDecision A single petition decision record.
 type PetitionDecision struct {
-	ActionTakenByCourtName                  *string   `json:"actionTakenByCourtName,omitempty"`
-	ApplicationNumberText                   *string   `json:"applicationNumberText,omitempty"`
-	BusinessEntityStatusCategory            *string   `json:"businessEntityStatusCategory,omitempty"`
-	CourtActionIndicator                    *bool     `json:"courtActionIndicator,omitempty"`
-	CustomerNumber                          *int      `json:"customerNumber,omitempty"`
-	DecisionDate                            *string   `json:"decisionDate,omitempty"`
-	DecisionPetitionTypeCode                *int      `json:"decisionPetitionTypeCode,omitempty"`
-	DecisionPetitionTypeCodeDescriptionText *string   `json:"decisionPetitionTypeCodeDescriptionText,omitempty"`
-	DecisionTypeCode                        *string   `json:"decisionTypeCode,omitempty"`
-	DecisionTypeCodeDescriptionText         *string   `json:"decisionTypeCodeDescriptionText,omitempty"`
-	FinalDecidingOfficeName                 *string   `json:"finalDecidingOfficeName,omitempty"`
-	FirstApplicantName                      *string   `json:"firstApplicantName,omitempty"`
-	FirstInventorToFileIndicator            *bool     `json:"firstInventorToFileIndicator,omitempty"`
-	GroupArtUnitNumber                      *string   `json:"groupArtUnitNumber,omitempty"`
-	InventionTitle                          *string   `json:"inventionTitle,omitempty"`
-	InventorBag                             *[]string `json:"inventorBag,omitempty"`
-	LastIngestionDateTime                   *string   `json:"lastIngestionDateTime,omitempty"`
-	PatentNumber                            *string   `json:"patentNumber,omitempty"`
-	PetitionDecisionRecordIdentifier        *string   `json:"petitionDecisionRecordIdentifier,omitempty"`
-	PetitionIssueConsideredTextBag          *[]string `json:"petitionIssueConsideredTextBag,omitempty"`
-	PetitionMailDate                        *string   `json:"petitionMailDate,omitempty"`
-	ProsecutionStatusCode                   *int      `json:"prosecutionStatusCode,omitempty"`
-	ProsecutionStatusCodeDescriptionText    *string   `json:"prosecutionStatusCodeDescriptionText,omitempty"`
-	RuleBag                                 *[]string `json:"ruleBag,omitempty"`
-	StatuteBag                              *[]string `json:"statuteBag,omitempty"`
-	TechnologyCenter                        *string   `json:"technologyCenter,omitempty"`
+	// ActionTakenByCourtName Name of court that took action, if applicable.
+	//
+	// Example: None
+	ActionTakenByCourtName *string `json:"actionTakenByCourtName,omitempty"`
+	AllSearchableFields    *string `json:"allSearchableFields,omitempty"`
+
+	// ApplicationNumberText USPTO patent application number.
+	//
+	// Example: 15569871
+	ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+	// ApplicationStatusDate Date of the application status.
+	//
+	// Example: 2009-05-04
+	ApplicationStatusDate *string `json:"applicationStatusDate,omitempty"`
+
+	// ApplicationStatusDescriptionText Current status description of the patent application.
+	//
+	// Example: Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362
+	ApplicationStatusDescriptionText *string `json:"applicationStatusDescriptionText,omitempty"`
+
+	// BusinessEntityStatusCategory Business entity size category of the applicant.
+	//
+	// Example: Small
+	BusinessEntityStatusCategory *string `json:"businessEntityStatusCategory,omitempty"`
+
+	// CourtActionIndicator Indicates whether court action has been taken.
+	//
+	// Example: false
+	CourtActionIndicator *bool `json:"courtActionIndicator,omitempty"`
+
+	// CustomerNumber USPTO customer number associated with the application.
+	//
+	// Example: 23628
+	CustomerNumber *int `json:"customerNumber,omitempty"`
+
+	// DecidedPetitionTypeCode Code representing the decided petition type.
+	//
+	// Example: C
+	DecidedPetitionTypeCode *string `json:"decidedPetitionTypeCode,omitempty"`
+
+	// DecidedPetitionTypeCodeDescriptionText Description of the decided petition outcome.
+	//
+	// Example: DENIED
+	DecidedPetitionTypeCodeDescriptionText *string `json:"decidedPetitionTypeCodeDescriptionText,omitempty"`
+
+	// DecisionDate Date the petition decision was issued.
+	//
+	// Example: 2024-03-20
+	DecisionDate *string `json:"decisionDate,omitempty"`
+
+	// DecisionMailDate Date the petition decision was mailed to the applicant.
+	//
+	// Example: 2024-03-25
+	DecisionMailDate         *string `json:"decisionMailDate,omitempty"`
+	DecisionPetitionTypeCode *string `json:"decisionPetitionTypeCode,omitempty"`
+
+	// DecisionPetitionTypeCodeDescriptionText Description of the petition type decision code.
+	//
+	// Example: To Withdraw A Holding of Abandonment in Pre-Exam Status
+	DecisionPetitionTypeCodeDescriptionText *string `json:"decisionPetitionTypeCodeDescriptionText,omitempty"`
+
+	// DocumentBag List of documents associated with this petition decision.
+	DocumentBag *[]PetitionDecisionDocument `json:"documentBag,omitempty"`
+
+	// FinalDecidingOfficeName Name of the office that made the final decision.
+	//
+	// Example: OFFICE OF PETITIONS
+	FinalDecidingOfficeName *string `json:"finalDecidingOfficeName,omitempty"`
+
+	// FinalPetitionDecisionIndicator Indicates whether this is a final petition decision.
+	//
+	// Example: false
+	FinalPetitionDecisionIndicator *bool `json:"finalPetitionDecisionIndicator,omitempty"`
+
+	// FirstApplicantName Name of the first applicant on the patent application.
+	//
+	// Example: BIOVERATIV THERAPEUTICS INC.
+	FirstApplicantName *string `json:"firstApplicantName,omitempty"`
+
+	// FirstInventorToFileIndicator Indicates whether this is a first inventor to file application.
+	//
+	// Example: true
+	FirstInventorToFileIndicator *bool `json:"firstInventorToFileIndicator,omitempty"`
+
+	// GroupArtUnitNumber USPTO group art unit number assigned to the application.
+	//
+	// Example: 1646
+	GroupArtUnitNumber *string `json:"groupArtUnitNumber,omitempty"`
+
+	// InventionTitle Title of the invention as stated in the patent application.
+	//
+	// Example: RECEPTOR TYROSINE KINASE BIOMARKERS
+	InventionTitle *string `json:"inventionTitle,omitempty"`
+
+	// InventorBag List of inventor names associated with the application.
+	//
+	// Example: ["David Clarke","Daniel Rolfe"]
+	InventorBag *[]string `json:"inventorBag,omitempty"`
+
+	// LastModifiedDateTime Timestamp of when the record was last ingested into the system.
+	//
+	// Example: 2025-04-23T02:47:58
+	LastModifiedDateTime *string `json:"lastModifiedDateTime,omitempty"`
+
+	// OcrSearchText OCR extracted text content from the petition decision document. Returns up to 500 characters with search term highlighting.
+	//
+	//
+	// Example: United States Patent and Trademark Office Commissioner for Patents P.O. Box 1450 Alexandria, VA 22313-1450...
+	OcrSearchText *string `json:"ocrSearchText,omitempty"`
+
+	// PatentNumber USPTO patent number if the application has been granted.
+	//
+	// Example: 8894782
+	PatentNumber                     *string `json:"patentNumber,omitempty"`
+	PetitionDecisionRecordIdentifier *string `json:"petitionDecisionRecordIdentifier,omitempty"`
+
+	// PetitionIssueConsideredTextBag List of petition issues considered in this decision.
+	//
+	// Example: [{"Review of Technology Center":"New ground of rejection in examiner's answer"}]
+	PetitionIssueConsideredTextBag *[]string `json:"petitionIssueConsideredTextBag,omitempty"`
+
+	// PetitionMailDate Date the petition was mailed.
+	//
+	// Example: 2022-09-12
+	PetitionMailDate *string `json:"petitionMailDate,omitempty"`
+
+	// ProsecutionStatusCode Numeric code representing the prosecution status at the time of petition.
+	//
+	// Example: 161
+	ProsecutionStatusCode *int64 `json:"prosecutionStatusCode,omitempty"`
+
+	// ProsecutionStatusCodeDescriptionText Description of the prosecution status at time of petition.
+	//
+	// Example: During examination
+	ProsecutionStatusCodeDescriptionText *string `json:"prosecutionStatusCodeDescriptionText,omitempty"`
+
+	// RuleBag List of CFR rules cited in the petition decision.
+	//
+	// Example: ["37 CFR 1.26(a)","37 CFR 1.113"]
+	RuleBag *[]string `json:"ruleBag,omitempty"`
+
+	// StatuteBag List of USC statutes cited in the petition decision.
+	//
+	// Example: ["35 USC 134"]
+	StatuteBag *[]string `json:"statuteBag,omitempty"`
+
+	// TechnologyCenter USPTO technology center handling the application.
+	//
+	// Example: 1646
+	TechnologyCenter *string `json:"technologyCenter,omitempty"`
 }
 
-// PetitionDecisionAndDocuments defines model for PetitionDecisionAndDocuments.
-type PetitionDecisionAndDocuments struct {
-	ActionTakenByCourtName                  *string                     `json:"actionTakenByCourtName,omitempty"`
-	ApplicationNumberText                   *string                     `json:"applicationNumberText,omitempty"`
-	BusinessEntityStatusCategory            *string                     `json:"businessEntityStatusCategory,omitempty"`
-	CourtActionIndicator                    *bool                       `json:"courtActionIndicator,omitempty"`
-	CustomerNumber                          *int                        `json:"customerNumber,omitempty"`
-	DecisionDate                            *string                     `json:"decisionDate,omitempty"`
-	DecisionPetitionTypeCode                *int                        `json:"decisionPetitionTypeCode,omitempty"`
-	DecisionPetitionTypeCodeDescriptionText *string                     `json:"decisionPetitionTypeCodeDescriptionText,omitempty"`
-	DecisionTypeCode                        *string                     `json:"decisionTypeCode,omitempty"`
-	DecisionTypeCodeDescriptionText         *string                     `json:"decisionTypeCodeDescriptionText,omitempty"`
-	DocumentBag                             *[]PetitionDecisionDocument `json:"documentBag,omitempty"`
-	FinalDecidingOfficeName                 *string                     `json:"finalDecidingOfficeName,omitempty"`
-	FirstApplicantName                      *string                     `json:"firstApplicantName,omitempty"`
-	FirstInventorToFileIndicator            *bool                       `json:"firstInventorToFileIndicator,omitempty"`
-	GroupArtUnitNumber                      *string                     `json:"groupArtUnitNumber,omitempty"`
-	InventionTitle                          *string                     `json:"inventionTitle,omitempty"`
-	InventorBag                             *[]string                   `json:"inventorBag,omitempty"`
-	LastIngestionDateTime                   *string                     `json:"lastIngestionDateTime,omitempty"`
-	PatentNumber                            *string                     `json:"patentNumber,omitempty"`
-	PetitionDecisionRecordIdentifier        *string                     `json:"petitionDecisionRecordIdentifier,omitempty"`
-	PetitionIssueConsideredTextBag          *[]string                   `json:"petitionIssueConsideredTextBag,omitempty"`
-	PetitionMailDate                        *string                     `json:"petitionMailDate,omitempty"`
-	ProsecutionStatusCode                   *int                        `json:"prosecutionStatusCode,omitempty"`
-	ProsecutionStatusCodeDescriptionText    *string                     `json:"prosecutionStatusCodeDescriptionText,omitempty"`
-	RuleBag                                 *[]string                   `json:"ruleBag,omitempty"`
-	StatuteBag                              *[]string                   `json:"statuteBag,omitempty"`
-	TechnologyCenter                        *string                     `json:"technologyCenter,omitempty"`
-}
-
-// PetitionDecisionDocument defines model for PetitionDecisionDocument.
+// PetitionDecisionDocument A document associated with a petition decision record.
 type PetitionDecisionDocument struct {
-	ApplicationNumberText       *string `json:"applicationNumberText,omitempty"`
-	DirectionCategory           *string `json:"directionCategory,omitempty"`
-	DocumentCode                *string `json:"documentCode,omitempty"`
+	// DocumentCode Code identifying the type of document.
+	//
+	// Example: PETDEC
+	DocumentCode *string `json:"documentCode,omitempty"`
+
+	// DocumentCodeDescriptionText Description of the document type code.
+	//
+	// Example: Petition Decision
 	DocumentCodeDescriptionText *string `json:"documentCodeDescriptionText,omitempty"`
-	DocumentDirectionCategory   *string `json:"documentDirectionCategory,omitempty"`
-	DocumentIdentifier          *string `json:"documentIdentifier,omitempty"`
-	DownloadOptionBag           *[]struct {
-		DocumentURI        *string `json:"documentURI,omitempty"`
+
+	// DocumentIdentifier Unique identifier for the document.
+	//
+	// Example: M98QOH0NWFYTX17
+	DocumentIdentifier *string `json:"documentIdentifier,omitempty"`
+
+	// DownloadOptionBag List of available download options for this document.
+	DownloadOptionBag *[]struct {
+		// DocumentURI URI to download the document.
+		//
+		// Example: https://data.uspto.gov/ui/download/applications/16123123/M98QOH0NWFYTX17.pdf
+		DocumentURI *string `json:"documentURI,omitempty"`
+		DownloadUrl *string `json:"downloadUrl,omitempty"`
+
+		// MimeTypeIdentifier MIME type of the downloadable document.
+		//
+		// Example: PDF
 		MimeTypeIdentifier *string `json:"mimeTypeIdentifier,omitempty"`
 		PageTotalQuantity  *int    `json:"pageTotalQuantity,omitempty"`
 	} `json:"downloadOptionBag,omitempty"`
+
+	// OfficialDate Official date and time of the document.
+	//
+	// Example: 2020-08-31T01:20:29.000-0400
 	OfficialDate *string `json:"officialDate,omitempty"`
 }
 
-// PetitionDecisionDownloadRequest defines model for PetitionDecisionDownloadRequest.
+// PetitionDecisionDownloadRequest Download request body. All fields are optional. Empty request returns top 25 records sorted by petitionMailDate desc. Facets are not supported on this endpoint.
 type PetitionDecisionDownloadRequest struct {
-	Fields  *[]string                 `json:"fields,omitempty"`
+	// Fields Fields to include in response. Returns all if omitted.
+	//
+	// Example: ["applicationNumberText","patentNumber","firstApplicantName","petitionMailDate","decisionPetitionTypeCode","decidedPetitionTypeCodeDescriptionText","decisionMailDate","finalDecidingOfficeName","decisionDate","technologyCenter","businessEntityStatusCategory"]
+	Fields *[]string `json:"fields,omitempty"`
+
+	// Filters List of exact match filters.
 	Filters *[]PetitionDecisionFilter `json:"filters,omitempty"`
 
-	// Format Download format. pdf,xml or docs
+	// Format Download format. Defaults to csv if not specified.
+	//
+	// Example: csv
 	Format *PetitionDecisionDownloadRequestFormat `json:"format,omitempty"`
 
-	// Pagination Pagination information.
+	// Pagination Pagination options for controlling result set size and offset.
 	Pagination *Pagination `json:"pagination,omitempty"`
 
-	// Q Search by field value or pass opensearch string query syntax
-	Q            *string                  `json:"q,omitempty"`
+	// Q Free-text or advanced Lucene query string. Searches across all searchable fields. Supports boolean (OR/AND/NOT), wildcards (BRANT*), phrases ("Show cause"), and field-specific queries (finalDecidingOfficeName:OFFICE OF PETITIONS).
+	//
+	//
+	// Example: finalDecidingOfficeName:OFFICE OF PETITIONS
+	Q *string `json:"q,omitempty"`
+
+	// RangeFilters List of range filters.
 	RangeFilters *[]PetitionDecisionRange `json:"rangeFilters,omitempty"`
-	Sort         *[]PetitionDecisionSort  `json:"sort,omitempty"`
+
+	// Sort Sort order. Defaults to petitionMailDate desc.
+	Sort *[]PetitionDecisionSort `json:"sort,omitempty"`
 }
 
-// PetitionDecisionDownloadRequestFormat Download format. pdf,xml or docs
+// PetitionDecisionDownloadRequestFormat Download format. Defaults to csv if not specified.
+//
+// Example: csv
 type PetitionDecisionDownloadRequestFormat string
 
-// PetitionDecisionFacet defines model for PetitionDecisionFacet.
-type PetitionDecisionFacet struct {
-	ActionTakenByCourtName               *[]PetitionDecisionFacetEntity `json:"actionTakenByCourtName,omitempty"`
-	BusinessEntityStatusCategory         *[]PetitionDecisionFacetEntity `json:"businessEntityStatusCategory,omitempty"`
-	CourtActionIndicator                 *[]PetitionDecisionFacetEntity `json:"courtActionIndicator,omitempty"`
-	DecisionPetitionTypeCode             *[]PetitionDecisionFacetEntity `json:"decisionPetitionTypeCode,omitempty"`
-	DecisionTypeCodeDescriptionText      *[]PetitionDecisionFacetEntity `json:"decisionTypeCodeDescriptionText,omitempty"`
-	FinalDecidingOfficeName              *[]PetitionDecisionFacetEntity `json:"finalDecidingOfficeName,omitempty"`
-	FirstInventorToFileIndicator         *[]PetitionDecisionFacetEntity `json:"firstInventorToFileIndicator,omitempty"`
-	PetitionIssueConsideredTextBag       *[]PetitionDecisionFacetEntity `json:"petitionIssueConsideredTextBag,omitempty"`
-	ProsecutionStatusCodeDescriptionText *[]PetitionDecisionFacetEntity `json:"prosecutionStatusCodeDescriptionText,omitempty"`
-	RuleBag                              *[]PetitionDecisionFacetEntity `json:"ruleBag,omitempty"`
-	StatuteBag                           *[]PetitionDecisionFacetEntity `json:"statuteBag,omitempty"`
-	TechnologyCenter                     *[]PetitionDecisionFacetEntity `json:"technologyCenter,omitempty"`
-}
-
-// PetitionDecisionFacetEntity defines model for PetitionDecisionFacetEntity.
-type PetitionDecisionFacetEntity struct {
-	Count *int    `json:"count,omitempty"`
-	Value *string `json:"value,omitempty"`
-}
-
-// PetitionDecisionFilter Add filters to your search request by providing filter name and filter value where name in filter request some field in data set.
+// PetitionDecisionFilter Exact match filter. Provide the field name from the dataset and one or more values to filter by.
 type PetitionDecisionFilter struct {
-	Name  *string   `json:"name,omitempty"`
-	Value *[]string `json:"value,omitempty"`
+	// Name Field name to filter on.
+	//
+	// Example: decidedPetitionTypeCodeDescriptionText
+	Name string `json:"name"`
+
+	// Value List of values to filter by.
+	//
+	// Example: ["DENIED"]
+	Value []string `json:"value"`
 }
 
-// PetitionDecisionIdentifierResponseBag defines model for PetitionDecisionIdentifierResponseBag.
-type PetitionDecisionIdentifierResponseBag struct {
-	Count                   *int                            `json:"count,omitempty"`
-	PetitionDecisionDataBag *[]PetitionDecisionAndDocuments `json:"petitionDecisionDataBag,omitempty"`
-	RequestIdentifier       *string                         `json:"requestIdentifier,omitempty"`
-}
-
-// PetitionDecisionRange Range filter. Provide field from dataset and valueFrom and valueTo. If range filter is for date field, date must be in “yyyy-MM-dd” format
+// PetitionDecisionRange Range filter. Provide a field name from the dataset along with valueFrom and valueTo. Date fields must use YYYY-MM-DD format.
 type PetitionDecisionRange struct {
-	Field     *string `json:"field,omitempty"`
+	// Field Field name to apply the range filter on.
+	//
+	// Example: petitionMailDate
+	Field string `json:"field"`
+
+	// ValueFrom Range start value inclusive. Date format YYYY-MM-DD.
+	//
+	// Example: 2022-08-04
 	ValueFrom *string `json:"valueFrom,omitempty"`
-	ValueTo   *string `json:"valueTo,omitempty"`
+
+	// ValueTo Range end value inclusive. Date format YYYY-MM-DD.
+	//
+	// Example: 2025-08-04
+	ValueTo *string `json:"valueTo,omitempty"`
 }
 
-// PetitionDecisionResponseBag defines model for PetitionDecisionResponseBag.
+// PetitionDecisionResponseBag Search response containing matching petition decision records.
 type PetitionDecisionResponseBag struct {
-	Count                   *int                     `json:"count,omitempty"`
-	Facets                  *[]PetitionDecisionFacet `json:"facets,omitempty"`
-	PetitionDecisionDataBag *[]PetitionDecision      `json:"petitionDecisionDataBag,omitempty"`
-	RequestIdentifier       *string                  `json:"requestIdentifier,omitempty"`
+	// Count Total number of matching records.
+	//
+	// Example: 1
+	Count *int `json:"count,omitempty"`
+
+	// Facets Aggregation results per requested facet field.
+	//
+	// Example: {"finalDecidingOfficeName":[{"count":7355,"value":"OFFICE OF PETITIONS"},{"count":120,"value":"INTERNATIONAL DIVISION"}],"firstInventorToFileIndicator":[{"count":4126,"value":"false"},{"count":2136,"value":"true"}]}
+	Facets *map[string][]FacetValue `json:"facets,omitempty"`
+
+	// PetitionDecisionDataBag List of matching petition decision records.
+	PetitionDecisionDataBag *[]PetitionDecision `json:"petitionDecisionDataBag,omitempty"`
+
+	// RequestIdentifier Unique request identifier for traceability.
+	//
+	// Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier *openapi_types.UUID `json:"requestIdentifier,omitempty"`
 }
 
-// PetitionDecisionSearchRequest defines model for PetitionDecisionSearchRequest.
+// PetitionDecisionSearchRequest Search request body. All fields are optional. Empty request returns top 25 records sorted by petitionMailDate desc.
 type PetitionDecisionSearchRequest struct {
-	Facets  *[]string                 `json:"facets,omitempty"`
-	Fields  *[]string                 `json:"fields,omitempty"`
+	// Fields Fields to include in response. Returns all if omitted.
+	//
+	// Example: ["applicationNumberText","patentNumber","firstApplicantName","petitionMailDate","decisionPetitionTypeCode","decidedPetitionTypeCodeDescriptionText","decisionMailDate","finalDecidingOfficeName","businessEntityStatusCategory","groupArtUnitNumber"]
+	Fields *[]string `json:"fields,omitempty"`
+
+	// Filters List of exact match filters.
 	Filters *[]PetitionDecisionFilter `json:"filters,omitempty"`
 
-	// Pagination Pagination information.
+	// Pagination Pagination options for controlling result set size and offset.
 	Pagination *Pagination `json:"pagination,omitempty"`
 
-	// Q Search by field value or pass opensearch string query syntax
-	Q            *string                  `json:"q,omitempty"`
+	// Q Free-text or advanced Lucene query string. Searches across all searchable fields. Supports boolean (OR/AND/NOT), wildcards (BRANT*), phrases ("Show cause"), and field-specific queries (finalDecidingOfficeName:OFFICE OF PETITIONS).
+	//
+	//
+	// Example: finalDecidingOfficeName:OFFICE OF PETITIONS
+	Q *string `json:"q,omitempty"`
+
+	// RangeFilters List of range filters.
 	RangeFilters *[]PetitionDecisionRange `json:"rangeFilters,omitempty"`
-	Sort         *[]PetitionDecisionSort  `json:"sort,omitempty"`
+
+	// Sort Sort order. Defaults to petitionMailDate desc.
+	Sort *[]PetitionDecisionSort `json:"sort,omitempty"`
 }
 
-// PetitionDecisionSort Sort you search result by providing field to be sorted and sort order
+// PetitionDecisionSort Sort clause. Provide the field to sort by and the sort direction.
 type PetitionDecisionSort struct {
-	Field *string `json:"field,omitempty"`
+	// Field Field name to sort by.
+	//
+	// Example: petitionMailDate
+	Field string `json:"field"`
 
-	// Order Sort order. e.g. Asc, ASC, Desc, desc, DESC
-	Order *PetitionDecisionSortOrder `json:"order,omitempty"`
+	// Order Sort direction. Case-insensitive.
+	//
+	// Example: desc
+	Order PetitionDecisionSortOrder `json:"order"`
 }
 
-// PetitionDecisionSortOrder Sort order. e.g. Asc, ASC, Desc, desc, DESC
+// PetitionDecisionSortOrder Sort direction. Case-insensitive.
+//
+// Example: desc
 type PetitionDecisionSortOrder string
 
 // ProceedingDataResponse defines model for ProceedingDataResponse.
 type ProceedingDataResponse struct {
 	Count                        *int                            `json:"count,omitempty"`
 	PatentTrialProceedingDataBag *[]PatentTrialProceedingDataBag `json:"patentTrialProceedingDataBag,omitempty"`
-	RequestIdentifier            *string                         `json:"requestIdentifier,omitempty"`
+
+	// RequestIdentifier Example: 501eacc7-c785-4d85-96ac-a39f3f5533aa
+	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 }
 
 // ProductFileBag defines model for ProductFileBag.
 type ProductFileBag struct {
+	// Count Example: 3
 	Count       *int `json:"count,omitempty"`
 	FileDataBag *[]struct {
-		FileDataFromDate         *openapi_types.Date `json:"fileDataFromDate,omitempty"`
-		FileDataToDate           *openapi_types.Date `json:"fileDataToDate,omitempty"`
-		FileDate                 *openapi_types.Date `json:"fileDate,omitempty"`
-		FileDownloadURI          *string             `json:"fileDownloadURI,omitempty"`
-		FileLastModifiedDateTime *string             `json:"fileLastModifiedDateTime,omitempty"`
-		FileName                 *string             `json:"fileName,omitempty"`
-		FileReleaseDate          *string             `json:"fileReleaseDate,omitempty"`
-		FileSize                 *float32            `json:"fileSize,omitempty"`
-		FileTypeText             *string             `json:"fileTypeText,omitempty"`
+		// FileDataFromDate Example: 2001-01-01
+		FileDataFromDate *openapi_types.Date `json:"fileDataFromDate,omitempty"`
+
+		// FileDataToDate Example: 2010-12-31
+		FileDataToDate *openapi_types.Date `json:"fileDataToDate,omitempty"`
+
+		// FileDate Example: 2001-01-01T00:00:00.000Z
+		FileDate *openapi_types.Date `json:"fileDate,omitempty"`
+
+		// FileDownloadURI Example: https://api.uspto.gov/api/v1/datasets/products/files/PTFWPRE/2001-2010-patent-filewrapper-full-json.zip
+		FileDownloadURI *string `json:"fileDownloadURI,omitempty"`
+
+		// FileLastModifiedDateTime Example: 2025-01-13 08:01:00
+		FileLastModifiedDateTime *string `json:"fileLastModifiedDateTime,omitempty"`
+
+		// FileName Example: 2001-2010-patent-filewrapper-full-json.zip
+		FileName *string `json:"fileName,omitempty"`
+
+		// FileReleaseDate Example: 2025-01-13 08:01:00
+		FileReleaseDate *string `json:"fileReleaseDate,omitempty"`
+
+		// FileSize Example: 1698377311
+		FileSize *float32 `json:"fileSize,omitempty"`
+
+		// FileTypeText Example: Data
+		FileTypeText *string `json:"fileTypeText,omitempty"`
 	} `json:"fileDataBag,omitempty"`
 }
 
 // Range Range filter. Provide field from dataset and valueFrom and valueTo. If range filter is for date field, date must be in “yyyy-MM-dd” format
 type Range struct {
-	Field     *string `json:"field,omitempty"`
+	// Field Example: applicationMetaData.grantDate
+	Field *string `json:"field,omitempty"`
+
+	// ValueFrom Example: 2010-08-04
 	ValueFrom *string `json:"valueFrom,omitempty"`
-	ValueTo   *string `json:"valueTo,omitempty"`
+
+	// ValueTo Example: 2022-08-04
+	ValueTo *string `json:"valueTo,omitempty"`
 }
 
 // RecordAttorney An attorney selected by the applicant or owner of an intellectual property to represent them before the national office.
 type RecordAttorney struct {
 	AttorneyBag *[]struct {
+		// ActiveIndicator Example: ACTIVE
 		ActiveIndicator    *string `json:"activeIndicator,omitempty"`
 		AttorneyAddressBag *[]struct {
-			AddressLineOneText   *string `json:"addressLineOneText,omitempty"`
-			AddressLineTwoText   *string `json:"addressLineTwoText,omitempty"`
-			CityName             *string `json:"cityName,omitempty"`
-			CountryCode          *string `json:"countryCode,omitempty"`
-			CountryName          *string `json:"countryName,omitempty"`
+			// AddressLineOneText Example: 1100 PEACHTREE STREET NE
+			AddressLineOneText *string `json:"addressLineOneText,omitempty"`
+
+			// AddressLineTwoText Example: SUITE 2800
+			AddressLineTwoText *string `json:"addressLineTwoText,omitempty"`
+
+			// CityName Example: ATLANTA
+			CityName *string `json:"cityName,omitempty"`
+
+			// CountryCode Example: US
+			CountryCode *string `json:"countryCode,omitempty"`
+
+			// CountryName Example: UNITED STATES
+			CountryName *string `json:"countryName,omitempty"`
+
+			// GeographicRegionCode Example: GA
 			GeographicRegionCode *string `json:"geographicRegionCode,omitempty"`
+
+			// GeographicRegionName Example: GEORGIA
 			GeographicRegionName *string `json:"geographicRegionName,omitempty"`
-			NameLineOneText      *string `json:"nameLineOneText,omitempty"`
-			NameLineTwoText      *string `json:"nameLineTwoText,omitempty"`
-			PostalCode           *string `json:"postalCode,omitempty"`
+
+			// NameLineOneText Example: KIILPATRICK TOWNSEND & STOCKTON, LLP
+			NameLineOneText *string `json:"nameLineOneText,omitempty"`
+
+			// NameLineTwoText Example: TOWNSEND
+			NameLineTwoText *string `json:"nameLineTwoText,omitempty"`
+
+			// PostalCode Example: 30309
+			PostalCode *string `json:"postalCode,omitempty"`
 		} `json:"attorneyAddressBag,omitempty"`
-		FirstName                      *string `json:"firstName,omitempty"`
-		LastName                       *string `json:"lastName,omitempty"`
-		MiddleName                     *string `json:"middleName,omitempty"`
-		NamePrefix                     *string `json:"namePrefix,omitempty"`
+
+		// FirstName Example: DANIEL
+		FirstName *string `json:"firstName,omitempty"`
+
+		// LastName Example: O'BRIEN
+		LastName *string `json:"lastName,omitempty"`
+
+		// MiddleName Example: D
+		MiddleName *string `json:"middleName,omitempty"`
+
+		// NamePrefix Example: Dr
+		NamePrefix *string `json:"namePrefix,omitempty"`
+
+		// NameSuffix Example: Jr.
 		NameSuffix                     *string `json:"nameSuffix,omitempty"`
 		RegisteredPractitionerCategory *string `json:"registeredPractitionerCategory,omitempty"`
-		RegistrationNumber             *string `json:"registrationNumber,omitempty"`
-		TelecommunicationAddressBag    *[]struct {
-			ExtensionNumber         *string `json:"extensionNumber,omitempty"`
-			TelecomTypeCode         *string `json:"telecomTypeCode,omitempty"`
+
+		// RegistrationNumber Example: 65545
+		RegistrationNumber          *string `json:"registrationNumber,omitempty"`
+		TelecommunicationAddressBag *[]struct {
+			// ExtensionNumber Example: 243
+			ExtensionNumber *string `json:"extensionNumber,omitempty"`
+
+			// TelecomTypeCode Example: TEL
+			TelecomTypeCode *string `json:"telecomTypeCode,omitempty"`
+
+			// TelecommunicationNumber Example: 206-622-4900
 			TelecommunicationNumber *string `json:"telecommunicationNumber,omitempty"`
 		} `json:"telecommunicationAddressBag,omitempty"`
 	} `json:"attorneyBag,omitempty"`
 
 	// CustomerNumberCorrespondenceData Correspondence address of the application inherited from the customer.
 	CustomerNumberCorrespondenceData *struct {
-		OrganizationStandardName  *string  `json:"organizationStandardName,omitempty"`
+		OrganizationStandardName *string `json:"organizationStandardName,omitempty"`
+
+		// PatronIdentifier Example: 38106
 		PatronIdentifier          *float32 `json:"patronIdentifier,omitempty"`
 		PowerOfAttorneyAddressBag *[]struct {
-			AddressLineOneText   *string `json:"addressLineOneText,omitempty"`
-			AddressLineTwoText   *string `json:"addressLineTwoText,omitempty"`
-			CityName             *string `json:"cityName,omitempty"`
-			CountryCode          *string `json:"countryCode,omitempty"`
-			CountryName          *string `json:"countryName,omitempty"`
+			// AddressLineOneText Example: 701 FIFTH AVENUE, SUITE 5400
+			AddressLineOneText *string `json:"addressLineOneText,omitempty"`
+
+			// AddressLineTwoText Example: Sample Line Two
+			AddressLineTwoText *string `json:"addressLineTwoText,omitempty"`
+
+			// CityName Example: SEATTLE
+			CityName *string `json:"cityName,omitempty"`
+
+			// CountryCode Example: US
+			CountryCode *string `json:"countryCode,omitempty"`
+
+			// CountryName Example: UNITED STATES
+			CountryName *string `json:"countryName,omitempty"`
+
+			// GeographicRegionCode Example: WA
 			GeographicRegionCode *string `json:"geographicRegionCode,omitempty"`
+
+			// GeographicRegionName Example: WASHINGTON
 			GeographicRegionName *string `json:"geographicRegionName,omitempty"`
-			NameLineOneText      *string `json:"nameLineOneText,omitempty"`
-			PostalCode           *string `json:"postalCode,omitempty"`
+
+			// NameLineOneText Example: Seed IP Law Group LLP/STMicroelectronics
+			NameLineOneText *string `json:"nameLineOneText,omitempty"`
+
+			// PostalCode Example: 98104-7092
+			PostalCode *string `json:"postalCode,omitempty"`
 		} `json:"powerOfAttorneyAddressBag,omitempty"`
 		TelecommunicationAddressBag *[]struct {
-			ExtensionNumber         *string `json:"extensionNumber,omitempty"`
-			TelecomTypeCode         *string `json:"telecomTypeCode,omitempty"`
+			// ExtensionNumber Example: 409
+			ExtensionNumber *string `json:"extensionNumber,omitempty"`
+
+			// TelecomTypeCode Example: TEL
+			TelecomTypeCode *string `json:"telecomTypeCode,omitempty"`
+
+			// TelecommunicationNumber Example: 206-622-4900
 			TelecommunicationNumber *string `json:"telecommunicationNumber,omitempty"`
 		} `json:"telecommunicationAddressBag,omitempty"`
 	} `json:"customerNumberCorrespondenceData,omitempty"`
 	PowerOfAttorneyBag *[]struct {
+		// ActiveIndicator Example: ACTIVE
 		ActiveIndicator    *string `json:"activeIndicator,omitempty"`
 		AttorneyAddressBag *[]struct {
-			AddressLineOneText   *string `json:"addressLineOneText,omitempty"`
-			AddressLineTwoText   *string `json:"addressLineTwoText,omitempty"`
-			CityName             *string `json:"cityName,omitempty"`
-			CountryCode          *string `json:"countryCode,omitempty"`
-			CountryName          *string `json:"countryName,omitempty"`
+			// AddressLineOneText Example: 701 FIFTH AVENUE
+			AddressLineOneText *string `json:"addressLineOneText,omitempty"`
+
+			// AddressLineTwoText Example: SUITE 5400
+			AddressLineTwoText *string `json:"addressLineTwoText,omitempty"`
+
+			// CityName Example: SEATTLE
+			CityName *string `json:"cityName,omitempty"`
+
+			// CountryCode Example: US
+			CountryCode *string `json:"countryCode,omitempty"`
+
+			// CountryName Example: UNITED STATES
+			CountryName *string `json:"countryName,omitempty"`
+
+			// GeographicRegionCode Example: WA
 			GeographicRegionCode *string `json:"geographicRegionCode,omitempty"`
+
+			// GeographicRegionName Example: WASHINGTON
 			GeographicRegionName *string `json:"geographicRegionName,omitempty"`
-			NameLineOneText      *string `json:"nameLineOneText,omitempty"`
-			NameLineTwoText      *string `json:"nameLineTwoText,omitempty"`
-			PostalCode           *string `json:"postalCode,omitempty"`
+
+			// NameLineOneText Example: SEED IP LAW  GROUP LLP
+			NameLineOneText *string `json:"nameLineOneText,omitempty"`
+
+			// NameLineTwoText Example: STOCKTON
+			NameLineTwoText *string `json:"nameLineTwoText,omitempty"`
+
+			// PostalCode Example: 98104
+			PostalCode *string `json:"postalCode,omitempty"`
 		} `json:"attorneyAddressBag,omitempty"`
-		CountryCode                    *string `json:"countryCode,omitempty"`
-		FirstName                      *string `json:"firstName,omitempty"`
-		LastName                       *string `json:"lastName,omitempty"`
-		MiddleName                     *string `json:"middleName,omitempty"`
-		NamePrefix                     *string `json:"namePrefix,omitempty"`
-		NameSuffix                     *string `json:"nameSuffix,omitempty"`
-		PreferredName                  *string `json:"preferredName,omitempty"`
+
+		// CountryCode Example: US
+		CountryCode *string `json:"countryCode,omitempty"`
+
+		// FirstName Example: DANIEL
+		FirstName *string `json:"firstName,omitempty"`
+
+		// LastName Example: O'BRIEN
+		LastName *string `json:"lastName,omitempty"`
+
+		// MiddleName Example: D
+		MiddleName *string `json:"middleName,omitempty"`
+
+		// NamePrefix Example: Dr
+		NamePrefix *string `json:"namePrefix,omitempty"`
+
+		// NameSuffix Example: Jr.
+		NameSuffix    *string `json:"nameSuffix,omitempty"`
+		PreferredName *string `json:"preferredName,omitempty"`
+
+		// RegisteredPractitionerCategory Example: ATTNY
 		RegisteredPractitionerCategory *string `json:"registeredPractitionerCategory,omitempty"`
-		RegistrationNumber             *string `json:"registrationNumber,omitempty"`
-		TelecommunicationAddressBag    *[]struct {
-			ExtensionNumber         *string `json:"extensionNumber,omitempty"`
-			TelecomTypeCode         *string `json:"telecomTypeCode,omitempty"`
+
+		// RegistrationNumber Example: 65545
+		RegistrationNumber          *string `json:"registrationNumber,omitempty"`
+		TelecommunicationAddressBag *[]struct {
+			// ExtensionNumber Example: 243
+			ExtensionNumber *string `json:"extensionNumber,omitempty"`
+
+			// TelecomTypeCode Example: TEL
+			TelecomTypeCode *string `json:"telecomTypeCode,omitempty"`
+
+			// TelecommunicationNumber Example: 206-622-4900
 			TelecommunicationNumber *string `json:"telecommunicationNumber,omitempty"`
 		} `json:"telecommunicationAddressBag,omitempty"`
 	} `json:"powerOfAttorneyBag,omitempty"`
@@ -933,58 +1777,92 @@ type RecordAttorney struct {
 
 // RegularPetitionerData defines model for RegularPetitionerData.
 type RegularPetitionerData struct {
-	ApplicationNumberText   *string             `json:"applicationNumberText,omitempty"`
-	CounselName             *string             `json:"counselName,omitempty"`
-	GrantDate               *openapi_types.Date `json:"grantDate,omitempty"`
-	GroupArtUnitNumber      *string             `json:"groupArtUnitNumber,omitempty"`
-	InventorName            *string             `json:"inventorName,omitempty"`
-	PatentNumber            *string             `json:"patentNumber,omitempty"`
-	PatentOwnerName         *string             `json:"patentOwnerName,omitempty"`
-	RealPartyInInterestName *string             `json:"realPartyInInterestName,omitempty"`
-	TechnologyCenterNumber  *string             `json:"technologyCenterNumber,omitempty"`
+	// ApplicationNumberText Example: 16123456
+	ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+	// CounselName Example: John D. Counsel
+	CounselName *string `json:"counselName,omitempty"`
+
+	// GrantDate Example: 2020-03-22
+	GrantDate *openapi_types.Date `json:"grantDate,omitempty"`
+
+	// GroupArtUnitNumber Example: 1790
+	GroupArtUnitNumber *string `json:"groupArtUnitNumber,omitempty"`
+
+	// InventorName Example: Emma Smith
+	InventorName *string `json:"inventorName,omitempty"`
+
+	// PatentNumber Example: US10203040B2
+	PatentNumber *string `json:"patentNumber,omitempty"`
+
+	// PatentOwnerName Example: JKL Holdings
+	PatentOwnerName *string `json:"patentOwnerName,omitempty"`
+
+	// RealPartyInInterestName Example: DEF Inc.
+	RealPartyInInterestName *string `json:"realPartyInInterestName,omitempty"`
+
+	// TechnologyCenterNumber Example: 1700
+	TechnologyCenterNumber *string `json:"technologyCenterNumber,omitempty"`
 }
 
 // RespondentData defines model for RespondentData.
 type RespondentData struct {
-	ApplicationNumberText   *string             `json:"applicationNumberText,omitempty"`
-	CounselName             *string             `json:"counselName,omitempty"`
-	GrantDate               *openapi_types.Date `json:"grantDate,omitempty"`
-	GroupArtUnitNumber      *string             `json:"groupArtUnitNumber,omitempty"`
-	InventorName            *string             `json:"inventorName,omitempty"`
-	PatentNumber            *string             `json:"patentNumber,omitempty"`
-	PatentOwnerName         *string             `json:"patentOwnerName,omitempty"`
-	RealPartyInInterestName *string             `json:"realPartyInInterestName,omitempty"`
-	TechnologyCenterNumber  *string             `json:"technologyCenterNumber,omitempty"`
+	// ApplicationNumberText Example: 16123456
+	ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+	// CounselName Example: Mary R. Lawyer
+	CounselName *string `json:"counselName,omitempty"`
+
+	// GrantDate Example: 2020-03-22
+	GrantDate *openapi_types.Date `json:"grantDate,omitempty"`
+
+	// GroupArtUnitNumber Example: 1790
+	GroupArtUnitNumber *string `json:"groupArtUnitNumber,omitempty"`
+
+	// InventorName Example: Emma Smith
+	InventorName *string `json:"inventorName,omitempty"`
+
+	// PatentNumber Example: US10203040B2
+	PatentNumber *string `json:"patentNumber,omitempty"`
+
+	// PatentOwnerName Example: JKL Holdings
+	PatentOwnerName *string `json:"patentOwnerName,omitempty"`
+
+	// RealPartyInInterestName Example: GHI LLC
+	RealPartyInInterestName *string `json:"realPartyInInterestName,omitempty"`
+
+	// TechnologyCenterNumber Example: 1700
+	TechnologyCenterNumber *string `json:"technologyCenterNumber,omitempty"`
 }
 
-// Response400 defines model for Response400.
-type Response400 struct {
-	Code              interface{} `json:"code,omitempty"`
-	Error             interface{} `json:"error,omitempty"`
-	ErrorDetails      interface{} `json:"errorDetails,omitempty"`
-	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+// Response401 Unauthorized — missing or invalid authentication token.
+type Response401 struct {
+	// Code Example: 401
+	Code *string `json:"code,omitempty"`
+
+	// Error Example: Unauthorized
+	Error *string `json:"error,omitempty"`
+
+	// ErrorDetails Example: Missing or invalid Bearer token. Please provide a valid Authorization header.
+	ErrorDetails *string `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier *openapi_types.UUID `json:"requestIdentifier,omitempty"`
 }
 
-// Response403 defines model for Response403.
-type Response403 struct {
-	Code  interface{} `json:"code,omitempty"`
-	Error interface{} `json:"error,omitempty"`
-}
-
-// Response404 defines model for Response404.
-type Response404 struct {
-	Code              interface{} `json:"code,omitempty"`
-	Error             interface{} `json:"error,omitempty"`
-	ErrorDetails      interface{} `json:"errorDetails,omitempty"`
-	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
-}
-
-// Response500 defines model for Response500.
+// Response500 Internal Server Error — an unexpected error occurred.
 type Response500 struct {
-	Code              interface{} `json:"code,omitempty"`
-	Error             interface{} `json:"error,omitempty"`
-	ErrorDetails      interface{} `json:"errorDetails,omitempty"`
-	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
+	// Code Example: 500
+	Code *string `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error *string `json:"error,omitempty"`
+
+	// ErrorDetails Example: An unexpected error occurred. Please contact the Help Desk.
+	ErrorDetails *string `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+	RequestIdentifier *openapi_types.UUID `json:"requestIdentifier,omitempty"`
 }
 
 // SearchRequest defines model for SearchRequest.
@@ -992,100 +1870,197 @@ type SearchRequest = PatentSearchRequest
 
 // Sort Sort you search result by providing field to be sorted and sort order
 type Sort struct {
+	// Field Example: applicationMetaData.filingDate
 	Field *string `json:"field,omitempty"`
 
 	// Order Sort order. e.g. Asc, ASC, Desc, desc, DESC
+	//
+	// Example: desc
 	Order *SortOrder `json:"order,omitempty"`
 }
 
 // SortOrder Sort order. e.g. Asc, ASC, Desc, desc, DESC
+//
+// Example: desc
 type SortOrder string
 
 // Status413Schema defines model for Status413Schema.
 type Status413Schema struct {
-	Code              *string `json:"code,omitempty"`
-	DetailedMessage   *string `json:"detailedMessage,omitempty"`
-	Message           *string `json:"message,omitempty"`
+	// Code Example: 413
+	Code *string `json:"code,omitempty"`
+
+	// DetailedMessage Example: Response payload exceeds allowed limit of 6MB, please refine your search criteria or reduce payload size by reducing page size
+	DetailedMessage *string `json:"detailedMessage,omitempty"`
+
+	// Message Example: Payload Too Large
+	Message *string `json:"message,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 }
 
 // StatusCodeSearchRequest defines model for StatusCodeSearchRequest.
 type StatusCodeSearchRequest struct {
-	// Pagination Pagination information.
+	// Pagination Pagination options for controlling result set size and offset.
 	Pagination *Pagination `json:"pagination,omitempty"`
 
 	// Q Search by field value or pass opensearch string query syntax
+	//
+	// Example: applicationStatusCode:120
 	Q *string `json:"q,omitempty"`
 }
 
 // StatusCodeSearchResponse This json structure represents data fields for status codes search API
 type StatusCodeSearchResponse struct {
-	Count             *int    `json:"count,omitempty"`
+	// Count Example: 1
+	Count *int `json:"count,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 	StatusCodeBag     *[]struct {
 		// ApplicationStatusCode Application status code
+		//
+		// Example: 60
 		ApplicationStatusCode *int `json:"applicationStatusCode,omitempty"`
 
 		// ApplicationStatusDescriptionText Application status code description
+		//
+		// Example: Final Rejection Counted, Not Yet Mailed
 		ApplicationStatusDescriptionText *string `json:"applicationStatusDescriptionText,omitempty"`
 	} `json:"statusCodeBag,omitempty"`
 }
 
 // TrialMetaData defines model for TrialMetaData.
 type TrialMetaData struct {
-	AccordedFilingDate        *openapi_types.Date `json:"accordedFilingDate,omitempty"`
-	FileDownloadURI           *string             `json:"fileDownloadURI,omitempty"`
-	InstitutionDecisionDate   *openapi_types.Date `json:"institutionDecisionDate,omitempty"`
-	LatestDecisionDate        *openapi_types.Date `json:"latestDecisionDate,omitempty"`
-	PetitionFilingDate        *openapi_types.Date `json:"petitionFilingDate,omitempty"`
-	TerminationDate           *openapi_types.Date `json:"terminationDate,omitempty"`
-	TrialLastModifiedDate     *openapi_types.Date `json:"trialLastModifiedDate,omitempty"`
-	TrialLastModifiedDateTime *string             `json:"trialLastModifiedDateTime,omitempty"`
-	TrialStatusCategory       *string             `json:"trialStatusCategory,omitempty"`
-	TrialTypeCode             *string             `json:"trialTypeCode,omitempty"`
+	// AccordedFilingDate Example: 2024-02-15
+	AccordedFilingDate *openapi_types.Date `json:"accordedFilingDate,omitempty"`
+	FileDownloadURI    *string             `json:"fileDownloadURI,omitempty"`
+
+	// InstitutionDecisionDate Example: 2024-08-20
+	InstitutionDecisionDate *openapi_types.Date `json:"institutionDecisionDate,omitempty"`
+
+	// LatestDecisionDate Example: 2025-01-12
+	LatestDecisionDate *openapi_types.Date `json:"latestDecisionDate,omitempty"`
+
+	// PetitionFilingDate Example: 2024-01-30
+	PetitionFilingDate *openapi_types.Date `json:"petitionFilingDate,omitempty"`
+
+	// TerminationDate Example: 2025-05-05
+	TerminationDate *openapi_types.Date `json:"terminationDate,omitempty"`
+
+	// TrialLastModifiedDate Example: 2025-05-05
+	TrialLastModifiedDate *openapi_types.Date `json:"trialLastModifiedDate,omitempty"`
+
+	// TrialLastModifiedDateTime Example: 2025-05-05T10:22:11Z
+	TrialLastModifiedDateTime *string `json:"trialLastModifiedDateTime,omitempty"`
+
+	// TrialStatusCategory Example: Terminated
+	TrialStatusCategory *string `json:"trialStatusCategory,omitempty"`
+
+	// TrialTypeCode Example: 102
+	TrialTypeCode *string `json:"trialTypeCode,omitempty"`
 }
 
 // PatentAppealDataBag defines model for patentAppealDataBag.
 type PatentAppealDataBag struct {
+	// AppealDocumentCategory Example: decision document
 	AppealDocumentCategory *string `json:"appealDocumentCategory,omitempty"`
 	AppealMetaData         *struct {
-		AppealFilingDate           *openapi_types.Date `json:"appealFilingDate,omitempty"`
-		AppealLastModifiedDate     *openapi_types.Date `json:"appealLastModifiedDate,omitempty"`
-		AppealLastModifiedDateTime *string             `json:"appealLastModifiedDateTime,omitempty"`
-		ApplicationTypeCategory    *string             `json:"applicationTypeCategory,omitempty"`
-		DocketNoticeMailedDate     *openapi_types.Date `json:"docketNoticeMailedDate,omitempty"`
-		FileDownloadURI            *string             `json:"fileDownloadURI,omitempty"`
+		// AppealFilingDate Example: 2024-05-05
+		AppealFilingDate *openapi_types.Date `json:"appealFilingDate,omitempty"`
+
+		// AppealLastModifiedDate Example: 2024-05-05
+		AppealLastModifiedDate *openapi_types.Date `json:"appealLastModifiedDate,omitempty"`
+
+		// AppealLastModifiedDateTime Example: 2024-05-05T00:00:00Z
+		AppealLastModifiedDateTime *string `json:"appealLastModifiedDateTime,omitempty"`
+
+		// ApplicationTypeCategory Example: Affirmed-in-Part
+		ApplicationTypeCategory *string `json:"applicationTypeCategory,omitempty"`
+
+		// DocketNoticeMailedDate Example: 2024-05-05
+		DocketNoticeMailedDate *openapi_types.Date `json:"docketNoticeMailedDate,omitempty"`
+
+		// FileDownloadURI Example: /download
+		FileDownloadURI *string `json:"fileDownloadURI,omitempty"`
 	} `json:"appealMetaData,omitempty"`
+
+	// AppealNumber Example: 2024518758
 	AppealNumber  *string `json:"appealNumber,omitempty"`
 	AppellantData *struct {
-		ApplicationNumberText   *string             `json:"applicationNumberText,omitempty"`
-		CounselName             *string             `json:"counselName,omitempty"`
-		GrantDate               *openapi_types.Date `json:"grantDate,omitempty"`
-		GroupArtUnitNumber      *string             `json:"groupArtUnitNumber,omitempty"`
-		InventorName            *string             `json:"inventorName,omitempty"`
-		PatentNumber            *string             `json:"patentNumber,omitempty"`
-		PatentOwnerName         *string             `json:"patentOwnerName,omitempty"`
-		PublicationDate         *string             `json:"publicationDate,omitempty"`
-		PublicationNumber       *string             `json:"publicationNumber,omitempty"`
-		RealPartyInInterestName *string             `json:"realPartyInInterestName,omitempty"`
-		TechnologyCenterNumber  *string             `json:"technologyCenterNumber,omitempty"`
+		// ApplicationNumberText Example: 8357487
+		ApplicationNumberText *string `json:"applicationNumberText,omitempty"`
+
+		// CounselName Example: TARROLL, SUMDHEIM
+		CounselName *string `json:"counselName,omitempty"`
+
+		// GrantDate Example: 2022-05-27
+		GrantDate *openapi_types.Date `json:"grantDate,omitempty"`
+
+		// GroupArtUnitNumber Example: STIC
+		GroupArtUnitNumber *string `json:"groupArtUnitNumber,omitempty"`
+
+		// InventorName Example: Sultan, Tarik et al
+		InventorName *string `json:"inventorName,omitempty"`
+
+		// PatentNumber Example: 4678439
+		PatentNumber *string `json:"patentNumber,omitempty"`
+
+		// PatentOwnerName Example: Unicorn Pharmaceuticals
+		PatentOwnerName *string `json:"patentOwnerName,omitempty"`
+
+		// PublicationDate Example: 2022-05-27
+		PublicationDate *string `json:"publicationDate,omitempty"`
+
+		// PublicationNumber Example: 20210628467A1
+		PublicationNumber *string `json:"publicationNumber,omitempty"`
+
+		// RealPartyInInterestName Example: Unicorn Pharmaceuticals
+		RealPartyInInterestName *string `json:"realPartyInInterestName,omitempty"`
+
+		// TechnologyCenterNumber Example: RD00
+		TechnologyCenterNumber *string `json:"technologyCenterNumber,omitempty"`
 	} `json:"appellantData,omitempty"`
 	DecisionData *struct {
-		AppealOutcomeCategory *string             `json:"appealOutcomeCategory,omitempty"`
-		DecisionIssueDate     *openapi_types.Date `json:"decisionIssueDate,omitempty"`
-		DecisionTypeCategory  *string             `json:"decisionTypeCategory,omitempty"`
-		IssueTypeBag          *[]string           `json:"issueTypeBag,omitempty"`
-		StatuteAndRuleBag     *[]string           `json:"statuteAndRuleBag,omitempty"`
+		// AppealOutcomeCategory Example: sample
+		AppealOutcomeCategory *string `json:"appealOutcomeCategory,omitempty"`
+
+		// DecisionIssueDate Example: 2002-02-25
+		DecisionIssueDate *openapi_types.Date `json:"decisionIssueDate,omitempty"`
+
+		// DecisionTypeCategory Example: Decision
+		DecisionTypeCategory *string `json:"decisionTypeCategory,omitempty"`
+
+		// IssueTypeBag Example: ["Substantive","Procedural"]
+		IssueTypeBag *[]string `json:"issueTypeBag,omitempty"`
+
+		// StatuteAndRuleBag Example: ["37 CFR 42.100","37 CFR 43.100"]
+		StatuteAndRuleBag *[]string `json:"statuteAndRuleBag,omitempty"`
 	} `json:"decisionData,omitempty"`
 	DocumentData *struct {
-		DocumentFilingDate          *string `json:"documentFilingDate,omitempty"`
-		DocumentIdentifier          *string `json:"documentIdentifier,omitempty"`
-		DocumentName                *string `json:"documentName,omitempty"`
-		DocumentOCRText             *string `json:"documentOCRText,omitempty"`
-		DocumentSizeQuantity        *int    `json:"documentSizeQuantity,omitempty"`
+		// DocumentFilingDate Example: 2022-02-26
+		DocumentFilingDate *string `json:"documentFilingDate,omitempty"`
+
+		// DocumentIdentifier Example: PTAB/e010a6e7-b2df-4f72-b800-e232b89585ab
+		DocumentIdentifier *string `json:"documentIdentifier,omitempty"`
+
+		// DocumentName Example: Final Decision Document
+		DocumentName *string `json:"documentName,omitempty"`
+
+		// DocumentOCRText Example: Some OCR content
+		DocumentOCRText *string `json:"documentOCRText,omitempty"`
+
+		// DocumentSizeQuantity Example: 102113
+		DocumentSizeQuantity *int `json:"documentSizeQuantity,omitempty"`
+
+		// DocumentTypeDescriptionText Example: Rehearing
 		DocumentTypeDescriptionText *string `json:"documentTypeDescriptionText,omitempty"`
-		FileDownloadURI             *string `json:"fileDownloadURI,omitempty"`
+
+		// FileDownloadURI Example: https://ptab.uspto.gov/appeal/document/download
+		FileDownloadURI *string `json:"fileDownloadURI,omitempty"`
 	} `json:"documentData,omitempty"`
+
+	// LastModifiedDateTime Example: 2024-05-05T00:00:00Z
 	LastModifiedDateTime    *string `json:"lastModifiedDateTime,omitempty"`
 	ThirdPartyRequesterData *struct {
 		ThirdPartyName *string `json:"thirdPartyName,omitempty"`
@@ -1098,14 +2073,22 @@ type PatentTrialDecisionDataBag struct {
 	DerivationPetitionerData *DerivationPetitionerData `json:"derivationPetitionerData,omitempty"`
 	DocumentData             *DocumentData             `json:"documentData,omitempty"`
 	FileDownloadURI          *string                   `json:"fileDownloadURI,omitempty"`
-	LastModifiedDateTime     *string                   `json:"lastModifiedDateTime,omitempty"`
-	PatentOwnerData          *PatentOwnerData          `json:"patentOwnerData,omitempty"`
-	RegularPetitionerData    *RegularPetitionerData    `json:"regularPetitionerData,omitempty"`
-	RespondentData           *RespondentData           `json:"respondentData,omitempty"`
-	TrialDocumentCategory    *string                   `json:"trialDocumentCategory,omitempty"`
-	TrialMetaData            *TrialMetaData            `json:"trialMetaData,omitempty"`
-	TrialNumber              *string                   `json:"trialNumber,omitempty"`
-	TrialTypeCode            *string                   `json:"trialTypeCode,omitempty"`
+
+	// LastModifiedDateTime Example: 2025-07-01T15:20:30Z
+	LastModifiedDateTime  *string                `json:"lastModifiedDateTime,omitempty"`
+	PatentOwnerData       *PatentOwnerData       `json:"patentOwnerData,omitempty"`
+	RegularPetitionerData *RegularPetitionerData `json:"regularPetitionerData,omitempty"`
+	RespondentData        *RespondentData        `json:"respondentData,omitempty"`
+
+	// TrialDocumentCategory Example: document
+	TrialDocumentCategory *string        `json:"trialDocumentCategory,omitempty"`
+	TrialMetaData         *TrialMetaData `json:"trialMetaData,omitempty"`
+
+	// TrialNumber Example: IPR2024-00001
+	TrialNumber *string `json:"trialNumber,omitempty"`
+
+	// TrialTypeCode Example: IPR
+	TrialTypeCode *string `json:"trialTypeCode,omitempty"`
 }
 
 // PatentTrialDocumentDataBag A single PTAB document record.
@@ -1114,32 +2097,51 @@ type PatentTrialDocumentDataBag struct {
 	DerivationPetitionerData *DerivationPetitionerData `json:"derivationPetitionerData,omitempty"`
 	DocumentData             *DocumentData             `json:"documentData,omitempty"`
 	FileDownloadURI          *string                   `json:"fileDownloadURI,omitempty"`
-	LastModifiedDateTime     *string                   `json:"lastModifiedDateTime,omitempty"`
-	PatentOwnerData          *PatentOwnerData          `json:"patentOwnerData,omitempty"`
-	RegularPetitionerData    *RegularPetitionerData    `json:"regularPetitionerData,omitempty"`
-	RespondentData           *RespondentData           `json:"respondentData,omitempty"`
-	TrialDocumentCategory    *string                   `json:"trialDocumentCategory,omitempty"`
-	TrialMetaData            *TrialMetaData            `json:"trialMetaData,omitempty"`
-	TrialNumber              *string                   `json:"trialNumber,omitempty"`
-	TrialTypeCode            *string                   `json:"trialTypeCode,omitempty"`
+
+	// LastModifiedDateTime Example: 2025-07-01T15:20:30Z
+	LastModifiedDateTime  *string                `json:"lastModifiedDateTime,omitempty"`
+	PatentOwnerData       *PatentOwnerData       `json:"patentOwnerData,omitempty"`
+	RegularPetitionerData *RegularPetitionerData `json:"regularPetitionerData,omitempty"`
+	RespondentData        *RespondentData        `json:"respondentData,omitempty"`
+
+	// TrialDocumentCategory Example: document
+	TrialDocumentCategory *string        `json:"trialDocumentCategory,omitempty"`
+	TrialMetaData         *TrialMetaData `json:"trialMetaData,omitempty"`
+
+	// TrialNumber Example: IPR2024-00001
+	TrialNumber *string `json:"trialNumber,omitempty"`
+
+	// TrialTypeCode Example: IPR
+	TrialTypeCode *string `json:"trialTypeCode,omitempty"`
 }
 
 // PatentTrialProceedingDataBag A single PTAB trial proceeding record.
 type PatentTrialProceedingDataBag struct {
 	DerivationPetitionerData *DerivationPetitionerData `json:"derivationPetitionerData,omitempty"`
-	LastModifiedDateTime     *string                   `json:"lastModifiedDateTime,omitempty"`
-	PatentOwnerData          *PatentOwnerData          `json:"patentOwnerData,omitempty"`
-	RegularPetitionerData    *RegularPetitionerData    `json:"regularPetitionerData,omitempty"`
-	RespondentData           *RespondentData           `json:"respondentData,omitempty"`
-	TrialMetaData            *TrialMetaData            `json:"trialMetaData,omitempty"`
-	TrialNumber              *string                   `json:"trialNumber,omitempty"`
+
+	// LastModifiedDateTime Example: 2025-07-17T20:24:01
+	LastModifiedDateTime  *string                `json:"lastModifiedDateTime,omitempty"`
+	PatentOwnerData       *PatentOwnerData       `json:"patentOwnerData,omitempty"`
+	RegularPetitionerData *RegularPetitionerData `json:"regularPetitionerData,omitempty"`
+	RespondentData        *RespondentData        `json:"respondentData,omitempty"`
+	TrialMetaData         *TrialMetaData         `json:"trialMetaData,omitempty"`
+
+	// TrialNumber Example: IPR2024-00001
+	TrialNumber *string `json:"trialNumber,omitempty"`
 }
 
 // BadRequest defines model for BadRequest.
 type BadRequest struct {
-	Code              interface{} `json:"code,omitempty"`
-	Error             interface{} `json:"error,omitempty"`
-	ErrorDetails      interface{} `json:"errorDetails,omitempty"`
+	// Code Example: 400
+	Code interface{} `json:"code,omitempty"`
+
+	// Error Example: Bad Request
+	Error interface{} `json:"error,omitempty"`
+
+	// ErrorDetails Example: Invalid request, review patent data request filter section and try again
+	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 	RequestIdentifier interface{} `json:"requestIdentifier,omitempty"`
 }
 
@@ -1149,38 +2151,74 @@ type Decision200 = DecisionDataResponse
 // Document200 defines model for Document200.
 type Document200 = DocumentDataResponse
 
+// DownloadSuccess A single petition decision record.
+type DownloadSuccess = PetitionDecision
+
 // Forbidden defines model for Forbidden.
 type Forbidden struct {
-	Code  *string `json:"code,omitempty"`
+	// Code Example: 403
+	Code *string `json:"code,omitempty"`
+
+	// Error Example: Forbidden
 	Error *string `json:"error,omitempty"`
 }
 
 // InternalError defines model for InternalError.
 type InternalError struct {
-	Code              *string `json:"code,omitempty"`
-	Error             *string `json:"error,omitempty"`
-	ErrorDetails      *string `json:"errorDetails,omitempty"`
+	// Code Example: 500
+	Code *string `json:"code,omitempty"`
+
+	// Error Example: Internal Server Error
+	Error *string `json:"error,omitempty"`
+
+	// ErrorDetails Example: Internal Server Error. Please contact Help Desk.
+	ErrorDetails *string `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 }
 
+// InternalServerError Internal Server Error — an unexpected error occurred.
+type InternalServerError = Response500
+
 // NotFound defines model for NotFound.
 type NotFound struct {
-	Code              *string `json:"code,omitempty"`
-	Error             *string `json:"error,omitempty"`
-	ErrorDetails      *string `json:"errorDetails,omitempty"`
+	// Code Example: 404
+	Code *string `json:"code,omitempty"`
+
+	// Error Example: Not Found
+	Error *string `json:"error,omitempty"`
+
+	// ErrorDetails Example: No matching records found
+	ErrorDetails *string `json:"errorDetails,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 }
 
 // Proceeding200 defines model for Proceeding200.
 type Proceeding200 = ProceedingDataResponse
 
+// SearchSuccess Search response containing matching petition decision records.
+type SearchSuccess = PetitionDecisionResponseBag
+
 // Status413 defines model for Status413.
 type Status413 struct {
-	Code              *string `json:"code,omitempty"`
-	DetailedMessage   *string `json:"detailedMessage,omitempty"`
-	Message           *string `json:"message,omitempty"`
+	// Code Example: 413
+	Code *string `json:"code,omitempty"`
+
+	// DetailedMessage Example: Response payload exceeds allowed limit of 6MB, please refine your search criteria or reduce payload size by reducing page size
+	DetailedMessage *string `json:"detailedMessage,omitempty"`
+
+	// Message Example: Payload Too Large
+	Message *string `json:"message,omitempty"`
+
+	// RequestIdentifier Example: 07c5c24d-bf8e-458c-9427-a038500d6e98
 	RequestIdentifier *string `json:"requestIdentifier,omitempty"`
 }
+
+// Unauthorized Unauthorized — missing or invalid authentication token.
+type Unauthorized = Response401
 
 // GetApiV1DatasetsProductsSearchParams defines parameters for GetApiV1DatasetsProductsSearch.
 type GetApiV1DatasetsProductsSearchParams struct {
@@ -1590,65 +2628,62 @@ type GetApiV1PatentTrialsProceedingsSearchDownloadParams struct {
 	Format *string `form:"format,omitempty" json:"format,omitempty"`
 }
 
-// GetApiV1PetitionDecisionsSearchParams defines parameters for GetApiV1PetitionDecisionsSearch.
-type GetApiV1PetitionDecisionsSearchParams struct {
+// SearchPetitionDecisionsGetParams defines parameters for SearchPetitionDecisionsGet.
+type SearchPetitionDecisionsGetParams struct {
 	// Q A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
 	Q *string `form:"q,omitempty" json:"q,omitempty"`
 
-	// Sort field to be sorted followed by sort order
+	// Sort Field to sort by followed by sort order (asc or desc).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Offset Position in the dataset of a particular record
+	// Offset Position in the dataset to start returning records from.
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 
-	// Limit Limit the number of results returned
+	// Limit Maximum number of records to return. Max 500.
 	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 
-	// Facets List of fields names to be faceted upon separated by comma (<b>,</b>)
+	// Facets Comma-separated list of field names to aggregate. Not supported on /search/download.
 	Facets *string `form:"facets,omitempty" json:"facets,omitempty"`
 
-	// Fields Limits the response by specifying fields from dataset should be included.
+	// Fields Comma-separated field names to include in the response. Returns all fields if omitted.
 	Fields *string `form:"fields,omitempty" json:"fields,omitempty"`
 
-	// Filters Filter data by supplying filter parameter. Provide field name and its value
+	// Filters Filter data by providing field name and value pairs. Separate multiple values with a comma for multi-value filters.
 	Filters *string `form:"filters,omitempty" json:"filters,omitempty"`
 
-	// RangeFilters Filter the data by supplying range of values. Applicable for number and date type fields.
+	// RangeFilters Filter data by a range of values. Applicable for number and date fields. Date values must be in YYYY-MM-DD format.
 	RangeFilters *string `form:"rangeFilters,omitempty" json:"rangeFilters,omitempty"`
 }
 
-// GetApiV1PetitionDecisionsSearchDownloadParams defines parameters for GetApiV1PetitionDecisionsSearchDownload.
-type GetApiV1PetitionDecisionsSearchDownloadParams struct {
+// DownloadPetitionDecisionsGetParams defines parameters for DownloadPetitionDecisionsGet.
+type DownloadPetitionDecisionsGetParams struct {
 	// Q A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
 	Q *string `form:"q,omitempty" json:"q,omitempty"`
 
-	// Sort field to be sorted followed by sort order
+	// Sort Field to sort by followed by sort order (asc or desc).
 	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 
-	// Offset Position in the dataset of a particular record
+	// Offset Position in the dataset to start returning records from.
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 
-	// Limit Limit the number of results returned
+	// Limit Maximum number of records to return. Max 500.
 	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 
-	// Fields Limits the response by specifying fields from dataset should be included.
+	// Fields Comma-separated field names to include in the response. Returns all fields if omitted.
 	Fields *string `form:"fields,omitempty" json:"fields,omitempty"`
 
-	// Filters Filter data by supplying filter parameter. Provide field name and its value
+	// Filters Filter data by providing field name and value pairs. Separate multiple values with a comma for multi-value filters.
 	Filters *string `form:"filters,omitempty" json:"filters,omitempty"`
 
-	// RangeFilters Filter the data by supplying range of values. Applicable for number and date type fields.
+	// RangeFilters Filter data by a range of values. Applicable for number and date fields. Date values must be in YYYY-MM-DD format.
 	RangeFilters *string `form:"rangeFilters,omitempty" json:"rangeFilters,omitempty"`
 
-	// Format Download Format
-	Format *string `form:"format,omitempty" json:"format,omitempty"`
+	// Format Download format. Defaults to csv if not specified.
+	Format *DownloadPetitionDecisionsGetParamsFormat `form:"format,omitempty" json:"format,omitempty"`
 }
 
-// GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams defines parameters for GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifier.
-type GetApiV1PetitionDecisionsPetitionDecisionRecordIdentifierParams struct {
-	// IncludeDocuments This is a true or false...yes to include petition decision documents in the response and no to omit the petition decision documents from the response
-	IncludeDocuments *bool `form:"includeDocuments,omitempty" json:"includeDocuments,omitempty"`
-}
+// DownloadPetitionDecisionsGetParamsFormat defines parameters for DownloadPetitionDecisionsGet.
+type DownloadPetitionDecisionsGetParamsFormat string
 
 // PostApiV1PatentAppealsDecisionsSearchJSONRequestBody defines body for PostApiV1PatentAppealsDecisionsSearch for application/json ContentType.
 type PostApiV1PatentAppealsDecisionsSearchJSONRequestBody = PatentSearchRequest
@@ -1689,8 +2724,8 @@ type PostApiV1PatentTrialsProceedingsSearchJSONRequestBody = SearchRequest
 // PostApiV1PatentTrialsProceedingsSearchDownloadJSONRequestBody defines body for PostApiV1PatentTrialsProceedingsSearchDownload for application/json ContentType.
 type PostApiV1PatentTrialsProceedingsSearchDownloadJSONRequestBody = DownloadRequest
 
-// PostApiV1PetitionDecisionsSearchJSONRequestBody defines body for PostApiV1PetitionDecisionsSearch for application/json ContentType.
-type PostApiV1PetitionDecisionsSearchJSONRequestBody = PetitionDecisionSearchRequest
+// SearchPetitionDecisionsPostJSONRequestBody defines body for SearchPetitionDecisionsPost for application/json ContentType.
+type SearchPetitionDecisionsPostJSONRequestBody = PetitionDecisionSearchRequest
 
-// PostApiV1PetitionDecisionsSearchDownloadJSONRequestBody defines body for PostApiV1PetitionDecisionsSearchDownload for application/json ContentType.
-type PostApiV1PetitionDecisionsSearchDownloadJSONRequestBody = PetitionDecisionDownloadRequest
+// DownloadPetitionDecisionsPostJSONRequestBody defines body for DownloadPetitionDecisionsPost for application/json ContentType.
+type DownloadPetitionDecisionsPostJSONRequestBody = PetitionDecisionDownloadRequest

@@ -325,7 +325,7 @@ func TestIntegrationWithRealAPI(t *testing.T) {
 
 	t.Run("GetPetitionDecision", func(t *testing.T) {
 		// Use a sample record ID - this might not exist
-		result, err := client.GetPetitionDecision(ctx, "9dc6b94a-afa0-5e66-beef-f26fa80992b8", false)
+		result, err := client.GetPetitionDecision(ctx, "9dc6b94a-afa0-5e66-beef-f26fa80992b8")
 		if err != nil {
 			t.Fatalf("GetPetitionDecision failed: %v", err)
 		}

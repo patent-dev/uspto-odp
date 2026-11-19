@@ -21,8 +21,6 @@ tags:
       description: Search patent data by supplying query parameter or json request. Get data of a specific application or a section of an application
     - name: Bulk DataSets
       description: Bulk Dataset Directory provides a single repository for raw public bulk data. It contains research data from the office of the Chief Economist.
-    - name: Petition Decision Search
-      description: Petition Decision Search
     - name: 'PTAB Trials'
       description: 'PTAB Trials APIs: proceedings, documents and decisions.'
     - name: PTAB Trials:Proceedings
@@ -1954,473 +1952,6 @@ paths:
                         schema:
                             type: string
                             format: uri
-    /api/v1/petition/decisions/search:
-        x-ip-domain: Patent
-        x-service-type: ["Search", "Dissemination"]
-        x-content-type: Petition Decisions
-        post:
-            tags:
-                - Petition Decision Search
-            summary: Search petition decision applications by supplying json payload
-            requestBody:
-                description: Petition Decision data search request json payload. Fields in the request is optional
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/PetitionDecisionSearchRequest'
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/PetitionDecisionResponseBag'
-                '400':
-                    description: Bad Request
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response400'
-                '403':
-                    description: Forbidden
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response403'
-                '404':
-                    description: Not Found
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response404'
-                '500':
-                    description: Internal Server Error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response500'
-        get:
-            tags:
-                - Petition Decision Search
-            summary: Petition decision application search by supplying query parameters
-            description: Query parameters are optional. When no query parameters supplied, top 25 petition decisions are returned
-            parameters:
-                - name: q
-                  in: query
-                  description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
-                  allowReserved: true
-                  schema:
-                    type: string
-                  examples:
-                    No Search Text:
-                        summary: No conditions
-                        description: Empty, No conditions
-                        value:
-                    Exact Phrase:
-                        value: Denied
-                        description: Search text 'Denied' across the searchable data fields
-                    Exact Phrase AND:
-                        value: Denied AND Patented
-                        description: Search text 'Denied' AND 'Patented' across all searchable fields within data set
-                    Search By Field Value:
-                        value: applicationNumberText:11512156
-                        description: Search data for application number 11512156
-                    Boolean OR:
-                        value: decisionTypeCodeDescriptionText:Denied OR finalDecidingOfficeName:OFFICE
-                        description: Search data where decisionTypeCodeDescriptionText is Denied Or finalDecidingOfficeName is OFFICE
-                    Boolean AND:
-                        value: decisionTypeCodeDescriptionText:Denied AND finalDecidingOfficeName:OFFICE
-                        description: Search data where decisionTypeCodeDescriptionText is Denied AND finalDecidingOfficeName is OFFICE
-                    Wildcard:
-                        value: firstApplicantName:BRANT*
-                        description: Search data where firstApplicantName has text BRANT followed by any character
-                    Range:
-                        value: petitionMailDate:[2021-08-04 TO 2021-09-04]
-                        description: Search data where petitionMailDate range is between 2020-08-04 TO 2022-08-04
-                    Comparison:
-                        value: decisionTypeCode:>524
-                        description: Search all records where decisionTypeCode is greater than 524
-                - name: sort
-                  in: query
-                  description: field to be sorted followed by sort order
-                  schema:
-                    type: string
-                  examples:
-                    No Sort:
-                        description: No sort option go by default sort
-                        value:
-                    Ascending:
-                        value: petitionMailDate asc
-                        description: Sort by petitionMailDate ascending order
-                    Descending:
-                        value: petitionMailDate desc
-                        description: Sort by petitionMailDate descending order
-                - name: offset
-                  in: query
-                  description: Position in the dataset of a particular record
-                  schema:
-                    type: integer
-                    minimum: 0
-                  example: 0
-                - name: limit
-                  in: query
-                  description: Limit the number of results returned
-                  schema:
-                    type: integer
-                    minimum: 1
-                  example: 25
-                - name: facets
-                  in: query
-                  description: List of fields names to be faceted upon separated by comma (<b>,</b>)
-                  schema:
-                    type: string
-                  examples:
-                    No Facets:
-                        value:
-                        description: No faceting option
-                    Facets Example 1:
-                        value: businessEntityStatusCategory,decisionPetitionTypeCode,decisionPetitionTypeCodeDescription,decisionTypeCode,decisionTypeCodeDescriptionText,firstApplicantName,finalDecidingOfficeName,actionTakenByCourtNamepetitionIssueConsideredText,prosecutionStatusCodeDescriptionText,petitionIssueConsideredTextBag,courtActionIndicator,ruleBag,statuteBag
-                        description: Faceting by businessEntityStatusCategory,decisionPetitionTypeCode,decisionPetitionTypeCodeDescription,decisionTypeCode,decisionTypeCodeDescriptionText,firstApplicantName,finalDecidingOfficeName,actionTakenByCourtNamepetitionIssueConsideredText,prosecutionStatusCodeDescriptionText,petitionIssueConsideredTextBag,courtActionIndicator,ruleBag,statuteBag
-                - name: fields
-                  in: query
-                  description: Limits the response by specifying fields from dataset should be included.
-                  schema:
-                    type: string
-                  examples:
-                    All Fields:
-                        value:
-                        description: Returns all available data set fields
-                    Include Fields:
-                        value: petitionDecisionRecordIdentifier,patentNumber,firstApplicantName,petitionMailDate,decisionPetitionTypeCode,decisionTypeCodeDescriptionText,decisionMailDate,finalDecidingOfficeName,decisionDate,petitionIssueConsideredTextBag,technologyCenter
-                        description: Include only petitionDecisionRecordIdentifier,patentNumber,firstApplicantName,petitionMailDate,decisionPetitionTypeCode,decisionTypeCodeDescriptionText,decisionMailDate,finalDecidingOfficeName,decisionDate,petitionIssueConsideredTextBag,technologyCenter in search result
-                - name: filters
-                  in: query
-                  description: Filter data by supplying filter parameter. Provide field name and its value
-                  schema:
-                    type: string
-                  examples:
-                    No Filter:
-                        value:
-                        description: No filter
-                    Filters Example 1:
-                        value: decisionTypeCodeDescriptionText DENIED
-                        description: Filter data where decisionTypeCodeDescriptionText value is DENIED
-                    Filters Example 2:
-                        value: businessEntityStatusCategory 'Small'
-                        description: Filter data where businessEntityStatusCategory value is 'Small'
-                    Filters Single Value:
-                        value: decisionDate 2023-10-18
-                        description: Filter data where decisionDate value is 2023-10-18
-                    Filters Multi Value:
-                        value: ruleBag 1.76,1.78
-                        description: Filter data where ruleBag value is 1.76 or 1.78
-                - name: rangeFilters
-                  in: query
-                  description: Filter the data by supplying range of values. Applicable for number and date type fields.
-                  schema:
-                    type: string
-                  examples:
-                    No Range Filter:
-                        value:
-                        description: No range filter
-                    Date Range Filter:
-                        value: petitionMailDate 2021-01-01:2025-01-01
-                        description: Filter data where petitionMailDate is between 2021-01-01 and 2025-01-01
-                    Number Range Filter:
-                        value: ruleBag 1.76:1.90
-                        description: Filter data where ruleBag is between 1.76 and 1.90
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/PetitionDecisionResponseBag'
-                '400':
-                    description: Bad Request
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response400'
-                '403':
-                    description: Forbidden
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response403'
-                '404':
-                    description: Not Found
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response404'
-                '500':
-                    description: Internal Server Error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response500'
-    /api/v1/petition/decisions/search/download:
-        x-ip-domain: Patent
-        x-service-type: ["Search", "Dissemination"]
-        x-content-type: Petition Decisions
-        post:
-            tags:
-                - Petition Decision Search
-            summary: Download petition decision data by supplying json payload
-            requestBody:
-                description: Petition decision data search request json payload. Fields in the request is optional
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/PetitionDecisionDownloadRequest'
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/PetitionDecisionResponseBag'
-                '400':
-                    description: Bad Request
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response400'
-                '403':
-                    description: Forbidden
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response403'
-                '404':
-                    description: Not Found
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response404'
-                '500':
-                    description: Internal Server Error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response500'
-        get:
-            tags:
-                - Petition Decision Search
-            summary: Petition decision application search by supplying query parameters
-            description: Query parameters are optional. When no query parameters supplied, top 25 petition decisions are returned
-            parameters:
-                - name: q
-                  in: query
-                  description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
-                  allowReserved: true
-                  schema:
-                    type: string
-                  examples:
-                    No Search Text:
-                        summary: No conditions
-                        description: Empty, No conditions
-                        value:
-                    Exact Phrase:
-                        value: Denied
-                        description: Search text 'Denied' across the searchable data fields
-                    Exact Phrase AND:
-                        value: Denied AND Patented
-                        description: Search text 'Denied' AND 'Patented' across all searchable fields within data set
-                    Search By Field Value:
-                        value: applicationNumberText:11512156
-                        description: Search data for application number 11512156
-                    Boolean OR:
-                        value: decisionTypeCodeDescriptionText:Denied OR finalDecidingOfficeName:OFFICE
-                        description: Search data where decisionTypeCodeDescriptionText is Denied Or finalDecidingOfficeName is OFFICE
-                    Boolean AND:
-                        value: decisionTypeCodeDescriptionText:Denied AND finalDecidingOfficeName:OFFICE
-                        description: Search data where decisionTypeCodeDescriptionText is Denied AND finalDecidingOfficeName is OFFICE
-                    Wildcard:
-                        value: firstApplicantName:BRANT*
-                        description: Search data where firstApplicantName has text BRANT followed by any character
-                    Range:
-                        value: petitionMailDate:[2021-08-04 TO 2021-09-04]
-                        description: Search data where petitionMailDate range is between 2020-08-04 TO 2022-08-04
-                    Comparison:
-                        value: decisionTypeCode:>524
-                        description: Search all records where decisionTypeCode is greater than 524
-                - name: sort
-                  in: query
-                  description: field to be sorted followed by sort order
-                  schema:
-                    type: string
-                  examples:
-                    No Sort:
-                        description: No sort option go by default sort
-                        value:
-                    Ascending:
-                        value: petitionMailDate asc
-                        description: Sort by petitionMailDate ascending order
-                    Descending:
-                        value: petitionMailDate desc
-                        description: Sort by petitionMailDate descending order
-                - name: offset
-                  in: query
-                  description: Position in the dataset of a particular record
-                  schema:
-                    type: integer
-                    minimum: 0
-                  example: 0
-                - name: limit
-                  in: query
-                  description: Limit the number of results returned
-                  schema:
-                    type: integer
-                    minimum: 1
-                  example: 25
-                - name: fields
-                  in: query
-                  description: Limits the response by specifying fields from dataset should be included.
-                  schema:
-                    type: string
-                  examples:
-                    All Fields:
-                        value:
-                        description: Returns all available data set fields
-                    Include Fields:
-                        value: petitionDecisionRecordIdentifier,patentNumber,firstApplicantName,petitionMailDate,decisionPetitionTypeCode,decisionTypeCodeDescriptionText,decisionMailDate,finalDecidingOfficeName,decisionDate,technologyCenter,businessEntityStatusCategory
-                        description: Include only petitionDecisionRecordIdentifier,patentNumber,firstApplicantName,petitionMailDate,decisionPetitionTypeCode,decisionTypeCodeDescriptionText,decisionMailDate,finalDecidingOfficeName,decisionDate,technologyCenter,businessEntityStatusCategory in search result
-                - name: filters
-                  in: query
-                  description: Filter data by supplying filter parameter. Provide field name and its value
-                  schema:
-                    type: string
-                  examples:
-                    No Filter:
-                        value:
-                        description: No filter
-                    Filters Example 1:
-                        value: decisionTypeCodeDescriptionText DENIED
-                        description: Filter data where decisionTypeCodeDescriptionText value is DENIED
-                    Filters Example 2:
-                        value: businessEntityStatusCategory 'Small'
-                        description: Filter data where businessEntityStatusCategory value is 'Small'
-                    Filters Single Value:
-                        value: decisionDate 2023-10-18
-                        description: Filter data where decisionDate value is 2023-10-18
-                    Filters Multi Value:
-                        value: ruleBag 1.76,1.78
-                        description: Filter data where ruleBag value is 1.76 or 1.78
-                - name: rangeFilters
-                  in: query
-                  description: Filter the data by supplying range of values. Applicable for number and date type fields.
-                  schema:
-                    type: string
-                  examples:
-                    No Range Filter:
-                        value:
-                        description: No range filter
-                    Date Range Filter:
-                        value: petitionMailDate 2021-01-01:2025-01-01
-                        description: Filter data where petitionMailDate is between 2021-01-01 and 2025-01-01
-                    Number Range Filter:
-                        value: ruleBag 1.76:1.90
-                        description: Filter data where ruleBag is between 1.76 and 1.90
-                - name: format
-                  in: query
-                  description: Download Format
-                  schema:
-                    type: string
-                  examples:
-                    json:
-                        value: json
-                    csv:
-                        value: csv
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/PetitionDecisionResponseBag'
-                '400':
-                    description: Bad Request
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response400'
-                '403':
-                    description: Forbidden
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response403'
-                '404':
-                    description: Not Found
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response404'
-                '500':
-                    description: Internal Server Error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response500'
-    /api/v1/petition/decisions/{petitionDecisionRecordIdentifier}:
-        x-ip-domain: Patent
-        x-service-type: ["Search", "Dissemination"]
-        x-content-type: Petition Decisions
-        get:
-            tags:
-                - Petition Decision Search
-            summary: Petition decision application data for a provided application number
-            parameters:
-                - name: petitionDecisionRecordIdentifier
-                  in: path
-                  description: Petition Decision number
-                  schema:
-                    type: string
-                  required: true
-                  examples:
-                    first:
-                        value: 6779f1be-0f3b-5775-b9d3-dcfdb83171c3
-                        summary: Petition decision record identifier
-                        description: Petition decision number
-                - name: includeDocuments
-                  in: query
-                  description: This is a true or false...yes to include petition decision documents in the response and no to omit the petition decision documents from the response
-                  schema:
-                    type: boolean
-                  example: true
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/PetitionDecisionIdentifierResponseBag'
-                '400':
-                    description: Bad Request
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response400'
-                '403':
-                    description: Forbidden
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response403'
-                '404':
-                    description: Not Found
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response404'
-                '500':
-                    description: Internal Server Error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response500'
     # ── PTAB Proceedings ─────────────────────────────
     /api/v1/patent/trials/proceedings/search:
         post:
@@ -4402,6 +3933,482 @@ paths:
                 '404': {$ref: '#/components/responses/NotFound'}
                 '413': {$ref: '#/components/responses/Status413'}
                 '500': {$ref: '#/components/responses/InternalError'}
+    /api/v1/petition/decisions/search:
+        x-ip-domain: Patent
+        x-service-type: ["Search", "Dissemination"]
+        x-content-type: Petition Decisions
+        get:
+            tags:
+                - Petition Decision Search
+            summary: Search petition decisions by query parameters
+            description: >
+                Search petition decisions using query string parameters. All parameters are optional. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+
+            operationId: searchPetitionDecisionsGet
+            parameters:
+                - name: q
+                  in: query
+                  required: false
+                  description: >
+                    A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+
+                  allowReserved: true
+                  schema:
+                    type: string
+                  examples:
+                    noSearchText:
+                        summary: No conditions
+                        description: Empty — no conditions applied
+                        value:
+                    exactPhrase:
+                        summary: Exact phrase
+                        value: Denied
+                        description: Search text 'Denied' across all searchable data fields
+                    booleanAnd:
+                        summary: Boolean AND
+                        value: Denied AND Patented
+                        description: Search for 'Denied' AND 'Patented' across all searchable fields
+                    searchByField:
+                        summary: Search by field value
+                        value: applicationNumberText:11512156
+                        description: Search data for application number 11512156
+                    booleanOr:
+                        summary: Boolean OR
+                        value: decisionTypeCodeDescriptionText:Denied OR finalDecidingOfficeName:OFFICE
+                        description: >
+                            Search where decisionTypeCodeDescriptionText is Denied OR finalDecidingOfficeName is OFFICE
+
+                    wildcard:
+                        summary: Wildcard
+                        value: firstApplicantName:BRANT*
+                        description: Search where firstApplicantName starts with BRANT
+                    range:
+                        summary: Date range
+                        value: petitionMailDate:[2021-08-04 TO 2021-09-04]
+                        description: Search where petitionMailDate is between 2021-08-04 and 2021-09-04
+                    comparison:
+                        summary: Comparison
+                        value: decisionTypeCode:>524
+                        description: Search all records where decisionTypeCode is greater than 524
+                - name: sort
+                  in: query
+                  required: false
+                  description: Field to sort by followed by sort order (asc or desc).
+                  schema:
+                    type: string
+                  examples:
+                    noSort:
+                        summary: No sort
+                        description: Default sort applied
+                        value:
+                    ascending:
+                        summary: Ascending
+                        value: petitionMailDate asc
+                        description: Sort by petitionMailDate ascending
+                    descending:
+                        summary: Descending
+                        value: petitionMailDate desc
+                        description: Sort by petitionMailDate descending
+                - name: offset
+                  in: query
+                  required: false
+                  description: Position in the dataset to start returning records from.
+                  schema:
+                    type: integer
+                    minimum: 0
+                    default: 0
+                  example: 0
+                - name: limit
+                  in: query
+                  required: false
+                  description: Maximum number of records to return. Max 500.
+                  schema:
+                    type: integer
+                    minimum: 1
+                    maximum: 500
+                    default: 25
+                  example: 25
+                - name: facets
+                  in: query
+                  required: false
+                  description: >
+                    Comma-separated list of field names to aggregate. Not supported on /search/download.
+
+                  schema:
+                    type: string
+                  examples:
+                    noFacets:
+                        summary: No facets
+                        value:
+                        description: No faceting applied
+                    facetsExample:
+                        summary: Facets example
+                        value: firstInventorToFileIndicator,finalDecidingOfficeName
+                        description: Facet by firstInventorToFileIndicator and finalDecidingOfficeName
+                - name: fields
+                  in: query
+                  required: false
+                  description: >
+                    Comma-separated field names to include in the response. Returns all fields if omitted.
+
+                  schema:
+                    type: string
+                  examples:
+                    allFields:
+                        summary: All fields
+                        value:
+                        description: Returns all available fields
+                    selectedFields:
+                        summary: Selected fields
+                        value: petitionDecisionRecordIdentifier,patentNumber,firstApplicantName,petitionMailDate,decisionPetitionTypeCode,decisionTypeCodeDescriptionText,decisionMailDate,finalDecidingOfficeName,decisionDate,petitionIssueConsideredTextBag,technologyCenter
+                        description: Returns only the specified fields
+                - name: filters
+                  in: query
+                  required: false
+                  description: >
+                    Filter data by providing field name and value pairs. Separate multiple values with a comma for multi-value filters.
+
+                  schema:
+                    type: string
+                  examples:
+                    noFilter:
+                        summary: No filter
+                        value:
+                        description: No filter applied
+                    singleValueFilter:
+                        summary: Single value filter
+                        value: decisionTypeCodeDescriptionText DENIED
+                        description: Filter where decisionTypeCodeDescriptionText is DENIED
+                    quotedValueFilter:
+                        summary: Quoted value filter
+                        value: businessEntityStatusCategory 'Small'
+                        description: Filter where businessEntityStatusCategory is Small
+                    dateFilter:
+                        summary: Date filter
+                        value: decisionDate 2023-10-18
+                        description: Filter where decisionDate is 2023-10-18
+                    multiValueFilter:
+                        summary: Multi-value filter
+                        value: ruleBag 1.76,1.78
+                        description: Filter where ruleBag is 1.76 or 1.78
+                - name: rangeFilters
+                  in: query
+                  required: false
+                  description: >
+                    Filter data by a range of values. Applicable for number and date fields. Date values must be in YYYY-MM-DD format.
+
+                  schema:
+                    type: string
+                  examples:
+                    noRangeFilter:
+                        summary: No range filter
+                        value:
+                        description: No range filter applied
+                    dateRangeFilter:
+                        summary: Date range filter
+                        value: petitionMailDate 2021-01-01:2025-01-01
+                        description: Filter where petitionMailDate is between 2021-01-01 and 2025-01-01
+                    numberRangeFilter:
+                        summary: Number range filter
+                        value: ruleBag 1.76:1.90
+                        description: Filter where ruleBag is between 1.76 and 1.90
+            responses:
+                '200':
+                    $ref: '#/components/responses/SearchSuccess'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
+        post:
+            tags:
+                - Petition Decision Search
+            summary: Search petition decisions by JSON request body
+            description: >
+                Search petition decisions using a JSON request body. All fields are optional. Empty request body returns the top 25 petition decisions sorted by petitionMailDate desc.
+
+            operationId: searchPetitionDecisionsPost
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PetitionDecisionSearchRequest'
+            responses:
+                '200':
+                    $ref: '#/components/responses/SearchSuccess'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
+    /api/v1/petition/decisions/search/download:
+        x-ip-domain: Patent
+        x-service-type: ["Search", "Dissemination"]
+        x-content-type: Petition Decisions
+        get:
+            tags:
+                - Petition Decision Search
+            summary: Download petition decisions by query parameters
+            description: >
+                Download petition decisions as CSV or JSON using query string parameters. All parameters are optional. Facets are not supported on this endpoint. When no query parameters are supplied, the top 25 petition decisions sorted by petitionMailDate desc are returned.
+
+            operationId: downloadPetitionDecisionsGet
+            parameters:
+                - name: q
+                  in: query
+                  required: false
+                  description: >
+                    A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+
+                  allowReserved: true
+                  schema:
+                    type: string
+                  examples:
+                    noSearchText:
+                        summary: No conditions
+                        description: Empty — no conditions applied
+                        value:
+                    exactPhrase:
+                        summary: Exact phrase
+                        value: Denied
+                        description: Search text 'Denied' across all searchable data fields
+                    booleanAnd:
+                        summary: Boolean AND
+                        value: Denied AND Patented
+                        description: Search for 'Denied' AND 'Patented' across all searchable fields
+                    searchByField:
+                        summary: Search by field value
+                        value: applicationNumberText:11512156
+                        description: Search data for application number 11512156
+                    booleanOr:
+                        summary: Boolean OR
+                        value: decisionTypeCodeDescriptionText:Denied OR finalDecidingOfficeName:OFFICE
+                        description: >
+                            Search where decisionTypeCodeDescriptionText is Denied OR finalDecidingOfficeName is OFFICE
+
+                    wildcard:
+                        summary: Wildcard
+                        value: firstApplicantName:BRANT*
+                        description: Search where firstApplicantName starts with BRANT
+                    range:
+                        summary: Date range
+                        value: petitionMailDate:[2021-08-04 TO 2021-09-04]
+                        description: Search where petitionMailDate is between 2021-08-04 and 2021-09-04
+                    comparison:
+                        summary: Comparison
+                        value: decisionTypeCode:>524
+                        description: Search all records where decisionTypeCode is greater than 524
+                - name: sort
+                  in: query
+                  required: false
+                  description: Field to sort by followed by sort order (asc or desc).
+                  schema:
+                    type: string
+                  examples:
+                    noSort:
+                        summary: No sort
+                        description: Default sort applied
+                        value:
+                    ascending:
+                        summary: Ascending
+                        value: petitionMailDate asc
+                        description: Sort by petitionMailDate ascending
+                    descending:
+                        summary: Descending
+                        value: petitionMailDate desc
+                        description: Sort by petitionMailDate descending
+                - name: offset
+                  in: query
+                  required: false
+                  description: Position in the dataset to start returning records from.
+                  schema:
+                    type: integer
+                    minimum: 0
+                    default: 0
+                  example: 0
+                - name: limit
+                  in: query
+                  required: false
+                  description: Maximum number of records to return. Max 500.
+                  schema:
+                    type: integer
+                    minimum: 1
+                    maximum: 500
+                    default: 25
+                  example: 25
+                - name: fields
+                  in: query
+                  required: false
+                  description: >
+                    Comma-separated field names to include in the response. Returns all fields if omitted.
+
+                  schema:
+                    type: string
+                  examples:
+                    allFields:
+                        summary: All fields
+                        value:
+                        description: Returns all available fields
+                    selectedFields:
+                        summary: Selected fields
+                        value: petitionDecisionRecordIdentifier,patentNumber,firstApplicantName,petitionMailDate,decisionPetitionTypeCode,decisionTypeCodeDescriptionText,decisionMailDate,finalDecidingOfficeName,decisionDate,petitionIssueConsideredTextBag,technologyCenter
+                        description: Returns only the specified fields
+                - name: filters
+                  in: query
+                  required: false
+                  description: >
+                    Filter data by providing field name and value pairs. Separate multiple values with a comma for multi-value filters.
+
+                  schema:
+                    type: string
+                  examples:
+                    noFilter:
+                        summary: No filter
+                        value:
+                        description: No filter applied
+                    singleValueFilter:
+                        summary: Single value filter
+                        value: decisionTypeCodeDescriptionText DENIED
+                        description: Filter where decisionTypeCodeDescriptionText is DENIED
+                    quotedValueFilter:
+                        summary: Quoted value filter
+                        value: businessEntityStatusCategory 'Small'
+                        description: Filter where businessEntityStatusCategory is Small
+                    dateFilter:
+                        summary: Date filter
+                        value: decisionDate 2023-10-18
+                        description: Filter where decisionDate is 2023-10-18
+                    multiValueFilter:
+                        summary: Multi-value filter
+                        value: ruleBag 1.76,1.78
+                        description: Filter where ruleBag is 1.76 or 1.78
+                - name: rangeFilters
+                  in: query
+                  required: false
+                  description: >
+                    Filter data by a range of values. Applicable for number and date fields. Date values must be in YYYY-MM-DD format.
+
+                  schema:
+                    type: string
+                  examples:
+                    noRangeFilter:
+                        summary: No range filter
+                        value:
+                        description: No range filter applied
+                    dateRangeFilter:
+                        summary: Date range filter
+                        value: petitionMailDate 2021-01-01:2025-01-01
+                        description: Filter where petitionMailDate is between 2021-01-01 and 2025-01-01
+                    numberRangeFilter:
+                        summary: Number range filter
+                        value: ruleBag 1.76:1.90
+                        description: Filter where ruleBag is between 1.76 and 1.90
+                - name: format
+                  in: query
+                  required: false
+                  description: Download format. Defaults to csv if not specified.
+                  schema:
+                    type: string
+                    enum: [json, csv]
+                    default: csv
+                  examples:
+                    csv:
+                        summary: CSV format
+                        value: csv
+                    json:
+                        summary: JSON format
+                        value: json
+            responses:
+                '200':
+                    $ref: '#/components/responses/DownloadSuccess'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
+        post:
+            tags:
+                - Petition Decision Search
+            summary: Download petition decisions by JSON request body
+            description: >
+                Download petition decisions as CSV or JSON using a JSON request body. All fields are optional. Facets are not supported on this endpoint.
+
+            operationId: downloadPetitionDecisionsPost
+            requestBody:
+                required: false
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PetitionDecisionDownloadRequest'
+            responses:
+                '200':
+                    $ref: '#/components/responses/DownloadSuccess'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
+    /api/v1/petition/decisions/{petitionDecisionRecordIdentifier}:
+        x-ip-domain: Patent
+        x-service-type: ["Search", "Dissemination"]
+        x-content-type: Petition Decisions
+        get:
+            tags:
+                - Petition Decision Search
+            summary: Get a single petition decision by record identifier
+            description: >
+                Retrieve a single petition decision record by its unique petition decision record identifier.
+
+            operationId: getPetitionDecisionById
+            parameters:
+                - name: petitionDecisionRecordIdentifier
+                  in: path
+                  required: true
+                  description: Unique petition decision record identifier.
+                  schema:
+                    type: string
+                  examples:
+                    example1:
+                        summary: Petition decision record identifier
+                        value: 6779f1be-0f3b-5775-b9d3-dcfdb83171c3
+            responses:
+                '200':
+                    description: Single petition decision record retrieved successfully.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PetitionDecisionResponseBag'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
 components:
     securitySchemes:
         ApiKeyAuth:
@@ -5001,9 +5008,6 @@ components:
                                     postalCode:
                                         type: string
                                         example: 20123
-                                    countryOrStateCode:
-                                        type: string
-                                        example:
                                     ictStateCode:
                                         type: string
                                         example:
@@ -5495,35 +5499,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/BulkDataProductBag'
-        # Petition Decision
-        PetitionDecisionResponseBag:
-            type: object
-            properties:
-                count:
-                    type: integer
-                    example: 1
-                petitionDecisionDataBag:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecision'
-                facets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacet'
-                requestIdentifier:
-                    type: string
-        PetitionDecisionIdentifierResponseBag:
-            type: object
-            properties:
-                count:
-                    type: integer
-                    example: 1
-                petitionDecisionDataBag:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionAndDocuments'
-                requestIdentifier:
-                    type: string
         # Trial – Proceedings
         ProceedingDataResponse:
             type: object
@@ -6240,6 +6215,509 @@ components:
                             type: array
                             items: {type: string}
                             example: ["Substantive", "Procedural"]
+        PetitionDecisionSearchRequest:
+            type: object
+            description: >
+                Search request body. All fields are optional. Empty request returns top 25 records sorted by petitionMailDate desc.
+
+            properties:
+                q:
+                    type: string
+                    description: >
+                        Free-text or advanced Lucene query string. Searches across all searchable fields. Supports boolean (OR/AND/NOT), wildcards (BRANT*), phrases ("Show cause"), and field-specific queries (finalDecidingOfficeName:OFFICE OF PETITIONS).
+
+                    example: finalDecidingOfficeName:OFFICE OF PETITIONS
+                filters:
+                    type: array
+                    description: List of exact match filters.
+                    items:
+                        $ref: '#/components/schemas/PetitionDecisionFilter'
+                rangeFilters:
+                    type: array
+                    description: List of range filters.
+                    items:
+                        $ref: '#/components/schemas/PetitionDecisionRange'
+                sort:
+                    type: array
+                    description: Sort order. Defaults to petitionMailDate desc.
+                    items:
+                        $ref: '#/components/schemas/PetitionDecisionSort'
+                fields:
+                    type: array
+                    description: Fields to include in response. Returns all if omitted.
+                    items:
+                        type: string
+                    example:
+                        - applicationNumberText
+                        - patentNumber
+                        - firstApplicantName
+                        - petitionMailDate
+                        - decisionPetitionTypeCode
+                        - decidedPetitionTypeCodeDescriptionText
+                        - decisionMailDate
+                        - finalDecidingOfficeName
+                        - businessEntityStatusCategory
+                        - groupArtUnitNumber
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+                    facets:
+                        type: array
+                        description: Fields to aggregate. Not supported on /search/download.
+                        items:
+                            type: string
+                        example:
+                            - finalDecidingOfficeName
+                            - businessEntityStatusCategory
+        PetitionDecisionDownloadRequest:
+            type: object
+            description: >
+                Download request body. All fields are optional. Empty request returns top 25 records sorted by petitionMailDate desc. Facets are not supported on this endpoint.
+
+            properties:
+                q:
+                    type: string
+                    description: >
+                        Free-text or advanced Lucene query string. Searches across all searchable fields. Supports boolean (OR/AND/NOT), wildcards (BRANT*), phrases ("Show cause"), and field-specific queries (finalDecidingOfficeName:OFFICE OF PETITIONS).
+
+                    example: finalDecidingOfficeName:OFFICE OF PETITIONS
+                filters:
+                    type: array
+                    description: List of exact match filters.
+                    items:
+                        $ref: '#/components/schemas/PetitionDecisionFilter'
+                rangeFilters:
+                    type: array
+                    description: List of range filters.
+                    items:
+                        $ref: '#/components/schemas/PetitionDecisionRange'
+                sort:
+                    type: array
+                    description: Sort order. Defaults to petitionMailDate desc.
+                    items:
+                        $ref: '#/components/schemas/PetitionDecisionSort'
+                fields:
+                    type: array
+                    description: Fields to include in response. Returns all if omitted.
+                    items:
+                        type: string
+                    example:
+                        - applicationNumberText
+                        - patentNumber
+                        - firstApplicantName
+                        - petitionMailDate
+                        - decisionPetitionTypeCode
+                        - decidedPetitionTypeCodeDescriptionText
+                        - decisionMailDate
+                        - finalDecidingOfficeName
+                        - decisionDate
+                        - technologyCenter
+                        - businessEntityStatusCategory
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+                format:
+                    type: string
+                    description: Download format. Defaults to csv if not specified.
+                    enum: [json, csv]
+                    default: csv
+                    example: csv
+        PetitionDecisionResponseBag:
+            type: object
+            description: Search response containing matching petition decision records.
+            properties:
+                count:
+                    type: integer
+                    description: Total number of matching records.
+                    example: 1
+                requestIdentifier:
+                    type: string
+                    format: uuid
+                    description: Unique request identifier for traceability.
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+                petitionDecisionDataBag:
+                    type: array
+                    description: List of matching petition decision records.
+                    items:
+                        $ref: '#/components/schemas/PetitionDecision'
+                facets:
+                    type: object
+                    description: Aggregation results per requested facet field.
+                    additionalProperties:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/FacetValue'
+                    example:
+                        firstInventorToFileIndicator:
+                            - value: "false"
+                              count: 4126
+                            - value: "true"
+                              count: 2136
+                        finalDecidingOfficeName:
+                            - value: OFFICE OF PETITIONS
+                              count: 7355
+                            - value: INTERNATIONAL DIVISION
+                              count: 120
+        PetitionDecision:
+            type: object
+            description: A single petition decision record.
+            properties:
+                petitionDecisionRecordIdentifier:
+                    type: string
+                applicationNumberText:
+                    type: string
+                    description: USPTO patent application number.
+                    example: "15569871"
+                applicationStatusDescriptionText:
+                    type: string
+                    description: Current status description of the patent application.
+                    example: Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362
+                applicationStatusDate:
+                    type: string
+                    description: Date of the application status.
+                    example: "2009-05-04"
+                businessEntityStatusCategory:
+                    type: string
+                    description: Business entity size category of the applicant.
+                    example: Small
+                customerNumber:
+                    type: integer
+                    description: USPTO customer number associated with the application.
+                    example: 23628
+                decisionDate:
+                    type: string
+                    description: Date the petition decision was issued.
+                    example: "2024-03-20"
+                decisionMailDate:
+                    type: string
+                    description: Date the petition decision was mailed to the applicant.
+                    example: "2024-03-25"
+                decisionPetitionTypeCode:
+                    type: string
+                decidedPetitionTypeCode:
+                    type: string
+                    description: Code representing the decided petition type.
+                    example: C
+                decisionPetitionTypeCodeDescriptionText:
+                    type: string
+                    description: Description of the petition type decision code.
+                    example: To Withdraw A Holding of Abandonment in Pre-Exam Status
+                decidedPetitionTypeCodeDescriptionText:
+                    type: string
+                    description: Description of the decided petition outcome.
+                    example: DENIED
+                documentBag:
+                    type: array
+                    description: List of documents associated with this petition decision.
+                    items:
+                        $ref: '#/components/schemas/PetitionDecisionDocument'
+                finalPetitionDecisionIndicator:
+                    type: boolean
+                    description: Indicates whether this is a final petition decision.
+                    example: false
+                finalDecidingOfficeName:
+                    type: string
+                    description: Name of the office that made the final decision.
+                    example: OFFICE OF PETITIONS
+                firstApplicantName:
+                    type: string
+                    description: Name of the first applicant on the patent application.
+                    example: BIOVERATIV THERAPEUTICS INC.
+                firstInventorToFileIndicator:
+                    type: boolean
+                    description: Indicates whether this is a first inventor to file application.
+                    example: true
+                groupArtUnitNumber:
+                    type: string
+                    description: USPTO group art unit number assigned to the application.
+                    example: "1646"
+                technologyCenter:
+                    type: string
+                    description: USPTO technology center handling the application.
+                    example: "1646"
+                inventionTitle:
+                    type: string
+                    description: Title of the invention as stated in the patent application.
+                    example: RECEPTOR TYROSINE KINASE BIOMARKERS
+                inventorBag:
+                    type: array
+                    description: List of inventor names associated with the application.
+                    items:
+                        type: string
+                    example:
+                        - David Clarke
+                        - Daniel Rolfe
+                actionTakenByCourtName:
+                    type: string
+                    description: Name of court that took action, if applicable.
+                    example: None
+                courtActionIndicator:
+                    type: boolean
+                    description: Indicates whether court action has been taken.
+                    example: false
+                lastModifiedDateTime:
+                    type: string
+                    description: Timestamp of when the record was last ingested into the system.
+                    example: "2025-04-23T02:47:58"
+                patentNumber:
+                    type: string
+                    description: USPTO patent number if the application has been granted.
+                    example: "8894782"
+                petitionIssueConsideredTextBag:
+                    type: array
+                    description: List of petition issues considered in this decision.
+                    items:
+                        type: string
+                    example:
+                        - Review of Technology Center: New ground of rejection in examiner's answer
+                petitionMailDate:
+                    type: string
+                    description: Date the petition was mailed.
+                    example: "2022-09-12"
+                prosecutionStatusCode:
+                    type: integer
+                    format: int64
+                    description: Numeric code representing the prosecution status at the time of petition.
+                    example: 161
+                prosecutionStatusCodeDescriptionText:
+                    type: string
+                    description: Description of the prosecution status at time of petition.
+                    example: During examination
+                ruleBag:
+                    type: array
+                    description: List of CFR rules cited in the petition decision.
+                    items:
+                        type: string
+                    example:
+                        - 37 CFR 1.26(a)
+                        - 37 CFR 1.113
+                statuteBag:
+                    type: array
+                    description: List of USC statutes cited in the petition decision.
+                    items:
+                        type: string
+                    example:
+                        - 35 USC 134
+                ocrSearchText:
+                    type: string
+                    maxLength: 500
+                    description: >
+                        OCR extracted text content from the petition decision document. Returns up to 500 characters with search term highlighting.
+
+                    example: "United States Patent and Trademark Office Commissioner for Patents P.O. Box 1450 Alexandria, VA 22313-1450..."
+                allSearchableFields:
+                    type: string
+        PetitionDecisionDocument:
+            type: object
+            description: A document associated with a petition decision record.
+            properties:
+                documentCode:
+                    type: string
+                    description: Code identifying the type of document.
+                    example: PETDEC
+                documentCodeDescriptionText:
+                    type: string
+                    description: Description of the document type code.
+                    example: Petition Decision
+                documentIdentifier:
+                    type: string
+                    description: Unique identifier for the document.
+                    example: M98QOH0NWFYTX17
+                downloadOptionBag:
+                    type: array
+                    description: List of available download options for this document.
+                    items:
+                        type: object
+                        properties:
+                            mimeTypeIdentifier:
+                                type: string
+                                description: MIME type of the downloadable document.
+                                example: PDF
+                            documentURI:
+                                type: string
+                                format: uri
+                                description: URI to download the document.
+                                example: https://data.uspto.gov/ui/download/applications/16123123/M98QOH0NWFYTX17.pdf
+                            downloadUrl:
+                                type: string
+                            pageTotalQuantity:
+                                type: integer
+                officialDate:
+                    type: string
+                    description: Official date and time of the document.
+                    example: "2020-08-31T01:20:29.000-0400"
+        PetitionDecisionFilter:
+            type: object
+            description: >
+                Exact match filter. Provide the field name from the dataset and one or more values to filter by.
+
+            required:
+                - name
+                - value
+            properties:
+                name:
+                    type: string
+                    description: Field name to filter on.
+                    example: decidedPetitionTypeCodeDescriptionText
+                value:
+                    type: array
+                    description: List of values to filter by.
+                    items:
+                        type: string
+                    example:
+                        - DENIED
+        PetitionDecisionRange:
+            type: object
+            description: >
+                Range filter. Provide a field name from the dataset along with valueFrom and valueTo. Date fields must use YYYY-MM-DD format.
+
+            required:
+                - field
+            properties:
+                field:
+                    type: string
+                    description: Field name to apply the range filter on.
+                    example: petitionMailDate
+                valueFrom:
+                    type: string
+                    description: Range start value inclusive. Date format YYYY-MM-DD.
+                    example: "2022-08-04"
+                valueTo:
+                    type: string
+                    description: Range end value inclusive. Date format YYYY-MM-DD.
+                    example: "2025-08-04"
+        PetitionDecisionSort:
+            type: object
+            description: >
+                Sort clause. Provide the field to sort by and the sort direction.
+
+            required:
+                - field
+                - order
+            properties:
+                field:
+                    type: string
+                    description: Field name to sort by.
+                    example: petitionMailDate
+                order:
+                    type: string
+                    description: Sort direction. Case-insensitive.
+                    enum: [asc, desc]
+                    example: desc
+        Pagination:
+            type: object
+            description: Pagination options for controlling result set size and offset.
+            properties:
+                offset:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    default: 0
+                    description: Number of records to skip before returning results.
+                    example: 0
+                limit:
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    maximum: 500
+                    default: 25
+                    description: Maximum number of records to return. Max 500.
+                    example: 25
+        FacetValue:
+            type: object
+            description: A single facet value with its document count.
+            properties:
+                value:
+                    type: string
+                    description: The facet value.
+                    example: OFFICE OF PETITIONS
+                count:
+                    type: integer
+                    description: Number of records matching this facet value.
+                    example: 7355
+        Response400:
+            type: object
+            description: Bad Request — the request was invalid or malformed.
+            properties:
+                code:
+                    type: string
+                    example: 400
+                error:
+                    type: string
+                    example: Bad Request
+                errorDetails:
+                    type: string
+                    example: Invalid request, review petition decision data request filter section and try again.
+                requestIdentifier:
+                    type: string
+                    format: uuid
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Response401:
+            type: object
+            description: Unauthorized — missing or invalid authentication token.
+            properties:
+                code:
+                    type: string
+                    example: 401
+                error:
+                    type: string
+                    example: Unauthorized
+                errorDetails:
+                    type: string
+                    example: Missing or invalid Bearer token. Please provide a valid Authorization header.
+                requestIdentifier:
+                    type: string
+                    format: uuid
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Response403:
+            type: object
+            description: Forbidden — authenticated but not authorized to access this resource.
+            properties:
+                code:
+                    type: string
+                    example: 403
+                error:
+                    type: string
+                    example: Forbidden
+                errorDetails:
+                    type: string
+                    example: You do not have permission to access this resource.
+                requestIdentifier:
+                    type: string
+                    format: uuid
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Response404:
+            type: object
+            description: Not Found — no records match the search criteria.
+            properties:
+                code:
+                    type: string
+                    example: 404
+                error:
+                    type: string
+                    example: Not Found
+                errorDetails:
+                    type: string
+                    example: No matching records found, refine your search criteria and try again.
+                requestIdentifier:
+                    type: string
+                    format: uuid
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Response500:
+            type: object
+            description: Internal Server Error — an unexpected error occurred.
+            properties:
+                code:
+                    type: string
+                    example: 500
+                error:
+                    type: string
+                    example: Internal Server Error
+                errorDetails:
+                    type: string
+                    example: An unexpected error occurred. Please contact the Help Desk.
+                requestIdentifier:
+                    type: string
+                    format: uuid
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
         StatusCodeSearchRequest:
             type: object
             properties:
@@ -6287,24 +6765,6 @@ components:
                     description: Sort order. e.g. Asc, ASC, Desc, desc, DESC
                     example: desc
                     enum: [Asc, asc, Desc, desc]
-        Pagination:
-            type: object
-            description: Pagination information.
-            properties:
-                offset:
-                    type: integer
-                    format: int32
-                    minimum: 0
-                    example: 0
-                    default: 0
-                    description: Start
-                limit:
-                    type: integer
-                    format: int32
-                    minimum: 1
-                    default: 25
-                    example: 25
-                    description: Maximum number of patent records to be returned in response
         Error:
             type: object
             description: Object representing the error response
@@ -6490,338 +6950,6 @@ components:
                             count:
                                 type: integer
                                 example: 1
-        PetitionDecisionFilter:
-            type: object
-            description: Add filters to your search request by providing filter name and filter value where name in filter request some field in data set.
-            properties:
-                name:
-                    type: string
-                    example: decisionTypeCodeDescriptionText
-                value:
-                    type: array
-                    items:
-                        type: string
-                        example: DENIED
-        PetitionDecisionRange:
-            type: object
-            description: Range filter. Provide field from dataset and valueFrom and valueTo. If range filter is for date field, date must be in “yyyy-MM-dd” format
-            properties:
-                field:
-                    type: string
-                    example: petitionMailDate
-                valueFrom:
-                    type: string
-                    example: '2022-08-04'
-                valueTo:
-                    type: string
-                    example: '2025-08-04'
-        PetitionDecisionSort:
-            type: object
-            description: Sort you search result by providing field to be sorted and sort order
-            properties:
-                field:
-                    type: string
-                    example: petitionMailDate
-                order:
-                    type: string
-                    description: Sort order. e.g. Asc, ASC, Desc, desc, DESC
-                    example: desc
-                    enum: [Asc, asc, Desc, desc]
-        Response400:
-            type: object
-            properties:
-                code:
-                    example: 400
-                error:
-                    example: Bad Request
-                errorDetails:
-                    example: Invalid request, review petition decision data request filter section and try again
-                requestIdentifier:
-                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
-        Response403:
-            type: object
-            properties:
-                code:
-                    example: 403
-                error:
-                    example: Forbidden
-        Response404:
-            type: object
-            properties:
-                code:
-                    example: 404
-                error:
-                    example: Not Found
-                errorDetails:
-                    example: No matching records found, refine your search criteria and try again
-                requestIdentifier:
-                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
-        Response500:
-            type: object
-            properties:
-                code:
-                    example: 500
-                error:
-                    example: Internal Server Error
-                errorDetails:
-                    example: Internal Server Error. Please contact Help Desk.
-                requestIdentifier:
-                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
-        PetitionDecisionSearchRequest:
-            type: object
-            properties:
-                q:
-                    type: string
-                    example: "finalDecidingOfficeName:OFFICE OF PETITIONS"
-                    description: Search by field value or pass opensearch string query syntax
-                filters:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFilter'
-                rangeFilters:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionRange'
-                sort:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionSort'
-                fields:
-                    type: array
-                    items:
-                        type: string
-                    example: ['applicationNumberText', 'patentNumber', 'firstApplicantName', 'petitionMailDate', 'decisionPetitionTypeCode', 'decisionTypeCodeDescriptionText', 'decisionMailDate', 'finalDecidingOfficeName', 'businessEntityStatusCategory', 'groupArtUnitNumber']
-                pagination:
-                    $ref: '#/components/schemas/Pagination'
-                facets:
-                    type: array
-                    items:
-                        type: string
-                    example: ['finalDecidingOfficeName', 'businessEntityStatusCategory']
-        PetitionDecisionDownloadRequest:
-            type: object
-            properties:
-                q:
-                    type: string
-                    example: "finalDecidingOfficeName:OFFICE OF PETITIONS"
-                    description: Search by field value or pass opensearch string query syntax
-                filters:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFilter'
-                rangeFilters:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionRange'
-                sort:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionSort'
-                fields:
-                    type: array
-                    items:
-                        type: string
-                    example: ['applicationNumberText', 'patentNumber', 'firstApplicantName', 'petitionMailDate', 'decisionPetitionTypeCode', 'decisionTypeCodeDescriptionText', 'decisionMailDate', 'finalDecidingOfficeName', 'businessEntityStatusCategory', 'groupArtUnitNumber']
-                pagination:
-                    $ref: '#/components/schemas/Pagination'
-                format:
-                    type: string
-                    example: csv
-                    enum: [json, csv]
-                    description: Download format. pdf,xml or docs
-        PetitionDecision:
-            type: object
-            properties:
-                petitionDecisionRecordIdentifier:
-                    type: string
-                    example: 5d899d97-2bba-50a9-b01d-d87b38c70c55
-                applicationNumberText:
-                    type: string
-                    example: 15569871
-                businessEntityStatusCategory:
-                    type: string
-                    example: Small
-                customerNumber:
-                    type: integer
-                    example: 23628
-                decisionDate:
-                    type: string
-                    example: 2024-03-20
-                decisionPetitionTypeCode:
-                    type: integer
-                    example: 551
-                decisionTypeCode:
-                    type: string
-                    example: C
-                decisionPetitionTypeCodeDescriptionText:
-                    type: string
-                    example: DENIED
-                finalDecidingOfficeName:
-                    type: string
-                    example: OFFICE OF PETITIONS
-                firstApplicantName:
-                    type: string
-                    example: BIOVERATIV THERAPEUTICS INC.
-                firstInventorToFileIndicator:
-                    type: boolean
-                    example: true
-                groupArtUnitNumber:
-                    type: string
-                    example: 1646
-                technologyCenter:
-                    type: string
-                    example: 1646
-                inventionTitle:
-                    type: string
-                    example: RECEPTOR TYROSINE KINASE BIOMARKERS
-                inventorBag:
-                    type: array
-                    items:
-                        type: string
-                    example: ["David Clarke", "Daniel Rolfe"]
-                actionTakenByCourtName:
-                    type: string
-                    example: "None"
-                courtActionIndicator:
-                    type: boolean
-                    example: false
-                lastIngestionDateTime:
-                    type: string
-                    example: '2025-04-23T02:47:58'
-                patentNumber:
-                    type: string
-                    example:
-                petitionIssueConsideredTextBag:
-                    type: array
-                    items:
-                        type: string
-                    example: ["Review of Technology Center: New ground of rejection in examiner's answer"]
-                petitionMailDate:
-                    type: string
-                    example: 2022-09-12
-                prosecutionStatusCodeDescriptionText:
-                    type: string
-                    example: During examination
-                ruleBag:
-                    type: array
-                    items:
-                        type: string
-                    example: ["37 CFR 1.26(a)", "37 CFR 1.113"]
-                statuteBag:
-                    type: array
-                    items:
-                        type: string
-                    example: ["35 USC 134"]
-                decisionTypeCodeDescriptionText:
-                    type: string
-                prosecutionStatusCode:
-                    type: integer
-        PetitionDecisionAndDocuments:
-            allOf:
-                - $ref: '#/components/schemas/PetitionDecision'
-                - type: object
-                  properties:
-                    documentBag:
-                        type: array
-                        items:
-                            $ref: '#/components/schemas/PetitionDecisionDocument'
-        PetitionDecisionFacetEntity:
-            type: object
-            properties:
-                value:
-                    type: string
-                    example: Facet Value
-                count:
-                    type: integer
-                    example: 1
-        PetitionDecisionFacet:
-            type: object
-            properties:
-                technologyCenter:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                finalDecidingOfficeName:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                firstInventorToFileIndicator:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                decisionPetitionTypeCode:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                decisionTypeCodeDescriptionText:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                prosecutionStatusCodeDescriptionText:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                petitionIssueConsideredTextBag:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                statuteBag:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                ruleBag:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                actionTakenByCourtName:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                courtActionIndicator:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-                businessEntityStatusCategory:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/PetitionDecisionFacetEntity'
-        PetitionDecisionDocument:
-            type: object
-            properties:
-                applicationNumberText:
-                    type: string
-                    example: 1556987
-                officialDate:
-                    type: string
-                    example: 2020-08-31T01:20:29.000-0400
-                documentIdentifier:
-                    type: string
-                    example: M98QOH0NWFYTX17
-                documentCode:
-                    type: string
-                    example: PETDEC
-                documentCodeDescriptionText:
-                    type: string
-                    example: Petition Decision
-                documentDirectionCategory:
-                    type: string
-                    example: OUTGOING
-                downloadOptionBag:
-                    type: array
-                    items:
-                        type: object
-                        properties:
-                            mimeTypeIdentifier:
-                                type: string
-                                example: PDF
-                            documentURI:
-                                type: string
-                                example: https://api.uspto.gov/api/v1/patent/application/documents/16123123/LDXBTPQ7XBLUEX3.pdf
-                            pageTotalQuantity:
-                                type: integer
-                                example: 2
-                directionCategory:
-                    type: string
         ParamQ:
             type: string
             description: Boolean/wildcard search query string.
@@ -6873,6 +7001,27 @@ components:
                 application/json:
                     schema:
                         $ref: '#/components/schemas/DecisionDataResponse'
+        SearchSuccess:
+            description: Successful search response.
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/PetitionDecisionResponseBag'
+        DownloadSuccess:
+            description: Successful download response.
+            headers:
+                Content-Disposition:
+                    schema:
+                        type: string
+                    description: "attachment; filename=petition-decisions-{requestId}.csv"
+            content:
+                text/csv:
+                    schema:
+                        type: string
+                        format: binary
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/PetitionDecision'
         BadRequest:
             description: Bad Request
             content:
@@ -6887,6 +7036,12 @@ components:
                                 example: Invalid request, review patent data request filter section and try again
                             requestIdentifier:
                                 example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        Unauthorized:
+            description: Unauthorized — missing or invalid authentication token.
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Response401'
         Forbidden:
             description: Forbidden
             content:
@@ -6917,6 +7072,12 @@ components:
                             requestIdentifier:
                                 type: string
                                 example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        InternalServerError:
+            description: Internal Server Error.
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Response500'
         Status413:
             description: Payload Too Large
             content:

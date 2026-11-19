@@ -15,10 +15,15 @@ APIs (DSAPI), and TSDR (Trademark Status & Document Retrieval).
 - **Bulk Data API** (3 endpoints) - product search and resumable file downloads
   with progress callbacks.
 - **Petition API** (3 endpoints) - petition decision search, retrieval, download.
+- **Trademark Decisions and Proceedings API** (4 endpoints) - expungement and
+  reexamination proceedings, petitions to the Director, and administrative
+  decisions (sanctions, show-cause orders), plus the decision PDFs.
 - **PTAB API** (19 endpoints) - trial proceedings, decisions, documents, appeal
   decisions, interference decisions.
 - **Office Action APIs** (8 endpoints) - text retrieval, citations, rejections,
   enriched citations, via the DSAPI Lucene/Solr pattern.
+- **Office Action Search API** (5 endpoints) - ODP office action search,
+  retrieval, download and full raw text (applications filed 2001 or later).
 - **TSDR** (7 wrapper methods) - trademark status and document retrieval on a
   separate server with its own key.
 - **Patent number normalization** - accepts application, grant, publication, and
@@ -29,15 +34,18 @@ APIs (DSAPI), and TSDR (Trademark Status & Document Retrieval).
 
 ### ODP releases & spec versions
 
-USPTO bumps the **portal version** (currently 4.0) for any change to the
+USPTO bumps the **portal version** (currently 5.1) for any change to the
 ODP -- UI updates, new bulk datasets, ecosystem additions -- even when the
 underlying **API specs** don't change. Each swagger file carries its own
 `info.version`, and that's the contract this client binds to.
 
 | Spec file | Version | Surface |
 |---|---|---|
-| `swagger.yaml` | 1.0.0 | Patent Application, Bulk Data, Petition, PTAB |
+| `swagger.yaml` | 1.0.0 | Patent Application, Bulk Data, PTAB |
 | `odp-common-base.yaml` | 1.0.0 | Shared schemas |
+| `petition-decisions.yaml` | 1.0.0 | Petition decisions |
+| `trademark-decisions.yaml` | 1.0.0 | Trademark decisions and proceedings |
+| `office-actions.yaml` | 1.0.0 | ODP Office Action Search |
 | `trial-proceedings.yaml` | 1.0.0 | PTAB trial proceedings |
 | `trial-decisions.yaml` | 1.0.0 | PTAB trial decisions |
 | `trial-documents.yaml` | 1.0.0 | PTAB trial documents |
@@ -56,11 +64,17 @@ What this client implements from each ODP portal release:
 |---|---|---|
 | 3.0 | 2025-11-21 | Initial PTAB datasets via ODP -- wrapped (19 endpoints). |
 | 3.2 | 2026-01-16 | Office Action Weekly Archives surfaced as bulk product `OACT` -- accessible via the existing `SearchBulkProducts` / `GetBulkProduct` wrappers. PTAB RSS feed not wrapped (separate host, no API key). |
-| 3.3 | 2026-03-04 | Trademark (TM) Decisions & Proceedings reachable only through the portal SPA at `data.uspto.gov/ui/trademark/tm-decisions-api/`, using cookie + WAF-token auth. No public API spec. Not wrapped; will revisit if USPTO publishes one. |
+| 3.3 | 2026-03-04 | Trademark (TM) Decisions & Proceedings reachable only through the portal SPA at `data.uspto.gov/ui/trademark/tm-decisions-api/`, using cookie + WAF-token auth. No public API spec at the time; wrapped since 5.1. |
 | 3.4 | 2026-03-13 | PatentsView bulk products surfaced via the existing bulk-data wrappers. |
 | 3.5 | 2026-03-24 | Office Action APIs migrated to ODP -- wrapped (8 endpoints). The OA wrappers use the ODP host (`Config.OABaseURL` default `https://api.uspto.gov`). |
-| 3.6 | 2026-04-10 | US PCT numbers standardized to 15-char (`PCTUS...`); display form is 17-char with slashes -- fully supported. Patent Assignments API: `countryOrStateCode` deprecated, location consolidated under `geographicRegionCode` -- handled with fallback. Daily/yearly bulk file resumption is dataset coverage, no client change. |
-| 4.0 | (latest) | Portal-level changes; the API specs in this repo are still 1.0.x. If 4.0 ever introduces a path or schema change, drop the new swagger files into `swagger/` and run `go run ./cmd/gen`; the coverage test catches anything that goes silently unwrapped. |
+| 3.6 | 2026-04-10 | US PCT numbers standardized to 15-char (`PCTUS...`); display form is 17-char with slashes -- fully supported. Patent Assignments API: `countryOrStateCode` deprecated, location consolidated under `geographicRegionCode` (the field left the spec in 5.0 and the fallback was dropped). Daily/yearly bulk file resumption is dataset coverage, no client change. |
+| 4.0 | | Portal-level changes; no API spec change. |
+| 5.0 | 2026-10-02 | Petition decisions moved to their own `petition-decisions.yaml` with a reworked record: `decisionTypeCode`/`decisionTypeCodeDescriptionText` replaced by `decidedPetitionTypeCode`/`decidedPetitionTypeCodeDescriptionText`, new `applicationStatusDescriptionText`, `applicationStatusDate`, `decisionMailDate`, `finalPetitionDecisionIndicator`, `ocrSearchText`; `decisionPetitionTypeCode` is now a string; `includeDocuments` is gone (documents always come back). Breaking for `GetPetitionDecision` (see Petition API). The new ODP Office Action Search (`/api/v1/patent/office-action/...`) is wrapped (5 endpoints) in `generated/oasearch`; the DSAPI Office Action wrappers keep working. |
+| 5.1 | 2026-11-13 | Trademark Decisions and Proceedings API published (`trademark-decisions.yaml`) -- wrapped (4 endpoints) in `generated/tmd`. |
+
+When a release changes a path or schema, drop the new swagger files into
+`swagger/` and run `go run ./cmd/gen`; the coverage test catches anything that
+goes silently unwrapped.
 
 ## Installation
 
@@ -175,9 +189,38 @@ for _, file := range files {
 
 ```go
 SearchPetitions(ctx, query string, offset, limit int) (*PetitionDecisionResponseBag, error)
-GetPetitionDecision(ctx, recordID string, includeDocuments bool) (*PetitionDecisionIdentifierResponseBag, error)
+GetPetitionDecision(ctx, recordID string) (*PetitionDecisionResponseBag, error)
 SearchPetitionsDownload(ctx, req PetitionDecisionDownloadRequest) ([]byte, error)
 ```
+
+`GetPetitionDecision` returns the record as the single entry of
+`PetitionDecisionDataBag`, with the decision documents in its `DocumentBag`.
+
+### Trademark Decisions and Proceedings API (4 endpoints)
+
+One dataset with three `decisionProceedingCategory` values: `ExpungReexam`,
+`PetitionsToDirector` and `Administrative`. Types live in `generated/tmd`.
+
+```go
+SearchTrademarkDecisions(ctx, query string, offset, limit int) (*tmd.SearchResponse, error)
+SearchTrademarkDecisionsWithRequest(ctx, req tmd.SearchRequest) (*tmd.SearchResponse, error)
+GetTrademarkDecision(ctx, documentIdentifier string) (*tmd.TrademarkDecisionResponse, error)
+SearchTrademarkDecisionsDownload(ctx, req tmd.DownloadRequest) ([]byte, error)
+DownloadTrademarkDecisionFile(ctx, fileDownloadURI string, w io.Writer) error
+```
+
+```go
+limit := 10
+res, err := client.SearchTrademarkDecisionsWithRequest(ctx, tmd.SearchRequest{
+    Q:          odp.StringPtr("expungement"),
+    Filters:    &[]tmd.FilterClause{{Name: "decisionProceedingCategory", Value: []string{odp.TrademarkDecisionCategoryExpungReexam}}},
+    Pagination: &tmd.Pagination{Limit: &limit},
+})
+```
+
+The API accepts `limit` 1-100. Records link to the TSDR case through
+`serialNumber` / `registrationNumber`; Administrative records carry a
+`fileDownloadURI` for the decision PDF.
 
 ### PTAB (Patent Trial and Appeal Board) API (19 endpoints)
 
@@ -248,6 +291,23 @@ result, err := client.SearchOfficeActions(ctx, "hasRej103:1 AND groupArtUnitNumb
 fields, err := client.GetOfficeActionRejectionFields(ctx)
 fmt.Printf("Searchable fields: %v\n", fields.Fields)
 ```
+
+### Office Action Search API (5 endpoints)
+
+The ODP Office Action Search (release 5.0): office actions of applications filed
+in 2001 or later, searchable by metadata and full text. Separate from the DSAPI
+wrappers above. Types live in `generated/oasearch`.
+
+```go
+SearchOfficeActionRecords(ctx, query string, offset, limit int) (*oasearch.OfficeActionSearchResponse, error)
+SearchOfficeActionRecordsWithRequest(ctx, req oasearch.OfficeActionSearchRequest) (*oasearch.OfficeActionSearchResponse, error)
+GetOfficeActionRecord(ctx, recordID string) (*oasearch.OfficeActionResponse, error)
+SearchOfficeActionRecordsDownload(ctx, req oasearch.OfficeActionDownloadRequest) ([]byte, error)
+GetOfficeActionText(ctx, recordID string) ([]byte, error)
+```
+
+Search and by-id records carry an `officeActionText` excerpt; `GetOfficeActionText`
+returns the full raw text.
 
 ### TSDR (Trademark Status & Document Retrieval) API
 
@@ -423,8 +483,11 @@ references between them. The originals are downloaded from
 
 ```
 swagger/
-  swagger.yaml                  # Main ODP API spec (Patent, Bulk, Petition)
+  swagger.yaml                  # Main ODP API spec (Patent, Bulk, PTAB)
   odp-common-base.yaml          # Shared type definitions
+  petition-decisions.yaml       # Petition decisions (bundled into generated/)
+  trademark-decisions.yaml      # Trademark decisions and proceedings
+  office-actions.yaml           # ODP Office Action Search
   trial-proceedings.yaml        # PTAB trial proceedings
   trial-decisions.yaml          # PTAB trial decisions
   trial-documents.yaml          # PTAB trial documents
@@ -451,7 +514,9 @@ go run ./cmd/gen
 1. Bundles ODP + PTAB YAML, resolving `$ref` -> `swagger_fixed.yaml` -> `generated/`
 2. Bundles the 4 Office Action specs -> `swagger_oa_fixed.yaml` -> `generated/oa/`
 3. Copies the TSDR spec -> `swagger_tsdr_fixed.json` -> `generated/tsdr/`
-4. Applies fixes for mismatches between the specs and actual API responses
+4. Fixes the trademark decisions spec -> `swagger_tmd_fixed.yaml` -> `generated/tmd/`
+5. Fixes the Office Action Search spec -> `swagger_oas_fixed.yaml` -> `generated/oasearch/`
+6. Applies fixes for mismatches between the specs and actual API responses
 
 ### Fixes applied
 
@@ -463,7 +528,6 @@ The USPTO swagger has several mismatches with actual API responses:
 - Error response `code`: integer -> string (API returns `"404"`, not `404`)
 
 **Structure fixes:**
-- `petitionIssueConsideredTextBag`: array of objects -> array of strings
 - `correspondenceAddress`: array -> object (Assignment API returns an object)
 - `DecisionData.statuteAndRuleBag`, `issueTypeBag`: string -> array
 - `GetPatentAssignment.assignmentBag`: single object -> array
@@ -479,6 +543,32 @@ The USPTO swagger has several mismatches with actual API responses:
   (e.g. `lastModifiedDateTime` returns `"2025-11-26T23:58:00"` without a timezone)
 - Removed `format: date` from fields that return datetimes or non-ISO dates
   (e.g. `fileReleaseDate` returns `"2025-09-23 00:57:53"`)
+
+**Petition decision fixes:**
+- `petition-decisions.yaml` is no longer `$ref`'d from `swagger.yaml`; its paths
+  are merged into the main bundle, and the stale petition `$ref`s left in
+  `swagger.yaml` are dropped
+- `PetitionDecisionSearchResponse` renamed `PetitionDecisionResponseBag`
+- `GET /api/v1/petition/decisions/{id}` returns the search envelope, not a bare record
+- `decisionPetitionTypeCode`: integer -> string (API returns `"505"`)
+- `petitionDecisionRecordIdentifier`: dropped `format: uuid` (kept a string)
+- Added `allSearchableFields` and the download options' `downloadUrl` /
+  `pageTotalQuantity` (returned but not in the spec)
+
+**Trademark decisions fixes:**
+- `serialNumber`, `registrationNumber`: string -> integer (API returns numbers)
+- Dropped the incomplete enums on `documentTypeDescriptionText` and
+  `proceedingTypeCategory` (the API returns e.g. `REEXAMINATION`)
+- Added `fileDownloadURI`, `textractStatus` (returned but not in the spec)
+- The by-identifier response is named `TrademarkDecisionResponse` and gains `count`
+- `POST .../search/download` takes `DownloadRequest` (with `format`), not `SearchRequest`
+
+**Office Action Search fixes:**
+- Error responses: `code` integer -> string, plus `message` / `detailedMessage`
+  (the API returns `{"code":"404","message":...}`, also for a search without matches)
+- `lastModifiedDateTime`: dropped `format: date` (the API returns a datetime)
+- Added `inventionTitle`, `publicStatusIndicator` (returned but not in the spec)
+- The by-identifier response is named `OfficeActionResponse`
 
 **Endpoint fixes:**
 - Removed `/api/v1/patent/applications/text-to-search` (defined but has no operations)

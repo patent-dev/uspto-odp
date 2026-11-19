@@ -12,6 +12,8 @@ import (
 
 	"github.com/patent-dev/uspto-odp/generated"
 	oa "github.com/patent-dev/uspto-odp/generated/oa"
+	"github.com/patent-dev/uspto-odp/generated/oasearch"
+	"github.com/patent-dev/uspto-odp/generated/tmd"
 	tsdrgen "github.com/patent-dev/uspto-odp/generated/tsdr"
 )
 
@@ -30,6 +32,10 @@ var unwrappedPatterns = []struct {
 	// GET form of search endpoints (POST variants already wrapped).
 	{"SearchWithResponse", "we use the POST search variant"},
 	{"SearchDownloadWithResponse", "we use the POST search-download variant"},
+	{"PetitionDecisionsGetWithResponse", "we use the POST petition search/download variants"},
+	{"SearchGetWithResponse", "trademark decisions: we use the POST search variant"},
+	{"SearchDownloadGetWithResponse", "trademark decisions: we use the POST search-download variant"},
+	{"OfficeActionsGetWithResponse", "office action search: we use the POST search/download variants"},
 	// OA DSAPI raw form helpers -- we use *WithFormdataBody, not the WithFormdataBodyWithResponse one.
 	{"WithFormdataBodyWithResponse", "DSAPI uses formdata body via raw helper"},
 	// OA *List fields *WithResponse -- we use the bare ListFields() helper that returns *http.Response.
@@ -101,6 +107,8 @@ func generatedMethodNames(t *testing.T) []string {
 	}
 	collect((*generated.ClientWithResponses)(nil))
 	collect((*oa.ClientWithResponses)(nil))
+	collect((*tmd.ClientWithResponses)(nil))
+	collect((*oasearch.ClientWithResponses)(nil))
 	collect((*tsdrgen.ClientWithResponses)(nil))
 	out := make([]string, 0, len(seen))
 	for n := range seen {
@@ -161,6 +169,8 @@ func TestGeneratedClientCoverage(t *testing.T) {
 	used := wrappedMethodNames(t, []string{
 		"client.go",
 		"office_action.go",
+		"office_action_search.go",
+		"trademark_decisions.go",
 		"tsdr.go",
 		"xml.go",
 	}, candidate)

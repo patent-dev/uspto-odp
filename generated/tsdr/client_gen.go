@@ -16,7 +16,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-// RequestEditorFn  is the function signature for the RequestEditor callback function
+// RequestEditorFn is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
 
 // Doer performs HTTP requests.
@@ -89,82 +89,172 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// GetcaseUpdateInfo request
+
+	// GetcaseUpdateInfo  Retrieves the last update time when a prosecution history was updated on a case
+	//
+	// Corresponds with GET /last-update/info.json (the `GetcaseUpdateInfo` operationId).
 	GetcaseUpdateInfo(ctx context.Context, params *GetcaseUpdateInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetcaseUpdateInfoXml request
+	// GetcaseUpdateInfoXml  Retrieves the last update time when a prosecution history was updated on a case
+	//
+	// Corresponds with GET /last-update/info.xml (the `GetcaseUpdateInfoXml` operationId).
 	GetcaseUpdateInfoXml(ctx context.Context, params *GetcaseUpdateInfoXmlParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetList request
+	// GetList Returns case details for multiple cases as a JSON.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/caseMultiStatus/sn?ids=78787878,76767676
+	//
+	// Corresponds with GET /ts/cd/caseMultiStatus/{type} (the `GetList` operationId).
 	GetList(ctx context.Context, pType string, params *GetListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetDocumentContentPdf request
+	// GetDocumentContentPdf Returns the content of a Document in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/content.pdf
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/content.pdf (the `GetDocumentContentPdf` operationId).
 	GetDocumentContentPdf(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetDocumentContentZip request
+	// GetDocumentContentZip Returns the content of a Document in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/content.zip
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/content.zip (the `GetDocumentContentZip` operationId).
 	GetDocumentContentZip(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetDocumentContentPdfDownload request
+	// GetDocumentContentPdfDownload  Returns the content of a Document in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.pdf
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/download.pdf (the `GetDocumentContentPdfDownload` operationId).
 	GetDocumentContentPdfDownload(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetDocumentContentZipDownload request
+	// GetDocumentContentZipDownload  Returns the content of a Document in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.zip
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/download.zip (the `GetDocumentContentZipDownload` operationId).
 	GetDocumentContentZipDownload(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetDocumentInfoXml request
+	// GetDocumentInfoXml Returns the metadata of a Document in XML for case identified by case ID
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/info (the `GetDocumentInfoXml` operationId).
 	GetDocumentInfoXml(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetPageContentMedia request
+	// GetPageContentMedia Returns the page content as a NATIVE format
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/{pageid}/media (the `GetPageContentMedia` operationId).
 	GetPageContentMedia(ctx context.Context, caseid string, docid string, pageid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetBundleInfoPdf request
+	// GetBundleInfoPdf  Obtains metadata for a document bundle for the given query params in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.pdf?sn=75757575,78787878
+	//
+	// Corresponds with GET /ts/cd/casedocs/bundle.pdf (the `GetBundleInfoPdf` operationId).
 	GetBundleInfoPdf(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetBundleInfoXml request
+	// GetBundleInfoXml  Obtains metadata for a document bundle for the given query params in XML format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.xml?sn=75757575,78787878
+	//
+	// Corresponds with GET /ts/cd/casedocs/bundle.xml (the `GetBundleInfoXml` operationId).
 	GetBundleInfoXml(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetBundleInfoZip request
+	// GetBundleInfoZip  Obtains metadata for a document bundle for the given query params in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.zip?sn=75757575,78787878
+	//
+	// Corresponds with GET /ts/cd/casedocs/bundle.zip (the `GetBundleInfoZip` operationId).
 	GetBundleInfoZip(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseBundleContentXml request
+	// GetCaseBundleContentXml Returns information about the searched document in the case in XML format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/bundle
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/bundle (the `GetCaseBundleContentXml` operationId).
 	GetCaseBundleContentXml(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseDocsPdf request
+	// GetCaseDocsPdf Returns information about all documents in the case in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/content.pdf
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/content.pdf (the `GetCaseDocsPdf` operationId).
 	GetCaseDocsPdf(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseDocsZip request
+	// GetCaseDocsZip Returns information about all documents in the case in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/content.zip
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/content.zip (the `GetCaseDocsZip` operationId).
 	GetCaseDocsZip(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseDocsPdfDownload request
+	// GetCaseDocsPdfDownload Returns information about all documents in the case in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/download.pdf
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/download.pdf (the `GetCaseDocsPdfDownload` operationId).
 	GetCaseDocsPdfDownload(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseDocsZipDownload request
+	// GetCaseDocsZipDownload Returns information about all documents in the case in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/download.zip
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/download.zip (the `GetCaseDocsZipDownload` operationId).
 	GetCaseDocsZipDownload(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseDocsInfoXml request
+	// GetCaseDocsInfoXml Returns information about all documents in the case in XML format.
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/info (the `GetCaseDocsInfoXml` operationId).
 	GetCaseDocsInfoXml(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseStatusInfoContentHtml request
+	// GetCaseStatusInfoContentHtml  Returns the content of a Document in HTML format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.html
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/content.html (the `GetCaseStatusInfoContentHtml` operationId).
 	GetCaseStatusInfoContentHtml(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseStatusInfoContentPdf request
+	// GetCaseStatusInfoContentPdf  Returns the content of a Document in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.pdf
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/content.pdf (the `GetCaseStatusInfoContentPdf` operationId).
 	GetCaseStatusInfoContentPdf(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseStatusInfoContentZip request
+	// GetCaseStatusInfoContentZip  Returns the content of a Document in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.zip
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/content.zip (the `GetCaseStatusInfoContentZip` operationId).
 	GetCaseStatusInfoContentZip(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseStatusInfoPdfDownload request
+	// GetCaseStatusInfoPdfDownload Returns trademark bibliographic information in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/download.pdf
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/download.pdf (the `GetCaseStatusInfoPdfDownload` operationId).
 	GetCaseStatusInfoPdfDownload(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCaseStatusInfoZipDownload request
+	// GetCaseStatusInfoZipDownload Returns trademark bibliographic information in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/download.zip
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/download.zip (the `GetCaseStatusInfoZipDownload` operationId).
 	GetCaseStatusInfoZipDownload(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// LoadXML request
+	// LoadXML Returns to the user the Trademark data for a specific serial number serialized into ST96 compliant XML.
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/info (the `LoadXML` operationId).
 	LoadXML(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// LoadOldXML request
+	// LoadOldXML Returns to the user the Trademark data for a specific serial number serialized into ST96 compliant XML.
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/v1/info (the `LoadOldXML` operationId).
 	LoadOldXML(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
+// GetcaseUpdateInfo  Retrieves the last update time when a prosecution history was updated on a case
+//
+// Corresponds with GET /last-update/info.json (the `GetcaseUpdateInfo` operationId).
 func (c *Client) GetcaseUpdateInfo(ctx context.Context, params *GetcaseUpdateInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetcaseUpdateInfoRequest(c.Server, params)
 	if err != nil {
@@ -177,6 +267,9 @@ func (c *Client) GetcaseUpdateInfo(ctx context.Context, params *GetcaseUpdateInf
 	return c.Client.Do(req)
 }
 
+// GetcaseUpdateInfoXml  Retrieves the last update time when a prosecution history was updated on a case
+//
+// Corresponds with GET /last-update/info.xml (the `GetcaseUpdateInfoXml` operationId).
 func (c *Client) GetcaseUpdateInfoXml(ctx context.Context, params *GetcaseUpdateInfoXmlParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetcaseUpdateInfoXmlRequest(c.Server, params)
 	if err != nil {
@@ -189,6 +282,11 @@ func (c *Client) GetcaseUpdateInfoXml(ctx context.Context, params *GetcaseUpdate
 	return c.Client.Do(req)
 }
 
+// GetList Returns case details for multiple cases as a JSON.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/caseMultiStatus/sn?ids=78787878,76767676
+//
+// Corresponds with GET /ts/cd/caseMultiStatus/{type} (the `GetList` operationId).
 func (c *Client) GetList(ctx context.Context, pType string, params *GetListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetListRequest(c.Server, pType, params)
 	if err != nil {
@@ -201,6 +299,11 @@ func (c *Client) GetList(ctx context.Context, pType string, params *GetListParam
 	return c.Client.Do(req)
 }
 
+// GetDocumentContentPdf Returns the content of a Document in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/content.pdf
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/content.pdf (the `GetDocumentContentPdf` operationId).
 func (c *Client) GetDocumentContentPdf(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDocumentContentPdfRequest(c.Server, caseid, docid)
 	if err != nil {
@@ -213,6 +316,11 @@ func (c *Client) GetDocumentContentPdf(ctx context.Context, caseid string, docid
 	return c.Client.Do(req)
 }
 
+// GetDocumentContentZip Returns the content of a Document in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/content.zip
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/content.zip (the `GetDocumentContentZip` operationId).
 func (c *Client) GetDocumentContentZip(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDocumentContentZipRequest(c.Server, caseid, docid)
 	if err != nil {
@@ -225,6 +333,11 @@ func (c *Client) GetDocumentContentZip(ctx context.Context, caseid string, docid
 	return c.Client.Do(req)
 }
 
+// GetDocumentContentPdfDownload  Returns the content of a Document in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.pdf
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/download.pdf (the `GetDocumentContentPdfDownload` operationId).
 func (c *Client) GetDocumentContentPdfDownload(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDocumentContentPdfDownloadRequest(c.Server, caseid, docid)
 	if err != nil {
@@ -237,6 +350,11 @@ func (c *Client) GetDocumentContentPdfDownload(ctx context.Context, caseid strin
 	return c.Client.Do(req)
 }
 
+// GetDocumentContentZipDownload  Returns the content of a Document in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.zip
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/download.zip (the `GetDocumentContentZipDownload` operationId).
 func (c *Client) GetDocumentContentZipDownload(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDocumentContentZipDownloadRequest(c.Server, caseid, docid)
 	if err != nil {
@@ -249,6 +367,9 @@ func (c *Client) GetDocumentContentZipDownload(ctx context.Context, caseid strin
 	return c.Client.Do(req)
 }
 
+// GetDocumentInfoXml Returns the metadata of a Document in XML for case identified by case ID
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/info (the `GetDocumentInfoXml` operationId).
 func (c *Client) GetDocumentInfoXml(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDocumentInfoXmlRequest(c.Server, caseid, docid)
 	if err != nil {
@@ -261,6 +382,9 @@ func (c *Client) GetDocumentInfoXml(ctx context.Context, caseid string, docid st
 	return c.Client.Do(req)
 }
 
+// GetPageContentMedia Returns the page content as a NATIVE format
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/{pageid}/media (the `GetPageContentMedia` operationId).
 func (c *Client) GetPageContentMedia(ctx context.Context, caseid string, docid string, pageid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetPageContentMediaRequest(c.Server, caseid, docid, pageid)
 	if err != nil {
@@ -273,6 +397,11 @@ func (c *Client) GetPageContentMedia(ctx context.Context, caseid string, docid s
 	return c.Client.Do(req)
 }
 
+// GetBundleInfoPdf  Obtains metadata for a document bundle for the given query params in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.pdf?sn=75757575,78787878
+//
+// Corresponds with GET /ts/cd/casedocs/bundle.pdf (the `GetBundleInfoPdf` operationId).
 func (c *Client) GetBundleInfoPdf(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetBundleInfoPdfRequest(c.Server)
 	if err != nil {
@@ -285,6 +414,11 @@ func (c *Client) GetBundleInfoPdf(ctx context.Context, reqEditors ...RequestEdit
 	return c.Client.Do(req)
 }
 
+// GetBundleInfoXml  Obtains metadata for a document bundle for the given query params in XML format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.xml?sn=75757575,78787878
+//
+// Corresponds with GET /ts/cd/casedocs/bundle.xml (the `GetBundleInfoXml` operationId).
 func (c *Client) GetBundleInfoXml(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetBundleInfoXmlRequest(c.Server)
 	if err != nil {
@@ -297,6 +431,11 @@ func (c *Client) GetBundleInfoXml(ctx context.Context, reqEditors ...RequestEdit
 	return c.Client.Do(req)
 }
 
+// GetBundleInfoZip  Obtains metadata for a document bundle for the given query params in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.zip?sn=75757575,78787878
+//
+// Corresponds with GET /ts/cd/casedocs/bundle.zip (the `GetBundleInfoZip` operationId).
 func (c *Client) GetBundleInfoZip(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetBundleInfoZipRequest(c.Server)
 	if err != nil {
@@ -309,6 +448,11 @@ func (c *Client) GetBundleInfoZip(ctx context.Context, reqEditors ...RequestEdit
 	return c.Client.Do(req)
 }
 
+// GetCaseBundleContentXml Returns information about the searched document in the case in XML format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/bundle
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/bundle (the `GetCaseBundleContentXml` operationId).
 func (c *Client) GetCaseBundleContentXml(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseBundleContentXmlRequest(c.Server, caseid)
 	if err != nil {
@@ -321,6 +465,11 @@ func (c *Client) GetCaseBundleContentXml(ctx context.Context, caseid string, req
 	return c.Client.Do(req)
 }
 
+// GetCaseDocsPdf Returns information about all documents in the case in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/content.pdf
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/content.pdf (the `GetCaseDocsPdf` operationId).
 func (c *Client) GetCaseDocsPdf(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseDocsPdfRequest(c.Server, caseid)
 	if err != nil {
@@ -333,6 +482,11 @@ func (c *Client) GetCaseDocsPdf(ctx context.Context, caseid string, reqEditors .
 	return c.Client.Do(req)
 }
 
+// GetCaseDocsZip Returns information about all documents in the case in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/content.zip
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/content.zip (the `GetCaseDocsZip` operationId).
 func (c *Client) GetCaseDocsZip(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseDocsZipRequest(c.Server, caseid)
 	if err != nil {
@@ -345,6 +499,11 @@ func (c *Client) GetCaseDocsZip(ctx context.Context, caseid string, reqEditors .
 	return c.Client.Do(req)
 }
 
+// GetCaseDocsPdfDownload Returns information about all documents in the case in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/download.pdf
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/download.pdf (the `GetCaseDocsPdfDownload` operationId).
 func (c *Client) GetCaseDocsPdfDownload(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseDocsPdfDownloadRequest(c.Server, caseid)
 	if err != nil {
@@ -357,6 +516,11 @@ func (c *Client) GetCaseDocsPdfDownload(ctx context.Context, caseid string, reqE
 	return c.Client.Do(req)
 }
 
+// GetCaseDocsZipDownload Returns information about all documents in the case in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/download.zip
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/download.zip (the `GetCaseDocsZipDownload` operationId).
 func (c *Client) GetCaseDocsZipDownload(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseDocsZipDownloadRequest(c.Server, caseid)
 	if err != nil {
@@ -369,6 +533,9 @@ func (c *Client) GetCaseDocsZipDownload(ctx context.Context, caseid string, reqE
 	return c.Client.Do(req)
 }
 
+// GetCaseDocsInfoXml Returns information about all documents in the case in XML format.
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/info (the `GetCaseDocsInfoXml` operationId).
 func (c *Client) GetCaseDocsInfoXml(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseDocsInfoXmlRequest(c.Server, caseid)
 	if err != nil {
@@ -381,6 +548,11 @@ func (c *Client) GetCaseDocsInfoXml(ctx context.Context, caseid string, reqEdito
 	return c.Client.Do(req)
 }
 
+// GetCaseStatusInfoContentHtml  Returns the content of a Document in HTML format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.html
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/content.html (the `GetCaseStatusInfoContentHtml` operationId).
 func (c *Client) GetCaseStatusInfoContentHtml(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseStatusInfoContentHtmlRequest(c.Server, caseid)
 	if err != nil {
@@ -393,6 +565,11 @@ func (c *Client) GetCaseStatusInfoContentHtml(ctx context.Context, caseid string
 	return c.Client.Do(req)
 }
 
+// GetCaseStatusInfoContentPdf  Returns the content of a Document in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.pdf
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/content.pdf (the `GetCaseStatusInfoContentPdf` operationId).
 func (c *Client) GetCaseStatusInfoContentPdf(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseStatusInfoContentPdfRequest(c.Server, caseid)
 	if err != nil {
@@ -405,6 +582,11 @@ func (c *Client) GetCaseStatusInfoContentPdf(ctx context.Context, caseid string,
 	return c.Client.Do(req)
 }
 
+// GetCaseStatusInfoContentZip  Returns the content of a Document in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.zip
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/content.zip (the `GetCaseStatusInfoContentZip` operationId).
 func (c *Client) GetCaseStatusInfoContentZip(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseStatusInfoContentZipRequest(c.Server, caseid)
 	if err != nil {
@@ -417,6 +599,11 @@ func (c *Client) GetCaseStatusInfoContentZip(ctx context.Context, caseid string,
 	return c.Client.Do(req)
 }
 
+// GetCaseStatusInfoPdfDownload Returns trademark bibliographic information in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/download.pdf
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/download.pdf (the `GetCaseStatusInfoPdfDownload` operationId).
 func (c *Client) GetCaseStatusInfoPdfDownload(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseStatusInfoPdfDownloadRequest(c.Server, caseid)
 	if err != nil {
@@ -429,6 +616,11 @@ func (c *Client) GetCaseStatusInfoPdfDownload(ctx context.Context, caseid string
 	return c.Client.Do(req)
 }
 
+// GetCaseStatusInfoZipDownload Returns trademark bibliographic information in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/download.zip
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/download.zip (the `GetCaseStatusInfoZipDownload` operationId).
 func (c *Client) GetCaseStatusInfoZipDownload(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCaseStatusInfoZipDownloadRequest(c.Server, caseid)
 	if err != nil {
@@ -441,6 +633,9 @@ func (c *Client) GetCaseStatusInfoZipDownload(ctx context.Context, caseid string
 	return c.Client.Do(req)
 }
 
+// LoadXML Returns to the user the Trademark data for a specific serial number serialized into ST96 compliant XML.
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/info (the `LoadXML` operationId).
 func (c *Client) LoadXML(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewLoadXMLRequest(c.Server, caseid)
 	if err != nil {
@@ -453,6 +648,9 @@ func (c *Client) LoadXML(ctx context.Context, caseid string, reqEditors ...Reque
 	return c.Client.Do(req)
 }
 
+// LoadOldXML Returns to the user the Trademark data for a specific serial number serialized into ST96 compliant XML.
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/v1/info (the `LoadOldXML` operationId).
 func (c *Client) LoadOldXML(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewLoadOldXMLRequest(c.Server, caseid)
 	if err != nil {
@@ -465,7 +663,7 @@ func (c *Client) LoadOldXML(ctx context.Context, caseid string, reqEditors ...Re
 	return c.Client.Do(req)
 }
 
-// NewGetcaseUpdateInfoRequest generates requests for GetcaseUpdateInfo
+// NewGetcaseUpdateInfoRequest constructs an http.Request for the GetcaseUpdateInfo method
 func NewGetcaseUpdateInfoRequest(server string, params *GetcaseUpdateInfoParams) (*http.Request, error) {
 	var err error
 
@@ -485,24 +683,29 @@ func NewGetcaseUpdateInfoRequest(server string, params *GetcaseUpdateInfoParams)
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sn", runtime.ParamLocationQuery, params.Sn); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sn", params.Sn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 			return nil, err
 		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
 			}
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -510,7 +713,7 @@ func NewGetcaseUpdateInfoRequest(server string, params *GetcaseUpdateInfoParams)
 	return req, nil
 }
 
-// NewGetcaseUpdateInfoXmlRequest generates requests for GetcaseUpdateInfoXml
+// NewGetcaseUpdateInfoXmlRequest constructs an http.Request for the GetcaseUpdateInfoXml method
 func NewGetcaseUpdateInfoXmlRequest(server string, params *GetcaseUpdateInfoXmlParams) (*http.Request, error) {
 	var err error
 
@@ -530,24 +733,29 @@ func NewGetcaseUpdateInfoXmlRequest(server string, params *GetcaseUpdateInfoXmlP
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sn", runtime.ParamLocationQuery, params.Sn); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sn", params.Sn, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 			return nil, err
 		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
 			}
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -555,13 +763,13 @@ func NewGetcaseUpdateInfoXmlRequest(server string, params *GetcaseUpdateInfoXmlP
 	return req, nil
 }
 
-// NewGetListRequest generates requests for GetList
+// NewGetListRequest constructs an http.Request for the GetList method
 func NewGetListRequest(server string, pType string, params *GetListParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "type", runtime.ParamLocationPath, pType)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "type", pType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -582,19 +790,21 @@ func NewGetListRequest(server string, pType string, params *GetListParams) (*htt
 	}
 
 	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
 		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
 
 		if params.From != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "from", runtime.ParamLocationQuery, *params.From); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "from", *params.From, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
@@ -602,36 +812,35 @@ func NewGetListRequest(server string, pType string, params *GetListParams) (*htt
 
 		if params.To != nil {
 
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "to", runtime.ParamLocationQuery, *params.To); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "to", *params.To, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
 
 		}
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "ids", runtime.ParamLocationQuery, params.Ids); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
+		if params.Ids != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "ids", params.Ids, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
 				}
 			}
+
 		}
 
-		queryURL.RawQuery = queryValues.Encode()
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -639,20 +848,20 @@ func NewGetListRequest(server string, pType string, params *GetListParams) (*htt
 	return req, nil
 }
 
-// NewGetDocumentContentPdfRequest generates requests for GetDocumentContentPdf
+// NewGetDocumentContentPdfRequest constructs an http.Request for the GetDocumentContentPdf method
 func NewGetDocumentContentPdfRequest(server string, caseid string, docid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "docid", runtime.ParamLocationPath, docid)
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "docid", docid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -672,7 +881,7 @@ func NewGetDocumentContentPdfRequest(server string, caseid string, docid string)
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -680,20 +889,20 @@ func NewGetDocumentContentPdfRequest(server string, caseid string, docid string)
 	return req, nil
 }
 
-// NewGetDocumentContentZipRequest generates requests for GetDocumentContentZip
+// NewGetDocumentContentZipRequest constructs an http.Request for the GetDocumentContentZip method
 func NewGetDocumentContentZipRequest(server string, caseid string, docid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "docid", runtime.ParamLocationPath, docid)
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "docid", docid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -713,7 +922,7 @@ func NewGetDocumentContentZipRequest(server string, caseid string, docid string)
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -721,20 +930,20 @@ func NewGetDocumentContentZipRequest(server string, caseid string, docid string)
 	return req, nil
 }
 
-// NewGetDocumentContentPdfDownloadRequest generates requests for GetDocumentContentPdfDownload
+// NewGetDocumentContentPdfDownloadRequest constructs an http.Request for the GetDocumentContentPdfDownload method
 func NewGetDocumentContentPdfDownloadRequest(server string, caseid string, docid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "docid", runtime.ParamLocationPath, docid)
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "docid", docid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -754,7 +963,7 @@ func NewGetDocumentContentPdfDownloadRequest(server string, caseid string, docid
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -762,20 +971,20 @@ func NewGetDocumentContentPdfDownloadRequest(server string, caseid string, docid
 	return req, nil
 }
 
-// NewGetDocumentContentZipDownloadRequest generates requests for GetDocumentContentZipDownload
+// NewGetDocumentContentZipDownloadRequest constructs an http.Request for the GetDocumentContentZipDownload method
 func NewGetDocumentContentZipDownloadRequest(server string, caseid string, docid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "docid", runtime.ParamLocationPath, docid)
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "docid", docid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -795,7 +1004,7 @@ func NewGetDocumentContentZipDownloadRequest(server string, caseid string, docid
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -803,20 +1012,20 @@ func NewGetDocumentContentZipDownloadRequest(server string, caseid string, docid
 	return req, nil
 }
 
-// NewGetDocumentInfoXmlRequest generates requests for GetDocumentInfoXml
+// NewGetDocumentInfoXmlRequest constructs an http.Request for the GetDocumentInfoXml method
 func NewGetDocumentInfoXmlRequest(server string, caseid string, docid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "docid", runtime.ParamLocationPath, docid)
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "docid", docid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -836,7 +1045,7 @@ func NewGetDocumentInfoXmlRequest(server string, caseid string, docid string) (*
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -844,27 +1053,27 @@ func NewGetDocumentInfoXmlRequest(server string, caseid string, docid string) (*
 	return req, nil
 }
 
-// NewGetPageContentMediaRequest generates requests for GetPageContentMedia
+// NewGetPageContentMediaRequest constructs an http.Request for the GetPageContentMedia method
 func NewGetPageContentMediaRequest(server string, caseid string, docid string, pageid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "docid", runtime.ParamLocationPath, docid)
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "docid", docid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
 
 	var pathParam2 string
 
-	pathParam2, err = runtime.StyleParamWithLocation("simple", false, "pageid", runtime.ParamLocationPath, pageid)
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "pageid", pageid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -884,7 +1093,7 @@ func NewGetPageContentMediaRequest(server string, caseid string, docid string, p
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -892,7 +1101,7 @@ func NewGetPageContentMediaRequest(server string, caseid string, docid string, p
 	return req, nil
 }
 
-// NewGetBundleInfoPdfRequest generates requests for GetBundleInfoPdf
+// NewGetBundleInfoPdfRequest constructs an http.Request for the GetBundleInfoPdf method
 func NewGetBundleInfoPdfRequest(server string) (*http.Request, error) {
 	var err error
 
@@ -911,7 +1120,7 @@ func NewGetBundleInfoPdfRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -919,7 +1128,7 @@ func NewGetBundleInfoPdfRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetBundleInfoXmlRequest generates requests for GetBundleInfoXml
+// NewGetBundleInfoXmlRequest constructs an http.Request for the GetBundleInfoXml method
 func NewGetBundleInfoXmlRequest(server string) (*http.Request, error) {
 	var err error
 
@@ -938,7 +1147,7 @@ func NewGetBundleInfoXmlRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -946,7 +1155,7 @@ func NewGetBundleInfoXmlRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetBundleInfoZipRequest generates requests for GetBundleInfoZip
+// NewGetBundleInfoZipRequest constructs an http.Request for the GetBundleInfoZip method
 func NewGetBundleInfoZipRequest(server string) (*http.Request, error) {
 	var err error
 
@@ -965,7 +1174,7 @@ func NewGetBundleInfoZipRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -973,13 +1182,13 @@ func NewGetBundleInfoZipRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetCaseBundleContentXmlRequest generates requests for GetCaseBundleContentXml
+// NewGetCaseBundleContentXmlRequest constructs an http.Request for the GetCaseBundleContentXml method
 func NewGetCaseBundleContentXmlRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -999,7 +1208,7 @@ func NewGetCaseBundleContentXmlRequest(server string, caseid string) (*http.Requ
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1007,13 +1216,13 @@ func NewGetCaseBundleContentXmlRequest(server string, caseid string) (*http.Requ
 	return req, nil
 }
 
-// NewGetCaseDocsPdfRequest generates requests for GetCaseDocsPdf
+// NewGetCaseDocsPdfRequest constructs an http.Request for the GetCaseDocsPdf method
 func NewGetCaseDocsPdfRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1033,7 +1242,7 @@ func NewGetCaseDocsPdfRequest(server string, caseid string) (*http.Request, erro
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1041,13 +1250,13 @@ func NewGetCaseDocsPdfRequest(server string, caseid string) (*http.Request, erro
 	return req, nil
 }
 
-// NewGetCaseDocsZipRequest generates requests for GetCaseDocsZip
+// NewGetCaseDocsZipRequest constructs an http.Request for the GetCaseDocsZip method
 func NewGetCaseDocsZipRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1067,7 +1276,7 @@ func NewGetCaseDocsZipRequest(server string, caseid string) (*http.Request, erro
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1075,13 +1284,13 @@ func NewGetCaseDocsZipRequest(server string, caseid string) (*http.Request, erro
 	return req, nil
 }
 
-// NewGetCaseDocsPdfDownloadRequest generates requests for GetCaseDocsPdfDownload
+// NewGetCaseDocsPdfDownloadRequest constructs an http.Request for the GetCaseDocsPdfDownload method
 func NewGetCaseDocsPdfDownloadRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1101,7 +1310,7 @@ func NewGetCaseDocsPdfDownloadRequest(server string, caseid string) (*http.Reque
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1109,13 +1318,13 @@ func NewGetCaseDocsPdfDownloadRequest(server string, caseid string) (*http.Reque
 	return req, nil
 }
 
-// NewGetCaseDocsZipDownloadRequest generates requests for GetCaseDocsZipDownload
+// NewGetCaseDocsZipDownloadRequest constructs an http.Request for the GetCaseDocsZipDownload method
 func NewGetCaseDocsZipDownloadRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1135,7 +1344,7 @@ func NewGetCaseDocsZipDownloadRequest(server string, caseid string) (*http.Reque
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1143,13 +1352,13 @@ func NewGetCaseDocsZipDownloadRequest(server string, caseid string) (*http.Reque
 	return req, nil
 }
 
-// NewGetCaseDocsInfoXmlRequest generates requests for GetCaseDocsInfoXml
+// NewGetCaseDocsInfoXmlRequest constructs an http.Request for the GetCaseDocsInfoXml method
 func NewGetCaseDocsInfoXmlRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1169,7 +1378,7 @@ func NewGetCaseDocsInfoXmlRequest(server string, caseid string) (*http.Request, 
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1177,13 +1386,13 @@ func NewGetCaseDocsInfoXmlRequest(server string, caseid string) (*http.Request, 
 	return req, nil
 }
 
-// NewGetCaseStatusInfoContentHtmlRequest generates requests for GetCaseStatusInfoContentHtml
+// NewGetCaseStatusInfoContentHtmlRequest constructs an http.Request for the GetCaseStatusInfoContentHtml method
 func NewGetCaseStatusInfoContentHtmlRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1203,7 +1412,7 @@ func NewGetCaseStatusInfoContentHtmlRequest(server string, caseid string) (*http
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1211,13 +1420,13 @@ func NewGetCaseStatusInfoContentHtmlRequest(server string, caseid string) (*http
 	return req, nil
 }
 
-// NewGetCaseStatusInfoContentPdfRequest generates requests for GetCaseStatusInfoContentPdf
+// NewGetCaseStatusInfoContentPdfRequest constructs an http.Request for the GetCaseStatusInfoContentPdf method
 func NewGetCaseStatusInfoContentPdfRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1237,7 +1446,7 @@ func NewGetCaseStatusInfoContentPdfRequest(server string, caseid string) (*http.
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1245,13 +1454,13 @@ func NewGetCaseStatusInfoContentPdfRequest(server string, caseid string) (*http.
 	return req, nil
 }
 
-// NewGetCaseStatusInfoContentZipRequest generates requests for GetCaseStatusInfoContentZip
+// NewGetCaseStatusInfoContentZipRequest constructs an http.Request for the GetCaseStatusInfoContentZip method
 func NewGetCaseStatusInfoContentZipRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1271,7 +1480,7 @@ func NewGetCaseStatusInfoContentZipRequest(server string, caseid string) (*http.
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1279,13 +1488,13 @@ func NewGetCaseStatusInfoContentZipRequest(server string, caseid string) (*http.
 	return req, nil
 }
 
-// NewGetCaseStatusInfoPdfDownloadRequest generates requests for GetCaseStatusInfoPdfDownload
+// NewGetCaseStatusInfoPdfDownloadRequest constructs an http.Request for the GetCaseStatusInfoPdfDownload method
 func NewGetCaseStatusInfoPdfDownloadRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1305,7 +1514,7 @@ func NewGetCaseStatusInfoPdfDownloadRequest(server string, caseid string) (*http
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1313,13 +1522,13 @@ func NewGetCaseStatusInfoPdfDownloadRequest(server string, caseid string) (*http
 	return req, nil
 }
 
-// NewGetCaseStatusInfoZipDownloadRequest generates requests for GetCaseStatusInfoZipDownload
+// NewGetCaseStatusInfoZipDownloadRequest constructs an http.Request for the GetCaseStatusInfoZipDownload method
 func NewGetCaseStatusInfoZipDownloadRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1339,7 +1548,7 @@ func NewGetCaseStatusInfoZipDownloadRequest(server string, caseid string) (*http
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1347,13 +1556,13 @@ func NewGetCaseStatusInfoZipDownloadRequest(server string, caseid string) (*http
 	return req, nil
 }
 
-// NewLoadXMLRequest generates requests for LoadXML
+// NewLoadXMLRequest constructs an http.Request for the LoadXML method
 func NewLoadXMLRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1373,7 +1582,7 @@ func NewLoadXMLRequest(server string, caseid string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1381,13 +1590,13 @@ func NewLoadXMLRequest(server string, caseid string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewLoadOldXMLRequest generates requests for LoadOldXML
+// NewLoadOldXMLRequest constructs an http.Request for the LoadOldXML method
 func NewLoadOldXMLRequest(server string, caseid string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "caseid", runtime.ParamLocationPath, caseid)
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "caseid", caseid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -1407,7 +1616,7 @@ func NewLoadOldXMLRequest(server string, caseid string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1458,86 +1667,234 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// GetcaseUpdateInfoWithResponse request
+
+	// GetcaseUpdateInfoWithResponse  Retrieves the last update time when a prosecution history was updated on a case
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /last-update/info.json (the `GetcaseUpdateInfo` operationId).
 	GetcaseUpdateInfoWithResponse(ctx context.Context, params *GetcaseUpdateInfoParams, reqEditors ...RequestEditorFn) (*GetcaseUpdateInfoResponse, error)
 
-	// GetcaseUpdateInfoXmlWithResponse request
+	// GetcaseUpdateInfoXmlWithResponse  Retrieves the last update time when a prosecution history was updated on a case
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /last-update/info.xml (the `GetcaseUpdateInfoXml` operationId).
 	GetcaseUpdateInfoXmlWithResponse(ctx context.Context, params *GetcaseUpdateInfoXmlParams, reqEditors ...RequestEditorFn) (*GetcaseUpdateInfoXmlResponse, error)
 
-	// GetListWithResponse request
+	// GetListWithResponse Returns case details for multiple cases as a JSON.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/caseMultiStatus/sn?ids=78787878,76767676
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/caseMultiStatus/{type} (the `GetList` operationId).
 	GetListWithResponse(ctx context.Context, pType string, params *GetListParams, reqEditors ...RequestEditorFn) (*GetListResponse, error)
 
-	// GetDocumentContentPdfWithResponse request
+	// GetDocumentContentPdfWithResponse Returns the content of a Document in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/content.pdf
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/content.pdf (the `GetDocumentContentPdf` operationId).
 	GetDocumentContentPdfWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentContentPdfResponse, error)
 
-	// GetDocumentContentZipWithResponse request
+	// GetDocumentContentZipWithResponse Returns the content of a Document in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/content.zip
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/content.zip (the `GetDocumentContentZip` operationId).
 	GetDocumentContentZipWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentContentZipResponse, error)
 
-	// GetDocumentContentPdfDownloadWithResponse request
+	// GetDocumentContentPdfDownloadWithResponse  Returns the content of a Document in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.pdf
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/download.pdf (the `GetDocumentContentPdfDownload` operationId).
 	GetDocumentContentPdfDownloadWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentContentPdfDownloadResponse, error)
 
-	// GetDocumentContentZipDownloadWithResponse request
+	// GetDocumentContentZipDownloadWithResponse  Returns the content of a Document in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.zip
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/download.zip (the `GetDocumentContentZipDownload` operationId).
 	GetDocumentContentZipDownloadWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentContentZipDownloadResponse, error)
 
-	// GetDocumentInfoXmlWithResponse request
+	// GetDocumentInfoXmlWithResponse Returns the metadata of a Document in XML for case identified by case ID
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/info (the `GetDocumentInfoXml` operationId).
 	GetDocumentInfoXmlWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentInfoXmlResponse, error)
 
-	// GetPageContentMediaWithResponse request
+	// GetPageContentMediaWithResponse Returns the page content as a NATIVE format
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/{pageid}/media (the `GetPageContentMedia` operationId).
 	GetPageContentMediaWithResponse(ctx context.Context, caseid string, docid string, pageid string, reqEditors ...RequestEditorFn) (*GetPageContentMediaResponse, error)
 
-	// GetBundleInfoPdfWithResponse request
+	// GetBundleInfoPdfWithResponse  Obtains metadata for a document bundle for the given query params in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.pdf?sn=75757575,78787878
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/bundle.pdf (the `GetBundleInfoPdf` operationId).
 	GetBundleInfoPdfWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetBundleInfoPdfResponse, error)
 
-	// GetBundleInfoXmlWithResponse request
+	// GetBundleInfoXmlWithResponse  Obtains metadata for a document bundle for the given query params in XML format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.xml?sn=75757575,78787878
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/bundle.xml (the `GetBundleInfoXml` operationId).
 	GetBundleInfoXmlWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetBundleInfoXmlResponse, error)
 
-	// GetBundleInfoZipWithResponse request
+	// GetBundleInfoZipWithResponse  Obtains metadata for a document bundle for the given query params in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.zip?sn=75757575,78787878
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/bundle.zip (the `GetBundleInfoZip` operationId).
 	GetBundleInfoZipWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetBundleInfoZipResponse, error)
 
-	// GetCaseBundleContentXmlWithResponse request
+	// GetCaseBundleContentXmlWithResponse Returns information about the searched document in the case in XML format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/bundle
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/bundle (the `GetCaseBundleContentXml` operationId).
 	GetCaseBundleContentXmlWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseBundleContentXmlResponse, error)
 
-	// GetCaseDocsPdfWithResponse request
+	// GetCaseDocsPdfWithResponse Returns information about all documents in the case in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/content.pdf
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/content.pdf (the `GetCaseDocsPdf` operationId).
 	GetCaseDocsPdfWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsPdfResponse, error)
 
-	// GetCaseDocsZipWithResponse request
+	// GetCaseDocsZipWithResponse Returns information about all documents in the case in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/content.zip
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/content.zip (the `GetCaseDocsZip` operationId).
 	GetCaseDocsZipWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsZipResponse, error)
 
-	// GetCaseDocsPdfDownloadWithResponse request
+	// GetCaseDocsPdfDownloadWithResponse Returns information about all documents in the case in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/download.pdf
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/download.pdf (the `GetCaseDocsPdfDownload` operationId).
 	GetCaseDocsPdfDownloadWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsPdfDownloadResponse, error)
 
-	// GetCaseDocsZipDownloadWithResponse request
+	// GetCaseDocsZipDownloadWithResponse Returns information about all documents in the case in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/download.zip
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/download.zip (the `GetCaseDocsZipDownload` operationId).
 	GetCaseDocsZipDownloadWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsZipDownloadResponse, error)
 
-	// GetCaseDocsInfoXmlWithResponse request
+	// GetCaseDocsInfoXmlWithResponse Returns information about all documents in the case in XML format.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casedocs/{caseid}/info (the `GetCaseDocsInfoXml` operationId).
 	GetCaseDocsInfoXmlWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsInfoXmlResponse, error)
 
-	// GetCaseStatusInfoContentHtmlWithResponse request
+	// GetCaseStatusInfoContentHtmlWithResponse  Returns the content of a Document in HTML format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.html
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/content.html (the `GetCaseStatusInfoContentHtml` operationId).
 	GetCaseStatusInfoContentHtmlWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoContentHtmlResponse, error)
 
-	// GetCaseStatusInfoContentPdfWithResponse request
+	// GetCaseStatusInfoContentPdfWithResponse  Returns the content of a Document in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.pdf
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/content.pdf (the `GetCaseStatusInfoContentPdf` operationId).
 	GetCaseStatusInfoContentPdfWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoContentPdfResponse, error)
 
-	// GetCaseStatusInfoContentZipWithResponse request
+	// GetCaseStatusInfoContentZipWithResponse  Returns the content of a Document in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.zip
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/content.zip (the `GetCaseStatusInfoContentZip` operationId).
 	GetCaseStatusInfoContentZipWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoContentZipResponse, error)
 
-	// GetCaseStatusInfoPdfDownloadWithResponse request
+	// GetCaseStatusInfoPdfDownloadWithResponse Returns trademark bibliographic information in PDF format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/download.pdf
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/download.pdf (the `GetCaseStatusInfoPdfDownload` operationId).
 	GetCaseStatusInfoPdfDownloadWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoPdfDownloadResponse, error)
 
-	// GetCaseStatusInfoZipDownloadWithResponse request
+	// GetCaseStatusInfoZipDownloadWithResponse Returns trademark bibliographic information in ZIP format.
+	//
+	// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/download.zip
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/download.zip (the `GetCaseStatusInfoZipDownload` operationId).
 	GetCaseStatusInfoZipDownloadWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoZipDownloadResponse, error)
 
-	// LoadXMLWithResponse request
+	// LoadXMLWithResponse Returns to the user the Trademark data for a specific serial number serialized into ST96 compliant XML.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/info (the `LoadXML` operationId).
 	LoadXMLWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*LoadXMLResponse, error)
 
-	// LoadOldXMLWithResponse request
+	// LoadOldXMLWithResponse Returns to the user the Trademark data for a specific serial number serialized into ST96 compliant XML.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /ts/cd/casestatus/{caseid}/v1/info (the `LoadOldXML` operationId).
 	LoadOldXMLWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*LoadOldXMLResponse, error)
 }
 
 type GetcaseUpdateInfoResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *CaseUpdateInfoList
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CaseUpdateInfoList
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetcaseUpdateInfoResponse) GetJSON200() *CaseUpdateInfoList {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GetcaseUpdateInfoResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1556,10 +1913,29 @@ func (r GetcaseUpdateInfoResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetcaseUpdateInfoResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetcaseUpdateInfoXmlResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	XML200       *CaseUpdateInfoList
+	// XML200 the response for an HTTP 200 `application/xml` response
+	XML200 *CaseUpdateInfoList
+}
+
+// GetXML200 returns the response for an HTTP 200 `application/xml` response
+func (r GetcaseUpdateInfoXmlResponse) GetXML200() *CaseUpdateInfoList {
+	return r.XML200
+}
+
+// GetBody returns the raw response body bytes
+func (r GetcaseUpdateInfoXmlResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1578,10 +1954,29 @@ func (r GetcaseUpdateInfoXmlResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetcaseUpdateInfoXmlResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *TransactionBag
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *TransactionBag
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetListResponse) GetJSON200() *TransactionBag {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GetListResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1600,9 +1995,22 @@ func (r GetListResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetListResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetDocumentContentPdfResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetDocumentContentPdfResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1621,9 +2029,22 @@ func (r GetDocumentContentPdfResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetDocumentContentPdfResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetDocumentContentZipResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetDocumentContentZipResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1642,9 +2063,22 @@ func (r GetDocumentContentZipResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetDocumentContentZipResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetDocumentContentPdfDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetDocumentContentPdfDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1663,9 +2097,22 @@ func (r GetDocumentContentPdfDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetDocumentContentPdfDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetDocumentContentZipDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetDocumentContentZipDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1684,10 +2131,29 @@ func (r GetDocumentContentZipDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetDocumentContentZipDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetDocumentInfoXmlResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	XML200       *Document
+	// XML200 the response for an HTTP 200 `application/xml` response
+	XML200 *Document
+}
+
+// GetXML200 returns the response for an HTTP 200 `application/xml` response
+func (r GetDocumentInfoXmlResponse) GetXML200() *Document {
+	return r.XML200
+}
+
+// GetBody returns the raw response body bytes
+func (r GetDocumentInfoXmlResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1706,9 +2172,22 @@ func (r GetDocumentInfoXmlResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetDocumentInfoXmlResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetPageContentMediaResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetPageContentMediaResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1727,9 +2206,22 @@ func (r GetPageContentMediaResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetPageContentMediaResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetBundleInfoPdfResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetBundleInfoPdfResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1748,10 +2240,29 @@ func (r GetBundleInfoPdfResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetBundleInfoPdfResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetBundleInfoXmlResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	XML200       *[]map[string]interface{}
+	// XML200 the response for an HTTP 200 `application/xml` response
+	XML200 *[]map[string]interface{}
+}
+
+// GetXML200 returns the response for an HTTP 200 `application/xml` response
+func (r GetBundleInfoXmlResponse) GetXML200() *[]map[string]interface{} {
+	return r.XML200
+}
+
+// GetBody returns the raw response body bytes
+func (r GetBundleInfoXmlResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1770,9 +2281,22 @@ func (r GetBundleInfoXmlResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetBundleInfoXmlResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetBundleInfoZipResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetBundleInfoZipResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1791,10 +2315,29 @@ func (r GetBundleInfoZipResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetBundleInfoZipResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseBundleContentXmlResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	XML200       *[]map[string]interface{}
+	// XML200 the response for an HTTP 200 `application/xml` response
+	XML200 *[]map[string]interface{}
+}
+
+// GetXML200 returns the response for an HTTP 200 `application/xml` response
+func (r GetCaseBundleContentXmlResponse) GetXML200() *[]map[string]interface{} {
+	return r.XML200
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseBundleContentXmlResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1813,9 +2356,22 @@ func (r GetCaseBundleContentXmlResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseBundleContentXmlResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseDocsPdfResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseDocsPdfResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1834,9 +2390,22 @@ func (r GetCaseDocsPdfResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseDocsPdfResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseDocsZipResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseDocsZipResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1855,9 +2424,22 @@ func (r GetCaseDocsZipResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseDocsZipResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseDocsPdfDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseDocsPdfDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1876,9 +2458,22 @@ func (r GetCaseDocsPdfDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseDocsPdfDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseDocsZipDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseDocsZipDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1897,10 +2492,29 @@ func (r GetCaseDocsZipDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseDocsZipDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseDocsInfoXmlResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	XML200       *[]map[string]interface{}
+	// XML200 the response for an HTTP 200 `application/xml` response
+	XML200 *[]map[string]interface{}
+}
+
+// GetXML200 returns the response for an HTTP 200 `application/xml` response
+func (r GetCaseDocsInfoXmlResponse) GetXML200() *[]map[string]interface{} {
+	return r.XML200
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseDocsInfoXmlResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1919,9 +2533,22 @@ func (r GetCaseDocsInfoXmlResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseDocsInfoXmlResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseStatusInfoContentHtmlResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseStatusInfoContentHtmlResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1940,9 +2567,22 @@ func (r GetCaseStatusInfoContentHtmlResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseStatusInfoContentHtmlResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseStatusInfoContentPdfResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseStatusInfoContentPdfResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1961,9 +2601,22 @@ func (r GetCaseStatusInfoContentPdfResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseStatusInfoContentPdfResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseStatusInfoContentZipResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseStatusInfoContentZipResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -1982,9 +2635,22 @@ func (r GetCaseStatusInfoContentZipResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseStatusInfoContentZipResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseStatusInfoPdfDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseStatusInfoPdfDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -2003,9 +2669,22 @@ func (r GetCaseStatusInfoPdfDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseStatusInfoPdfDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GetCaseStatusInfoZipDownloadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCaseStatusInfoZipDownloadResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -2024,10 +2703,29 @@ func (r GetCaseStatusInfoZipDownloadResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCaseStatusInfoZipDownloadResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type LoadXMLResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	XML200       *TrademarkTransactionType
+	// XML200 the response for an HTTP 200 `application/xml` response
+	XML200 *TrademarkTransactionType
+}
+
+// GetXML200 returns the response for an HTTP 200 `application/xml` response
+func (r LoadXMLResponse) GetXML200() *TrademarkTransactionType {
+	return r.XML200
+}
+
+// GetBody returns the raw response body bytes
+func (r LoadXMLResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -2046,10 +2744,29 @@ func (r LoadXMLResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r LoadXMLResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type LoadOldXMLResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	XML200       *TransactionType
+	// XML200 the response for an HTTP 200 `application/xml` response
+	XML200 *TransactionType
+}
+
+// GetXML200 returns the response for an HTTP 200 `application/xml` response
+func (r LoadOldXMLResponse) GetXML200() *TransactionType {
+	return r.XML200
+}
+
+// GetBody returns the raw response body bytes
+func (r LoadOldXMLResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -2068,7 +2785,19 @@ func (r LoadOldXMLResponse) StatusCode() int {
 	return 0
 }
 
-// GetcaseUpdateInfoWithResponse request returning *GetcaseUpdateInfoResponse
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r LoadOldXMLResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GetcaseUpdateInfoWithResponse  Retrieves the last update time when a prosecution history was updated on a case
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /last-update/info.json (the `GetcaseUpdateInfo` operationId).
 func (c *ClientWithResponses) GetcaseUpdateInfoWithResponse(ctx context.Context, params *GetcaseUpdateInfoParams, reqEditors ...RequestEditorFn) (*GetcaseUpdateInfoResponse, error) {
 	rsp, err := c.GetcaseUpdateInfo(ctx, params, reqEditors...)
 	if err != nil {
@@ -2077,7 +2806,11 @@ func (c *ClientWithResponses) GetcaseUpdateInfoWithResponse(ctx context.Context,
 	return ParseGetcaseUpdateInfoResponse(rsp)
 }
 
-// GetcaseUpdateInfoXmlWithResponse request returning *GetcaseUpdateInfoXmlResponse
+// GetcaseUpdateInfoXmlWithResponse  Retrieves the last update time when a prosecution history was updated on a case
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /last-update/info.xml (the `GetcaseUpdateInfoXml` operationId).
 func (c *ClientWithResponses) GetcaseUpdateInfoXmlWithResponse(ctx context.Context, params *GetcaseUpdateInfoXmlParams, reqEditors ...RequestEditorFn) (*GetcaseUpdateInfoXmlResponse, error) {
 	rsp, err := c.GetcaseUpdateInfoXml(ctx, params, reqEditors...)
 	if err != nil {
@@ -2086,7 +2819,13 @@ func (c *ClientWithResponses) GetcaseUpdateInfoXmlWithResponse(ctx context.Conte
 	return ParseGetcaseUpdateInfoXmlResponse(rsp)
 }
 
-// GetListWithResponse request returning *GetListResponse
+// GetListWithResponse Returns case details for multiple cases as a JSON.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/caseMultiStatus/sn?ids=78787878,76767676
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/caseMultiStatus/{type} (the `GetList` operationId).
 func (c *ClientWithResponses) GetListWithResponse(ctx context.Context, pType string, params *GetListParams, reqEditors ...RequestEditorFn) (*GetListResponse, error) {
 	rsp, err := c.GetList(ctx, pType, params, reqEditors...)
 	if err != nil {
@@ -2095,7 +2834,13 @@ func (c *ClientWithResponses) GetListWithResponse(ctx context.Context, pType str
 	return ParseGetListResponse(rsp)
 }
 
-// GetDocumentContentPdfWithResponse request returning *GetDocumentContentPdfResponse
+// GetDocumentContentPdfWithResponse Returns the content of a Document in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/content.pdf
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/content.pdf (the `GetDocumentContentPdf` operationId).
 func (c *ClientWithResponses) GetDocumentContentPdfWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentContentPdfResponse, error) {
 	rsp, err := c.GetDocumentContentPdf(ctx, caseid, docid, reqEditors...)
 	if err != nil {
@@ -2104,7 +2849,13 @@ func (c *ClientWithResponses) GetDocumentContentPdfWithResponse(ctx context.Cont
 	return ParseGetDocumentContentPdfResponse(rsp)
 }
 
-// GetDocumentContentZipWithResponse request returning *GetDocumentContentZipResponse
+// GetDocumentContentZipWithResponse Returns the content of a Document in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/content.zip
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/content.zip (the `GetDocumentContentZip` operationId).
 func (c *ClientWithResponses) GetDocumentContentZipWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentContentZipResponse, error) {
 	rsp, err := c.GetDocumentContentZip(ctx, caseid, docid, reqEditors...)
 	if err != nil {
@@ -2113,7 +2864,13 @@ func (c *ClientWithResponses) GetDocumentContentZipWithResponse(ctx context.Cont
 	return ParseGetDocumentContentZipResponse(rsp)
 }
 
-// GetDocumentContentPdfDownloadWithResponse request returning *GetDocumentContentPdfDownloadResponse
+// GetDocumentContentPdfDownloadWithResponse  Returns the content of a Document in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.pdf
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/download.pdf (the `GetDocumentContentPdfDownload` operationId).
 func (c *ClientWithResponses) GetDocumentContentPdfDownloadWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentContentPdfDownloadResponse, error) {
 	rsp, err := c.GetDocumentContentPdfDownload(ctx, caseid, docid, reqEditors...)
 	if err != nil {
@@ -2122,7 +2879,13 @@ func (c *ClientWithResponses) GetDocumentContentPdfDownloadWithResponse(ctx cont
 	return ParseGetDocumentContentPdfDownloadResponse(rsp)
 }
 
-// GetDocumentContentZipDownloadWithResponse request returning *GetDocumentContentZipDownloadResponse
+// GetDocumentContentZipDownloadWithResponse  Returns the content of a Document in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.zip
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/download.zip (the `GetDocumentContentZipDownload` operationId).
 func (c *ClientWithResponses) GetDocumentContentZipDownloadWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentContentZipDownloadResponse, error) {
 	rsp, err := c.GetDocumentContentZipDownload(ctx, caseid, docid, reqEditors...)
 	if err != nil {
@@ -2131,7 +2894,11 @@ func (c *ClientWithResponses) GetDocumentContentZipDownloadWithResponse(ctx cont
 	return ParseGetDocumentContentZipDownloadResponse(rsp)
 }
 
-// GetDocumentInfoXmlWithResponse request returning *GetDocumentInfoXmlResponse
+// GetDocumentInfoXmlWithResponse Returns the metadata of a Document in XML for case identified by case ID
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/info (the `GetDocumentInfoXml` operationId).
 func (c *ClientWithResponses) GetDocumentInfoXmlWithResponse(ctx context.Context, caseid string, docid string, reqEditors ...RequestEditorFn) (*GetDocumentInfoXmlResponse, error) {
 	rsp, err := c.GetDocumentInfoXml(ctx, caseid, docid, reqEditors...)
 	if err != nil {
@@ -2140,7 +2907,11 @@ func (c *ClientWithResponses) GetDocumentInfoXmlWithResponse(ctx context.Context
 	return ParseGetDocumentInfoXmlResponse(rsp)
 }
 
-// GetPageContentMediaWithResponse request returning *GetPageContentMediaResponse
+// GetPageContentMediaWithResponse Returns the page content as a NATIVE format
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedoc/{caseid}/{docid}/{pageid}/media (the `GetPageContentMedia` operationId).
 func (c *ClientWithResponses) GetPageContentMediaWithResponse(ctx context.Context, caseid string, docid string, pageid string, reqEditors ...RequestEditorFn) (*GetPageContentMediaResponse, error) {
 	rsp, err := c.GetPageContentMedia(ctx, caseid, docid, pageid, reqEditors...)
 	if err != nil {
@@ -2149,7 +2920,13 @@ func (c *ClientWithResponses) GetPageContentMediaWithResponse(ctx context.Contex
 	return ParseGetPageContentMediaResponse(rsp)
 }
 
-// GetBundleInfoPdfWithResponse request returning *GetBundleInfoPdfResponse
+// GetBundleInfoPdfWithResponse  Obtains metadata for a document bundle for the given query params in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.pdf?sn=75757575,78787878
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/bundle.pdf (the `GetBundleInfoPdf` operationId).
 func (c *ClientWithResponses) GetBundleInfoPdfWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetBundleInfoPdfResponse, error) {
 	rsp, err := c.GetBundleInfoPdf(ctx, reqEditors...)
 	if err != nil {
@@ -2158,7 +2935,13 @@ func (c *ClientWithResponses) GetBundleInfoPdfWithResponse(ctx context.Context, 
 	return ParseGetBundleInfoPdfResponse(rsp)
 }
 
-// GetBundleInfoXmlWithResponse request returning *GetBundleInfoXmlResponse
+// GetBundleInfoXmlWithResponse  Obtains metadata for a document bundle for the given query params in XML format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.xml?sn=75757575,78787878
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/bundle.xml (the `GetBundleInfoXml` operationId).
 func (c *ClientWithResponses) GetBundleInfoXmlWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetBundleInfoXmlResponse, error) {
 	rsp, err := c.GetBundleInfoXml(ctx, reqEditors...)
 	if err != nil {
@@ -2167,7 +2950,13 @@ func (c *ClientWithResponses) GetBundleInfoXmlWithResponse(ctx context.Context, 
 	return ParseGetBundleInfoXmlResponse(rsp)
 }
 
-// GetBundleInfoZipWithResponse request returning *GetBundleInfoZipResponse
+// GetBundleInfoZipWithResponse  Obtains metadata for a document bundle for the given query params in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.zip?sn=75757575,78787878
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/bundle.zip (the `GetBundleInfoZip` operationId).
 func (c *ClientWithResponses) GetBundleInfoZipWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetBundleInfoZipResponse, error) {
 	rsp, err := c.GetBundleInfoZip(ctx, reqEditors...)
 	if err != nil {
@@ -2176,7 +2965,13 @@ func (c *ClientWithResponses) GetBundleInfoZipWithResponse(ctx context.Context, 
 	return ParseGetBundleInfoZipResponse(rsp)
 }
 
-// GetCaseBundleContentXmlWithResponse request returning *GetCaseBundleContentXmlResponse
+// GetCaseBundleContentXmlWithResponse Returns information about the searched document in the case in XML format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/bundle
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/bundle (the `GetCaseBundleContentXml` operationId).
 func (c *ClientWithResponses) GetCaseBundleContentXmlWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseBundleContentXmlResponse, error) {
 	rsp, err := c.GetCaseBundleContentXml(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2185,7 +2980,13 @@ func (c *ClientWithResponses) GetCaseBundleContentXmlWithResponse(ctx context.Co
 	return ParseGetCaseBundleContentXmlResponse(rsp)
 }
 
-// GetCaseDocsPdfWithResponse request returning *GetCaseDocsPdfResponse
+// GetCaseDocsPdfWithResponse Returns information about all documents in the case in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/content.pdf
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/content.pdf (the `GetCaseDocsPdf` operationId).
 func (c *ClientWithResponses) GetCaseDocsPdfWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsPdfResponse, error) {
 	rsp, err := c.GetCaseDocsPdf(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2194,7 +2995,13 @@ func (c *ClientWithResponses) GetCaseDocsPdfWithResponse(ctx context.Context, ca
 	return ParseGetCaseDocsPdfResponse(rsp)
 }
 
-// GetCaseDocsZipWithResponse request returning *GetCaseDocsZipResponse
+// GetCaseDocsZipWithResponse Returns information about all documents in the case in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/content.zip
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/content.zip (the `GetCaseDocsZip` operationId).
 func (c *ClientWithResponses) GetCaseDocsZipWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsZipResponse, error) {
 	rsp, err := c.GetCaseDocsZip(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2203,7 +3010,13 @@ func (c *ClientWithResponses) GetCaseDocsZipWithResponse(ctx context.Context, ca
 	return ParseGetCaseDocsZipResponse(rsp)
 }
 
-// GetCaseDocsPdfDownloadWithResponse request returning *GetCaseDocsPdfDownloadResponse
+// GetCaseDocsPdfDownloadWithResponse Returns information about all documents in the case in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/download.pdf
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/download.pdf (the `GetCaseDocsPdfDownload` operationId).
 func (c *ClientWithResponses) GetCaseDocsPdfDownloadWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsPdfDownloadResponse, error) {
 	rsp, err := c.GetCaseDocsPdfDownload(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2212,7 +3025,13 @@ func (c *ClientWithResponses) GetCaseDocsPdfDownloadWithResponse(ctx context.Con
 	return ParseGetCaseDocsPdfDownloadResponse(rsp)
 }
 
-// GetCaseDocsZipDownloadWithResponse request returning *GetCaseDocsZipDownloadResponse
+// GetCaseDocsZipDownloadWithResponse Returns information about all documents in the case in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casedocs/sn78787878/download.zip
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/download.zip (the `GetCaseDocsZipDownload` operationId).
 func (c *ClientWithResponses) GetCaseDocsZipDownloadWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsZipDownloadResponse, error) {
 	rsp, err := c.GetCaseDocsZipDownload(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2221,7 +3040,11 @@ func (c *ClientWithResponses) GetCaseDocsZipDownloadWithResponse(ctx context.Con
 	return ParseGetCaseDocsZipDownloadResponse(rsp)
 }
 
-// GetCaseDocsInfoXmlWithResponse request returning *GetCaseDocsInfoXmlResponse
+// GetCaseDocsInfoXmlWithResponse Returns information about all documents in the case in XML format.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casedocs/{caseid}/info (the `GetCaseDocsInfoXml` operationId).
 func (c *ClientWithResponses) GetCaseDocsInfoXmlWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseDocsInfoXmlResponse, error) {
 	rsp, err := c.GetCaseDocsInfoXml(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2230,7 +3053,13 @@ func (c *ClientWithResponses) GetCaseDocsInfoXmlWithResponse(ctx context.Context
 	return ParseGetCaseDocsInfoXmlResponse(rsp)
 }
 
-// GetCaseStatusInfoContentHtmlWithResponse request returning *GetCaseStatusInfoContentHtmlResponse
+// GetCaseStatusInfoContentHtmlWithResponse  Returns the content of a Document in HTML format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.html
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/content.html (the `GetCaseStatusInfoContentHtml` operationId).
 func (c *ClientWithResponses) GetCaseStatusInfoContentHtmlWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoContentHtmlResponse, error) {
 	rsp, err := c.GetCaseStatusInfoContentHtml(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2239,7 +3068,13 @@ func (c *ClientWithResponses) GetCaseStatusInfoContentHtmlWithResponse(ctx conte
 	return ParseGetCaseStatusInfoContentHtmlResponse(rsp)
 }
 
-// GetCaseStatusInfoContentPdfWithResponse request returning *GetCaseStatusInfoContentPdfResponse
+// GetCaseStatusInfoContentPdfWithResponse  Returns the content of a Document in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.pdf
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/content.pdf (the `GetCaseStatusInfoContentPdf` operationId).
 func (c *ClientWithResponses) GetCaseStatusInfoContentPdfWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoContentPdfResponse, error) {
 	rsp, err := c.GetCaseStatusInfoContentPdf(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2248,7 +3083,13 @@ func (c *ClientWithResponses) GetCaseStatusInfoContentPdfWithResponse(ctx contex
 	return ParseGetCaseStatusInfoContentPdfResponse(rsp)
 }
 
-// GetCaseStatusInfoContentZipWithResponse request returning *GetCaseStatusInfoContentZipResponse
+// GetCaseStatusInfoContentZipWithResponse  Returns the content of a Document in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/content.zip
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/content.zip (the `GetCaseStatusInfoContentZip` operationId).
 func (c *ClientWithResponses) GetCaseStatusInfoContentZipWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoContentZipResponse, error) {
 	rsp, err := c.GetCaseStatusInfoContentZip(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2257,7 +3098,13 @@ func (c *ClientWithResponses) GetCaseStatusInfoContentZipWithResponse(ctx contex
 	return ParseGetCaseStatusInfoContentZipResponse(rsp)
 }
 
-// GetCaseStatusInfoPdfDownloadWithResponse request returning *GetCaseStatusInfoPdfDownloadResponse
+// GetCaseStatusInfoPdfDownloadWithResponse Returns trademark bibliographic information in PDF format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/download.pdf
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/download.pdf (the `GetCaseStatusInfoPdfDownload` operationId).
 func (c *ClientWithResponses) GetCaseStatusInfoPdfDownloadWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoPdfDownloadResponse, error) {
 	rsp, err := c.GetCaseStatusInfoPdfDownload(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2266,7 +3113,13 @@ func (c *ClientWithResponses) GetCaseStatusInfoPdfDownloadWithResponse(ctx conte
 	return ParseGetCaseStatusInfoPdfDownloadResponse(rsp)
 }
 
-// GetCaseStatusInfoZipDownloadWithResponse request returning *GetCaseStatusInfoZipDownloadResponse
+// GetCaseStatusInfoZipDownloadWithResponse Returns trademark bibliographic information in ZIP format.
+//
+// Parameters can be one of the following: rnXXXXXXX for US registration number, snXXXXXXXX for US serial number, refXXXXXXXX and irXXXXXXX for Madrid numbers. Example: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/download.zip
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/download.zip (the `GetCaseStatusInfoZipDownload` operationId).
 func (c *ClientWithResponses) GetCaseStatusInfoZipDownloadWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*GetCaseStatusInfoZipDownloadResponse, error) {
 	rsp, err := c.GetCaseStatusInfoZipDownload(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2275,7 +3128,11 @@ func (c *ClientWithResponses) GetCaseStatusInfoZipDownloadWithResponse(ctx conte
 	return ParseGetCaseStatusInfoZipDownloadResponse(rsp)
 }
 
-// LoadXMLWithResponse request returning *LoadXMLResponse
+// LoadXMLWithResponse Returns to the user the Trademark data for a specific serial number serialized into ST96 compliant XML.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/info (the `LoadXML` operationId).
 func (c *ClientWithResponses) LoadXMLWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*LoadXMLResponse, error) {
 	rsp, err := c.LoadXML(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2284,7 +3141,11 @@ func (c *ClientWithResponses) LoadXMLWithResponse(ctx context.Context, caseid st
 	return ParseLoadXMLResponse(rsp)
 }
 
-// LoadOldXMLWithResponse request returning *LoadOldXMLResponse
+// LoadOldXMLWithResponse Returns to the user the Trademark data for a specific serial number serialized into ST96 compliant XML.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /ts/cd/casestatus/{caseid}/v1/info (the `LoadOldXML` operationId).
 func (c *ClientWithResponses) LoadOldXMLWithResponse(ctx context.Context, caseid string, reqEditors ...RequestEditorFn) (*LoadOldXMLResponse, error) {
 	rsp, err := c.LoadOldXML(ctx, caseid, reqEditors...)
 	if err != nil {
@@ -2314,6 +3175,15 @@ func ParseGetcaseUpdateInfoResponse(rsp *http.Response) (*GetcaseUpdateInfoRespo
 		}
 		response.JSON200 = &dest
 
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
+
 	}
 
 	return response, nil
@@ -2340,6 +3210,15 @@ func ParseGetcaseUpdateInfoXmlResponse(rsp *http.Response) (*GetcaseUpdateInfoXm
 		}
 		response.XML200 = &dest
 
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
+
 	}
 
 	return response, nil
@@ -2365,6 +3244,15 @@ func ParseGetListResponse(rsp *http.Response) (*GetListResponse, error) {
 			return nil, err
 		}
 		response.JSON200 = &dest
+
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
 
 	}
 
@@ -2456,6 +3344,15 @@ func ParseGetDocumentInfoXmlResponse(rsp *http.Response) (*GetDocumentInfoXmlRes
 		}
 		response.XML200 = &dest
 
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
+
 	}
 
 	return response, nil
@@ -2514,6 +3411,15 @@ func ParseGetBundleInfoXmlResponse(rsp *http.Response) (*GetBundleInfoXmlRespons
 		}
 		response.XML200 = &dest
 
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
+
 	}
 
 	return response, nil
@@ -2555,6 +3461,15 @@ func ParseGetCaseBundleContentXmlResponse(rsp *http.Response) (*GetCaseBundleCon
 			return nil, err
 		}
 		response.XML200 = &dest
+
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
 
 	}
 
@@ -2645,6 +3560,15 @@ func ParseGetCaseDocsInfoXmlResponse(rsp *http.Response) (*GetCaseDocsInfoXmlRes
 			return nil, err
 		}
 		response.XML200 = &dest
+
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
 
 	}
 
@@ -2752,6 +3676,15 @@ func ParseLoadXMLResponse(rsp *http.Response) (*LoadXMLResponse, error) {
 		}
 		response.XML200 = &dest
 
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
+
 	}
 
 	return response, nil
@@ -2777,6 +3710,15 @@ func ParseLoadOldXMLResponse(rsp *http.Response) (*LoadOldXMLResponse, error) {
 			return nil, err
 		}
 		response.XML200 = &dest
+
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case rsp.StatusCode == 400:
+		break // No content-type
+
+	case rsp.StatusCode == 404:
+		break // No content-type
 
 	}
 

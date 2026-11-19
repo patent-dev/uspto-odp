@@ -1,167 +1,234 @@
 {
-  "count": 7393,
+  "count": 1131391,
   "petitionDecisionDataBag": [
     {
-      "applicationNumberText": "10347018",
-      "businessEntityStatusCategory": "Small",
-      "courtActionIndicator": false,
-      "decisionDate": "2012-03-26",
-      "decisionPetitionTypeCode": 525,
-      "decisionTypeCode": "C",
-      "finalDecidingOfficeName": "OFFICE OF PETITIONS",
-      "firstInventorToFileIndicator": false,
-      "groupArtUnitNumber": "1791",
-      "inventionTitle": "Edible Homogenous Supports for Comestibles with Optional Mess Guards and Drip Guards",
-      "inventorBag": [
-        "Alice Mary Kiely"
-      ],
-      "lastIngestionDateTime": "2026-03-31T15:41:46",
-      "petitionDecisionRecordIdentifier": "eafa727a-354d-534f-b6aa-a4b366afbb28",
-      "petitionIssueConsideredTextBag": [
-        "Withdrawal of abandonment"
-      ],
-      "petitionMailDate": "2011-09-30",
-      "prosecutionStatusCodeDescriptionText": "Abandoned",
-      "ruleBag": [
-        "37 CFR 1.181",
-        "37 CFR 1.113",
-        "37 CFR 1.137"
-      ],
-      "statuteBag": [
-        "35 USC 132",
-        "35 USC 133"
-      ],
-      "technologyCenter": "1700"
-    },
-    {
-      "applicationNumberText": "12383049",
+      "allSearchableFields": "18695171 Withdraw from issue awaiting action To withdraw from issue after payment of the issue fee \t(37 CFR 1.313(c)(1) or (2). GRANTED OFFICE OF PETITIONS Telefonaktiebolaget LM Ericsson (publ) Prioritized Rekeying of Security Associations Daiying Liu Congjie Zhang Daniel Migault Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/695,171 11/18/2026 37 CFR 1.313(c)(2) 1009-6753 / P102439US01\n\nTitle of Invention\n\nPrioritized Rekeying of Security Associations\n\nIn re Application of Daiying Liu\n\nThis is an electronic decision on the petition under 37 CFR 1.313(c)(2), filed November 18, 2026 to withdraw the\nabove-identified application from issue after payment of the issue fee.\n\nThe request is GRANTED.\n\nThe above-identified application is withdrawn from issue for consideration of a submission under 37 CFR 1.114\n(request for continued examination). See 37 CFR 1.313(c)(2).\n\nPetitioner is advised that the issue fee paid in this application cannot be refunded. If, however, this\napplication is again allowed, petitioner may request that it be applied towards the issue fee required by\nthe new Notice of Allowance.\n\nThe application is being referred to Technology Center AU 2408 for consideration of the request for continued\nexamination (Quick Path Information Disclosure Statement) under 37 CFR 1.114.\n\nTelephone inquired concerning this decision should be directed to the Patent Electronic Business Center (EBC)\nat 866-217-9197.\n\nOffice of Petitions",
+      "applicationNumberText": "18695171",
+      "applicationStatusDate": "2026-11-18",
+      "applicationStatusDescriptionText": "Withdraw from issue awaiting action",
       "businessEntityStatusCategory": "Regular Undiscounted",
       "courtActionIndicator": false,
-      "customerNumber": 26646,
-      "decisionDate": "2012-04-25",
-      "decisionPetitionTypeCode": 652,
-      "decisionTypeCode": "C",
+      "customerNumber": 102721,
+      "decidedPetitionTypeCode": "A",
+      "decidedPetitionTypeCodeDescriptionText": "GRANTED",
+      "decisionDate": "2026-11-18",
+      "decisionMailDate": "2026-11-18",
+      "decisionPetitionTypeCode": "505",
+      "decisionPetitionTypeCodeDescriptionText": "To withdraw from issue after payment of the issue fee \t(37 CFR 1.313(c)(1) or (2).",
+      "documentBag": [
+        {
+          "documentCode": "PET.DEC.AUTO",
+          "documentCodeDescriptionText": "ePetition Grant Letter",
+          "documentIdentifier": "MWMPMLNI120X149",
+          "downloadOptionBag": [
+            {
+              "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/18695171/MWMPMLNI120X149/files/grantLetter.pdf",
+              "mimeTypeIdentifier": "PDF",
+              "pageTotalQuantity": 1
+            }
+          ],
+          "officialDate": "2026-11-18T22:44:02"
+        }
+      ],
       "finalDecidingOfficeName": "OFFICE OF PETITIONS",
-      "firstInventorToFileIndicator": false,
-      "groupArtUnitNumber": "1628",
-      "inventionTitle": "Purification of air sensitive steroids",
+      "finalPetitionDecisionIndicator": false,
+      "firstApplicantName": "Telefonaktiebolaget LM Ericsson (publ)",
+      "firstInventorToFileIndicator": true,
+      "groupArtUnitNumber": "2408",
+      "inventionTitle": "Prioritized Rekeying of Security Associations",
       "inventorBag": [
-        "Marco Villa",
-        "Donato Motolese"
+        "Daiying Liu",
+        "Congjie Zhang",
+        "Daniel Migault"
       ],
-      "lastIngestionDateTime": "2026-03-31T15:41:46",
-      "petitionDecisionRecordIdentifier": "fc9dcf5d-8c06-568b-92b7-082a2bd1b29e",
-      "petitionIssueConsideredTextBag": [
-        "Make special: Patent Prosecution Highway"
-      ],
-      "petitionMailDate": "2011-09-12",
-      "prosecutionStatusCodeDescriptionText": "No status provided",
-      "ruleBag": [
-        "37 CFR 1.102(a)"
-      ],
-      "statuteBag": [
-        "No statute provided"
-      ],
-      "technologyCenter": "1600"
+      "lastModifiedDateTime": "2026-11-19T11:57:10",
+      "ocrSearchText": "Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/695,171 11/18/2026 37 CFR 1.313(c)(2) 1009-6753 / P102439US01\n\nTitle of Invention\n\nPrioritized Rekeying of Security Associations\n\nIn re Application of Daiying Liu\n\nThis is an electronic decision on the petition under 37 CFR 1.313(c)(2), filed Novembe ...",
+      "petitionDecisionRecordIdentifier": "ea54bce6-5cfa-546f-b4f2-6a9145f67424",
+      "petitionMailDate": "2026-11-18",
+      "technologyCenter": "2400"
     },
     {
-      "applicationNumberText": "12993212",
+      "allSearchableFields": "18574848 Withdraw from issue awaiting action To withdraw from issue after payment of issue fee (37 CFR 1.313(c)(1) or (2)) with assigned patent number. GRANTED OFFICE OF PETITIONS LG Energy Solution, Ltd. Vehicle, Computing System, Operating Method of Computing System and Computer Program Chi Ho Moon Ji Won Bang Min Yi Kim Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/574,848 11/18/2026 37 CFR 1.313(c)(2) LGES 3.3F-5178\n\nTitle of Invention\nVehicle, Computing System, Operating Method of Computing System and Computer Program\n\nIn re Application of Chi Ho Moon\n\nThis is an electronic decision on the petition under 37 CFR 1.313(c)(2), filed November 18, 2026 to withdraw the\nabove-identified application from issue after payment of the issue fee.\n\nThe request is GRANTED.\n\nThe above-identified application is withdrawn from issue for consideration of a submission under 37 CFR 1.114\n(request for continued examination). See 37 CFR 1.313(c)(2).\n\nPetitioner is advised that the issue fee paid in this application cannot be refunded. If, however, this\napplication is again allowed, petitioner may request that it be applied towards the issue fee required by\nthe new Notice of Allowance.\n\nThe application is being referred to Technology Center AU 3668 for consideration of the request for continued\nexamination (Quick Path Information Disclosure Statement) under 37 CFR 1.114.\n\nTelephone inquired concerning this decision should be directed to the Patent Electronic Business Center (EBC)\nat 866-217-9197.\n\nOffice of Petitions",
+      "applicationNumberText": "18574848",
+      "applicationStatusDate": "2026-11-18",
+      "applicationStatusDescriptionText": "Withdraw from issue awaiting action",
       "businessEntityStatusCategory": "Regular Undiscounted",
       "courtActionIndicator": false,
-      "customerNumber": 20995,
-      "decisionDate": "2014-03-24",
-      "decisionPetitionTypeCode": 652,
-      "decisionTypeCode": "C",
+      "customerNumber": 86765,
+      "decidedPetitionTypeCode": "A",
+      "decidedPetitionTypeCodeDescriptionText": "GRANTED",
+      "decisionDate": "2026-11-18",
+      "decisionMailDate": "2026-11-18",
+      "decisionPetitionTypeCode": "555",
+      "decisionPetitionTypeCodeDescriptionText": "To withdraw from issue after payment of issue fee (37 CFR 1.313(c)(1) or (2)) with assigned patent number.",
+      "documentBag": [
+        {
+          "documentCode": "PET.DEC.AUTO",
+          "documentCodeDescriptionText": "ePetition Grant Letter",
+          "documentIdentifier": "MWMM210R167X202",
+          "downloadOptionBag": [
+            {
+              "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/18574848/MWMM210R167X202/files/grantLetter.pdf",
+              "mimeTypeIdentifier": "PDF",
+              "pageTotalQuantity": 1
+            }
+          ],
+          "officialDate": "2026-11-18T20:57:09"
+        }
+      ],
       "finalDecidingOfficeName": "OFFICE OF PETITIONS",
-      "firstInventorToFileIndicator": false,
-      "groupArtUnitNumber": "1792",
-      "inventionTitle": "GLASS-CONTAINING RESIN MOLDED PRODUCT",
+      "finalPetitionDecisionIndicator": false,
+      "firstApplicantName": "LG Energy Solution, Ltd.",
+      "firstInventorToFileIndicator": true,
+      "groupArtUnitNumber": "3668",
+      "inventionTitle": "Vehicle, Computing System, Operating Method of Computing System and Computer Program",
       "inventorBag": [
-        "Kenji Nakamura"
+        "Chi Ho Moon",
+        "Ji Won Bang",
+        "Min Yi Kim"
       ],
-      "lastIngestionDateTime": "2026-03-31T15:41:46",
-      "patentNumber": "8541075",
-      "petitionDecisionRecordIdentifier": "af6a17ed-3af4-5ca7-b50f-5ead639d6f44",
-      "petitionIssueConsideredTextBag": [
-        "Make special: Patent Prosecution Highway"
-      ],
-      "petitionMailDate": "2010-11-22",
-      "prosecutionStatusCodeDescriptionText": "No status provided",
-      "ruleBag": [
-        "37 CFR 1.102(a)"
-      ],
-      "statuteBag": [
-        "No statute provided"
-      ],
-      "technologyCenter": "1700"
+      "lastModifiedDateTime": "2026-11-19T11:57:10",
+      "ocrSearchText": "Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/574,848 11/18/2026 37 CFR 1.313(c)(2) LGES 3.3F-5178\n\nTitle of Invention\nVehicle, Computing System, Operating Method of Computing System and Computer Program\n\nIn re Application of Chi Ho Moon\n\nThis is an electronic decision on the petition under 37 C ...",
+      "petitionDecisionRecordIdentifier": "631c0cc6-194c-596c-91ea-d1a408cf40eb",
+      "petitionMailDate": "2026-11-18",
+      "technologyCenter": "3600"
     },
     {
-      "applicationNumberText": "11459636",
+      "allSearchableFields": "18957978 Withdraw from issue awaiting action To withdraw from issue after payment of issue fee (37 CFR 1.313(c)(1) or (2)) with assigned patent number. GRANTED OFFICE OF PETITIONS Perrone Robotics, Inc. GENERAL PURPOSE ROBOTICS OPERATING SYSTEM WITH UNMANNED AND AUTONOMOUS VEHICLE EXTENSIONS Paul J. Perrone Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/957 ,978 11/18/2026 37 CFR 1.313(c)(2) 339-0004US\n\nTitle of Invention\nGENERAL PURPOSE ROBOTICS OPERATING SYSTEM WITH UNMANNED AND AUTONOMOUS\n\nVEHICLE EXTENSIONS\nIn re Application of Paul Perrone\n\nThis is an electronic decision on the petition under 37 CFR 1.313(c)(2), filed November 18, 2026 to withdraw the\nabove-identified application from issue after payment of the issue fee.\n\nThe request is GRANTED.\n\nThe above-identified application is withdrawn from issue for consideration of a submission under 37 CFR 1.114\n(request for continued examination). See 37 CFR 1.313(c)(2).\n\nPetitioner is advised that the issue fee paid in this application cannot be refunded. If, however, this\napplication is again allowed, petitioner may request that it be applied towards the issue fee required by\nthe new Notice of Allowance.\n\nThe application is being referred to Technology Center AU 3656 for processing of the request for continuing\nexamination under 37 CFR 1.114.\n\nTelephone inquired concerning this decision should be directed to the Patent Electronic Business Center (EBC)\nat 866-217-9197.\n\nOffice of Petitions",
+      "applicationNumberText": "18957978",
+      "applicationStatusDate": "2026-11-18",
+      "applicationStatusDescriptionText": "Withdraw from issue awaiting action",
       "businessEntityStatusCategory": "Small",
       "courtActionIndicator": false,
-      "customerNumber": 77974,
-      "decisionDate": "2015-08-20",
-      "decisionPetitionTypeCode": 551,
-      "decisionTypeCode": "C",
+      "customerNumber": 190141,
+      "decidedPetitionTypeCode": "A",
+      "decidedPetitionTypeCodeDescriptionText": "GRANTED",
+      "decisionDate": "2026-11-18",
+      "decisionMailDate": "2026-11-18",
+      "decisionPetitionTypeCode": "555",
+      "decisionPetitionTypeCodeDescriptionText": "To withdraw from issue after payment of issue fee (37 CFR 1.313(c)(1) or (2)) with assigned patent number.",
+      "documentBag": [
+        {
+          "documentCode": "PET.DEC.AUTO",
+          "documentCodeDescriptionText": "ePetition Grant Letter",
+          "documentIdentifier": "MWMDGYSV233X125",
+          "downloadOptionBag": [
+            {
+              "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/18957978/MWMDGYSV233X125/files/grantLetter.pdf",
+              "mimeTypeIdentifier": "PDF",
+              "pageTotalQuantity": 1
+            }
+          ],
+          "officialDate": "2026-11-18T17:02:53"
+        }
+      ],
       "finalDecidingOfficeName": "OFFICE OF PETITIONS",
-      "firstInventorToFileIndicator": false,
-      "groupArtUnitNumber": "1632",
-      "inventionTitle": "LIGHT-ACTIVATED CATION CHANNEL AND USES THEREOF",
+      "finalPetitionDecisionIndicator": false,
+      "firstApplicantName": "Perrone Robotics, Inc.",
+      "firstInventorToFileIndicator": true,
+      "groupArtUnitNumber": "3656",
+      "inventionTitle": "GENERAL PURPOSE ROBOTICS OPERATING SYSTEM WITH UNMANNED AND AUTONOMOUS VEHICLE EXTENSIONS",
       "inventorBag": [
-        "Karl Deisseroth",
-        "Edward S. Boyden"
+        "Paul J. Perrone"
       ],
-      "lastIngestionDateTime": "2026-03-31T15:41:46",
-      "patentNumber": "8906360",
-      "petitionDecisionRecordIdentifier": "eb95d115-ab31-5870-be83-646436ccf7b7",
-      "petitionIssueConsideredTextBag": [
-        "Patent term adjustment: Applicant delay"
-      ],
-      "petitionMailDate": "2015-02-09",
-      "prosecutionStatusCodeDescriptionText": "Patented",
-      "ruleBag": [
-        "37 CFR 1.705(b)",
-        "37 CFR 1.704(c)(8)"
-      ],
-      "statuteBag": [
-        "35 USC 154",
-        "35 USC 154(b)(2)(C)(iii)"
-      ],
-      "technologyCenter": "1600"
+      "lastModifiedDateTime": "2026-11-19T11:57:10",
+      "ocrSearchText": "Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/957 ,978 11/18/2026 37 CFR 1.313(c)(2) 339-0004US\n\nTitle of Invention\nGENERAL PURPOSE ROBOTICS OPERATING SYSTEM WITH UNMANNED AND AUTONOMOUS\n\nVEHICLE EXTENSIONS\nIn re Application of Paul Perrone\n\nThis is an electronic decision on the petition under 3 ...",
+      "petitionDecisionRecordIdentifier": "36da1b7e-8a04-55b1-91b7-c45de8abcde8",
+      "petitionMailDate": "2026-11-18",
+      "technologyCenter": "3600"
     },
     {
-      "applicationNumberText": "11459636",
-      "businessEntityStatusCategory": "Small",
+      "allSearchableFields": "18948274 Withdraw from issue awaiting action To withdraw from issue after payment of issue fee (37 CFR 1.313(c)(1) or (2)) with assigned patent number. GRANTED OFFICE OF PETITIONS DOLBY INTERNATIONAL AB COMPANDING SYSTEM AND METHOD TO REDUCE QUANTIZATION NOISE USING ADVANCED SPECTRAL EXTENSION Per Hedelin Arijit Biswas Michael Schug Vinay Melkote Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/948, 274 11/18/2026 37 CFR 1.313(c)(2) D13031US07\n\nTitle of Invention\nCOMPANDING SYSTEM AND METHOD TO REDUCE QUANTIZATION NOISE USING ADVANCED\n\nSPECTRAL EXTENSION\nIn re Application of Per Hedelin\n\nThis is an electronic decision on the petition under 37 CFR 1.313(c)(2), filed November 18, 2026 to withdraw the\nabove-identified application from issue after payment of the issue fee.\n\nThe request is GRANTED.\n\nThe above-identified application is withdrawn from issue for consideration of a submission under 37 CFR 1.114\n(request for continued examination). See 37 CFR 1.313(c)(2).\n\nPetitioner is advised that the issue fee paid in this application cannot be refunded. If, however, this\napplication is again allowed, petitioner may request that it be applied towards the issue fee required by\nthe new Notice of Allowance.\n\nThe application is being referred to Technology Center AU 2653 for consideration of the request for continued\nexamination (Quick Path Information Disclosure Statement) under 37 CFR 1.114.\n\nTelephone inquired concerning this decision should be directed to the Patent Electronic Business Center (EBC)\nat 866-217-9197.\n\nOffice of Petitions",
+      "applicationNumberText": "18948274",
+      "applicationStatusDate": "2026-11-18",
+      "applicationStatusDescriptionText": "Withdraw from issue awaiting action",
+      "businessEntityStatusCategory": "Regular Undiscounted",
       "courtActionIndicator": false,
-      "customerNumber": 77974,
-      "decisionDate": "2019-04-10",
-      "decisionPetitionTypeCode": 551,
-      "decisionTypeCode": "C",
+      "customerNumber": 74507,
+      "decidedPetitionTypeCode": "A",
+      "decidedPetitionTypeCodeDescriptionText": "GRANTED",
+      "decisionDate": "2026-11-18",
+      "decisionMailDate": "2026-11-18",
+      "decisionPetitionTypeCode": "555",
+      "decisionPetitionTypeCodeDescriptionText": "To withdraw from issue after payment of issue fee (37 CFR 1.313(c)(1) or (2)) with assigned patent number.",
+      "documentBag": [
+        {
+          "documentCode": "PET.DEC.AUTO",
+          "documentCodeDescriptionText": "ePetition Grant Letter",
+          "documentIdentifier": "MWMHLQTAX205X26",
+          "downloadOptionBag": [
+            {
+              "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/18948274/MWMHLQTAX205X26/files/grantLetter.pdf",
+              "mimeTypeIdentifier": "PDF",
+              "pageTotalQuantity": 1
+            }
+          ],
+          "officialDate": "2026-11-18T18:55:02"
+        }
+      ],
       "finalDecidingOfficeName": "OFFICE OF PETITIONS",
-      "firstInventorToFileIndicator": false,
-      "groupArtUnitNumber": "1632",
-      "inventionTitle": "LIGHT-ACTIVATED CATION CHANNEL AND USES THEREOF",
+      "finalPetitionDecisionIndicator": false,
+      "firstApplicantName": "DOLBY INTERNATIONAL AB",
+      "firstInventorToFileIndicator": true,
+      "groupArtUnitNumber": "2653",
+      "inventionTitle": "COMPANDING SYSTEM AND METHOD TO REDUCE QUANTIZATION NOISE USING ADVANCED SPECTRAL EXTENSION",
       "inventorBag": [
-        "Karl Deisseroth",
-        "Edward S. Boyden"
+        "Per Hedelin",
+        "Arijit Biswas",
+        "Michael Schug",
+        "Vinay Melkote"
       ],
-      "lastIngestionDateTime": "2026-03-31T15:41:46",
-      "patentNumber": "8906360",
-      "petitionDecisionRecordIdentifier": "46db22e6-3210-5645-8335-b04fa6d7aa12",
-      "petitionIssueConsideredTextBag": [
-        "Patent term adjustment: Applicant delay"
+      "lastModifiedDateTime": "2026-11-19T11:57:09",
+      "ocrSearchText": "Doc code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nUNITED STATES _ P.O, Box 1450\nUSPTO] PATENT AND TRADEMARK OFFICE Alexandria, Vi er uspto gov\n\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n18/948, 274 11/18/2026 37 CFR 1.313(c)(2) D13031US07\n\nTitle of Invention\nCOMPANDING SYSTEM AND METHOD TO REDUCE QUANTIZATION NOISE USING ADVANCED\n\nSPECTRAL EXTENSION\nIn re Application of Per Hedelin\n\nThis is an electronic decision on the petition under  ...",
+      "petitionDecisionRecordIdentifier": "7aa4a6af-0d93-56f2-a077-86cb1b81819b",
+      "petitionMailDate": "2026-11-18",
+      "technologyCenter": "2600"
+    },
+    {
+      "allSearchableFields": "15841159 Patented Case REINSTATE PATENT - UNINTENTIONALLY DELAYED PAYMENT OF MAINTENANCE FEE, NO ADDITIONAL INFORMATION REQUIRED (37 CFR 1.378(A)) GRANTED OFFICE OF PETITIONS MOBILITY ENHANCEMENT DEVICE FOR ATTACHMENT TO FOOT OR FOOTWEAR Saprina Renee BUTLER Tessa Renee BUTLER 11337844 Doc Code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nCommissioner for Patents\n\nr) EENITED STATES United States Patent and Trademark Office\nPATENT AND TRADEMARK OFFICE Alexandria, VA 22313 - 1450\nwww.uspto.gov\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n15/841 ,159 11/18/2026 UNDER CFR 1.378(b) 2020-01-00370PA\n\nTitle of Invention\nMOBILITY ENHANCEMENT DEVICE FOR ATTACHMENT TO FOOT OR FOOTWEAR\n\nIn re Patent # 11337844\nIssue date: 05/24/2022\nFiling date: 12/13/2017\n\nThis is an electronic decision on the petition under 37 CFR 1.378(b), filed November 18, 2026 to accept\nunintentional delayed payment of the 3.5 year maintenance fee for the above-identified patent.\n\nThe petition is GRANTED.\n\nThe maintenance fee is accepted, and the above-identified patent reinstated as of November 18, 2026. This\ndecision also constitutes notice that the fee has been accepted. An electronic copy of the petition and this\ndecision has been created as an entry in the Image File Wrapper. Nevertheless, petitions should print and retain\nan independent copy.\n\nTelephone inquiries concerning this decision should be directed to the Patent Electronic Business Center (EBC)\nat 866-217-9197.\n\nOffice of Petitions",
+      "applicationNumberText": "15841159",
+      "applicationStatusDate": "2026-11-18",
+      "applicationStatusDescriptionText": "Patented Case",
+      "businessEntityStatusCategory": "Micro",
+      "courtActionIndicator": false,
+      "customerNumber": 140304,
+      "decidedPetitionTypeCode": "A",
+      "decidedPetitionTypeCodeDescriptionText": "GRANTED",
+      "decisionDate": "2026-11-18",
+      "decisionMailDate": "2026-11-18",
+      "decisionPetitionTypeCode": "533",
+      "decisionPetitionTypeCodeDescriptionText": "REINSTATE PATENT - UNINTENTIONALLY DELAYED PAYMENT OF MAINTENANCE FEE, NO ADDITIONAL INFORMATION REQUIRED (37 CFR 1.378(A))",
+      "documentBag": [
+        {
+          "documentCode": "PET.DEC.AUTO",
+          "documentCodeDescriptionText": "ePetition Grant Letter",
+          "documentIdentifier": "MWMLJ8D16X15X87",
+          "downloadOptionBag": [
+            {
+              "downloadUrl": "https://api.uspto.gov/api/v1/download/applications/15841159/MWMLJ8D16X15X87/files/grantLetter.pdf",
+              "mimeTypeIdentifier": "PDF",
+              "pageTotalQuantity": 1
+            }
+          ],
+          "officialDate": "2026-11-18T20:44:45"
+        }
       ],
-      "petitionMailDate": "2015-10-26",
-      "prosecutionStatusCodeDescriptionText": "Patented",
-      "ruleBag": [
-        "37 CFR 1.704(d)",
-        "37 CFR 1.705(b)"
+      "finalDecidingOfficeName": "OFFICE OF PETITIONS",
+      "finalPetitionDecisionIndicator": false,
+      "firstInventorToFileIndicator": true,
+      "groupArtUnitNumber": "3786",
+      "inventionTitle": "MOBILITY ENHANCEMENT DEVICE FOR ATTACHMENT TO FOOT OR FOOTWEAR",
+      "inventorBag": [
+        "Saprina Renee BUTLER",
+        "Tessa Renee BUTLER"
       ],
-      "statuteBag": [
-        "35 USC 154",
-        "35 USC 154(b)(2)(C)(iii)"
-      ],
-      "technologyCenter": "1600"
+      "lastModifiedDateTime": "2026-11-19T11:57:09",
+      "ocrSearchText": "Doc Code : PET.DEC.AUTO\nDescription : ePetition Grant Letter\n\nCommissioner for Patents\n\nr) EENITED STATES United States Patent and Trademark Office\nPATENT AND TRADEMARK OFFICE Alexandria, VA 22313 - 1450\nwww.uspto.gov\nGRANT LETTER\nAPPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER\n15/841 ,159 11/18/2026 UNDER CFR 1.378(b) 2020-01-00370PA\n\nTitle of Invention\nMOBILITY ENHANCEMENT DEVICE FOR ATTACHMENT TO FOOT OR FOOTWEAR\n\nIn re Patent # 11337844\nIssue date: 05/24/2022\nFi ...",
+      "patentNumber": "11337844",
+      "petitionDecisionRecordIdentifier": "f2623356-30e2-5763-8e9b-4ef2c9cafc4e",
+      "petitionMailDate": "2026-11-18",
+      "technologyCenter": "3700"
     }
-  ]
+  ],
+  "requestIdentifier": "e6eae2b6-983f-464c-9237-6f4560f4b2e7"
 }

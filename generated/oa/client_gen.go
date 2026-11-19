@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-// RequestEditorFn  is the function signature for the RequestEditor callback function
+// RequestEditorFn is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
 
 // Doer performs HTTP requests.
@@ -88,39 +88,113 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// EnrichedCitationsListFields request
+
+	// EnrichedCitationsListFields Provides the general information about the API and the list of fields that can be used to query the dataset.
+	//
+	// This GET API returns the list of all the searchable field names that are in the enriched_cited_reference_metadata. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+	//
+	// Corresponds with GET /api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields (the `EnrichedCitationsListFields` operationId).
 	EnrichedCitationsListFields(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EnrichedCitationsSearchWithBody request with any body
+	// EnrichedCitationsSearchWithBody Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records (the `EnrichedCitationsSearch` operationId).
 	EnrichedCitationsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// EnrichedCitationsSearchWithFormdataBody Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes a body of the `application/x-www-form-urlencoded` content type.
+	//
+	// Corresponds with POST /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records (the `EnrichedCitationsSearch` operationId).
 	EnrichedCitationsSearchWithFormdataBody(ctx context.Context, body EnrichedCitationsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// OaActionsListFields request
+	// OaActionsListFields Provides the general information about the API and the list of fields that can be used to query the dataset.
+	//
+	// This GET API returns the list of all the searchable field names that are in the oa_actions. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+	//
+	// Corresponds with GET /api/v1/patent/oa/oa_actions/v1/fields (the `OaActionsListFields` operationId).
 	OaActionsListFields(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// OaActionsSearchWithBody request with any body
+	// OaActionsSearchWithBody Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_actions/v1/records (the `OaActionsSearch` operationId).
 	OaActionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// OaActionsSearchWithFormdataBody Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes a body of the `application/x-www-form-urlencoded` content type.
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_actions/v1/records (the `OaActionsSearch` operationId).
 	OaActionsSearchWithFormdataBody(ctx context.Context, body OaActionsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// OaCitationsListFields request
+	// OaCitationsListFields Provides the general information about the API and the list of fields that can be used to query the dataset.
+	//
+	// This GET API returns the list of all the searchable field names that are in the oa_citations. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+	//
+	// Corresponds with GET /api/v1/patent/oa/oa_citations/v2/fields (the `OaCitationsListFields` operationId).
 	OaCitationsListFields(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// OaCitationsSearchWithBody request with any body
+	// OaCitationsSearchWithBody Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_citations/v2/records (the `OaCitationsSearch` operationId).
 	OaCitationsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// OaCitationsSearchWithFormdataBody Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes a body of the `application/x-www-form-urlencoded` content type.
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_citations/v2/records (the `OaCitationsSearch` operationId).
 	OaCitationsSearchWithFormdataBody(ctx context.Context, body OaCitationsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// OaRejectionsListFields request
+	// OaRejectionsListFields Provides the general information about the API and the list of fields that can be used to query the dataset.
+	//
+	// This GET API returns the list of all the searchable field names that are in the oa_rejections. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+	//
+	// Corresponds with GET /api/v1/patent/oa/oa_rejections/v2/fields (the `OaRejectionsListFields` operationId).
 	OaRejectionsListFields(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// OaRejectionsSearchWithBody request with any body
+	// OaRejectionsSearchWithBody Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_rejections/v2/records (the `OaRejectionsSearch` operationId).
 	OaRejectionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// OaRejectionsSearchWithFormdataBody Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes a body of the `application/x-www-form-urlencoded` content type.
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_rejections/v2/records (the `OaRejectionsSearch` operationId).
 	OaRejectionsSearchWithFormdataBody(ctx context.Context, body OaRejectionsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
+// EnrichedCitationsListFields Provides the general information about the API and the list of fields that can be used to query the dataset.
+//
+// This GET API returns the list of all the searchable field names that are in the enriched_cited_reference_metadata. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+//
+// Corresponds with GET /api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields (the `EnrichedCitationsListFields` operationId).
 func (c *Client) EnrichedCitationsListFields(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEnrichedCitationsListFieldsRequest(c.Server)
 	if err != nil {
@@ -133,6 +207,13 @@ func (c *Client) EnrichedCitationsListFields(ctx context.Context, reqEditors ...
 	return c.Client.Do(req)
 }
 
+// EnrichedCitationsSearchWithBody Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records (the `EnrichedCitationsSearch` operationId).
 func (c *Client) EnrichedCitationsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEnrichedCitationsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -145,6 +226,13 @@ func (c *Client) EnrichedCitationsSearchWithBody(ctx context.Context, contentTyp
 	return c.Client.Do(req)
 }
 
+// EnrichedCitationsSearchWithFormdataBody Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes a body of the `application/x-www-form-urlencoded` content type.
+//
+// Corresponds with POST /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records (the `EnrichedCitationsSearch` operationId).
 func (c *Client) EnrichedCitationsSearchWithFormdataBody(ctx context.Context, body EnrichedCitationsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEnrichedCitationsSearchRequestWithFormdataBody(c.Server, body)
 	if err != nil {
@@ -157,6 +245,11 @@ func (c *Client) EnrichedCitationsSearchWithFormdataBody(ctx context.Context, bo
 	return c.Client.Do(req)
 }
 
+// OaActionsListFields Provides the general information about the API and the list of fields that can be used to query the dataset.
+//
+// This GET API returns the list of all the searchable field names that are in the oa_actions. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+//
+// Corresponds with GET /api/v1/patent/oa/oa_actions/v1/fields (the `OaActionsListFields` operationId).
 func (c *Client) OaActionsListFields(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaActionsListFieldsRequest(c.Server)
 	if err != nil {
@@ -169,6 +262,13 @@ func (c *Client) OaActionsListFields(ctx context.Context, reqEditors ...RequestE
 	return c.Client.Do(req)
 }
 
+// OaActionsSearchWithBody Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/oa/oa_actions/v1/records (the `OaActionsSearch` operationId).
 func (c *Client) OaActionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaActionsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -181,6 +281,13 @@ func (c *Client) OaActionsSearchWithBody(ctx context.Context, contentType string
 	return c.Client.Do(req)
 }
 
+// OaActionsSearchWithFormdataBody Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes a body of the `application/x-www-form-urlencoded` content type.
+//
+// Corresponds with POST /api/v1/patent/oa/oa_actions/v1/records (the `OaActionsSearch` operationId).
 func (c *Client) OaActionsSearchWithFormdataBody(ctx context.Context, body OaActionsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaActionsSearchRequestWithFormdataBody(c.Server, body)
 	if err != nil {
@@ -193,6 +300,11 @@ func (c *Client) OaActionsSearchWithFormdataBody(ctx context.Context, body OaAct
 	return c.Client.Do(req)
 }
 
+// OaCitationsListFields Provides the general information about the API and the list of fields that can be used to query the dataset.
+//
+// This GET API returns the list of all the searchable field names that are in the oa_citations. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+//
+// Corresponds with GET /api/v1/patent/oa/oa_citations/v2/fields (the `OaCitationsListFields` operationId).
 func (c *Client) OaCitationsListFields(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaCitationsListFieldsRequest(c.Server)
 	if err != nil {
@@ -205,6 +317,13 @@ func (c *Client) OaCitationsListFields(ctx context.Context, reqEditors ...Reques
 	return c.Client.Do(req)
 }
 
+// OaCitationsSearchWithBody Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/oa/oa_citations/v2/records (the `OaCitationsSearch` operationId).
 func (c *Client) OaCitationsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaCitationsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -217,6 +336,13 @@ func (c *Client) OaCitationsSearchWithBody(ctx context.Context, contentType stri
 	return c.Client.Do(req)
 }
 
+// OaCitationsSearchWithFormdataBody Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes a body of the `application/x-www-form-urlencoded` content type.
+//
+// Corresponds with POST /api/v1/patent/oa/oa_citations/v2/records (the `OaCitationsSearch` operationId).
 func (c *Client) OaCitationsSearchWithFormdataBody(ctx context.Context, body OaCitationsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaCitationsSearchRequestWithFormdataBody(c.Server, body)
 	if err != nil {
@@ -229,6 +355,11 @@ func (c *Client) OaCitationsSearchWithFormdataBody(ctx context.Context, body OaC
 	return c.Client.Do(req)
 }
 
+// OaRejectionsListFields Provides the general information about the API and the list of fields that can be used to query the dataset.
+//
+// This GET API returns the list of all the searchable field names that are in the oa_rejections. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+//
+// Corresponds with GET /api/v1/patent/oa/oa_rejections/v2/fields (the `OaRejectionsListFields` operationId).
 func (c *Client) OaRejectionsListFields(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaRejectionsListFieldsRequest(c.Server)
 	if err != nil {
@@ -241,6 +372,13 @@ func (c *Client) OaRejectionsListFields(ctx context.Context, reqEditors ...Reque
 	return c.Client.Do(req)
 }
 
+// OaRejectionsSearchWithBody Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/patent/oa/oa_rejections/v2/records (the `OaRejectionsSearch` operationId).
 func (c *Client) OaRejectionsSearchWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaRejectionsSearchRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -253,6 +391,13 @@ func (c *Client) OaRejectionsSearchWithBody(ctx context.Context, contentType str
 	return c.Client.Do(req)
 }
 
+// OaRejectionsSearchWithFormdataBody Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes a body of the `application/x-www-form-urlencoded` content type.
+//
+// Corresponds with POST /api/v1/patent/oa/oa_rejections/v2/records (the `OaRejectionsSearch` operationId).
 func (c *Client) OaRejectionsSearchWithFormdataBody(ctx context.Context, body OaRejectionsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewOaRejectionsSearchRequestWithFormdataBody(c.Server, body)
 	if err != nil {
@@ -265,7 +410,7 @@ func (c *Client) OaRejectionsSearchWithFormdataBody(ctx context.Context, body Oa
 	return c.Client.Do(req)
 }
 
-// NewEnrichedCitationsListFieldsRequest generates requests for EnrichedCitationsListFields
+// NewEnrichedCitationsListFieldsRequest constructs an http.Request for the EnrichedCitationsListFields method
 func NewEnrichedCitationsListFieldsRequest(server string) (*http.Request, error) {
 	var err error
 
@@ -284,7 +429,7 @@ func NewEnrichedCitationsListFieldsRequest(server string) (*http.Request, error)
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -303,7 +448,7 @@ func NewEnrichedCitationsSearchRequestWithFormdataBody(server string, body Enric
 	return NewEnrichedCitationsSearchRequestWithBody(server, "application/x-www-form-urlencoded", bodyReader)
 }
 
-// NewEnrichedCitationsSearchRequestWithBody generates requests for EnrichedCitationsSearch with any type of body
+// NewEnrichedCitationsSearchRequestWithBody constructs an http.Request for the EnrichedCitationsSearch method, with any body, and a specified content type
 func NewEnrichedCitationsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -322,7 +467,7 @@ func NewEnrichedCitationsSearchRequestWithBody(server string, contentType string
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -332,7 +477,7 @@ func NewEnrichedCitationsSearchRequestWithBody(server string, contentType string
 	return req, nil
 }
 
-// NewOaActionsListFieldsRequest generates requests for OaActionsListFields
+// NewOaActionsListFieldsRequest constructs an http.Request for the OaActionsListFields method
 func NewOaActionsListFieldsRequest(server string) (*http.Request, error) {
 	var err error
 
@@ -351,7 +496,7 @@ func NewOaActionsListFieldsRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -370,7 +515,7 @@ func NewOaActionsSearchRequestWithFormdataBody(server string, body OaActionsSear
 	return NewOaActionsSearchRequestWithBody(server, "application/x-www-form-urlencoded", bodyReader)
 }
 
-// NewOaActionsSearchRequestWithBody generates requests for OaActionsSearch with any type of body
+// NewOaActionsSearchRequestWithBody constructs an http.Request for the OaActionsSearch method, with any body, and a specified content type
 func NewOaActionsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -389,7 +534,7 @@ func NewOaActionsSearchRequestWithBody(server string, contentType string, body i
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -399,7 +544,7 @@ func NewOaActionsSearchRequestWithBody(server string, contentType string, body i
 	return req, nil
 }
 
-// NewOaCitationsListFieldsRequest generates requests for OaCitationsListFields
+// NewOaCitationsListFieldsRequest constructs an http.Request for the OaCitationsListFields method
 func NewOaCitationsListFieldsRequest(server string) (*http.Request, error) {
 	var err error
 
@@ -418,7 +563,7 @@ func NewOaCitationsListFieldsRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -437,7 +582,7 @@ func NewOaCitationsSearchRequestWithFormdataBody(server string, body OaCitations
 	return NewOaCitationsSearchRequestWithBody(server, "application/x-www-form-urlencoded", bodyReader)
 }
 
-// NewOaCitationsSearchRequestWithBody generates requests for OaCitationsSearch with any type of body
+// NewOaCitationsSearchRequestWithBody constructs an http.Request for the OaCitationsSearch method, with any body, and a specified content type
 func NewOaCitationsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -456,7 +601,7 @@ func NewOaCitationsSearchRequestWithBody(server string, contentType string, body
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -466,7 +611,7 @@ func NewOaCitationsSearchRequestWithBody(server string, contentType string, body
 	return req, nil
 }
 
-// NewOaRejectionsListFieldsRequest generates requests for OaRejectionsListFields
+// NewOaRejectionsListFieldsRequest constructs an http.Request for the OaRejectionsListFields method
 func NewOaRejectionsListFieldsRequest(server string) (*http.Request, error) {
 	var err error
 
@@ -485,7 +630,7 @@ func NewOaRejectionsListFieldsRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -504,7 +649,7 @@ func NewOaRejectionsSearchRequestWithFormdataBody(server string, body OaRejectio
 	return NewOaRejectionsSearchRequestWithBody(server, "application/x-www-form-urlencoded", bodyReader)
 }
 
-// NewOaRejectionsSearchRequestWithBody generates requests for OaRejectionsSearch with any type of body
+// NewOaRejectionsSearchRequestWithBody constructs an http.Request for the OaRejectionsSearch method, with any body, and a specified content type
 func NewOaRejectionsSearchRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -523,7 +668,7 @@ func NewOaRejectionsSearchRequestWithBody(server string, contentType string, bod
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -576,44 +721,138 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// EnrichedCitationsListFieldsWithResponse request
+
+	// EnrichedCitationsListFieldsWithResponse Provides the general information about the API and the list of fields that can be used to query the dataset.
+	//
+	// This GET API returns the list of all the searchable field names that are in the enriched_cited_reference_metadata. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields (the `EnrichedCitationsListFields` operationId).
 	EnrichedCitationsListFieldsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*EnrichedCitationsListFieldsResponse, error)
 
-	// EnrichedCitationsSearchWithBodyWithResponse request with any body
+	// EnrichedCitationsSearchWithBodyWithResponse Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records (the `EnrichedCitationsSearch` operationId).
 	EnrichedCitationsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EnrichedCitationsSearchResponse, error)
 
+	// EnrichedCitationsSearchWithFormdataBodyWithResponse Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records (the `EnrichedCitationsSearch` operationId).
 	EnrichedCitationsSearchWithFormdataBodyWithResponse(ctx context.Context, body EnrichedCitationsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*EnrichedCitationsSearchResponse, error)
 
-	// OaActionsListFieldsWithResponse request
+	// OaActionsListFieldsWithResponse Provides the general information about the API and the list of fields that can be used to query the dataset.
+	//
+	// This GET API returns the list of all the searchable field names that are in the oa_actions. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/oa/oa_actions/v1/fields (the `OaActionsListFields` operationId).
 	OaActionsListFieldsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*OaActionsListFieldsResponse, error)
 
-	// OaActionsSearchWithBodyWithResponse request with any body
+	// OaActionsSearchWithBodyWithResponse Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_actions/v1/records (the `OaActionsSearch` operationId).
 	OaActionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*OaActionsSearchResponse, error)
 
+	// OaActionsSearchWithFormdataBodyWithResponse Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_actions/v1/records (the `OaActionsSearch` operationId).
 	OaActionsSearchWithFormdataBodyWithResponse(ctx context.Context, body OaActionsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*OaActionsSearchResponse, error)
 
-	// OaCitationsListFieldsWithResponse request
+	// OaCitationsListFieldsWithResponse Provides the general information about the API and the list of fields that can be used to query the dataset.
+	//
+	// This GET API returns the list of all the searchable field names that are in the oa_citations. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/oa/oa_citations/v2/fields (the `OaCitationsListFields` operationId).
 	OaCitationsListFieldsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*OaCitationsListFieldsResponse, error)
 
-	// OaCitationsSearchWithBodyWithResponse request with any body
+	// OaCitationsSearchWithBodyWithResponse Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_citations/v2/records (the `OaCitationsSearch` operationId).
 	OaCitationsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*OaCitationsSearchResponse, error)
 
+	// OaCitationsSearchWithFormdataBodyWithResponse Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_citations/v2/records (the `OaCitationsSearch` operationId).
 	OaCitationsSearchWithFormdataBodyWithResponse(ctx context.Context, body OaCitationsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*OaCitationsSearchResponse, error)
 
-	// OaRejectionsListFieldsWithResponse request
+	// OaRejectionsListFieldsWithResponse Provides the general information about the API and the list of fields that can be used to query the dataset.
+	//
+	// This GET API returns the list of all the searchable field names that are in the oa_rejections. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/patent/oa/oa_rejections/v2/fields (the `OaRejectionsListFields` operationId).
 	OaRejectionsListFieldsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*OaRejectionsListFieldsResponse, error)
 
-	// OaRejectionsSearchWithBodyWithResponse request with any body
+	// OaRejectionsSearchWithBodyWithResponse Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_rejections/v2/records (the `OaRejectionsSearch` operationId).
 	OaRejectionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*OaRejectionsSearchResponse, error)
 
+	// OaRejectionsSearchWithFormdataBodyWithResponse Provides search capability for the data set with the given search criteria.
+	//
+	// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+	//
+	// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/patent/oa/oa_rejections/v2/records (the `OaRejectionsSearch` operationId).
 	OaRejectionsSearchWithFormdataBodyWithResponse(ctx context.Context, body OaRejectionsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*OaRejectionsSearchResponse, error)
 }
 
 type EnrichedCitationsListFieldsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *string
-	JSON404      *string
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *string
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *string
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EnrichedCitationsListFieldsResponse) GetJSON200() *string {
+	return r.JSON200
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r EnrichedCitationsListFieldsResponse) GetJSON404() *string {
+	return r.JSON404
+}
+
+// GetBody returns the raw response body bytes
+func (r EnrichedCitationsListFieldsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -632,10 +871,29 @@ func (r EnrichedCitationsListFieldsResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EnrichedCitationsListFieldsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type EnrichedCitationsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]map[string]map[string]interface{}
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *[]map[string]map[string]interface{}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EnrichedCitationsSearchResponse) GetJSON200() *[]map[string]map[string]interface{} {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r EnrichedCitationsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -654,11 +912,36 @@ func (r EnrichedCitationsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EnrichedCitationsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type OaActionsListFieldsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *string
-	JSON404      *string
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *string
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *string
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r OaActionsListFieldsResponse) GetJSON200() *string {
+	return r.JSON200
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r OaActionsListFieldsResponse) GetJSON404() *string {
+	return r.JSON404
+}
+
+// GetBody returns the raw response body bytes
+func (r OaActionsListFieldsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -677,10 +960,29 @@ func (r OaActionsListFieldsResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r OaActionsListFieldsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type OaActionsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]map[string]map[string]interface{}
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *[]map[string]map[string]interface{}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r OaActionsSearchResponse) GetJSON200() *[]map[string]map[string]interface{} {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r OaActionsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -699,11 +1001,36 @@ func (r OaActionsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r OaActionsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type OaCitationsListFieldsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *string
-	JSON404      *string
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *string
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *string
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r OaCitationsListFieldsResponse) GetJSON200() *string {
+	return r.JSON200
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r OaCitationsListFieldsResponse) GetJSON404() *string {
+	return r.JSON404
+}
+
+// GetBody returns the raw response body bytes
+func (r OaCitationsListFieldsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -722,10 +1049,29 @@ func (r OaCitationsListFieldsResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r OaCitationsListFieldsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type OaCitationsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]map[string]map[string]interface{}
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *[]map[string]map[string]interface{}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r OaCitationsSearchResponse) GetJSON200() *[]map[string]map[string]interface{} {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r OaCitationsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -744,11 +1090,36 @@ func (r OaCitationsSearchResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r OaCitationsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type OaRejectionsListFieldsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *string
-	JSON404      *string
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *string
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *string
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r OaRejectionsListFieldsResponse) GetJSON200() *string {
+	return r.JSON200
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r OaRejectionsListFieldsResponse) GetJSON404() *string {
+	return r.JSON404
+}
+
+// GetBody returns the raw response body bytes
+func (r OaRejectionsListFieldsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -767,10 +1138,29 @@ func (r OaRejectionsListFieldsResponse) StatusCode() int {
 	return 0
 }
 
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r OaRejectionsListFieldsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type OaRejectionsSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]map[string]map[string]interface{}
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *[]map[string]map[string]interface{}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r OaRejectionsSearchResponse) GetJSON200() *[]map[string]map[string]interface{} {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r OaRejectionsSearchResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -789,7 +1179,21 @@ func (r OaRejectionsSearchResponse) StatusCode() int {
 	return 0
 }
 
-// EnrichedCitationsListFieldsWithResponse request returning *EnrichedCitationsListFieldsResponse
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r OaRejectionsSearchResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// EnrichedCitationsListFieldsWithResponse Provides the general information about the API and the list of fields that can be used to query the dataset.
+//
+// This GET API returns the list of all the searchable field names that are in the enriched_cited_reference_metadata. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields (the `EnrichedCitationsListFields` operationId).
 func (c *ClientWithResponses) EnrichedCitationsListFieldsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*EnrichedCitationsListFieldsResponse, error) {
 	rsp, err := c.EnrichedCitationsListFields(ctx, reqEditors...)
 	if err != nil {
@@ -798,7 +1202,13 @@ func (c *ClientWithResponses) EnrichedCitationsListFieldsWithResponse(ctx contex
 	return ParseEnrichedCitationsListFieldsResponse(rsp)
 }
 
-// EnrichedCitationsSearchWithBodyWithResponse request with arbitrary body returning *EnrichedCitationsSearchResponse
+// EnrichedCitationsSearchWithBodyWithResponse Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records (the `EnrichedCitationsSearch` operationId).
 func (c *ClientWithResponses) EnrichedCitationsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EnrichedCitationsSearchResponse, error) {
 	rsp, err := c.EnrichedCitationsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -807,6 +1217,13 @@ func (c *ClientWithResponses) EnrichedCitationsSearchWithBodyWithResponse(ctx co
 	return ParseEnrichedCitationsSearchResponse(rsp)
 }
 
+// EnrichedCitationsSearchWithFormdataBodyWithResponse Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/oa/enriched_cited_reference_metadata/v3/records (the `EnrichedCitationsSearch` operationId).
 func (c *ClientWithResponses) EnrichedCitationsSearchWithFormdataBodyWithResponse(ctx context.Context, body EnrichedCitationsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*EnrichedCitationsSearchResponse, error) {
 	rsp, err := c.EnrichedCitationsSearchWithFormdataBody(ctx, body, reqEditors...)
 	if err != nil {
@@ -815,7 +1232,13 @@ func (c *ClientWithResponses) EnrichedCitationsSearchWithFormdataBodyWithRespons
 	return ParseEnrichedCitationsSearchResponse(rsp)
 }
 
-// OaActionsListFieldsWithResponse request returning *OaActionsListFieldsResponse
+// OaActionsListFieldsWithResponse Provides the general information about the API and the list of fields that can be used to query the dataset.
+//
+// This GET API returns the list of all the searchable field names that are in the oa_actions. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/oa/oa_actions/v1/fields (the `OaActionsListFields` operationId).
 func (c *ClientWithResponses) OaActionsListFieldsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*OaActionsListFieldsResponse, error) {
 	rsp, err := c.OaActionsListFields(ctx, reqEditors...)
 	if err != nil {
@@ -824,7 +1247,13 @@ func (c *ClientWithResponses) OaActionsListFieldsWithResponse(ctx context.Contex
 	return ParseOaActionsListFieldsResponse(rsp)
 }
 
-// OaActionsSearchWithBodyWithResponse request with arbitrary body returning *OaActionsSearchResponse
+// OaActionsSearchWithBodyWithResponse Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/oa/oa_actions/v1/records (the `OaActionsSearch` operationId).
 func (c *ClientWithResponses) OaActionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*OaActionsSearchResponse, error) {
 	rsp, err := c.OaActionsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -833,6 +1262,13 @@ func (c *ClientWithResponses) OaActionsSearchWithBodyWithResponse(ctx context.Co
 	return ParseOaActionsSearchResponse(rsp)
 }
 
+// OaActionsSearchWithFormdataBodyWithResponse Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/oa/oa_actions/v1/records (the `OaActionsSearch` operationId).
 func (c *ClientWithResponses) OaActionsSearchWithFormdataBodyWithResponse(ctx context.Context, body OaActionsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*OaActionsSearchResponse, error) {
 	rsp, err := c.OaActionsSearchWithFormdataBody(ctx, body, reqEditors...)
 	if err != nil {
@@ -841,7 +1277,13 @@ func (c *ClientWithResponses) OaActionsSearchWithFormdataBodyWithResponse(ctx co
 	return ParseOaActionsSearchResponse(rsp)
 }
 
-// OaCitationsListFieldsWithResponse request returning *OaCitationsListFieldsResponse
+// OaCitationsListFieldsWithResponse Provides the general information about the API and the list of fields that can be used to query the dataset.
+//
+// This GET API returns the list of all the searchable field names that are in the oa_citations. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/oa/oa_citations/v2/fields (the `OaCitationsListFields` operationId).
 func (c *ClientWithResponses) OaCitationsListFieldsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*OaCitationsListFieldsResponse, error) {
 	rsp, err := c.OaCitationsListFields(ctx, reqEditors...)
 	if err != nil {
@@ -850,7 +1292,13 @@ func (c *ClientWithResponses) OaCitationsListFieldsWithResponse(ctx context.Cont
 	return ParseOaCitationsListFieldsResponse(rsp)
 }
 
-// OaCitationsSearchWithBodyWithResponse request with arbitrary body returning *OaCitationsSearchResponse
+// OaCitationsSearchWithBodyWithResponse Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/oa/oa_citations/v2/records (the `OaCitationsSearch` operationId).
 func (c *ClientWithResponses) OaCitationsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*OaCitationsSearchResponse, error) {
 	rsp, err := c.OaCitationsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -859,6 +1307,13 @@ func (c *ClientWithResponses) OaCitationsSearchWithBodyWithResponse(ctx context.
 	return ParseOaCitationsSearchResponse(rsp)
 }
 
+// OaCitationsSearchWithFormdataBodyWithResponse Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/oa/oa_citations/v2/records (the `OaCitationsSearch` operationId).
 func (c *ClientWithResponses) OaCitationsSearchWithFormdataBodyWithResponse(ctx context.Context, body OaCitationsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*OaCitationsSearchResponse, error) {
 	rsp, err := c.OaCitationsSearchWithFormdataBody(ctx, body, reqEditors...)
 	if err != nil {
@@ -867,7 +1322,13 @@ func (c *ClientWithResponses) OaCitationsSearchWithFormdataBodyWithResponse(ctx 
 	return ParseOaCitationsSearchResponse(rsp)
 }
 
-// OaRejectionsListFieldsWithResponse request returning *OaRejectionsListFieldsResponse
+// OaRejectionsListFieldsWithResponse Provides the general information about the API and the list of fields that can be used to query the dataset.
+//
+// This GET API returns the list of all the searchable field names that are in the oa_rejections. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the syntax options shown below.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/patent/oa/oa_rejections/v2/fields (the `OaRejectionsListFields` operationId).
 func (c *ClientWithResponses) OaRejectionsListFieldsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*OaRejectionsListFieldsResponse, error) {
 	rsp, err := c.OaRejectionsListFields(ctx, reqEditors...)
 	if err != nil {
@@ -876,7 +1337,13 @@ func (c *ClientWithResponses) OaRejectionsListFieldsWithResponse(ctx context.Con
 	return ParseOaRejectionsListFieldsResponse(rsp)
 }
 
-// OaRejectionsSearchWithBodyWithResponse request with arbitrary body returning *OaRejectionsSearchResponse
+// OaRejectionsSearchWithBodyWithResponse Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/oa/oa_rejections/v2/records (the `OaRejectionsSearch` operationId).
 func (c *ClientWithResponses) OaRejectionsSearchWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*OaRejectionsSearchResponse, error) {
 	rsp, err := c.OaRejectionsSearchWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -885,6 +1352,13 @@ func (c *ClientWithResponses) OaRejectionsSearchWithBodyWithResponse(ctx context
 	return ParseOaRejectionsSearchResponse(rsp)
 }
 
+// OaRejectionsSearchWithFormdataBodyWithResponse Provides search capability for the data set with the given search criteria.
+//
+// This API is based on Solr/Lucense Search. The data is indexed using SOLR. This GET API returns the list of all the searchable field names that are in the Solr Index. Please see the 'fields' attribute which returns an array of field names. Each field or a combination of fields can be searched using the Solr/Lucene Syntax. Please refer https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for the query syntax. List of field names that are searchable can be determined using above GET api.
+//
+// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/patent/oa/oa_rejections/v2/records (the `OaRejectionsSearch` operationId).
 func (c *ClientWithResponses) OaRejectionsSearchWithFormdataBodyWithResponse(ctx context.Context, body OaRejectionsSearchFormdataRequestBody, reqEditors ...RequestEditorFn) (*OaRejectionsSearchResponse, error) {
 	rsp, err := c.OaRejectionsSearchWithFormdataBody(ctx, body, reqEditors...)
 	if err != nil {
@@ -947,6 +1421,9 @@ func ParseEnrichedCitationsSearchResponse(rsp *http.Response) (*EnrichedCitation
 		}
 		response.JSON200 = &dest
 
+	case rsp.StatusCode == 404:
+		break // No content-type
+
 	}
 
 	return response, nil
@@ -1005,6 +1482,9 @@ func ParseOaActionsSearchResponse(rsp *http.Response) (*OaActionsSearchResponse,
 			return nil, err
 		}
 		response.JSON200 = &dest
+
+	case rsp.StatusCode == 404:
+		break // No content-type
 
 	}
 
@@ -1065,6 +1545,9 @@ func ParseOaCitationsSearchResponse(rsp *http.Response) (*OaCitationsSearchRespo
 		}
 		response.JSON200 = &dest
 
+	case rsp.StatusCode == 404:
+		break // No content-type
+
 	}
 
 	return response, nil
@@ -1123,6 +1606,9 @@ func ParseOaRejectionsSearchResponse(rsp *http.Response) (*OaRejectionsSearchRes
 			return nil, err
 		}
 		response.JSON200 = &dest
+
+	case rsp.StatusCode == 404:
+		break // No content-type
 
 	}
 

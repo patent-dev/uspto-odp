@@ -67,12 +67,34 @@ get search_interference_decisions    "$BASE/api/v1/patent/interferences/decision
 get get_interference_decisions       "$BASE/api/v1/patent/interferences/$INTERFERENCE/decisions"
 
 # Petitions. get_petition_decision is chained off the search result's record id.
-get search_petitions                 "$BASE/api/v1/patent/petitions/search?q=revival&offset=0&limit=1"
-REC=$(grep -oE '"petitionDecisionRecordIdentifier":"[0-9a-f-]+"' "$DIR/search_petitions.json" | head -1 | sed -E 's/.*:"([0-9a-f-]+)"/\1/')
+get search_petitions                 "$BASE/api/v1/petition/decisions/search?q=revival&offset=0&limit=1"
+REC=$(grep -oE '"petitionDecisionRecordIdentifier": ?"[0-9a-f-]+"' "$DIR/search_petitions.json" | head -1 | sed -E 's/.*: ?"([0-9a-f-]+)"/\1/')
 if [ -n "$REC" ]; then
-  get get_petition_decision          "$BASE/api/v1/patent/petitions/$REC"
+  get get_petition_decision          "$BASE/api/v1/petition/decisions/$REC"
 else
   echo "  get_petition_decision: SKIP (no record id in search result)"
+fi
+
+# Trademark decisions and proceedings. get_trademark_decision is chained off an
+# Administrative record (those carry fileDownloadURI).
+get search_trademark_decisions       "$BASE/api/v1/trademark/decision-proceeding/search?q=NEOWISE&offset=0&limit=1"
+get search_trademark_decisions_admin "$BASE/api/v1/trademark/decision-proceeding/search?filters=decisionProceedingCategory%20Administrative&offset=0&limit=1"
+DOC=$(grep -oE '"documentIdentifier": ?"[0-9a-f]+"' "$DIR/search_trademark_decisions_admin.json" | head -1 | sed -E 's/.*: ?"([0-9a-f]+)"/\1/')
+rm -f "$DIR/search_trademark_decisions_admin.json"
+if [ -n "$DOC" ]; then
+  get get_trademark_decision         "$BASE/api/v1/trademark/decision-proceeding/search/$DOC"
+else
+  echo "  get_trademark_decision: SKIP (no document identifier in search result)"
+fi
+
+# ODP Office Action Search (5.0). get_office_action_record is chained off the
+# search result's record id.
+get search_office_action_records     "$BASE/api/v1/patent/office-action/search?q=applicationNumberText:$APP&offset=0&limit=1"
+OAREC=$(grep -oE '"officeActionRecordIdentifier": ?"[0-9a-f]+"' "$DIR/search_office_action_records.json" | head -1 | sed -E 's/.*: ?"([0-9a-f]+)"/\1/')
+if [ -n "$OAREC" ]; then
+  get get_office_action_record       "$BASE/api/v1/patent/office-action/$OAREC"
+else
+  echo "  get_office_action_record: SKIP (no record id in search result)"
 fi
 
 # Office Action DSAPI /fields.

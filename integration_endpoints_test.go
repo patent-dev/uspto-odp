@@ -13,6 +13,8 @@ import (
 	"time"
 
 	"github.com/patent-dev/uspto-odp/generated"
+	"github.com/patent-dev/uspto-odp/generated/oasearch"
+	"github.com/patent-dev/uspto-odp/generated/tmd"
 )
 
 // Per-endpoint live integration tests: exactly one TestIntegration<Method> for
@@ -125,6 +127,37 @@ func TestIntegrationSearchPatents(t *testing.T) {
 	}
 	if res == nil {
 		t.Fatal("expected non-nil response")
+	}
+}
+
+func TestIntegrationSearchPatentsWithOptions(t *testing.T) {
+	c := newITClient(t, false)
+	res, err := c.SearchPatentsWithOptions(testCtx(t), "battery", 0, 2, &PatentSearchOptions{
+		Sort:         []PatentSearchSort{{Field: "applicationMetaData.filingDate", Order: "desc"}},
+		Fields:       []string{"applicationNumberText", "applicationMetaData.filingDate"},
+		Filters:      []PatentSearchFilter{{Field: "applicationMetaData.applicationTypeLabelName", Values: []string{"Utility"}}},
+		RangeFilters: []PatentSearchRange{{Field: "applicationMetaData.filingDate", From: "2024-01-01", To: "2024-12-31"}},
+	})
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("SearchPatentsWithOptions: %v", err)
+	}
+	if res == nil || res.PatentFileWrapperDataBag == nil || len(*res.PatentFileWrapperDataBag) == 0 {
+		t.Fatal("expected at least one application")
+	}
+	bag := *res.PatentFileWrapperDataBag
+	for _, p := range bag {
+		if p.ApplicationMetaData == nil || p.ApplicationMetaData.FilingDate == nil {
+			t.Fatalf("record missing projected filingDate: %+v", p)
+		}
+		if d := *p.ApplicationMetaData.FilingDate; d < "2024-01-01" || d > "2024-12-31" {
+			t.Errorf("filingDate %s outside the range filter", d)
+		}
+	}
+	if len(bag) == 2 && *bag[0].ApplicationMetaData.FilingDate < *bag[1].ApplicationMetaData.FilingDate {
+		t.Error("results not sorted by filingDate desc")
 	}
 }
 
@@ -571,7 +604,7 @@ func TestIntegrationGetPetitionDecision(t *testing.T) {
 	if recordID == "" {
 		t.Skip("skip: no petition record identifier available")
 	}
-	res, err := c.GetPetitionDecision(testCtx(t), recordID, false)
+	res, err := c.GetPetitionDecision(testCtx(t), recordID)
 	if skipExpected(t, err) {
 		return
 	}
@@ -1241,5 +1274,248 @@ func TestIntegrationGetTrademarkMultiStatus(t *testing.T) {
 	}
 	if res == nil {
 		t.Fatal("expected non-nil response")
+	}
+}
+
+// --- Trademark decisions and proceedings -------------------------------------
+
+func TestIntegrationSearchTrademarkDecisions(t *testing.T) {
+	c := newITClient(t, false)
+	res, err := c.SearchTrademarkDecisions(testCtx(t), "NEOWISE", 0, 2)
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("SearchTrademarkDecisions: %v", err)
+	}
+	if res == nil || res.TrademarkDecisionsDataBag == nil || len(*res.TrademarkDecisionsDataBag) == 0 {
+		t.Fatal("expected at least one trademark decision")
+	}
+}
+
+func TestIntegrationSearchTrademarkDecisionsWithRequest(t *testing.T) {
+	c := newITClient(t, false)
+	limit := 1
+	res, err := c.SearchTrademarkDecisionsWithRequest(testCtx(t), tmd.SearchRequest{
+		Filters:    &[]tmd.FilterClause{{Name: "decisionProceedingCategory", Value: []string{TrademarkDecisionCategoryPetitionsToDirector}}},
+		Facets:     &[]string{"decisionProceedingCategory"},
+		Pagination: &tmd.Pagination{Limit: &limit},
+	})
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("SearchTrademarkDecisionsWithRequest: %v", err)
+	}
+	if res == nil || res.TrademarkDecisionsDataBag == nil || len(*res.TrademarkDecisionsDataBag) != 1 {
+		t.Fatal("expected exactly one record")
+	}
+	if got := (*res.TrademarkDecisionsDataBag)[0].DecisionProceedingCategory; got == nil || string(*got) != TrademarkDecisionCategoryPetitionsToDirector {
+		t.Errorf("decisionProceedingCategory = %v, want %s", got, TrademarkDecisionCategoryPetitionsToDirector)
+	}
+	if res.Facets == nil || len((*res.Facets)["decisionProceedingCategory"]) == 0 {
+		t.Error("expected decisionProceedingCategory facet values")
+	}
+}
+
+// firstAdministrativeTrademarkDecision returns an Administrative record (those
+// carry fileDownloadURI), or skips.
+func firstAdministrativeTrademarkDecision(t *testing.T, c *Client) *tmd.TrademarkDecisionRecord {
+	t.Helper()
+	limit := 1
+	res, err := c.SearchTrademarkDecisionsWithRequest(testCtx(t), tmd.SearchRequest{
+		Filters:    &[]tmd.FilterClause{{Name: "decisionProceedingCategory", Value: []string{TrademarkDecisionCategoryAdministrative}}},
+		Pagination: &tmd.Pagination{Limit: &limit},
+	})
+	if skipExpected(t, err) {
+		t.SkipNow()
+	}
+	if err != nil {
+		t.Fatalf("SearchTrademarkDecisionsWithRequest (chain): %v", err)
+	}
+	if res == nil || res.TrademarkDecisionsDataBag == nil || len(*res.TrademarkDecisionsDataBag) == 0 {
+		t.Skip("skip: no Administrative trademark decision available")
+	}
+	return &(*res.TrademarkDecisionsDataBag)[0]
+}
+
+func TestIntegrationGetTrademarkDecision(t *testing.T) {
+	c := newITClient(t, false)
+	rec := firstAdministrativeTrademarkDecision(t, c)
+	if rec.DocumentIdentifier == nil {
+		t.Skip("skip: record has no documentIdentifier")
+	}
+	res, err := c.GetTrademarkDecision(testCtx(t), *rec.DocumentIdentifier)
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("GetTrademarkDecision: %v", err)
+	}
+	if res == nil || res.TrademarkDecisionsDataBag == nil || res.TrademarkDecisionsDataBag.DocumentIdentifier == nil ||
+		*res.TrademarkDecisionsDataBag.DocumentIdentifier != *rec.DocumentIdentifier {
+		t.Fatal("expected the requested record back")
+	}
+}
+
+func TestIntegrationSearchTrademarkDecisionsDownload(t *testing.T) {
+	c := newITClient(t, false)
+	format := tmd.DownloadRequestFormat("json")
+	limit := 1
+	data, err := c.SearchTrademarkDecisionsDownload(testCtx(t), tmd.DownloadRequest{
+		Q:          StringPtr("NEOWISE"),
+		Format:     &format,
+		Pagination: &tmd.Pagination{Limit: &limit},
+	})
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("SearchTrademarkDecisionsDownload: %v", err)
+	}
+	if !bytes.Contains(data, []byte("trademarkDecisionsDataBag")) {
+		t.Fatalf("expected a JSON download, got %.200s", data)
+	}
+}
+
+func TestIntegrationDownloadTrademarkDecisionFile(t *testing.T) {
+	c := newITClient(t, false)
+	rec := firstAdministrativeTrademarkDecision(t, c)
+	if rec.FileDownloadURI == nil {
+		t.Skip("skip: record has no fileDownloadURI")
+	}
+	var buf bytes.Buffer
+	err := c.DownloadTrademarkDecisionFile(testCtx(t), *rec.FileDownloadURI, &buf)
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("DownloadTrademarkDecisionFile: %v", err)
+	}
+	if !bytes.HasPrefix(buf.Bytes(), []byte("%PDF")) {
+		t.Fatalf("expected a PDF, got %d bytes starting %q", buf.Len(), buf.Bytes()[:min(8, buf.Len())])
+	}
+}
+
+// --- ODP Office Action Search ------------------------------------------------
+
+func TestIntegrationSearchOfficeActionRecords(t *testing.T) {
+	c := newITClient(t, false)
+	res, err := c.SearchOfficeActionRecords(testCtx(t), "applicationNumberText:"+itApp, 0, 5)
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("SearchOfficeActionRecords: %v", err)
+	}
+	if res == nil || res.OfficeActionDataBag == nil || len(*res.OfficeActionDataBag) == 0 {
+		t.Fatal("expected office actions for " + itApp)
+	}
+	for _, oa := range *res.OfficeActionDataBag {
+		if oa.ApplicationNumberText == nil || *oa.ApplicationNumberText != itApp {
+			t.Errorf("applicationNumberText = %v, want %s", oa.ApplicationNumberText, itApp)
+		}
+	}
+
+	// A search without matches is answered with HTTP 404 and a string error
+	// code ("404"); it must surface as a typed 404, not a parse failure.
+	_, err = c.SearchOfficeActionRecords(testCtx(t), "applicationNumberText:00000001", 0, 1)
+	var apiErr *APIError
+	if !errors.As(err, &apiErr) || apiErr.StatusCode != 404 {
+		t.Fatalf("no-match search err = %v, want *APIError with status 404", err)
+	}
+}
+
+func TestIntegrationSearchOfficeActionRecordsWithRequest(t *testing.T) {
+	c := newITClient(t, false)
+	limit := int32(1)
+	res, err := c.SearchOfficeActionRecordsWithRequest(testCtx(t), oasearch.OfficeActionSearchRequest{
+		Q:          StringPtr("obviousness"),
+		Filters:    &[]oasearch.OfficeActionFilter{{Name: "documentCode", Value: []string{"CTNF"}}},
+		Facets:     &[]string{"rejectionTypeBag"},
+		Pagination: &oasearch.Pagination{Limit: &limit},
+	})
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("SearchOfficeActionRecordsWithRequest: %v", err)
+	}
+	if res == nil || res.OfficeActionDataBag == nil || len(*res.OfficeActionDataBag) != 1 {
+		t.Fatal("expected exactly one record")
+	}
+	if dc := (*res.OfficeActionDataBag)[0].DocumentCode; dc == nil || *dc != "CTNF" {
+		t.Errorf("documentCode = %v, want CTNF", dc)
+	}
+	if res.Facets == nil || len((*res.Facets)["rejectionTypeBag"]) == 0 {
+		t.Error("expected rejectionTypeBag facet values")
+	}
+}
+
+// firstOfficeActionRecordID returns an office action record id for itApp, or skips.
+func firstOfficeActionRecordID(t *testing.T, c *Client) string {
+	t.Helper()
+	res, err := c.SearchOfficeActionRecords(testCtx(t), "applicationNumberText:"+itApp, 0, 1)
+	if skipExpected(t, err) {
+		t.SkipNow()
+	}
+	if err != nil {
+		t.Fatalf("SearchOfficeActionRecords (chain): %v", err)
+	}
+	if res == nil || res.OfficeActionDataBag == nil || len(*res.OfficeActionDataBag) == 0 ||
+		(*res.OfficeActionDataBag)[0].OfficeActionRecordIdentifier == nil {
+		t.Skip("skip: no office action record available")
+	}
+	return *(*res.OfficeActionDataBag)[0].OfficeActionRecordIdentifier
+}
+
+func TestIntegrationGetOfficeActionRecord(t *testing.T) {
+	c := newITClient(t, false)
+	id := firstOfficeActionRecordID(t, c)
+	res, err := c.GetOfficeActionRecord(testCtx(t), id)
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("GetOfficeActionRecord: %v", err)
+	}
+	if res == nil || res.OfficeActionDataBag == nil || len(*res.OfficeActionDataBag) != 1 ||
+		*(*res.OfficeActionDataBag)[0].OfficeActionRecordIdentifier != id {
+		t.Fatal("expected the requested record back")
+	}
+}
+
+func TestIntegrationSearchOfficeActionRecordsDownload(t *testing.T) {
+	c := newITClient(t, false)
+	format := oasearch.OfficeActionDownloadRequestFormat("json")
+	limit := int32(1)
+	data, err := c.SearchOfficeActionRecordsDownload(testCtx(t), oasearch.OfficeActionDownloadRequest{
+		Q:          StringPtr("applicationNumberText:" + itApp),
+		Format:     &format,
+		Pagination: &oasearch.Pagination{Limit: &limit},
+	})
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("SearchOfficeActionRecordsDownload: %v", err)
+	}
+	if !bytes.Contains(data, []byte(itApp)) {
+		t.Fatalf("expected the application in the download, got %.200s", data)
+	}
+}
+
+func TestIntegrationGetOfficeActionText(t *testing.T) {
+	c := newITClient(t, false)
+	id := firstOfficeActionRecordID(t, c)
+	text, err := c.GetOfficeActionText(testCtx(t), id)
+	if skipExpected(t, err) {
+		return
+	}
+	if err != nil {
+		t.Fatalf("GetOfficeActionText: %v", err)
+	}
+	if !bytes.Contains(text, []byte("United States Patent and Trademark Office")) {
+		t.Fatalf("unexpected office action text: %.200q", text)
 	}
 }
